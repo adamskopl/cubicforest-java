@@ -22,7 +22,7 @@ import com.badlogic.gdx.math.Vector3;
 public class WorldRenderer {
 
 	OrthographicCamera cam;
-	RenderCalculator calc;
+	
 	List<RenderableObjectsMaster> renderableObjectsMasters;
 	SpriteBatch batch = new SpriteBatch(5460);
 	
@@ -47,25 +47,17 @@ public class WorldRenderer {
 	
 	public WorldRenderer () {
 		renderer = new ImmediateModeRenderer10();
-		calc = new RenderCalculator(tileWidth);
+		CoordCalc.setTileSize(tileWidth);
 		this.cam = new OrthographicCamera(480, 320);
 		this.cam.position.set(0, -100, 0);
 		
 		renderableObjectsMasters = new ArrayList<RenderableObjectsMaster>();
-		
-		cubesAtlas = new Texture(Gdx.files.internal("data/cube-atlas.png"));
 		tilesAtlas = new Texture(Gdx.files.internal("data/tiles-atlas.png"));
-		testAtlas = new Texture(Gdx.files.internal("data/test-atlas.png"));
-		TextureRegion[] split = new TextureRegion(cubesAtlas).split(20, 20)[0];
+
 		TextureRegion[] splitTiles = new TextureRegion(tilesAtlas).split(50, 31)[0];
-		TextureRegion[] splitTest = new TextureRegion(testAtlas).split(10, 40)[0];
 		
-		testCube = split[0];
-		testCube2 = split[1];
-		testCross = split[1];
 		tile = splitTiles[0];
 		tileLight = splitTiles[1];
-		testRec = splitTest[0];
 		
 		Gdx.app.debug("cf", "w, h " + tile.getRegionWidth() + " " + tile.getRegionHeight());
 		
@@ -82,26 +74,7 @@ public class WorldRenderer {
 		batch.begin();
 
 		renderROMs();
-		
-////		batch.draw(testCube, 90, 15);
-//		batch.draw(testCube, 80, 10);
-//		batch.draw(testCube, 100, 10);
-//		batch.draw(testCube, 70, 5);
-//		batch.draw(testCube, 90, 5);
-//		batch.draw(testCube, 110, 5);
-//		batch.draw(testCube, 80, -0);
-//		batch.draw(testCube, 100, 0);		
-//		batch.draw(testCube, 90, -5);
-//		
-////		batch.draw(testCube2, 60, 0);
-//		batch.draw(testCube2, 50, -5);
-//		batch.draw(testCube2, 70, -5);
-//		batch.draw(testCube2, 40, -10);
-//		batch.draw(testCube2, 60, -10);
-//		batch.draw(testCube2, 80, -10);
-//		batch.draw(testCube2, 50, -15);
-//		batch.draw(testCube2, 70, -15);		
-//		batch.draw(testCube2, 60, -20);
+
 		batch.end();
 		
 		renderGrid();
@@ -116,7 +89,7 @@ public class WorldRenderer {
 		Vector3 vec = new Vector3();
 		for(int row = 0; row < amount; row++) {
 			for(int col = 0; col < amount; col++) {
-				Vector2 screenCoord = calc.getScreenCoord(new Vector2(row, col));
+				Vector2 screenCoord = CoordCalc.tilesToRender(new Vector2(row, col));
 				vec.set(screenCoord, 0);
 				renderer.color(1.0f, 0.8f, 0.8f, 1.0f);
 				renderer.vertex(vec);
@@ -135,9 +108,9 @@ public class WorldRenderer {
 	
 	public void renderObject(RenderableObject rObj) {
 		Vector2 objPos = rObj.getWorldPos();
-		Vector2 screenPos = calc.getScreenCoord(objPos);
-		screenPos.add(rObj.getRenderVector());
-		batch.draw(rObj.getTextureRegion(), screenPos.x, screenPos.y);
+		Vector2 renderPos = CoordCalc.tilesToRender(objPos);
+		renderPos.add(rObj.getRenderVector());
+		batch.draw(rObj.getTextureRegion(), renderPos.x, renderPos.y);
 	}
 	
 	public void renderROM(RenderableObjectsMaster ROM) {
