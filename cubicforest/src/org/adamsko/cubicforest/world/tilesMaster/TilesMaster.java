@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
@@ -22,7 +23,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  *
  */
-public class TilesMaster extends RenderableObjectsContainer implements RenderableObjectsMaster {
+public class TilesMaster extends RenderableObjectsContainer implements RenderableObjectsMaster, PickMasterClient {
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
 	private int mapSize;
@@ -60,6 +61,30 @@ public class TilesMaster extends RenderableObjectsContainer implements Renderabl
 	@Override
 	public List<RenderableObject> getRendarbleObjects() {
 		return renderableObjects;
+	}
+
+	@Override
+	public void onLeftClickScreen(Vector2 screenPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRightClickScreen(Vector2 screenPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLeftClickTiles(Vector2 tilesPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRightClickTiles(Vector2 tilesPos) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
