@@ -60,7 +60,6 @@ public class TilesMasterHelper {
 		return coords;
 	}
 	
-	
 	public static boolean isTileonTestMap(int tileIndex) {		
 		return testEmptyTiles.contains(tileIndex);
 	}

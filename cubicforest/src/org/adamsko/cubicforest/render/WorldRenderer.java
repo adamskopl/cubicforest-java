@@ -4,7 +4,6 @@ package org.adamsko.cubicforest.render;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,7 +28,7 @@ public class WorldRenderer {
 	/**
 	 * Width of the isometric tile in pixels.
 	 */
-	int tileWidth = 50;
+	int tileWidth = 75;
 	
 	ImmediateModeRenderer10 renderer;
 	
@@ -48,18 +47,22 @@ public class WorldRenderer {
 	public WorldRenderer () {
 		renderer = new ImmediateModeRenderer10();
 		CoordCalc.setTileSize(tileWidth);
-		this.cam = new OrthographicCamera(480, 320);
-		this.cam.position.set(0, -100, 0);
+//		this.cam = new OrthographicCamera(480, 320);
+		this.cam = new OrthographicCamera(780, 460);
+//		this.cam.position.set(0, 0, 0);
+//		this.cam.position.set(0, -100, 0);
+//		this.cam.position.set(240, -160, 0);
+		this.cam.position.set(390, -230, 0);
 		
 		renderableObjectsMasters = new ArrayList<RenderableObjectsMaster>();
-		tilesAtlas = new Texture(Gdx.files.internal("data/tiles-atlas.png"));
+//		tilesAtlas = new Texture(Gdx.files.internal("data/tiles-atlas-big.png"));
 
-		TextureRegion[] splitTiles = new TextureRegion(tilesAtlas).split(50, 31)[0];
+//		TextureRegion[] splitTiles = new TextureRegion(tilesAtlas).split(100, 62)[0];
 		
-		tile = splitTiles[0];
-		tileLight = splitTiles[1];
+//		tile = splitTiles[0];
+//		tileLight = splitTiles[1];
 		
-		Gdx.app.debug("cf", "w, h " + tile.getRegionWidth() + " " + tile.getRegionHeight());
+//		Gdx.app.debug("cf", "w, h " + tile.getRegionWidth() + " " + tile.getRegionHeight());
 		
 	}
 	

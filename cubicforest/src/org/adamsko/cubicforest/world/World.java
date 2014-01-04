@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.pickmaster.PickMaster;
 import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.WorldRenderer;
@@ -18,10 +19,17 @@ public class World {
 	WorldRenderer renderer;	
 	List <WorldObjectsMaster> worldObjectsMasters;
 	
+	PickMaster pickMaster;
+	
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
-		addWorldMaster(new TilesMaster(64), true);
+		pickMaster = new PickMaster();
+		
+		TilesMaster tilesMaster = new TilesMaster(64);
+		addWorldMaster(tilesMaster, true);
+		pickMaster.addClient(tilesMaster);
+		
 	}
 
 	public void addWorldMaster(WorldObjectsMaster newWorldMaster, Boolean renderable) {
@@ -32,6 +40,6 @@ public class World {
 	}
 	
 	public void update (float deltaTime) {
-		
+		pickMaster.update();
 	}
 }

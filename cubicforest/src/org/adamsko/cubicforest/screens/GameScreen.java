@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.screens;
 
-//import org.adamsko.cubicforest.render.OnscreenControlRenderer;
 import org.adamsko.cubicforest.render.WorldRenderer;
 import org.adamsko.cubicforest.world.World;
 

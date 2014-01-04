@@ -8,8 +8,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "cubicforest";
 		cfg.useGL20 = false;
-		cfg.width = 480;
-		cfg.height = 320;
+		cfg.width = 780;
+		cfg.height = 460;
 		
 		new LwjglApplication(new Cubicforest(), cfg);
 	}

@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
-import org.adamsko.cubicforest.world.Tile;
 import org.adamsko.cubicforest.world.WorldObject;
 
 import com.badlogic.gdx.Gdx;
@@ -29,7 +28,7 @@ public class TilesMaster extends RenderableObjectsContainer implements Renderabl
 	private int mapSize;
 	
 	public TilesMaster(int mapSize) {
-		super("tiles-atlas", 50, 31);
+		super("tiles-atlas-medium", 75, 45);
 		this.mapSize = mapSize;
 		TilesMasterHelper.setMapSize(mapSize);
 		initTiles();
@@ -39,9 +38,9 @@ public class TilesMaster extends RenderableObjectsContainer implements Renderabl
 		for(int fIndex = 0; fIndex < mapSize; fIndex++) {
 			if(TilesMasterHelper.isTileonTestMap(fIndex)) {continue;}
 			
-			Vector2 fCoords = TilesMasterHelper.calcCoords(fIndex);
-			Gdx.app.log("coord", fCoords.x + ", " + fCoords.y);
-			Tile newTile = new Tile(fCoords, atlas[1]);
+			Vector2 fCoords = TilesMasterHelper.calcCoords(fIndex);	
+			fCoords.add(new Vector2(7, -3)); // temporary solution for centering view
+			Tile newTile = new Tile(fCoords, atlas[0]);
 			worldObjects.add(newTile);
 			renderableObjects.add(newTile);
 		}
@@ -50,7 +49,7 @@ public class TilesMaster extends RenderableObjectsContainer implements Renderabl
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 	@Override
@@ -64,27 +63,14 @@ public class TilesMaster extends RenderableObjectsContainer implements Renderabl
 	}
 
 	@Override
-	public void onLeftClickScreen(Vector2 screenPos) {
-		// TODO Auto-generated method stub
+	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {	
 		
-	}
-
-	@Override
-	public void onRightClickScreen(Vector2 screenPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onLeftClickTiles(Vector2 tilesPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onRightClickTiles(Vector2 tilesPos) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+		for(WorldObject wo : worldObjects) {
+			Tile t = (Tile)wo;
+			if(t.isPosInTile(inputTilesPos)) {
+				// tile picked
+				t.setTextureRegion(atlas[1]);
+			}
+		}		
+	}	
 }
