@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.pickmaster.PickMaster;
-import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.WorldRenderer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -27,12 +26,12 @@ public class World {
 		pickMaster = new PickMaster();
 		
 		TilesMaster tilesMaster = new TilesMaster(64);
-		addWorldMaster(tilesMaster, true);
+		addWorldObjectsMaster(tilesMaster, true);
 		pickMaster.addClient(tilesMaster);
 		
 	}
 
-	public void addWorldMaster(WorldObjectsMaster newWorldMaster, Boolean renderable) {
+	public void addWorldObjectsMaster(WorldObjectsMaster newWorldMaster, Boolean renderable) {
 		worldObjectsMasters.add(newWorldMaster);
 		if(renderable) {
 			renderer.addROM((RenderableObjectsMaster)newWorldMaster);

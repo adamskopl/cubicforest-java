@@ -4,6 +4,8 @@ package org.adamsko.cubicforest.render;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.queue.RenderListMaster;
+
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -31,21 +33,13 @@ public class WorldRenderer {
 	int tileWidth = 75;
 	
 	ImmediateModeRenderer10 renderer;
-	
-	Texture cubesAtlas;
-	Texture tilesAtlas;
-	Texture testAtlas;
-	TextureRegion testCube, testCube2;
-	TextureRegion testCross;
-	TextureRegion tile;
-	TextureRegion tileLight;
-	TextureRegion testRec;
-	
+	RenderListMaster renderListMaster;
 	
 	FPSLogger fps = new FPSLogger();
 	
 	public WorldRenderer () {
 		renderer = new ImmediateModeRenderer10();
+		renderListMaster = new RenderListMaster();
 		CoordCalc.setTileSize(tileWidth);
 //		this.cam = new OrthographicCamera(480, 320);
 		this.cam = new OrthographicCamera(780, 460);
@@ -55,14 +49,6 @@ public class WorldRenderer {
 		this.cam.position.set(390, -230, 0);
 		
 		renderableObjectsMasters = new ArrayList<RenderableObjectsMaster>();
-//		tilesAtlas = new Texture(Gdx.files.internal("data/tiles-atlas-big.png"));
-
-//		TextureRegion[] splitTiles = new TextureRegion(tilesAtlas).split(100, 62)[0];
-		
-//		tile = splitTiles[0];
-//		tileLight = splitTiles[1];
-		
-//		Gdx.app.debug("cf", "w, h " + tile.getRegionWidth() + " " + tile.getRegionHeight());
 		
 	}
 	
@@ -107,25 +93,27 @@ public class WorldRenderer {
 	
 	public void addROM(RenderableObjectsMaster ROM) {
 		renderableObjectsMasters.add(ROM);
+		renderListMaster.addRenderableObjects(ROM.getRendarbleObjects());
 	}
 	
-	public void renderObject(RenderableObject rObj) {
-		Vector2 objPos = rObj.getWorldPos();
+	private void renderObject(RenderableObject rObj) {
+		Vector2 objPos = rObj.getTilesPos();
 		Vector2 renderPos = CoordCalc.tilesToRender(objPos);
 		renderPos.add(rObj.getRenderVector());
 		batch.draw(rObj.getTextureRegion(), renderPos.x, renderPos.y);
 	}
 	
-	public void renderROM(RenderableObjectsMaster ROM) {
-		List<RenderableObject> rObjects = ROM.getRendarbleObjects();
-		for(RenderableObject rObj : rObjects) {
+	private void renderROMs() {
+		for(RenderableObject rObj : renderListMaster.gerRenderList()) {
 			renderObject(rObj);
 		}
 	}
 	
-	public void renderROMs() {
-		for(RenderableObjectsMaster ROM : renderableObjectsMasters) {
-			renderROM(ROM);
+	@SuppressWarnings("unused")
+	private void renderROM(RenderableObjectsMaster ROM) {
+		List<RenderableObject> rObjects = ROM.getRendarbleObjects();
+		for(RenderableObject rObj : rObjects) {
+			renderObject(rObj);
 		}
 	}
 }

@@ -14,7 +14,7 @@ public class Tile extends CubicObject {
 		
 	public Tile(Vector2 coords, TextureRegion tr) {
 		super(tr);
-		this.worldPos = coords;
+		this.tilesPos = coords;
 		
 		Vector2 rendVec = new Vector2(-tr.getRegionWidth()/2, -tr.getRegionHeight());					
 		setRenderVector(rendVec);
@@ -27,8 +27,8 @@ public class Tile extends CubicObject {
 	 */
 	public boolean isPosInTile(Vector2 tilePos) {
 		
-		if (tilePos.x > worldPos.x && tilePos.x < worldPos.x+1) 				
-			if(tilePos.y > worldPos.y && tilePos.y < worldPos.y+1) {
+		if (tilePos.x > tilesPos.x && tilePos.x < tilesPos.x+1) 				
+			if(tilePos.y > tilesPos.y && tilePos.y < tilesPos.y+1) {
 				return true;	
 		}
 		return false;

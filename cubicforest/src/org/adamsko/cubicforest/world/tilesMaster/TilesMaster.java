@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.pickmaster.PickMasterClient;
@@ -9,7 +8,6 @@ import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObject;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
