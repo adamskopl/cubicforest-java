@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.pickmaster.PickMasterClient;
+import org.adamsko.cubicforest.world.WorldObject;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -27,7 +28,7 @@ public class TilesMaster implements PickMasterClient {
 	}
 	
 	public void initTiles() {
-		tilesContainer = new TilesContainer();
+		tilesContainer = new TilesContainer(this);
 		for(int fIndex = 0; fIndex < mapSize; fIndex++) {
 			if(TilesMasterHelper.isTileonTestMap(fIndex)) {continue;}
 			
@@ -39,6 +40,13 @@ public class TilesMaster implements PickMasterClient {
 	
 	public TilesContainer getTilesContainer() {
 		return tilesContainer;
+	}
+	
+	public void insertWorldObject(WorldObject insertObject, Vector2 tilePos) {
+		Tile parentTile = tilesContainer.getTileOnPos(tilePos);
+		if(parentTile != null) {
+			parentTile.insertWorldObject(insertObject);
+		}
 	}
 	
 	@Override

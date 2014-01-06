@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.world.CubicObject;
+import org.adamsko.cubicforest.world.WorldObject;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -12,12 +13,18 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Tile extends CubicObject {
 		
+	private WorldObject occupant;
+	private Boolean occupied;
+	
 	public Tile(Vector2 coords, TextureRegion tr) {
 		super(tr);
 		this.tilesPos = coords;
 		
 		Vector2 rendVec = new Vector2(-tr.getRegionWidth()/2, -tr.getRegionHeight());					
 		setRenderVector(rendVec);
+		
+		occupant = null;
+		occupied = false;
 	}
 	
 	/**
@@ -32,6 +39,18 @@ public class Tile extends CubicObject {
 				return true;	
 		}
 		return false;
+	}
+	
+	/**
+	 * @param insertObject WorldObject to be inserted into the tile
+	 */
+	public void insertWorldObject(WorldObject insertObject) {
+		occupant = insertObject;
+		occupied = true;
+	}
+	
+	public Boolean isTileOccupied() {
+		return occupied;
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +16,8 @@ public class RenderableObjectsContainer extends WorldObjectsContainer{
 	protected Texture objectsTexture;
 	protected TextureRegion[] atlas;
 	
-	public RenderableObjectsContainer(String textureName, int tileW, int tileH) {
+	public RenderableObjectsContainer(TilesMaster TM, String textureName, int tileW, int tileH) {
+		super(TM);
 		renderableObjects = new ArrayList<RenderableObject>();
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName +".png"));
 		atlas = new TextureRegion(objectsTexture).split(tileW, tileH)[0]; 

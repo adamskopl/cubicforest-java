@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -60,6 +61,7 @@ public class TilesMasterHelper {
 		return coords;
 	}
 	
+	// temporary function for test map
 	public static boolean isTileonTestMap(int tileIndex) {		
 		return testEmptyTiles.contains(tileIndex);
 	}

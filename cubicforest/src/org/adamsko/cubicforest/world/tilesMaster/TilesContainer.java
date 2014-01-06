@@ -8,16 +8,35 @@ import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObject;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends RenderableObjectsContainer implements RenderableObjectsMaster, PickMasterClient {
 	
-	public TilesContainer() {
-		super("tiles-atlas-medium", 75, 45);
+	public TilesContainer(TilesMaster TM) {
+		super(TM, "tiles-atlas-medium", 75, 45);
 	}
 	
 	public List<RenderableObject> getTiles() {
 		return renderableObjects;
+	}
+	
+	/**
+	 * Search Tiles for one containing given tilePosition.
+	 * @param tilePos tilePosition of the searched Tile  
+	 * @return Tile which contains tilePos position.
+	 */
+	public Tile getTileOnPos(Vector2 tilePos) {
+		
+		for(WorldObject wo : worldObjects) {
+			Tile tile = (Tile)wo;
+			if(tile.isPosInTile(tilePos)){
+				return tile;
+			}
+		}
+		
+		Gdx.app.error("TilesContainer", "tile with (" + tilePos.x + ", " + tilePos.y + ") not found");
+		return null;
 	}
 	
 	public void addTile(Vector2 tilePos) {
