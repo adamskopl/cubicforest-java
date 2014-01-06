@@ -26,7 +26,7 @@ public class World {
 		pickMaster = new PickMaster();
 		
 		TilesMaster tilesMaster = new TilesMaster(64);
-		addWorldObjectsMaster(tilesMaster, true);
+		addWorldObjectsMaster(tilesMaster.getTilesContainer(), true);
 		pickMaster.addClient(tilesMaster);
 		
 	}

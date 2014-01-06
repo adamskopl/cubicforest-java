@@ -1,7 +1,6 @@
 package org.adamsko.cubicforest.render.queue;
 
 import java.util.Comparator;
-import java.util.Vector;
 
 import org.adamsko.cubicforest.render.RenderableObject;
 
