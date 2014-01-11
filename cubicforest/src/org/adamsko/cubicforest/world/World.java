@@ -6,28 +6,39 @@ import java.util.List;
 import org.adamsko.cubicforest.pickmaster.PickMaster;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.WorldRenderer;
+import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 /**
  * World class desc.
- * @author adamsko
+ * @author adamsko 
  *
  */
 public class World {
 	
 	WorldRenderer renderer;	
 	List <WorldObjectsMaster> worldObjectsMasters;
-	
 	PickMaster pickMaster;
+	
+	TilesMaster tilesMaster;
+	TerrainObjectsMaster terrainObjectsMaster;
+	HeroesMaster heroesMaster;
 	
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
 		
-		TilesMaster tilesMaster = new TilesMaster(64);
+		tilesMaster = new TilesMaster(64);
+		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster, "terrain-atlas-medium", 42, 50);
+		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);
+
 		addWorldObjectsMaster(tilesMaster.getTilesContainer(), true);
-		pickMaster.addClient(tilesMaster);
+		addWorldObjectsMaster(terrainObjectsMaster, true);
+		addWorldObjectsMaster(heroesMaster, true);
+		
+		pickMaster.addClient(tilesMaster);		
 		
 	}
 

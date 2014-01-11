@@ -30,7 +30,7 @@ public class RenderListMaster {
 	/**
 	 * Sort renderList.
 	 */
-	private void sortRenderList() {
+	public void sortRenderList() {
 		Collections.sort(renderList, rOCompoarator);
 	}
 	
@@ -48,12 +48,11 @@ public class RenderListMaster {
 	public void addRenderableObjects(List<RenderableObject> list) {
 		/*
 		 * TODO check if objects are already on the renderList.
-		 * error.
+		 * (it's an error)
 		 */
 		for(RenderableObject ro : list) {
 			renderList.add(ro);
 		}
-		sortRenderList();
 	}
 	
 	/**

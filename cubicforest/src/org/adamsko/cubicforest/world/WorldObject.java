@@ -17,12 +17,25 @@ public class WorldObject {
 	protected Vector2 tilesPos;
 	
 	/*
-	 * Vertical position of the object.
+	 * Vertical position of the object. Indicates order of the rendering.
 	 */
-	protected float height;
+	protected Float height;
+	
+	public WorldObject() {
+		tilesPos = new Vector2(0.0f, 0.0f);
+		height = new Float(0.0f);
+	}
+	
+	public void setTilesPos(Vector2 pos) {
+		this.tilesPos.set(pos);
+	}
 	
 	public Vector2 getTilesPos() {
-		return tilesPos;
+		return this.tilesPos;
+	}
+	
+	public void setHeight(Float height) {
+		this.height = height;
 	}
 	
 	public float getHeight() {

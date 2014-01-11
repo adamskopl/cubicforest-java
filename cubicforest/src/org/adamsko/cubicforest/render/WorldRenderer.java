@@ -64,7 +64,7 @@ public class WorldRenderer {
 
 		batch.end();
 		
-		renderGrid();
+//		renderGrid();
 		fps.log();
 	}
 	
@@ -91,7 +91,27 @@ public class WorldRenderer {
 	
 	public void addROM(RenderableObjectsMaster ROM) {
 		renderableObjectsMasters.add(ROM);
-		renderListMaster.addRenderableObjects(ROM.getRendarbleObjects());
+//		renderListMaster.addRenderableObjects(ROM.getRenderableObjects());
+	}
+	
+	/**
+	 * Prepare {@link RenderListMaster} for render: add new
+	 * {@link RenderableObject} objects, update old ones, sort list.
+	 */
+	private void updateRenderList() {
+		Boolean sortNeeded = false;
+		for(RenderableObjectsMaster rOM : renderableObjectsMasters) {
+			List<RenderableObject> unservedObjects = rOM
+					.popRenderableObjectsUnserved();
+			if(unservedObjects.size() != 0) {
+				sortNeeded = true;
+				renderListMaster.addRenderableObjects(unservedObjects);
+			}
+		}
+		// renderListMaster has new objects added: sort needed
+		if(sortNeeded) {
+			renderListMaster.sortRenderList();
+		}
 	}
 	
 	private void renderObject(RenderableObject rObj) {
@@ -102,6 +122,7 @@ public class WorldRenderer {
 	}
 	
 	private void renderROMs() {
+		updateRenderList();
 		for(RenderableObject rObj : renderListMaster.gerRenderList()) {
 			renderObject(rObj);
 		}
@@ -109,7 +130,7 @@ public class WorldRenderer {
 	
 	@SuppressWarnings("unused")
 	private void renderROM(RenderableObjectsMaster ROM) {
-		List<RenderableObject> rObjects = ROM.getRendarbleObjects();
+		List<RenderableObject> rObjects = ROM.getRenderableObjects();
 		for(RenderableObject rObj : rObjects) {
 			renderObject(rObj);
 		}

@@ -18,7 +18,7 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 	}
 	
 	public List<RenderableObject> getTiles() {
-		return renderableObjects;
+		return getRenderableObjects();
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 	 */
 	public Tile getTileOnPos(Vector2 tilePos) {
 		
-		for(WorldObject wo : worldObjects) {
+		for(WorldObject wo : getWorldObjects()) {
 			Tile tile = (Tile)wo;
 			if(tile.isPosInTile(tilePos)){
 				return tile;
@@ -41,13 +41,21 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 	
 	public void addTile(Vector2 tilePos) {
 		Tile newTile = new Tile(tilePos, atlas[0]);
-		worldObjects.add(newTile);
-		renderableObjects.add(newTile);
+		newTile.setRenderVector(new Vector2(-atlas[0].getRegionWidth() / 2,
+				-atlas[0].getRegionHeight()));
+		// tiles are slightly lower than other objects
+		newTile.setHeight(-0.01f);
+
+		// FIXME: don't add newTile through addRenderableObject(), because it's
+		// a Tile. Is it ok?
+		super.getWorldObjects().add(newTile);
+		super.getRenderableObjects().add(newTile);
+		super.getRenderableObjectsUnserved().add(newTile);
 	}
 
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {
-		for(WorldObject wo : renderableObjects) {
+		for(WorldObject wo : getRenderableObjects()) {
 			Tile t = (Tile)wo;
 			if(t.isPosInTile(inputTilesPos)) {
 				t.setTextureRegion(atlas[1]);				
@@ -58,16 +66,6 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public List<WorldObject> getWorldObjects() {
-		return worldObjects;
-	}
-
-	@Override
-	public List<RenderableObject> getRendarbleObjects() {
-        return renderableObjects;
 	}
 	
 }

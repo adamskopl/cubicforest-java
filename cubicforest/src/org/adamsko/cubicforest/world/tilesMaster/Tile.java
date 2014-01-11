@@ -19,10 +19,6 @@ public class Tile extends CubicObject {
 	public Tile(Vector2 coords, TextureRegion tr) {
 		super(tr);
 		this.tilesPos = coords;
-		
-		Vector2 rendVec = new Vector2(-tr.getRegionWidth()/2, -tr.getRegionHeight());					
-		setRenderVector(rendVec);
-		
 		occupant = null;
 		occupied = false;
 	}
