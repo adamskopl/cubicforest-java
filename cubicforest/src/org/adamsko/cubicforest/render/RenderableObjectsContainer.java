@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.queue.RenderListMaster;
-import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
@@ -79,10 +78,6 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 		// add newObject to RenderableObject objects, which are not in
 		// RenderListMaster yet
 		renderableObjectsUnserved.add(newObject);
-	}
-
-	public List<WorldObject> getWorldObjects() {
-		return super.getWorldObjects();
 	}
 
 	/**
