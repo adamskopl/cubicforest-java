@@ -12,8 +12,9 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 /**
  * World class desc.
- * @author adamsko 
- *
+ * 
+ * @author adamsko
+ * 
  */
 public class World {
 	

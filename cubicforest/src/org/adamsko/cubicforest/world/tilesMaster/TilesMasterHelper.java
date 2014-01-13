@@ -7,8 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Collection of TilesMaster helpful functions.
+ * 
  * @author adamsko
- *
+ * 
  */
 public class TilesMasterHelper {
 

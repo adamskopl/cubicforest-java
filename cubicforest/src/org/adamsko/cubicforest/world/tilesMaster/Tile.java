@@ -8,8 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * A tile which is a base indicator of all objects positions in the world.
+ * 
  * @author adamsko
- *
  */
 public class Tile extends CubicObject {
 		

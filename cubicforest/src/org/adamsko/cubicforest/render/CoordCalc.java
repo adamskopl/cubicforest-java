@@ -3,19 +3,16 @@ package org.adamsko.cubicforest.render;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * @author adamsko
- * Converting coordinates in different spaces.
- * <br>
- * TilesCoordinates - coordinates indicated by tiles. 
- * (0.0, 0.0) is a left corner of the first tile, 
- * (0.5, 0.5) is it's center.
- * <br>
- * RenderCoordinates - coordinates indicated by render area. E.g. if a tile is 128x128px and 
- * is displayed isometricaly, (1.0, 0.0) in TilesCoordinates is (64.0, 32.0) in RenderCoordinates.
- * <br>
- *  
+ * Converting coordinates in different spaces. <br>
+ * TilesCoordinates - coordinates indicated by tiles. (0.0, 0.0) is a left
+ * corner of the first tile, (0.5, 0.5) is it's center. <br>
+ * RenderCoordinates - coordinates indicated by render area. E.g. if a tile is
+ * 128x128px and is displayed isometricaly, (1.0, 0.0) in TilesCoordinates is
+ * (64.0, 32.0) in RenderCoordinates. <br>
+ * 
  * ScreenCoordinates - coordinates indicated by screen's dimensions.
  * 
+ * @author adamsko
  */
 public class CoordCalc {
 

@@ -7,12 +7,13 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Comparator for {@link RenderableObject}. Used for deciding which
- * object should be rendered first.
+ * Comparator for {@link RenderableObject}. Used for deciding which object
+ * should be rendered first.
  * 
  * Sorting rules order: height, tilePosition(lower coordinates first).
+ * 
  * @author adamsko
- *
+ * 
  */
 public class RenderableObjectComparator implements Comparator <RenderableObject> {
 

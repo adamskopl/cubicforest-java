@@ -15,6 +15,29 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class RenderableObjectsContainer extends WorldObjectsContainer {
 
 	/**
+	 * Types of {@link RenderableObject} objects lists in container.
+	 * 
+	 * @author adamsko
+	 */
+	public enum ROListType {
+		/**
+		 * list with {@link RenderableObject} objects, that are not in
+		 * {@link RenderListMaster} yet
+		 */
+		RO_UNSERVED,
+		/**
+		 * list with {@link RenderableObject} objects that are already in
+		 * {@link RenderListMaster} and need to be updated (render order
+		 * recalculated)
+		 */
+		RO_TO_UPDATE,
+		/**
+		 * list with all {@link RenderableObject} objects in container
+		 */
+		RO_ALL
+	}
+
+	/**
 	 * Actual list of {@link RenderableObject} objects. In contrary to
 	 * renderableObjectsToServe, it contains all objects which should be
 	 * rendered.
@@ -24,16 +47,24 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	 * List of {@link RenderableObject}. Indicates which objects from
 	 * renderableObjects objects should be added to {@link RenderListMaster}
 	 * (e.g. objects just created). The purpose is to separate new objects from
-	 * those being already in {@link RenderListMaster}. List is cleared after
-	 * being served.
+	 * those being already in {@link RenderListMaster}.
 	 */
 	private List<RenderableObject> renderableObjectsUnserved;
+
+	/**
+	 * List of {@link RenderableObject}. Indicates which objects from
+	 * renderableObjects objects should be updated (sorted) in
+	 * {@link RenderListMaster}. The purpose is to separate objects needing to
+	 * updated from those staying unchanged.
+	 */
+	private List<RenderableObject> renderableObjectsToUpdate;
+
 	protected Texture objectsTexture;
 	protected TextureRegion[] atlas;
 
 	public RenderableObjectsContainer(TilesMaster TM, String textureName,
 			int tileW, int tileH) {
-		super(TM); 
+		super(TM);
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName
@@ -49,31 +80,56 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 		// RenderListMaster yet
 		renderableObjectsUnserved.add(newObject);
 	}
-	
+
 	public List<WorldObject> getWorldObjects() {
 		return super.getWorldObjects();
 	}
-	
-	public List<RenderableObject> getRenderableObjects() {
-		return renderableObjects;
-	}
-	
-	public List<RenderableObject> getRenderableObjectsUnserved() {
-		return renderableObjectsUnserved;
-	}
-	
+
 	/**
-	 * Get {@link RenderableObject} objects that are not yet in
-	 * {@link RenderListMaster}. Clean the list afterwards.
+	 * Get {@link RenderableObject} list of given {@link ROListType} type.
 	 * 
-	 * @return Copy of the {@link RenderableObject} objects list, with objects,
-	 *         that are not in {@link RenderListMaster} yet.
+	 * @param type
+	 *            type of {@link RenderableObject} objects list.
+	 * @return {@link RenderableObject} objects list of given {@link ROListType}
+	 *         type.
 	 */
-	public List<RenderableObject> popRenderableObjectsUnserved() {
-		// copy is made only to clear renderableObjectsToServe before return
-		List<RenderableObject> serveCopy = new ArrayList<RenderableObject>(
-				renderableObjectsUnserved);
-		renderableObjectsUnserved.clear();
-		return serveCopy;
+	public List<RenderableObject> getRenderableObjects(ROListType type) {
+		switch (type) {
+		case RO_TO_UPDATE: {
+			return renderableObjectsToUpdate;
+		}
+
+		case RO_UNSERVED: {
+			return renderableObjectsUnserved;
+		}
+
+		case RO_ALL: {
+			return renderableObjects;
+		}
+
+		default:
+			Gdx.app.error("getRenderableObjects", "type not handleable");
+			return null;
+		}
 	}
+
+	/**
+	 * Get {@link RenderableObject} list of given {@link ROListType} type. Clear
+	 * corresponding list in container afterwards.
+	 * 
+	 * @param type
+	 *            type of {@link RenderableObject} objects list.
+	 * 
+	 * @return Copy of the {@link RenderableObject} objects list of given
+	 *         {@link ROListType} type.
+	 */
+	public List<RenderableObject> popRenderableObjects(ROListType type) {
+		List<RenderableObject> listOriginal = getRenderableObjects(type);
+		List<RenderableObject> listCopy = new ArrayList<RenderableObject>(
+				listOriginal);
+		listOriginal.clear();
+
+		return listCopy;
+	}
+
 }

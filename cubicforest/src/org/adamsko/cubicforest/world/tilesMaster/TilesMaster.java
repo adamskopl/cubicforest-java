@@ -7,14 +7,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Tiles managing class.
- * Map's model: <br>
+ * Tiles managing class. Map's model: <br>
  * . X---> <br>
  * Y 0 1 2 <br>
  * | 3 4 5 <br>
  * V 6 7 8 <br>
+ * 
  * @author adamsko
- *
  */
 public class TilesMaster implements PickMasterClient {
 

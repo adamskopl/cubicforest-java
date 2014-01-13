@@ -18,7 +18,7 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 	}
 	
 	public List<RenderableObject> getTiles() {
-		return getRenderableObjects();
+		return getRenderableObjects(ROListType.RO_ALL);
 	}
 	
 	/**
@@ -49,13 +49,13 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 		// FIXME: don't add newTile through addRenderableObject(), because it's
 		// a Tile. Is it ok?
 		super.getWorldObjects().add(newTile);
-		super.getRenderableObjects().add(newTile);
-		super.getRenderableObjectsUnserved().add(newTile);
+		super.getRenderableObjects(ROListType.RO_ALL).add(newTile);
+		super.getRenderableObjects(ROListType.RO_UNSERVED).add(newTile);
 	}
 
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {
-		for(WorldObject wo : getRenderableObjects()) {
+		for(WorldObject wo : getRenderableObjects(ROListType.RO_ALL)) {
 			Tile t = (Tile)wo;
 			if(t.isPosInTile(inputTilesPos)) {
 				t.setTextureRegion(atlas[1]);				
