@@ -53,6 +53,17 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 		super.getRenderableObjects(ROListType.RO_UNSERVED).add(newTile);
 	}
 
+	/**
+	 * Mark given tile to be different from the others.
+	 * 
+	 * @param tileToHighlight
+	 * 
+	 */
+	public void testHighlightTile(Tile tileToHighlight) {
+		tileToHighlight.setTextureRegion(atlas[2]);
+	}
+	
+
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {
 		for(WorldObject wo : getRenderableObjects(ROListType.RO_ALL)) {

@@ -45,6 +45,7 @@ public class TilesMaster implements PickMasterClient {
 		Tile parentTile = tilesContainer.getTileOnPos(insertObject.getTilesPos());
 		if(parentTile != null) {
 			parentTile.insertWorldObject(insertObject);
+			tilesContainer.testHighlightTile(parentTile);
 		}
 	}
 	

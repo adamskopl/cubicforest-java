@@ -54,7 +54,7 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	 * List of {@link RenderableObject}. Indicates which objects from
 	 * renderableObjects objects should be updated (sorted) in
 	 * {@link RenderListMaster}. The purpose is to separate objects needing to
-	 * updated from those staying unchanged.
+	 * be updated from those staying unchanged.
 	 */
 	private List<RenderableObject> renderableObjectsToUpdate;
 
