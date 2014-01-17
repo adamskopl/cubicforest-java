@@ -26,9 +26,9 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 		RenderableObject testPig;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testPig = new RenderableObject(atlas[atlasIndex]);
+			testPig = new RenderableObject(atlasRows.get(0)[atlasIndex]);
 			testPig.setRenderVector(new Vector2(
-					-atlas[0].getRegionWidth() / 2, -7));
+					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
 			testPig.setTilesPos(pos);

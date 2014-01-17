@@ -11,7 +11,7 @@ import org.adamsko.cubicforest.world.WorldObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class TilesContainer extends RenderableObjectsContainer implements RenderableObjectsMaster, PickMasterClient {
+public class TilesContainer extends RenderableObjectsContainer implements RenderableObjectsMaster {
 	
 	public TilesContainer(TilesMaster TM) {
 		super(TM, "tiles-atlas-medium", 75, 45);
@@ -40,9 +40,9 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 	}
 	
 	public void addTile(Vector2 tilePos) {
-		Tile newTile = new Tile(tilePos, atlas[0]);
-		newTile.setRenderVector(new Vector2(-atlas[0].getRegionWidth() / 2,
-				-atlas[0].getRegionHeight()));
+		Tile newTile = new Tile(tilePos, atlasRows.get(0)[0]);
+		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0].getRegionWidth() / 2,
+				-atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects
 		newTile.setHeight(-0.01f);
 
@@ -60,16 +60,14 @@ public class TilesContainer extends RenderableObjectsContainer implements Render
 	 * 
 	 */
 	public void testHighlightTile(Tile tileToHighlight) {
-		tileToHighlight.setTextureRegion(atlas[2]);
+		tileToHighlight.setTextureRegion(atlasRows.get(0)[2]);
 	}
 	
-
-	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {
 		for(WorldObject wo : getRenderableObjects(ROListType.RO_ALL)) {
 			Tile t = (Tile)wo;
 			if(t.isPosInTile(inputTilesPos)) {
-				t.setTextureRegion(atlas[1]);				
+				t.setTextureRegion(atlasRows.get(0)[1]);
 			}
 		}
 	}

@@ -11,6 +11,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * @author adamsko
+ *
+ */
 public class RenderableObjectsContainer extends WorldObjectsContainer {
 
 	/**
@@ -59,7 +63,12 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	private List<RenderableObject> renderableObjectsToUpdate;
 
 	protected Texture objectsTexture;
-	protected TextureRegion[] atlas;
+	
+	
+	/**
+	 * Temporary solution. Keep rows of atlas in a list.
+	 */
+	protected List<TextureRegion[]> atlasRows;
 
 	public RenderableObjectsContainer(TilesMaster TM, String textureName,
 			int tileW, int tileH) {
@@ -68,7 +77,10 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName
 				+ ".png"));
-		atlas = new TextureRegion(objectsTexture).split(tileW, tileH)[0];
+		
+		atlasRows = new ArrayList<TextureRegion[]>();
+		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[0]);
+		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[1]);
 	}
 
 	public void addRenderableObject(RenderableObject newObject) {

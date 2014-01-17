@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.render;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,6 +107,11 @@ public class WorldRenderer {
 				sortNeeded = true;
 				renderListMaster.addRenderableObjects(unservedObjects);
 			}
+
+			/*
+			 * TODO: objectsToUpdate handling. Remove them from renderList and
+			 * add to the end, so they can be sorted
+			 */
 		}
 
 		if(sortNeeded) {
