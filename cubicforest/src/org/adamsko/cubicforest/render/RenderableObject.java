@@ -18,10 +18,16 @@ public class RenderableObject extends WorldObject {
 	private TextureRegion textureRegion;
 	
 	/**
+	 * Temporary solution: sequence number of the texture in an atlas row
+	 */
+	private int texNum = 0;
+	
+	/**
 	 * @param tr
 	 */
-	public RenderableObject(TextureRegion tr) {
+	public RenderableObject(TextureRegion tr, int texNum) {
 		this.textureRegion = tr;
+		this.texNum = texNum;
 	}
 	
 	public void setRenderVector(Vector2 vec) {
@@ -44,6 +50,15 @@ public class RenderableObject extends WorldObject {
 	 */
 	public TextureRegion getTextureRegion() {
 		return this.textureRegion;
+	}
+	
+	/**
+	 * Temporary solution. Get sequence number of a texture in an atlas row.
+	 * 
+	 * @return sequence number of the texture in an atlas row
+	 */
+	public int getTexNum() {
+		return texNum;
 	}
 	
 }

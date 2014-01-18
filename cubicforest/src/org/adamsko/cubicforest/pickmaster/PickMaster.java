@@ -22,7 +22,6 @@ public class PickMaster {
 	public void update() {
 		if(Gdx.input.isTouched()) {
 			Vector2 screenPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-			Gdx.app.log("INPUT: ",  Gdx.input.getX() + ", " + Gdx.input.getY());
 			Vector2 tilesPos = new Vector2(CoordCalc.screenToTiles(screenPos));
 			for(PickMasterClient client : clients) {				
 				client.onInput(screenPos, tilesPos);

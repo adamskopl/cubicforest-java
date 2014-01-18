@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 
 public class WorldObjectsContainer {
@@ -16,8 +17,9 @@ public class WorldObjectsContainer {
 		tilesMaster = TM;
 	}
 	
-	public void addWorldObject(WorldObject newObject) {
+	public void addWorldObject(WorldObject newObject, WorldObjectsMaster hisMaster) {
 		worldObjects.add(newObject);
+		newObject.setMaster(hisMaster);
 		// associate newObject with a tile (every WorldObject is associated with
 		// a tile)
 		tilesMaster.insertWorldObject(newObject);
@@ -30,5 +32,10 @@ public class WorldObjectsContainer {
 	 */
 	public List<WorldObject> getWorldObjects() {
 		return worldObjects;
+	}
+	
+	public void handleServantTileEvent(WorldObject servant,
+			TileEvent_e tileEvent) {
+		
 	}
 }

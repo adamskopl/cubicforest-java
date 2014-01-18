@@ -1,9 +1,9 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
+import org.adamsko.cubicforest.pickmaster.PickMaster;
 import org.adamsko.cubicforest.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.WorldObject;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -17,6 +17,19 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class TilesMaster implements PickMasterClient {
 
+	/**
+	 * Event types connected with a {@link Tile}.
+	 * 
+	 * @author adamsko
+	 * 
+	 */
+	public enum TileEvent_e {
+		/**
+		 * {@link Tile} received input from {@link PickMaster}.
+		 */
+		TILE_PICKED		
+	}
+	
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
 	private int mapSize;
 	private TilesContainer tilesContainer;
@@ -41,16 +54,27 @@ public class TilesMaster implements PickMasterClient {
 		return tilesContainer;
 	}
 	
+	/**
+	 * Associate given {@link WorldObject} object with a {@link Tile} object.
+	 * 
+	 * @param insertObject
+	 *            {@link WorldObject} object to be associated with a
+	 *            {@link Tile}.
+	 */
 	public void insertWorldObject(WorldObject insertObject) {
 		Tile parentTile = tilesContainer.getTileOnPos(insertObject.getTilesPos());
 		if(parentTile != null) {
 			parentTile.insertWorldObject(insertObject);
-			tilesContainer.testHighlightTile(parentTile);
+			tilesContainer.testHighlightTile(parentTile, 1);
 		}
 	}
 	
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {	
-		tilesContainer.onInput(inputScreenPos, inputTilesPos);
+		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
+		if(clickedTile != null) {
+			tilesContainer.testHighlightTile(clickedTile, 2);
+			clickedTile.handleTileEvent(TileEvent_e.TILE_PICKED);
+		}
 	}
 }

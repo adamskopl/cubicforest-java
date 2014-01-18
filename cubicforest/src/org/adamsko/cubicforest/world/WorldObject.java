@@ -1,5 +1,8 @@
 package org.adamsko.cubicforest.world;
 
+import org.adamsko.cubicforest.world.tilesMaster.Tile;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -21,9 +24,23 @@ public class WorldObject {
 	 */
 	protected Float height;
 	
+	/**
+	 * {@link WorldObjectsMaster} which is managing this object.
+	 */
+	private WorldObjectsMaster master = null;
+	
 	public WorldObject() {
 		tilesPos = new Vector2(0.0f, 0.0f);
 		height = new Float(0.0f);
+	}
+	
+	/**
+	 * Set {@link WorldObjectsMaster} which is managing this object.
+	 * 
+	 * @param master {@link WorldObjectsMaster} of this object
+	 */
+	public void setMaster(WorldObjectsMaster master) {
+		this.master = master;
 	}
 	
 	public void setTilesPos(Vector2 pos) {
@@ -40,6 +57,16 @@ public class WorldObject {
 	
 	public float getHeight() {
 		return height;
+	}
+	
+	/**
+	 * Handle {@link TileEvent_e} event of a parent {@link Tile}.
+	 * 
+	 * @param tileEvent
+	 *            event associated with a parent {@link Tile}.
+	 */
+	public void handleParentTileEvent(TileEvent_e tileEvent) {
+		master.handleServantTileEvent(this, tileEvent);
 	}
 	
 }

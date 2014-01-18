@@ -31,13 +31,13 @@ public class TerrainObjectsMaster extends RenderableObjectsContainer implements 
 		RenderableObject testTree;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testTree = new RenderableObject(atlasRows.get(0)[atlasIndex]);
+			testTree = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testTree.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
 			testTree.setTilesPos(pos);
-			addRenderableObject(testTree);
+			addRenderableObject(testTree, this);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}
 		}
 	}

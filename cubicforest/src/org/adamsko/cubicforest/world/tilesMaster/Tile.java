@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.world.CubicObject;
 import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -17,7 +18,7 @@ public class Tile extends CubicObject {
 	private Boolean occupied;
 	
 	public Tile(Vector2 coords, TextureRegion tr) {
-		super(tr);
+		super(tr, 0);
 		this.tilesPos = coords;
 		occupant = null;
 		occupied = false;
@@ -25,7 +26,9 @@ public class Tile extends CubicObject {
 	
 	/**
 	 * Check if vector belongs to tile's area.
-	 * @param tilePos vector being checked for inclusion
+	 * 
+	 * @param tilePos
+	 *            vector being checked for inclusion
 	 * @return
 	 */
 	public boolean isPosInTile(Vector2 tilePos) {
@@ -38,7 +41,8 @@ public class Tile extends CubicObject {
 	}
 	
 	/**
-	 * @param insertObject WorldObject to be inserted into the tile
+	 * @param insertObject
+	 *            WorldObject to be inserted into the tile
 	 */
 	public void insertWorldObject(WorldObject insertObject) {
 		occupant = insertObject;
@@ -47,6 +51,18 @@ public class Tile extends CubicObject {
 	
 	public Boolean isTileOccupied() {
 		return occupied;
+	}
+
+	/**
+	 * Handle {@link TileEvent_e} event associated with this {@link Tile}.
+	 * 
+	 * @param tileEvent
+	 *            {@link TileEvent_e} event associated with this {@link Tile}.
+	 */
+	public void handleTileEvent(TileEvent_e tileEvent) {
+		if (isTileOccupied()) {
+			occupant.handleParentTileEvent(tileEvent);
+		}
 	}
 	
 }

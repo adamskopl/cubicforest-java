@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * @author adamsko
- *
+ * 
  */
 public class RenderableObjectsContainer extends WorldObjectsContainer {
 
@@ -63,8 +64,7 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	private List<RenderableObject> renderableObjectsToUpdate;
 
 	protected Texture objectsTexture;
-	
-	
+
 	/**
 	 * Temporary solution. Keep rows of atlas in a list.
 	 */
@@ -83,8 +83,8 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[1]);
 	}
 
-	public void addRenderableObject(RenderableObject newObject) {
-		addWorldObject(newObject);
+	public void addRenderableObject(RenderableObject newObject, WorldObjectsMaster hisMaster) {
+		addWorldObject(newObject, hisMaster);
 		// add newObject to other RenderableObject objects
 		renderableObjects.add(newObject);
 		// add newObject to RenderableObject objects, which are not in
