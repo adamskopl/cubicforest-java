@@ -1,10 +1,14 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.adamsko.cubicforest.pickmaster.PickMaster;
 import org.adamsko.cubicforest.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.WorldObject;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Tiles managing class. Map's model: <br>
@@ -67,6 +71,13 @@ public class TilesMaster implements PickMasterClient {
 			parentTile.insertWorldObject(insertObject);
 			tilesContainer.testHighlightTile(parentTile, 1);
 		}
+	}
+	
+	/**
+	 * Temporary test: get tiles for a test path.
+	 */
+	public List<Tile> getPathTestTiles() {
+		return tilesContainer.getPathTestTiles();
 	}
 	
 	@Override

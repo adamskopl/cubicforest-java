@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.RenderableObject;
@@ -65,7 +66,20 @@ public class TilesContainer extends RenderableObjectsContainer implements
 	public void testHighlightTile(Tile tileToHighlight, int texNum) {
 		tileToHighlight.setTextureRegion(atlasRows.get(0)[texNum]);
 	}
-	
+		
+	public List<Tile> getPathTestTiles() {
+		List<Tile> testList = new ArrayList<Tile>();
+		
+		List<Vector2> posList = new ArrayList<Vector2>();
+		posList.add(new Vector2(1, 0));
+		posList.add(new Vector2(2, 0));
+		
+		for(Vector2 p : posList) {
+			testList.add(getTileOnPos(p));		
+		}
+		
+		return testList;
+	}
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
