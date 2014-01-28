@@ -1,5 +1,8 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -11,8 +14,14 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
  */
 public class TilePathsMaster {
 	
+	/**
+	 * list of paths, that were generated and their followings are in progress
+	 */
+	private List <TilePath> handledPaths;
+	
 	public TilePathsMaster(TilesMaster tilesMaster) {
 		TilePathSearcher.setTilesMaster(tilesMaster);
+		handledPaths = new ArrayList<TilePath>();
 	}
 	
 	public void startPath(WorldObject objectOnPath, Tile destinationTile) {
