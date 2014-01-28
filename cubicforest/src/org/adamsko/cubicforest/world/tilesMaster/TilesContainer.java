@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -40,6 +41,16 @@ public class TilesContainer extends RenderableObjectsContainer implements
 
 		Gdx.app.error("TilesContainer", "tile with (" + tilePos.x + ", "
 				+ tilePos.y + ") not found");
+		return null;
+	}
+	
+	public Tile getTileWithObject(WorldObject object) {
+		for(WorldObject wo : getWorldObjects()) {
+			Tile tile = (Tile) wo;
+			if (tile.getOccupant() == object) {
+				return tile;
+			}
+		}
 		return null;
 	}
 

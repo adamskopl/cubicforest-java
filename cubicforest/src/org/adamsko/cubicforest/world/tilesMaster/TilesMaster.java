@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.pickmaster.PickMaster;
 import org.adamsko.cubicforest.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -36,12 +37,19 @@ public class TilesMaster implements PickMasterClient {
 	
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
 	private int mapSize;
+	private List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
+	private OrdersMaster ordersMaster;
 	
 	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;
+		clients = new ArrayList<TilesMasterClient>();
 		TilesMasterHelper.setMapSize(mapSize);
 		initTiles();
+	}
+	
+	public void addClient(TilesMasterClient client) {
+		clients.add(client);
 	}
 	
 	public void initTiles() {
@@ -84,7 +92,13 @@ public class TilesMaster implements PickMasterClient {
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {	
 		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
 		if(clickedTile != null) {
+			for(TilesMasterClient client : clients) {
+				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
+			}
+			
+			// FIXME: TilesMasterClient code conversion needed
 			tilesContainer.testHighlightTile(clickedTile, 2);
+			// FIXME: TilesMasterClient code conversion needed
 			clickedTile.handleTileEvent(TileEvent_e.TILE_PICKED);
 		}
 	}

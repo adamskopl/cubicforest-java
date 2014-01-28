@@ -41,6 +41,15 @@ public class Tile extends CubicObject {
 	}
 	
 	/**
+	 * Get {@link WorldObject} object associated with this tile.
+	 * 
+	 * @return {@link WorldObject} object associated with this tile.
+	 */
+	public WorldObject getOccupant() {
+		return occupant;
+	}
+	
+	/**
 	 * @param insertObject
 	 *            WorldObject to be inserted into the tile
 	 */

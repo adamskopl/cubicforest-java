@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.render.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;

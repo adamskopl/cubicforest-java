@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -52,6 +53,10 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 
 		}
 		}
+	}
+	
+	public WorldObject getTestObject() {
+		return getWorldObjects().get(0);
 	}
 	
 	@Override
