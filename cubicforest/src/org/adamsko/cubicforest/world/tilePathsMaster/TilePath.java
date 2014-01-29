@@ -15,11 +15,6 @@ import com.badlogic.gdx.utils.Array;
  * @author adamsko
  */
 public class TilePath {
-	
-	/**
-	 * Object on the path.
-	 */
-	private WorldObject objectOnPath = null;
 		
 	/**
 	 * List of tiles which wanderer has to go through.
@@ -37,10 +32,6 @@ public class TilePath {
 	 */
 	public void pushTile(Tile newTile) {
 		tilesList.add(newTile);
-	}
-	
-	public void addObject(WorldObject objectOnPath) {
-		this.objectOnPath = objectOnPath;  
 	}
 
 }

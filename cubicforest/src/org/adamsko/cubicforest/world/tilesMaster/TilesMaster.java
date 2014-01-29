@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -46,6 +47,7 @@ public class TilesMaster implements PickMasterClient {
 		clients = new ArrayList<TilesMasterClient>();
 		TilesMasterHelper.setMapSize(mapSize);
 		initTiles();
+		Gdx.app.log("TilesMaster", "CONTTS");
 	}
 	
 	public void addClient(TilesMasterClient client) {
@@ -90,9 +92,11 @@ public class TilesMaster implements PickMasterClient {
 	
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {	
+		Gdx.app.log("TilesMaster", "ON INPUUUUT");
 		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
 		if(clickedTile != null) {
 			for(TilesMasterClient client : clients) {
+				Gdx.app.log("TilesMaster", "for loop");
 				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
 			}
 			

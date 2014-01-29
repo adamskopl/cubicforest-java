@@ -45,16 +45,27 @@ public class WorldObject {
 	
 	public void setTilesPos(Vector2 pos) {
 		this.tilesPos.set(pos);
+	}	
+	public void setTilesPosX(float x) {
+		this.tilesPos.set(x, this.tilesPos.y);
+	}	
+	public void setTilesPosY(float y) {
+		this.tilesPos.set(this.tilesPos.x, y);
 	}
 	
 	public Vector2 getTilesPos() {
 		return this.tilesPos;
+	}	
+	public float getTilesPosX() {
+		return this.tilesPos.x;
+	}	
+	public float getTilesPosY() {
+		return this.tilesPos.y;
 	}
 	
 	public void setHeight(Float height) {
 		this.height = height;
-	}
-	
+	}	
 	public float getHeight() {
 		return height;
 	}
