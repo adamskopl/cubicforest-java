@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -33,5 +34,18 @@ public class TilePath {
 	public void pushTile(Tile newTile) {
 		tilesList.add(newTile);
 	}
+	
+	public Boolean isEmpty() {
+		return tilesList.isEmpty();
+	}
 
+	public Tile frontTile() {
+		try {
+			return tilesList.remove(0);
+		}
+		catch(IndexOutOfBoundsException ex) {
+			Gdx.app.error("TilePath", ex.toString());
+			return null;
+		}
+	}
 }

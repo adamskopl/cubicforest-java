@@ -38,7 +38,7 @@ public class TilePathGuide {
 	 */
 	public void start() {
 		Tween.to(wanderer, WorldObjectAccessor.TILESPOS_X, 2.0f)
-		.target(13.5f)
+		.target(path.frontTile().getTilesPosX())
 		.delay(0.5f)
 		.ease(Circ.INOUT)
 		.repeat(3, 1.0f)

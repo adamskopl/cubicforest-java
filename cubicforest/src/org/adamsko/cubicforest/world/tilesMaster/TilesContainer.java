@@ -82,11 +82,16 @@ public class TilesContainer extends RenderableObjectsContainer implements
 		List<Tile> testList = new ArrayList<Tile>();
 		
 		List<Vector2> posList = new ArrayList<Vector2>();
-		posList.add(new Vector2(1, 0));
-		posList.add(new Vector2(2, 0));
+		posList.add(new Vector2(7, -3));
+		posList.add(new Vector2(8, 3));
 		
 		for(Vector2 p : posList) {
-			testList.add(getTileOnPos(p));		
+			Tile posTile = getTileOnPos(p);
+			if(posTile == null){
+				Gdx.app.error("testPath", "null tile");
+				continue;
+			}			
+			testList.add(posTile);
 		}
 		
 		return testList;
