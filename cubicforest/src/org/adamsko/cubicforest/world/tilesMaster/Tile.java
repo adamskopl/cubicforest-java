@@ -13,17 +13,17 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  */
 public class Tile extends CubicObject {
-		
+
 	private WorldObject occupant;
 	private Boolean occupied;
-	
+
 	public Tile(Vector2 coords, TextureRegion tr) {
 		super(tr, 0);
 		this.tilesPos = coords;
 		occupant = null;
 		occupied = false;
 	}
-	
+
 	/**
 	 * Check if vector belongs to tile's area.
 	 * 
@@ -32,14 +32,14 @@ public class Tile extends CubicObject {
 	 * @return
 	 */
 	public boolean isPosInTile(Vector2 tilePos) {
-		
-		if (tilePos.x > tilesPos.x && tilePos.x < tilesPos.x+1) 				
-			if(tilePos.y > tilesPos.y && tilePos.y < tilesPos.y+1) {
-				return true;	
-		}
+
+		if (tilePos.x >= tilesPos.x && tilePos.x < tilesPos.x + 1)
+			if (tilePos.y >= tilesPos.y && tilePos.y < tilesPos.y + 1) {
+				return true;
+			}
 		return false;
 	}
-	
+
 	/**
 	 * Get {@link WorldObject} object associated with this tile.
 	 * 
@@ -48,7 +48,7 @@ public class Tile extends CubicObject {
 	public WorldObject getOccupant() {
 		return occupant;
 	}
-	
+
 	/**
 	 * @param insertObject
 	 *            WorldObject to be inserted into the tile
@@ -57,7 +57,7 @@ public class Tile extends CubicObject {
 		occupant = insertObject;
 		occupied = true;
 	}
-	
+
 	public Boolean isTileOccupied() {
 		return occupied;
 	}
@@ -73,5 +73,5 @@ public class Tile extends CubicObject {
 			occupant.handleParentTileEvent(tileEvent);
 		}
 	}
-	
+
 }

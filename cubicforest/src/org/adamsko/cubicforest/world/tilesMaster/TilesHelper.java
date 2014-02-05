@@ -6,12 +6,12 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Collection of TilesMaster helpful functions.
+ * Collection of helpful functions connected with {@link Tile}.
  * 
  * @author adamsko
  * 
  */
-public class TilesMasterHelper {
+public class TilesHelper {
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
 	static int mapSize = 1;
@@ -64,6 +64,38 @@ public class TilesMasterHelper {
 	// temporary function for test map
 	public static boolean isTileonTestMap(int tileIndex) {		
 		return testEmptyTiles.contains(tileIndex);
+	}
+	
+	/**
+	 * @param tileA
+	 * @param tileB
+	 * @return
+	 */
+	public static Boolean areTilesAdjecant(Tile tileA, Tile tileB) {
+		float xDiff = Math.abs(tileA.getTilesPosX() - tileB.getTilesPosX());
+		float yDiff = Math.abs(tileA.getTilesPosY() - tileB.getTilesPosY());
+		
+		if(xDiff == 1 && yDiff == 0) return true;
+		if(yDiff == 1 && xDiff == 0) return true;
+		
+		return false;
+	}
+	
+	/**
+	 * Calculate position between adjacent tiles.
+	 * 
+	 * @param tileA
+	 * @param tileB
+	 * @return Position between tiles or null;
+	 * @throws Exception 
+	 */
+	public static Vector2 getPosBetween(Tile tileA, Tile tileB) throws Exception {
+		if (!areTilesAdjecant(tileA, tileB)) {
+			throw new Exception("tiles not adjecant");
+		}
+		Vector2 posA = tileA.getTilesPos();
+		Vector2 posB = tileB.getTilesPos();
+		return new Vector2(posA.sub(posB));
 	}
 	
 }

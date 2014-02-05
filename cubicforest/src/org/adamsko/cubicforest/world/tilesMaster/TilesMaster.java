@@ -45,9 +45,8 @@ public class TilesMaster implements PickMasterClient {
 	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
-		TilesMasterHelper.setMapSize(mapSize);
+		TilesHelper.setMapSize(mapSize);
 		initTiles();
-		Gdx.app.log("TilesMaster", "CONTTS");
 	}
 	
 	public void addClient(TilesMasterClient client) {
@@ -57,8 +56,8 @@ public class TilesMaster implements PickMasterClient {
 	public void initTiles() {
 		tilesContainer = new TilesContainer(this);
 		for(int fIndex = 0; fIndex < mapSize; fIndex++) {
-			if(TilesMasterHelper.isTileonTestMap(fIndex)) {continue;}			
-			Vector2 fCoords = TilesMasterHelper.calcCoords(fIndex);
+			if(TilesHelper.isTileonTestMap(fIndex)) {continue;}			
+			Vector2 fCoords = TilesHelper.calcCoords(fIndex);
 			fCoords.add(new Vector2(7, -3)); // temporary solution for centering view
 			tilesContainer.addTile(fCoords);
 		}
@@ -92,13 +91,16 @@ public class TilesMaster implements PickMasterClient {
 	
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {	
-		Gdx.app.log("TilesMaster", "ON INPUUUUT");
 		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
 		if(clickedTile != null) {
 			for(TilesMasterClient client : clients) {
-				Gdx.app.log("TilesMaster", "for loop");
 				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
 			}
+			
+			Gdx.app.log(
+					"TilesMaster onInput",
+					Float.toString(clickedTile.getTilesPosX()) + ", "
+							+ Float.toString(clickedTile.getTilesPosY()));
 			
 			// FIXME: TilesMasterClient code conversion needed
 			tilesContainer.testHighlightTile(clickedTile, 2);

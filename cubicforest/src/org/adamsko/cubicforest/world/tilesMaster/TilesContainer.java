@@ -20,7 +20,7 @@ public class TilesContainer extends RenderableObjectsContainer implements
 	}
 
 	public List<RenderableObject> getTiles() {
-		return getRenderableObjects(ROListType.RO_ALL);
+		return getRenderableObjects(ROListType_e.RO_ALL);
 	}
 
 	/**
@@ -56,6 +56,7 @@ public class TilesContainer extends RenderableObjectsContainer implements
 
 	public void addTile(Vector2 tilePos) {
 		Tile newTile = new Tile(tilePos, atlasRows.get(0)[0]);
+		Gdx.app.log("addTile", tilePos.x + ", " + tilePos.y);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects
@@ -64,8 +65,8 @@ public class TilesContainer extends RenderableObjectsContainer implements
 		// FIXME: don't add newTile through addRenderableObject(), because it's
 		// a Tile. Is it ok?
 		super.getWorldObjects().add(newTile);
-		super.getRenderableObjects(ROListType.RO_ALL).add(newTile);
-		super.getRenderableObjects(ROListType.RO_UNSERVED).add(newTile);
+		super.getRenderableObjects(ROListType_e.RO_ALL).add(newTile);
+		super.getRenderableObjects(ROListType_e.RO_UNSERVED).add(newTile);
 	}
 
 	/**
@@ -82,8 +83,15 @@ public class TilesContainer extends RenderableObjectsContainer implements
 		List<Tile> testList = new ArrayList<Tile>();
 		
 		List<Vector2> posList = new ArrayList<Vector2>();
-		posList.add(new Vector2(7, -3));
-		posList.add(new Vector2(8, 3));
+		posList.add(new Vector2(8, -3));
+		posList.add(new Vector2(9, -3));
+		posList.add(new Vector2(10, -3));
+		posList.add(new Vector2(10, -2));
+		posList.add(new Vector2(11, -2));
+		posList.add(new Vector2(12, -2));
+		posList.add(new Vector2(12, -3));
+		posList.add(new Vector2(13, -3));
+		posList.add(new Vector2(14, -3));
 		
 		for(Vector2 p : posList) {
 			Tile posTile = getTileOnPos(p);

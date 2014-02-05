@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.render;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObjectsContainer.ROListType;
+import org.adamsko.cubicforest.render.RenderableObjectsContainer.ROListType_e;
 import org.adamsko.cubicforest.render.queue.RenderListMaster;
 
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -65,7 +65,7 @@ public class WorldRenderer {
 		batch.end();
 		
 //		renderGrid();
-		fps.log();
+//		fps.log();
 	}
 	
 	void renderGrid() {
@@ -102,7 +102,7 @@ public class WorldRenderer {
 		Boolean sortNeeded = false;
 		for(RenderableObjectsMaster rOM : renderableObjectsMasters) {
 			List<RenderableObject> unservedObjects = rOM
-					.popRenderableObjects(ROListType.RO_UNSERVED);
+					.popRenderableObjects(ROListType_e.RO_UNSERVED);
 			if(unservedObjects.size() != 0) {
 				sortNeeded = true;
 				renderListMaster.addRenderableObjects(unservedObjects);
@@ -136,7 +136,7 @@ public class WorldRenderer {
 	
 	@SuppressWarnings("unused")
 	private void renderROM(RenderableObjectsMaster ROM) {
-		List<RenderableObject> rObjects = ROM.getRenderableObjects(ROListType.RO_ALL);
+		List<RenderableObject> rObjects = ROM.getRenderableObjects(ROListType_e.RO_ALL);
 		for(RenderableObject rObj : rObjects) {
 			renderObject(rObj);
 		}

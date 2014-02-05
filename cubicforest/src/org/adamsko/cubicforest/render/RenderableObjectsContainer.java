@@ -6,7 +6,6 @@ import java.util.List;
 import org.adamsko.cubicforest.render.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -24,7 +23,7 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	 * 
 	 * @author adamsko
 	 */
-	public enum ROListType {
+	public enum ROListType_e {
 		/**
 		 * list with {@link RenderableObject} objects, that are not in
 		 * {@link RenderListMaster} yet
@@ -94,14 +93,14 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	}
 
 	/**
-	 * Get {@link RenderableObject} list of given {@link ROListType} type.
+	 * Get {@link RenderableObject} list of given {@link ROListType_e} type.
 	 * 
 	 * @param type
 	 *            type of {@link RenderableObject} objects list.
-	 * @return {@link RenderableObject} objects list of given {@link ROListType}
+	 * @return {@link RenderableObject} objects list of given {@link ROListType_e}
 	 *         type.
 	 */
-	public List<RenderableObject> getRenderableObjects(ROListType type) {
+	public List<RenderableObject> getRenderableObjects(ROListType_e type) {
 		switch (type) {
 		case RO_TO_UPDATE: {
 			return renderableObjectsToUpdate;
@@ -122,16 +121,16 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	}
 
 	/**
-	 * Get {@link RenderableObject} list of given {@link ROListType} type. Clear
+	 * Get {@link RenderableObject} list of given {@link ROListType_e} type. Clear
 	 * corresponding list in container afterwards.
 	 * 
 	 * @param type
 	 *            type of {@link RenderableObject} objects list.
 	 * 
 	 * @return Copy of the {@link RenderableObject} objects list of given
-	 *         {@link ROListType} type.
+	 *         {@link ROListType_e} type.
 	 */
-	public List<RenderableObject> popRenderableObjects(ROListType type) {
+	public List<RenderableObject> popRenderableObjects(ROListType_e type) {
 		List<RenderableObject> listOriginal = getRenderableObjects(type);
 		List<RenderableObject> listCopy = new ArrayList<RenderableObject>(
 				listOriginal);
