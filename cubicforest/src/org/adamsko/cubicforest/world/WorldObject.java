@@ -54,7 +54,7 @@ public class WorldObject {
 	}
 	
 	public Vector2 getTilesPos() {
-		return this.tilesPos;
+		return new Vector2(this.tilesPos);
 	}	
 	public float getTilesPosX() {
 		return this.tilesPos.x;

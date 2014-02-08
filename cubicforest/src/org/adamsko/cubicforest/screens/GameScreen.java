@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.screens;
 
+import org.adamsko.cubicforest.TestClass;
 import org.adamsko.cubicforest.render.WorldRenderer;
 import org.adamsko.cubicforest.world.World;
 import org.adamsko.cubicforest.world.WorldObject;
@@ -30,9 +31,17 @@ public class GameScreen extends CubicScreen {
 	
 	@Override
 	public void show () {
-		initTween();		
+		Gdx.app.setLogLevel(com.badlogic.gdx.Application.LOG_DEBUG);
+		
+		Boolean performTest = false;
+		if(performTest){
+			TestClass testClass = new TestClass();
+			Gdx.app.exit();
+		}
+		initTween();
 		renderer = new WorldRenderer();
-		world = new World(renderer);		
+		world = new World(renderer);
+
 	}
 	
 	@Override

@@ -77,9 +77,21 @@ public class TilesMaster implements PickMasterClient {
 	public void insertWorldObject(WorldObject insertObject) {
 		Tile parentTile = tilesContainer.getTileOnPos(insertObject.getTilesPos());
 		if(parentTile != null) {
-			parentTile.insertWorldObject(insertObject);
-			tilesContainer.testHighlightTile(parentTile, 1);
+			try {
+				parentTile.insertWorldObject(insertObject);
+				tilesContainer.testHighlightTile(parentTile, 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+	}
+	
+	public void occupantLeftTile(Tile tileLeft, Tile tileEntered) throws Exception {
+		WorldObject occupant = tileLeft.takeOutObject();
+		tilesContainer.testHighlightTile(tileLeft, 0);
+		
+		tileEntered.insertWorldObject(occupant);
+		tilesContainer.testHighlightTile(tileEntered, 1);
 	}
 	
 	/**
