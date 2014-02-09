@@ -25,6 +25,11 @@ public class WorldObject {
 	protected Float height;
 	
 	/**
+	 * Long story short: WorldObject's name. 
+	 */
+	protected String name;
+	
+	/**
 	 * {@link WorldObjectsMaster} which is managing this object.
 	 */
 	private WorldObjectsMaster master = null;
@@ -32,6 +37,7 @@ public class WorldObject {
 	public WorldObject() {
 		tilesPos = new Vector2(0.0f, 0.0f);
 		height = new Float(0.0f);
+		name = new String("WorldObject");
 	}
 	
 	/**
@@ -68,6 +74,13 @@ public class WorldObject {
 	}	
 	public float getHeight() {
 		return height;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getName() {
+		return name;
 	}
 	
 	/**
