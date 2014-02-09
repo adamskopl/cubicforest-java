@@ -47,16 +47,31 @@ public class LabelsContainer {
 		}
 	}
 
+	/**
+	 * Add Float reference to be rendered.
+	 * 
+	 * @param valueToRender
+	 */
 	public void addLabel(Float valueToRender) {
 		Label newLabel = new LabelFloat(valueToRender);
 		labels.add(newLabel);
 	}
 
+	/**
+	 * Add Float reference to be rendered.
+	 * 
+	 * @param valueToRender
+	 */
 	public void addLabel(Vector2 valueToRender) {
 		Label newLabel = new LabelVector2(valueToRender);
 		labels.add(newLabel);
 	}
 
+	/**
+	 * Add Float reference to be rendered.
+	 * 
+	 * @param valueToRender
+	 */
 	public void addLabel(String valueToRender) {
 		Label newLabel = new LabelString(valueToRender);
 		labels.add(newLabel);
