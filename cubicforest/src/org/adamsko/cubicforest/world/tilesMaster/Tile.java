@@ -52,22 +52,22 @@ public class Tile extends CubicObject {
 	/**
 	 * @param insertObject
 	 *            WorldObject to be inserted into the tile
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void insertWorldObject(WorldObject insertObject) throws Exception {
-		if(isTileOccupied()) {
+		if (isOccupied()) {
 			throw new Exception("insertWorldObject: tile is already occupied");
 		}
 		occupant = insertObject;
 		occupied = true;
 	}
-	
+
 	/**
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public WorldObject takeOutObject() throws Exception {
-		if(!isTileOccupied()) {
+		if (!isOccupied()) {
 			throw new Exception("tile not occupied");
 		}
 		WorldObject takenObject = occupant;
@@ -76,8 +76,22 @@ public class Tile extends CubicObject {
 		return takenObject;
 	}
 
-	public Boolean isTileOccupied() {
+	/**
+	 * Does tile have an occupant?
+	 * 
+	 * @return
+	 */
+	public Boolean isOccupied() {
 		return occupied;
+	}
+
+	/**
+	 * Is tile passable? Could it be occupied/passed?
+	 * 
+	 * @return
+	 */
+	public Boolean isPassable() {
+		return !isOccupied();
 	}
 
 	/**
@@ -87,11 +101,11 @@ public class Tile extends CubicObject {
 	 *            {@link TileEvent_e} event associated with this {@link Tile}.
 	 */
 	public void handleTileEvent(TileEvent_e tileEvent) {
-		if (isTileOccupied()) {
+		if (isOccupied()) {
 			occupant.handleParentTileEvent(tileEvent);
 		}
 	}
-	
+
 	public String toString() {
 		return getTilesPos().toString();
 	}

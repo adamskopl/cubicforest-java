@@ -68,6 +68,28 @@ public class TilesMaster implements PickMasterClient {
 	}
 	
 	/**
+	 * Get tiles adjacent to given tile. 
+	 * 
+	 * @param tile
+	 * @return
+	 */
+	public List<Tile> getTilesAdjacent(Tile tile) {
+		List<Tile> adjTiles = new ArrayList<Tile>();
+		List<Vector2> adjPositions = new ArrayList<Vector2>();
+		adjPositions.add(new Vector2(-1.0f, 0.0f));
+		adjPositions.add(new Vector2(0.0f, 1.0f));
+		adjPositions.add(new Vector2(1.0f, 0.0f));
+		adjPositions.add(new Vector2(0.0f, -1.0f));
+		for(Vector2 adjPos : adjPositions) {
+			adjPos.add(tile.getTilesPos());
+			Tile adjTile = tilesContainer.getTileOnPos(adjPos);
+			if(adjTile==null)continue;
+			adjTiles.add(adjTile);
+		}
+		return adjTiles;
+	}
+	
+	/**
 	 * Associate given {@link WorldObject} object with a {@link Tile} object.
 	 * 
 	 * @param insertObject
@@ -92,13 +114,6 @@ public class TilesMaster implements PickMasterClient {
 		
 		tileEntered.insertWorldObject(occupant);
 		tilesContainer.testHighlightTile(tileEntered, 1);
-	}
-	
-	/**
-	 * Temporary test: get tiles for a test path.
-	 */
-	public List<Tile> getPathTestTiles() {
-		return tilesContainer.getPathTestTiles();
 	}
 	
 	@Override

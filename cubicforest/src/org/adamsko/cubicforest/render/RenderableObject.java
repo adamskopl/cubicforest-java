@@ -95,7 +95,19 @@ public class RenderableObject extends WorldObject implements LabelsMaster {
 		}
 		}
 	}
-
+	
+	public void addLabel(Float value) {
+		labels.addLabel(value);
+	}
+	
+	public void addLabel(Integer value) {
+		labels.addLabel(value);
+	}
+	
+	public void addLabel(String value) {
+		labels.addLabel(value);
+	}
+	
 	public void altLabelLast(Color color, float scale, float vecX, float vecY) {
 		labels.altLabelLast(color, scale, vecX, vecY);
 	}

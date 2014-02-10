@@ -164,4 +164,18 @@ public class TilesHelper {
 		}
 		}
 	}
+	
+	/**
+	 * Convert list of tiles to String
+	 * 
+	 * @param tiles list of tiles to convert
+	 * @return String containing tiles converted to String
+	 */
+	public static String toString(List<Tile> tiles) {
+		String ret = new String();
+		for(Tile t : tiles) {
+			ret+=t.toString() + " ";
+		}
+		return ret;
+	}
 }

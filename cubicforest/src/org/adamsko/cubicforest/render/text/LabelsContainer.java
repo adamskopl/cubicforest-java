@@ -46,6 +46,16 @@ public class LabelsContainer {
 			Gdx.app.error("exception", ex.toString());
 		}
 	}
+	
+	/**
+	 * Add Integer reference to be rendered.
+	 * 
+	 * @param valueToRender
+	 */
+	public void addLabel(Integer valueToRender) {
+		Label newLabel = new LabelInteger(valueToRender);
+		labels.add(newLabel);
+	}
 
 	/**
 	 * Add Float reference to be rendered.

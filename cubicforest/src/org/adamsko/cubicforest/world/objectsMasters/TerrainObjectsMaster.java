@@ -47,10 +47,8 @@ public class TerrainObjectsMaster extends RenderableObjectsContainer implements 
 			testTree.setTilesPos(pos);
 			
 			testTree.setName("testTree");
-			testTree.addLabel(ROLabel_e.LABEL_TILEPOS);
-			testTree.altLabelLast(Color.ORANGE, 0.8f, 0.0f, 0.0f);
 			testTree.addLabel(ROLabel_e.LABEL_NAME);
-			testTree.altLabelLast(Color.ORANGE, 0.8f, 0.0f, 15.0f);
+			testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
 			
 			addRenderableObject(testTree, this);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}

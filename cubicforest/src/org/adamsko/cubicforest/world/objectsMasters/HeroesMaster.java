@@ -44,8 +44,8 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 			testPig.setTilesPos(pos);
 			testPig.setName("testPig");
 			testPig.addLabel(ROLabel_e.LABEL_TILEPOS);
-			testPig.addLabel(ROLabel_e.LABEL_NAME);
-			testPig.altLabelLast(Color.ORANGE, 1.0f, 0.0f, 15.0f);
+//			testPig.addLabel(ROLabel_e.LABEL_NAME);
+			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
 			addRenderableObject(testPig, this);
 			
