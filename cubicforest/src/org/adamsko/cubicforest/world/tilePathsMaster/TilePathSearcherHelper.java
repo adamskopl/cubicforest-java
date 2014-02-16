@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesHelper;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 public class TilePathSearcherHelper {

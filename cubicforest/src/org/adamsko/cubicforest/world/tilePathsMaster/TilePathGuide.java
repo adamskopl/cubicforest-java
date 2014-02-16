@@ -2,26 +2,14 @@ package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import org.adamsko.cubicforest.screens.GameScreen;
 import org.adamsko.cubicforest.world.WorldObject;
-import org.adamsko.cubicforest.world.WorldObjectAccessor;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesContainer;
-import org.adamsko.cubicforest.world.tilesMaster.TilesHelper;
-import org.adamsko.cubicforest.world.tilesMaster.TilesHelper.TilesConnection_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.TweenEquation;
-import aurelienribon.tweenengine.TweenManager;
-import aurelienribon.tweenengine.equations.Bounce;
-import aurelienribon.tweenengine.equations.Circ;
 import aurelienribon.tweenengine.equations.Linear;
-import aurelienribon.tweenengine.equations.Quad;
-import aurelienribon.tweenengine.equations.Sine;
 
 /**
  * Guides {@link WorldObject} through {@link TilePath} with tweeners.

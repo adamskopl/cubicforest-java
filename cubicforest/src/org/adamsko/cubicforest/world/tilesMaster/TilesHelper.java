@@ -2,10 +2,7 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 /**
  * Collection of helpful functions connected with {@link Tile}.
@@ -65,17 +62,35 @@ public class TilesHelper {
 		sideSize = (int) Math.sqrt(size);
 
 		testEmptyTiles = new ArrayList<Integer>();
-		testEmptyTiles.add(8);
-		testEmptyTiles.add(9);
-		testEmptyTiles.add(10);
-		testEmptyTiles.add(24);
-		testEmptyTiles.add(28);
-		testEmptyTiles.add(29);
-		testEmptyTiles.add(36);
-		testEmptyTiles.add(37);
-		testEmptyTiles.add(48);
-		testEmptyTiles.add(49);
-		testEmptyTiles.add(50);
+//		testEmptyTiles.add(5);
+//		testEmptyTiles.add(6);
+//		testEmptyTiles.add(7);
+//		
+//		testEmptyTiles.add(32);
+//		testEmptyTiles.add(33);
+//		testEmptyTiles.add(43);
+//		
+//		testEmptyTiles.add(72);
+//		testEmptyTiles.add(73);
+//		testEmptyTiles.add(82);
+//		testEmptyTiles.add(83);
+//		
+//		testEmptyTiles.add(25);
+//		testEmptyTiles.add(35);
+//		testEmptyTiles.add(45);
+//		testEmptyTiles.add(55);
+//		testEmptyTiles.add(65);
+//		
+//		testEmptyTiles.add(56);
+//		testEmptyTiles.add(57);
+//		testEmptyTiles.add(58);
+//		
+//		testEmptyTiles.add(28);
+//		testEmptyTiles.add(38);
+//		
+//		testEmptyTiles.add(86);
+//		testEmptyTiles.add(87);
+		
 
 	}
 

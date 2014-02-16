@@ -6,7 +6,6 @@ import java.util.List;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer.ROListType_e;
 import org.adamsko.cubicforest.render.queue.RenderListMaster;
 import org.adamsko.cubicforest.render.text.Label;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;

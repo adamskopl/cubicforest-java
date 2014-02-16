@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -35,6 +34,7 @@ public class TerrainObjectsMaster extends RenderableObjectsContainer implements 
 		testPositions.add(new Vector2(7, 7));
 		testPositions.add(new Vector2(6, 2));
 		testPositions.add(new Vector2(1, 7));
+		testPositions.add(new Vector2(3, 2));
 
 		RenderableObject testTree;
 		int atlasIndex = 0;

@@ -9,11 +9,7 @@ import org.adamsko.cubicforest.render.WorldRenderer;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcherHelper;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-
-import com.badlogic.gdx.Gdx;
 
 /**
  * World class desc.
@@ -38,7 +34,7 @@ public class World {
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
 		
-		tilesMaster = new TilesMaster(64);
+		tilesMaster = new TilesMaster(100);
 				
 		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster, "terrain-atlas-medium", 42, 50);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);

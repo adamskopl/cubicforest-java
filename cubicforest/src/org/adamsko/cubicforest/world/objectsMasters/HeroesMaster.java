@@ -8,7 +8,6 @@ import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.world.WorldObject;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 

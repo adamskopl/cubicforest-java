@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.WorldObjectAccessor;
 
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Game;
@@ -35,6 +34,7 @@ public class GameScreen extends CubicScreen {
 		
 		Boolean performTest = false;
 		if(performTest){
+			@SuppressWarnings("unused")
 			TestClass testClass = new TestClass();
 			Gdx.app.exit();
 		}

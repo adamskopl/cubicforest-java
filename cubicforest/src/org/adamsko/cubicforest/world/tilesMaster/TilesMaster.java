@@ -10,7 +10,6 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * Tiles managing class. Map's model: <br>

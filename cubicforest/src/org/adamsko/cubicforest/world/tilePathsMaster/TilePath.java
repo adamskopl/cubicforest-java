@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * Holds +a {@link WorldObject} object and+ a queue of {@link Tile} objects

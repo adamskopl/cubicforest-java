@@ -1,15 +1,11 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObject;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends RenderableObjectsContainer implements
