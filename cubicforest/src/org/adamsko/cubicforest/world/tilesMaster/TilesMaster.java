@@ -10,7 +10,6 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * Tiles managing class. Map's model: <br>
@@ -45,9 +44,8 @@ public class TilesMaster implements PickMasterClient {
 	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
-		TilesMasterHelper.setMapSize(mapSize);
+		TilesHelper.setMapSize(mapSize);
 		initTiles();
-		Gdx.app.log("TilesMaster", "CONTTS");
 	}
 	
 	public void addClient(TilesMasterClient client) {
@@ -57,8 +55,8 @@ public class TilesMaster implements PickMasterClient {
 	public void initTiles() {
 		tilesContainer = new TilesContainer(this);
 		for(int fIndex = 0; fIndex < mapSize; fIndex++) {
-			if(TilesMasterHelper.isTileonTestMap(fIndex)) {continue;}			
-			Vector2 fCoords = TilesMasterHelper.calcCoords(fIndex);
+			if(TilesHelper.isTileonTestMap(fIndex)) {continue;}			
+			Vector2 fCoords = TilesHelper.calcCoords(fIndex);
 			fCoords.add(new Vector2(7, -3)); // temporary solution for centering view
 			tilesContainer.addTile(fCoords);
 		}
@@ -66,6 +64,28 @@ public class TilesMaster implements PickMasterClient {
 	
 	public TilesContainer getTilesContainer() {
 		return tilesContainer;
+	}
+	
+	/**
+	 * Get tiles adjacent to given tile. 
+	 * 
+	 * @param tile
+	 * @return
+	 */
+	public List<Tile> getTilesAdjacent(Tile tile) {
+		List<Tile> adjTiles = new ArrayList<Tile>();
+		List<Vector2> adjPositions = new ArrayList<Vector2>();
+		adjPositions.add(new Vector2(-1.0f, 0.0f));
+		adjPositions.add(new Vector2(0.0f, 1.0f));
+		adjPositions.add(new Vector2(1.0f, 0.0f));
+		adjPositions.add(new Vector2(0.0f, -1.0f));
+		for(Vector2 adjPos : adjPositions) {
+			adjPos.add(tile.getTilesPos());
+			Tile adjTile = tilesContainer.getTileOnPos(adjPos);
+			if(adjTile==null)continue;
+			adjTiles.add(adjTile);
+		}
+		return adjTiles;
 	}
 	
 	/**
@@ -78,27 +98,35 @@ public class TilesMaster implements PickMasterClient {
 	public void insertWorldObject(WorldObject insertObject) {
 		Tile parentTile = tilesContainer.getTileOnPos(insertObject.getTilesPos());
 		if(parentTile != null) {
-			parentTile.insertWorldObject(insertObject);
-			tilesContainer.testHighlightTile(parentTile, 1);
+			try {
+				parentTile.insertWorldObject(insertObject);
+				tilesContainer.testHighlightTile(parentTile, 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
-	/**
-	 * Temporary test: get tiles for a test path.
-	 */
-	public List<Tile> getPathTestTiles() {
-		return tilesContainer.getPathTestTiles();
+	public void occupantLeftTile(Tile tileLeft, Tile tileEntered) throws Exception {
+		WorldObject occupant = tileLeft.takeOutObject();
+		tilesContainer.testHighlightTile(tileLeft, 0);
+		
+		tileEntered.insertWorldObject(occupant);
+		tilesContainer.testHighlightTile(tileEntered, 1);
 	}
 	
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {	
-		Gdx.app.log("TilesMaster", "ON INPUUUUT");
 		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
 		if(clickedTile != null) {
 			for(TilesMasterClient client : clients) {
-				Gdx.app.log("TilesMaster", "for loop");
 				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
 			}
+			
+			Gdx.app.log(
+					"TilesMaster onInput",
+					Float.toString(clickedTile.getTilesPosX()) + ", "
+							+ Float.toString(clickedTile.getTilesPosY()));
 			
 			// FIXME: TilesMasterClient code conversion needed
 			tilesContainer.testHighlightTile(clickedTile, 2);

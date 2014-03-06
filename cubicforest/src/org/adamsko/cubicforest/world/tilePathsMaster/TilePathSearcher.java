@@ -1,31 +1,33 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+
+import com.badlogic.gdx.Gdx;
 
 /**
  * Generates {@link TilePath} object from (...)
  * 
  * @author adamsko
- *
+ * 
  */
 public class TilePathSearcher {
 
 	private static TilesMaster tilesMaster = null;
-	
+	private static TilePathSearcherHelper helper;
+
 	public static void setTilesMaster(TilesMaster tilesMaster) {
 		TilePathSearcher.tilesMaster = tilesMaster;
+		helper = new TilePathSearcherHelper(tilesMaster);
 	}
-	
+
 	public static TilePath search(WorldObject objectOnPath, Tile destTile) {
 		Tile srcTile = tilesMaster.getTilesContainer().getTileWithObject(
 				objectOnPath);
 		return search(srcTile, destTile);
 	}
-	
+
 	/**
 	 * @param from
 	 * @param to
@@ -33,18 +35,19 @@ public class TilePathSearcher {
 	 *         given 'from' {@link Tile} object
 	 */
 	public static TilePath search(Tile from, Tile to) {
-		
-		List<Tile> testTiles = tilesMaster.getPathTestTiles();
-		TilePath testPath = new TilePath();
-		for(Tile t : testTiles) {
-			testPath.pushTile(t);
+		if (from == to) {
+			return new TilePath();
 		}
-		
-		/*
-		 * TODO: generate TilesPath with shortest path algorithm. Take Tile
-		 * objects from TilesMaster
-		 */
-		return testPath;
+
+		TilePath path = null;
+
+		helper.searchCostTiles(from, to);
+		try {
+			path = helper.costTilesToPath();
+		} catch (Exception e) {
+			Gdx.app.error("TilePath::search()", e.toString());
+		}
+		return path;
 	}
-	
+
 }

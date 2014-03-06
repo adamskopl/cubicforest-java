@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * Holds +a {@link WorldObject} object and+ a queue of {@link Tile} objects
@@ -35,11 +34,20 @@ public class TilePath {
 		tilesList.add(newTile);
 	}
 	
+	/**
+	 * Add new {@link Tile} object in the front of the list.
+	 * 
+	 * @param newTile
+	 */
+	public void addTileFront(Tile newTile) {
+		tilesList.add(0, newTile);
+	}
+	
 	public Boolean isEmpty() {
 		return tilesList.isEmpty();
 	}
 
-	public Tile frontTile() {
+	public Tile removeFrontTile() {
 		try {
 			return tilesList.remove(0);
 		}
@@ -47,5 +55,23 @@ public class TilePath {
 			Gdx.app.error("TilePath", ex.toString());
 			return null;
 		}
+	}
+	
+	public Tile getFrontTile() {
+		try {
+			return tilesList.get(0);
+		}
+		catch(IndexOutOfBoundsException ex) {
+			Gdx.app.error("TilePath", ex.toString());
+			return null;
+		}
+	}
+	
+	public String toString() {
+		String ret = new String();
+		for(Tile t : tilesList) {
+			ret+=t.toString() + " ";
+		}
+		return ret;
 	}
 }

@@ -6,25 +6,31 @@ import java.util.List;
 import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.world.WorldObject;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class HeroesMaster extends RenderableObjectsContainer implements RenderableObjectsMaster {
 
 	public HeroesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
 		super(TM, textureName, tileW, tileH);
+		try {
 		addTestObjects();
+		} catch (Exception e) {
+			Gdx.app.error("HeroesMaster", e.toString());
+		}
 	}
 	
-	private void addTestObjects() {
+	private void addTestObjects() throws Exception {
 		List<Vector2> testPositions = new ArrayList<Vector2>();
 		testPositions.add(new Vector2(0, 0));
 		testPositions.add(new Vector2(6, 4));
-		testPositions.add(new Vector2(2, 5));
+		testPositions.add(new Vector2(3, 6));
 
 		RenderableObject testPig;
 		int atlasIndex = 0;
@@ -35,6 +41,11 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
 			testPig.setTilesPos(pos);
+			testPig.setName("testPig");
+			testPig.addLabel(ROLabel_e.LABEL_TILEPOS);
+//			testPig.addLabel(ROLabel_e.LABEL_NAME);
+			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
+			
 			addRenderableObject(testPig, this);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
