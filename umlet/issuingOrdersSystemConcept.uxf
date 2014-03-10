@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>264</x>
+      <y>432</y>
+      <w>160</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>OrdersMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>224</x>
+      <y>368</y>
+      <w>584</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.ordersMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>952</x>
+      <y>56</y>
+      <w>424</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.tilePathsMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>968</x>
+      <y>104</y>
+      <w>344</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>TilePathsMaster
+--
+void startPath(WorldObject wanderer, Tile destinationTile)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>296</x>
+      <y>120</y>
+      <w>408</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.tilesMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>320</x>
+      <y>160</y>
+      <w>288</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>/TilesMasterClient/
+--
+void onTileEvent(Tile tile , TileEvent_e event)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>320</x>
+      <y>200</y>
+      <w>152</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>136;24;24;232</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>368</x>
+      <y>200</y>
+      <w>152</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>lt=-
+onTileEvent&gt;</panel_attributes>
+    <additional_attributes>136;24;24;232</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>528</x>
+      <y>480</y>
+      <w>224</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>HeroesRotator
+--
+List&lt;WorldObjects&gt; rotatedObjects</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>368</x>
+      <y>720</y>
+      <w>320</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>class managing hereos... managing objects, that are
+following orders
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>488</x>
+      <y>592</y>
+      <w>104</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>88;24;24;128</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>944</x>
+      <y>488</y>
+      <w>296</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>968</x>
+      <y>544</y>
+      <w>88</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>HeroesMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>784</x>
+      <y>496</y>
+      <w>200</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+getObjectsToGiveOrders&gt;</panel_attributes>
+    <additional_attributes>24;24;184;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>400</x>
+      <y>136</y>
+      <w>584</w>
+      <h>336</h>
+    </coordinates>
+    <panel_attributes>lt=-
+orderFinished(WorldObject)&lt;</panel_attributes>
+    <additional_attributes>568;24;24;320</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>1880</x>
+      <y>312</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>808</x>
+      <y>216</y>
+      <w>192</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>24;24;176;112</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>896</x>
+      <y>328</y>
+      <w>256</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>goal reached, or unable to be finished
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>320</x>
+      <y>496</y>
+      <w>224</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-
+orderFinished(WorldObject)&gt;</panel_attributes>
+    <additional_attributes>24;24;208;56</additional_attributes>
+  </element>
+</diagram>
