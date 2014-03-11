@@ -32,6 +32,12 @@ public class TilePathsMaster {
 		guide.start();
 	}
 	
+	/**
+	 * TODO check if path ended with success or failure. If with failure: try
+	 * one more time
+	 * 
+	 * @param guide
+	 */
 	protected void onPathEnd(TilePathGuide guide) {
 		guide = null;
 		// remove guide from TilePathGuide vector

@@ -80,7 +80,7 @@ public class TilePathGuide implements TweenCallback {
 
 		/*
 		 * The first tile is the tile from which wanderer starts. It will be
-		 * reassigned to tileHeadingFrom in first stageBorder() invocation
+		 * reassigned to tileHeadingFrom in the first stageBorder() invocation
 		 */
 		helper.setTileHeadingTo(path.removeFrontTile());
 
@@ -168,7 +168,8 @@ public class TilePathGuide implements TweenCallback {
 	 * @throws Exception
 	 */
 	private void stageBorder() throws Exception {
-		// assign tileHeadingTo to tileHeadingFrom
+		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is 
+		// a tile that has been reached right now)
 		helper.reassignTileFrom();
 		// wanderer is heading to border between tileHeadingFrom and
 		// tileHeadingTom, remove first Tile, assign it
