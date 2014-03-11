@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>160</x>
+      <y>168</y>
+      <w>392</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>*WorldObjectsContainer*
+--
+List&lt;WorldObject&gt; worldObjects
+TilesMaster tilesMaster
+--
++ void addWorldObject(WorldObject newObject, 
+WorldObjectsMaster hisMaster)
++ List&lt;WorldObject&gt; getWorldObjects()
++ void handleServantTileEvent(WorldObject servant, 
+TileEvent_e tileEvent)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>160</x>
+      <y>600</y>
+      <w>200</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>*World*
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>552</x>
+      <y>432</y>
+      <w>200</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>*WorldObject*
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>272</x>
+      <y>456</y>
+      <w>200</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>/WorldObjectsMaster/
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>512</x>
+      <y>704</y>
+      <w>168</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>*CubicObject*
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>664</x>
+      <y>544</y>
+      <w>264</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.render
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>728</x>
+      <y>576</y>
+      <w>144</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>RenderableObject
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>576</x>
+      <y>592</y>
+      <w>240</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>224;24;24;112</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>640</x>
+      <y>480</y>
+      <w>160</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;144;96</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>848</x>
+      <y>232</y>
+      <w>320</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.tilesMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>880</x>
+      <y>256</y>
+      <w>144</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>TilesMaster
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>528</x>
+      <y>232</y>
+      <w>368</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;352;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>528</x>
+      <y>296</y>
+      <w>368</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-
+insertWorldObject(newObject)&gt;</panel_attributes>
+    <additional_attributes>24;40;352;40</additional_attributes>
+  </element>
+</diagram>

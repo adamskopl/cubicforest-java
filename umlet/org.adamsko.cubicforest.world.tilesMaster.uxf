@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>740</x>
+      <y>630</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*TilesMaster*
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>370</x>
+      <y>330</y>
+      <w>130</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>*Tile*
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>270</x>
+      <y>570</y>
+      <w>350</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*TilesContainer*
+--
+void addTile(Vector2 tilePos)
+Tile getTileWithObject(WorldObject object)
+Tile getTileOnPos(Vector2 tilePos)
+List&lt;RenderableObject&gt; getTiles()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>590</x>
+      <y>620</y>
+      <w>170</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>150;60;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>630</x>
+      <y>240</y>
+      <w>610</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.render
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>660</x>
+      <y>310</y>
+      <w>270</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>RenderableObjectsContainer
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>980</x>
+      <y>310</y>
+      <w>220</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>/RenderableObjectsMaster/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>360</y>
+      <w>300</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>280;30;30;210</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>560</x>
+      <y>350</y>
+      <w>550</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>530;30;30;220</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>470</x>
+      <y>320</y>
+      <w>210</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>190;30;30;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>390</x>
+      <y>340</y>
+      <w>292</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=-
+getWorldObjects().add(newTile)&gt;</panel_attributes>
+    <additional_attributes>30;230;270;30</additional_attributes>
+  </element>
+</diagram>

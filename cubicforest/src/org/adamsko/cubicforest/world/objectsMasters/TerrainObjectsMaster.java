@@ -46,13 +46,28 @@ public class TerrainObjectsMaster extends RenderableObjectsContainer implements 
 			pos.add(new Vector2(7, -3));
 			testTree.setTilesPos(pos);
 			
-			testTree.setName("testTree");
+			testTree.setName("tree");
 			testTree.addLabel(ROLabel_e.LABEL_NAME);
 			testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
 			
 			addRenderableObject(testTree, this);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}
 		}
+	}
+	
+	public void addTestObject(Vector2 tilePos) throws Exception {		
+		
+		RenderableObject testTree = new RenderableObject(atlasRows.get(0)[0], 0);
+		testTree.setRenderVector(new Vector2(
+				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
+		tilePos.add(new Vector2(0.5f, 0.5f));
+		testTree.setTilesPos(tilePos);
+		
+		testTree.setName("tree added");
+		testTree.addLabel(ROLabel_e.LABEL_NAME);
+		testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
+		
+		addRenderableObject(testTree, this);		
 	}
 
 	@Override

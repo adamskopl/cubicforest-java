@@ -40,6 +40,7 @@ public class World {
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);
 		
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
+		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
 
 		addWorldObjectsMaster(tilesMaster.getTilesContainer(), true);
 		addWorldObjectsMaster(terrainObjectsMaster, true);
