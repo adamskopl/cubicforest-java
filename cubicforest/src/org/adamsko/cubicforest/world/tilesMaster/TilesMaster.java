@@ -3,10 +3,10 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.pickmaster.PickMaster;
-import org.adamsko.cubicforest.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
+import org.adamsko.cubicforest.world.pickmaster.PickMaster;
+import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -39,7 +39,6 @@ public class TilesMaster implements PickMasterClient {
 	private int mapSize;
 	private List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
-	private OrdersMaster ordersMaster;
 	
 	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;

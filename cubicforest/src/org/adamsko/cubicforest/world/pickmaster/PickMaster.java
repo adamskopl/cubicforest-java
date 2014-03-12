@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.pickmaster;
+package org.adamsko.cubicforest.world.pickmaster;
 
 import java.util.ArrayList;
 import java.util.List;

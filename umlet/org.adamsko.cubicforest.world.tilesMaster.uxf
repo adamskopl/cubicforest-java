@@ -4,8 +4,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>740</x>
-      <y>630</y>
+      <x>750</x>
+      <y>610</y>
       <w>210</w>
       <h>120</h>
     </coordinates>
@@ -16,8 +16,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>370</x>
-      <y>330</y>
+      <x>380</x>
+      <y>310</y>
       <w>130</w>
       <h>70</h>
     </coordinates>
@@ -28,8 +28,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>270</x>
-      <y>570</y>
+      <x>280</x>
+      <y>550</y>
       <w>350</w>
       <h>120</h>
     </coordinates>
@@ -44,8 +44,8 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>590</x>
-      <y>620</y>
+      <x>600</x>
+      <y>600</y>
       <w>170</w>
       <h>80</h>
     </coordinates>
@@ -55,8 +55,8 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>630</x>
-      <y>240</y>
+      <x>640</x>
+      <y>220</y>
       <w>610</w>
       <h>220</h>
     </coordinates>
@@ -68,8 +68,8 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>660</x>
-      <y>310</y>
+      <x>670</x>
+      <y>290</y>
       <w>270</w>
       <h>80</h>
     </coordinates>
@@ -80,8 +80,8 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>980</x>
-      <y>310</y>
+      <x>990</x>
+      <y>290</y>
       <w>220</w>
       <h>70</h>
     </coordinates>
@@ -92,8 +92,8 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>510</x>
-      <y>360</y>
+      <x>520</x>
+      <y>340</y>
       <w>300</w>
       <h>230</h>
     </coordinates>
@@ -103,8 +103,8 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
-      <y>350</y>
+      <x>570</x>
+      <y>330</y>
       <w>550</w>
       <h>240</h>
     </coordinates>
@@ -114,8 +114,8 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>470</x>
-      <y>320</y>
+      <x>480</x>
+      <y>300</y>
       <w>210</w>
       <h>60</h>
     </coordinates>
@@ -126,13 +126,26 @@ List&lt;RenderableObject&gt; getTiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>390</x>
-      <y>340</y>
+      <x>400</x>
+      <y>320</y>
       <w>292</w>
       <h>250</h>
     </coordinates>
     <panel_attributes>lt=-
 getWorldObjects().add(newTile)&gt;</panel_attributes>
     <additional_attributes>30;230;270;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1060</x>
+      <y>610</y>
+      <w>370</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>/TilesMasterClient/
+--
++ void onTileEvent(Tile tile , TileEvent_e event)</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

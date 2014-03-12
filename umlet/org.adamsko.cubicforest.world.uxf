@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>8</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>160</x>
-      <y>168</y>
-      <w>392</w>
-      <h>184</h>
+      <x>259</x>
+      <y>301</y>
+      <w>343</w>
+      <h>161</h>
     </coordinates>
     <panel_attributes>*WorldObjectsContainer*
 --
@@ -24,10 +24,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>160</x>
-      <y>600</y>
-      <w>200</w>
-      <h>128</h>
+      <x>259</x>
+      <y>679</y>
+      <w>175</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>*World*
 --</panel_attributes>
@@ -36,10 +36,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>552</x>
-      <y>432</y>
-      <w>200</w>
-      <h>72</h>
+      <x>602</x>
+      <y>532</y>
+      <w>175</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>*WorldObject*
 --</panel_attributes>
@@ -48,10 +48,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>272</x>
-      <y>456</y>
-      <w>200</w>
-      <h>72</h>
+      <x>357</x>
+      <y>553</y>
+      <w>175</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>/WorldObjectsMaster/
 --</panel_attributes>
@@ -60,10 +60,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>512</x>
-      <y>704</y>
-      <w>168</w>
-      <h>80</h>
+      <x>567</x>
+      <y>770</y>
+      <w>147</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>*CubicObject*
 --</panel_attributes>
@@ -72,10 +72,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>664</x>
-      <y>544</y>
-      <w>264</w>
-      <h>112</h>
+      <x>700</x>
+      <y>630</y>
+      <w>231</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.render
 --
@@ -85,10 +85,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>728</x>
-      <y>576</y>
-      <w>144</w>
-      <h>40</h>
+      <x>756</x>
+      <y>658</y>
+      <w>126</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>RenderableObject
 --</panel_attributes>
@@ -97,32 +97,32 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>576</x>
-      <y>592</y>
-      <w>240</w>
-      <h>128</h>
+      <x>623</x>
+      <y>672</y>
+      <w>209</w>
+      <h>111</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>224;24;24;112</additional_attributes>
+    <additional_attributes>196;21;21;98</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>640</x>
-      <y>480</y>
-      <w>160</w>
-      <h>112</h>
+      <x>679</x>
+      <y>574</y>
+      <w>139</w>
+      <h>97</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;144;96</additional_attributes>
+    <additional_attributes>21;21;126;84</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>848</x>
-      <y>232</y>
-      <w>320</w>
-      <h>208</h>
+      <x>861</x>
+      <y>357</y>
+      <w>280</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.tilesMaster
 --
@@ -132,10 +132,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>880</x>
-      <y>256</y>
-      <w>144</w>
-      <h>96</h>
+      <x>889</x>
+      <y>378</y>
+      <w>126</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>TilesMaster
 --</panel_attributes>
@@ -144,24 +144,24 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>528</x>
-      <y>232</y>
-      <w>368</w>
-      <h>88</h>
+      <x>581</x>
+      <y>357</y>
+      <w>321</w>
+      <h>76</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;352;72</additional_attributes>
+    <additional_attributes>21;21;308;63</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>528</x>
-      <y>296</y>
-      <w>368</w>
-      <h>56</h>
+      <x>581</x>
+      <y>413</y>
+      <w>321</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=-
 insertWorldObject(newObject)&gt;</panel_attributes>
-    <additional_attributes>24;40;352;40</additional_attributes>
+    <additional_attributes>21;35;308;35</additional_attributes>
   </element>
 </diagram>

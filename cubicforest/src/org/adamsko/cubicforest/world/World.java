@@ -3,12 +3,13 @@ package org.adamsko.cubicforest.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.pickmaster.PickMaster;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.WorldRenderer;
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
+import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 /**
@@ -25,6 +26,7 @@ public class World {
 	
 	private TilesMaster tilesMaster;
 	private OrdersMaster ordersMaster;
+	private RoundsMaster roundsMaster;
 	
 	TerrainObjectsMaster terrainObjectsMaster;
 	HeroesMaster heroesMaster;
@@ -39,6 +41,8 @@ public class World {
 		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster, "terrain-atlas-medium", 42, 50);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);
 		
+		roundsMaster = new RoundsMaster();
+		
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
 
@@ -47,7 +51,8 @@ public class World {
 		addWorldObjectsMaster(heroesMaster, true);
 		
 		pickMaster.addClient(tilesMaster);
-		tilesMaster.addClient(ordersMaster);
+		tilesMaster.addClient(roundsMaster);
+//		tilesMaster.addClient(ordersMaster);
 		
 	}
 
