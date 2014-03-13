@@ -4,7 +4,7 @@ import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
-public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase  {
+public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 
 	PhaseHeroes(OrderableObjectsContainer orderableObjectsContainer) {
 		super(orderableObjectsContainer);
@@ -18,9 +18,8 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase  {
 	}
 
 	@Override
-	public boolean hasPhaseEnded() {
-		// TODO Auto-generated method stub
-		return false;
+	public void phaseIsOver() {
+		super.phaseIsOver(this);		
 	}
 
 	@Override

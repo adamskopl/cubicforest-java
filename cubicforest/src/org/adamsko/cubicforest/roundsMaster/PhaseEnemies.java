@@ -18,9 +18,8 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 	}
 
 	@Override
-	public boolean hasPhaseEnded() {
-		// TODO Auto-generated method stub
-		return false;
+	public void phaseIsOver() {
+		super.phaseIsOver(this);		
 	}
 
 	@Override

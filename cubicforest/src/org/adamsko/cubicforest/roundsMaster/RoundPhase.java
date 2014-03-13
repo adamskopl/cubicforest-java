@@ -4,7 +4,14 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
 
 public interface RoundPhase extends TilesMasterClient {
 
-	boolean hasPhaseEnded();
+	/**
+	 * Function to invoke, when phase is over.
+	 * Phase should invoke 'phaseIsOver' for {@link RoundsMaster}
+	 * 
+	 * @param masterToInform
+	 */
+	void phaseIsOver();
 	void startPhase();
+	void setRoundsMaster(RoundsMaster roundsMaster);
 		
 }
