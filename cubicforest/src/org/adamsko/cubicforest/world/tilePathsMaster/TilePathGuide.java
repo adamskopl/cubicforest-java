@@ -180,6 +180,10 @@ public class TilePathGuide implements TweenCallback {
 		tilesMaster.occupantLeftTile(helper.getTileHeadingFrom(),
 				helper.getTileHeadingTo());
 	}
+	
+	public WorldObject getWanderer() {
+		return wanderer;
+	}
 
 	@Override
 	public void onEvent(int type, BaseTween<?> source) {

@@ -1,17 +1,45 @@
 package org.adamsko.cubicforest.roundsMaster;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
 
+/**
+ * A round consists of phases. 
+ * 
+ * @author adamsko
+ *
+ */
 public class RoundsMaster implements TilesMasterClient {
 
 	private List<RoundPhase> phases;
+	int phasePointer = -1;
 	
 	public RoundsMaster() {
-		
+		phases = new ArrayList<RoundPhase>();
+	}
+	
+	public void nextRound() throws Exception {
+		phasePointer = -1;	
+		nextPhase();
+	}
+	
+	private RoundPhase actualPhase() {
+		return phases.get(phasePointer);
+	}
+	
+	public void nextPhase() throws Exception {
+		phasePointer++;
+		// check if previous phase was the last one 
+		if(phasePointer == phases.size()) {
+			nextRound();
+		} else {		
+			RoundPhase nextPhase = phases.get(phasePointer);
+			nextPhase.startPhase();
+		}
 	}
 
 	/**
@@ -20,14 +48,19 @@ public class RoundsMaster implements TilesMasterClient {
 	 * 
 	 * @param phaseEnded
 	 *            phase which has ended right now
+	 * @throws Exception 
 	 */
-	public void phaseIsOver(RoundPhase phaseEnded) {
+	public void phaseIsOver(RoundPhase phaseEnded) throws Exception {
+		if(phases.get(phasePointer) != phaseEnded) {
+			throw new Exception("phaseIsOver: phasePointer error");
+		}
+		nextPhase();
 
 	}
 
 	@Override
 	public void onTileEvent(Tile tile, TileEvent_e event) {
-		// TODO Auto-generated method stub
+		actualPhase().onTileEvent(tile, event);
 
 	}
 	

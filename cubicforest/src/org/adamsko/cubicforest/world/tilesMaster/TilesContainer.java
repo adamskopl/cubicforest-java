@@ -77,5 +77,12 @@ public class TilesContainer extends RenderableObjectsContainer implements
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
 	}
+	
+	public void clearTilesLabels() {
+		for (WorldObject wo : getWorldObjects()) {
+			Tile tile = (Tile) wo;
+			tile.clearLabels();
+		}
+	}
 
 }

@@ -40,6 +40,8 @@ public class TilesMaster implements PickMasterClient {
 	private List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
 	
+	private Tile highlightedTile = null;
+	
 	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
@@ -127,10 +129,20 @@ public class TilesMaster implements PickMasterClient {
 					Float.toString(clickedTile.getTilesPosX()) + ", "
 							+ Float.toString(clickedTile.getTilesPosY()));
 			
-			// FIXME: TilesMasterClient code conversion needed
-			tilesContainer.testHighlightTile(clickedTile, 2);
-			// FIXME: TilesMasterClient code conversion needed
+			if(!clickedTile.isOccupied()) {
+				if(highlightedTile!=null)tilesContainer.testHighlightTile(highlightedTile, 0);
+				highlightedTile = clickedTile;
+				// FIXME: TilesMasterClient code conversion needed
+				tilesContainer.testHighlightTile(highlightedTile, 2);
+				// FIXME: TilesMasterClient code conversion needed
+			}
+			
 			clickedTile.handleTileEvent(TileEvent_e.TILE_PICKED);
 		}
+	}
+	
+	public void clearTilesLabels() {
+		tilesContainer.clearTilesLabels();
+		
 	}
 }

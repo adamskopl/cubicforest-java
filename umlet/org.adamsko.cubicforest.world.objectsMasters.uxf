@@ -4,8 +4,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>440</x>
-      <y>512</y>
+      <x>656</x>
+      <y>552</y>
       <w>304</w>
       <h>80</h>
     </coordinates>
@@ -18,8 +18,8 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>192</x>
-      <y>248</y>
+      <x>408</x>
+      <y>288</y>
       <w>344</w>
       <h>144</h>
     </coordinates>
@@ -40,8 +40,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>424</x>
-      <y>368</y>
+      <x>640</x>
+      <y>408</y>
       <w>88</w>
       <h>160</h>
     </coordinates>
@@ -51,8 +51,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>568</x>
-      <y>272</y>
+      <x>784</x>
+      <y>312</y>
       <w>304</w>
       <h>104</h>
     </coordinates>
@@ -67,8 +67,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>616</x>
-      <y>352</y>
+      <x>832</x>
+      <y>392</y>
       <w>64</w>
       <h>176</h>
     </coordinates>
@@ -78,8 +78,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>224</x>
-      <y>520</y>
+      <x>440</x>
+      <y>560</y>
       <w>184</w>
       <h>56</h>
     </coordinates>
@@ -90,8 +90,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>272</x>
-      <y>352</y>
+      <x>488</x>
+      <y>392</y>
       <w>480</w>
       <h>184</h>
     </coordinates>
@@ -101,8 +101,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>240</x>
-      <y>368</y>
+      <x>456</x>
+      <y>408</y>
       <w>96</w>
       <h>168</h>
     </coordinates>
@@ -112,8 +112,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>144</x>
-      <y>216</y>
+      <x>360</x>
+      <y>256</y>
       <w>752</w>
       <h>192</h>
     </coordinates>
@@ -125,8 +125,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>912</x>
-      <y>256</y>
+      <x>1128</x>
+      <y>296</y>
       <w>288</w>
       <h>112</h>
     </coordinates>
@@ -136,8 +136,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>664</x>
-      <y>328</y>
+      <x>880</x>
+      <y>368</y>
       <w>344</w>
       <h>200</h>
     </coordinates>
@@ -147,8 +147,8 @@ ROListType_e type)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>928</x>
-      <y>288</y>
+      <x>1144</x>
+      <y>328</y>
       <w>248</w>
       <h>64</h>
     </coordinates>
@@ -160,8 +160,8 @@ List&lt;WorldObject&gt; getOrderableObjects()</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>824</x>
-      <y>528</y>
+      <x>1040</x>
+      <y>568</y>
       <w>144</w>
       <h>64</h>
     </coordinates>
@@ -172,8 +172,8 @@ List&lt;WorldObject&gt; getOrderableObjects()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>768</x>
-      <y>352</y>
+      <x>984</x>
+      <y>392</y>
       <w>120</w>
       <h>192</h>
     </coordinates>
@@ -183,8 +183,8 @@ List&lt;WorldObject&gt; getOrderableObjects()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>888</x>
-      <y>328</y>
+      <x>1104</x>
+      <y>368</y>
       <w>224</w>
       <h>208</h>
     </coordinates>
@@ -194,8 +194,8 @@ List&lt;WorldObject&gt; getOrderableObjects()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
-      <y>368</y>
+      <x>712</x>
+      <y>408</y>
       <w>360</w>
       <h>176</h>
     </coordinates>

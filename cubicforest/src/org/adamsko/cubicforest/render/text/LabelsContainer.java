@@ -48,6 +48,13 @@ public class LabelsContainer {
 	}
 	
 	/**
+	 * Remove all labels from labels list.
+	 */
+	public void clearLables() {
+		labels.clear();
+	}
+	
+	/**
 	 * Add Integer reference to be rendered.
 	 * 
 	 * @param valueToRender

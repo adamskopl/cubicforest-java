@@ -10,7 +10,7 @@ public interface RoundPhase extends TilesMasterClient {
 	 * 
 	 * @param masterToInform
 	 */
-	void phaseIsOver();
+	void phaseIsOver() throws Exception;
 	void startPhase();
 	void setRoundsMaster(RoundsMaster roundsMaster);
 		

@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -15,7 +16,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class HeroesMaster extends RenderableObjectsContainer implements RenderableObjectsMaster {
+public class HeroesMaster extends RenderableObjectsContainer implements RenderableObjectsMaster, OrderableObjectsContainer {
 
 	public HeroesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
 		super(TM, textureName, tileW, tileH);
@@ -73,6 +74,11 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public List<WorldObject> getOrderableObjects() {
+		return getWorldObjects();
 	}
 
 }

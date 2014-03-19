@@ -5,12 +5,17 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.WorldRenderer;
+import org.adamsko.cubicforest.roundsMaster.PhaseEnemies;
+import org.adamsko.cubicforest.roundsMaster.PhaseHeroes;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+
+import com.badlogic.gdx.Gdx;
 
 /**
  * World class desc.
@@ -30,6 +35,7 @@ public class World {
 	
 	TerrainObjectsMaster terrainObjectsMaster;
 	HeroesMaster heroesMaster;
+	EnemiesMaster enemiesMaster;
 	
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
@@ -40,20 +46,39 @@ public class World {
 				
 		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster, "terrain-atlas-medium", 42, 50);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);
-		
-		roundsMaster = new RoundsMaster();
-		
+		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium", 30, 35);
+				
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
+		
+		initRoundsMaster();
 
 		addWorldObjectsMaster(tilesMaster.getTilesContainer(), true);
 		addWorldObjectsMaster(terrainObjectsMaster, true);
 		addWorldObjectsMaster(heroesMaster, true);
+		addWorldObjectsMaster(enemiesMaster, true);
 		
 		pickMaster.addClient(tilesMaster);
 		tilesMaster.addClient(roundsMaster);
-//		tilesMaster.addClient(ordersMaster);
 		
+	}
+	
+	private void initRoundsMaster() {
+		roundsMaster = new RoundsMaster();
+		
+		PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster, ordersMaster);
+		phaseHeroes.setRoundsMaster(roundsMaster);
+		roundsMaster.addPhase(phaseHeroes);		
+		
+		PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster, ordersMaster);
+		phaseEnemies.setRoundsMaster(roundsMaster);
+		roundsMaster.addPhase(phaseEnemies);
+		
+		try {
+			roundsMaster.nextRound();
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
 	}
 
 	public void addWorldObjectsMaster(WorldObjectsMaster newWorldMaster, Boolean renderable) {

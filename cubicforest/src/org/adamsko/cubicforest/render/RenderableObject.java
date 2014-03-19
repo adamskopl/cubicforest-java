@@ -117,4 +117,8 @@ public class RenderableObject extends WorldObject implements LabelsMaster {
 		return (labels.getLabels().size() != 0);
 	}
 	
+	public void clearLabels() {
+		labels.clearLables();
+	}
+	
 }

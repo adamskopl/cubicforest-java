@@ -202,13 +202,13 @@
     <dia:group>
       <dia:object type="Standard - Box" version="0" id="O5">
         <dia:attribute name="obj_pos">
-          <dia:point val="29,18"/>
+          <dia:point val="28.8485,18.1768"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="28.95,17.95;31.05,20.05"/>
+          <dia:rectangle val="28.7985,18.1268;30.8985,20.2268"/>
         </dia:attribute>
         <dia:attribute name="elem_corner">
-          <dia:point val="29,18"/>
+          <dia:point val="28.8485,18.1768"/>
         </dia:attribute>
         <dia:attribute name="elem_width">
           <dia:real val="2"/>
@@ -222,10 +222,10 @@
       </dia:object>
       <dia:object type="Standard - Text" version="1" id="O6">
         <dia:attribute name="obj_pos">
-          <dia:point val="29.45,19.45"/>
+          <dia:point val="29.2985,19.6268"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="29.45,18.14;30.63,19.785"/>
+          <dia:rectangle val="29.2985,18.3168;30.4785,19.9618"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -239,7 +239,7 @@
               <dia:real val="1.7638888991688506"/>
             </dia:attribute>
             <dia:attribute name="pos">
-              <dia:point val="29.45,19.45"/>
+              <dia:point val="29.2985,19.6268"/>
             </dia:attribute>
             <dia:attribute name="color">
               <dia:color val="#ff0000"/>
