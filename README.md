@@ -1,8 +1,8 @@
 # About Cubicforest-java
 
-Real-time logic game written in Java about three pigs, trying to
-protect themselves from hungry wolves. Collect scattered cubes, to
-create items helping pigs to defeat cubic predators.
+Turn based logic game about three pigs, trying to protect themselves
+from hungry wolves. Collect scattered cubes, to create items helping
+pigs to defeat cubic predators.
 
 # Launching project
 
