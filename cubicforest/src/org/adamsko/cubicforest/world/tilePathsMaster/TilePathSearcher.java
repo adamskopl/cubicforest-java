@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -28,6 +30,47 @@ public class TilePathSearcher {
 		return search(srcTile, destTile);
 	}
 
+	public static TilePath search(WorldObject objectFrom, WorldObject objectTo) {
+		Tile srcTile = tilesMaster.getTilesContainer().getTileWithObject(
+				objectFrom);
+		Tile destTile = tilesMaster.getTilesContainer().getTileWithObject(
+				objectTo);
+
+		TilePath searchedPath = search(srcTile, destTile);
+		Gdx.app.debug("searchedPath", Integer.toString(searchedPath.length()));
+		return searchedPath;
+
+	}
+
+	/**
+	 * Search for the shortest path from one {@link WorldObject} object to the
+	 * tile adjacent to other given {@link WorldObject} object.
+	 * 
+	 * @param objectFrom
+	 *            object from which path is leading
+	 * @param objectTo
+	 *            object which adjacent tiles are the ones to which shortest
+	 *            path is searched
+	 * @return
+	 */
+	public static TilePath searchShortestPathAdjacentTiles(
+			WorldObject objectFrom, WorldObject objectTo) {
+		Tile tileTo = tilesMaster.getTilesContainer().getTileWithObject(
+				objectTo);
+		List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo);
+		TilePath shortestPath = null;
+		for (Tile adjacentTile : adjacentTiles) {
+			if(adjacentTile.isOccupied()){continue;}
+			
+			TilePath adjacentTilePath = search(objectFrom, adjacentTile);
+			if(shortestPath == null) {shortestPath = adjacentTilePath; continue;}
+			if(adjacentTilePath.length() < shortestPath.length()) {
+				shortestPath = adjacentTilePath;
+			}
+		}
+		return shortestPath;
+	}
+
 	/**
 	 * @param from
 	 * @param to
@@ -47,6 +90,7 @@ public class TilePathSearcher {
 		} catch (Exception e) {
 			Gdx.app.error("TilePath::search()", e.toString());
 		}
+
 		return path;
 	}
 

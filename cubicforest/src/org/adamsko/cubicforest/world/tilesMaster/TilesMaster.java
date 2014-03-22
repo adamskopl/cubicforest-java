@@ -124,10 +124,10 @@ public class TilesMaster implements PickMasterClient {
 				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
 			}
 			
-			Gdx.app.log(
-					"TilesMaster onInput",
-					Float.toString(clickedTile.getTilesPosX()) + ", "
-							+ Float.toString(clickedTile.getTilesPosY()));
+//			Gdx.app.log(
+//					"TilesMaster onInput",
+//					Float.toString(clickedTile.getTilesPosX()) + ", "
+//							+ Float.toString(clickedTile.getTilesPosY()));
 			
 			if(!clickedTile.isOccupied()) {
 				if(highlightedTile!=null)tilesContainer.testHighlightTile(highlightedTile, 0);

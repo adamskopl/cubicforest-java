@@ -14,6 +14,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public abstract class PhaseOrderableObjects implements OrdersMasterClient {
 
+	private String name;
 	private RoundsMaster roundsMaster;
 	protected OrdersMaster ordersMaster;
 
@@ -24,10 +25,11 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient {
 	 */
 	private int activeObjectPointer = -1;
 
-	PhaseOrderableObjects(OrderableObjectsContainer orderableObjectsContainer,
-			OrdersMaster ordersMaster) {
+	protected PhaseOrderableObjects(OrderableObjectsContainer orderableObjectsContainer,
+			OrdersMaster ordersMaster, String name) {
 		
 		this.ordersMaster = ordersMaster;
+		this.name = name;
 		phaseObjects = new ArrayList<WorldObject>();
 		
 		for (WorldObject wo : orderableObjectsContainer.getOrderableObjects()) {
@@ -35,6 +37,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient {
 		}
 	}
 
+	
 	/**
 	 * 
 	 */
@@ -67,5 +70,9 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient {
 
 	public void setRoundsMaster(RoundsMaster roundsMaster) {
 		this.roundsMaster = roundsMaster;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

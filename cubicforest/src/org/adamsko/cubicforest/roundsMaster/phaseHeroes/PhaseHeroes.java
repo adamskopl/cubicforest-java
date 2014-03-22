@@ -1,5 +1,7 @@
-package org.adamsko.cubicforest.roundsMaster;
+package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
+import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
@@ -20,13 +22,13 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 
 	public PhaseHeroes(OrderableObjectsContainer orderableObjectsContainer,
 			OrdersMaster ordersMaster) {
-		super(orderableObjectsContainer, ordersMaster);
+		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onTileEvent(Tile tile, TileEvent_e event) {
-		Gdx.app.debug("phaseHeroes", "onTileEvent");
+//		Gdx.app.debug("phaseHeroes", "onTileEvent");
 		WorldObject activeObject = null;
 		if (!orderInProgress) {			
 			orderInProgress = true;
@@ -35,6 +37,7 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 			activeObject = activeObject();
 		}
 		if(activeObject != null) {
+			Gdx.app.debug(getName(), "startOrder");
 			ordersMaster.startOrder(activeObject, tile, this);
 			orderInProgress = true;
 		}
@@ -47,20 +50,24 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 
 	@Override
 	public void startPhase() {
-		Gdx.app.debug("PhaseHeroes", "startPhase()");
+		Gdx.app.debug(getName(), "startPhase()");
 
 	}
 
 	@Override
 	public void onOrderFinished(OrdersMasterResult_e result,
 			WorldObject objectWithOrder) {
-		Gdx.app.debug("phaseHeroes", "order finished");
+		Gdx.app.debug(getName(), "order finished\n");
+		
+		if(activeObject() != objectWithOrder) {
+			Gdx.app.error(getName(), "activeObject() != objectWithOrder");
+		}
+		
 		orderInProgress = false;		
 		if(isActiveObjectLast()) {
 			try {
 				phaseIsOver();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return;

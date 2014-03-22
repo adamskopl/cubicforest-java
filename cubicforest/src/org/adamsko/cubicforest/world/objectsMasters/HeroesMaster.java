@@ -29,9 +29,9 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 	
 	private void addTestObjects() throws Exception {
 		List<Vector2> testPositions = new ArrayList<Vector2>();
-		testPositions.add(new Vector2(0, 0));
+		testPositions.add(new Vector2(0, 5));
 		testPositions.add(new Vector2(6, 4));
-		testPositions.add(new Vector2(3, 6));
+//		testPositions.add(new Vector2(3, 6));
 
 		RenderableObject testPig;
 		int atlasIndex = 0;

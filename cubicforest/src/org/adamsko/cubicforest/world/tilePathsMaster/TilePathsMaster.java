@@ -33,7 +33,14 @@ public class TilePathsMaster {
 	public void startPath(WorldObject wanderer, Tile destinationTile) {		
 		TilePath testPath = TilePathSearcher.search(wanderer,
 				destinationTile);
-		TilePathGuide guide = new TilePathGuide(wanderer, testPath, this, tilesMaster);
+		startPath(wanderer, testPath);
+//		TilePathGuide guide = new TilePathGuide(wanderer, testPath, this, tilesMaster);
+//		tilePathGuides.add(guide);
+//		guide.start();
+	}
+	
+	public void startPath(WorldObject wanderer, TilePath path) {
+		TilePathGuide guide = new TilePathGuide(wanderer, path, this, tilesMaster);
 		tilePathGuides.add(guide);
 		guide.start();
 	}
@@ -47,14 +54,12 @@ public class TilePathsMaster {
 	protected void onPathEnd(TilePathGuide guide) {
 		WorldObject wanderer = guide.getWanderer();
 		master.onPathFinished(OrdersMasterResult_e.ORDER_PATH_FINISHED, wanderer);
-
-		Gdx.app.debug("TilePathsMaster", "size: "+tilePathGuides.size());
 		
 		// remove guide from TilePathGuide vector		
 		try {
 			tilePathGuides.remove(guide);
 		} catch (Exception e) {
-			Gdx.app.debug("TilePathsMaster::onPathEnd", e.toString());
+			Gdx.app.error("TilePathsMaster::onPathEnd", e.toString());
 		}
 
 		tilesMaster.clearTilesLabels();

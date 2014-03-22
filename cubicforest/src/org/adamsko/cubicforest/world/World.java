@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.WorldRenderer;
-import org.adamsko.cubicforest.roundsMaster.PhaseEnemies;
-import org.adamsko.cubicforest.roundsMaster.PhaseHeroes;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.objectsMasters.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
@@ -70,7 +70,7 @@ public class World {
 		phaseHeroes.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseHeroes);		
 		
-		PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster, ordersMaster);
+		PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster, heroesMaster, ordersMaster);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseEnemies);
 		

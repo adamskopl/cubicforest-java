@@ -39,9 +39,9 @@ public class EnemiesMaster extends RenderableObjectsContainer implements
 	
 	private void addTestObjects() throws Exception {
 		List<Vector2> testPositions = new ArrayList<Vector2>();
-		testPositions.add(new Vector2(1, 9));
+		testPositions.add(new Vector2(1, 1));
 		testPositions.add(new Vector2(3, 9));
-		testPositions.add(new Vector2(5, 9));
+//		testPositions.add(new Vector2(5, 9));
 
 		RenderableObject testEnemy;
 		int atlasIndex = 0;

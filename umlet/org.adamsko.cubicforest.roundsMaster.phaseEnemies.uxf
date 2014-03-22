@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>7</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>371</x>
+      <y>511</y>
+      <w>231</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>*PhaseEnemies*
+--
+- PhaseEnemiesHeroesHelper heroesHelper
+
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>763</x>
+      <y>525</y>
+      <w>182</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>*PhaseEnemiesHeroesHelper*
+--
+List&lt;WorldObject&gt; heroes
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>581</x>
+      <y>560</y>
+      <w>195</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;182;35</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>833</x>
+      <y>357</y>
+      <w>266</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>HeroesMaster
+--
++ void handleServantTileEvent(WorldObject servant,
+TileEvent_e tileEvent)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>819</x>
+      <y>315</y>
+      <w>315</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>826</x>
+      <y>406</y>
+      <w>153</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=-
+getOrderableObjects()&lt;</panel_attributes>
+    <additional_attributes>21;119;140;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1092</x>
+      <y>567</y>
+      <w>294</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>TilePathSearcher
+--
+TilePath search(WorldObject objectOnPath, Tile destTile)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>1078</x>
+      <y>539</y>
+      <w>343</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.tilePathsMaster</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>924</x>
+      <y>567</y>
+      <w>181</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=-
+search()&gt;</panel_attributes>
+    <additional_attributes>21;35;168;35</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>182</x>
+      <y>266</y>
+      <w>322</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>/PhaseOrderableObjects/
+--
+RoundsMaster roundsMaster
+OrdersMaster ordersMaster
+List&lt;WorldObject&gt; phaseObjects
+--
++ PhaseOrderableObjects(
+OrderableObjectsContainer orderableObjectsContainer,
+OrdersMaster ordersMaster)
++ void phaseIsOver(RoundPhase phaseOver)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>315</x>
+      <y>371</y>
+      <w>132</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;119;140</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>497</x>
+      <y>357</y>
+      <w>132</w>
+      <h>167</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>119;21;21;154</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>511</x>
+      <y>308</y>
+      <w>266</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>/RoundPhase/
+--
++ void phaseIsOver()
++ void startPhase()
++ void setRoundsMaster(RoundsMaster roundsMaster)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>154</x>
+      <y>224</y>
+      <w>637</w>
+      <h>203</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.roundsMaster</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

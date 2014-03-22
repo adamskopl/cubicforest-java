@@ -74,4 +74,8 @@ public class TilePath {
 		}
 		return ret;
 	}
+	
+	public int length() {
+		return tilesList.size();
+	}
 }
