@@ -4,7 +4,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>700</x>
+      <x>777</x>
       <y>329</y>
       <w>168</w>
       <h>119</h>
@@ -16,7 +16,7 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>329</x>
+      <x>406</x>
       <y>455</y>
       <w>231</w>
       <h>119</h>
@@ -29,7 +29,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>399</x>
+      <x>476</x>
       <y>497</y>
       <w>77</w>
       <h>42</h>
@@ -42,7 +42,7 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>175</x>
+      <x>252</x>
       <y>154</y>
       <w>336</w>
       <h>203</h>
@@ -55,7 +55,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>189</x>
+      <x>266</x>
       <y>224</y>
       <w>301</w>
       <h>84</h>
@@ -68,7 +68,7 @@ void startPath(WorldObject wanderer, Tile destinationTile)</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>672</x>
+      <x>749</x>
       <y>119</y>
       <w>231</w>
       <h>126</h>
@@ -81,7 +81,7 @@ void startPath(WorldObject wanderer, Tile destinationTile)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>721</x>
+      <x>798</x>
       <y>140</y>
       <w>126</w>
       <h>42</h>
@@ -93,7 +93,7 @@ void startPath(WorldObject wanderer, Tile destinationTile)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>735</x>
+      <x>812</x>
       <y>161</y>
       <w>90</w>
       <h>181</h>
@@ -105,7 +105,7 @@ TO DELETE</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1050</x>
+      <x>1127</x>
       <y>413</y>
       <w>182</w>
       <h>63</h>
@@ -118,7 +118,7 @@ List&lt;WorldObject&gt; getOrderableObjects</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>945</x>
+      <x>1022</x>
       <y>273</y>
       <w>119</w>
       <h>49</h>
@@ -130,7 +130,7 @@ List&lt;WorldObject&gt; getOrderableObjects</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1176</x>
+      <x>1253</x>
       <y>525</y>
       <w>126</w>
       <h>56</h>
@@ -142,7 +142,7 @@ List&lt;WorldObject&gt; getOrderableObjects</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>896</x>
+      <x>973</x>
       <y>525</y>
       <w>266</w>
       <h>70</h>
@@ -156,7 +156,7 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1001</x>
+      <x>1078</x>
       <y>455</y>
       <w>118</w>
       <h>83</h>
@@ -167,10 +167,10 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1148</x>
+      <x>1225</x>
       <y>455</y>
-      <w>91</w>
-      <h>77</h>
+      <w>97</w>
+      <h>83</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>21;21;84;70</additional_attributes>
@@ -178,7 +178,7 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>469</x>
+      <x>546</x>
       <y>259</y>
       <w>244</w>
       <h>132</h>
@@ -186,5 +186,39 @@ TileEvent_e tileEvent)</panel_attributes>
     <panel_attributes>lt=-
 startPath</panel_attributes>
     <additional_attributes>231;119;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>553</x>
+      <y>637</y>
+      <w>217</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>609</x>
+      <y>679</y>
+      <w>105</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>World
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>644</x>
+      <y>427</y>
+      <w>230</w>
+      <h>265</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;252;217;21</additional_attributes>
   </element>
 </diagram>

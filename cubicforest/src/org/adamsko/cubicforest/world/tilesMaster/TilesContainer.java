@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends RenderableObjectsContainer implements
 		RenderableObjectsMaster {
-
+	
 	public TilesContainer(TilesMaster TM) {
 		super(TM, "tiles-atlas-medium", 75, 45);
 	}

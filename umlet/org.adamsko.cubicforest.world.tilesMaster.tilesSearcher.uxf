@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>550</x>
+      <y>470</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*TilesSearcher*
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>880</x>
+      <y>450</y>
+      <w>410</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>*AdjacentTilesSearcher*
+--
+- static TilesMaster tilesMaster
+--
+static List&lt;Tile&gt; getTilesInRange(Tile tile, int range, 
+Boolean getOccupied)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

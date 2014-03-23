@@ -6,6 +6,8 @@ import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult_e;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -28,18 +30,20 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 
 	@Override
 	public void onTileEvent(Tile tile, TileEvent_e event) {
-//		Gdx.app.debug("phaseHeroes", "onTileEvent");
+
 		WorldObject activeObject = null;
-		if (!orderInProgress) {			
-			orderInProgress = true;
-			// set next object
-			nextObject();
+		if (!orderInProgress) {
 			activeObject = activeObject();
-		}
-		if(activeObject != null) {
-			Gdx.app.debug(getName(), "startOrder");
-			ordersMaster.startOrder(activeObject, tile, this);
-			orderInProgress = true;
+			// check if tile event is valid
+			TilePath pathToTile = TilePathSearcher.search(activeObject, tile);
+
+			// consider path which length is shorter than object's range
+			if (pathToTile.length()-1 <= activeObject.getSpeed()) {
+				orderInProgress = true;
+				Gdx.app.debug(getName(), "startOrder");
+				ordersMaster.unhighlightTilesObjectRange(activeObject());
+				ordersMaster.startOrder(activeObject, pathToTile, this);
+			}
 		}
 	}
 
@@ -51,6 +55,7 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 	@Override
 	public void startPhase() {
 		Gdx.app.debug(getName(), "startPhase()");
+		nextHero();
 
 	}
 
@@ -58,19 +63,29 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 	public void onOrderFinished(OrdersMasterResult_e result,
 			WorldObject objectWithOrder) {
 		Gdx.app.debug(getName(), "order finished\n");
-		
-		if(activeObject() != objectWithOrder) {
+
+		if (activeObject() != objectWithOrder) {
 			Gdx.app.error(getName(), "activeObject() != objectWithOrder");
 		}
-		
-		orderInProgress = false;		
-		if(isActiveObjectLast()) {
+
+		orderInProgress = false;
+		if (isActiveObjectLast()) {
 			try {
 				phaseIsOver();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return;
+		} else {
+			// set next object
+			nextHero();
 		}
+
 	}
+
+	private void nextHero() {
+		nextObject();
+		ordersMaster.highlightTilesObjectRange(activeObject());
+	}
+
 }

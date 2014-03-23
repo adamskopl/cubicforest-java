@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
-import org.adamsko.cubicforest.world.CubicObject;
+import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  * @author adamsko
  */
-public class Tile extends CubicObject {
+public class Tile extends RenderableObject {
 
 	private WorldObject occupant;
 	private Boolean occupied;

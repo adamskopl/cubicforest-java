@@ -14,6 +14,7 @@ import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
 
 import com.badlogic.gdx.Gdx;
 
@@ -43,6 +44,7 @@ public class World {
 		pickMaster = new PickMaster();
 		
 		tilesMaster = new TilesMaster(100);
+		TilesSearcher.setTilesMaster(tilesMaster);
 				
 		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster, "terrain-atlas-medium", 42, 50);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);
@@ -60,7 +62,7 @@ public class World {
 		
 		pickMaster.addClient(tilesMaster);
 		tilesMaster.addClient(roundsMaster);
-		
+
 	}
 	
 	private void initRoundsMaster() {

@@ -52,6 +52,9 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 			Gdx.app.error("moveEnemy", "PATH == NULL");
 		}
 		Gdx.app.debug(getName(), "startOrder");
+		
+		// shorten path to enemy's speed
+		shortestPathTileAdjacentHero.shortenPath(activeEnemy.getSpeed());		
 		ordersMaster.startOrder(activeEnemy, shortestPathTileAdjacentHero, this);
 	}
 

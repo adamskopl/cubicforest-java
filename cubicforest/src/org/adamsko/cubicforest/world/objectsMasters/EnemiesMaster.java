@@ -41,7 +41,8 @@ public class EnemiesMaster extends RenderableObjectsContainer implements
 		List<Vector2> testPositions = new ArrayList<Vector2>();
 		testPositions.add(new Vector2(1, 1));
 		testPositions.add(new Vector2(3, 9));
-//		testPositions.add(new Vector2(5, 9));
+		testPositions.add(new Vector2(5, 9));
+		testPositions.add(new Vector2(6, 9));
 
 		RenderableObject testEnemy;
 		int atlasIndex = 0;
@@ -49,6 +50,9 @@ public class EnemiesMaster extends RenderableObjectsContainer implements
 			testEnemy = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testEnemy.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
+			
+			testEnemy.setSpeed(2);
+			
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
 			testEnemy.setTilesPos(pos);

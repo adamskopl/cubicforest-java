@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
@@ -35,6 +37,8 @@ public class OrdersMaster {
 
 	private Boolean tempTestStarted;
 	private Vector2 tempTargetPos;
+	
+	private TilesMaster tilesMaster;
 
 	/**
 	 * Client which will be informed about the result of the order. Don't know
@@ -50,6 +54,7 @@ public class OrdersMaster {
 	public OrdersMaster(TilesMaster tilesMaster, HeroesMaster heroesMaster) {
 		tilePathsMaster = new TilePathsMaster(this, tilesMaster);
 		this.heroesMaster = heroesMaster;
+		this.tilesMaster = tilesMaster;
 		tempTestStarted = false;
 		tempTargetPos = new Vector2();
 	}
@@ -81,6 +86,21 @@ public class OrdersMaster {
 			OrdersMasterClient client) {
 		this.client = client;
 		tilePathsMaster.startPath(wanderer, path);		
+	}
+	
+	/**
+	 * Highlight tiles which are in object's range
+	 * 
+	 * @param object
+	 */
+	public void highlightTilesObjectRange(WorldObject object) {
+		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object, object.getSpeed(), false);
+		tilesMaster.highlightTiles(tilesInRange, 2);
+	}
+	
+	public void unhighlightTilesObjectRange(WorldObject object) {
+		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object, object.getSpeed(), false);
+		tilesMaster.highlightTiles(tilesInRange, 0);
 	}
 
 }

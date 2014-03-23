@@ -31,11 +31,17 @@ public class WorldObject {
 	 * {@link WorldObjectsMaster} which is managing this object.
 	 */
 	private WorldObjectsMaster master = null;
+	
+	/**
+	 * How many tiles object can move. 
+	 */
+	private int speed;
 
 	public WorldObject() {
 		tilesPos = new Vector2(0.0f, 0.0f);
 		height = new Float(0.0f);
 		name = new String("WorldObject");
+		speed = 0;
 	}
 
 	/**
@@ -85,6 +91,14 @@ public class WorldObject {
 	}
 	public String getName() {
 		return name;
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	
+	public int getSpeed() {
+		return speed;
 	}
 
 	/**

@@ -25,16 +25,13 @@ public class TilePathSearcher {
 	}
 
 	public static TilePath search(WorldObject objectOnPath, Tile destTile) {
-		Tile srcTile = tilesMaster.getTilesContainer().getTileWithObject(
-				objectOnPath);
+		Tile srcTile = tilesMaster.getTileWithObject(objectOnPath);
 		return search(srcTile, destTile);
 	}
 
 	public static TilePath search(WorldObject objectFrom, WorldObject objectTo) {
-		Tile srcTile = tilesMaster.getTilesContainer().getTileWithObject(
-				objectFrom);
-		Tile destTile = tilesMaster.getTilesContainer().getTileWithObject(
-				objectTo);
+		Tile srcTile = tilesMaster.getTileWithObject(objectFrom);
+		Tile destTile = tilesMaster.getTileWithObject(objectTo);
 
 		TilePath searchedPath = search(srcTile, destTile);
 		Gdx.app.debug("searchedPath", Integer.toString(searchedPath.length()));
@@ -55,16 +52,20 @@ public class TilePathSearcher {
 	 */
 	public static TilePath searchShortestPathAdjacentTiles(
 			WorldObject objectFrom, WorldObject objectTo) {
-		Tile tileTo = tilesMaster.getTilesContainer().getTileWithObject(
-				objectTo);
-		List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo);
+		Tile tileTo = tilesMaster.getTileWithObject(objectTo);
+		List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo, true);
 		TilePath shortestPath = null;
 		for (Tile adjacentTile : adjacentTiles) {
-			if(adjacentTile.isOccupied()){continue;}
-			
+			if (adjacentTile.isOccupied()) {
+				continue;
+			}
+
 			TilePath adjacentTilePath = search(objectFrom, adjacentTile);
-			if(shortestPath == null) {shortestPath = adjacentTilePath; continue;}
-			if(adjacentTilePath.length() < shortestPath.length()) {
+			if (shortestPath == null) {
+				shortestPath = adjacentTilePath;
+				continue;
+			}
+			if (adjacentTilePath.length() < shortestPath.length()) {
 				shortestPath = adjacentTilePath;
 			}
 		}

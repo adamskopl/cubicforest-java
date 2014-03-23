@@ -81,9 +81,10 @@ public class TilePathSearcherHelper {
 	 * @throws Exception
 	 */
 	private void popCostsToSource(TilePath path) throws Exception {
-//		Gdx.app.debug("popCostsToSource", new String() + getActualCost());
+		// Gdx.app.debug("popCostsToSource", new String() + getActualCost());
 		List<Tile> actualCostTiles = actualCostTiles();
-//		Gdx.app.debug("actualCostTiles", TilesHelper.toString(actualCostTiles));
+		// Gdx.app.debug("actualCostTiles",
+		// TilesHelper.toString(actualCostTiles));
 		Tile pathFirstTile = path.getFrontTile();
 		boolean tileAdded = false;
 		for (Tile costTile : actualCostTiles) {
@@ -105,7 +106,7 @@ public class TilePathSearcherHelper {
 		if (!tileAdded) {
 			throw new Exception("popCostsToSource: no tile added");
 		}
-//		Gdx.app.debug("popCostsToSource path ", path.toString());
+		// Gdx.app.debug("popCostsToSource path ", path.toString());
 		popCostsToSource(path);
 	}
 
@@ -114,28 +115,26 @@ public class TilePathSearcherHelper {
 	 * cost
 	 */
 	private void handleNextCost() {
-		
+
 		// add vector of tiles for actually considered cost
 		addNextCost();
 		boolean anyTileAdded = false;
 		for (Tile prevTile : previousCostTiles()) {
-			List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(prevTile);
-//			Gdx.app.debug("adjacentTiles " + getActualCost(),
-//					TilesHelper.toString(adjacentTiles));
+			List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(prevTile,
+					true);
+
 			int tilesAdded = addAdjacentTilesCurrentCost(adjacentTiles);
+
 			if (tilesAdded > 0) {
 				anyTileAdded = true;
 			}
+
 			if (tilesAdded == -1) {
-//				Gdx.app.debug("handleNextCost " + getActualCost(),
-//						"end: destiny found");
 				return;
 			}
 		}
 		if (!anyTileAdded) {
 			// no tiles added for current cost, no further tiles will be added
-//			Gdx.app.debug("handleNextCost " + getActualCost(),
-//					"end: no tiles added");
 			return;
 		}
 
@@ -177,7 +176,7 @@ public class TilePathSearcherHelper {
 	 * @return decision: tile can be added or not
 	 */
 	private boolean tileValidCurrentCost(Tile tileChecked) {
-//		Gdx.app.debug("tileValidCurrentCost", "");
+		// Gdx.app.debug("tileValidCurrentCost", "");
 		if (!tileChecked.isPassable()) {
 			return false;
 		}
@@ -205,8 +204,6 @@ public class TilePathSearcherHelper {
 	 */
 	private void addActualCostTile(Tile readyTile) {
 		actualCostTiles().add(readyTile);
-		readyTile.addLabel(getActualCost());
-		readyTile.altLabelLast(Color.RED, 1.0f, 0.0f, -10.0f);
 	}
 
 	/**
@@ -255,7 +252,6 @@ public class TilePathSearcherHelper {
 	 */
 	private void addTilePathFront(TilePath path, Tile tile) {
 		path.addTileFront(tile);
-		tile.altLabelLast(Color.GREEN, 1.0f, 0.0f, 0.0f);
 	}
 
 }

@@ -39,6 +39,9 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 			testPig = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testPig.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
+			
+			testPig.setSpeed(4);
+			
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
 			testPig.setTilesPos(pos);
@@ -59,7 +62,7 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 		case TILE_PICKED: {
 			RenderableObject servantConv = (RenderableObject) servant;
 			int texNum = servantConv.getTexNum();
-			servantConv.setTextureRegion(atlasRows.get(1)[texNum]);
+//			servantConv.setTextureRegion(atlasRows.get(1)[texNum]);
 		}
 		default: {
 
