@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>657</x>
+      <y>423</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>/InteractiveObjectsMaster/
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>324</x>
+      <y>612</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>/InteractiveObject/
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>342</x>
+      <y>756</y>
+      <w>153</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*GatherCube*
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>477</x>
+      <y>630</y>
+      <w>116</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>99;27;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>675</y>
+      <w>44</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>27;27;27;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>576</x>
+      <y>612</y>
+      <w>162</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*GatherCubesMaster*
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>486</y>
+      <w>107</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>90;27;27;126</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>261</x>
+      <y>171</y>
+      <w>387</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>RenderableObjectsContainer
+--
+List&lt;RenderableObject&gt; renderableObjects
+List&lt;RenderableObject&gt; renderableObjectsUnserved
+List&lt;RenderableObject&gt; renderableObjectsToUpdate
+--
++ void addRenderableObject(RenderableObject newObject, 
+WorldObjectsMaster hisMaster
++ List&lt;RenderableObject&gt; getRenderableObjects(
+ROListType_e type)
++ List&lt;RenderableObject&gt; popRenderableObjects(
+ROListType_e type)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>684</x>
+      <y>198</y>
+      <w>342</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>/RenderableObjectsMaster/
+--
++ List&lt;RenderableObject&gt; getRenderableObjects(
+ROListType_e type)
++ List&lt;RenderableObject&gt; popRenderableObjects(
+ROListType_e type)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>207</x>
+      <y>135</y>
+      <w>846</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.render
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>720</x>
+      <y>288</y>
+      <w>143</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>126;27;27;135</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>423</x>
+      <y>306</y>
+      <w>215</w>
+      <h>323</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;198;306</additional_attributes>
+  </element>
+</diagram>
