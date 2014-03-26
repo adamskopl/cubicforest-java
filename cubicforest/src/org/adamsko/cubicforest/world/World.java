@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.render.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
+import org.adamsko.cubicforest.world.interactiveObjects.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
@@ -38,6 +39,8 @@ public class World {
 	HeroesMaster heroesMaster;
 	EnemiesMaster enemiesMaster;
 	
+	GatherCubesMaster gatherCubesMaster;
+	
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
@@ -49,6 +52,7 @@ public class World {
 		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster, "terrain-atlas-medium", 42, 50);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium", 30, 35);
+		gatherCubesMaster = new GatherCubesMaster(tilesMaster, "cubes-atlas-medium", 25, 40);
 				
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
@@ -59,6 +63,7 @@ public class World {
 		addWorldObjectsMaster(terrainObjectsMaster, true);
 		addWorldObjectsMaster(heroesMaster, true);
 		addWorldObjectsMaster(enemiesMaster, true);
+		addWorldObjectsMaster(gatherCubesMaster, true);
 		
 		pickMaster.addClient(tilesMaster);
 		tilesMaster.addClient(roundsMaster);
