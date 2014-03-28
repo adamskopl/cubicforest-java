@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>702</x>
+      <y>468</y>
+      <w>387</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>*TilesEventsMaster*
+--
++ void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)
++ void tileEvent(TileEvent_e evenType, Tile eventTile)
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>270</x>
+      <y>441</y>
+      <w>324</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.tilesMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>306</x>
+      <y>486</y>
+      <w>225</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>TilesMaster
+--
++ TilesEventsMaster tileEvent()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>504</x>
+      <y>504</y>
+      <w>215</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;198;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>549</x>
+      <y>171</y>
+      <w>450</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.interactionMaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>657</x>
+      <y>225</y>
+      <w>180</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>InteractionMaster
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>738</x>
+      <y>279</y>
+      <w>89</w>
+      <h>206</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>72;189;27;27</additional_attributes>
+  </element>
+</diagram>

@@ -7,7 +7,8 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
@@ -36,7 +37,7 @@ public class HeroesMaster extends RenderableObjectsContainer implements Renderab
 		RenderableObject testPig;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testPig = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex);
+			testPig = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_HERO);
 			testPig.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			

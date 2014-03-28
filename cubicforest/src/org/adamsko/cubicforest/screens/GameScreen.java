@@ -3,8 +3,8 @@ package org.adamsko.cubicforest.screens;
 import org.adamsko.cubicforest.TestClass;
 import org.adamsko.cubicforest.render.WorldRenderer;
 import org.adamsko.cubicforest.world.World;
-import org.adamsko.cubicforest.world.WorldObject;
 import org.adamsko.cubicforest.world.WorldObjectAccessor;
+import org.adamsko.cubicforest.world.object.WorldObject;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;

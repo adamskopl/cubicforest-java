@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.ordersMaster;
 import java.util.List;
 
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;

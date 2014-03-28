@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -39,7 +40,7 @@ public class TerrainObjectsMaster extends RenderableObjectsContainer implements 
 		RenderableObject testTree;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testTree = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex);
+			testTree = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_TERRAIN);
 			testTree.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
 			pos.add(new Vector2(0.5f, 0.5f));
@@ -53,21 +54,6 @@ public class TerrainObjectsMaster extends RenderableObjectsContainer implements 
 			addRenderableObject(testTree, this);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}
 		}
-	}
-	
-	public void addTestObject(Vector2 tilePos) throws Exception {		
-		
-		RenderableObject testTree = new RenderableObject(atlasRows.get(0)[0], 0);
-		testTree.setRenderVector(new Vector2(
-				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
-		tilePos.add(new Vector2(0.5f, 0.5f));
-		testTree.setTilesPos(tilePos);
-		
-		testTree.setName("tree added");
-		testTree.addLabel(ROLabel_e.LABEL_NAME);
-		testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
-		
-		addRenderableObject(testTree, this);		
 	}
 
 	@Override

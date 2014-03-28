@@ -1,8 +1,9 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import org.adamsko.cubicforest.screens.GameScreen;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.Gdx;
 
@@ -168,7 +169,7 @@ public class TilePathGuide implements TweenCallback {
 	 * @throws Exception
 	 */
 	private void stageBorder() throws Exception {
-		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is 
+		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is
 		// a tile that has been reached right now)
 		helper.reassignTileFrom();
 		// wanderer is heading to border between tileHeadingFrom and
@@ -176,11 +177,21 @@ public class TilePathGuide implements TweenCallback {
 		helper.setTileHeadingTo(path.removeFrontTile());
 	}
 
+	/**
+	 * Perform operations for HEADING_CENTER state: in this stage wanderer is
+	 * heading from the edge of the tileHeadingFrom to the center of
+	 * TileHeadingTo.
+	 * 
+	 * @throws Exception
+	 */
 	private void stageCenter() throws Exception {
-		tilesMaster.occupantLeftTile(helper.getTileHeadingFrom(),
-				helper.getTileHeadingTo());
+		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_ENTERS,
+				helper.getTileHeadingTo(), wanderer);
+		
+		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_LEAVES,
+				helper.getTileHeadingFrom());
 	}
-	
+
 	public WorldObject getWanderer() {
 		return wanderer;
 	}

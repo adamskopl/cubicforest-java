@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.roundsMaster;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;

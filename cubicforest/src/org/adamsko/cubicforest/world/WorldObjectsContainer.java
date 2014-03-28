@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -22,7 +23,9 @@ public class WorldObjectsContainer {
 		newObject.setMaster(hisMaster);
 		// associate newObject with a tile (every WorldObject is associated with
 		// a tile)
-		tilesMaster.insertWorldObject(newObject);
+		if(newObject.isOccupyingTile()) {
+			tilesMaster.insertWorldObject(newObject);
+		}
 	}
 	
 	/**

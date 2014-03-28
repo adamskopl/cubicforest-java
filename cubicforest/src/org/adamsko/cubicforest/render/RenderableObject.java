@@ -6,7 +6,8 @@ import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.render.text.LabelsContainer;
 import org.adamsko.cubicforest.render.text.LabelsMaster;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,7 +35,8 @@ public class RenderableObject extends WorldObject implements LabelsMaster {
 	/**
 	 * @param tr
 	 */
-	public RenderableObject(TextureRegion tr, int texNum) {
+	public RenderableObject(TextureRegion tr, int texNum, WorldObjectType_e type) {
+		super(type);
 		this.textureRegion = tr;
 		this.texNum = texNum;
 		labels = new LabelsContainer();

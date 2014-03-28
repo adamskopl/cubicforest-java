@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>550</x>
-      <y>470</y>
-      <w>170</w>
-      <h>90</h>
+      <x>693</x>
+      <y>455</y>
+      <w>119</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>*TilesSearcher*
 --
@@ -17,10 +17,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>880</x>
-      <y>450</y>
-      <w>410</w>
-      <h>150</h>
+      <x>924</x>
+      <y>441</y>
+      <w>287</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>*AdjacentTilesSearcher*
 --

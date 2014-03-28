@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 import java.util.List;
 import java.util.Vector;
 
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;

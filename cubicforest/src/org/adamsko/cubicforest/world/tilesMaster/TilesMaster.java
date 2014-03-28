@@ -3,10 +3,12 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
+import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
 
 import com.badlogic.gdx.Gdx;
@@ -33,7 +35,9 @@ public class TilesMaster implements PickMasterClient {
 		/**
 		 * {@link Tile} received input from {@link PickMaster}.
 		 */
-		TILE_PICKED
+		TILE_PICKED,
+		OCCUPANT_LEAVES,
+		OCCUPANT_ENTERS
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
@@ -41,21 +45,28 @@ public class TilesMaster implements PickMasterClient {
 	private List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
 
+	private TilesEventsMaster tilesEventsMaster;
+	
 	private Tile highlightedTile = null;
 
 	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
 		TilesHelper.setMapSize(mapSize);
-		initTiles();
+		initTiles();		
 	}
 
 	public void addClient(TilesMasterClient client) {
 		clients.add(client);
 	}
 
+	public void setInteractionMaster(InteractionMaster interactionMaster) {
+		tilesEventsMaster.setInteractionMaster(interactionMaster);
+	}
+	
 	public void initTiles() {
 		tilesContainer = new TilesContainer(this);
+		tilesEventsMaster = new TilesEventsMaster(tilesContainer);
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			if (TilesHelper.isTileonTestMap(fIndex)) {
 				continue;
@@ -125,15 +136,6 @@ public class TilesMaster implements PickMasterClient {
 		}
 	}
 
-	public void occupantLeftTile(Tile tileLeft, Tile tileEntered)
-			throws Exception {
-		WorldObject occupant = tileLeft.takeOutObject();
-		tilesContainer.testHighlightTile(tileLeft, 0);
-
-		tileEntered.insertWorldObject(occupant);
-		tilesContainer.testHighlightTile(tileEntered, 1);
-	}
-
 	@Override
 	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {
 		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
@@ -141,11 +143,6 @@ public class TilesMaster implements PickMasterClient {
 			for (TilesMasterClient client : clients) {
 				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
 			}
-
-			// Gdx.app.log(
-			// "TilesMaster onInput",
-			// Float.toString(clickedTile.getTilesPosX()) + ", "
-			// + Float.toString(clickedTile.getTilesPosY()));
 
 			if (!clickedTile.isOccupied()) {
 				if (highlightedTile != null)
@@ -169,4 +166,10 @@ public class TilesMaster implements PickMasterClient {
 			tilesContainer.testHighlightTile(t, texIndex);
 		}
 	}
+	
+	public TilesEventsMaster event() {
+		return tilesEventsMaster;
+	}
+	
+
 }

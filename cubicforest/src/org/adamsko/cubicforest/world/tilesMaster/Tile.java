@@ -1,7 +1,8 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.render.RenderableObject;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,7 +19,7 @@ public class Tile extends RenderableObject {
 	private Boolean occupied;
 
 	public Tile(Vector2 coords, TextureRegion tr) {
-		super(tr, 0);
+		super(tr, 0, WorldObjectType_e.OBJECT_TILE);
 		this.tilesPos = coords;
 		occupant = null;
 		occupied = false;
@@ -66,7 +67,7 @@ public class Tile extends RenderableObject {
 	 * @return
 	 * @throws Exception
 	 */
-	public WorldObject takeOutObject() throws Exception {
+	public WorldObject occupantLeaves() throws Exception {
 		if (!isOccupied()) {
 			throw new Exception("tile not occupied");
 		}

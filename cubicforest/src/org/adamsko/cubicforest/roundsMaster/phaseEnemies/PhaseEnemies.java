@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult_e;

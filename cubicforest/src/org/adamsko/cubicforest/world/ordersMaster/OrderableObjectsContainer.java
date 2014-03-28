@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.ordersMaster;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 
 public interface OrderableObjectsContainer {
 

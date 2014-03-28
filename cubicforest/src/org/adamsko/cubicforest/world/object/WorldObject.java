@@ -1,5 +1,6 @@
-package org.adamsko.cubicforest.world;
+package org.adamsko.cubicforest.world.object;
 
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -11,6 +12,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class WorldObject {
 
+	private WorldObjectType_e type;
+	
 	/*
 	 * Position indicated by tiles. (0.0,0.0): uppper corner of the first tile.
 	 * (2.5, 1.5): center of the field with (2, 1) coordinates
@@ -36,12 +39,18 @@ public class WorldObject {
 	 * How many tiles object can move. 
 	 */
 	private int speed;
+	
+	/**
+	 * Is this object occupying tile or leaving it free?
+	 */
+	private Boolean occupiesTile;
 
-	public WorldObject() {
+	public WorldObject(WorldObjectType_e type) {
 		tilesPos = new Vector2(0.0f, 0.0f);
 		height = new Float(0.0f);
 		name = new String("WorldObject");
 		speed = 0;
+		occupiesTile = true;
 	}
 
 	/**
@@ -99,6 +108,27 @@ public class WorldObject {
 	
 	public int getSpeed() {
 		return speed;
+	}
+	
+	public void setOccupiesTile(Boolean occupiesTile) {
+		this.occupiesTile = occupiesTile;
+	}
+	
+	public Boolean isOccupyingTile() {
+		return this.occupiesTile;
+	}
+	
+	public WorldObjectType_e getType() {
+		return type;
+	}
+	
+	public String typeToString() {
+		try {
+			return WorldObjectHelper.typeToString(type);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return "TYPE_ERROR";
 	}
 
 	/**

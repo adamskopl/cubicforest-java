@@ -8,10 +8,11 @@ import org.adamsko.cubicforest.render.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
-import org.adamsko.cubicforest.world.interactiveObjects.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.EnemiesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -34,6 +35,7 @@ public class World {
 	private TilesMaster tilesMaster;
 	private OrdersMaster ordersMaster;
 	private RoundsMaster roundsMaster;
+	private InteractionMaster interactionMaster;
 	
 	TerrainObjectsMaster terrainObjectsMaster;
 	HeroesMaster heroesMaster;
@@ -56,6 +58,9 @@ public class World {
 				
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
+		
+		interactionMaster = new InteractionMaster();
+		tilesMaster.setInteractionMaster(interactionMaster);
 		
 		initRoundsMaster();
 

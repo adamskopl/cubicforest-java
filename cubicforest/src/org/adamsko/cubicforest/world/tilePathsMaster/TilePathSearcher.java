@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 

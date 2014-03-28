@@ -5,7 +5,8 @@ import java.util.List;
 import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
+
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends RenderableObjectsContainer implements

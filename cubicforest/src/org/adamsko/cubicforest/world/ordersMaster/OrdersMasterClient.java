@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 
 public interface OrdersMasterClient {
 

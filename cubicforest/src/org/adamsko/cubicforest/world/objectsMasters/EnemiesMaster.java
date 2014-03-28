@@ -7,7 +7,8 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.world.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
@@ -47,7 +48,7 @@ public class EnemiesMaster extends RenderableObjectsContainer implements
 		RenderableObject testEnemy;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testEnemy = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex);
+			testEnemy = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_ENEMY);
 			testEnemy.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			

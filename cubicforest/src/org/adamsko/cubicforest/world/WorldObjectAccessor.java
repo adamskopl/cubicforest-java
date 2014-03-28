@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.world;
 
+import org.adamsko.cubicforest.world.object.WorldObject;
+
 import aurelienribon.tweenengine.TweenAccessor;
 
 public class WorldObjectAccessor implements TweenAccessor<WorldObject> {
