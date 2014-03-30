@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
@@ -16,13 +18,29 @@ import com.badlogic.gdx.math.Vector2;
 public class Tile extends RenderableObject {
 
 	private WorldObject occupant;
-	private Boolean occupied;
+	/**
+	 * For now: item created by Heroes and GatherCubes
+	 */
+	private WorldObject item;
+
+	/**
+	 * Does tile contain a {@link WorldObject} object?
+	 */
+	private Boolean hasOccupant;
+	/**
+	 * 
+	 */
+	private Boolean hasItem;
 
 	public Tile(Vector2 coords, TextureRegion tr) {
 		super(tr, 0, WorldObjectType_e.OBJECT_TILE);
 		this.tilesPos = coords;
+
 		occupant = null;
-		occupied = false;
+		hasOccupant = false;
+
+		item = null;		
+		hasItem = false;
 	}
 
 	/**
@@ -49,18 +67,30 @@ public class Tile extends RenderableObject {
 	public WorldObject getOccupant() {
 		return occupant;
 	}
+	
+	public WorldObject getItem() {
+		return item;
+	}
 
 	/**
 	 * @param insertObject
 	 *            WorldObject to be inserted into the tile
 	 * @throws Exception
 	 */
-	public void insertWorldObject(WorldObject insertObject) throws Exception {
-		if (isOccupied()) {
+	public void insertObject(WorldObject insertObject) throws Exception {
+		if (hasOccupant()) {
 			throw new Exception("insertWorldObject: tile is already occupied");
 		}
 		occupant = insertObject;
-		occupied = true;
+		hasOccupant = true;
+	}
+
+	public void insertItem(WorldObject insertItem) throws Exception {
+		if (hasItem()) {
+			throw new Exception("insertItem: tile has already an item");
+		}
+		item = insertItem;
+		hasItem = true;
 	}
 
 	/**
@@ -68,12 +98,12 @@ public class Tile extends RenderableObject {
 	 * @throws Exception
 	 */
 	public WorldObject occupantLeaves() throws Exception {
-		if (!isOccupied()) {
+		if (!hasOccupant()) {
 			throw new Exception("tile not occupied");
 		}
 		WorldObject takenObject = occupant;
 		occupant = null;
-		occupied = false;
+		hasOccupant = false;
 		return takenObject;
 	}
 
@@ -82,8 +112,17 @@ public class Tile extends RenderableObject {
 	 * 
 	 * @return
 	 */
-	public Boolean isOccupied() {
-		return occupied;
+	public Boolean hasOccupant() {
+		return hasOccupant;
+	}
+
+	/**
+	 * Does tile have an item?
+	 * 
+	 * @return
+	 */
+	public Boolean hasItem() {
+		return hasItem;
 	}
 
 	/**
@@ -92,7 +131,7 @@ public class Tile extends RenderableObject {
 	 * @return
 	 */
 	public Boolean isPassable() {
-		return !isOccupied();
+		return !hasOccupant();
 	}
 
 	/**
@@ -102,7 +141,7 @@ public class Tile extends RenderableObject {
 	 *            {@link TileEvent_e} event associated with this {@link Tile}.
 	 */
 	public void handleTileEvent(TileEvent_e tileEvent) {
-		if (isOccupied()) {
+		if (hasOccupant()) {
 			occupant.handleParentTileEvent(tileEvent);
 		}
 	}

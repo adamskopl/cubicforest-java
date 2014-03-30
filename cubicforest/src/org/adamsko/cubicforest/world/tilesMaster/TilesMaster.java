@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
@@ -128,8 +129,12 @@ public class TilesMaster implements PickMasterClient {
 				.getTilesPos());
 		if (parentTile != null) {
 			try {
-				parentTile.insertWorldObject(insertObject);
-				tilesContainer.testHighlightTile(parentTile, 1);
+				if(insertObject.getType() == WorldObjectType_e.OBJECT_GATHER_CUBE) {
+					parentTile.insertItem(insertObject);
+				} else {
+					parentTile.insertObject(insertObject);
+					tilesContainer.testHighlightTile(parentTile, 1);
+				}				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -144,7 +149,7 @@ public class TilesMaster implements PickMasterClient {
 				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
 			}
 
-			if (!clickedTile.isOccupied()) {
+			if (!clickedTile.hasOccupant()) {
 				if (highlightedTile != null)
 					tilesContainer.testHighlightTile(highlightedTile, 0);
 				highlightedTile = clickedTile;

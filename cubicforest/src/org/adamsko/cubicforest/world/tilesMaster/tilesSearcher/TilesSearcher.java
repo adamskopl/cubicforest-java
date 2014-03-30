@@ -34,7 +34,7 @@ public class TilesSearcher {
 			if (adjTile == null) {
 				continue;
 			}
-			if (!getOccupied && adjTile.isOccupied()) {
+			if (!getOccupied && adjTile.hasOccupant()) {
 				continue;
 			}
 			adjTiles.add(adjTile);

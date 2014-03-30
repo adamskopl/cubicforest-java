@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -13,7 +14,7 @@ public class TilesContainer extends RenderableObjectsContainer implements
 		RenderableObjectsMaster {
 	
 	public TilesContainer(TilesMaster TM) {
-		super(TM, "tiles-atlas-medium", 75, 45);
+		super(TM, WorldObjectType_e.OBJECT_TILE, "tiles-atlas-medium", 75, 45);
 	}
 
 	public List<RenderableObject> getTiles() {

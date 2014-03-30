@@ -189,7 +189,7 @@ public class TilePathGuide implements TweenCallback {
 				helper.getTileHeadingTo(), wanderer);
 		
 		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_LEAVES,
-				helper.getTileHeadingFrom());
+				helper.getTileHeadingFrom(), wanderer);
 	}
 
 	public WorldObject getWanderer() {

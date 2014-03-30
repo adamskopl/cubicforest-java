@@ -18,7 +18,7 @@ public class TerrainObjectsMaster extends RenderableObjectsContainer implements 
 
 	public TerrainObjectsMaster(TilesMaster TM, String textureName, int tileW,
 			int tileH) {
-		super(TM, textureName, tileW, tileH);
+		super(TM, WorldObjectType_e.OBJECT_TERRAIN, textureName, tileW, tileH);
 		try {
 		addTestObjects();
 		} catch (Exception e) {

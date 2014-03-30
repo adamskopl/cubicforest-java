@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>100</x>
-      <y>210</y>
-      <w>190</w>
-      <h>120</h>
+      <x>408</x>
+      <y>392</y>
+      <w>152</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>WorldObjectType_e
 --
@@ -20,10 +20,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>490</x>
-      <y>260</y>
-      <w>340</w>
-      <h>160</h>
+      <x>736</x>
+      <y>376</y>
+      <w>272</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>*WorldObject*
 --

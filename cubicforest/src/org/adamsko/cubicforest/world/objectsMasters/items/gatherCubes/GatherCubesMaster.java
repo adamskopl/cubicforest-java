@@ -1,23 +1,26 @@
-package org.adamsko.cubicforest.world.objectsMasters;
+package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObject;
 import org.adamsko.cubicforest.render.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.RenderableObjectsMaster;
-import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMasterClient;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
+import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class GatherCubesMaster extends RenderableObjectsContainer implements
+public class GatherCubesMaster extends InteractionObjectsMaster implements
 		RenderableObjectsMaster {
 
 	public GatherCubesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(TM, textureName, tileW, tileH);		
+		super(TM, WorldObjectType_e.OBJECT_GATHER_CUBE, textureName, tileW, tileH);		
 		try {
 			addTestCubes();
 		} catch (Exception e) {
@@ -37,10 +40,10 @@ public class GatherCubesMaster extends RenderableObjectsContainer implements
 		testPositions.add(new Vector2(4, 4));
 		testPositions.add(new Vector2(8, 6));
 		
-		RenderableObject testCube;
+		GatherCube testCube;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testCube = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_GATHER_CUBE);
+			testCube = new GatherCube(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_GATHER_CUBE);
 			testCube.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -2));
 			
@@ -57,8 +60,24 @@ public class GatherCubesMaster extends RenderableObjectsContainer implements
 		}
 		
 	}
-	
-	public void tileEvent() {
+
+	@Override
+	public void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject) {
+
+		GatherCube tileCube = (GatherCube)eventTile.getItem();
+		
+		switch (evenType) {
+		case OCCUPANT_ENTERS:
+			tileCube.setTextureRegion(atlasRows.get(1)[tileCube.getTexNum()]);
+			break;
+
+		case OCCUPANT_LEAVES:
+			tileCube.setTextureRegion(atlasRows.get(0)[tileCube.getTexNum()]);
+			break;			
+		default:
+			break;
+		}
 		
 	}
 	

@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.objectsMasters;
+package org.adamsko.cubicforest.world.objectsMasters.entities.enemies;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +9,20 @@ import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
+import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class EnemiesMaster extends RenderableObjectsContainer implements
+public class EnemiesMaster extends InteractionObjectsMaster implements
 		RenderableObjectsMaster, OrderableObjectsContainer {
 
 	public EnemiesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(TM, textureName, tileW, tileH);
+		super(TM, WorldObjectType_e.OBJECT_ENEMY, textureName, tileW, tileH);
 		try {
 			addTestObjects();
 		} catch (Exception e) {
@@ -45,10 +48,10 @@ public class EnemiesMaster extends RenderableObjectsContainer implements
 		testPositions.add(new Vector2(5, 9));
 		testPositions.add(new Vector2(6, 9));
 
-		RenderableObject testEnemy;
+		Enemy testEnemy;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testEnemy = new RenderableObject(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_ENEMY);
+			testEnemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_ENEMY);
 			testEnemy.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			
@@ -66,6 +69,13 @@ public class EnemiesMaster extends RenderableObjectsContainer implements
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}
+	}
+
+	@Override
+	public void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

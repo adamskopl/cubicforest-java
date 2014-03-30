@@ -32,18 +32,21 @@ public class TilesEventsMaster {
 
 		switch (evenType) {
 		case OCCUPANT_ENTERS: {
-			eventTile.insertWorldObject(eventObject);
+			eventTile.insertObject(eventObject);
 			tilesContainer.testHighlightTile(eventTile, 1);
-			interactionMaster.tileEvent(evenType, eventTile, eventObject);
 			break;
 		}
 		case OCCUPANT_LEAVES: {
+			eventTile.occupantLeaves();
+			tilesContainer.testHighlightTile(eventTile, 0);
 			break;
 		}
 		default: {
 			throw new Exception("tileEvent: unsupported event type");
 		}
 		}
+		
+		interactionMaster.tileEvent(evenType, eventTile, eventObject);
 	}
 
 	/**
@@ -60,14 +63,14 @@ public class TilesEventsMaster {
 			break;
 		}
 		case OCCUPANT_LEAVES: {
-			eventTile.occupantLeaves();
-			tilesContainer.testHighlightTile(eventTile, 0);
+
 			break;
 		}
 		default: {
 			throw new Exception("tileEvent: unsupported event type");
 		}
 		}
+
 	}
 
 }

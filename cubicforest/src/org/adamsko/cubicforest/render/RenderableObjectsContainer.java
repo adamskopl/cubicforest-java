@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.render.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -70,9 +71,9 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 	 */
 	protected List<TextureRegion[]> atlasRows;
 
-	public RenderableObjectsContainer(TilesMaster TM, String textureName,
+	public RenderableObjectsContainer(TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
-		super(TM);
+		super(TM, worldObjectsType);
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName

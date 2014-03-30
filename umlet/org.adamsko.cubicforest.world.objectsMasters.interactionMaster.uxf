@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>552</x>
+      <y>384</y>
+      <w>352</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>*InteractionMaster*
+--
++ void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>200</x>
+      <y>424</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>World
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>304</x>
+      <y>440</y>
+      <w>264</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;248;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>184</x>
+      <y>384</y>
+      <w>192</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>552</x>
+      <y>72</y>
+      <w>552</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.tilesMaster.tilesEvents
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>600</x>
+      <y>120</y>
+      <w>232</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TilesEventsMaster
+--
+- InteractionMaster interactionMaster</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>680</x>
+      <y>160</y>
+      <w>40</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;224</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>688</x>
+      <y>160</y>
+      <w>104</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=-
+tileEvent()&gt;</panel_attributes>
+    <additional_attributes>56;24;56;224</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>480</x>
+      <y>640</y>
+      <w>216</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>512</x>
+      <y>672</y>
+      <w>152</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>GatherCubesMaster
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>560</x>
+      <y>520</y>
+      <w>96</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>80;24;24;152</additional_attributes>
+  </element>
+</diagram>

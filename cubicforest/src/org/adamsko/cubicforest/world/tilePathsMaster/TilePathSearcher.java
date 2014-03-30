@@ -56,7 +56,7 @@ public class TilePathSearcher {
 		List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo, true);
 		TilePath shortestPath = null;
 		for (Tile adjacentTile : adjacentTiles) {
-			if (adjacentTile.isOccupied()) {
+			if (adjacentTile.hasOccupant()) {
 				continue;
 			}
 

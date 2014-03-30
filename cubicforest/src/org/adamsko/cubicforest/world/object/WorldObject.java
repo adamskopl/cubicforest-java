@@ -51,6 +51,7 @@ public class WorldObject {
 		name = new String("WorldObject");
 		speed = 0;
 		occupiesTile = true;
+		this.type = type;
 	}
 
 	/**
