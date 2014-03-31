@@ -3,21 +3,17 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMasterClient;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class GatherCubesMaster extends InteractionObjectsMaster implements
-		RenderableObjectsMaster {
+		WorldObjectsMaster {
 
 	private GatherCubesCounter gatherCubesCounter;
 
@@ -64,7 +60,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			pos.add(new Vector2(7, -3));
 			testCube.setTilesPos(pos);
 
-			addRenderableObject(testCube, this);
+			addWorldObject(testCube, this);
 
 			if (atlasIndex == 3) {
 				atlasIndex = 0;

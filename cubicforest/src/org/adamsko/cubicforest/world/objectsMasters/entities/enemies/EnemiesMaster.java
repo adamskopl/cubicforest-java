@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -19,7 +18,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class EnemiesMaster extends InteractionObjectsMaster implements
-		RenderableObjectsMaster, OrderableObjectsContainer {
+		WorldObjectsMaster, OrderableObjectsContainer {
 
 	public EnemiesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
 		super(TM, WorldObjectType_e.OBJECT_ENEMY, textureName, tileW, tileH);
@@ -45,8 +44,8 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		List<Vector2> testPositions = new ArrayList<Vector2>();
 		testPositions.add(new Vector2(1, 1));
 		testPositions.add(new Vector2(3, 9));
-		testPositions.add(new Vector2(5, 9));
-		testPositions.add(new Vector2(6, 9));
+//		testPositions.add(new Vector2(5, 9));
+//		testPositions.add(new Vector2(6, 9));
 
 		Enemy testEnemy;
 		int atlasIndex = 0;
@@ -65,7 +64,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			testEnemy.addLabel(ROLabel_e.LABEL_NAME);
 			testEnemy.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
-			addRenderableObject(testEnemy, this);
+			addWorldObject(testEnemy, this);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}

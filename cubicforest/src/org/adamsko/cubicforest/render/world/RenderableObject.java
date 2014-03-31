@@ -1,19 +1,20 @@
 package org.adamsko.cubicforest.render.world;
 
-import java.util.List;
-
-import org.adamsko.cubicforest.render.text.Label;
-import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.render.text.LabelsContainer;
-import org.adamsko.cubicforest.render.text.LabelsMaster;
-import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
-
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.sun.xml.internal.fastinfoset.algorithm.BuiltInEncodingAlgorithm.WordListener;
 
-public class RenderableObject extends WorldObject implements LabelsMaster {
+public class RenderableObject  {
+
+	protected RenderableObjectType_e renderType;
+	
+	public RenderableObjectType_e getRenderType() {
+		return renderType;
+	}
+
+	public void setRenderType(RenderableObjectType_e renderType) {
+		this.renderType = renderType;
+	}
 
 	/**
 	 * Vector translating rendered image.
@@ -30,16 +31,13 @@ public class RenderableObject extends WorldObject implements LabelsMaster {
 	 */
 	private int texNum = 0;
 	
-	private LabelsContainer labels;
-	
 	/**
 	 * @param tr
 	 */
-	public RenderableObject(TextureRegion tr, int texNum, WorldObjectType_e type) {
-		super(type);
+	public RenderableObject(TextureRegion tr, int texNum) {
 		this.textureRegion = tr;
 		this.texNum = texNum;
-		labels = new LabelsContainer();
+		renderType = RenderableObjectType_e.TYPE_UNDEFINED;		
 	}
 	
 	public void setRenderVector(Vector2 vec) {
@@ -71,56 +69,6 @@ public class RenderableObject extends WorldObject implements LabelsMaster {
 	 */
 	public int getTexNum() {
 		return texNum;
-	}
-
-	@Override
-	public List<Label> getLabels() {
-		return labels.getLabels();
-	}
-
-	public void addLabel(ROLabel_e type) throws Exception {
-		switch(type) {
-		case LABEL_TILEPOS: {
-			labels.addLabel(tilesPos);
-			break;
-		}
-		case LABEL_HEIGHT: {
-			labels.addLabel(height);
-			break;
-		}
-		case LABEL_NAME: {
-			labels.addLabel(name);
-			break;
-		}
-		default: {
-			throw new Exception("unsupported Label type");
-		}
-		}
-	}
-	
-	public void addLabel(Float value) {
-		labels.addLabel(value);
-	}
-	
-	public void addLabel(Integer value) {
-		labels.addLabel(value);
-	}
-	
-	public void addLabel(String value) {
-		labels.addLabel(value);
-	}
-	
-	public void altLabelLast(Color color, float scale, float vecX, float vecY) {
-		labels.altLabelLast(color, scale, vecX, vecY);
-	}
-	
-	@Override
-	public Boolean hasLabels() {
-		return (labels.getLabels().size() != 0);
-	}
-	
-	public void clearLabels() {
-		labels.clearLables();
 	}
 	
 }

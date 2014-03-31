@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListTyp
 import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 
-public interface RenderableObjectsMaster extends WorldObjectsMaster {
+public interface RenderableObjectsMaster {
 
 	/**
 	 * @return all {@link RenderableObject} in implementing class.

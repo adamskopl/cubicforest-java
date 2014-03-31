@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -19,7 +20,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class HeroesMaster extends InteractionObjectsMaster implements RenderableObjectsMaster, OrderableObjectsContainer {
+public class HeroesMaster extends InteractionObjectsMaster implements WorldObjectsMaster, OrderableObjectsContainer {
 
 	public HeroesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
 		super(TM, WorldObjectType_e.OBJECT_HERO, textureName, tileW, tileH);
@@ -53,7 +54,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements Renderable
 //			testPig.addLabel(ROLabel_e.LABEL_NAME);
 			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
-			addRenderableObject(testPig, this);
+			addWorldObject(testPig, this);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}

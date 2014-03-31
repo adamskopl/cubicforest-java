@@ -66,11 +66,11 @@ public class World {
 		
 		initRoundsMaster();
 
-		addWorldObjectsMaster(tilesMaster.getTilesContainer(), true);
-		addWorldObjectsMaster(terrainObjectsMaster, true);
-		addWorldObjectsMaster(heroesMaster, true);
-		addWorldObjectsMaster(enemiesMaster, true);
-		addWorldObjectsMaster(gatherCubesMaster, true);
+		addWorldObjectsMaster(tilesMaster.getTilesContainer());
+		addWorldObjectsMaster(terrainObjectsMaster);
+		addWorldObjectsMaster(heroesMaster);
+		addWorldObjectsMaster(enemiesMaster);
+		addWorldObjectsMaster(gatherCubesMaster);
 		
 		pickMaster.addClient(tilesMaster);
 		tilesMaster.addClient(roundsMaster);
@@ -95,11 +95,9 @@ public class World {
 		}
 	}
 
-	public void addWorldObjectsMaster(WorldObjectsMaster newWorldMaster, Boolean renderable) {
+	public void addWorldObjectsMaster(WorldObjectsMaster newWorldMaster) {
 		worldObjectsMasters.add(newWorldMaster);
-		if(renderable) {
-			renderer.addROM((RenderableObjectsMaster)newWorldMaster);
-		}
+		renderer.addROM(newWorldMaster);
 	}
 	
 	public void update (float deltaTime) {

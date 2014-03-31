@@ -1,103 +1,141 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>9</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1089</x>
-      <y>423</y>
-      <w>162</w>
-      <h>99</h>
+      <x>808</x>
+      <y>568</y>
+      <w>144</w>
+      <h>88</h>
     </coordinates>
-    <panel_attributes>GuiElement
---</panel_attributes>
+    <panel_attributes>*GuiElement*
+--
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>576</x>
-      <y>459</y>
-      <w>369</w>
-      <h>144</h>
+      <x>416</x>
+      <y>584</y>
+      <w>328</w>
+      <h>128</h>
     </coordinates>
-    <panel_attributes>GuiRenderer
+    <panel_attributes>*GuiRenderer*
 --
 + void render(float deltaTime)
 + void addGEC(GuiElementsContainer gec)
 - void renderGECs()
 --
-List&lt;GuiElementsContainer&gt; guiElementsContainers</panel_attributes>
+List&lt;GuiElementsContainer&gt; guiElementsContainers
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>760</x>
+      <y>448</y>
+      <w>144</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>*GuiElementsContainer*
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>808</x>
+      <y>488</y>
+      <w>88</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;72;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>496</x>
+      <y>408</y>
+      <w>144</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>*Gui*
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>544</x>
+      <y>464</y>
+      <w>40</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;120</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>640</x>
+      <y>464</y>
+      <w>136</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;120;120;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>968</x>
+      <y>320</y>
+      <w>264</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>equivalent of RenderableObjectsContainer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>880</x>
+      <y>328</y>
+      <w>104</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>24;160;88;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>168</x>
+      <y>392</y>
+      <w>192</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>WorldRenderer
+--
++ void render(float deltaTime)
++ void renderGui()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>234</x>
-      <y>342</y>
-      <w>252</w>
-      <h>135</h>
+      <x>104</x>
+      <y>344</y>
+      <w>312</w>
+      <h>176</h>
     </coordinates>
-    <panel_attributes>org.adamsko.cubicforest.screens
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>306</x>
-      <y>387</y>
-      <w>108</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>GameScreen
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>387</x>
-      <y>306</y>
-      <w>287</w>
-      <h>125</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;108;270;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1089</x>
-      <y>279</y>
-      <w>162</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>GuiElementsContainer
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>1143</x>
-      <y>324</y>
-      <w>44</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;27;99</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>657</x>
-      <y>297</y>
-      <w>162</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>Gui
+    <panel_attributes>org.adamsko.cubicforest.render.world
 --
 </panel_attributes>
     <additional_attributes/>
@@ -105,23 +143,12 @@ List&lt;GuiElementsContainer&gt; guiElementsContainers</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>387</x>
-      <y>405</y>
-      <w>206</w>
-      <h>134</h>
+      <x>336</x>
+      <y>416</y>
+      <w>176</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;189;117</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>711</x>
-      <y>360</y>
-      <w>44</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;27;99</additional_attributes>
+    <additional_attributes>24;24;160;24</additional_attributes>
   </element>
 </diagram>

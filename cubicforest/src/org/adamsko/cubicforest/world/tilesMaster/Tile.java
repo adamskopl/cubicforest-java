@@ -1,8 +1,5 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
-import java.util.List;
-
-import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
@@ -15,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  * @author adamsko
  */
-public class Tile extends RenderableObject {
+public class Tile extends WorldObject {
 
 	private WorldObject occupant;
 	/**

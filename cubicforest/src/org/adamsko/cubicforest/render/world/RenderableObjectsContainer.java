@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
-import org.adamsko.cubicforest.world.WorldObjectsContainer;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
@@ -17,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @author adamsko
  * 
  */
-public class RenderableObjectsContainer extends WorldObjectsContainer {
+public class RenderableObjectsContainer {
 
 	/**
 	 * Types of {@link RenderableObject} objects lists in container.
@@ -73,7 +71,6 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 
 	public RenderableObjectsContainer(TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
-		super(TM, worldObjectsType);
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName
@@ -84,8 +81,7 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[1]);
 	}
 
-	public void addRenderableObject(RenderableObject newObject, WorldObjectsMaster hisMaster) {
-		addWorldObject(newObject, hisMaster);
+	public void addRenderableObject(RenderableObject newObject) {
 		// add newObject to other RenderableObject objects
 		renderableObjects.add(newObject);
 		// add newObject to RenderableObject objects, which are not in

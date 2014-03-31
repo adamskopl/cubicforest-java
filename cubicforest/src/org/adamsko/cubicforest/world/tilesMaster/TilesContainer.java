@@ -3,15 +3,15 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.world.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class TilesContainer extends RenderableObjectsContainer implements
-		RenderableObjectsMaster {
+public class TilesContainer extends WorldObjectsContainer implements
+		WorldObjectsMaster {
 	
 	public TilesContainer(TilesMaster TM) {
 		super(TM, WorldObjectType_e.OBJECT_TILE, "tiles-atlas-medium", 75, 45);

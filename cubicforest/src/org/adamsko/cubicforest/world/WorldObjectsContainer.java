@@ -3,13 +3,14 @@ package org.adamsko.cubicforest.world;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 
-public class WorldObjectsContainer {
+public class WorldObjectsContainer extends RenderableObjectsContainer {
 
 	private List<WorldObject> worldObjects;
 	private TilesMaster tilesMaster;
@@ -22,7 +23,9 @@ public class WorldObjectsContainer {
 		return worldObjectsType;
 	}
 
-	public WorldObjectsContainer(TilesMaster TM, WorldObjectType_e worldObjectsType) {
+	public WorldObjectsContainer(TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
+			int tileW, int tileH) {
+		super(TM, worldObjectsType, textureName, tileW, tileH); 
 		worldObjects = new ArrayList<WorldObject>();
 		tilesMaster = TM;
 		this.worldObjectsType = worldObjectsType;
@@ -30,7 +33,9 @@ public class WorldObjectsContainer {
 	
 	public void addWorldObject(WorldObject newObject, WorldObjectsMaster hisMaster) {
 		worldObjects.add(newObject);
-		newObject.setMaster(hisMaster);
+
+		addRenderableObject(newObject);
+		
 		// associate newObject with a tile (every WorldObject is associated with
 		// a tile)
 		tilesMaster.insertWorldObject(newObject);

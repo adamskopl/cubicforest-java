@@ -1,18 +1,29 @@
 package org.adamsko.cubicforest.world.object;
 
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import java.util.List;
+
+import org.adamsko.cubicforest.render.text.Label;
+import org.adamsko.cubicforest.render.text.LabelsContainer;
+import org.adamsko.cubicforest.render.text.LabelsMaster;
+import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author adamsko
  * 
  */
-public class WorldObject {
+public class WorldObject extends RenderableObject implements LabelsMaster {
 
-	private WorldObjectType_e type;
+	private LabelsContainer labels;
+	
+	protected WorldObjectType_e worldType;
 	
 	/*
 	 * Position indicated by tiles. (0.0,0.0): uppper corner of the first tile.
@@ -29,11 +40,6 @@ public class WorldObject {
 	 * Long story short: WorldObject's name.
 	 */
 	protected String name;
-
-	/**
-	 * {@link WorldObjectsMaster} which is managing this object.
-	 */
-	private WorldObjectsMaster master = null;
 	
 	/**
 	 * How many tiles object can move. 
@@ -45,23 +51,16 @@ public class WorldObject {
 	 */
 	private Boolean occupiesTile;
 
-	public WorldObject(WorldObjectType_e type) {
+	public WorldObject(TextureRegion tr, int texNum, WorldObjectType_e worldType) {
+		super(tr, texNum);
 		tilesPos = new Vector2(0.0f, 0.0f);
 		height = new Float(0.0f);
 		name = new String("WorldObject");
 		speed = 0;
 		occupiesTile = true;
-		this.type = type;
-	}
-
-	/**
-	 * Set {@link WorldObjectsMaster} which is managing this object.
-	 * 
-	 * @param master
-	 *            {@link WorldObjectsMaster} of this object
-	 */
-	public void setMaster(WorldObjectsMaster master) {
-		this.master = master;
+		this.worldType = worldType;
+		this.renderType = RenderableObjectType_e.TYPE_WORLD;
+		labels = new LabelsContainer();
 	}
 
 	public void setTilesPos(Vector2 pos) {
@@ -120,12 +119,12 @@ public class WorldObject {
 	}
 	
 	public WorldObjectType_e getType() {
-		return type;
+		return worldType;
 	}
 	
 	public String typeToString() {
 		try {
-			return WorldObjectHelper.typeToString(type);
+			return WorldObjectHelper.typeToString(worldType);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -139,7 +138,56 @@ public class WorldObject {
 	 *            event associated with a parent {@link Tile}.
 	 */
 	public void handleParentTileEvent(TileEvent_e tileEvent) {
-		master.handleServantTileEvent(this, tileEvent);
 	}
+	
+	public void addLabel(ROLabel_e type) throws Exception {
+		switch(type) {
+		case LABEL_TILEPOS: {
+			labels.addLabel(tilesPos);
+			break;
+		}
+		case LABEL_HEIGHT: {
+			labels.addLabel(height);
+			break;
+		}
+		case LABEL_NAME: {
+			labels.addLabel(name);
+			break;
+		}
+		default: {
+			throw new Exception("unsupported Label type");
+		}
+		}
+	}
+	
+	@Override
+	public List<Label> getLabels() {
+		return labels.getLabels();
+	}
+	
+	public void addLabel(Float value) {
+		labels.addLabel(value);
+	}
+	
+	public void addLabel(Integer value) {
+		labels.addLabel(value);
+	}
+	
+	public void addLabel(String value) {
+		labels.addLabel(value);
+	}
+	
+	public void altLabelLast(Color color, float scale, float vecX, float vecY) {
+		labels.altLabelLast(color, scale, vecX, vecY);
+	}
+	
+	@Override
+	public Boolean hasLabels() {
+		return (labels.getLabels().size() != 0);
+	}
+	
+	public void clearLabels() {
+		labels.clearLables();
+	}	
 
 }

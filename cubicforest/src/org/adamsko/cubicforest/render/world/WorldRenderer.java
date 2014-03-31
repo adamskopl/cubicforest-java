@@ -8,7 +8,9 @@ import org.adamsko.cubicforest.render.gui.GuiRenderer;
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
 import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
+import org.adamsko.cubicforest.world.object.WorldObject;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -19,6 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 /**
+ * 
  * @author adamsko
  * 
  */
@@ -29,9 +32,6 @@ public class WorldRenderer {
 	List<RenderableObjectsMaster> renderableObjectsMasters;
 	SpriteBatch batch = new SpriteBatch(5460);
 	BitmapFont font = new BitmapFont();
-
-	Gui gui;
-	GuiRenderer guiRenderer;
 	
 	/**
 	 * Width of the isometric tile in pixels.
@@ -71,7 +71,7 @@ public class WorldRenderer {
 		// renderGrid();
 		// fps.log();
 	}
-
+	
 	void renderGrid() {
 		cam.update(false);
 		renderer.begin(cam.combined, GL10.GL_POINTS);
@@ -126,18 +126,24 @@ public class WorldRenderer {
 	}
 
 	private void renderObject(RenderableObject rObj) {
-		Vector2 objPos = rObj.getTilesPos();
-		Vector2 renderPos = CoordCalc.tilesToRender(objPos);
-		renderPos.add(rObj.getRenderVector());
-		batch.draw(rObj.getTextureRegion(), renderPos.x, renderPos.y);
+		if (rObj.getRenderType() == RenderableObjectType_e.TYPE_WORLD) {
+			WorldObject wObj = (WorldObject)rObj;
+			Vector2 objPos = wObj.getTilesPos();
+			Vector2 renderPos = CoordCalc.tilesToRender(objPos);
+			renderPos.add(rObj.getRenderVector());
+			batch.draw(wObj.getTextureRegion(), renderPos.x, renderPos.y);
+		}
 	}
 
 	private void renderObjectsLabels(RenderableObject rObj) {
-		Vector2 objPos = rObj.getTilesPos();
-		Vector2 renderPos = CoordCalc.tilesToRender(objPos);
-		if (rObj.hasLabels()) {
-			for (Label l : rObj.getLabels()) {
-				renderLabel(l, renderPos);
+		if (rObj.getRenderType() == RenderableObjectType_e.TYPE_WORLD) {
+			WorldObject wObj = (WorldObject)rObj;
+			Vector2 objPos = wObj.getTilesPos();
+			Vector2 renderPos = CoordCalc.tilesToRender(objPos);
+			if (wObj.hasLabels()) {
+				for (Label l : wObj.getLabels()) {
+					renderLabel(l, renderPos);
+				}
 			}
 		}
 	}

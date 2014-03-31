@@ -28,7 +28,6 @@ public class TestClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		Boolean adj = TilesHelper.areTilesAdjecant(tileA, tileB);
 		
 		System.out.println("posBetween: " + posBetween.toString());
 		System.out.println("tiles: " + tileA.toString() + tileB.toString());
