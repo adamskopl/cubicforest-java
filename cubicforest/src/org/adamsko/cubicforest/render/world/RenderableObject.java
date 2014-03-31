@@ -1,11 +1,21 @@
 package org.adamsko.cubicforest.render.world;
 
+import java.util.List;
+
+import org.adamsko.cubicforest.render.text.Label;
+import org.adamsko.cubicforest.render.text.LabelsContainer;
+import org.adamsko.cubicforest.render.text.LabelsMaster;
+import org.adamsko.cubicforest.render.text.ROLabel_e;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.sun.xml.internal.fastinfoset.algorithm.BuiltInEncodingAlgorithm.WordListener;
 
-public class RenderableObject  {
+public class RenderableObject implements LabelsMaster  {
 
+	protected LabelsContainer labels;
+	
 	protected RenderableObjectType_e renderType;
 	
 	public RenderableObjectType_e getRenderType() {
@@ -37,7 +47,8 @@ public class RenderableObject  {
 	public RenderableObject(TextureRegion tr, int texNum) {
 		this.textureRegion = tr;
 		this.texNum = texNum;
-		renderType = RenderableObjectType_e.TYPE_UNDEFINED;		
+		renderType = RenderableObjectType_e.TYPE_UNDEFINED;
+		labels = new LabelsContainer();
 	}
 	
 	public void setRenderVector(Vector2 vec) {
@@ -70,5 +81,35 @@ public class RenderableObject  {
 	public int getTexNum() {
 		return texNum;
 	}
+	
+	@Override
+	public List<Label> getLabels() {
+		return labels.getLabels();
+	}
+	
+	public void addLabel(Float value) {
+		labels.addLabel(value);
+	}
+	
+	public void addLabel(Integer value) {
+		labels.addLabel(value);
+	}
+	
+	public void addLabel(String value) {
+		labels.addLabel(value);
+	}
+	
+	public void altLabelLast(Color color, float scale, float vecX, float vecY) {
+		labels.altLabelLast(color, scale, vecX, vecY);
+	}
+	
+	@Override
+	public Boolean hasLabels() {
+		return (labels.getLabels().size() != 0);
+	}
+	
+	public void clearLabels() {
+		labels.clearLables();
+	}	
 	
 }

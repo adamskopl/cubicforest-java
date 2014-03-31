@@ -3,8 +3,7 @@ package org.adamsko.cubicforest.render.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.gui.Gui;
-import org.adamsko.cubicforest.render.gui.GuiRenderer;
+import org.adamsko.cubicforest.gui.GuiObject;
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
 import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
@@ -19,6 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 /**
  * 
@@ -126,26 +126,47 @@ public class WorldRenderer {
 	}
 
 	private void renderObject(RenderableObject rObj) {
-		if (rObj.getRenderType() == RenderableObjectType_e.TYPE_WORLD) {
-			WorldObject wObj = (WorldObject)rObj;
+		switch(rObj.getRenderType()) {
+		case TYPE_WORLD:
+			WorldObject wObj = (WorldObject) rObj;
 			Vector2 objPos = wObj.getTilesPos();
 			Vector2 renderPos = CoordCalc.tilesToRender(objPos);
 			renderPos.add(rObj.getRenderVector());
 			batch.draw(wObj.getTextureRegion(), renderPos.x, renderPos.y);
+			break;
+		case TYPE_GUI:
+			GuiObject gObj = (GuiObject) rObj;
+			batch.draw(gObj.getTextureRegion(), 100, -100);
+			break;
+		default:
+			break;
 		}
 	}
 
 	private void renderObjectsLabels(RenderableObject rObj) {
-		if (rObj.getRenderType() == RenderableObjectType_e.TYPE_WORLD) {
+
+		Vector2 renderPos = new Vector2();
+
+		switch(rObj.getRenderType()) {
+		case TYPE_WORLD:
 			WorldObject wObj = (WorldObject)rObj;
 			Vector2 objPos = wObj.getTilesPos();
-			Vector2 renderPos = CoordCalc.tilesToRender(objPos);
-			if (wObj.hasLabels()) {
-				for (Label l : wObj.getLabels()) {
-					renderLabel(l, renderPos);
-				}
+			renderPos = CoordCalc.tilesToRender(objPos);
+
+			break;
+		case TYPE_GUI:
+			renderPos = new Vector2(110, -100);
+			break;
+		default:
+			break;
+		}
+					
+		if (rObj.hasLabels()) {
+			for (Label l : rObj.getLabels()) {
+				renderLabel(l, renderPos);
 			}
 		}
+		
 	}
 
 	private void renderLabel(Label label, Vector2 pos) {

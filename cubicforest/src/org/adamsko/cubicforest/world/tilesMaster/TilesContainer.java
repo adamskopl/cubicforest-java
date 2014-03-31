@@ -3,10 +3,10 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.world.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 
 import com.badlogic.gdx.math.Vector2;
 

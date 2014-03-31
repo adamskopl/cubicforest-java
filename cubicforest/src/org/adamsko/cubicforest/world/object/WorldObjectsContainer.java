@@ -1,11 +1,10 @@
-package org.adamsko.cubicforest.world;
+package org.adamsko.cubicforest.world.object;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 

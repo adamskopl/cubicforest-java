@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.world.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;

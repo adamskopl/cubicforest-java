@@ -1,8 +1,6 @@
 package org.adamsko.cubicforest.screens;
 
 import org.adamsko.cubicforest.TestClass;
-import org.adamsko.cubicforest.render.gui.Gui;
-import org.adamsko.cubicforest.render.gui.GuiRenderer;
 import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.world.World;
 import org.adamsko.cubicforest.world.WorldObjectAccessor;
