@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
 
-import org.adamsko.cubicforest.render.RenderableObjectsContainer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;

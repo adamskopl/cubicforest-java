@@ -1,9 +1,9 @@
-package org.adamsko.cubicforest.render;
+package org.adamsko.cubicforest.render.world;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObjectsContainer.ROListType_e;
-import org.adamsko.cubicforest.render.queue.RenderListMaster;
+import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
+import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 
 public interface RenderableObjectsMaster extends WorldObjectsMaster {

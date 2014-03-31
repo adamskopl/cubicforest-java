@@ -1,7 +1,9 @@
 package org.adamsko.cubicforest.screens;
 
 import org.adamsko.cubicforest.TestClass;
-import org.adamsko.cubicforest.render.WorldRenderer;
+import org.adamsko.cubicforest.render.gui.Gui;
+import org.adamsko.cubicforest.render.gui.GuiRenderer;
+import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.world.World;
 import org.adamsko.cubicforest.world.WorldObjectAccessor;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -16,7 +18,8 @@ import com.badlogic.gdx.graphics.GL10;
 public class GameScreen extends CubicScreen {
 	
 	World world;
-	WorldRenderer renderer;
+	WorldRenderer worldRenderer;
+	
 	public static TweenManager tweenManager;
 	
 	public GameScreen (Game game) {
@@ -39,8 +42,8 @@ public class GameScreen extends CubicScreen {
 			Gdx.app.exit();
 		}
 		initTween();
-		renderer = new WorldRenderer();
-		world = new World(renderer);
+		worldRenderer = new WorldRenderer();
+		world = new World(worldRenderer);
 
 	}
 	
@@ -52,13 +55,13 @@ public class GameScreen extends CubicScreen {
 		
 		Gdx.gl.glClearColor(0.2f, 0.3f, 0.4f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		renderer.render(delta);
+		worldRenderer.render(delta);
 //		controlRenderer.render();
 	}
 	
 	@Override
 	public void hide () {
-		renderer.dispose();
+		worldRenderer.dispose();
 //		controlRenderer.dispose();
 	}
 

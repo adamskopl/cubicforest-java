@@ -2,9 +2,9 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObject;
-import org.adamsko.cubicforest.render.RenderableObjectsContainer;
-import org.adamsko.cubicforest.render.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 

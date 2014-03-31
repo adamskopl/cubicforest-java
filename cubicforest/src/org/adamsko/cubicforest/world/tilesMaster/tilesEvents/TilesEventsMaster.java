@@ -41,6 +41,9 @@ public class TilesEventsMaster {
 			tilesContainer.testHighlightTile(eventTile, 0);
 			break;
 		}
+		case OCCUPANT_STOPS: {
+			break;
+		}
 		default: {
 			throw new Exception("tileEvent: unsupported event type");
 		}

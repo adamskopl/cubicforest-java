@@ -1,9 +1,9 @@
-package org.adamsko.cubicforest.render;
+package org.adamsko.cubicforest.render.world;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.queue.RenderListMaster;
+import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
@@ -116,7 +116,7 @@ public class RenderableObjectsContainer extends WorldObjectsContainer {
 		}
 
 		default:
-			Gdx.app.error("getRenderableObjects", "type not handleable");
+			Gdx.app.error("getRenderableObjects", "type not supported");
 			return null;
 		}
 	}

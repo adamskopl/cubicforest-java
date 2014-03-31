@@ -1,8 +1,8 @@
-package org.adamsko.cubicforest.render.queue;
+package org.adamsko.cubicforest.render.world.queue;
 
 import java.util.Comparator;
 
-import org.adamsko.cubicforest.render.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObject;
 
 import com.badlogic.gdx.math.Vector2;
 

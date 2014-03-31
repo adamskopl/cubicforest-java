@@ -134,6 +134,8 @@ public class TilePathGuide implements TweenCallback {
 		case HEADING_BORDER: {
 			if (path.isEmpty()) {
 				// wanderer has reached his goal or started with an empty path
+				tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_STOPS, helper.getTileHeadingTo(), wanderer);
+								
 				master.onPathEnd(this);
 				return;
 			}

@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render;
+package org.adamsko.cubicforest.render.world;
 
 import com.badlogic.gdx.math.Vector2;
 

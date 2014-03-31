@@ -3,8 +3,8 @@ package org.adamsko.cubicforest.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObjectsMaster;
-import org.adamsko.cubicforest.render.WorldRenderer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
@@ -55,6 +55,7 @@ public class World {
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30, 35);
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium", 30, 35);
 		gatherCubesMaster = new GatherCubesMaster(tilesMaster, "cubes-atlas-medium", 25, 40);
+		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 				
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);

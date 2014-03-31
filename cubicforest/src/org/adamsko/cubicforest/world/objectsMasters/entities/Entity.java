@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.entities;
 
-import org.adamsko.cubicforest.render.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 

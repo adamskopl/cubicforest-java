@@ -1,10 +1,10 @@
-package org.adamsko.cubicforest.render.queue;
+package org.adamsko.cubicforest.render.world.queue;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObject;
 
 /**
  * Manager of the {@link RenderableObject} objects. Responsible for an order of

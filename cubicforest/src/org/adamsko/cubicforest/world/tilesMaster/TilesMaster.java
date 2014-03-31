@@ -38,7 +38,8 @@ public class TilesMaster implements PickMasterClient {
 		 */
 		TILE_PICKED,
 		OCCUPANT_LEAVES,
-		OCCUPANT_ENTERS
+		OCCUPANT_ENTERS,
+		OCCUPANT_STOPS
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)

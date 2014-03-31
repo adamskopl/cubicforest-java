@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
-import org.adamsko.cubicforest.render.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

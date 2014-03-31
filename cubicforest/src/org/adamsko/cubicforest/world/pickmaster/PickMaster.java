@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.pickmaster;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.CoordCalc;
+import org.adamsko.cubicforest.render.world.CoordCalc;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;

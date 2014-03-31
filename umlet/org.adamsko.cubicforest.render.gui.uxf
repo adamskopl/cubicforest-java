@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1089</x>
+      <y>423</y>
+      <w>162</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>GuiElement
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>576</x>
+      <y>459</y>
+      <w>369</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>GuiRenderer
+--
++ void render(float deltaTime)
++ void addGEC(GuiElementsContainer gec)
+- void renderGECs()
+--
+List&lt;GuiElementsContainer&gt; guiElementsContainers</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>234</x>
+      <y>342</y>
+      <w>252</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.screens
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>306</x>
+      <y>387</y>
+      <w>108</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>GameScreen
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>306</y>
+      <w>287</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;108;270;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1089</x>
+      <y>279</y>
+      <w>162</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>GuiElementsContainer
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1143</x>
+      <y>324</y>
+      <w>44</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>657</x>
+      <y>297</y>
+      <w>162</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Gui
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>405</y>
+      <w>206</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;189;117</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>711</x>
+      <y>360</y>
+      <w>44</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;99</additional_attributes>
+  </element>
+</diagram>

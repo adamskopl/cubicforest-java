@@ -62,7 +62,6 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 	@Override
 	public void onOrderFinished(OrdersMasterResult_e result,
 			WorldObject objectWithOrder) {
-		Gdx.app.debug(getName(), "order finished\n");
 
 		if (activeObject() != objectWithOrder) {
 			Gdx.app.error(getName(), "activeObject() != objectWithOrder");

@@ -3,10 +3,10 @@ package org.adamsko.cubicforest.world.objectsMasters.entities.heroes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObject;
-import org.adamsko.cubicforest.render.RenderableObjectsContainer;
-import org.adamsko.cubicforest.render.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;

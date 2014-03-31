@@ -1,11 +1,13 @@
-package org.adamsko.cubicforest.render;
+package org.adamsko.cubicforest.render.world;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.RenderableObjectsContainer.ROListType_e;
-import org.adamsko.cubicforest.render.queue.RenderListMaster;
+import org.adamsko.cubicforest.render.gui.Gui;
+import org.adamsko.cubicforest.render.gui.GuiRenderer;
 import org.adamsko.cubicforest.render.text.Label;
+import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
+import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
 
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
@@ -28,6 +30,9 @@ public class WorldRenderer {
 	SpriteBatch batch = new SpriteBatch(5460);
 	BitmapFont font = new BitmapFont();
 
+	Gui gui;
+	GuiRenderer guiRenderer;
+	
 	/**
 	 * Width of the isometric tile in pixels.
 	 */

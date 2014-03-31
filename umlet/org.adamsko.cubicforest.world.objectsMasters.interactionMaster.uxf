@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>8</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>552</x>
-      <y>384</y>
-      <w>352</w>
-      <h>160</h>
+      <x>336</x>
+      <y>441</y>
+      <w>308</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>*InteractionMaster*
 --
 + void tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject)
-
++ addClient(InteractionMasterClient client)
++ void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)		
+--
+- List&lt;InteractionMasterClient&gt; clients
 bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>200</x>
-      <y>424</y>
-      <w>128</w>
-      <h>72</h>
+      <x>133</x>
+      <y>434</y>
+      <w>112</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>World
 --</panel_attributes>
@@ -32,21 +36,21 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>304</x>
-      <y>440</y>
-      <w>264</w>
-      <h>40</h>
+      <x>224</x>
+      <y>448</y>
+      <w>125</w>
+      <h>34</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;248;24</additional_attributes>
+    <additional_attributes>21;21;112;21</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>184</x>
-      <y>384</y>
-      <w>192</w>
-      <h>144</h>
+      <x>112</x>
+      <y>399</y>
+      <w>168</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world
 --
@@ -56,10 +60,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>552</x>
-      <y>72</y>
-      <w>552</w>
-      <h>168</h>
+      <x>329</x>
+      <y>252</y>
+      <w>315</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.tilesMaster.tilesEvents
 </panel_attributes>
@@ -68,10 +72,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>600</x>
-      <y>120</y>
-      <w>232</w>
-      <h>64</h>
+      <x>378</x>
+      <y>301</y>
+      <w>203</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>TilesEventsMaster
 --
@@ -81,35 +85,67 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>680</x>
-      <y>160</y>
-      <w>40</w>
-      <h>240</h>
+      <x>448</x>
+      <y>336</y>
+      <w>34</w>
+      <h>118</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;224</additional_attributes>
+    <additional_attributes>21;21;21;105</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>688</x>
-      <y>160</y>
-      <w>104</w>
-      <h>240</h>
+      <x>455</x>
+      <y>336</y>
+      <w>94</w>
+      <h>118</h>
     </coordinates>
     <panel_attributes>lt=-
 tileEvent()&gt;</panel_attributes>
-    <additional_attributes>56;24;56;224</additional_attributes>
+    <additional_attributes>49;21;49;105</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>714</x>
+      <y>616</y>
+      <w>329</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>/InteractionObjectsMaster/
+--
++ Boolean isTileEventValid(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>385</x>
+      <y>616</y>
+      <w>322</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>InteractionMasterClient
+--
++ void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)
++ Boolean isTileEventValid(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)	
+bg=yellow</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>480</x>
-      <y>640</y>
-      <w>216</w>
-      <h>104</h>
+      <x>777</x>
+      <y>476</y>
+      <w>203</w>
+      <h>112</h>
     </coordinates>
-    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes
+    <panel_attributes>org.adamsko.cubicforest.render
 --
 </panel_attributes>
     <additional_attributes/>
@@ -117,24 +153,159 @@ tileEvent()&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>512</x>
-      <y>672</y>
-      <w>152</w>
-      <h>48</h>
+      <x>798</x>
+      <y>511</y>
+      <w>154</w>
+      <h>63</h>
     </coordinates>
-    <panel_attributes>GatherCubesMaster
+    <panel_attributes>RenderableObjectsContainer
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
-      <y>520</y>
-      <w>96</w>
-      <h>168</h>
+      <x>847</x>
+      <y>553</y>
+      <w>34</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;21;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>532</x>
+      <y>602</y>
+      <w>195</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>21;21;182;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>1141</x>
+      <y>511</y>
+      <w>308</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.entities.enemies
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>1141</x>
+      <y>679</y>
+      <w>308</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>1141</x>
+      <y>595</y>
+      <w>308</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.entities.heroes
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1155</x>
+      <y>616</y>
+      <w>273</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>EnemiesMaster
+--
++ void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1022</x>
+      <y>539</y>
+      <w>132</w>
+      <h>97</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;84;119;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1022</x>
+      <y>616</y>
+      <w>132</w>
+      <h>41</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;28;119;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1022</x>
+      <y>651</y>
+      <w>132</w>
+      <h>83</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;119;70</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>497</x>
+      <y>518</y>
+      <w>55</w>
+      <h>111</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>80;24;24;152</additional_attributes>
+    <additional_attributes>21;21;42;98</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1162</x>
+      <y>532</y>
+      <w>273</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>HeroesMaster
+--
++ void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1155</x>
+      <y>700</y>
+      <w>273</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>GatherCubesMaster
+--
++ void tileEvent(TileEvent_e evenType, Tile eventTile,
+			WorldObject eventObject)</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

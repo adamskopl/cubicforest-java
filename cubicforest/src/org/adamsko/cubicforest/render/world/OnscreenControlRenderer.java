@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render;
+package org.adamsko.cubicforest.render.world;
 
 import org.adamsko.cubicforest.world.World;
 
