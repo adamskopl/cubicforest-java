@@ -8,6 +8,8 @@ import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
+import com.badlogic.gdx.Gdx;
+
 
 public class WorldObjectsContainer extends RenderableObjectsContainer {
 
@@ -30,7 +32,18 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		this.worldObjectsType = worldObjectsType;
 	}
 	
-	public void addWorldObject(WorldObject newObject, WorldObjectsMaster hisMaster) {
+	public void removeWorldObject(WorldObject objectRemove) {
+		worldObjects.remove(objectRemove);
+		Gdx.app.error("removeWorldObject: ", Integer.toString(worldObjects.size()));
+		
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// TODO: REMOVE OBJECT FROM TILE !!!
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		
+	}
+	
+	public void addWorldObject(WorldObject newObject) {
 		worldObjects.add(newObject);
 
 		addRenderableObject(newObject);

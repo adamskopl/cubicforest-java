@@ -51,7 +51,7 @@ public class TerrainObjectsMaster extends WorldObjectsContainer implements World
 			testTree.addLabel(ROLabel_e.LABEL_NAME);
 			testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
 			
-			addWorldObject(testTree, this);
+			addWorldObject(testTree);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}
 		}
 	}

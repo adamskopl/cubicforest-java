@@ -64,7 +64,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			testEnemy.addLabel(ROLabel_e.LABEL_NAME);
 			testEnemy.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
-			addWorldObject(testEnemy, this);
+			addWorldObject(testEnemy);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}

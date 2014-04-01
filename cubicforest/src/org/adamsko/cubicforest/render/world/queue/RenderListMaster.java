@@ -19,29 +19,29 @@ public class RenderListMaster {
 	 * render (sorted).
 	 */
 	private List<RenderableObject> renderList;
-	
+
 	private RenderableObjectComparator rOCompoarator;
-	
+
 	public RenderListMaster() {
 		renderList = new ArrayList<RenderableObject>();
 		rOCompoarator = new RenderableObjectComparator();
-		
+
 	}
-	
+
 	/**
 	 * Sort renderList.
 	 */
 	public void sortRenderList() {
 		Collections.sort(renderList, rOCompoarator);
 	}
-	
+
 	/**
 	 * @return sorted {@link RenderableObject} list
 	 */
 	public List<RenderableObject> gerRenderList() {
 		return renderList;
 	}
-		
+
 	/**
 	 * Add new {@link RenderableObject} objects to the list.
 	 * 
@@ -49,14 +49,13 @@ public class RenderListMaster {
 	 */
 	public void addRenderableObjects(List<RenderableObject> list) {
 		/*
-		 * TODO check if objects are already on the renderList.
-		 * (it's an error)
+		 * TODO check if objects are already on the renderList. (it's an error)
 		 */
-		for(RenderableObject ro : list) {
+		for (RenderableObject ro : list) {
 			renderList.add(ro);
 		}
 	}
-	
+
 	/**
 	 * Receiving the list of objects, which are already on renderList, but have
 	 * changes their parameters (e.g. height, tilePos, texture). Update those
@@ -66,7 +65,7 @@ public class RenderListMaster {
 	 *            List with {@link RenderableObject} objects to be updated.
 	 */
 	public void updateRenderableObjects(List<RenderableObject> list) {
-		
+
 	}
 
 	/**
@@ -76,7 +75,9 @@ public class RenderListMaster {
 	 *            the renderList.
 	 */
 	public void removeRenderableObjects(List<RenderableObject> list) {
-		
+		for (RenderableObject ro : list) {
+			renderList.remove(ro);
+		}
 	}
-	
+
 }

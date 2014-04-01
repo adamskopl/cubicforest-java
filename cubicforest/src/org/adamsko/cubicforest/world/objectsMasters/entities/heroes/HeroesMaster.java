@@ -51,10 +51,10 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 			testPig.setTilesPos(pos);
 			testPig.setName("testPig");
 			testPig.addLabel(ROLabel_e.LABEL_TILEPOS);
-			testPig.addLabel(ROLabel_e.LABEL_NAME);
+//			testPig.addLabel(ROLabel_e.LABEL_NAME);
 			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
-			addWorldObject(testPig, this);
+			addWorldObject(testPig);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}

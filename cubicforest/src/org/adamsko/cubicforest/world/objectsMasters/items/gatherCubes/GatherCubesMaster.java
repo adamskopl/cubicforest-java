@@ -64,7 +64,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			pos.add(new Vector2(7, -3));
 			testCube.setTilesPos(pos);
 
-			addWorldObject(testCube, this);
+			addWorldObject(testCube);
 
 			if (atlasIndex == 3) {
 				atlasIndex = 0;
@@ -97,6 +97,10 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			break;
 		}
 
+	}
+	
+	private void removeCube(GatherCube cubeToRemove) {
+//		WorldObject cube = (WorldObject)cubeToRemove
 	}
 
 }

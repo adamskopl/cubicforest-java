@@ -34,6 +34,7 @@ public class RenderableObjectsContainer {
 		 * recalculated)
 		 */
 		RO_TO_UPDATE,
+		RO_TO_REMOVE,
 		/**
 		 * list with all {@link RenderableObject} objects in container
 		 */
@@ -61,6 +62,8 @@ public class RenderableObjectsContainer {
 	 * be updated from those staying unchanged.
 	 */
 	private List<RenderableObject> renderableObjectsToUpdate;
+	
+	private List<RenderableObject> renderableObjectsToRemove;
 
 	protected Texture objectsTexture;
 
@@ -73,6 +76,8 @@ public class RenderableObjectsContainer {
 			int tileW, int tileH) {
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
+		renderableObjectsToRemove = new ArrayList<RenderableObject>();
+		
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName
 				+ ".png"));
 		
@@ -87,6 +92,11 @@ public class RenderableObjectsContainer {
 		// add newObject to RenderableObject objects, which are not in
 		// RenderListMaster yet
 		renderableObjectsUnserved.add(newObject);
+	}
+	
+	public void removeRenderableObject(RenderableObject newObject) {
+		renderableObjects.remove(newObject);
+		renderableObjectsToRemove.add(newObject);
 	}
 
 	/**
@@ -107,6 +117,11 @@ public class RenderableObjectsContainer {
 			return renderableObjectsUnserved;
 		}
 
+		case RO_TO_REMOVE: {
+			return renderableObjectsToRemove;
+		}
+		
+		
 		case RO_ALL: {
 			return renderableObjects;
 		}

@@ -31,10 +31,10 @@ public class WorldRenderer {
 
 	List<RenderableObjectsMaster> renderableObjectsMastersWorld;
 	List<RenderableObjectsMaster> renderableObjectsMastersGui;
-	
+
 	RenderListMaster renderListMasterWorld;
 	RenderListMaster renderListMasterGui;
-	
+
 	SpriteBatch batch = new SpriteBatch(5460);
 	BitmapFont font = new BitmapFont();
 
@@ -112,14 +112,21 @@ public class WorldRenderer {
 	 * Prepare {@link RenderListMaster} for render: add new
 	 * {@link RenderableObject} objects, update old ones, sort list.
 	 */
-	private void updateRenderList(List<RenderableObjectsMaster> renderableObjectsMasters, RenderListMaster renderListMaster) {
+	private void updateRenderList(
+			List<RenderableObjectsMaster> renderableObjectsMasters,
+			RenderListMaster renderListMaster) {
 		Boolean sortNeeded = false;
 		for (RenderableObjectsMaster rOM : renderableObjectsMasters) {
-			List<RenderableObject> unservedObjects = rOM
+			List<RenderableObject> objectsUnserved = rOM
 					.popRenderableObjects(ROListType_e.RO_UNSERVED);
-			if (unservedObjects.size() != 0) {
+
+			List<RenderableObject> objectsToRemove = rOM
+					.popRenderableObjects(ROListType_e.RO_TO_REMOVE);
+
+			if (objectsUnserved.size() != 0 || objectsToRemove.size() != 0) {
 				sortNeeded = true;
-				renderListMaster.addRenderableObjects(unservedObjects);
+				renderListMaster.addRenderableObjects(objectsUnserved);
+				renderListMaster.removeRenderableObjects(objectsToRemove);
 			}
 
 			/*
@@ -166,8 +173,9 @@ public class WorldRenderer {
 
 			break;
 		case TYPE_GUI:
-			GuiElement gObj = (GuiElement)rObj;
-			renderPos = new Vector2(gObj.getScreenPos().x, gObj.getScreenPos().y);
+			GuiElement gObj = (GuiElement) rObj;
+			renderPos = new Vector2(gObj.getScreenPos().x,
+					gObj.getScreenPos().y);
 			break;
 		default:
 			break;
@@ -195,7 +203,7 @@ public class WorldRenderer {
 		renderRenderList(renderListMasterGui);
 
 	}
-	
+
 	private void renderRenderList(RenderListMaster renderListMaster) {
 		for (RenderableObject rObj : renderListMaster.gerRenderList()) {
 			renderObject(rObj);
