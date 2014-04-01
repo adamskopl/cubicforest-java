@@ -1,27 +1,40 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
-import org.adamsko.cubicforest.gui.GuiObject;
-import org.adamsko.cubicforest.gui.GuiObjectsContainer;
+import org.adamsko.cubicforest.gui.GuiElement;
+import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
-public class GatherCubesCounter extends GuiObjectsContainer {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
+public class GatherCubesCounter extends GuiElementsContainer {
+
+	private Float counter;
+	
 	public GatherCubesCounter(TilesMaster TM,
 			WorldObjectType_e worldObjectsType, String textureName, int tileW,
-			int tileH) {
-		super(TM, worldObjectsType, textureName, tileW, tileH);
+			int tileH, int posX, int posY) {
+		super(TM, worldObjectsType, textureName, tileW, tileH, posX, posY);
 
+		counter = new Float(10.0f);
+		
 		createGui();
 	}
 
 	private void createGui() {
 		
-		GuiObject testObject;
-		testObject = new GuiObject(atlasRows.get(0)[0], 0);
-		testObject.addLabel(new String("COUNTER"));
-		addGuiObject(testObject);
-		
+		GuiElement testObject;
+		testObject = new GuiElement(atlasRows.get(0)[3], 0, this, 0, 0);
+		testObject.addLabel(counter);
+		testObject.altLabelLast(Color.WHITE, 1.0f, 30.0f, 20.0f);
+		addGuiElement(testObject);
+	}
+	
+	public void addValue(int value) {
+		counter += value;
+		guiElements.get(0).testAdd();
+		Gdx.app.error("add", Float.toString(counter));
 	}
 	
 }

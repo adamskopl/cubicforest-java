@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.render.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.gui.GuiObject;
+import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
 import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
@@ -32,7 +32,7 @@ public class WorldRenderer {
 	List<RenderableObjectsMaster> renderableObjectsMasters;
 	SpriteBatch batch = new SpriteBatch(5460);
 	BitmapFont font = new BitmapFont();
-	
+
 	/**
 	 * Width of the isometric tile in pixels.
 	 */
@@ -71,7 +71,7 @@ public class WorldRenderer {
 		// renderGrid();
 		// fps.log();
 	}
-	
+
 	void renderGrid() {
 		cam.update(false);
 		renderer.begin(cam.combined, GL10.GL_POINTS);
@@ -126,7 +126,7 @@ public class WorldRenderer {
 	}
 
 	private void renderObject(RenderableObject rObj) {
-		switch(rObj.getRenderType()) {
+		switch (rObj.getRenderType()) {
 		case TYPE_WORLD:
 			WorldObject wObj = (WorldObject) rObj;
 			Vector2 objPos = wObj.getTilesPos();
@@ -135,8 +135,10 @@ public class WorldRenderer {
 			batch.draw(wObj.getTextureRegion(), renderPos.x, renderPos.y);
 			break;
 		case TYPE_GUI:
-			GuiObject gObj = (GuiObject) rObj;
-			batch.draw(gObj.getTextureRegion(), 100, -100);
+			GuiElement gObj = (GuiElement) rObj;
+			// batch.draw(gObj.getTextureRegion(), 100, -100);
+			batch.draw(gObj.getTextureRegion(), gObj.getScreenPos().x,
+					gObj.getScreenPos().y);
 			break;
 		default:
 			break;
@@ -147,26 +149,27 @@ public class WorldRenderer {
 
 		Vector2 renderPos = new Vector2();
 
-		switch(rObj.getRenderType()) {
+		switch (rObj.getRenderType()) {
 		case TYPE_WORLD:
-			WorldObject wObj = (WorldObject)rObj;
+			WorldObject wObj = (WorldObject) rObj;
 			Vector2 objPos = wObj.getTilesPos();
 			renderPos = CoordCalc.tilesToRender(objPos);
 
 			break;
 		case TYPE_GUI:
-			renderPos = new Vector2(110, -100);
+			GuiElement gObj = (GuiElement)rObj;
+			renderPos = new Vector2(gObj.getScreenPos().x, gObj.getScreenPos().y);
 			break;
 		default:
 			break;
 		}
-					
+
 		if (rObj.hasLabels()) {
 			for (Label l : rObj.getLabels()) {
 				renderLabel(l, renderPos);
 			}
 		}
-		
+
 	}
 
 	private void renderLabel(Label label, Vector2 pos) {

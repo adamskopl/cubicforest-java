@@ -40,7 +40,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public void initGatherCubesCounter(TilesMaster tilesMaster) {
 		gatherCubesCounter = new GatherCubesCounter(tilesMaster,
-				WorldObjectType_e.OBJECT_GENERIC, "cubes-atlas-medium", 24, 24);
+				WorldObjectType_e.OBJECT_GENERIC, "cubes-atlas-medium", 25, 25, 700, -50);
 	}
 
 	private void addTestCubes() throws Exception {
@@ -90,6 +90,8 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			break;
 		case OCCUPANT_STOPS:
 			tileCube.setTextureRegion(atlasRows.get(1)[tileCube.getTexNum()]);
+			eventObject.setName("xx");
+			gatherCubesCounter.addValue(1);
 			break;
 		default:
 			break;

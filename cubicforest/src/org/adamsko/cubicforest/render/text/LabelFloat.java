@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.render.text;
 
+import com.badlogic.gdx.Gdx;
+
 public class LabelFloat extends Label {
 
 	Float value;
@@ -10,7 +12,7 @@ public class LabelFloat extends Label {
 
 	@Override
 	public String getValue() {
-		return Float.toString(value);
+		return value.toString();
 	}
 
 }

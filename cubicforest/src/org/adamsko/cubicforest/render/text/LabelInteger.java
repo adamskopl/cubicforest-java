@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.render.text;
 
+import com.badlogic.gdx.Gdx;
+
 public class LabelInteger extends Label {
 
 	Integer value;
