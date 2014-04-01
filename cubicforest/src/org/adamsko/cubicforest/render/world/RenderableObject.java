@@ -99,9 +99,9 @@ public class RenderableObject implements LabelsMaster  {
 		labels.addLabel(value);
 	}
 	
-//	public void addLabel(Vector2 value) {
-//		labels.addLabel(value);
-//	}
+	public void addLabel(Vector2 value) {
+		labels.addLabel(value);
+	}
 	
 	public void altLabelLast(Color color, float scale, float vecX, float vecY) {
 		labels.altLabelLast(color, scale, vecX, vecY);

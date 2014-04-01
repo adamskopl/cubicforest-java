@@ -99,12 +99,12 @@ public class World {
 	}
 
 	private void addGuiObjectsContainer(GuiElementsContainer guiObjectsContainer) {
-		renderer.addROM(guiObjectsContainer);
+		renderer.addROMGui(guiObjectsContainer);
 	}
 	
 	public void addWorldObjectsMaster(WorldObjectsMaster newWorldMaster) {
 		worldObjectsMasters.add(newWorldMaster);
-		renderer.addROM(newWorldMaster);
+		renderer.addROMWorld(newWorldMaster);
 	}
 	
 	public void update (float deltaTime) {

@@ -40,7 +40,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public void initGatherCubesCounter(TilesMaster tilesMaster) {
 		gatherCubesCounter = new GatherCubesCounter(tilesMaster,
-				WorldObjectType_e.OBJECT_GENERIC, "cubes-atlas-medium", 25, 25, 700, -50);
+				WorldObjectType_e.OBJECT_GENERIC, "cubes-atlas-medium", 25, 25, 650, -50);
 	}
 
 	private void addTestCubes() throws Exception {

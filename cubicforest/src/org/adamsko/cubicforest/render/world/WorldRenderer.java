@@ -29,7 +29,12 @@ public class WorldRenderer {
 
 	OrthographicCamera cam;
 
-	List<RenderableObjectsMaster> renderableObjectsMasters;
+	List<RenderableObjectsMaster> renderableObjectsMastersWorld;
+	List<RenderableObjectsMaster> renderableObjectsMastersGui;
+	
+	RenderListMaster renderListMasterWorld;
+	RenderListMaster renderListMasterGui;
+	
 	SpriteBatch batch = new SpriteBatch(5460);
 	BitmapFont font = new BitmapFont();
 
@@ -39,13 +44,13 @@ public class WorldRenderer {
 	int tileWidth = 75;
 
 	ImmediateModeRenderer10 renderer;
-	RenderListMaster renderListMaster;
 
 	FPSLogger fps = new FPSLogger();
 
 	public WorldRenderer() {
 		renderer = new ImmediateModeRenderer10();
-		renderListMaster = new RenderListMaster();
+		renderListMasterWorld = new RenderListMaster();
+		renderListMasterGui = new RenderListMaster();
 		CoordCalc.setTileSize(tileWidth);
 		// this.cam = new OrthographicCamera(480, 320);
 		this.cam = new OrthographicCamera(780, 460);
@@ -53,7 +58,8 @@ public class WorldRenderer {
 		// this.cam.position.set(0, -100, 0);
 		// this.cam.position.set(240, -160, 0);
 		this.cam.position.set(390, -230, 0);
-		renderableObjectsMasters = new ArrayList<RenderableObjectsMaster>();
+		renderableObjectsMastersWorld = new ArrayList<RenderableObjectsMaster>();
+		renderableObjectsMastersGui = new ArrayList<RenderableObjectsMaster>();
 	}
 
 	public void render(float deltaTime) {
@@ -94,16 +100,19 @@ public class WorldRenderer {
 		batch.dispose();
 	}
 
-	public void addROM(RenderableObjectsMaster ROM) {
-		renderableObjectsMasters.add(ROM);
-		// renderListMaster.addRenderableObjects(ROM.getRenderableObjects());
+	public void addROMWorld(RenderableObjectsMaster ROM) {
+		renderableObjectsMastersWorld.add(ROM);
+	}
+
+	public void addROMGui(RenderableObjectsMaster ROM) {
+		renderableObjectsMastersGui.add(ROM);
 	}
 
 	/**
 	 * Prepare {@link RenderListMaster} for render: add new
 	 * {@link RenderableObject} objects, update old ones, sort list.
 	 */
-	private void updateRenderList() {
+	private void updateRenderList(List<RenderableObjectsMaster> renderableObjectsMasters, RenderListMaster renderListMaster) {
 		Boolean sortNeeded = false;
 		for (RenderableObjectsMaster rOM : renderableObjectsMasters) {
 			List<RenderableObject> unservedObjects = rOM
@@ -180,7 +189,14 @@ public class WorldRenderer {
 	}
 
 	private void renderROMs() {
-		updateRenderList();
+		updateRenderList(renderableObjectsMastersWorld, renderListMasterWorld);
+		updateRenderList(renderableObjectsMastersGui, renderListMasterGui);
+		renderRenderList(renderListMasterWorld);
+		renderRenderList(renderListMasterGui);
+
+	}
+	
+	private void renderRenderList(RenderListMaster renderListMaster) {
 		for (RenderableObject rObj : renderListMaster.gerRenderList()) {
 			renderObject(rObj);
 		}

@@ -29,8 +29,6 @@ public class GuiElement extends RenderableObject {
 		
 		this.parentContainer = pareContainer;
 		elementContainerPos = new Vector2(posX, posY);
-	
-		altLabelLast(Color.BLUE, 1.0f, 10.0f, -30.0f);
 	}
 
 	public Vector2 getScreenPos() {
