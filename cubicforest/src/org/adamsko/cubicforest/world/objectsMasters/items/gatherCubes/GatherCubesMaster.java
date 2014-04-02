@@ -91,6 +91,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			tileCube.setTextureRegion(atlasRows.get(1)[tileCube.getTexNum()]);
 			eventObject.setName("xx");
 			gatherCubesCounter.addValue(1);
+			removeCube(tileCube);
 			break;
 		default:
 			break;
@@ -99,6 +100,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	}
 	
 	private void removeCube(GatherCube cubeToRemove) {
+		removeObject(cubeToRemove);
 //		WorldObject cube = (WorldObject)cubeToRemove
 	}
 

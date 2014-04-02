@@ -34,7 +34,7 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		this.worldObjectsType = worldObjectsType;
 	}
 	
-	public void removeWorldObject(WorldObject objectRemove) {
+	public void removeObject(WorldObject objectRemove) {
 		worldObjects.remove(objectRemove);
 		Gdx.app.error("removeWorldObject: ", Integer.toString(worldObjects.size()));
 		
