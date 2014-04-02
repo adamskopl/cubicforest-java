@@ -23,7 +23,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public GatherCubesMaster(TilesMaster TM, String textureName, int tileW,
 			int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_GATHER_CUBE, textureName, tileW,
+		super(TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW,
 				tileH);
 		try {
 			addTestCubes();
@@ -40,7 +40,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public void initGatherCubesCounter(TilesMaster tilesMaster) {
 		gatherCubesCounter = new GatherCubesCounter(tilesMaster,
-				WorldObjectType_e.OBJECT_GENERIC, "cubes-atlas-medium", 25, 25, 650, -50);
+				WorldObjectType_e.OBJECT_ITEM, "cubes-atlas-medium", 25, 25, 650, -50);
 	}
 
 	private void addTestCubes() throws Exception {
@@ -52,8 +52,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 		GatherCube testCube;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testCube = new GatherCube(atlasRows.get(0)[atlasIndex], atlasIndex,
-					WorldObjectType_e.OBJECT_GATHER_CUBE);
+			testCube = new GatherCube(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -2));
 
@@ -64,7 +63,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			pos.add(new Vector2(7, -3));
 			testCube.setTilesPos(pos);
 
-			addWorldObject(testCube);
+			addObject(testCube);
 
 			if (atlasIndex == 3) {
 				atlasIndex = 0;

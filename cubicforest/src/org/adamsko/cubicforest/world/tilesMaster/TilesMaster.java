@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
@@ -121,24 +123,46 @@ public class TilesMaster implements PickMasterClient {
 	/**
 	 * Associate given {@link WorldObject} object with a {@link Tile} object.
 	 * 
-	 * @param insertObject
+	 * @param addObject
 	 *            {@link WorldObject} object to be associated with a
 	 *            {@link Tile}.
 	 */
-	public void insertWorldObject(WorldObject insertObject) {
-		Tile parentTile = tilesContainer.getTileOnPos(insertObject
-				.getTilesPos());
+	public void addWorldObject(WorldObject addObject) {
+		Tile parentTile = tilesContainer.getTileOnPos(addObject.getTilesPos());
 		if (parentTile != null) {
 			try {
-				if(insertObject.getType() == WorldObjectType_e.OBJECT_GATHER_CUBE) {
-					parentTile.insertItem(insertObject);
-				} else {
-					parentTile.insertObject(insertObject);
+				parentTile.insertObject(addObject);
+				switch (addObject.getType()) {
+				case OBJECT_ENTITY:
+					Gdx.app.error("addWorldObject " + addObject.getName(), "entity");
 					tilesContainer.testHighlightTile(parentTile, 1);
-				}				
+					break;
+				case OBJECT_ITEM:
+					Gdx.app.error("addWorldObject " + addObject.getName(), "item");
+					break;
+				case OBJECT_TERRAIN:
+					Gdx.app.error("addWorldObject " + addObject.getName(), "terrain");
+					tilesContainer.testHighlightTile(parentTile, 1);
+					break;
+				default:
+					Gdx.app.error("addWorldObject " + addObject.getName(), "unknown");
+					break;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	/**
+	 * @param removeObject
+	 */
+	public void removeWorldObject(WorldObject removeObject) {
+		Tile parentTile = tilesContainer.getTileOnPos(removeObject
+				.getTilesPos());
+		
+		if (parentTile != null) {
+			
 		}
 	}
 

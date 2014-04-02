@@ -21,7 +21,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
 	public EnemiesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_ENEMY, textureName, tileW, tileH);
+		super(TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
 			addTestObjects();
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		Enemy testEnemy;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testEnemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_ENEMY);
+			testEnemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testEnemy.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			
@@ -64,7 +64,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			testEnemy.addLabel(ROLabel_e.LABEL_NAME);
 			testEnemy.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
-			addWorldObject(testEnemy);
+			addObject(testEnemy);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}

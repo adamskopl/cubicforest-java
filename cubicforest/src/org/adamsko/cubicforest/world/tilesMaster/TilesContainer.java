@@ -14,7 +14,7 @@ public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 	
 	public TilesContainer(TilesMaster TM) {
-		super(TM, WorldObjectType_e.OBJECT_TILE, "tiles-atlas-medium", 75, 45);
+		super(TM, WorldObjectType_e.OBJECT_UNDEFINED, "tiles-atlas-medium", 75, 45);
 	}
 
 	public List<RenderableObject> getTiles() {

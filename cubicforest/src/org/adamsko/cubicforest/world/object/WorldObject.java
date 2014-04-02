@@ -17,6 +17,10 @@ public class WorldObject extends RenderableObject {
 
 	protected WorldObjectType_e worldType;
 	
+	public WorldObjectType_e getWorldType() {
+		return worldType;
+	}
+
 	/*
 	 * Position indicated by tiles. (0.0,0.0): uppper corner of the first tile.
 	 * (2.5, 1.5): center of the field with (2, 1) coordinates

@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>8</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>408</x>
-      <y>392</y>
-      <w>152</w>
-      <h>96</h>
+      <x>126</x>
+      <y>270</y>
+      <w>171</w>
+      <h>108</h>
     </coordinates>
-    <panel_attributes>WorldObjectType_e
+    <panel_attributes>*WorldObjectType_e*
 --
 	OBJECT_GENERIC,
 	OBJECT_HERO,
 	OBJECT_ENEMY,
-	OBJECT_GATHER_CUBE</panel_attributes>
+	OBJECT_GATHER_CUBE
+
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>736</x>
-      <y>376</y>
-      <w>272</w>
-      <h>128</h>
+      <x>477</x>
+      <y>234</y>
+      <w>396</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes>*WorldObject*
 --
-+ void handleParentTileEvent(TileEvent_e tileEvent)
 # Vector2 tilesPos
 # Float height
 # String name
 # Boolean occupiesTile
-- WorldObjectType_e type</panel_attributes>
+- WorldObjectType_e type
+--
++ void handleParentTileEvent(TileEvent_e tileEvent)
+
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

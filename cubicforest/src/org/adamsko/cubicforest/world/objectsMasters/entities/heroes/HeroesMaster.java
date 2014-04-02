@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
@@ -23,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 public class HeroesMaster extends InteractionObjectsMaster implements WorldObjectsMaster, OrderableObjectsContainer {
 
 	public HeroesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_HERO, textureName, tileW, tileH);
+		super(TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
 		addTestObjects();
 		} catch (Exception e) {
@@ -40,7 +38,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 		Hero testPig;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testPig = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_HERO);
+			testPig = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testPig.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			
@@ -54,7 +52,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 //			testPig.addLabel(ROLabel_e.LABEL_NAME);
 			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
-			addWorldObject(testPig);
+			addObject(testPig);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}

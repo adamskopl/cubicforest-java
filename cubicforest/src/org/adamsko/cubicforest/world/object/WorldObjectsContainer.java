@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
+import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -36,6 +38,8 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		worldObjects.remove(objectRemove);
 		Gdx.app.error("removeWorldObject: ", Integer.toString(worldObjects.size()));
 		
+		removeRenderableObject(objectRemove);
+		
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		// TODO: REMOVE OBJECT FROM TILE !!!
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -43,15 +47,23 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		
 	}
 	
-	public void addWorldObject(WorldObject newObject) {
-		worldObjects.add(newObject);
-
-		addRenderableObject(newObject);
-		
+	public void addObject(WorldObject worldObject) {
+		worldObjects.add(worldObject);
+		addRenderableObject(worldObject);
 		// associate newObject with a tile (every WorldObject is associated with
 		// a tile)
-		tilesMaster.insertWorldObject(newObject);
+		tilesMaster.addWorldObject(worldObject);
 	}
+	
+//	public void addWorldObject(WorldObject newObject) {
+//		worldObjects.add(newObject);
+//
+//		addRenderableObject(newObject);
+//		
+//		// associate newObject with a tile (every WorldObject is associated with
+//		// a tile)
+//		tilesMaster.addWorldObject(newObject);
+//	}
 	
 	/**
 	 * Get {@link WorldObject} objects.

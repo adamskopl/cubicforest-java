@@ -8,6 +8,9 @@ import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
+import org.adamsko.cubicforest.world.objectsMasters.terrain.Tree;
+import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -37,10 +40,10 @@ public class TerrainObjectsMaster extends WorldObjectsContainer implements World
 		testPositions.add(new Vector2(1, 7));
 		testPositions.add(new Vector2(3, 2));
 
-		WorldObject testTree;
+		Tree testTree;
 		int atlasIndex = 0;
 		for (Vector2 pos : testPositions) {
-			testTree = new WorldObject(atlasRows.get(0)[atlasIndex], atlasIndex, WorldObjectType_e.OBJECT_TERRAIN);
+			testTree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testTree.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
 			pos.add(new Vector2(0.5f, 0.5f));
@@ -51,7 +54,7 @@ public class TerrainObjectsMaster extends WorldObjectsContainer implements World
 			testTree.addLabel(ROLabel_e.LABEL_NAME);
 			testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
 			
-			addWorldObject(testTree);
+			addObject(testTree);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}
 		}
 	}

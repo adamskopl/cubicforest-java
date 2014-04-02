@@ -2,8 +2,11 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
+import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -30,7 +33,7 @@ public class Tile extends WorldObject {
 	private Boolean hasItem;
 
 	public Tile(Vector2 coords, TextureRegion tr) {
-		super(tr, 0, WorldObjectType_e.OBJECT_TILE);
+		super(tr, 0, WorldObjectType_e.OBJECT_UNDEFINED);
 		this.tilesPos = coords;
 
 		occupant = null;
@@ -68,26 +71,36 @@ public class Tile extends WorldObject {
 	public WorldObject getItem() {
 		return item;
 	}
-
-	/**
-	 * @param insertObject
-	 *            WorldObject to be inserted into the tile
-	 * @throws Exception
-	 */
+	
 	public void insertObject(WorldObject insertObject) throws Exception {
-		if (hasOccupant()) {
-			throw new Exception("insertWorldObject: tile is already occupied");
-		}
-		occupant = insertObject;
-		hasOccupant = true;
-	}
+		switch(insertObject.getWorldType()) {
+		case OBJECT_ENTITY:
+			if (hasOccupant()) {
+				throw new Exception("insertWorldObject: tile is already occupied");
+			}
+			occupant = insertObject;
+			hasOccupant = true;
 
-	public void insertItem(WorldObject insertItem) throws Exception {
-		if (hasItem()) {
-			throw new Exception("insertItem: tile has already an item");
+			break;
+		case OBJECT_ITEM:
+			if (hasItem()) {
+				throw new Exception("insertItem: tile has already an item");
+			}
+			item = insertObject;
+			hasItem = true;
+			break;
+		case OBJECT_TERRAIN:
+			if (hasOccupant()) {
+				throw new Exception("insertWorldObject: tile is already occupied");
+			}
+			occupant = insertObject;
+			hasOccupant = true;
+			break;
+		default:
+			Gdx.app.error("Tile::insertObject()", "worldType unsupported");
+			break;
+		
 		}
-		item = insertItem;
-		hasItem = true;
 	}
 
 	/**

@@ -19,7 +19,7 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer imp
 	public Boolean isTileEventValid(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject) {
 
-		WorldObjectType_e tileObjectType = WorldObjectType_e.OBJECT_GENERIC;
+		WorldObjectType_e tileObjectType = WorldObjectType_e.OBJECT_UNDEFINED;
 		
 		if(eventTile.hasOccupant()) {			
 			tileObjectType = eventTile.getOccupant().getType();
