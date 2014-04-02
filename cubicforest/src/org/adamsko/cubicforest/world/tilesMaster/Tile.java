@@ -116,6 +116,16 @@ public class Tile extends WorldObject {
 		hasOccupant = false;
 		return takenObject;
 	}
+	
+	public WorldObject itemLeaves() throws Exception {
+		if (!hasItem()) {
+			throw new Exception("tile without item");
+		}
+		WorldObject takenItem = item;
+		item = null;
+		hasItem = false;
+		return takenItem;
+	}
 
 	/**
 	 * Does tile have an occupant?

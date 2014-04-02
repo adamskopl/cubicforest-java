@@ -28,23 +28,16 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 
 	public WorldObjectsContainer(TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
-		super(TM, worldObjectsType, textureName, tileW, tileH); 
+		super(TM, textureName, tileW, tileH); 
 		worldObjects = new ArrayList<WorldObject>();
 		tilesMaster = TM;
 		this.worldObjectsType = worldObjectsType;
 	}
 	
-	public void removeObject(WorldObject objectRemove) {
+	public void removeObject(WorldObject objectRemove) throws Exception {
 		worldObjects.remove(objectRemove);
-		Gdx.app.error("removeWorldObject: ", Integer.toString(worldObjects.size()));
-		
 		removeRenderableObject(objectRemove);
-		
-		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		// TODO: REMOVE OBJECT FROM TILE !!!
-		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
-		
+		tilesMaster.removeWorldObject(objectRemove);		
 	}
 	
 	public void addObject(WorldObject worldObject) {

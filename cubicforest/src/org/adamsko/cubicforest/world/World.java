@@ -3,7 +3,8 @@ package org.adamsko.cubicforest.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.gui.GuiElementsContainer;
+import org.adamsko.cubicforest.gui.Gui;
+import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
@@ -44,6 +45,8 @@ public class World {
 	
 	GatherCubesMaster gatherCubesMaster;
 	
+	GuiMaster guiMaster;
+	
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
@@ -75,6 +78,10 @@ public class World {
 		
 		addGuiObjectsContainer(gatherCubesMaster.getGatherCubesCounter());
 		
+		guiMaster = new GuiMaster();
+		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
+		
+		pickMaster.addClient(guiMaster);
 		pickMaster.addClient(tilesMaster);
 		tilesMaster.addClient(roundsMaster);
 
@@ -98,7 +105,7 @@ public class World {
 		}
 	}
 
-	private void addGuiObjectsContainer(GuiElementsContainer guiObjectsContainer) {
+	private void addGuiObjectsContainer(Gui guiObjectsContainer) {
 		renderer.addROMGui(guiObjectsContainer);
 	}
 	

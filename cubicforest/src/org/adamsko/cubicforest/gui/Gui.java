@@ -10,10 +10,11 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class GuiElementsContainer extends RenderableObjectsContainer implements
+public abstract class Gui extends RenderableObjectsContainer implements
 		RenderableObjectsMaster {
 
 	protected List<GuiElement> guiElements;
+	private GuiType_e type;
 
 	/**
 	 * Absolute screen position of the container. Its elements positions are
@@ -29,14 +30,14 @@ public class GuiElementsContainer extends RenderableObjectsContainer implements
 		this.containerScreenPos = containerScreenPos;
 	}
 
-	public GuiElementsContainer(TilesMaster TM,
-			WorldObjectType_e worldObjectsType, String textureName, int tileW,
+	public Gui(TilesMaster TM, GuiType_e guiType, String textureName, int tileW,
 			int tileH, float posX, float posY) {
-		super(TM, worldObjectsType, textureName, tileW, tileH);
+		super(TM, textureName, tileW, tileH);
 
 		guiElements = new ArrayList<GuiElement>();
 
 		this.containerScreenPos = new Vector2(posX, posY);
+		this.type = guiType;
 	}
 
 	public void addGuiElement(GuiElement guiElement) {

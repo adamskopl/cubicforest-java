@@ -23,8 +23,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public GatherCubesMaster(TilesMaster TM, String textureName, int tileW,
 			int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW,
-				tileH);
+		super(TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 		try {
 			addTestCubes();
 		} catch (Exception e) {
@@ -40,7 +39,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public void initGatherCubesCounter(TilesMaster tilesMaster) {
 		gatherCubesCounter = new GatherCubesCounter(tilesMaster,
-				WorldObjectType_e.OBJECT_ITEM, "cubes-atlas-medium", 25, 25, 650, -50);
+				"cubes-atlas-medium", 25, 25, 650, -50);
 	}
 
 	private void addTestCubes() throws Exception {
@@ -48,6 +47,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 		testPositions.add(new Vector2(0, 3));
 		testPositions.add(new Vector2(4, 4));
 		testPositions.add(new Vector2(8, 6));
+		testPositions.add(new Vector2(9, 9));
 
 		GatherCube testCube;
 		int atlasIndex = 0;
@@ -82,6 +82,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 		switch (evenType) {
 		case OCCUPANT_ENTERS:
+			tileCube.setTextureRegion(atlasRows.get(1)[tileCube.getTexNum()]);
 			break;
 
 		case OCCUPANT_LEAVES:
@@ -98,10 +99,14 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 		}
 
 	}
-	
+
 	private void removeCube(GatherCube cubeToRemove) {
-		removeObject(cubeToRemove);
-//		WorldObject cube = (WorldObject)cubeToRemove
+		try {
+			removeObject(cubeToRemove);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

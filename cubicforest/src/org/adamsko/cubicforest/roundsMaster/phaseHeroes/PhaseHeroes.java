@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import org.adamsko.cubicforest.gui.Gui;
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -85,6 +86,11 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 	private void nextHero() {
 		nextObject();
 		ordersMaster.highlightTilesObjectRange(activeObject());
+	}
+
+	@Override
+	public void onGuiEvent(Gui eventGui) {
+		Gdx.app.error("onGuiEvent", "PHASE HEROES");		
 	}
 
 }

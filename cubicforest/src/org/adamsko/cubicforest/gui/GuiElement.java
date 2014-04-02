@@ -15,7 +15,7 @@ public class GuiElement extends RenderableObject {
 	/**
 	 * Container to which element belongs.
 	 */
-	GuiElementsContainer parentContainer;
+	Gui parentContainer;
 
 	/**
 	 * Absolute position of the element in its container.
@@ -23,7 +23,7 @@ public class GuiElement extends RenderableObject {
 	private Vector2 elementContainerPos;
 
 	public GuiElement(TextureRegion tr, int texNum,
-			GuiElementsContainer pareContainer, float posX, float posY) {
+			Gui pareContainer, float posX, float posY) {
 		super(tr, texNum);
 		this.renderType = RenderableObjectType_e.TYPE_GUI;
 		

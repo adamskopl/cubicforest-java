@@ -3,6 +3,8 @@ package org.adamsko.cubicforest.roundsMaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.gui.Gui;
+import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
@@ -13,7 +15,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
  * @author adamsko
  *
  */
-public class RoundsMaster implements TilesMasterClient {
+public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 
 	private List<RoundPhase> phases;
 	int phasePointer = -1;
@@ -69,6 +71,11 @@ public class RoundsMaster implements TilesMasterClient {
 	 */
 	public void addPhase(RoundPhase newPhase) {
 		phases.add(newPhase);
+	}
+
+	@Override
+	public void onGuiEvent(Gui eventGui) {
+		actualPhase().onGuiEvent(eventGui);		
 	}
 
 }

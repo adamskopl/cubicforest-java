@@ -16,6 +16,7 @@ import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 /**
  * Tiles managing class. Map's model: <br>
@@ -156,13 +157,30 @@ public class TilesMaster implements PickMasterClient {
 	
 	/**
 	 * @param removeObject
+	 * @throws Exception 
 	 */
-	public void removeWorldObject(WorldObject removeObject) {
+	public void removeWorldObject(WorldObject removeObject) throws Exception {
 		Tile parentTile = tilesContainer.getTileOnPos(removeObject
 				.getTilesPos());
-		
 		if (parentTile != null) {
-			
+			switch (removeObject.getWorldType()) {
+			case OBJECT_ENTITY:
+				WorldObject removedOccupant = parentTile.occupantLeaves();
+				if (removeObject != removedOccupant) {
+					throw new Exception(
+							"removeWorldObject removeObject != removedOccupant");
+				}
+				break;
+			case OBJECT_ITEM:
+				WorldObject removedItem = parentTile.itemLeaves();
+				if (removeObject != removedItem) {
+					throw new Exception(
+							"removeWorldObject removeObject != removedOccupant");
+				}
+				break;
+			default:
+				throw new Exception("removeWorldObject unsupported type");
+			}
 		}
 	}
 

@@ -72,7 +72,7 @@ public class RenderableObjectsContainer {
 	 */
 	protected List<TextureRegion[]> atlasRows;
 
-	public RenderableObjectsContainer(TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
+	public RenderableObjectsContainer(TilesMaster TM, String textureName,
 			int tileW, int tileH) {
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
