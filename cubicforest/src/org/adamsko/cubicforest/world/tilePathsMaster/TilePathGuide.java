@@ -87,6 +87,11 @@ public class TilePathGuide implements TweenCallback {
 
 		// set HEADING_CENTER state, for proper nextStage() invocation
 		this.guideStage = GuideStage_e.HEADING_CENTER;
+	
+		// FIXME: onPathEnd() here... will it not cause errors?		
+		if(path.isEmpty()) {
+			master.onPathEnd(this);
+		}
 	}
 
 	/**
@@ -135,11 +140,10 @@ public class TilePathGuide implements TweenCallback {
 			if (path.isEmpty()) {
 				// wanderer has reached his goal or started with an empty path
 
-				// //////ERRROR! SOMETIMES TILE IS NULL!!!!!!!!!!!!
+				// FIXME ERRROR! SOMETIMES TILE IS NULL!!!!!!!!!!!!
+				// probably for paths like tileA->tileA
 				tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_STOPS,
 						helper.getTileHeadingTo(), wanderer);
-				Gdx.app.error("path.isEmpty()!!!",
-						"FIX HERE! TILE COULD BE EMPTY!");
 
 				master.onPathEnd(this);
 				return;

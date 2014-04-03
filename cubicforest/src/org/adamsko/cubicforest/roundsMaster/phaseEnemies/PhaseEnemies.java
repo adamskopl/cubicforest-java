@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.gui.Gui;
+import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -81,7 +81,7 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 	}
 
 	@Override
-	public void onGuiEvent(Gui eventGui) {
+	public void onGuiEvent(GuiContainer eventGui) {
 		// TODO Auto-generated method stub
 		
 	}

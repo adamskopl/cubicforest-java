@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import org.adamsko.cubicforest.gui.GuiElement;
-import org.adamsko.cubicforest.gui.Gui;
+import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class GatherCubesCounter extends Gui {
+public class GatherCubesCounter extends GuiContainer {
 
 	private Vector2 counter;
 

@@ -28,7 +28,7 @@ public class WorldObjectAccessor implements TweenAccessor<WorldObject> {
 			return 2;
 		}
 		case(HEIGHT): {
-			returnValues[0] = target.getHeight();
+			returnValues[0] = target.getVerticalPos();
 			return 1;
 		}		
 		default: assert false; return -1;

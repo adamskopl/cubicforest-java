@@ -135,14 +135,11 @@ public class TilesMaster implements PickMasterClient {
 				parentTile.insertObject(addObject);
 				switch (addObject.getType()) {
 				case OBJECT_ENTITY:
-					Gdx.app.error("addWorldObject " + addObject.getName(), "entity");
 					tilesContainer.testHighlightTile(parentTile, 1);
 					break;
 				case OBJECT_ITEM:
-					Gdx.app.error("addWorldObject " + addObject.getName(), "item");
 					break;
 				case OBJECT_TERRAIN:
-					Gdx.app.error("addWorldObject " + addObject.getName(), "terrain");
 					tilesContainer.testHighlightTile(parentTile, 1);
 					break;
 				default:

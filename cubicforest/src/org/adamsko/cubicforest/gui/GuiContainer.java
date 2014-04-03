@@ -10,7 +10,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class Gui extends RenderableObjectsContainer implements
+public abstract class GuiContainer extends RenderableObjectsContainer implements
 		RenderableObjectsMaster {
 
 	protected List<GuiElement> guiElements;
@@ -30,7 +30,7 @@ public abstract class Gui extends RenderableObjectsContainer implements
 		this.containerScreenPos = containerScreenPos;
 	}
 
-	public Gui(TilesMaster TM, GuiType_e guiType, String textureName, int tileW,
+	public GuiContainer(TilesMaster TM, GuiType_e guiType, String textureName, int tileW,
 			int tileH, float posX, float posY) {
 		super(TM, textureName, tileW, tileH);
 
@@ -43,6 +43,21 @@ public abstract class Gui extends RenderableObjectsContainer implements
 	public void addGuiElement(GuiElement guiElement) {
 		guiElements.add(guiElement);
 		addRenderableObject(guiElement);
+	}
+	
+	/**
+	 * Check if any of the gui elements is clicked.
+	 * 
+	 * @param screenPos
+	 * @return
+	 */
+	public Boolean isClicked(Vector2 screenPos) {
+		Boolean elementClicked = false;
+		for(GuiElement e : guiElements) {
+			if(e.isClicked(screenPos))
+				elementClicked = true;
+		}
+		return elementClicked;
 	}
 
 }

@@ -82,6 +82,14 @@ public class RenderableObject implements LabelsMaster  {
 		return texNum;
 	}
 	
+	public Integer getTexWidth() {
+		return textureRegion.getRegionWidth();
+	}
+	
+	public Integer getTexHeight() {
+		return textureRegion.getRegionHeight();
+	}
+	
 	@Override
 	public List<Label> getLabels() {
 		return labels.getLabels();

@@ -30,7 +30,7 @@ public class WorldObject extends RenderableObject {
 	/*
 	 * Vertical position of the object. Indicates order of the rendering.
 	 */
-	protected Float height;
+	protected Float verticalPos;
 
 	/**
 	 * Long story short: WorldObject's name.
@@ -50,7 +50,7 @@ public class WorldObject extends RenderableObject {
 	public WorldObject(TextureRegion tr, int texNum, WorldObjectType_e worldType) {
 		super(tr, texNum);
 		tilesPos = new Vector2(0.0f, 0.0f);
-		height = new Float(0.0f);
+		verticalPos = new Float(0.0f);
 		name = new String("WorldObject");
 		speed = 0;
 		occupiesTile = true;
@@ -83,11 +83,11 @@ public class WorldObject extends RenderableObject {
 	}
 
 	public void setHeight(Float height) {
-		this.height = height;
+		this.verticalPos = height;
 	}
 
-	public float getHeight() {
-		return height;
+	public float getVerticalPos() {
+		return verticalPos;
 	}
 
 	public void setName(String name) {
@@ -142,7 +142,7 @@ public class WorldObject extends RenderableObject {
 			break;
 		}
 		case LABEL_HEIGHT: {
-			labels.addLabel(height);
+			labels.addLabel(verticalPos);
 			break;
 		}
 		case LABEL_NAME: {

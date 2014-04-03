@@ -32,9 +32,9 @@ public class RenderableObjectComparator implements Comparator <RenderableObject>
 			WorldObject wo1 = (WorldObject)o1;
 			WorldObject wo2 = (WorldObject)o2;
 
-			if (wo1.getHeight() < wo2.getHeight())
+			if (wo1.getVerticalPos() < wo2.getVerticalPos())
 				return -1;
-			if (wo1.getHeight() > wo2.getHeight())
+			if (wo1.getVerticalPos() > wo2.getVerticalPos())
 				return 1;
 			// objects have equal height
 
