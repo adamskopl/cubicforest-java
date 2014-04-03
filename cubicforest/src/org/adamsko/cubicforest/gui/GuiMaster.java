@@ -13,6 +13,8 @@ public class GuiMaster implements PickMasterClient {
 	private List<GuiMasterClient> clients;
 
 	public void addGui(Gui newGui) {
+		guiList = new ArrayList<Gui>();
+		
 		guiList.add(newGui);
 	}
 	

@@ -134,8 +134,13 @@ public class TilePathGuide implements TweenCallback {
 		case HEADING_BORDER: {
 			if (path.isEmpty()) {
 				// wanderer has reached his goal or started with an empty path
-				tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_STOPS, helper.getTileHeadingTo(), wanderer);
-								
+
+				// //////ERRROR! SOMETIMES TILE IS NULL!!!!!!!!!!!!
+				tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_STOPS,
+						helper.getTileHeadingTo(), wanderer);
+				Gdx.app.error("path.isEmpty()!!!",
+						"FIX HERE! TILE COULD BE EMPTY!");
+
 				master.onPathEnd(this);
 				return;
 			}
@@ -189,7 +194,7 @@ public class TilePathGuide implements TweenCallback {
 	private void stageCenter() throws Exception {
 		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_ENTERS,
 				helper.getTileHeadingTo(), wanderer);
-		
+
 		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_LEAVES,
 				helper.getTileHeadingFrom(), wanderer);
 	}
