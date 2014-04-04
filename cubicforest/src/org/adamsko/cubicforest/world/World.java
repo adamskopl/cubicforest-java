@@ -15,6 +15,7 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMast
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -45,6 +46,8 @@ public class World {
 	
 	GatherCubesMaster gatherCubesMaster;
 	
+	HeroToolsMaster heroToolsMaster;
+	
 	GuiMaster guiMaster;
 	
 	public World(WorldRenderer renderer) {
@@ -60,6 +63,8 @@ public class World {
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium", 30, 35);
 		gatherCubesMaster = new GatherCubesMaster(tilesMaster, "cubes-atlas-medium", 25, 40);
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
+		
+		heroToolsMaster = new HeroToolsMaster(tilesMaster, "tools-atlas-medium", 40, 45);
 				
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
@@ -76,11 +81,16 @@ public class World {
 		addWorldObjectsMaster(enemiesMaster);
 		addWorldObjectsMaster(gatherCubesMaster);
 		
-		addGuiObjectsContainer(gatherCubesMaster.getGatherCubesCounter());
+
 		
-		guiMaster = new GuiMaster();
+		guiMaster = new GuiMaster(tilesMaster);
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
 		guiMaster.addClient(roundsMaster);
+		
+		addGuiObjectsContainer(gatherCubesMaster.getGatherCubesCounter());
+		for(GuiContainer GC : guiMaster.getGuiList()) {
+			addGuiObjectsContainer(GC);
+		}
 		
 		pickMaster.addClient(guiMaster);
 		pickMaster.addClient(tilesMaster);

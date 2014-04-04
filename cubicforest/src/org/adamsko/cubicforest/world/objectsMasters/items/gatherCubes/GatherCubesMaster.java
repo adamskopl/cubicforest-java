@@ -17,10 +17,6 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	private GatherCubesCounter gatherCubesCounter;
 
-	public GatherCubesCounter getGatherCubesCounter() {
-		return gatherCubesCounter;
-	}
-
 	public GatherCubesMaster(TilesMaster TM, String textureName, int tileW,
 			int tileH) {
 		super(TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
@@ -30,6 +26,10 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public GatherCubesCounter getGatherCubesCounter() {
+		return gatherCubesCounter;
 	}
 
 	@Override

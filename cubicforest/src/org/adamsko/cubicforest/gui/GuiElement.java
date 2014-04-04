@@ -33,7 +33,7 @@ public class GuiElement extends RenderableObject {
 
 	public Vector2 getScreenPos() {
 		// take into account position of the container!
-		return parentContainer.getContainerScreenPos().add(elementContainerPos);
+		return new Vector2(parentContainer.getContainerScreenPos().add(elementContainerPos));
 	}
 
 	/**

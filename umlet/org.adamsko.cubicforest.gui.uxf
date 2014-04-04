@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>640</y>
+      <w>340</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*GuiMaster*
+--
+- List&lt;GuiContainer&gt; guiList
+- List&lt;GuiMasterClient&gt; clients
+--
++ void addGui(GuiContainer newGui)
++ void addClient(GuiMasterClient newClient)
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>950</x>
+      <y>630</y>
+      <w>340</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.pickmaster
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>1040</x>
+      <y>680</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>PickMasterClient
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>750</x>
+      <y>660</y>
+      <w>360</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>340;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>910</x>
+      <y>440</y>
+      <w>340</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>*GuiElement*
+--
+GuiContainer parentContainer
+--
+Boolean isClicked(Vector2 clickedScreenPos)
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>470</x>
+      <y>150</y>
+      <w>600</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.render.world
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>880</x>
+      <y>220</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>RenderableObject
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>930</x>
+      <y>270</y>
+      <w>160</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;140;170</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>420</x>
+      <y>430</y>
+      <w>350</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>/GuiContainer/
+--
+# List&lt;GuiElement&gt; guiElements
+- GuiType_e type
+- Vector2 containerScreenPos
+--
++ void addGuiElement(GuiElement guiElement)
++ Boolean isClicked(Vector2 screenPos)
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>670</x>
+      <y>200</y>
+      <w>200</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>/RenderableObjectsContainer/
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>590</x>
+      <y>290</y>
+      <w>200</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>180;30;30;140</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>480</x>
+      <y>240</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>RenderableObjectsMaster
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>540</x>
+      <y>230</y>
+      <w>60</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>40;30;30;200</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>740</x>
+      <y>460</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;170;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>580</x>
+      <y>530</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;110;30;30</additional_attributes>
+  </element>
+</diagram>

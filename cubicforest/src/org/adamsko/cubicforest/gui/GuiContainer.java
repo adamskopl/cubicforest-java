@@ -23,7 +23,7 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 	private Vector2 containerScreenPos;
 
 	public Vector2 getContainerScreenPos() {
-		return containerScreenPos;
+		return new Vector2(containerScreenPos);
 	}
 
 	public void setContainerScreenPos(Vector2 containerScreenPos) {

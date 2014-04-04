@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>576</x>
+      <y>630</y>
+      <w>135</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*GuiHeroTools*
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>594</x>
+      <y>414</y>
+      <w>396</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.gui
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>639</x>
+      <y>459</y>
+      <w>117</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>GuiContainer
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>612</x>
+      <y>486</y>
+      <w>107</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90;27;27;144</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>855</x>
+      <y>612</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>*GuiElementHeroTool*
+--
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>828</x>
+      <y>468</y>
+      <w>108</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>GuiElement
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>864</x>
+      <y>477</y>
+      <w>98</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;81;135</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>684</x>
+      <y>648</y>
+      <w>188</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;171;27</additional_attributes>
+  </element>
+</diagram>
