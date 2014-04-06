@@ -95,12 +95,12 @@ public class OrdersMaster {
 	 */
 	public void highlightTilesObjectRange(WorldObject object) {
 		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object, object.getSpeed(), false);
-		tilesMaster.highlightTiles(tilesInRange, 2);
+		tilesMaster.highlightTiles(tilesInRange, 1, 1);
 	}
 	
 	public void unhighlightTilesObjectRange(WorldObject object) {
 		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object, object.getSpeed(), false);
-		tilesMaster.highlightTiles(tilesInRange, 0);
+		tilesMaster.highlightTiles(tilesInRange, 0, 0);
 	}
 
 }

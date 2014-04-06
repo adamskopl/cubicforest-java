@@ -33,12 +33,12 @@ public class TilesEventsMaster {
 		switch (evenType) {
 		case OCCUPANT_ENTERS: {
 			eventTile.insertObject(eventObject);
-			tilesContainer.testHighlightTile(eventTile, 1);
+			tilesContainer.testHighlightTile(eventTile, 0, 1);
 			break;
 		}
 		case OCCUPANT_LEAVES: {
 			eventTile.occupantLeaves();
-			tilesContainer.testHighlightTile(eventTile, 0);
+			tilesContainer.testHighlightTile(eventTile, 0, 0);
 			break;
 		}
 		case OCCUPANT_STOPS: {

@@ -43,6 +43,7 @@ public class GuiElement extends RenderableObject {
 	 */
 	public Boolean isClicked(Vector2 clickedScreenPos) {
 		Vector2 screenPos = new Vector2(getScreenPos());
+		screenPos.add(getRenderVector());
 		
 		// FIXME get "real" y coordinates... 
 		screenPos.y = -screenPos.y;

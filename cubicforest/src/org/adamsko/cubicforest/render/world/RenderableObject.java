@@ -49,6 +49,7 @@ public class RenderableObject implements LabelsMaster  {
 		this.texNum = texNum;
 		renderType = RenderableObjectType_e.TYPE_UNDEFINED;
 		labels = new LabelsContainer();
+		renderVector = new Vector2();
 	}
 	
 	public void setRenderVector(Vector2 vec) {

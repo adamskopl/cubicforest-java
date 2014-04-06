@@ -75,7 +75,7 @@ public class WorldRenderer {
 		batch.end();
 
 		// renderGrid();
-		// fps.log();
+//		 fps.log();
 	}
 
 	void renderGrid() {
@@ -123,7 +123,8 @@ public class WorldRenderer {
 			List<RenderableObject> objectsToRemove = rOM
 					.popRenderableObjects(ROListType_e.RO_TO_REMOVE);
 
-			if (objectsUnserved.size() != 0 || objectsToRemove.size() != 0) {
+			if (objectsUnserved.size() != 0 || 
+					objectsToRemove.size() != 0) {
 				sortNeeded = true;
 				renderListMaster.addRenderableObjects(objectsUnserved);
 				renderListMaster.removeRenderableObjects(objectsToRemove);
@@ -152,9 +153,10 @@ public class WorldRenderer {
 			break;
 		case TYPE_GUI:
 			GuiElement gObj = (GuiElement) rObj;
-			// batch.draw(gObj.getTextureRegion(), 100, -100);
-			batch.draw(gObj.getTextureRegion(), gObj.getScreenPos().x,
-					gObj.getScreenPos().y);
+			renderPos = gObj.getScreenPos();
+			renderPos.add(gObj.getRenderVector());
+//			renderPos.add(new Vector2(100, 100));
+			batch.draw(gObj.getTextureRegion(), renderPos.x, renderPos.y);
 			break;
 		default:
 			break;

@@ -15,4 +15,8 @@ public class ItemObject extends WorldObject {
 		this.itemType = itemType;
 	}
 
+	public ItemObjectType_e getItemType() {
+		return itemType;
+	}
+
 }

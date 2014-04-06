@@ -52,7 +52,7 @@ public class WorldObjectAccessor implements TweenAccessor<WorldObject> {
 			break;
 		}
 		case(HEIGHT): {
-			target.setHeight(newValues[0]);
+			target.setVerticalPos(newValues[0]);
 		}		
 		default: assert false; break;
 		}

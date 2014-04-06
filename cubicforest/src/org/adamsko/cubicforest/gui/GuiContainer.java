@@ -16,6 +16,10 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 	protected List<GuiElement> guiElements;
 	private GuiType_e type;
 
+	public GuiType_e getType() {
+		return type;
+	}
+
 	/**
 	 * Absolute screen position of the container. Its elements positions are
 	 * translated by these coordinates.

@@ -7,6 +7,8 @@ import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
+import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
@@ -27,7 +29,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			e.printStackTrace();
 		}
 	}
-	
+
 	public GatherCubesCounter getGatherCubesCounter() {
 		return gatherCubesCounter;
 	}
@@ -58,6 +60,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 			testCube.setSpeed(2);
 			testCube.setOccupiesTile(false);
+			testCube.setVerticalPos(0.5f);
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
@@ -78,7 +81,12 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	public void tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject) {
 
-		GatherCube tileCube = (GatherCube) eventTile.getItem();
+		ItemObject item = (ItemObject) eventTile.getItem();
+		if (item.getItemType() != ItemObjectType_e.ITEM_GATHER_CUBE) {
+			return;
+		}
+
+		GatherCube tileCube = (GatherCube) item;
 
 		switch (evenType) {
 		case OCCUPANT_ENTERS:

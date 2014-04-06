@@ -3,8 +3,6 @@ package org.adamsko.cubicforest.world.object;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectType_e;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -82,7 +80,7 @@ public class WorldObject extends RenderableObject {
 		return this.tilesPos.y;
 	}
 
-	public void setHeight(Float height) {
+	public void setVerticalPos(Float height) {
 		this.verticalPos = height;
 	}
 
@@ -112,11 +110,7 @@ public class WorldObject extends RenderableObject {
 	public Boolean isOccupyingTile() {
 		return this.occupiesTile;
 	}
-	
-	public WorldObjectType_e getType() {
-		return worldType;
-	}
-	
+
 	public String typeToString() {
 		try {
 			return WorldObjectHelper.typeToString(worldType);
@@ -124,15 +118,6 @@ public class WorldObject extends RenderableObject {
 			e.printStackTrace();
 		}		
 		return "TYPE_ERROR";
-	}
-
-	/**
-	 * Handle {@link TileEvent_e} event of a parent {@link Tile}.
-	 * 
-	 * @param tileEvent
-	 *            event associated with a parent {@link Tile}.
-	 */
-	public void handleParentTileEvent(TileEvent_e tileEvent) {
 	}
 	
 	public void addLabel(ROLabel_e type) throws Exception {

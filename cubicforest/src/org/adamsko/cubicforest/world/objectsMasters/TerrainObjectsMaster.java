@@ -49,10 +49,11 @@ public class TerrainObjectsMaster extends WorldObjectsContainer implements World
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
 			testTree.setTilesPos(pos);
+			testTree.setVerticalPos(0.5f);
 			
 			testTree.setName("tree");
-			testTree.addLabel(ROLabel_e.LABEL_NAME);
-			testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
+//			testTree.addLabel(ROLabel_e.LABEL_NAME);
+//			testTree.altLabelLast(Color.ORANGE, 0.8f, -15.0f, 0.0f);
 			
 			addObject(testTree);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}

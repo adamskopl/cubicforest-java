@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>7</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>581</x>
-      <y>273</y>
-      <w>343</w>
-      <h>161</h>
+      <x>690</x>
+      <y>282</y>
+      <w>294</w>
+      <h>138</h>
     </coordinates>
     <panel_attributes>*WorldObjectsContainer*
 --
@@ -25,10 +25,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>630</x>
-      <y>693</y>
-      <w>175</w>
-      <h>112</h>
+      <x>732</x>
+      <y>642</y>
+      <w>150</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>*World*
 --
@@ -38,10 +38,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>245</x>
-      <y>490</y>
-      <w>252</w>
-      <h>112</h>
+      <x>402</x>
+      <y>468</y>
+      <w>216</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>/WorldObjectsMaster/
 --
@@ -55,10 +55,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>609</x>
-      <y>448</y>
-      <w>371</w>
-      <h>154</h>
+      <x>714</x>
+      <y>432</y>
+      <w>318</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.render
 --
@@ -68,10 +68,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>833</x>
-      <y>511</y>
-      <w>126</w>
-      <h>56</h>
+      <x>906</x>
+      <y>486</y>
+      <w>108</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>RenderableObject
 --</panel_attributes>
@@ -80,21 +80,21 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>875</x>
-      <y>343</y>
-      <w>230</w>
-      <h>181</h>
+      <x>942</x>
+      <y>342</y>
+      <w>198</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>217;21;21;168</additional_attributes>
+    <additional_attributes>186;18;18;144</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>210</x>
-      <y>252</y>
-      <w>280</w>
-      <h>182</h>
+      <x>372</x>
+      <y>264</y>
+      <w>240</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.tilesMaster
 --
@@ -104,10 +104,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>245</x>
-      <y>301</y>
-      <w>126</w>
-      <h>84</h>
+      <x>402</x>
+      <y>306</y>
+      <w>108</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>TilesMaster
 --</panel_attributes>
@@ -116,33 +116,33 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>350</x>
-      <y>308</y>
-      <w>244</w>
-      <h>34</h>
+      <x>492</x>
+      <y>312</y>
+      <w>210</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>231;21;21;21</additional_attributes>
+    <additional_attributes>198;18;18;18</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>350</x>
-      <y>322</y>
-      <w>244</w>
-      <h>49</h>
+      <x>492</x>
+      <y>324</y>
+      <w>210</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=-
 insertWorldObject(newObject)&gt;</panel_attributes>
-    <additional_attributes>231;35;21;35</additional_attributes>
+    <additional_attributes>198;30;18;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>637</x>
-      <y>490</y>
-      <w>182</w>
-      <h>84</h>
+      <x>738</x>
+      <y>468</y>
+      <w>156</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>RenderableObjectsContainer
 --</panel_attributes>
@@ -151,21 +151,21 @@ insertWorldObject(newObject)&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>707</x>
-      <y>413</y>
-      <w>34</w>
-      <h>90</h>
+      <x>798</x>
+      <y>402</y>
+      <w>30</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;21;77</additional_attributes>
+    <additional_attributes>18;18;18;66</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>966</x>
-      <y>210</y>
-      <w>336</w>
-      <h>189</h>
+      <x>1020</x>
+      <y>228</y>
+      <w>288</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.object
 --
@@ -175,10 +175,10 @@ insertWorldObject(newObject)&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>987</x>
-      <y>252</y>
-      <w>238</w>
-      <h>112</h>
+      <x>1038</x>
+      <y>264</y>
+      <w>204</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>*WorldObject*
 --

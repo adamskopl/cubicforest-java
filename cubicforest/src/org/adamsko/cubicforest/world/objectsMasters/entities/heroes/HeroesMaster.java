@@ -33,7 +33,6 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 		List<Vector2> testPositions = new ArrayList<Vector2>();
 		testPositions.add(new Vector2(0, 5));
 		testPositions.add(new Vector2(6, 4));
-//		testPositions.add(new Vector2(3, 6));
 
 		Hero testPig;
 		int atlasIndex = 0;
@@ -44,13 +43,14 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 			
 			testPig.setSpeed(4);
 			
+//			testPig.setVerticalPos(0.1f);
+			
 			pos.add(new Vector2(0.5f, 0.5f));
 			pos.add(new Vector2(7, -3));
 			testPig.setTilesPos(pos);
 			testPig.setName("testPig");
-			testPig.addLabel(ROLabel_e.LABEL_TILEPOS);
-//			testPig.addLabel(ROLabel_e.LABEL_NAME);
-			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
+//			testPig.addLabel(ROLabel_e.LABEL_TILEPOS);
+//			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
 			addObject(testPig);
 			
@@ -63,7 +63,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 		switch (tileEvent) {
 		case TILE_PICKED: {
 			RenderableObject servantConv = (RenderableObject) servant;
-			int texNum = servantConv.getTexNum();
+//			int texNum = servantConv.getTexNum();
 //			servantConv.setTextureRegion(atlasRows.get(1)[texNum]);
 		}
 		default: {

@@ -154,20 +154,8 @@ public class Tile extends WorldObject {
 		return !hasOccupant();
 	}
 
-	/**
-	 * Handle {@link TileEvent_e} event associated with this {@link Tile}.
-	 * 
-	 * @param tileEvent
-	 *            {@link TileEvent_e} event associated with this {@link Tile}.
-	 */
-	public void handleTileEvent(TileEvent_e tileEvent) {
-		if (hasOccupant()) {
-			occupant.handleParentTileEvent(tileEvent);
-		}
-	}
-
 	public String toString() {
 		return getTilesPos().toString();
 	}
-
+	
 }

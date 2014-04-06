@@ -22,14 +22,14 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer imp
 		WorldObjectType_e tileObjectType = WorldObjectType_e.OBJECT_UNDEFINED;
 		
 		if(eventTile.hasOccupant()) {			
-			tileObjectType = eventTile.getOccupant().getType();
+			tileObjectType = eventTile.getOccupant().getWorldType();
 			if(tileObjectType == getWorldObjectsType()) {
 				return true;
 			}
 		}
 		
 		if(eventTile.hasItem()) {			
-			tileObjectType = eventTile.getItem().getType();
+			tileObjectType = eventTile.getItem().getWorldType();
 			if(tileObjectType == getWorldObjectsType()) {
 				return true;
 			}

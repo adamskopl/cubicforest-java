@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>464</x>
+      <y>448</y>
+      <w>200</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>*PhaseHeroes*
+--
+- Boolean orderInProgress
+- void nextHero()
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>248</x>
+      <y>160</y>
+      <w>368</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>/PhaseOrderableObjects/
+--
+RoundsMaster roundsMaster
+OrdersMaster ordersMaster
+List&lt;WorldObject&gt; phaseObjects
+--
++ PhaseOrderableObjects(
+OrderableObjectsContainer orderableObjectsContainer,
+OrdersMaster ordersMaster)
++ void phaseIsOver(RoundPhase phaseOver)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>624</x>
+      <y>208</y>
+      <w>304</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>/RoundPhase/
+--
++ void phaseIsOver()
++ void startPhase()
++ void setRoundsMaster(RoundsMaster roundsMaster)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>216</x>
+      <y>112</y>
+      <w>728</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.roundsMaster</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>592</x>
+      <y>264</y>
+      <w>168</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>152;24;24;184</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>400</x>
+      <y>280</y>
+      <w>128</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;112;168</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>768</x>
+      <y>472</y>
+      <w>280</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>*PhaseHeroesOrdersMaster*
+--
+- Tile tilePicked
+--
+void tilePicked(Tile tilePickedOrder, 
+Boolean tileOrderValid)
+- void highlightPickedTile(Tile tilePickedOrder,
+Boolean tileOrderValid)
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>640</x>
+      <y>504</y>
+      <w>144</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;128;48</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>1080</x>
+      <y>472</y>
+      <w>248</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.tilesMaster
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1144</x>
+      <y>560</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Tile
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1024</x>
+      <y>496</y>
+      <w>136</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;120;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1136</x>
+      <y>496</y>
+      <w>112</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TilesMaster
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1024</x>
+      <y>480</y>
+      <w>128</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;112;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>784</x>
+      <y>664</y>
+      <w>264</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.items.heroTools
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>848</x>
+      <y>712</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>HeroesToolsMaster
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>912</x>
+      <y>592</y>
+      <w>56</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>40;24;24;120</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>640</x>
+      <y>472</y>
+      <w>144</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+tilePicked</panel_attributes>
+    <additional_attributes>128;48;24;24</additional_attributes>
+  </element>
+</diagram>

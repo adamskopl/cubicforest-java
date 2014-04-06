@@ -4,8 +4,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>371</x>
-      <y>511</y>
+      <x>560</x>
+      <y>448</y>
       <w>231</w>
       <h>147</h>
     </coordinates>
@@ -20,8 +20,8 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>763</x>
-      <y>525</y>
+      <x>952</x>
+      <y>448</y>
       <w>182</w>
       <h>147</h>
     </coordinates>
@@ -35,19 +35,19 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>581</x>
-      <y>560</y>
+      <x>770</x>
+      <y>497</y>
       <w>195</w>
-      <h>48</h>
+      <h>34</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;182;35</additional_attributes>
+    <additional_attributes>21;21;182;21</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>833</x>
-      <y>357</y>
+      <x>1022</x>
+      <y>294</y>
       <w>266</w>
       <h>70</h>
     </coordinates>
@@ -60,8 +60,8 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>819</x>
-      <y>315</y>
+      <x>1008</x>
+      <y>252</y>
       <w>315</w>
       <h>140</h>
     </coordinates>
@@ -71,20 +71,20 @@ TileEvent_e tileEvent)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>826</x>
-      <y>406</y>
+      <x>1015</x>
+      <y>343</y>
       <w>153</w>
-      <h>132</h>
+      <h>118</h>
     </coordinates>
     <panel_attributes>lt=-
 getOrderableObjects()&lt;</panel_attributes>
-    <additional_attributes>21;119;140;21</additional_attributes>
+    <additional_attributes>21;105;140;21</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1092</x>
-      <y>567</y>
+      <x>1281</x>
+      <y>490</y>
       <w>294</w>
       <h>63</h>
     </coordinates>
@@ -96,8 +96,8 @@ TilePath search(WorldObject objectOnPath, Tile destTile)</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1078</x>
-      <y>539</y>
+      <x>1267</x>
+      <y>462</y>
       <w>343</w>
       <h>133</h>
     </coordinates>
@@ -107,8 +107,8 @@ TilePath search(WorldObject objectOnPath, Tile destTile)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>924</x>
-      <y>567</y>
+      <x>1113</x>
+      <y>490</y>
       <w>181</w>
       <h>49</h>
     </coordinates>
@@ -119,8 +119,8 @@ search()&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>182</x>
-      <y>266</y>
+      <x>371</x>
+      <y>203</y>
       <w>322</w>
       <h>126</h>
     </coordinates>
@@ -139,8 +139,8 @@ OrdersMaster ordersMaster)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>315</x>
-      <y>371</y>
+      <x>504</x>
+      <y>308</y>
       <w>132</w>
       <h>153</h>
     </coordinates>
@@ -150,8 +150,8 @@ OrdersMaster ordersMaster)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>497</x>
-      <y>357</y>
+      <x>686</x>
+      <y>294</y>
       <w>132</w>
       <h>167</h>
     </coordinates>
@@ -161,8 +161,8 @@ OrdersMaster ordersMaster)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>511</x>
-      <y>308</y>
+      <x>700</x>
+      <y>245</y>
       <w>266</w>
       <h>70</h>
     </coordinates>
@@ -176,8 +176,8 @@ OrdersMaster ordersMaster)
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>154</x>
-      <y>224</y>
+      <x>343</x>
+      <y>161</y>
       <w>637</w>
       <h>203</h>
     </coordinates>

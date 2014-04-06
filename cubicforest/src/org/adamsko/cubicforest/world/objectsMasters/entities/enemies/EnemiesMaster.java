@@ -61,8 +61,8 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			testEnemy.setTilesPos(pos);
 			testEnemy.setName("enemy " + atlasIndex);
 //			testEnemy.addLabel(ROLabel_e.LABEL_TILEPOS);
-			testEnemy.addLabel(ROLabel_e.LABEL_NAME);
-			testEnemy.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
+//			testEnemy.addLabel(ROLabel_e.LABEL_NAME);
+//			testEnemy.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
 			
 			addObject(testEnemy);
 			

@@ -39,10 +39,7 @@ public class TilesMaster implements PickMasterClient {
 		/**
 		 * {@link Tile} received input from {@link PickMaster}.
 		 */
-		TILE_PICKED,
-		OCCUPANT_LEAVES,
-		OCCUPANT_ENTERS,
-		OCCUPANT_STOPS
+		TILE_PICKED, OCCUPANT_LEAVES, OCCUPANT_ENTERS, OCCUPANT_STOPS
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
@@ -51,14 +48,12 @@ public class TilesMaster implements PickMasterClient {
 	private TilesContainer tilesContainer;
 
 	private TilesEventsMaster tilesEventsMaster;
-	
-	private Tile highlightedTile = null;
 
 	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
 		TilesHelper.setMapSize(mapSize);
-		initTiles();		
+		initTiles();
 	}
 
 	public void addClient(TilesMasterClient client) {
@@ -68,7 +63,7 @@ public class TilesMaster implements PickMasterClient {
 	public void setInteractionMaster(InteractionMaster interactionMaster) {
 		tilesEventsMaster.setInteractionMaster(interactionMaster);
 	}
-	
+
 	public void initTiles() {
 		tilesContainer = new TilesContainer(this);
 		tilesEventsMaster = new TilesEventsMaster(tilesContainer);
@@ -133,17 +128,18 @@ public class TilesMaster implements PickMasterClient {
 		if (parentTile != null) {
 			try {
 				parentTile.insertObject(addObject);
-				switch (addObject.getType()) {
+				switch (addObject.getWorldType()) {
 				case OBJECT_ENTITY:
-					tilesContainer.testHighlightTile(parentTile, 1);
+					tilesContainer.testHighlightTile(parentTile, 0, 1);
 					break;
 				case OBJECT_ITEM:
 					break;
 				case OBJECT_TERRAIN:
-					tilesContainer.testHighlightTile(parentTile, 1);
+					tilesContainer.testHighlightTile(parentTile, 0, 1);
 					break;
 				default:
-					Gdx.app.error("addWorldObject " + addObject.getName(), "unknown");
+					Gdx.app.error("addWorldObject " + addObject.getName(),
+							"unknown");
 					break;
 				}
 			} catch (Exception e) {
@@ -151,10 +147,10 @@ public class TilesMaster implements PickMasterClient {
 			}
 		}
 	}
-	
+
 	/**
 	 * @param removeObject
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void removeWorldObject(WorldObject removeObject) throws Exception {
 		Tile parentTile = tilesContainer.getTileOnPos(removeObject
@@ -188,17 +184,6 @@ public class TilesMaster implements PickMasterClient {
 			for (TilesMasterClient client : clients) {
 				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
 			}
-
-			if (!clickedTile.hasOccupant()) {
-				if (highlightedTile != null)
-					tilesContainer.testHighlightTile(highlightedTile, 0);
-				highlightedTile = clickedTile;
-				// FIXME: TilesMasterClient code conversion needed
-				tilesContainer.testHighlightTile(highlightedTile, 2);
-				// FIXME: TilesMasterClient code conversion needed
-			}
-
-			clickedTile.handleTileEvent(TileEvent_e.TILE_PICKED);
 		}
 	}
 
@@ -206,15 +191,19 @@ public class TilesMaster implements PickMasterClient {
 		tilesContainer.clearTilesLabels();
 	}
 
-	public void highlightTiles(List<Tile> tilesToHighlight, int texIndex) {
+	public void highlightTile(Tile tileToHighlight, int texRow, int texCol) {
+		tilesContainer.testHighlightTile(tileToHighlight, texRow, texCol);
+	}
+
+	public void highlightTiles(List<Tile> tilesToHighlight, int texRow,
+			int texCol) {
 		for (Tile t : tilesToHighlight) {
-			tilesContainer.testHighlightTile(t, texIndex);
+			tilesContainer.testHighlightTile(t, texRow, texCol);
 		}
 	}
-	
+
 	public TilesEventsMaster event() {
 		return tilesEventsMaster;
 	}
-	
 
 }

@@ -54,7 +54,7 @@ public class TilesContainer extends WorldObjectsContainer implements
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects
-		newTile.setHeight(-0.01f);
+		newTile.setVerticalPos(-0.01f);
 
 		// FIXME: don't add newTile through addRenderableObject(), because it's
 		// a Tile. Is it ok?
@@ -71,8 +71,8 @@ public class TilesContainer extends WorldObjectsContainer implements
 	 * @param texNum
 	 *            sequence number of the texture in an atlas row.
 	 */
-	public void testHighlightTile(Tile tileToHighlight, int texNum) {
-		tileToHighlight.setTextureRegion(atlasRows.get(0)[texNum]);
+	public void testHighlightTile(Tile tileToHighlight, int texRow, int texCol) {
+		tileToHighlight.setTextureRegion(atlasRows.get(texRow)[texCol]);
 	}
 
 	@Override
