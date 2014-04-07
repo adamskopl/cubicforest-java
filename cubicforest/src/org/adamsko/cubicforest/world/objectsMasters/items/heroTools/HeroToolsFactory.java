@@ -2,6 +2,12 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolBlack;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolBlue;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolWhite;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;

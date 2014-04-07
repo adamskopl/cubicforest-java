@@ -1,9 +1,14 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
+import org.adamsko.cubicforest.gui.heroTools.GuiElementHeroTool;
+import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
+import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
+import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
@@ -63,26 +68,22 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 				activePath = null;
 			}
 		}
-		// if (startOrderValid(tile)) {
-		// heroesOrdersMaster.tilePicked(tile, true);
-
-		// activeObject = activeObject();
-		//
-		//
-		// // consider path which length is shorter than object's range
-		// if (pathToTile.length() - 1 <= activeObject.getSpeed()) {
-		// orderInProgress = true;
-		// Gdx.app.debug(getName(), "startOrder");
-		// ordersMaster.unhighlightTilesObjectRange(activeObject());
-		// ordersMaster.startOrder(activeObject, pathToTile, this);
-		// }
-		// }
 	}
 
+	/**
+	 * 
+	 */
 	private void startOrderClicked() {
 		if (!orderInProgress) {
 			if (activePath != null && activePath.length() > 0) {
 				orderInProgress = true;
+				try {
+					heroesOrdersMaster
+							.changePhaseHeroesMode(PhaseHeroesMode_e.MODE_ORDER_EXECUTION);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 				ordersMaster.unhighlightTilesObjectRange(activeObject());
 				ordersMaster.startOrder(activeObject(), activePath, this);
 			}
@@ -113,14 +114,19 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 
 	@Override
 	public void startPhase() {
-		Gdx.app.debug(getName(), "startPhase()");
 		nextHero();
-
 	}
 
 	@Override
 	public void onOrderFinished(OrdersMasterResult_e result,
 			WorldObject objectWithOrder) {
+
+		try {
+			heroesOrdersMaster
+					.changePhaseHeroesMode(PhaseHeroesMode_e.MODE_CHOICE_MOVEMENT);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 
 		if (activeObject() != objectWithOrder) {
 			Gdx.app.error(getName(), "activeObject() != objectWithOrder");
@@ -150,17 +156,53 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 	public void onGuiEvent(GuiContainer eventGui) {
 		switch (eventGui.getType()) {
 		case GUI_ORDERS:
-			startOrderClicked();
+			guiOrdersClicked((GuiOrders) eventGui);
 			break;
-
 		case GUI_HERO_TOOLS:
-
+			guiHeroToolsClicked((GuiHeroTools) eventGui);
 			break;
 
 		default:
 			break;
 		}
 
+	}
+
+	private void guiHeroToolsClicked(GuiHeroTools guiHeroTools) {
+		try {
+			GuiElementHeroTool clickedElement = (GuiElementHeroTool) guiHeroTools
+					.getClickedElement();
+			HeroToolType_e heroToolType = clickedElement.getHeroToolType();
+
+			// change mode and also set marker's type
+			heroesOrdersMaster.changePhaseHeroesMode(
+					PhaseHeroesMode_e.MODE_CHOICE_TOOL, heroToolType);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void guiOrdersClicked(GuiOrders guiOrders) {
+		GuiElementOrder clickedElement = (GuiElementOrder) guiOrders
+				.getClickedElement();
+
+		switch (clickedElement.getOrderType()) {
+		case ORDER_ACCEPT:
+			startOrderClicked();
+			break;
+		case ORDER_CANCEL:
+			try {
+				// cancel tool adding
+				heroesOrdersMaster
+						.changePhaseHeroesMode(PhaseHeroesMode_e.MODE_CHOICE_MOVEMENT);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 }

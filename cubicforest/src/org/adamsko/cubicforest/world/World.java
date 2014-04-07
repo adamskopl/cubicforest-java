@@ -76,6 +76,8 @@ public class World {
 
 		interactionMaster = new InteractionMaster();
 		interactionMaster.addClient(gatherCubesMaster);
+		interactionMaster.addClient(heroesToolsMaster);
+		
 		tilesMaster.setInteractionMaster(interactionMaster);
 
 		initRoundsMaster();

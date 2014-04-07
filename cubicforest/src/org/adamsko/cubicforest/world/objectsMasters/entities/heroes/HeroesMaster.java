@@ -39,7 +39,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 		for (Vector2 pos : testPositions) {
 			testPig = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex);
 			testPig.setRenderVector(new Vector2(
-					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
+					-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
 			
 			testPig.setSpeed(4);
 			

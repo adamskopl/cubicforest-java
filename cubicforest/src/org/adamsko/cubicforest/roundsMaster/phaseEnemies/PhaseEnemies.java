@@ -39,7 +39,6 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 
 	@Override
 	public void startPhase() {
-		Gdx.app.debug(getName(), "startPhase()");
 		moveNextEnemy();
 	}
 
@@ -62,7 +61,6 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 	@Override
 	public void onOrderFinished(OrdersMasterResult_e result,
 			WorldObject objectWithOrder) {
-		Gdx.app.debug(getName(), "order finished\n");
 
 		if(activeObject() != objectWithOrder) {
 			Gdx.app.error(getName(), "activeObject() != objectWithOrder");

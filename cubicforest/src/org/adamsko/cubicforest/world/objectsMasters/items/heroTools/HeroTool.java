@@ -10,8 +10,12 @@ public abstract class HeroTool extends ItemObject {
 	HeroToolType_e heroToolType;
 	HeroToolStates_e state;
 
-	Integer buildCost;
+	public HeroToolStates_e getState() {
+		return state;
+	}
 
+	Integer buildCost;
+	
 	public HeroTool(TextureRegion tr, int texNum, HeroToolType_e heroToolType) {
 		super(tr, texNum, ItemObjectType_e.ITEM_HERO_TOOL);
 
@@ -21,6 +25,38 @@ public abstract class HeroTool extends ItemObject {
 		
 		state = HeroToolStates_e.STATE_CONSTRUCTION;
 		
+	}
+	
+	public void changeState(HeroToolStates_e newState) {
+		switch (newState) {
+		case STATE_CONSTRUCTION:
+			newStateConstruction();
+			break;
+		case STATE_READY:
+			newStateReady();
+			break;
+		default:
+			break;
+		}
+		
+		this.state = newState;
+	}
+	
+	private void newStateConstruction() {
+		
+	}
+	
+	private void newStateReady() {
+		switch (state) {
+		case STATE_CONSTRUCTION:
+			
+			
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }

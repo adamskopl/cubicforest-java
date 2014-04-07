@@ -10,6 +10,10 @@ public class GuiElementHeroTool extends GuiElement {
 
 	private HeroToolType_e heroToolType;
 
+	public HeroToolType_e getHeroToolType() {
+		return heroToolType;
+	}
+
 	public GuiElementHeroTool(HeroToolType_e heroToolType, TextureRegion tr,
 			int texNum, GuiContainer pareContainer, float posX, float posY) {
 		super(tr, texNum, pareContainer, posX, posY);

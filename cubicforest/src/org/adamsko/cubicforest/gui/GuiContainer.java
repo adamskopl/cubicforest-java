@@ -15,6 +15,12 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 
 	protected List<GuiElement> guiElements;
 	private GuiType_e type;
+	// holds actually clicked element 
+	private GuiElement clickedElement = null;
+	
+	public GuiElement getClickedElement() {
+		return clickedElement;
+	}
 
 	public GuiType_e getType() {
 		return type;
@@ -56,12 +62,15 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 	 * @return
 	 */
 	public Boolean isClicked(Vector2 screenPos) {
-		Boolean elementClicked = false;
+		Boolean isElementClicked = false;
 		for(GuiElement e : guiElements) {
-			if(e.isClicked(screenPos))
-				elementClicked = true;
+			if(e.isClicked(screenPos)) {
+				isElementClicked = true;
+				clickedElement = e;
+				break;
+			}
 		}
-		return elementClicked;
+		return isElementClicked;
 	}
 
 }

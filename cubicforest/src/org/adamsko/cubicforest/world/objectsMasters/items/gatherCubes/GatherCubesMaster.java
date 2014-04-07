@@ -78,7 +78,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void tileEvent(TileEvent_e evenType, Tile eventTile,
+	public void tileEvent(TileEvent_e eventType, Tile eventTile,
 			WorldObject eventObject) {
 
 		ItemObject item = (ItemObject) eventTile.getItem();
@@ -88,7 +88,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 		GatherCube tileCube = (GatherCube) item;
 
-		switch (evenType) {
+		switch (eventType) {
 		case OCCUPANT_ENTERS:
 			tileCube.setTextureRegion(atlasRows.get(1)[tileCube.getTexNum()]);
 			break;

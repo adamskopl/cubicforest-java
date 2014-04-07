@@ -16,7 +16,7 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer imp
 	}
 	
 	@Override
-	public Boolean isTileEventValid(TileEvent_e evenType, Tile eventTile,
+	public Boolean isTileEventValid(TileEvent_e eventType, Tile eventTile,
 			WorldObject eventObject) {
 
 		WorldObjectType_e tileObjectType = WorldObjectType_e.OBJECT_UNDEFINED;
