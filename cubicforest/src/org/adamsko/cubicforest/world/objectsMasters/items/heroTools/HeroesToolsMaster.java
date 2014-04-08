@@ -188,6 +188,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 			switch (toolState) {
 			case STATE_CONSTRUCTION:
 				tileTool.setTextureRegion(atlasRows.get(0)[tileTool.getTexNum()]);
+				tileTool.setState(HeroToolStates_e.STATE_READY);
 				gatherCubesMaster.counterAddValue(-tileTool.getBuildCost());
 				break;
 

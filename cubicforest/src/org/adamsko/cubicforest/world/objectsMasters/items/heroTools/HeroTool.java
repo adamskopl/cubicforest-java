@@ -10,6 +10,10 @@ public abstract class HeroTool extends ItemObject {
 	HeroToolType_e heroToolType;
 	HeroToolStates_e state;
 
+	public void setState(HeroToolStates_e state) {
+		this.state = state;
+	}
+
 	public HeroToolStates_e getState() {
 		return state;
 	}
