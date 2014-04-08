@@ -4,6 +4,8 @@ import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -16,9 +18,10 @@ public class GatherCubesCounter extends GuiContainer {
 
 	public GatherCubesCounter(TilesMaster TM, String textureName, int tileW,
 			int tileH, int posX, int posY) {
-		super(TM, GuiType_e.GUI_CUBES_COUNTER, textureName, tileW, tileH, posX, posY);
+		super(TM, GuiType_e.GUI_CUBES_COUNTER, textureName, tileW, tileH, posX,
+				posY);
 
-		counter = new Vector2(10, 10);
+		counter = new Vector2(4, 0);
 
 		createGui();
 	}
@@ -33,7 +36,11 @@ public class GatherCubesCounter extends GuiContainer {
 	}
 
 	public void addValue(int value) {
-		counter.add(1, 0);
+		counter.add(value, 0);
+	}
+	
+	public Integer getCounter() {
+		return (int) counter.x;
 	}
 
 }

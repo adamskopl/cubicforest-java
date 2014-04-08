@@ -44,8 +44,8 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		List<Vector2> testPositions = new ArrayList<Vector2>();
 		testPositions.add(new Vector2(1, 1));
 		testPositions.add(new Vector2(3, 9));
-//		testPositions.add(new Vector2(5, 9));
-//		testPositions.add(new Vector2(6, 9));
+		testPositions.add(new Vector2(5, 9));
+		testPositions.add(new Vector2(6, 9));
 
 		Enemy testEnemy;
 		int atlasIndex = 0;

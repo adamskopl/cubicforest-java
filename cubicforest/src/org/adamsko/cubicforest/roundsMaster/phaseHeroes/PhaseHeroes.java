@@ -8,6 +8,8 @@ import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesCounter;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
@@ -25,6 +27,7 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 
 	private PhaseHeroesOrdersMaster heroesOrdersMaster;
 	private TilesMaster tilesMaster;
+	private GatherCubesMaster gatherCubesMaster;
 
 	/**
 	 * Active path created by picking order valid Tile.
@@ -40,10 +43,11 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 
 	public PhaseHeroes(OrderableObjectsContainer orderableObjectsContainer,
 			OrdersMaster ordersMaster, TilesMaster tilesMaster,
-			HeroesToolsMaster heroesToolsMaster) {
+			HeroesToolsMaster heroesToolsMaster, GatherCubesMaster gatherCubesMaster) {
 		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
 
 		this.tilesMaster = tilesMaster;
+		this.gatherCubesMaster = gatherCubesMaster;
 		heroesOrdersMaster = new PhaseHeroesOrdersMaster(tilesMaster,
 				heroesToolsMaster);
 	}
@@ -174,9 +178,11 @@ public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
 					.getClickedElement();
 			HeroToolType_e heroToolType = clickedElement.getHeroToolType();
 
-			// change mode and also set marker's type
-			heroesOrdersMaster.changePhaseHeroesMode(
-					PhaseHeroesMode_e.MODE_CHOICE_TOOL, heroToolType);
+			if (gatherCubesMaster.isToolAffordable(heroToolType)) {
+				// change mode and also set marker's type
+				heroesOrdersMaster.changePhaseHeroesMode(
+						PhaseHeroesMode_e.MODE_CHOICE_TOOL, heroToolType);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

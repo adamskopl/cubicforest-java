@@ -13,6 +13,7 @@ import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -39,8 +40,10 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	private HeroToolType_e heroToolMarkerType;
 
 	private HeroToolsFactory heroToolsFactory;
+	
+	private GatherCubesMaster gatherCubesMaster;
 
-	public HeroesToolsMaster(TilesMaster TM, String textureName, int tileW,
+	public HeroesToolsMaster(TilesMaster TM, GatherCubesMaster gatherCubesMaster,String textureName, int tileW,
 			int tileH) {
 		super(TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 
@@ -49,6 +52,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 		heroToolMarkerType = null;
 
 		heroToolsFactory = new HeroToolsFactory(atlasRows);
+		this.gatherCubesMaster = gatherCubesMaster;
 
 	}
 
@@ -184,6 +188,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 			switch (toolState) {
 			case STATE_CONSTRUCTION:
 				tileTool.setTextureRegion(atlasRows.get(0)[tileTool.getTexNum()]);
+				gatherCubesMaster.counterAddValue(-tileTool.getBuildCost());
 				break;
 
 			default:

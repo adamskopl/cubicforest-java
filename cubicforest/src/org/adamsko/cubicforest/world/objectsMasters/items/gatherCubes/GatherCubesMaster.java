@@ -9,6 +9,9 @@ import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
@@ -32,6 +35,17 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public GatherCubesCounter getGatherCubesCounter() {
 		return gatherCubesCounter;
+	}
+
+	/**
+	 * Check if counter allows heroTool to be build (if player can afford it).
+	 */
+	public Boolean isToolAffordable(HeroToolType_e heroToolType) {
+		int toolCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
+		if(toolCost <= gatherCubesCounter.getCounter()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -115,6 +129,10 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void counterAddValue(Integer value) {
+		gatherCubesCounter.addValue(value);
 	}
 
 }

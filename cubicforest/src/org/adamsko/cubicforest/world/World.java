@@ -69,7 +69,7 @@ public class World {
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 
 		heroesToolsMaster = new HeroesToolsMaster(tilesMaster,
-				"tools-atlas-medium", 40, 45);
+				gatherCubesMaster, "tools-atlas-medium", 40, 45);
 
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
@@ -77,7 +77,7 @@ public class World {
 		interactionMaster = new InteractionMaster();
 		interactionMaster.addClient(gatherCubesMaster);
 		interactionMaster.addClient(heroesToolsMaster);
-		
+
 		tilesMaster.setInteractionMaster(interactionMaster);
 
 		initRoundsMaster();
@@ -108,7 +108,7 @@ public class World {
 		roundsMaster = new RoundsMaster();
 
 		PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster, ordersMaster,
-				tilesMaster, heroesToolsMaster);
+				tilesMaster, heroesToolsMaster, gatherCubesMaster);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseHeroes);
 
