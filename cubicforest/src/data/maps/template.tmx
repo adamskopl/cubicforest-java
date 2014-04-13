@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="50" tileheight="50">
+ <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50">
+  <image source="tileset.png" trans="ffffff" width="600" height="600"/>
+ </tileset>
+ <objectgroup name="atlas" width="10" height="10">
+  <object type="tile" gid="5" x="-150" y="50"/>
+  <object type="terrain" gid="4" x="-150" y="100"/>
+  <object type="hero" gid="2" x="-150" y="150"/>
+  <object type="enemy" gid="3" x="-150" y="200"/>
+  <object type="item" gid="1" x="-150" y="250"/>
+ </objectgroup>
+</map>
