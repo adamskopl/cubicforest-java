@@ -71,6 +71,16 @@
   <object type="tile" gid="5" x="150" y="500"/>
   <object type="tile" gid="5" x="450" y="250"/>
   <object type="tile" gid="5" x="450" y="300"/>
+  <object type="tile" gid="5" x="400" y="350"/>
+  <object type="tile" gid="5" x="450" y="350"/>
+  <object type="tile" gid="5" x="400" y="400"/>
+  <object type="tile" gid="5" x="450" y="400"/>
+  <object type="tile" gid="5" x="400" y="450"/>
+  <object type="tile" gid="5" x="450" y="450"/>
+  <object type="tile" gid="5" x="400" y="500"/>
+  <object type="tile" gid="5" x="450" y="500"/>
+  <object type="tile" gid="5" x="400" y="100"/>
+  <object type="tile" gid="5" x="450" y="100"/>
  </objectgroup>
  <objectgroup name="TILED_ENTITY_HERO" width="10" height="10">
   <object type="hero" gid="2" x="300" y="350"/>

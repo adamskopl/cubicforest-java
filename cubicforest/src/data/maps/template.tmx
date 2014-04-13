@@ -10,4 +10,9 @@
   <object type="enemy" gid="3" x="-150" y="200"/>
   <object type="item" gid="1" x="-150" y="250"/>
  </objectgroup>
+ <objectgroup name="TILED_TILE" width="10" height="10"/>
+ <objectgroup name="TILED_ENTITY_HERO" width="10" height="10"/>
+ <objectgroup name="TILED_ENTITY_ENEMY" width="10" height="10"/>
+ <objectgroup name="TILED_TERRAIN" width="10" height="10"/>
+ <objectgroup name="TILED_ITEM_GATHERCUBE" width="10" height="10"/>
 </map>
