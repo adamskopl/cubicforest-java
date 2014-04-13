@@ -23,7 +23,7 @@ public class TerrainObjectsMaster extends WorldObjectsContainer implements World
 
 	public TerrainObjectsMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW,
 			int tileH) {
-		super(mapsLoader, TM, WorldObjectType_e.OBJECT_TERRAIN, textureName, tileW, tileH);
+		super("TerrainObjectsMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_TERRAIN, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -88,6 +88,15 @@ public class TerrainObjectsMaster extends WorldObjectsContainer implements World
 			addObject(tree);
 			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}
 		}
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+//		try {
+//			removeWorldObjects();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}		
 	}
 
 }

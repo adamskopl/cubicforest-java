@@ -10,13 +10,14 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
-	public TilesContainer(MapsLoader mapsLoader, TilesMaster TM) {
-		super(mapsLoader, TM, WorldObjectType_e.OBJECT_UNDEFINED,
+	public TilesContainer(String name, MapsLoader mapsLoader, TilesMaster TM) {
+		super(name, mapsLoader, TM, WorldObjectType_e.OBJECT_UNDEFINED,
 				"tiles-atlas-medium", 75, 45);
 	}
 
@@ -99,5 +100,10 @@ public class TilesContainer extends WorldObjectsContainer implements
 			addTile(vec);
 		}
 
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+		
 	}
 }

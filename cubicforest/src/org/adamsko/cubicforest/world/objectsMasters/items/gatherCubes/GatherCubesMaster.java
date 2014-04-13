@@ -26,7 +26,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW,
 			int tileH) {
-		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+		super("GatherCubesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -165,6 +165,19 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			}
 		}
 		
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+		gatherCubesCounter.reset();
+		
+		try {
+			removeWorldObjects();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		loadMapObjects(mapsLoader);
 	}
 
 }

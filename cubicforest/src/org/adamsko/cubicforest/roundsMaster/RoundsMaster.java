@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
+import org.adamsko.cubicforest.world.World;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
@@ -12,40 +13,49 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
 import com.badlogic.gdx.Gdx;
 
 /**
- * A round consists of phases. 
+ * A round consists of phases.
  * 
  * @author adamsko
- *
+ * 
  */
 public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 
+	/**
+	 * for the rounds/world restart
+	 */
+	private World world;
 	private List<RoundPhase> phases;
 	int phasePointer = -1;
-	
-	public RoundsMaster() {
+	/**
+	 * Block reloading and unblock it later (one click = one reload)
+	 */
+	private boolean reloadAllowed = true;
+
+	public RoundsMaster(World world) {
+		this.world = world;
 		phases = new ArrayList<RoundPhase>();
 	}
-	
+
 	public void nextRound() throws Exception {
-		phasePointer = -1;	
+		phasePointer = -1;
 		nextPhase();
 	}
-	
+
 	private RoundPhase actualPhase() {
-		if(phases.size() == 0)
+		if (phases.size() == 0)
 			return null;
 		return phases.get(phasePointer);
 	}
-	
+
 	public void nextPhase() throws Exception {
-		if(phases.size() == 0)
+		if (phases.size() == 0)
 			return;
-		
+
 		phasePointer++;
-		// check if previous phase was the last one 
-		if(phasePointer == phases.size()) {
+		// check if previous phase was the last one
+		if (phasePointer == phases.size()) {
 			nextRound();
-		} else {		
+		} else {
 			RoundPhase nextPhase = phases.get(phasePointer);
 			nextPhase.startPhase();
 		}
@@ -57,10 +67,10 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	 * 
 	 * @param phaseEnded
 	 *            phase which has ended right now
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void phaseIsOver(RoundPhase phaseEnded) throws Exception {
-		if(phases.get(phasePointer) != phaseEnded) {
+		if (phases.get(phasePointer) != phaseEnded) {
 			throw new Exception("phaseIsOver: phasePointer error");
 		}
 		nextPhase();
@@ -71,11 +81,11 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	public void onTileEvent(Tile tile, TileEvent_e event) {
 		RoundPhase actualPhase = actualPhase();
 
-		if(actualPhase != null)
+		if (actualPhase != null)
 			actualPhase.onTileEvent(tile, event);
 
 	}
-	
+
 	/**
 	 * @param newPhase
 	 */
@@ -83,9 +93,43 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		phases.add(newPhase);
 	}
 
+	/**
+	 * Reload {@link RoundsMaster}: reload all phases, reload World.
+	 */
+	public void reload() {
+		if(reloadAllowed) {
+			reloadAllowed = false;
+
+			world.reloadWorld();
+
+			// reload phases after reloading World (add new phaseObjects)
+			reloadPhases();
+			
+			try {
+				nextRound();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public boolean isReloadAllowed() {
+		return reloadAllowed;
+	}
+	
+	private void reloadPhases() {
+		for(RoundPhase phase : phases) {
+			phase.reloadPhase();
+		}
+	}
+	
+	public void reloadUnlock() {
+		reloadAllowed = true;
+	}
+
 	@Override
 	public void onGuiEvent(GuiContainer eventGui) {
-		actualPhase().onGuiEvent(eventGui);		
+		actualPhase().onGuiEvent(eventGui);
 	}
 
 }

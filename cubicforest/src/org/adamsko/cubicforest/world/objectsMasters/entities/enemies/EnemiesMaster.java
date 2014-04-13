@@ -23,7 +23,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
 	public EnemiesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
+		super("enemiesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -101,6 +101,22 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			addObject(enemy);
 			
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
+		}
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+		try {
+			removeWorldObjects();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			loadMapObjects(mapsLoader);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

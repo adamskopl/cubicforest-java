@@ -17,7 +17,7 @@ public class GuiHeroTools extends GuiContainer {
 
 	public GuiHeroTools(TilesMaster TM, String textureName, int tileW,
 			int tileH, float posX, float posY) {
-		super(TM, GuiType_e.GUI_HERO_TOOLS, textureName, tileW, tileH, posX,
+		super("guiHeroTools", TM, GuiType_e.GUI_HERO_TOOLS, textureName, tileW, tileH, posX,
 				posY);
 
 		createGui();

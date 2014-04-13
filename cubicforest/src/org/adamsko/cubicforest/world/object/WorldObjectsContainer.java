@@ -29,9 +29,9 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		return worldObjectsType;
 	}
 
-	public WorldObjectsContainer(MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
+	public WorldObjectsContainer(String name, MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
-		super(TM, textureName, tileW, tileH); 
+		super(name, TM, textureName, tileW, tileH); 
 		worldObjects = new ArrayList<WorldObject>();
 		tilesMaster = TM;
 		this.mapsLoader = mapsLoader;
@@ -74,6 +74,13 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 	public void handleServantTileEvent(WorldObject servant,
 			TileEvent_e tileEvent) {
 		
+	}
+	
+	protected void removeWorldObjects() throws Exception {
+		while(worldObjects.size() != 0) {
+			WorldObject object = worldObjects.get(0);
+			removeObject(object);
+		}
 	}
 
 }

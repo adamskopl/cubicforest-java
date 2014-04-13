@@ -27,7 +27,7 @@ public class MapsLoader {
 		Boolean exists = new Boolean(Gdx.files.internal("data/maps/testMap.json")
 				.exists());
 
-		FileHandle mapFile = Gdx.files.internal("data/maps/testMap.json");
+		FileHandle mapFile = Gdx.files.internal("data/maps/testMap2.json");
 
 		String mapFileString = mapFile.readString();
 		

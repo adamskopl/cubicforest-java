@@ -10,5 +10,5 @@ public interface WorldObjectsMaster extends RenderableObjectsMaster {
 	public void update(float deltaTime);
 	public List<WorldObject> getWorldObjects();
 	void loadMapObjects(MapsLoader mapsLoader) throws Exception;
-	
+	void reload(MapsLoader mapsLoader);
 }

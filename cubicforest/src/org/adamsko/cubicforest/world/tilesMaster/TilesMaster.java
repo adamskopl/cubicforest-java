@@ -69,7 +69,7 @@ public class TilesMaster implements PickMasterClient {
 
 	public void initTiles() {
 		
-		tilesContainer = new TilesContainer(mapsLoader, this);
+		tilesContainer = new TilesContainer("tiles container", mapsLoader, this);
 		tilesContainer.loadMapObjects(mapsLoader);
 
 		tilesEventsMaster = new TilesEventsMaster(tilesContainer);
@@ -177,6 +177,9 @@ public class TilesMaster implements PickMasterClient {
 					throw new Exception(
 							"removeWorldObject removeObject != removedOccupant");
 				}
+				break;
+			case OBJECT_TERRAIN:
+				
 				break;
 			default:
 				throw new Exception("removeWorldObject unsupported type");

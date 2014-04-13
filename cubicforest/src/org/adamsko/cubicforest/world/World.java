@@ -110,7 +110,7 @@ public class World {
 	}
 
 	private void initRoundsMaster() {
-		roundsMaster = new RoundsMaster();
+		roundsMaster = new RoundsMaster(this);
 
 		PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster, ordersMaster,
 				tilesMaster, heroesToolsMaster, gatherCubesMaster);
@@ -126,6 +126,12 @@ public class World {
 			roundsMaster.nextRound();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void reloadWorld() {
+		for(WorldObjectsMaster wo : worldObjectsMasters) {
+			wo.reload(mapsLoader);
 		}
 	}
 

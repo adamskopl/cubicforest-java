@@ -46,7 +46,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 
 	public HeroesToolsMaster(MapsLoader mapsLoader, TilesMaster TM, GatherCubesMaster gatherCubesMaster,String textureName, int tileW,
 			int tileH) {
-		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+		super("HeroesToolsMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 
 		// addTestObjects();
 		heroToolMarker = null;
@@ -208,6 +208,16 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+		try {
+			removeWorldObjects();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

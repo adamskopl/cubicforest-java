@@ -1,6 +1,8 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
+import org.adamsko.cubicforest.gui.debug.GuiDebug;
+import org.adamsko.cubicforest.gui.debug.GuiElementDebug;
 import org.adamsko.cubicforest.gui.heroTools.GuiElementHeroTool;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
 import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
@@ -43,7 +45,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 	public PhaseHeroes(OrderableObjectsContainer orderableObjectsContainer,
 			OrdersMaster ordersMaster, TilesMaster tilesMaster,
-			HeroesToolsMaster heroesToolsMaster, GatherCubesMaster gatherCubesMaster) {
+			HeroesToolsMaster heroesToolsMaster,
+			GatherCubesMaster gatherCubesMaster) {
 		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
 
 		this.tilesMaster = tilesMaster;
@@ -56,6 +59,9 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	public void onTileEvent(Tile tile, TileEvent_e event) {
 
 		WorldObject activeObject = null;
+		
+		// allow 'reload' button to be clicked
+		roundsMaster.reloadUnlock();
 
 		if (!orderInProgress) {
 			activeObject = activeObject();
@@ -117,7 +123,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void startPhase() {
+	public void startPhase() {		
 		nextHero();
 	}
 
@@ -165,11 +171,31 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		case GUI_HERO_TOOLS:
 			guiHeroToolsClicked((GuiHeroTools) eventGui);
 			break;
+		case GUI_DEBUG:
+			guiDebugClicked((GuiDebug) eventGui);
+			break;
 
 		default:
 			break;
 		}
 
+	}
+
+	private void guiDebugClicked(GuiDebug guiDebug) {
+		GuiElementDebug clickedElementDebug = (GuiElementDebug) guiDebug
+				.getClickedElement();
+
+		switch (clickedElementDebug.getDebugType()) {
+		case DEBUG_RELOAD:
+			if(roundsMaster.isReloadAllowed()) {
+				ordersMaster.unhighlightTilesObjectRange(activeObject());
+				roundsMaster.reload();
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	private void guiHeroToolsClicked(GuiHeroTools guiHeroTools) {

@@ -40,9 +40,9 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 		this.containerScreenPos = containerScreenPos;
 	}
 
-	public GuiContainer(TilesMaster TM, GuiType_e guiType, String textureName, int tileW,
+	public GuiContainer(String name, TilesMaster TM, GuiType_e guiType, String textureName, int tileW,
 			int tileH, float posX, float posY) {
-		super(TM, textureName, tileW, tileH);
+		super(name, TM, textureName, tileW, tileH);
 
 		guiElements = new ArrayList<GuiElement>();
 

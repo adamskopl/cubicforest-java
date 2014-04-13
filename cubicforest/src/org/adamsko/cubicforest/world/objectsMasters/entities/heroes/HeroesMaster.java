@@ -23,7 +23,7 @@ import com.badlogic.gdx.math.Vector2;
 public class HeroesMaster extends InteractionObjectsMaster implements WorldObjectsMaster, OrderableObjectsContainer {
 
 	public HeroesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
+		super("HeroesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -90,6 +90,21 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}			
 		}
 		
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+		try {
+			removeWorldObjects();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			loadMapObjects(mapsLoader);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

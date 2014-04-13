@@ -12,7 +12,7 @@ public class GuiOrders extends GuiContainer {
 
 	public GuiOrders(TilesMaster TM, String textureName, int tileW, int tileH,
 			float posX, float posY) {
-		super(TM, GuiType_e.GUI_ORDERS, textureName, tileW, tileH, posX, posY);
+		super("gui orders", TM, GuiType_e.GUI_ORDERS, textureName, tileW, tileH, posX, posY);
 		createGui();
 	}
 

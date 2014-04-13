@@ -13,6 +13,7 @@ public interface RoundPhase extends TilesMasterClient, GuiMasterClient {
 	 */
 	void phaseIsOver() throws Exception;
 	void startPhase();
+	void reloadPhase();
 	void setRoundsMaster(RoundsMaster roundsMaster);
 	String getName();
 		

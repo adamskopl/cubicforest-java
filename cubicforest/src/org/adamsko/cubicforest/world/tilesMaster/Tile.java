@@ -80,7 +80,7 @@ public class Tile extends WorldObject {
 			}
 			occupant = insertObject;
 			hasOccupant = true;
-
+			
 			break;
 		case OBJECT_ITEM:
 			if (hasItem()) {

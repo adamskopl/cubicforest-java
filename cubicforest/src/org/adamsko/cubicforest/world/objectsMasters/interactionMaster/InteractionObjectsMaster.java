@@ -11,9 +11,9 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 public abstract class InteractionObjectsMaster extends WorldObjectsContainer implements InteractionMasterClient {
 
-	public InteractionObjectsMaster(MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
+	public InteractionObjectsMaster(String name, MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
-		super(mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
+		super(name, mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
 	}
 	
 	@Override

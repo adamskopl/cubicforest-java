@@ -18,7 +18,7 @@ public class GatherCubesCounter extends GuiContainer {
 
 	public GatherCubesCounter(TilesMaster TM, String textureName, int tileW,
 			int tileH, int posX, int posY) {
-		super(TM, GuiType_e.GUI_CUBES_COUNTER, textureName, tileW, tileH, posX,
+		super("gatherCubesCounter", TM, GuiType_e.GUI_CUBES_COUNTER, textureName, tileW, tileH, posX,
 				posY);
 
 		counter = new Vector2(4, 0);
@@ -41,6 +41,10 @@ public class GatherCubesCounter extends GuiContainer {
 	
 	public Integer getCounter() {
 		return (int) counter.x;
+	}
+
+	public void reset() {
+		counter.set(4, 0);
 	}
 
 }

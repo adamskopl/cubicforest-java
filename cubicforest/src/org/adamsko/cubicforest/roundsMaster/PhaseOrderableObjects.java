@@ -16,27 +16,27 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		RoundPhase {
 
 	private String name;
-	private RoundsMaster roundsMaster;
+	protected RoundsMaster roundsMaster;
 	protected OrdersMaster ordersMaster;
 
 	private List<WorldObject> phaseObjects;
+	private OrderableObjectsContainer objectsContainer;
 
 	/**
 	 * Active object's position on the list.
 	 */
-	private int activeObjectPointer = -1;
+	private int activeObjectPointer;
 
 	protected PhaseOrderableObjects(
 			OrderableObjectsContainer orderableObjectsContainer,
 			OrdersMaster ordersMaster, String name) {
 
+		this.objectsContainer = orderableObjectsContainer;
 		this.ordersMaster = ordersMaster;
 		this.name = name;
 		phaseObjects = new ArrayList<WorldObject>();
-
-		for (WorldObject wo : orderableObjectsContainer.getOrderableObjects()) {
-			phaseObjects.add(wo);
-		}
+		
+		reloadPhase();
 	}
 
 	/**
@@ -82,5 +82,15 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 
 	public String getName() {
 		return name;
+	}
+	
+	@Override
+	public void reloadPhase() {
+		activeObjectPointer = -1;
+		
+		phaseObjects.clear();
+		for (WorldObject wo : objectsContainer.getOrderableObjects()) {
+			phaseObjects.add(wo);
+		}
 	}
 }

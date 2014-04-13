@@ -26,6 +26,11 @@ public class TilePathSearcher {
 
 	public static TilePath search(WorldObject objectOnPath, Tile destTile) {
 		Tile srcTile = tilesMaster.getTileWithObject(objectOnPath);
+
+		if(srcTile == null) {
+			Gdx.app.error("search", "NULL");
+		}
+		
 		return search(srcTile, destTile);
 	}
 

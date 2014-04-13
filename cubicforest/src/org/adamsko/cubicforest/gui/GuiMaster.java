@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.gui.debug.GuiDebug;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
@@ -25,6 +26,7 @@ public class GuiMaster implements PickMasterClient {
 
 	private GuiHeroTools guiHeroTools;
 	private GuiOrders guiOrders;
+	private GuiDebug guiDebug;
 
 	public GuiMaster(TilesMaster tilesMaster) {
 		guiList = new ArrayList<GuiContainer>();
@@ -36,8 +38,12 @@ public class GuiMaster implements PickMasterClient {
 		guiOrders = new GuiOrders(tilesMaster, "orders-atlas-medium", 100, 100,
 				20, -340);
 
+		guiDebug = new GuiDebug(tilesMaster, "orders-atlas-medium", 50, 50,
+				680, -100);
+
 		addGui(guiHeroTools);
 		addGui(guiOrders);
+		addGui(guiDebug);
 	}
 
 	public void addGui(GuiContainer newGui) {

@@ -17,6 +17,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class RenderableObjectsContainer {
 
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
+	
 	/**
 	 * Types of {@link RenderableObject} objects lists in container.
 	 * 
@@ -72,8 +78,10 @@ public class RenderableObjectsContainer {
 	 */
 	protected List<TextureRegion[]> atlasRows;
 
-	public RenderableObjectsContainer(TilesMaster TM, String textureName,
+	public RenderableObjectsContainer(String name, TilesMaster TM, String textureName,
 			int tileW, int tileH) {
+		this.name = new String(name);
+		
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		renderableObjectsToRemove = new ArrayList<RenderableObject>();
