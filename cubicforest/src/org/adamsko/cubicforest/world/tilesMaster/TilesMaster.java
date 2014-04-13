@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
@@ -46,11 +47,13 @@ public class TilesMaster implements PickMasterClient {
 	private int mapSize;
 	private List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
+	private MapsLoader mapsLoader;
 
 	private TilesEventsMaster tilesEventsMaster;
 
-	public TilesMaster(int mapSize) {
+	public TilesMaster(MapsLoader mapsLoader, int mapSize) {
 		this.mapSize = mapSize;
+		this.mapsLoader = mapsLoader;
 		clients = new ArrayList<TilesMasterClient>();
 		TilesHelper.setMapSize(mapSize);
 		initTiles();
@@ -65,8 +68,12 @@ public class TilesMaster implements PickMasterClient {
 	}
 
 	public void initTiles() {
-		tilesContainer = new TilesContainer(this);
+		
+		tilesContainer = new TilesContainer(mapsLoader, this);
+		tilesContainer.loadMapObjects(mapsLoader);
+
 		tilesEventsMaster = new TilesEventsMaster(tilesContainer);
+
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			if (TilesHelper.isTileonTestMap(fIndex)) {
 				continue;
@@ -74,7 +81,7 @@ public class TilesMaster implements PickMasterClient {
 			Vector2 fCoords = TilesHelper.calcCoords(fIndex);
 			fCoords.add(new Vector2(7, -3)); // temporary solution for centering
 												// view
-			tilesContainer.addTile(fCoords);
+//			tilesContainer.addTile(fCoords);
 		}
 	}
 

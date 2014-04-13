@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -17,6 +18,8 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 
 	private List<WorldObject> worldObjects;
 	private TilesMaster tilesMaster;
+	private MapsLoader mapsLoader;
+	
 	/**
 	 * Every container contains only one type of objects.
 	 */
@@ -26,11 +29,12 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		return worldObjectsType;
 	}
 
-	public WorldObjectsContainer(TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
+	public WorldObjectsContainer(MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
 		super(TM, textureName, tileW, tileH); 
 		worldObjects = new ArrayList<WorldObject>();
 		tilesMaster = TM;
+		this.mapsLoader = mapsLoader;
 		this.worldObjectsType = worldObjectsType;
 	}
 	

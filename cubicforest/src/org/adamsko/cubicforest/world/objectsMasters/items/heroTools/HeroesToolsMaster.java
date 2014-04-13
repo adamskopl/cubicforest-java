@@ -8,6 +8,7 @@ import javax.swing.event.DocumentEvent.EventType;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -43,9 +44,9 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	
 	private GatherCubesMaster gatherCubesMaster;
 
-	public HeroesToolsMaster(TilesMaster TM, GatherCubesMaster gatherCubesMaster,String textureName, int tileW,
+	public HeroesToolsMaster(MapsLoader mapsLoader, TilesMaster TM, GatherCubesMaster gatherCubesMaster,String textureName, int tileW,
 			int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 
 		// addTestObjects();
 		heroToolMarker = null;
@@ -202,6 +203,12 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 			break;
 		}
 
+	}
+
+	@Override
+	public void loadMapObjects(MapsLoader mapsLoader) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

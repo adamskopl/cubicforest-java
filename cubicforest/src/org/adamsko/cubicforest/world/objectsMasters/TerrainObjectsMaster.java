@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
@@ -19,11 +21,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TerrainObjectsMaster extends WorldObjectsContainer implements WorldObjectsMaster {
 
-	public TerrainObjectsMaster(TilesMaster TM, String textureName, int tileW,
+	public TerrainObjectsMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW,
 			int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_TERRAIN, textureName, tileW, tileH);
+		super(mapsLoader, TM, WorldObjectType_e.OBJECT_TERRAIN, textureName, tileW, tileH);
 		try {
-		addTestObjects();
+			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
 			Gdx.app.error("TerrainObjectsMaster", e.toString());
 		}
@@ -64,6 +66,28 @@ public class TerrainObjectsMaster extends WorldObjectsContainer implements World
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void loadMapObjects(MapsLoader mapsLoader) {
+		List<Vector2> coords = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_TERRAIN);
+
+		Tree tree;
+		int atlasIndex = 0;
+		for (Vector2 pos : coords) {
+			tree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex);
+			tree.setRenderVector(new Vector2(
+					-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
+			pos.add(new Vector2(0.5f, 0.5f));
+			tree.setTilesPos(pos);
+			tree.setVerticalPos(0.5f);
+			
+			tree.setName("tree");
+			
+			addObject(tree);
+			if(atlasIndex==1){atlasIndex=0;}else{atlasIndex++;}
+		}
 	}
 
 }

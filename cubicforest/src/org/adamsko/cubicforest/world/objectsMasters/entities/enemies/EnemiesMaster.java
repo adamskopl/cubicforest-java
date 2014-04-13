@@ -6,6 +6,8 @@ import java.util.List;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -20,10 +22,10 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemiesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
-	public EnemiesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
+	public EnemiesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW, int tileH) {
+		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
-			addTestObjects();
+			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,4 +79,28 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		
 	}
 
+	@Override
+	public void loadMapObjects(MapsLoader mapsLoader) throws Exception {
+		List<Vector2> coords = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_ENEMY);
+		
+		Enemy enemy;
+		int atlasIndex = 0;
+		for (Vector2 pos : coords) {
+			enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex);
+			enemy.setRenderVector(new Vector2(
+					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
+			
+			enemy.setSpeed(2);
+			
+			pos.add(new Vector2(0.5f, 0.5f));
+			enemy.setTilesPos(pos);
+			enemy.setName("Enemy" + atlasIndex);
+			enemy.addLabel(ROLabel_e.LABEL_NAME);
+			
+			addObject(enemy);
+			
+			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
+		}
+	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -22,11 +23,11 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	private GatherCubesCounter gatherCubesCounter;
 
-	public GatherCubesMaster(TilesMaster TM, String textureName, int tileW,
+	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW,
 			int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 		try {
-			addTestCubes();
+//			addTestCubes();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -133,6 +134,12 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	
 	public void counterAddValue(Integer value) {
 		gatherCubesCounter.addValue(value);
+	}
+
+	@Override
+	public void loadMapObjects(MapsLoader mapsLoader) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

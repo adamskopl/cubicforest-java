@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -48,10 +49,11 @@ public class PhaseEnemiesHeroesHelper {
 
 			TilePath pathToHero = TilePathSearcher
 					.searchShortestPathAdjacentTiles(enemy, hero);
-			if(pathToHero == null) {
+
+			if (pathToHero == null || pathToHero.length() == 0) {
 				continue;
 			}
-			
+
 			if (shortestPath == null) {
 				shortestPath = pathToHero;
 			}

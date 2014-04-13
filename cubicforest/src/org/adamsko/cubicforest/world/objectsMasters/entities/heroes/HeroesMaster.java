@@ -6,6 +6,8 @@ import java.util.List;
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -20,41 +22,12 @@ import com.badlogic.gdx.math.Vector2;
 
 public class HeroesMaster extends InteractionObjectsMaster implements WorldObjectsMaster, OrderableObjectsContainer {
 
-	public HeroesMaster(TilesMaster TM, String textureName, int tileW, int tileH) {
-		super(TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
+	public HeroesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW, int tileH) {
+		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
-		addTestObjects();
+			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
 			Gdx.app.error("HeroesMaster", e.toString());
-		}
-	}
-	
-	private void addTestObjects() throws Exception {
-		List<Vector2> testPositions = new ArrayList<Vector2>();
-		testPositions.add(new Vector2(0, 5));
-		testPositions.add(new Vector2(6, 4));
-
-		Hero testPig;
-		int atlasIndex = 0;
-		for (Vector2 pos : testPositions) {
-			testPig = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex);
-			testPig.setRenderVector(new Vector2(
-					-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
-			
-			testPig.setSpeed(4);
-			
-//			testPig.setVerticalPos(0.1f);
-			
-			pos.add(new Vector2(0.5f, 0.5f));
-			pos.add(new Vector2(7, -3));
-			testPig.setTilesPos(pos);
-			testPig.setName("testPig");
-//			testPig.addLabel(ROLabel_e.LABEL_TILEPOS);
-//			testPig.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
-			
-			addObject(testPig);
-			
-			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}
 	}
 
@@ -90,6 +63,32 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 	public void tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loadMapObjects(MapsLoader mapsLoader) throws Exception {
+		List<Vector2> coords = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_HERO);
+		
+		Hero hero;
+		int atlasIndex = 0;
+		for (Vector2 pos : coords) {
+			hero = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex);
+			hero.setRenderVector(new Vector2(
+					-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
+			
+			hero.setSpeed(4);
+			
+			pos.add(new Vector2(0.5f, 0.5f));
+			hero.setTilesPos(pos);
+			hero.setName("Pig" + atlasIndex);
+			hero.addLabel(ROLabel_e.LABEL_NAME);
+			
+			addObject(hero);
+			
+			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}			
+		}
 		
 	}
 

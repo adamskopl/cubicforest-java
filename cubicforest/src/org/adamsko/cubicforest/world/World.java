@@ -10,6 +10,7 @@ import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -32,6 +33,8 @@ import com.badlogic.gdx.Gdx;
 public class World {
 
 	private WorldRenderer renderer;
+	MapsLoader mapsLoader;
+	
 	private List<WorldObjectsMaster> worldObjectsMasters;
 	private PickMaster pickMaster;
 
@@ -52,23 +55,25 @@ public class World {
 
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
+		mapsLoader = new MapsLoader();
+		
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
 
-		tilesMaster = new TilesMaster(100);
+		tilesMaster = new TilesMaster(mapsLoader, 100);
 		TilesSearcher.setTilesMaster(tilesMaster);
 
-		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster,
+		terrainObjectsMaster = new TerrainObjectsMaster(mapsLoader, tilesMaster,
 				"terrain-atlas-medium", 42, 50);
-		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30,
+		heroesMaster = new HeroesMaster(mapsLoader, tilesMaster, "heroes-atlas-medium", 30,
 				35);
-		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",
+		enemiesMaster = new EnemiesMaster(mapsLoader, tilesMaster, "enemies-atlas-medium",
 				30, 35);
-		gatherCubesMaster = new GatherCubesMaster(tilesMaster,
+		gatherCubesMaster = new GatherCubesMaster(mapsLoader, tilesMaster,
 				"cubes-atlas-medium", 25, 40);
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 
-		heroesToolsMaster = new HeroesToolsMaster(tilesMaster,
+		heroesToolsMaster = new HeroesToolsMaster(mapsLoader, tilesMaster,
 				gatherCubesMaster, "tools-atlas-medium", 40, 45);
 
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);

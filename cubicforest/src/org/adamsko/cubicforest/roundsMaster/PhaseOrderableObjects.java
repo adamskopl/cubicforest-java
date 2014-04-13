@@ -12,7 +12,8 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
-public abstract class PhaseOrderableObjects implements OrdersMasterClient {
+public abstract class PhaseOrderableObjects implements OrdersMasterClient,
+		RoundPhase {
 
 	private String name;
 	private RoundsMaster roundsMaster;
@@ -25,37 +26,44 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient {
 	 */
 	private int activeObjectPointer = -1;
 
-	protected PhaseOrderableObjects(OrderableObjectsContainer orderableObjectsContainer,
+	protected PhaseOrderableObjects(
+			OrderableObjectsContainer orderableObjectsContainer,
 			OrdersMaster ordersMaster, String name) {
-		
+
 		this.ordersMaster = ordersMaster;
 		this.name = name;
 		phaseObjects = new ArrayList<WorldObject>();
-		
+
 		for (WorldObject wo : orderableObjectsContainer.getOrderableObjects()) {
 			phaseObjects.add(wo);
 		}
 	}
 
-	
 	/**
 	 * 
 	 */
 	protected void nextObject() {
+		if (phaseObjects.size() == 0)
+			try {
+				phaseIsOver(this);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		activeObjectPointer++;
 		// check if previous object was the last one
 		if (activeObjectPointer == phaseObjects.size()) {
 			activeObjectPointer = 0;
 		}
 	}
-	
+
 	protected Boolean isActiveObjectLast() {
-		if(activeObjectPointer+1 == phaseObjects.size()) {
+		if (activeObjectPointer + 1 == phaseObjects.size()) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @return WorldObject pointed by activeObjectPointer.
 	 */
@@ -71,7 +79,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient {
 	public void setRoundsMaster(RoundsMaster roundsMaster) {
 		this.roundsMaster = roundsMaster;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

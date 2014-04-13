@@ -23,7 +23,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.Gdx;
 
-public class PhaseHeroes extends PhaseOrderableObjects implements RoundPhase {
+public class PhaseHeroes extends PhaseOrderableObjects {
 
 	private PhaseHeroesOrdersMaster heroesOrdersMaster;
 	private TilesMaster tilesMaster;

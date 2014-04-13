@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
@@ -10,9 +11,9 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 public abstract class InteractionObjectsMaster extends WorldObjectsContainer implements InteractionMasterClient {
 
-	public InteractionObjectsMaster(TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
+	public InteractionObjectsMaster(MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
-		super(TM, worldObjectsType, textureName, tileW, tileH);
+		super(mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
 	}
 	
 	@Override

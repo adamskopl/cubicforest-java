@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
@@ -12,9 +14,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
-	
-	public TilesContainer(TilesMaster TM) {
-		super(TM, WorldObjectType_e.OBJECT_UNDEFINED, "tiles-atlas-medium", 75, 45);
+
+	public TilesContainer(MapsLoader mapsLoader, TilesMaster TM) {
+		super(mapsLoader, TM, WorldObjectType_e.OBJECT_UNDEFINED,
+				"tiles-atlas-medium", 75, 45);
 	}
 
 	public List<RenderableObject> getTiles() {
@@ -79,7 +82,7 @@ public class TilesContainer extends WorldObjectsContainer implements
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	public void clearTilesLabels() {
 		for (WorldObject wo : getWorldObjects()) {
 			Tile tile = (Tile) wo;
@@ -87,4 +90,14 @@ public class TilesContainer extends WorldObjectsContainer implements
 		}
 	}
 
+	@Override
+	public void loadMapObjects(MapsLoader mapsLoader) {
+		List<Vector2> coords = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_TILE);
+		
+		for (Vector2 vec : coords) {			
+			addTile(vec);
+		}
+
+	}
 }

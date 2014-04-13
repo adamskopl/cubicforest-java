@@ -52,23 +52,43 @@ public class TilePathSearcher {
 	 */
 	public static TilePath searchShortestPathAdjacentTiles(
 			WorldObject objectFrom, WorldObject objectTo) {
+
+		Gdx.app.debug("searchShortestPathAdjacentTiles", "<<<<<<<<<<<<<");
+
 		Tile tileTo = tilesMaster.getTileWithObject(objectTo);
 		List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo, true);
+
+		// Gdx.app.debug("adjTiles num: ",
+		// Integer.toString(adjacentTiles.size()));
+
 		TilePath shortestPath = null;
+		int index = -1;
 		for (Tile adjacentTile : adjacentTiles) {
+			index++;
+			// Gdx.app.debug("adjTile ", Integer.toString(index));
+
 			if (adjacentTile.hasOccupant()) {
+				Gdx.app.debug("adjTilehasOcc", "");
 				continue;
 			}
 
 			TilePath adjacentTilePath = search(objectFrom, adjacentTile);
 			if (shortestPath == null) {
+				Gdx.app.debug(Integer.toString(index) + " adjPath len ",
+						Integer.toString(adjacentTilePath.length()));
 				shortestPath = adjacentTilePath;
 				continue;
 			}
-			if (adjacentTilePath.length() < shortestPath.length()) {
+
+			Gdx.app.debug(Integer.toString(index) + " adjPath len ",
+					Integer.toString(adjacentTilePath.length()));
+
+			if (adjacentTilePath.length() < shortestPath.length()
+					|| shortestPath.length() == 0) {
 				shortestPath = adjacentTilePath;
 			}
 		}
+		Gdx.app.debug("searchShortestPathAdjacentTiles", ">>>>>>>>>>>>>");
 		return shortestPath;
 	}
 

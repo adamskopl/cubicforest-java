@@ -32,10 +32,15 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	}
 	
 	private RoundPhase actualPhase() {
+		if(phases.size() == 0)
+			return null;
 		return phases.get(phasePointer);
 	}
 	
 	public void nextPhase() throws Exception {
+		if(phases.size() == 0)
+			return;
+		
 		phasePointer++;
 		// check if previous phase was the last one 
 		if(phasePointer == phases.size()) {
@@ -64,7 +69,10 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 
 	@Override
 	public void onTileEvent(Tile tile, TileEvent_e event) {
-		actualPhase().onTileEvent(tile, event);
+		RoundPhase actualPhase = actualPhase();
+
+		if(actualPhase != null)
+			actualPhase.onTileEvent(tile, event);
 
 	}
 	

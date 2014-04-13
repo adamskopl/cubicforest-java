@@ -29,7 +29,7 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 
 	@Override
 	public void onTileEvent(Tile tile, TileEvent_e event) {
-//		Gdx.app.debug("phaseEnemies", "onTileEvent");
+		// Gdx.app.debug("phaseEnemies", "onTileEvent");
 	}
 
 	@Override
@@ -47,26 +47,33 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 		WorldObject activeEnemy = activeObject();
 		TilePath shortestPathTileAdjacentHero = heroesHelper
 				.searchPathShortestHero(activeEnemy);
-		
-		if (shortestPathTileAdjacentHero == null) {
-			Gdx.app.error("moveEnemy", "PATH == NULL");
+
+		if (shortestPathTileAdjacentHero == null
+				|| shortestPathTileAdjacentHero.length() == 0) {
+
+//			if (shortestPathTileAdjacentHero == null)
+//				Gdx.app.error("moveEnemy", "PATH == NULL");
+
+			onOrderFinished(OrdersMasterResult_e.ORDER_PATH_NOTFOUND,
+					activeEnemy);
+		} else {
+			// shorten path to enemy's speed
+			shortestPathTileAdjacentHero.shortenPath(activeEnemy.getSpeed());
+			Gdx.app.debug(getName(), activeEnemy.getName() + " startOrder");
+			ordersMaster.startOrder(activeEnemy, shortestPathTileAdjacentHero,
+					this);
 		}
-		Gdx.app.debug(getName(), "startOrder");
-		
-		// shorten path to enemy's speed
-		shortestPathTileAdjacentHero.shortenPath(activeEnemy.getSpeed());		
-		ordersMaster.startOrder(activeEnemy, shortestPathTileAdjacentHero, this);
 	}
 
 	@Override
 	public void onOrderFinished(OrdersMasterResult_e result,
 			WorldObject objectWithOrder) {
 
-		if(activeObject() != objectWithOrder) {
+		if (activeObject() != objectWithOrder) {
 			Gdx.app.error(getName(), "activeObject() != objectWithOrder");
 		}
-		
-		if(isActiveObjectLast()) {
+
+		if (isActiveObjectLast()) {
 			try {
 				phaseIsOver();
 			} catch (Exception e) {
@@ -75,13 +82,13 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 			return;
 		}
 		moveNextEnemy();
-		
+
 	}
 
 	@Override
 	public void onGuiEvent(GuiContainer eventGui) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
