@@ -69,7 +69,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) throws Exception {
 		List<Vector2> coords = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_HERO);
+				.getCoords(TiledObjectType_e.TILED_ENTITY_HERO);
 		
 		Hero hero;
 		int atlasIndex = 0;

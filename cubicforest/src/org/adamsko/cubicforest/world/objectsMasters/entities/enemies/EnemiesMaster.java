@@ -82,7 +82,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) throws Exception {
 		List<Vector2> coords = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_ENEMY);
+				.getCoords(TiledObjectType_e.TILED_ENTITY_ENEMY);
 		
 		Enemy enemy;
 		int atlasIndex = 0;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -27,7 +28,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			int tileH) {
 		super(mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 		try {
-//			addTestCubes();
+			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,7 +139,31 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) {
-		// TODO Auto-generated method stub
+		List<Vector2> coords = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_ITEM_GATHERCUBE);
+
+		GatherCube gatherCube;
+		int atlasIndex = 0;
+		for (Vector2 pos : coords) {
+			gatherCube = new GatherCube(atlasRows.get(0)[atlasIndex], atlasIndex);
+			gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
+					.getRegionWidth() / 2, -2));
+
+			gatherCube.setSpeed(2);
+			gatherCube.setOccupiesTile(false);
+			gatherCube.setVerticalPos(0.5f);
+
+			pos.add(new Vector2(0.5f, 0.5f));
+			gatherCube.setTilesPos(pos);
+
+			addObject(gatherCube);
+
+			if (atlasIndex == 3) {
+				atlasIndex = 0;
+			} else {
+				atlasIndex++;
+			}
+		}
 		
 	}
 
