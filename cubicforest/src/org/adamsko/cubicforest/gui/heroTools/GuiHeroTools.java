@@ -30,7 +30,7 @@ public class GuiHeroTools extends GuiContainer {
 		for (HeroToolType_e type : HeroToolType_e.values()) {
 
 			GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
-					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 50, 0);
+					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 60, 0);
 
 			guiElementHeroTool.addLabel(HeroesToolsMaster
 					.heroTooltypeToCost(type));

@@ -184,7 +184,6 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 			break;
 			
 		case OCCUPANT_STOPS:
-			Gdx.app.error("occ stops", "");
 			HeroToolStates_e toolState = tileTool.getState();
 			switch (toolState) {
 			case STATE_CONSTRUCTION:

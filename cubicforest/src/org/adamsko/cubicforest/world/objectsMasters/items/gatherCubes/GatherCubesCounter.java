@@ -21,7 +21,7 @@ public class GatherCubesCounter extends GuiContainer {
 		super("gatherCubesCounter", TM, GuiType_e.GUI_CUBES_COUNTER, textureName, tileW, tileH, posX,
 				posY);
 
-		counter = new Vector2(4, 0);
+		counter = new Vector2(15, 0);
 
 		createGui();
 	}
@@ -44,7 +44,7 @@ public class GatherCubesCounter extends GuiContainer {
 	}
 
 	public void reset() {
-		counter.set(4, 0);
+		counter.set(15, 0);
 	}
 
 }

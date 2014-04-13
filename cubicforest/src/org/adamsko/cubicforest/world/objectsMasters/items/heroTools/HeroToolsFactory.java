@@ -45,12 +45,11 @@ public class HeroToolsFactory {
 		}
 
 		newTool.setRenderVector(new Vector2(-textureRegions.get(0)[0]
-				.getRegionWidth() / 2 + 2, -30));
+				.getRegionWidth()/2, -45));
 		
 		newTool.setTilesPos(tilePos);
-		newTool.setVerticalPos(0.4f);
+		newTool.setVerticalPos(0.3f);
 
 		return newTool;
 	}
-
 }

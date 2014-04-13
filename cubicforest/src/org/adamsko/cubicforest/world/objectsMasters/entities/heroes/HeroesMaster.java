@@ -84,6 +84,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements WorldObjec
 			hero.setTilesPos(pos);
 			hero.setName("Pig" + atlasIndex);
 			hero.addLabel(ROLabel_e.LABEL_NAME);
+			hero.setVerticalPos(0.1f);
 			
 			addObject(hero);
 			

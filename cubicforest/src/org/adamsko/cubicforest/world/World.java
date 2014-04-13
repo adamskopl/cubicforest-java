@@ -74,7 +74,7 @@ public class World {
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 
 		heroesToolsMaster = new HeroesToolsMaster(mapsLoader, tilesMaster,
-				gatherCubesMaster, "tools-atlas-medium", 40, 45);
+				gatherCubesMaster, "tools-atlas-medium", 75, 90);
 
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
