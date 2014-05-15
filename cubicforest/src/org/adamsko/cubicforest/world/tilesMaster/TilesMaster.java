@@ -40,7 +40,23 @@ public class TilesMaster implements PickMasterClient {
 		/**
 		 * {@link Tile} received input from {@link PickMaster}.
 		 */
-		TILE_PICKED, OCCUPANT_LEAVES, OCCUPANT_ENTERS, OCCUPANT_STOPS
+		TILE_PICKED,
+		/**
+		 * Occupant is leaving a tile.
+		 */
+		OCCUPANT_LEAVES,
+		/**
+		 * Occupant enters a tile.
+		 */
+		OCCUPANT_ENTERS,
+		/**
+		 * Occupant reaches center of the tile and continues movement.
+		 */
+		OCCUPANT_PASSES,
+		/**
+		 * Occupant ends his movement on a tile.
+		 */
+		OCCUPANT_STOPS
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
@@ -68,7 +84,7 @@ public class TilesMaster implements PickMasterClient {
 	}
 
 	public void initTiles() {
-		
+
 		tilesContainer = new TilesContainer("tiles container", mapsLoader, this);
 		tilesContainer.loadMapObjects(mapsLoader);
 
@@ -81,7 +97,7 @@ public class TilesMaster implements PickMasterClient {
 			Vector2 fCoords = TilesHelper.calcCoords(fIndex);
 			fCoords.add(new Vector2(7, -3)); // temporary solution for centering
 												// view
-//			tilesContainer.addTile(fCoords);
+												// tilesContainer.addTile(fCoords);
 		}
 	}
 
@@ -179,7 +195,7 @@ public class TilesMaster implements PickMasterClient {
 				}
 				break;
 			case OBJECT_TERRAIN:
-				
+
 				break;
 			default:
 				throw new Exception("removeWorldObject unsupported type");

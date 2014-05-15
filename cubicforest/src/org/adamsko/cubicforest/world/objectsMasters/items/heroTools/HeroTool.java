@@ -1,13 +1,20 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class HeroTool extends ItemObject {
 
 	HeroToolType_e heroToolType;
+	public HeroToolType_e getHeroToolType() {
+		return heroToolType;
+	}
+	
 	HeroToolStates_e state;
 
 	public void setState(HeroToolStates_e state) {
@@ -66,5 +73,7 @@ public abstract class HeroTool extends ItemObject {
 			break;
 		}
 	}
+
+	public abstract void onEntityTileEvent(EntityObject entityObject, TileEvent_e eventType);
 
 }

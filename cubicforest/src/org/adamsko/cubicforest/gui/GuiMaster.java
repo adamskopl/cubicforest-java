@@ -32,8 +32,8 @@ public class GuiMaster implements PickMasterClient {
 		guiList = new ArrayList<GuiContainer>();
 		clients = new ArrayList<GuiMasterClient>();
 
-		guiHeroTools = new GuiHeroTools(tilesMaster, "tools-atlas-medium", 75,
-				90, 25, -50);
+		guiHeroTools = new GuiHeroTools(tilesMaster, "tools-atlas-medium", 40,
+				42, 25, -50);
 
 		guiOrders = new GuiOrders(tilesMaster, "orders-atlas-medium", 100, 100,
 				20, -340);

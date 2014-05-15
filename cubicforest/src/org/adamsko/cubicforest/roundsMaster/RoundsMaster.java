@@ -6,11 +6,14 @@ import java.util.List;
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.world.World;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Setters.ACubemap;
 
 /**
  * A round consists of phases.
@@ -97,14 +100,14 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	 * Reload {@link RoundsMaster}: reload all phases, reload World.
 	 */
 	public void reload() {
-		if(reloadAllowed) {
+		if (reloadAllowed) {
 			reloadAllowed = false;
 
 			world.reloadWorld();
 
 			// reload phases after reloading World (add new phaseObjects)
 			reloadPhases();
-			
+
 			try {
 				nextRound();
 			} catch (Exception e) {
@@ -112,19 +115,30 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 			}
 		}
 	}
-	
+
 	public boolean isReloadAllowed() {
 		return reloadAllowed;
 	}
-	
+
 	private void reloadPhases() {
-		for(RoundPhase phase : phases) {
+		for (RoundPhase phase : phases) {
 			phase.reloadPhase();
 		}
 	}
-	
+
 	public void reloadUnlock() {
 		reloadAllowed = true;
+	}
+
+	/**
+	 * Modify actual order. Used by {@link InteractionObjectsMaster} objects to
+	 * modify actually issued orders.
+	 */
+	public void orderOperation(OrderOperation_e orderOperation) {
+		RoundPhase actualPhase = actualPhase();
+		if(actualPhase != null) {
+			actualPhase.orderOperation(orderOperation);
+		}
 	}
 
 	@Override

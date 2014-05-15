@@ -34,7 +34,7 @@ public class World {
 
 	private WorldRenderer renderer;
 	MapsLoader mapsLoader;
-	
+
 	private List<WorldObjectsMaster> worldObjectsMasters;
 	private PickMaster pickMaster;
 
@@ -56,25 +56,27 @@ public class World {
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
 		mapsLoader = new MapsLoader();
-		
+
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
 
 		tilesMaster = new TilesMaster(mapsLoader, 100);
 		TilesSearcher.setTilesMaster(tilesMaster);
 
-		terrainObjectsMaster = new TerrainObjectsMaster(mapsLoader, tilesMaster,
-				"terrain-atlas-medium", 42, 50);
-		heroesMaster = new HeroesMaster(mapsLoader, tilesMaster, "heroes-atlas-medium", 30,
-				35);
-		enemiesMaster = new EnemiesMaster(mapsLoader, tilesMaster, "enemies-atlas-medium",
-				30, 35);
+		roundsMaster = new RoundsMaster(this);
+
+		terrainObjectsMaster = new TerrainObjectsMaster(mapsLoader,
+				tilesMaster, "terrain-atlas-medium", 42, 50);
+		heroesMaster = new HeroesMaster(mapsLoader, tilesMaster, roundsMaster,
+				"heroes-atlas-medium", 30, 35);
+		enemiesMaster = new EnemiesMaster(mapsLoader, tilesMaster,
+				roundsMaster, "enemies-atlas-medium", 30, 35);
 		gatherCubesMaster = new GatherCubesMaster(mapsLoader, tilesMaster,
-				"cubes-atlas-medium", 25, 40);
+				roundsMaster, "cubes-atlas-medium", 25, 40);
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 
 		heroesToolsMaster = new HeroesToolsMaster(mapsLoader, tilesMaster,
-				gatherCubesMaster, "tools-atlas-medium", 75, 90);
+				roundsMaster, gatherCubesMaster, "tools-atlas-medium", 40, 45);
 
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
@@ -110,7 +112,6 @@ public class World {
 	}
 
 	private void initRoundsMaster() {
-		roundsMaster = new RoundsMaster(this);
 
 		PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster, ordersMaster,
 				tilesMaster, heroesToolsMaster, gatherCubesMaster);
@@ -128,9 +129,9 @@ public class World {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void reloadWorld() {
-		for(WorldObjectsMaster wo : worldObjectsMasters) {
+		for (WorldObjectsMaster wo : worldObjectsMasters) {
 			wo.reload(mapsLoader);
 		}
 	}

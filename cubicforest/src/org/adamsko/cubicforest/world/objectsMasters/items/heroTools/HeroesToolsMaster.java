@@ -7,15 +7,18 @@ import javax.swing.event.DocumentEvent.EventType;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -29,7 +32,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  * @author adamsko
  * 
- * TODO: add tool marker master (class responsible for tool marker)
+ *         TODO: add tool marker master (class responsible for tool marker)
  * 
  */
 public class HeroesToolsMaster extends InteractionObjectsMaster implements
@@ -37,16 +40,20 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 
 	private HeroTool heroToolMarker;
 
-	// indicates a type of the heroToolMarker 
+	// indicates a type of the heroToolMarker
 	private HeroToolType_e heroToolMarkerType;
 
 	private HeroToolsFactory heroToolsFactory;
-	
+
 	private GatherCubesMaster gatherCubesMaster;
 
-	public HeroesToolsMaster(MapsLoader mapsLoader, TilesMaster TM, GatherCubesMaster gatherCubesMaster,String textureName, int tileW,
-			int tileH) {
-		super("HeroesToolsMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+	private HeroesToolsInteractionMaster heroesToolsInteractionMaster;
+
+	public HeroesToolsMaster(MapsLoader mapsLoader, TilesMaster TM,
+			RoundsMaster roundsMaster, GatherCubesMaster gatherCubesMaster,
+			String textureName, int tileW, int tileH) {
+		super("HeroesToolsMaster", mapsLoader, TM, roundsMaster,
+				WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 
 		// addTestObjects();
 		heroToolMarker = null;
@@ -55,6 +62,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 		heroToolsFactory = new HeroToolsFactory(atlasRows);
 		this.gatherCubesMaster = gatherCubesMaster;
 
+		heroesToolsInteractionMaster = new HeroesToolsInteractionMaster();
 	}
 
 	/**
@@ -62,38 +70,38 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	 */
 	public void heroToolMarkerAdd(Tile heroToolTile) {
 
-		if(heroToolTile == null) {
+		if (heroToolTile == null) {
 			Gdx.app.error("addHeroToolMarker", "heroToolTile == null");
 			return;
 		}
-		
-		if(heroToolTile.hasItem()) {
+
+		if (heroToolTile.hasItem()) {
 			Gdx.app.error("addHeroToolMarker", "heroToolTile.hasItem()");
 			return;
 		}
-		
-		if(heroToolMarkerType == null) {
+
+		if (heroToolMarkerType == null) {
 			Gdx.app.error("addHeroToolMarker", "heroToolMarkerType == null");
 			return;
 		}
-		
+
 		Vector2 heroToolTilePos = heroToolTile.getTilesPos();
 
-		heroToolMarker = heroToolsFactory.createHeroTool(
-				heroToolMarkerType, heroToolTilePos);
+		heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
+				heroToolTilePos);
 
 		addObject(heroToolMarker);
 	}
 
 	/**
-	 * @throws Exception 
+	 * @throws Exception
 	 * 
 	 */
 	public void heroToolMarkerRemove() throws Exception {
-		if(heroToolMarker != null) {
+		if (heroToolMarker != null) {
 			removeObject(heroToolMarker);
 			heroToolMarker = null;
-		}		
+		}
 	}
 
 	/**
@@ -101,7 +109,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	 */
 	public void heroToolMarkerAccept() {
 
-		// heroToolMarker just stays in master's collection 
+		// heroToolMarker just stays in master's collection
 		heroToolMarker = null;
 	}
 
@@ -141,11 +149,11 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 			return 0;
 		case TOOL_RED:
 			return 1;
-		case TOOL_BLUE:
+		case TOOL_TURRET:
 			return 3;
-		case TOOL_BLACK:
+		case TOOL_TRAP:
 			return 5;
-		case TOOL_WHITE:
+		case TOOL_PORTAL:
 			return 10;
 		default:
 			Gdx.app.error("heroTooltypeToCost", "unknown type");
@@ -156,7 +164,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	public void setHeroToolMarkerType(HeroToolType_e heroToolMarkerType) {
 		this.heroToolMarkerType = heroToolMarkerType;
 	}
-	
+
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
@@ -166,26 +174,32 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	@Override
 	public void tileEvent(TileEvent_e eventType, Tile eventTile,
 			WorldObject eventObject) {
-		
+
 		ItemObject item = (ItemObject) eventTile.getItem();
 		if (item.getItemType() != ItemObjectType_e.ITEM_HERO_TOOL) {
 			return;
 		}
-		
+
 		HeroTool tileTool = (HeroTool) item;
 
-		Gdx.app.error("tileevent", "");
-		
 		switch (eventType) {
 		case OCCUPANT_ENTERS:
 			break;
 
 		case OCCUPANT_LEAVES:
 			break;
-			
+
+		case OCCUPANT_PASSES:
+			orderOperation(OrderOperation_e.ORDER_PAUSE);
+			if (eventObject.getWorldType() == WorldObjectType_e.OBJECT_ENTITY)
+				tileTool.onEntityTileEvent((EntityObject) eventObject,
+						eventType);
+			break;
 		case OCCUPANT_STOPS:
 			HeroToolStates_e toolState = tileTool.getState();
 			switch (toolState) {
+			// for now only one situation: Hero is heading right now to finish
+			// up a tool
 			case STATE_CONSTRUCTION:
 				tileTool.setTextureRegion(atlasRows.get(0)[tileTool.getTexNum()]);
 				tileTool.setState(HeroToolStates_e.STATE_READY);
@@ -193,9 +207,12 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 				break;
 
 			default:
+				if (eventObject.getWorldType() == WorldObjectType_e.OBJECT_ENTITY)
+					tileTool.onEntityTileEvent((EntityObject) eventObject,
+							eventType);
 				break;
 			}
-			
+
 			break;
 
 		default:
@@ -207,7 +224,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -217,7 +234,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

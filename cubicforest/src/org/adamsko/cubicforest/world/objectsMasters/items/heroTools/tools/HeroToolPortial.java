@@ -7,10 +7,10 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class HeroToolRed extends HeroTool {
+public class HeroToolPortial extends HeroTool {
 
-	public HeroToolRed(TextureRegion tr, int texNum) {
-		super(tr, texNum, HeroToolType_e.TOOL_RED);
+	public HeroToolPortial(TextureRegion tr, int texNum) {
+		super(tr, texNum, HeroToolType_e.TOOL_PORTAL);
 
 	}
 

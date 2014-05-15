@@ -88,6 +88,10 @@ public class OrdersMaster {
 		tilePathsMaster.startPath(wanderer, path);		
 	}
 	
+	public void orderOperation(WorldObject wanderer) {
+		
+	}
+	
 	/**
 	 * Highlight tiles which are in object's range
 	 * 

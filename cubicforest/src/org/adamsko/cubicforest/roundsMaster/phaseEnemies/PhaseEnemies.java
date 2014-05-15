@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult_e;
@@ -51,9 +52,6 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 		if (shortestPathTileAdjacentHero == null
 				|| shortestPathTileAdjacentHero.length() == 0) {
 
-//			if (shortestPathTileAdjacentHero == null)
-//				Gdx.app.error("moveEnemy", "PATH == NULL");
-
 			onOrderFinished(OrdersMasterResult_e.ORDER_PATH_NOTFOUND,
 					activeEnemy);
 		} else {
@@ -89,6 +87,12 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 	public void onGuiEvent(GuiContainer eventGui) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void orderOperation(OrderOperation_e operation) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

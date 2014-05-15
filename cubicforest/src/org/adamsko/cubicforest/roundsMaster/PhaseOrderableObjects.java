@@ -7,10 +7,6 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		RoundPhase {

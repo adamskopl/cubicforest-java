@@ -1,19 +1,26 @@
 package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 public abstract class InteractionObjectsMaster extends WorldObjectsContainer implements InteractionMasterClient {
 
-	public InteractionObjectsMaster(String name, MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
+	private RoundsMaster roundsMaster;
+	
+	public InteractionObjectsMaster(String name, MapsLoader mapsLoader,
+			TilesMaster TM, RoundsMaster roundsMaster, WorldObjectType_e worldObjectsType, String textureName,
 			int tileW, int tileH) {
 		super(name, mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
+		
+		this.roundsMaster = roundsMaster;
 	}
 	
 	@Override
@@ -36,6 +43,15 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer imp
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * As a result of tile events, change actually issued orders.
+	 * 
+	 * @param orderOperation
+	 */
+	protected void orderOperation(OrderOperation_e orderOperation) {
+		roundsMaster.orderOperation(orderOperation);
 	}
 
 }

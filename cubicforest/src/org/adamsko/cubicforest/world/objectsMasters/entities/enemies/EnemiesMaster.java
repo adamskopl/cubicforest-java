@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel_e;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
@@ -22,8 +23,8 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemiesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
-	public EnemiesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW, int tileH) {
-		super("enemiesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
+	public EnemiesMaster(MapsLoader mapsLoader, TilesMaster TM, RoundsMaster roundsMaster, String textureName, int tileW, int tileH) {
+		super("enemiesMaster", mapsLoader, TM, roundsMaster, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -91,12 +92,13 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			enemy.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			
-			enemy.setSpeed(2);
+			enemy.setSpeed(3);
 			
 			pos.add(new Vector2(0.5f, 0.5f));
 			enemy.setTilesPos(pos);
-			enemy.setName("Enemy" + atlasIndex);
+			enemy.setName("E" + atlasIndex);
 			enemy.addLabel(ROLabel_e.LABEL_NAME);
+			enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
 			
 			addObject(enemy);
 			

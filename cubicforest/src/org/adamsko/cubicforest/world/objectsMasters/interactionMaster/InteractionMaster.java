@@ -22,7 +22,7 @@ public class InteractionMaster {
 	public void addClient(InteractionMasterClient client) {
 		clients.add(client);
 	}
-
+	
 	public void tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject) throws Exception {
 

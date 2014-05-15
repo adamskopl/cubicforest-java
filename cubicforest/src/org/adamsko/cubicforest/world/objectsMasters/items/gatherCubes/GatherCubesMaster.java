@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
@@ -24,9 +25,9 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	private GatherCubesCounter gatherCubesCounter;
 
-	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM, String textureName, int tileW,
+	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM, RoundsMaster roundsMaster, String textureName, int tileW,
 			int tileH) {
-		super("GatherCubesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+		super("GatherCubesMaster", mapsLoader, TM, roundsMaster, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {

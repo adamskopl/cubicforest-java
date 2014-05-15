@@ -140,8 +140,7 @@ public class TilePathGuide implements TweenCallback {
 			if (path.isEmpty()) {
 				// wanderer has reached his goal or started with an empty path
 
-				// FIXME ERRROR! SOMETIMES TILE IS NULL!!!!!!!!!!!!
-				// probably for paths like tileA->tileA
+				// path is empty: occupant has reached its goal
 				tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_STOPS,
 						helper.getTileHeadingTo(), wanderer);
 
@@ -180,6 +179,10 @@ public class TilePathGuide implements TweenCallback {
 	 * @throws Exception
 	 */
 	private void stageBorder() throws Exception {
+		// path is not empty, occupant passes tile
+		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_PASSES,
+				helper.getTileHeadingTo(), wanderer);
+		
 		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is
 		// a tile that has been reached right now)
 		helper.reassignTileFrom();

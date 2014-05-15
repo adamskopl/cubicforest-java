@@ -14,6 +14,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult_e;
@@ -235,6 +236,11 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void orderOperation(OrderOperation_e operation) {
+		// TODO Auto-generated method stub
 	}
 
 }

@@ -2,13 +2,14 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolBlack;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolBlue;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolWhite;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortial;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -30,14 +31,14 @@ public class HeroToolsFactory {
 		case TOOL_RED:
 			newTool = new HeroToolRed(textureRegions.get(1)[1], 1);
 			break;
-		case TOOL_BLUE:
-			newTool = new HeroToolBlue(textureRegions.get(1)[2], 2);
+		case TOOL_TURRET:
+			newTool = new HeroToolTurret(textureRegions.get(1)[2], 2);
 			break;
-		case TOOL_BLACK:
-			newTool = new HeroToolBlack(textureRegions.get(1)[3], 3);
+		case TOOL_TRAP:
+			newTool = new HeroToolTrap(textureRegions.get(1)[3], 3);
 			break;
-		case TOOL_WHITE:
-			newTool = new HeroToolWhite(textureRegions.get(1)[4], 4);
+		case TOOL_PORTAL:
+			newTool = new HeroToolPortial(textureRegions.get(1)[4], 4);
 			break;
 		default:
 			Gdx.app.error("createHeroTool", "unknown heroToolType");
@@ -45,10 +46,12 @@ public class HeroToolsFactory {
 		}
 
 		newTool.setRenderVector(new Vector2(-textureRegions.get(0)[0]
-				.getRegionWidth()/2, -45));
+				.getRegionWidth()/2 + 2, -30));
 		
 		newTool.setTilesPos(tilePos);
 		newTool.setVerticalPos(0.3f);
+		newTool.addLabel(newTool.getHeroToolType().toString());
+		newTool.altLabelLast(Color.YELLOW, 0.8f, -40.0f, -10.0f);
 
 		return newTool;
 	}

@@ -44,6 +44,9 @@ public class TilesEventsMaster {
 		case OCCUPANT_STOPS: {
 			break;
 		}
+		case OCCUPANT_PASSES: {
+			break;
+		}
 		default: {
 			throw new Exception("tileEvent: unsupported event type");
 		}
