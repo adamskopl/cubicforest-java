@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -30,21 +31,47 @@ public class TilePathsMaster {
 		tilePathGuides = new ArrayList<TilePathGuide>();
 	}
 
-	public void startPath(WorldObject wanderer, Tile destinationTile) {		
-		TilePath testPath = TilePathSearcher.search(wanderer,
-				destinationTile);
-		startPath(wanderer, testPath);
-//		TilePathGuide guide = new TilePathGuide(wanderer, testPath, this, tilesMaster);
-//		tilePathGuides.add(guide);
-//		guide.start();
+	public String getName() {
+		return "TilePathsMaster";
 	}
-	
+
+	public void startPath(WorldObject wanderer, Tile destinationTile) {
+		TilePath testPath = TilePathSearcher.search(wanderer, destinationTile);
+		startPath(wanderer, testPath);
+		// TilePathGuide guide = new TilePathGuide(wanderer, testPath, this,
+		// tilesMaster);
+		// tilePathGuides.add(guide);
+		// guide.start();
+	}
+
 	public void startPath(WorldObject wanderer, TilePath path) {
-		TilePathGuide guide = new TilePathGuide(wanderer, path, this, tilesMaster);
+		TilePathGuide guide = new TilePathGuide(wanderer, path, this,
+				tilesMaster);
 		tilePathGuides.add(guide);
 		guide.start();
 	}
-	
+
+	/**
+	 * Perform an operation on a path for wanderer. On of the tilePathGuides
+	 * should be handling wanderer right now, because pathOperation() is invoked
+	 * after tilesMaster.event().tileEvent() from the tilePathGuide with the
+	 * discussed wanderer.
+	 * 
+	 * @param wanderer
+	 * @param operation
+	 */
+	public void pathOperation(WorldObject wanderer, OrderOperation_e operation) {
+		/*
+		 * Right now
+		 */
+		TilePathGuide guideWanderer = getTilePathGuide(wanderer);
+		if (guideWanderer == null) {
+			Gdx.app.error(getName(), "pathOperation: TilePathGuide not found");
+			return;
+		}
+		guideWanderer.pathOperation(operation);
+	}
+
 	/**
 	 * TODO check if path ended with success or failure. If with failure: try
 	 * one more time
@@ -53,9 +80,10 @@ public class TilePathsMaster {
 	 */
 	protected void onPathEnd(TilePathGuide guide) {
 		WorldObject wanderer = guide.getWanderer();
-		master.onPathFinished(OrdersMasterResult_e.ORDER_PATH_FINISHED, wanderer);
-		
-		// remove guide from TilePathGuide vector		
+		master.onPathFinished(OrdersMasterResult_e.ORDER_PATH_FINISHED,
+				wanderer);
+
+		// remove guide from TilePathGuide vector
 		try {
 			tilePathGuides.remove(guide);
 		} catch (Exception e) {
@@ -65,6 +93,14 @@ public class TilePathsMaster {
 		tilesMaster.clearTilesLabels();
 		// guide is no longer needed
 		guide = null;
+	}
+
+	private TilePathGuide getTilePathGuide(WorldObject wanderer) {
+		for (TilePathGuide tilePathGuide : tilePathGuides) {
+			if (tilePathGuide.getWanderer() == wanderer)
+				return tilePathGuide;
+		}
+		return null;
 	}
 
 }

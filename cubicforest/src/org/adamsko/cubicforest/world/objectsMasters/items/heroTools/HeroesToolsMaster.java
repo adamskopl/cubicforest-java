@@ -50,9 +50,9 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	private HeroesToolsInteractionMaster heroesToolsInteractionMaster;
 
 	public HeroesToolsMaster(MapsLoader mapsLoader, TilesMaster TM,
-			RoundsMaster roundsMaster, GatherCubesMaster gatherCubesMaster,
-			String textureName, int tileW, int tileH) {
-		super("HeroesToolsMaster", mapsLoader, TM, roundsMaster,
+			GatherCubesMaster gatherCubesMaster, String textureName, int tileW,
+			int tileH) {
+		super("HeroesToolsMaster", mapsLoader, TM,
 				WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 
 		// addTestObjects();
@@ -172,8 +172,25 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void tileEvent(TileEvent_e eventType, Tile eventTile,
-			WorldObject eventObject) {
+	public void loadMapObjects(MapsLoader mapsLoader) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+		try {
+			removeWorldObjects();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	protected void processTileEventImplementation(TileEvent_e eventType,
+			Tile eventTile, WorldObject eventObject) {
+		// TODO Auto-generated method stub
 
 		ItemObject item = (ItemObject) eventTile.getItem();
 		if (item.getItemType() != ItemObjectType_e.ITEM_HERO_TOOL) {
@@ -190,7 +207,13 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 			break;
 
 		case OCCUPANT_PASSES:
+			/*
+			 * FIXME: class has no access to RoundsMaster. We are returning back
+			 * the effect of the interaction.
+			 */
+			// orderOperation(OrderOperation_e.ORDER_PAUSE);
 			orderOperation(OrderOperation_e.ORDER_PAUSE);
+
 			if (eventObject.getWorldType() == WorldObjectType_e.OBJECT_ENTITY)
 				tileTool.onEntityTileEvent((EntityObject) eventObject,
 						eventType);
@@ -217,22 +240,6 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 
 		default:
 			break;
-		}
-
-	}
-
-	@Override
-	public void loadMapObjects(MapsLoader mapsLoader) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void reload(MapsLoader mapsLoader) {
-		try {
-			removeWorldObjects();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 	}

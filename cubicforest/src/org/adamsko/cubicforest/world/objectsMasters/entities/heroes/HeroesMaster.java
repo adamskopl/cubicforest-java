@@ -26,7 +26,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 
 	public HeroesMaster(MapsLoader mapsLoader, TilesMaster TM,
 			RoundsMaster roundsMaster, String textureName, int tileW, int tileH) {
-		super("HeroesMaster", mapsLoader, TM, roundsMaster, WorldObjectType_e.OBJECT_ENTITY,
+		super("HeroesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY,
 				textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
@@ -61,13 +61,6 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 	@Override
 	public List<WorldObject> getOrderableObjects() {
 		return getWorldObjects();
-	}
-
-	@Override
-	public void tileEvent(TileEvent_e evenType, Tile eventTile,
-			WorldObject eventObject) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -115,6 +108,13 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected void processTileEventImplementation(TileEvent_e eventType,
+			Tile eventTile, WorldObject eventObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

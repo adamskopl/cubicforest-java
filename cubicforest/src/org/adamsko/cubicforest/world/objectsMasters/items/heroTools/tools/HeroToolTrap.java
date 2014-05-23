@@ -20,7 +20,7 @@ public class HeroToolTrap extends HeroTool {
 			TileEvent_e eventType) {
 		switch (entityObject.getEntityType()) {
 		case ENTITY_ENEMY:
-			Gdx.app.error("Trap", "ENEMY ENTERS!");
+			Gdx.app.error("Trap", "ENEMY !" + eventType.toString());
 		case ENTITY_HERO:
 			break;
 		default:

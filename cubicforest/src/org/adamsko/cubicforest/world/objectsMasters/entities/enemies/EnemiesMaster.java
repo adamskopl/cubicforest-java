@@ -24,7 +24,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
 	public EnemiesMaster(MapsLoader mapsLoader, TilesMaster TM, RoundsMaster roundsMaster, String textureName, int tileW, int tileH) {
-		super("enemiesMaster", mapsLoader, TM, roundsMaster, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
+		super("enemiesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -74,13 +74,6 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void tileEvent(TileEvent_e evenType, Tile eventTile,
-			WorldObject eventObject) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) throws Exception {
 		List<Vector2> coords = mapsLoader
 				.getCoords(TiledObjectType_e.TILED_ENTITY_ENEMY);
@@ -120,5 +113,12 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected void processTileEventImplementation(TileEvent_e eventType,
+			Tile eventTile, WorldObject eventObject) {
+		// TODO Auto-generated method stub
+		
 	}
 }

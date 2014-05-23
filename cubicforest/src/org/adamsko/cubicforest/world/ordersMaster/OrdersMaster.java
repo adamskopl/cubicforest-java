@@ -37,7 +37,7 @@ public class OrdersMaster {
 
 	private Boolean tempTestStarted;
 	private Vector2 tempTargetPos;
-	
+
 	private TilesMaster tilesMaster;
 
 	/**
@@ -79,31 +79,41 @@ public class OrdersMaster {
 	public void startOrder(WorldObject wanderer, Tile destinationTile,
 			OrdersMasterClient client) {
 		this.client = client;
-		tilePathsMaster.startPath(wanderer, destinationTile);		
+		tilePathsMaster.startPath(wanderer, destinationTile);
 	}
 
 	public void startOrder(WorldObject wanderer, TilePath path,
 			OrdersMasterClient client) {
 		this.client = client;
-		tilePathsMaster.startPath(wanderer, path);		
+		tilePathsMaster.startPath(wanderer, path);
 	}
-	
-	public void orderOperation(WorldObject wanderer) {
-		
+
+	/**
+	 * Perform operation on present order. Function invoked after the chain of
+	 * functions invoked as a result of tilesMaster.event().tileEvent() in
+	 * TilePathGuide
+	 * 
+	 * @param wanderer
+	 * @param operation 
+	 */
+	public void orderOperation(WorldObject wanderer, OrderOperation_e operation) {
+		tilePathsMaster.pathOperation(wanderer, operation);
 	}
-	
+
 	/**
 	 * Highlight tiles which are in object's range
 	 * 
 	 * @param object
 	 */
 	public void highlightTilesObjectRange(WorldObject object) {
-		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object, object.getSpeed(), false);
+		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
+				object.getSpeed(), false);
 		tilesMaster.highlightTiles(tilesInRange, 1, 1);
 	}
-	
+
 	public void unhighlightTilesObjectRange(WorldObject object) {
-		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object, object.getSpeed(), false);
+		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
+				object.getSpeed(), false);
 		tilesMaster.highlightTiles(tilesInRange, 0, 0);
 	}
 

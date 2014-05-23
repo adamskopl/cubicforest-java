@@ -25,9 +25,10 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	private GatherCubesCounter gatherCubesCounter;
 
-	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM, RoundsMaster roundsMaster, String textureName, int tileW,
-			int tileH) {
-		super("GatherCubesMaster", mapsLoader, TM, roundsMaster, WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM,
+			String textureName, int tileW, int tileH) {
+		super("GatherCubesMaster", mapsLoader, TM,
+				WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -45,7 +46,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	 */
 	public Boolean isToolAffordable(HeroToolType_e heroToolType) {
 		int toolCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
-		if(toolCost <= gatherCubesCounter.getCounter()) {
+		if (toolCost <= gatherCubesCounter.getCounter()) {
 			return true;
 		}
 		return false;
@@ -94,9 +95,66 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	}
 
+	private void removeCube(GatherCube cubeToRemove) {
+		try {
+			removeObject(cubeToRemove);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void counterAddValue(Integer value) {
+		gatherCubesCounter.addValue(value);
+	}
+
 	@Override
-	public void tileEvent(TileEvent_e eventType, Tile eventTile,
-			WorldObject eventObject) {
+	public void loadMapObjects(MapsLoader mapsLoader) {
+		List<Vector2> coords = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_ITEM_GATHERCUBE);
+
+		GatherCube gatherCube;
+		int atlasIndex = 0;
+		for (Vector2 pos : coords) {
+			gatherCube = new GatherCube(atlasRows.get(0)[atlasIndex],
+					atlasIndex);
+			gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
+					.getRegionWidth() / 2, -2));
+
+			gatherCube.setSpeed(2);
+			gatherCube.setOccupiesTile(false);
+			gatherCube.setVerticalPos(0.5f);
+
+			pos.add(new Vector2(0.5f, 0.5f));
+			gatherCube.setTilesPos(pos);
+
+			addObject(gatherCube);
+
+			if (atlasIndex == 3) {
+				atlasIndex = 0;
+			} else {
+				atlasIndex++;
+			}
+		}
+
+	}
+
+	@Override
+	public void reload(MapsLoader mapsLoader) {
+		gatherCubesCounter.reset();
+
+		try {
+			removeWorldObjects();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		loadMapObjects(mapsLoader);
+	}
+
+	@Override
+	protected void processTileEventImplementation(TileEvent_e eventType,
+			Tile eventTile, WorldObject eventObject) {
 
 		ItemObject item = (ItemObject) eventTile.getItem();
 		if (item.getItemType() != ItemObjectType_e.ITEM_GATHER_CUBE) {
@@ -121,64 +179,6 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 			break;
 		default:
 			break;
-		}
-
-	}
-
-	private void removeCube(GatherCube cubeToRemove) {
-		try {
-			removeObject(cubeToRemove);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void counterAddValue(Integer value) {
-		gatherCubesCounter.addValue(value);
-	}
-
-	@Override
-	public void loadMapObjects(MapsLoader mapsLoader) {
-		List<Vector2> coords = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_ITEM_GATHERCUBE);
-
-		GatherCube gatherCube;
-		int atlasIndex = 0;
-		for (Vector2 pos : coords) {
-			gatherCube = new GatherCube(atlasRows.get(0)[atlasIndex], atlasIndex);
-			gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2, -2));
-
-			gatherCube.setSpeed(2);
-			gatherCube.setOccupiesTile(false);
-			gatherCube.setVerticalPos(0.5f);
-
-			pos.add(new Vector2(0.5f, 0.5f));
-			gatherCube.setTilesPos(pos);
-
-			addObject(gatherCube);
-
-			if (atlasIndex == 3) {
-				atlasIndex = 0;
-			} else {
-				atlasIndex++;
-			}
-		}
-		
-	}
-
-	@Override
-	public void reload(MapsLoader mapsLoader) {
-		gatherCubesCounter.reset();
-		
-		try {
-			removeWorldObjects();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		loadMapObjects(mapsLoader);
-	}
-
+		}	
+	}	
 }

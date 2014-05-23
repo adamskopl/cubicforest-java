@@ -2,6 +2,8 @@ package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import org.adamsko.cubicforest.screens.GameScreen;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
+import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
@@ -50,6 +52,10 @@ public class TilePathGuide implements TweenCallback {
 		}
 	}
 
+	public String getName() {
+		return "TilePathGuide";
+	}
+
 	/**
 	 * Object on the path.
 	 */
@@ -87,9 +93,9 @@ public class TilePathGuide implements TweenCallback {
 
 		// set HEADING_CENTER state, for proper nextStage() invocation
 		this.guideStage = GuideStage_e.HEADING_CENTER;
-	
-		// FIXME: onPathEnd() here... will it not cause errors?		
-		if(path.isEmpty()) {
+
+		// FIXME: onPathEnd() here... will it not cause errors?
+		if (path.isEmpty()) {
 			master.onPathEnd(this);
 		}
 	}
@@ -141,7 +147,7 @@ public class TilePathGuide implements TweenCallback {
 				// wanderer has reached his goal or started with an empty path
 
 				// path is empty: occupant has reached its goal
-				tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_STOPS,
+				sendTileEvent(TileEvent_e.OCCUPANT_STOPS,
 						helper.getTileHeadingTo(), wanderer);
 
 				master.onPathEnd(this);
@@ -180,9 +186,9 @@ public class TilePathGuide implements TweenCallback {
 	 */
 	private void stageBorder() throws Exception {
 		// path is not empty, occupant passes tile
-		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_PASSES,
+		sendTileEvent(TileEvent_e.OCCUPANT_PASSES,
 				helper.getTileHeadingTo(), wanderer);
-		
+
 		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is
 		// a tile that has been reached right now)
 		helper.reassignTileFrom();
@@ -199,11 +205,12 @@ public class TilePathGuide implements TweenCallback {
 	 * @throws Exception
 	 */
 	private void stageCenter() throws Exception {
-		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_ENTERS,
-				helper.getTileHeadingTo(), wanderer);
+		
+		sendTileEvent(TileEvent_e.OCCUPANT_ENTERS, helper.getTileHeadingTo(),
+				wanderer);
 
-		tilesMaster.event().tileEvent(TileEvent_e.OCCUPANT_LEAVES,
-				helper.getTileHeadingFrom(), wanderer);
+		sendTileEvent(TileEvent_e.OCCUPANT_LEAVES, helper.getTileHeadingFrom(),
+				wanderer);
 	}
 
 	public WorldObject getWanderer() {
@@ -217,6 +224,15 @@ public class TilePathGuide implements TweenCallback {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void sendTileEvent(TileEvent_e tileEvent, Tile tile,
+			WorldObject wanderer) throws Exception {
+		tilesMaster.event().tileEvent(tileEvent, tile, wanderer);
+	}
+
+	public void pathOperation(OrderOperation_e operation) {
+		Gdx.app.debug(getName(), "pathOperation " + operation.toString());
 	}
 
 }

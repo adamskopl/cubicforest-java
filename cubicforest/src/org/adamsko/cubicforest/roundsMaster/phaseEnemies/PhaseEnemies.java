@@ -92,7 +92,9 @@ public class PhaseEnemies extends PhaseOrderableObjects implements RoundPhase {
 	@Override
 	public void orderOperation(OrderOperation_e operation) {
 		// TODO Auto-generated method stub
-		
+		Gdx.app.debug(getName(), "order operation: " + operation.toString());
+		WorldObject activeEnemy = activeObject();
+		ordersMaster.orderOperation(activeEnemy, operation);
 	}
 
 }

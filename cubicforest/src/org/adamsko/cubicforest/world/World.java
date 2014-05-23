@@ -72,16 +72,16 @@ public class World {
 		enemiesMaster = new EnemiesMaster(mapsLoader, tilesMaster,
 				roundsMaster, "enemies-atlas-medium", 30, 35);
 		gatherCubesMaster = new GatherCubesMaster(mapsLoader, tilesMaster,
-				roundsMaster, "cubes-atlas-medium", 25, 40);
+				"cubes-atlas-medium", 25, 40);
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 
 		heroesToolsMaster = new HeroesToolsMaster(mapsLoader, tilesMaster,
-				roundsMaster, gatherCubesMaster, "tools-atlas-medium", 40, 45);
+				gatherCubesMaster, "tools-atlas-medium", 40, 45);
 
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
 
-		interactionMaster = new InteractionMaster();
+		interactionMaster = new InteractionMaster(roundsMaster);
 		interactionMaster.addClient(gatherCubesMaster);
 		interactionMaster.addClient(heroesToolsMaster);
 
