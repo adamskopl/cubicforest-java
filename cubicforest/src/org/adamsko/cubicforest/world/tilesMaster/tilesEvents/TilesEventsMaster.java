@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.tilesMaster.tilesEvents;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
+import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
@@ -27,7 +28,7 @@ public class TilesEventsMaster {
 	 * @param eventObject
 	 * @throws Exception
 	 */
-	public void tileEvent(TileEvent_e evenType, Tile eventTile,
+	public OrderOperation_e tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject) throws Exception {
 
 		switch (evenType) {
@@ -52,7 +53,7 @@ public class TilesEventsMaster {
 		}
 		}
 		
-		interactionMaster.tileEvent(evenType, eventTile, eventObject);
+		return interactionMaster.tileEvent(evenType, eventTile, eventObject);
 	}
 
 	/**

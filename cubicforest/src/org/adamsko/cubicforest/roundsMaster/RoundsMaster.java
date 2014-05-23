@@ -130,17 +130,6 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		reloadAllowed = true;
 	}
 
-	/**
-	 * Modify actual order. Used by {@link InteractionObjectsMaster} objects to
-	 * modify actually issued orders.
-	 */
-	public void orderOperation(OrderOperation_e orderOperation) {
-		RoundPhase actualPhase = actualPhase();
-		if(actualPhase != null) {
-			actualPhase.orderOperation(orderOperation);
-		}
-	}
-
 	@Override
 	public void onGuiEvent(GuiContainer eventGui) {
 		actualPhase().onGuiEvent(eventGui);

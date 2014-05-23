@@ -238,9 +238,4 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		}
 	}
 
-	@Override
-	public void orderOperation(OrderOperation_e operation) {
-		// TODO Auto-generated method stub
-	}
-
 }

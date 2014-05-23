@@ -89,18 +89,6 @@ public class OrdersMaster {
 	}
 
 	/**
-	 * Perform operation on present order. Function invoked after the chain of
-	 * functions invoked as a result of tilesMaster.event().tileEvent() in
-	 * TilePathGuide
-	 * 
-	 * @param wanderer
-	 * @param operation 
-	 */
-	public void orderOperation(WorldObject wanderer, OrderOperation_e operation) {
-		tilePathsMaster.pathOperation(wanderer, operation);
-	}
-
-	/**
 	 * Highlight tiles which are in object's range
 	 * 
 	 * @param object

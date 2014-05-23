@@ -16,18 +16,16 @@ import com.badlogic.gdx.Gdx;
 public class InteractionMaster {
 
 	private List<InteractionMasterClient> clients;
-	private RoundsMaster roundsMaster;
 
-	public InteractionMaster(RoundsMaster roundsMaster) {
+	public InteractionMaster() {
 		clients = new ArrayList<InteractionMasterClient>();
-		this.roundsMaster = roundsMaster;
 	}
 
 	public void addClient(InteractionMasterClient client) {
 		clients.add(client);
 	}
 
-	public void tileEvent(TileEvent_e evenType, Tile eventTile,
+	public OrderOperation_e tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject) throws Exception {
 
 		Boolean orderChanged = false;
@@ -46,17 +44,6 @@ public class InteractionMaster {
 				}
 			}
 		}
-		if (orderChanged) {
-			roundsMaster.orderOperation(orderChange);
-		}
-	}
-
-	/**
-	 * As a result of tile events, change actually issued orders.
-	 * 
-	 * @param orderOperation
-	 */
-	private void orderOperation(OrderOperation_e orderOperation) {
-		roundsMaster.orderOperation(orderOperation);
+		return orderChange;
 	}
 }

@@ -186,8 +186,8 @@ public class TilePathGuide implements TweenCallback {
 	 */
 	private void stageBorder() throws Exception {
 		// path is not empty, occupant passes tile
-		sendTileEvent(TileEvent_e.OCCUPANT_PASSES,
-				helper.getTileHeadingTo(), wanderer);
+		sendTileEvent(TileEvent_e.OCCUPANT_PASSES, helper.getTileHeadingTo(),
+				wanderer);
 
 		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is
 		// a tile that has been reached right now)
@@ -205,7 +205,7 @@ public class TilePathGuide implements TweenCallback {
 	 * @throws Exception
 	 */
 	private void stageCenter() throws Exception {
-		
+
 		sendTileEvent(TileEvent_e.OCCUPANT_ENTERS, helper.getTileHeadingTo(),
 				wanderer);
 
@@ -226,13 +226,13 @@ public class TilePathGuide implements TweenCallback {
 		}
 	}
 
-	private void sendTileEvent(TileEvent_e tileEvent, Tile tile,
+	private OrderOperation_e sendTileEvent(TileEvent_e tileEvent, Tile tile,
 			WorldObject wanderer) throws Exception {
-		tilesMaster.event().tileEvent(tileEvent, tile, wanderer);
-	}
-
-	public void pathOperation(OrderOperation_e operation) {
-		Gdx.app.debug(getName(), "pathOperation " + operation.toString());
+		OrderOperation_e tileEventOrderResult = tilesMaster.event().tileEvent(tileEvent, tile, wanderer);
+		if(tileEventOrderResult != OrderOperation_e.ORDER_CONTINUE) {
+			Gdx.app.debug(getName(), "pathOperation " + tileEventOrderResult.toString());
+		}
+		return tileEventOrderResult;
 	}
 
 }

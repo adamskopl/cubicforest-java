@@ -17,12 +17,6 @@ public interface RoundPhase extends TilesMasterClient, GuiMasterClient {
 	void startPhase();
 	void reloadPhase();
 	void setRoundsMaster(RoundsMaster roundsMaster);
-	/**
-	 * Modify actual order. Used by {@link InteractionObjectsMaster} objects to
-	 * modify actually issued orders.
-	 * @param orderOperation
-	 */
-	void orderOperation(OrderOperation_e orderOperation);
 	String getName();
 		
 }

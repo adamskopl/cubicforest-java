@@ -52,27 +52,6 @@ public class TilePathsMaster {
 	}
 
 	/**
-	 * Perform an operation on a path for wanderer. On of the tilePathGuides
-	 * should be handling wanderer right now, because pathOperation() is invoked
-	 * after tilesMaster.event().tileEvent() from the tilePathGuide with the
-	 * discussed wanderer.
-	 * 
-	 * @param wanderer
-	 * @param operation
-	 */
-	public void pathOperation(WorldObject wanderer, OrderOperation_e operation) {
-		/*
-		 * Right now
-		 */
-		TilePathGuide guideWanderer = getTilePathGuide(wanderer);
-		if (guideWanderer == null) {
-			Gdx.app.error(getName(), "pathOperation: TilePathGuide not found");
-			return;
-		}
-		guideWanderer.pathOperation(operation);
-	}
-
-	/**
 	 * TODO check if path ended with success or failure. If with failure: try
 	 * one more time
 	 * 

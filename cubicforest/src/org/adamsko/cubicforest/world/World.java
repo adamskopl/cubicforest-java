@@ -81,7 +81,7 @@ public class World {
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster);
 		ordersMaster.tempSetTerrainObjectsMaster(terrainObjectsMaster);
 
-		interactionMaster = new InteractionMaster(roundsMaster);
+		interactionMaster = new InteractionMaster();
 		interactionMaster.addClient(gatherCubesMaster);
 		interactionMaster.addClient(heroesToolsMaster);
 
