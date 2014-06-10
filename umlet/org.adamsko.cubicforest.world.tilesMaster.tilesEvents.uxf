@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>9</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>612</x>
-      <y>450</y>
-      <w>387</w>
-      <h>135</h>
+      <x>488</x>
+      <y>408</y>
+      <w>344</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>*TilesEventsMaster*
 --
@@ -20,10 +20,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>180</x>
-      <y>423</y>
-      <w>324</w>
-      <h>153</h>
+      <x>104</x>
+      <y>384</y>
+      <w>288</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.tilesMaster
 --
@@ -33,10 +33,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>216</x>
-      <y>468</y>
-      <w>225</w>
-      <h>63</h>
+      <x>136</x>
+      <y>424</y>
+      <w>200</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>TilesMaster
 --
@@ -46,21 +46,21 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>414</x>
-      <y>486</y>
-      <w>215</w>
-      <h>44</h>
+      <x>312</x>
+      <y>440</y>
+      <w>192</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;198;27</additional_attributes>
+    <additional_attributes>24;24;176;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>459</x>
-      <y>153</y>
-      <w>450</w>
-      <h>171</h>
+      <x>352</x>
+      <y>144</y>
+      <w>400</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.interactionMaster
 --
@@ -70,10 +70,10 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>567</x>
-      <y>207</y>
-      <w>180</w>
-      <h>81</h>
+      <x>448</x>
+      <y>192</y>
+      <w>160</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>InteractionMaster
 --</panel_attributes>
@@ -82,12 +82,12 @@ bg=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>648</x>
-      <y>261</y>
-      <w>89</w>
-      <h>206</h>
+      <x>520</x>
+      <y>240</y>
+      <w>80</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>72;189;27;27</additional_attributes>
+    <additional_attributes>64;168;24;24</additional_attributes>
   </element>
 </diagram>
