@@ -49,7 +49,7 @@ public class HeroToolsFactory {
 				.getRegionWidth()/2 + 2, -30));
 		
 		newTool.setTilesPos(tilePos);
-		newTool.setVerticalPos(0.3f);
+		newTool.setVerticalPos(0.1f);
 		newTool.addLabel(newTool.getHeroToolType().toString());
 		newTool.altLabelLast(Color.YELLOW, 0.8f, -40.0f, -10.0f);
 

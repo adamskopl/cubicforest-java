@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
-import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
@@ -11,10 +11,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public abstract class HeroTool extends ItemObject {
 
 	HeroToolType_e heroToolType;
+
 	public HeroToolType_e getHeroToolType() {
 		return heroToolType;
 	}
-	
+
 	HeroToolStates_e state;
 
 	public void setState(HeroToolStates_e state) {
@@ -26,7 +27,7 @@ public abstract class HeroTool extends ItemObject {
 	}
 
 	Integer buildCost;
-	
+
 	public Integer getBuildCost() {
 		return buildCost;
 	}
@@ -37,11 +38,11 @@ public abstract class HeroTool extends ItemObject {
 		this.heroToolType = heroToolType;
 
 		this.buildCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
-		
+
 		state = HeroToolStates_e.STATE_CONSTRUCTION;
-		
+
 	}
-	
+
 	public void changeState(HeroToolStates_e newState) {
 		switch (newState) {
 		case STATE_CONSTRUCTION:
@@ -53,20 +54,18 @@ public abstract class HeroTool extends ItemObject {
 		default:
 			break;
 		}
-		
+
 		this.state = newState;
 	}
-	
+
 	private void newStateConstruction() {
-		
+
 	}
-	
+
 	private void newStateReady() {
 		switch (state) {
 		case STATE_CONSTRUCTION:
-			
-			
-			
+
 			break;
 
 		default:
@@ -74,6 +73,15 @@ public abstract class HeroTool extends ItemObject {
 		}
 	}
 
-	public abstract void onEntityTileEvent(EntityObject entityObject, TileEvent_e eventType);
+	/**
+	 * Process tile interaction with given object. Return order result for that
+	 * object.
+	 * 
+	 * @param entityObject
+	 * @param eventType
+	 * @return
+	 */
+	public abstract InteractionResult onEntityTileEvent(
+			EntityObject entityObject, TileEvent_e eventType);
 
 }

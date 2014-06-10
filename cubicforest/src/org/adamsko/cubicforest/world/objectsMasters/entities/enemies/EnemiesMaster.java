@@ -42,36 +42,6 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 	public List<WorldObject> getOrderableObjects() {
 		return getWorldObjects();
 	}
-	
-	private void addTestObjects() throws Exception {
-		List<Vector2> testPositions = new ArrayList<Vector2>();
-		testPositions.add(new Vector2(1, 1));
-		testPositions.add(new Vector2(3, 9));
-		testPositions.add(new Vector2(5, 9));
-		testPositions.add(new Vector2(6, 9));
-
-		Enemy testEnemy;
-		int atlasIndex = 0;
-		for (Vector2 pos : testPositions) {
-			testEnemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex);
-			testEnemy.setRenderVector(new Vector2(
-					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
-			
-			testEnemy.setSpeed(2);
-			
-			pos.add(new Vector2(0.5f, 0.5f));
-			pos.add(new Vector2(7, -3));
-			testEnemy.setTilesPos(pos);
-			testEnemy.setName("enemy " + atlasIndex);
-//			testEnemy.addLabel(ROLabel_e.LABEL_TILEPOS);
-//			testEnemy.addLabel(ROLabel_e.LABEL_NAME);
-//			testEnemy.altLabelLast(Color.ORANGE, 1.0f, -25.0f, 0.0f);
-			
-			addObject(testEnemy);
-			
-			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
-		}
-	}
 
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) throws Exception {
@@ -85,11 +55,12 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			enemy.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			
-			enemy.setSpeed(3);
+			enemy.setSpeed(4);
 			
 			pos.add(new Vector2(0.5f, 0.5f));
 			enemy.setTilesPos(pos);
 			enemy.setName("E" + atlasIndex);
+			enemy.setVerticalPos(0.3f);
 			enemy.addLabel(ROLabel_e.LABEL_NAME);
 			enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
 			
@@ -115,10 +86,4 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		}
 	}
 
-	@Override
-	protected void processTileEventImplementation(TileEvent_e eventType,
-			Tile eventTile, WorldObject eventObject) {
-		// TODO Auto-generated method stub
-		
-	}
 }

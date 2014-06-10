@@ -82,7 +82,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 			hero.setName("H" + atlasIndex);
 			hero.addLabel(ROLabel_e.LABEL_NAME);
 			hero.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
-			hero.setVerticalPos(0.1f);
+			hero.setVerticalPos(0.3f);
 
 			addObject(hero);
 
@@ -108,13 +108,6 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	protected void processTileEventImplementation(TileEvent_e eventType,
-			Tile eventTile, WorldObject eventObject) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

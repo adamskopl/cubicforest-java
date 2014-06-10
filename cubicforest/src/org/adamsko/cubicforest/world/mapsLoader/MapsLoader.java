@@ -24,10 +24,10 @@ public class MapsLoader {
 
 	private void loadTestMap() {
 
-		Boolean exists = new Boolean(Gdx.files.internal("data/maps/testMap.json")
+		Boolean exists = new Boolean(Gdx.files.internal("data/maps/clearMap.json")
 				.exists());
 
-		FileHandle mapFile = Gdx.files.internal("data/maps/testMap2.json");
+		FileHandle mapFile = Gdx.files.internal("data/maps/clearMap.json");
 
 		String mapFileString = mapFile.readString();
 		

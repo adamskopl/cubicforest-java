@@ -18,7 +18,7 @@ public interface InteractionMasterClient {
 	 *         E.g object should stop, because of the interaction with object,
 	 *         which stops other objects.
 	 */
-	public OrderOperation_e processTileEvent(TileEvent_e evenType, Tile eventTile,
+	public InteractionResult processTileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject);
 
 	/**

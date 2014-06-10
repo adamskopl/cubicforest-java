@@ -1,12 +1,16 @@
-package org.adamsko.cubicforest.roundsMaster;
+package org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.roundsMaster.RoundPhase;
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
+
+import com.badlogic.gdx.Gdx;
 
 public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		RoundPhase {
@@ -17,6 +21,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 
 	private List<WorldObject> phaseObjects;
 	private OrderableObjectsContainer objectsContainer;
+	protected OrdersMasterResultResolver ordersMasterResultResolver;
 
 	/**
 	 * Active object's position on the list.
@@ -25,16 +30,34 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 
 	protected PhaseOrderableObjects(
 			OrderableObjectsContainer orderableObjectsContainer,
-			OrdersMaster ordersMaster, String name) {
+			OrdersMaster ordersMaster,
+			OrdersMasterResultResolver ordersMasterResultResolver, String name) {
 
 		this.objectsContainer = orderableObjectsContainer;
 		this.ordersMaster = ordersMaster;
 		this.name = name;
+		this.ordersMasterResultResolver = ordersMasterResultResolver;
+
 		phaseObjects = new ArrayList<WorldObject>();
-		
+
 		reloadPhase();
 	}
 
+	/**
+	 * 
+	 */
+	void addObject(WorldObject object) {
+		
+	}
+	
+	/**
+	 * 
+	 */
+	void removeObject(WorldObject object) {
+		activeObjectPointer--;
+		phaseObjects.remove(object);
+	}
+	
 	/**
 	 * 
 	 */
@@ -64,6 +87,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	 * @return WorldObject pointed by activeObjectPointer.
 	 */
 	protected WorldObject activeObject() {
+		if(phaseObjects.size() == 0) return null;
 		WorldObject activeObject = phaseObjects.get(activeObjectPointer);
 		return activeObject;
 	}
@@ -79,11 +103,11 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	public String getName() {
 		return name;
 	}
-	
+
 	@Override
 	public void reloadPhase() {
 		activeObjectPointer = -1;
-		
+
 		phaseObjects.clear();
 		for (WorldObject wo : objectsContainer.getOrderableObjects()) {
 			phaseObjects.add(wo);

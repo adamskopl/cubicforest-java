@@ -1,7 +1,5 @@
 package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
 
-import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
@@ -13,23 +11,23 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 /**
  * @author adamsko
- *
+ * 
  */
 public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 		implements InteractionMasterClient {
 
-	/**
-	 * Variable which is set by concrete class. Used to indicate if the current
-	 * order should be changed (result returned by OrderOperation_e
-	 * processTileEvent())
-	 */
-	private OrderOperation_e tileEventResult = OrderOperation_e.ORDER_CONTINUE;
+	protected InteractionResolver interactionResolver;
+
+	public void setInteractionResolver(InteractionResolver interactionResolver) {
+		this.interactionResolver = interactionResolver;
+	}
 
 	public InteractionObjectsMaster(String name, MapsLoader mapsLoader,
 			TilesMaster TM, WorldObjectType_e worldObjectsType,
 			String textureName, int tileW, int tileH) {
 		super(name, mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
 
+		this.interactionResolver = interactionResolver;
 	}
 
 	@Override
@@ -55,38 +53,12 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 	}
 
 	@Override
-	public OrderOperation_e processTileEvent(TileEvent_e eventType,
+	public InteractionResult processTileEvent(TileEvent_e eventType,
 			Tile eventTile, WorldObject eventObject) {
 
-		// process tile event, set change tileEventResult value if needed
-		// (interaction effect affects a process of a current order execution)
-		processTileEventImplementation(eventType, eventTile, eventObject);
+		InteractionResult tileEventResult = interactionResolver
+				.resolveInteracion(eventType, eventTile, eventObject);
 
-		OrderOperation_e copy = tileEventResult;
-		// set a default value, which will be returned in the case of tile event
-		// which has no effect on a current order
-		tileEventResult = OrderOperation_e.ORDER_CONTINUE;
-		return copy;
+		return tileEventResult;
 	}
-
-	/**
-	 * Individual function for processing tile events. Idea: implementation is
-	 * issuing orderOperation()
-	 * 
-	 * Name of the function should be changed. It's a sub-function for
-	 * processTileEvent.
-	 */
-	protected abstract void processTileEventImplementation(
-			TileEvent_e eventType, Tile eventTile, WorldObject eventObject);
-
-	/**
-	 * Change currently executed order.
-	 * 
-	 * @param orderOperation
-	 */
-	protected void orderOperation(OrderOperation_e orderOperation) {
-		// tileEventResult is returned in processTileEvent
-		tileEventResult = orderOperation;
-	}
-
 }

@@ -13,37 +13,37 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.Gdx;
 
-
 public class WorldObjectsContainer extends RenderableObjectsContainer {
 
 	private List<WorldObject> worldObjects;
 	private TilesMaster tilesMaster;
 	private MapsLoader mapsLoader;
-	
+
 	/**
 	 * Every container contains only one type of objects.
 	 */
 	private WorldObjectType_e worldObjectsType;
-	
+
 	public WorldObjectType_e getWorldObjectsType() {
 		return worldObjectsType;
 	}
 
-	public WorldObjectsContainer(String name, MapsLoader mapsLoader, TilesMaster TM, WorldObjectType_e worldObjectsType, String textureName,
-			int tileW, int tileH) {
-		super(name, TM, textureName, tileW, tileH); 
+	public WorldObjectsContainer(String name, MapsLoader mapsLoader,
+			TilesMaster TM, WorldObjectType_e worldObjectsType,
+			String textureName, int tileW, int tileH) {
+		super(name, TM, textureName, tileW, tileH);
 		worldObjects = new ArrayList<WorldObject>();
 		tilesMaster = TM;
 		this.mapsLoader = mapsLoader;
 		this.worldObjectsType = worldObjectsType;
 	}
-	
+
 	public void removeObject(WorldObject objectRemove) throws Exception {
 		worldObjects.remove(objectRemove);
 		removeRenderableObject(objectRemove);
-		tilesMaster.removeWorldObject(objectRemove);		
+		tilesMaster.removeWorldObject(objectRemove);
 	}
-	
+
 	public void addObject(WorldObject worldObject) {
 		worldObjects.add(worldObject);
 		addRenderableObject(worldObject);
@@ -51,17 +51,21 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		// a tile)
 		tilesMaster.addWorldObject(worldObject);
 	}
-	
-//	public void addWorldObject(WorldObject newObject) {
-//		worldObjects.add(newObject);
-//
-//		addRenderableObject(newObject);
-//		
-//		// associate newObject with a tile (every WorldObject is associated with
-//		// a tile)
-//		tilesMaster.addWorldObject(newObject);
-//	}
-	
+
+	public boolean containsObject(WorldObject object) {
+		return worldObjects.contains(object);
+	}
+
+	// public void addWorldObject(WorldObject newObject) {
+	// worldObjects.add(newObject);
+	//
+	// addRenderableObject(newObject);
+	//
+	// // associate newObject with a tile (every WorldObject is associated with
+	// // a tile)
+	// tilesMaster.addWorldObject(newObject);
+	// }
+
 	/**
 	 * Get {@link WorldObject} objects.
 	 * 
@@ -70,14 +74,14 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 	public List<WorldObject> getWorldObjects() {
 		return worldObjects;
 	}
-	
+
 	public void handleServantTileEvent(WorldObject servant,
 			TileEvent_e tileEvent) {
-		
+
 	}
-	
+
 	protected void removeWorldObjects() throws Exception {
-		while(worldObjects.size() != 0) {
+		while (worldObjects.size() != 0) {
 			WorldObject object = worldObjects.get(0);
 			removeObject(object);
 		}

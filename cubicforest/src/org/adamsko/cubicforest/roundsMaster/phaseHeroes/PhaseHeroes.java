@@ -7,9 +7,11 @@ import org.adamsko.cubicforest.gui.heroTools.GuiElementHeroTool;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
 import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
-import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
+import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.OrdersMasterResultResolver;
+import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesCounter;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
@@ -17,7 +19,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsM
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult_e;
+import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterPathResult_e;
+import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -29,7 +32,6 @@ import com.badlogic.gdx.Gdx;
 public class PhaseHeroes extends PhaseOrderableObjects {
 
 	private PhaseHeroesOrdersMaster heroesOrdersMaster;
-	private TilesMaster tilesMaster;
 	private GatherCubesMaster gatherCubesMaster;
 
 	/**
@@ -45,12 +47,13 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private Boolean orderInProgress = false;
 
 	public PhaseHeroes(OrderableObjectsContainer orderableObjectsContainer,
-			OrdersMaster ordersMaster, TilesMaster tilesMaster,
-			HeroesToolsMaster heroesToolsMaster,
+			OrdersMaster ordersMaster,
+			OrdersMasterResultResolver ordersMasterResultResolver,
+			TilesMaster tilesMaster, HeroesToolsMaster heroesToolsMaster,
 			GatherCubesMaster gatherCubesMaster) {
-		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
+		super(orderableObjectsContainer, ordersMaster,
+				ordersMasterResultResolver, "PhaseHeroes");
 
-		this.tilesMaster = tilesMaster;
 		this.gatherCubesMaster = gatherCubesMaster;
 		heroesOrdersMaster = new PhaseHeroesOrdersMaster(tilesMaster,
 				heroesToolsMaster);
@@ -60,7 +63,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	public void onTileEvent(Tile tile, TileEvent_e event) {
 
 		WorldObject activeObject = null;
-		
+
 		// allow 'reload' button to be clicked
 		roundsMaster.reloadUnlock();
 
@@ -124,12 +127,12 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void startPhase() {		
+	public void startPhase() {
 		nextHero();
 	}
 
 	@Override
-	public void onOrderFinished(OrdersMasterResult_e result,
+	public void onOrderFinished(OrdersMasterResult result,
 			WorldObject objectWithOrder) {
 
 		try {
@@ -188,7 +191,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		switch (clickedElementDebug.getDebugType()) {
 		case DEBUG_RELOAD:
-			if(roundsMaster.isReloadAllowed()) {
+			if (roundsMaster.isReloadAllowed()) {
 				ordersMaster.unhighlightTilesObjectRange(activeObject());
 				roundsMaster.reload();
 			}

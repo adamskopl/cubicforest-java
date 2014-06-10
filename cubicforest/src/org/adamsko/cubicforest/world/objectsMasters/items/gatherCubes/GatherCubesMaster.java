@@ -62,40 +62,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 				"cubes-atlas-medium", 25, 25, 650, -50);
 	}
 
-	private void addTestCubes() throws Exception {
-		List<Vector2> testPositions = new ArrayList<Vector2>();
-		testPositions.add(new Vector2(0, 3));
-		testPositions.add(new Vector2(4, 4));
-		testPositions.add(new Vector2(8, 6));
-		testPositions.add(new Vector2(9, 9));
-
-		GatherCube testCube;
-		int atlasIndex = 0;
-		for (Vector2 pos : testPositions) {
-			testCube = new GatherCube(atlasRows.get(0)[atlasIndex], atlasIndex);
-			testCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2, -2));
-
-			testCube.setSpeed(2);
-			testCube.setOccupiesTile(false);
-			testCube.setVerticalPos(0.5f);
-
-			pos.add(new Vector2(0.5f, 0.5f));
-			pos.add(new Vector2(7, -3));
-			testCube.setTilesPos(pos);
-
-			addObject(testCube);
-
-			if (atlasIndex == 3) {
-				atlasIndex = 0;
-			} else {
-				atlasIndex++;
-			}
-		}
-
-	}
-
-	private void removeCube(GatherCube cubeToRemove) {
+	void removeCube(GatherCube cubeToRemove) {
 		try {
 			removeObject(cubeToRemove);
 		} catch (Exception e) {
@@ -151,34 +118,13 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 		loadMapObjects(mapsLoader);
 	}
-
-	@Override
-	protected void processTileEventImplementation(TileEvent_e eventType,
-			Tile eventTile, WorldObject eventObject) {
-
-		ItemObject item = (ItemObject) eventTile.getItem();
-		if (item.getItemType() != ItemObjectType_e.ITEM_GATHER_CUBE) {
-			return;
-		}
-
-		GatherCube tileCube = (GatherCube) item;
-
-		switch (eventType) {
-		case OCCUPANT_ENTERS:
-			tileCube.setTextureRegion(atlasRows.get(1)[tileCube.getTexNum()]);
-			break;
-
-		case OCCUPANT_LEAVES:
-			tileCube.setTextureRegion(atlasRows.get(0)[tileCube.getTexNum()]);
-			break;
-		case OCCUPANT_STOPS:
-			tileCube.setTextureRegion(atlasRows.get(1)[tileCube.getTexNum()]);
-			eventObject.setName("xx");
-			gatherCubesCounter.addValue(1);
-			removeCube(tileCube);
-			break;
-		default:
-			break;
-		}	
+	
+	void cubeHighlight(GatherCube cube) {
+		cube.setTextureRegion(atlasRows.get(1)[cube.getTexNum()]);
+	}
+	
+	void cubeUnHighlight(GatherCube cube) {
+		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
 	}	
+
 }

@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.ordersMaster;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.roundsMaster.PhaseOrderableObjects;
+import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -66,7 +66,7 @@ public class OrdersMaster {
 	 *            {@link WorldObject} which was guided by one of the
 	 *            {@link TilePathsMaster} object {@link TilePathGuide} objects
 	 */
-	public void onPathFinished(OrdersMasterResult_e result, WorldObject wanderer) {
+	public void onPathFinished(OrdersMasterResult result, WorldObject wanderer) {
 		client.onOrderFinished(result, wanderer);
 	}
 

@@ -25,25 +25,25 @@ public class InteractionMaster {
 		clients.add(client);
 	}
 
-	public OrderOperation_e tileEvent(TileEvent_e evenType, Tile eventTile,
+	public InteractionResult tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject) throws Exception {
 
 		Boolean orderChanged = false;
-		OrderOperation_e orderChange = OrderOperation_e.ORDER_CONTINUE;
+		InteractionResult interactionResult = new InteractionResult();
 
 		for (InteractionMasterClient client : clients) {
 			if (client.isTileEventValid(evenType, eventTile, eventObject)) {
-				orderChange = client.processTileEvent(
-						evenType, eventTile, eventObject);
-				if (orderChange != OrderOperation_e.ORDER_CONTINUE) {
+				interactionResult = client.processTileEvent(evenType,
+						eventTile, eventObject);
+				if (interactionResult.getOrderOperation() != OrderOperation_e.ORDER_CONTINUE) {
 					if (orderChanged) {
 						Gdx.app.error("InteractionMaster",
 								"order is changed more than one time");
 					}
-					orderChanged = true; 
+					orderChanged = true;
 				}
 			}
 		}
-		return orderChange;
+		return interactionResult;
 	}
 }

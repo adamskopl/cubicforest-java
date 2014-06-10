@@ -10,11 +10,14 @@ import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
+import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.OrdersMasterResultResolver;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverFactory;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
@@ -41,6 +44,7 @@ public class World {
 	private TilesMaster tilesMaster;
 	private OrdersMaster ordersMaster;
 	private RoundsMaster roundsMaster;
+	private OrdersMasterResultResolver ordersMasterResultResolver;
 	private InteractionMaster interactionMaster;
 
 	TerrainObjectsMaster terrainObjectsMaster;
@@ -88,6 +92,7 @@ public class World {
 		tilesMaster.setInteractionMaster(interactionMaster);
 
 		initRoundsMaster();
+		initInteractionResolvers();
 
 		addWorldObjectsMaster(tilesMaster.getTilesContainer());
 		addWorldObjectsMaster(terrainObjectsMaster);
@@ -113,13 +118,17 @@ public class World {
 
 	private void initRoundsMaster() {
 
+		ordersMasterResultResolver = new OrdersMasterResultResolver(
+				heroesMaster, enemiesMaster);
+
 		PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster, ordersMaster,
-				tilesMaster, heroesToolsMaster, gatherCubesMaster);
+				ordersMasterResultResolver, tilesMaster, heroesToolsMaster,
+				gatherCubesMaster);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseHeroes);
 
 		PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster,
-				heroesMaster, ordersMaster);
+				heroesMaster, ordersMaster, ordersMasterResultResolver);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseEnemies);
 
@@ -128,6 +137,22 @@ public class World {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void initInteractionResolvers() {
+		InteractionResolverFactory interactionResolverFactory = new InteractionResolverFactory(
+				heroesMaster, enemiesMaster, heroesToolsMaster,
+				gatherCubesMaster);
+
+		heroesMaster.setInteractionResolver(interactionResolverFactory
+				.createFactory(InteractionResolverType_e.RESOLVER_HEROES));
+		enemiesMaster.setInteractionResolver(interactionResolverFactory
+				.createFactory(InteractionResolverType_e.RESOLVER_ENEMIES));
+		gatherCubesMaster
+				.setInteractionResolver(interactionResolverFactory
+						.createFactory(InteractionResolverType_e.RESOLVER_GATHER_CUBES));
+		heroesToolsMaster.setInteractionResolver(interactionResolverFactory
+				.createFactory(InteractionResolverType_e.RESOLVER_HERO_TOOLS));
 	}
 
 	public void reloadWorld() {
