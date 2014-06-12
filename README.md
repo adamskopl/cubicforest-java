@@ -4,6 +4,12 @@ Turn based logic game about three pigs, trying to protect themselves
 from hungry wolves. Collect scattered cubes, to create items helping
 pigs to defeat cubic predators.
 
+# Tools:
+
+-  libGDX, http://libgdx.badlogicgames.com/
+-  Tiled: editing levels, http://www.mapeditor.org/
+-  Gson: loading Json, https://sites.google.com/site/gson/
+
 # Launching project
 
 The easiest way is to simply download Eclipse ADT-bundle. 
