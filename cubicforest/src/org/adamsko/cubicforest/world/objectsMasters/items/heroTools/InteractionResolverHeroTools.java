@@ -67,7 +67,7 @@ public class InteractionResolverHeroTools implements InteractionResolver {
 			}
 		}
 
-		BŁĄD TUTAJ: DLACZEGO ENEMY SIĘ NIE ZATRZYMUJE?
+//		BŁĄD TUTAJ: DLACZEGO ENEMY SIĘ NIE ZATRZYMUJE?
 		if (interactionResult.getTileObjectOperation() == ObjectOperation_e.OBJECT_REMOVE) {
 			heroesToolsMaster.removeTool(tileTool);
 		}

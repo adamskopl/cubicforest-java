@@ -27,7 +27,6 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 			String textureName, int tileW, int tileH) {
 		super(name, mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
 
-		this.interactionResolver = interactionResolver;
 	}
 
 	@Override

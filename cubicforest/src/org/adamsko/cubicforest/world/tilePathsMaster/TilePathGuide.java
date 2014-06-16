@@ -151,31 +151,28 @@ public class TilePathGuide implements TweenCallback {
 				InteractionResult tileEventResult = processTileEvent(
 						TileEvent_e.OCCUPANT_STOPS, helper.getTileHeadingTo(),
 						wanderer);
-				
-				if (tileEventResult.getObjectOperation() == ObjectOperation_e.OBJECT_REMOVE) {
-					Gdx.app.debug("guide", "REMOVE OBJECT");
-				}
 
 				master.onPathEnd(this, tileEventResult);
 				return;
 			}
 			InteractionResult stageResult = stageBorder();
 
-			if (stageResult.getObjectOperation() == ObjectOperation_e.OBJECT_REMOVE) {
-				Gdx.app.debug("guide", "REMOVE OBJECT");
-			}
-
-			/*
-			 * TODO: help function/classes needed
-			 */
+			/*       CODE DUPLICATION IN HEADING_CENTER       */
 			if (stageResult.getOrderOperation() == OrderOperation_e.ORDER_FINISH) {
 				master.onPathEnd(this, stageResult);
 				return;
-			}
+			}			
+			
 			break;
 		}
 		case HEADING_CENTER: {
 			InteractionResult stageResult = stageCenter();
+			/*       CODE DUPLICATION IN HEADING_BORDER          */
+			if (stageResult.getOrderOperation() == OrderOperation_e.ORDER_FINISH) {
+				master.onPathEnd(this, stageResult);
+				return;
+			}			
+			
 			break;
 		}
 		default: {
@@ -208,7 +205,7 @@ public class TilePathGuide implements TweenCallback {
 		InteractionResult tileEventResult = processTileEvent(
 				TileEvent_e.OCCUPANT_PASSES, helper.getTileHeadingTo(),
 				wanderer);
-
+		
 		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is
 		// a tile that has been reached right now)
 		helper.reassignTileFrom();
@@ -237,7 +234,7 @@ public class TilePathGuide implements TweenCallback {
 				wanderer);
 
 		/*
-		 * TODO: which tileEventResult to return
+		 * TODO: which tileEventResult to return?
 		 */
 		return tileEventResult;
 	}

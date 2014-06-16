@@ -1,10 +1,8 @@
 package org.adamsko.cubicforest.world.objectsMasters.entities.enemies;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
@@ -13,9 +11,7 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
