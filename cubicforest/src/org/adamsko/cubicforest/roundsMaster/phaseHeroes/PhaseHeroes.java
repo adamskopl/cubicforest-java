@@ -7,25 +7,20 @@ import org.adamsko.cubicforest.gui.heroTools.GuiElementHeroTool;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
 import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
-import org.adamsko.cubicforest.roundsMaster.RoundPhase;
-import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.OrdersMasterResultResolver;
+import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation_e;
-import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesCounter;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterPathResult_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.Gdx;
 
@@ -47,12 +42,10 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private Boolean orderInProgress = false;
 
 	public PhaseHeroes(OrderableObjectsContainer orderableObjectsContainer,
-			OrdersMaster ordersMaster,
-			OrdersMasterResultResolver ordersMasterResultResolver,
-			TilesMaster tilesMaster, HeroesToolsMaster heroesToolsMaster,
+			OrdersMaster ordersMaster, TilesMaster tilesMaster,
+			HeroesToolsMaster heroesToolsMaster,
 			GatherCubesMaster gatherCubesMaster) {
-		super(orderableObjectsContainer, ordersMaster,
-				ordersMasterResultResolver, "PhaseHeroes");
+		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
 
 		this.gatherCubesMaster = gatherCubesMaster;
 		heroesOrdersMaster = new PhaseHeroesOrdersMaster(tilesMaster,
@@ -60,7 +53,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onTileEvent(Tile tile, TileEvent_e event) {
+	public void onTileEvent(Tile tile, TileEvent event) {
 
 		WorldObject activeObject = null;
 
@@ -89,17 +82,22 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	 */
 	private void startOrderClicked() {
 		if (!orderInProgress) {
-			if (activePath != null && activePath.length() > 0) {
+			// if (activePath != null && activePath.length() > 0) {
+			if (activePath != null) {
 				orderInProgress = true;
+
 				try {
 					heroesOrdersMaster
-							.changePhaseHeroesMode(PhaseHeroesMode_e.MODE_ORDER_EXECUTION);
+							.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
 				ordersMaster.unhighlightTilesObjectRange(activeObject());
+
+				activeObject().restoreMovementPoints();
 				ordersMaster.startOrder(activeObject(), activePath, this);
+				activePath = null;
 			}
 		}
 	}
@@ -114,7 +112,15 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	 */
 	private Boolean startOrderValid(WorldObject activeObject, Tile tile,
 			TilePath pathToTile) {
-		if (!orderInProgress && !tile.hasOccupant()
+
+		if (tile.hasOccupant()) {
+			// occupied tile with an active object can be chosen
+			if (tile.getOccupant() == activeObject)
+				return true;
+			return false;
+		}
+
+		if (!orderInProgress
 				&& pathToTile.length() - 1 <= activeObject.getSpeed())
 			return true;
 
@@ -135,18 +141,27 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	public void onOrderFinished(OrdersMasterResult result,
 			WorldObject objectWithOrder) {
 
+		orderInProgress = false;
+		
+		if (roundsMaster.getGameResult() == GameResult.GAME_WON) {
+			if (roundsMaster.isReloadAllowed()) {
+				roundsMaster.reload();
+				roundsMaster.resetGameResult();
+				return;
+			} else
+				Gdx.app.error("onOrderFinished()",
+						"roundsMaster.isReloadAllowed()==false");
+			
+			roundsMaster.resetGameResult();
+		}
+		
 		try {
 			heroesOrdersMaster
-					.changePhaseHeroesMode(PhaseHeroesMode_e.MODE_CHOICE_MOVEMENT);
+					.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
-		if (activeObject() != objectWithOrder) {
-			Gdx.app.error(getName(), "activeObject() != objectWithOrder");
-		}
-
-		orderInProgress = false;
 		if (isActiveObjectLast()) {
 			try {
 				phaseIsOver();
@@ -155,7 +170,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			}
 			return;
 		} else {
-			// set next object
+			// handle next object
 			nextHero();
 		}
 
@@ -206,12 +221,12 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		try {
 			GuiElementHeroTool clickedElement = (GuiElementHeroTool) guiHeroTools
 					.getClickedElement();
-			HeroToolType_e heroToolType = clickedElement.getHeroToolType();
+			HeroToolType heroToolType = clickedElement.getHeroToolType();
 
 			if (gatherCubesMaster.isToolAffordable(heroToolType)) {
 				// change mode and also set marker's type
 				heroesOrdersMaster.changePhaseHeroesMode(
-						PhaseHeroesMode_e.MODE_CHOICE_TOOL, heroToolType);
+						PhaseHeroesMode.MODE_CHOICE_TOOL, heroToolType);
 			}
 
 		} catch (Exception e) {
@@ -231,7 +246,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			try {
 				// cancel tool adding
 				heroesOrdersMaster
-						.changePhaseHeroesMode(PhaseHeroesMode_e.MODE_CHOICE_MOVEMENT);
+						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

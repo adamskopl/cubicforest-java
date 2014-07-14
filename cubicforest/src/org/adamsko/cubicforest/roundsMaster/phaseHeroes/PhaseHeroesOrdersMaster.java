@@ -1,13 +1,10 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
-import java.text.BreakIterator;
-
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
@@ -17,7 +14,7 @@ class PhaseHeroesOrdersMaster {
 	private TilesMaster tilesMaster;
 
 	private Tile tilePickedOrder;
-	private PhaseHeroesMode_e phaseHeroesMode;
+	private PhaseHeroesMode phaseHeroesMode;
 
 	/**
 	 * Coordinates of the texture in image atlas of the picked {@link Tile}
@@ -32,7 +29,7 @@ class PhaseHeroesOrdersMaster {
 		this.tilesMaster = tilesMaster;
 		this.heroesToolsMaster = heroesToolsMaster;
 		// default choice: movement order
-		this.phaseHeroesMode = PhaseHeroesMode_e.MODE_CHOICE_MOVEMENT;
+		this.phaseHeroesMode = PhaseHeroesMode.MODE_CHOICE_MOVEMENT;
 	}
 
 	/**
@@ -43,8 +40,8 @@ class PhaseHeroesOrdersMaster {
 	 * @param heroToolType
 	 * @throws Exception
 	 */
-	public void changePhaseHeroesMode(PhaseHeroesMode_e newMode,
-			HeroToolType_e heroToolType) throws Exception {
+	public void changePhaseHeroesMode(PhaseHeroesMode newMode,
+			HeroToolType heroToolType) throws Exception {
 		heroesToolsMaster.setHeroToolMarkerType(heroToolType);
 		changePhaseHeroesMode(newMode);
 	}
@@ -53,7 +50,7 @@ class PhaseHeroesOrdersMaster {
 	 * @param newMode
 	 * @throws Exception
 	 */
-	public void changePhaseHeroesMode(PhaseHeroesMode_e newMode)
+	public void changePhaseHeroesMode(PhaseHeroesMode newMode)
 			throws Exception {
 
 		switch (newMode) {
@@ -70,39 +67,7 @@ class PhaseHeroesOrdersMaster {
 		default:
 			Gdx.app.error("changePhaseHeroesMode", "unknown new mode");
 			break;
-		}
-		
-//		switch (phaseHeroesMode) {
-//		case MODE_CHOICE_MOVEMENT:
-//			switch (newMode) {
-//			// MOVEMENT -> TOOL CHOICE
-//			case MODE_CHOICE_TOOL:
-//				
-//				break;
-//			default:
-//				break;
-//			}
-//			break;
-//		case MODE_CHOICE_TOOL:
-//			switch (newMode) {
-//			// TOOL CHOICE -> MOVEMENT
-//			case MODE_CHOICE_MOVEMENT:
-//				
-//				break;
-//			// TOOL CHOICE -> TOOL CHOICE
-//			case MODE_CHOICE_TOOL:
-
-//				break;
-//			// TOOL CHOICE -> ORDER EXECUTION
-//			case MODE_ORDER_EXECUTION:
-//				break;
-//			default:
-//				break;
-//			}
-//			break;
-//		default:
-//			break;
-//		}
+		}		
 
 		this.phaseHeroesMode = newMode;
 	}

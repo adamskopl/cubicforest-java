@@ -5,7 +5,6 @@ import java.util.List;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-
 import com.badlogic.gdx.Gdx;
 
 /**
@@ -18,7 +17,11 @@ public class TilePathSearcher {
 
 	private static TilesMaster tilesMaster = null;
 	private static TilePathSearcherHelper helper;
-
+//
+//	public String toString() {
+//		return "TilePathSearcher";
+//	}
+	
 	public static void setTilesMaster(TilesMaster tilesMaster) {
 		TilePathSearcher.tilesMaster = tilesMaster;
 		helper = new TilePathSearcherHelper(tilesMaster);
@@ -39,7 +42,6 @@ public class TilePathSearcher {
 		Tile destTile = tilesMaster.getTileWithObject(objectTo);
 
 		TilePath searchedPath = search(srcTile, destTile);
-		Gdx.app.debug("searchedPath", Integer.toString(searchedPath.length()));
 		return searchedPath;
 
 	}
@@ -58,42 +60,26 @@ public class TilePathSearcher {
 	public static TilePath searchShortestPathAdjacentTiles(
 			WorldObject objectFrom, WorldObject objectTo) {
 
-//		Gdx.app.debug("searchShortestPathAdjacentTiles", "<<<<<<<<<<<<<");
-
 		Tile tileTo = tilesMaster.getTileWithObject(objectTo);
 		List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo, true);
 
-		// Gdx.app.debug("adjTiles num: ",
-		// Integer.toString(adjacentTiles.size()));
-
 		TilePath shortestPath = null;
-		int index = -1;
 		for (Tile adjacentTile : adjacentTiles) {
-			index++;
-			// Gdx.app.debug("adjTile ", Integer.toString(index));
-
 			if (adjacentTile.hasOccupant()) {
-//				Gdx.app.debug("adjTilehasOcc", "");
 				continue;
 			}
 
 			TilePath adjacentTilePath = search(objectFrom, adjacentTile);
 			if (shortestPath == null) {
-//				Gdx.app.debug(Integer.toString(index) + " adjPath len ",
-//						Integer.toString(adjacentTilePath.length()));
 				shortestPath = adjacentTilePath;
 				continue;
 			}
-
-//			Gdx.app.debug(Integer.toString(index) + " adjPath len ",
-//					Integer.toString(adjacentTilePath.length()));
 
 			if (adjacentTilePath.length() < shortestPath.length()
 					|| shortestPath.length() == 0) {
 				shortestPath = adjacentTilePath;
 			}
 		}
-//		Gdx.app.debug("searchShortestPathAdjacentTiles", ">>>>>>>>>>>>>");
 		return shortestPath;
 	}
 
@@ -104,13 +90,16 @@ public class TilePathSearcher {
 	 *         given 'from' {@link Tile} object
 	 */
 	public static TilePath search(Tile from, Tile to) {
+
 		if (from == to) {
-			return new TilePath();
+			// return path with 'from' tile
+			return new TilePath(from);
 		}
 
 		TilePath path = null;
 
 		helper.searchCostTiles(from, to);
+		
 		try {
 			path = helper.costTilesToPath();
 		} catch (Exception e) {

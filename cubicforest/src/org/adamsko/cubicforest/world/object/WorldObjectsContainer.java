@@ -4,37 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
-
-import com.badlogic.gdx.Gdx;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 public class WorldObjectsContainer extends RenderableObjectsContainer {
 
 	private List<WorldObject> worldObjects;
 	private TilesMaster tilesMaster;
-	private MapsLoader mapsLoader;
-
 	/**
 	 * Every container contains only one type of objects.
 	 */
-	private WorldObjectType_e worldObjectsType;
+	private WorldObjectType worldObjectsType;
 
-	public WorldObjectType_e getWorldObjectsType() {
+	public WorldObjectType getWorldObjectsType() {
 		return worldObjectsType;
 	}
 
 	public WorldObjectsContainer(String name, MapsLoader mapsLoader,
-			TilesMaster TM, WorldObjectType_e worldObjectsType,
+			TilesMaster TM, WorldObjectType worldObjectsType,
 			String textureName, int tileW, int tileH) {
 		super(name, TM, textureName, tileW, tileH);
 		worldObjects = new ArrayList<WorldObject>();
 		tilesMaster = TM;
-		this.mapsLoader = mapsLoader;
 		this.worldObjectsType = worldObjectsType;
 	}
 
@@ -56,16 +48,6 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		return worldObjects.contains(object);
 	}
 
-	// public void addWorldObject(WorldObject newObject) {
-	// worldObjects.add(newObject);
-	//
-	// addRenderableObject(newObject);
-	//
-	// // associate newObject with a tile (every WorldObject is associated with
-	// // a tile)
-	// tilesMaster.addWorldObject(newObject);
-	// }
-
 	/**
 	 * Get {@link WorldObject} objects.
 	 * 
@@ -76,7 +58,7 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 	}
 
 	public void handleServantTileEvent(WorldObject servant,
-			TileEvent_e tileEvent) {
+			TileEvent tileEvent) {
 
 	}
 

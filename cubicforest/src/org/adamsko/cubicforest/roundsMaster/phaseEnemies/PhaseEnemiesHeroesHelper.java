@@ -25,14 +25,22 @@ public class PhaseEnemiesHeroesHelper {
 	 * enemies.
 	 */
 	private List<WorldObject> heroes;
+	/**
+	 * How many heroes are at the start of the level?
+	 */
+	private int startHeroesNumber;
 
 	public PhaseEnemiesHeroesHelper(OrderableObjectsContainer heroesContainer) {
 		heroes = heroesContainer.getOrderableObjects();
-
+		startHeroesNumber = heroes.size();
 	}
 
+	public boolean gameOver() {
+		return heroes.size() != startHeroesNumber;
+	}
+	
 	/**
-	 * Search for the shortest path from given enemy to any heroe.
+	 * Search for the shortest path from given enemy to any hero.
 	 * 
 	 * @param enemy
 	 *            enemy for which shortest path is searched
@@ -47,8 +55,9 @@ public class PhaseEnemiesHeroesHelper {
 		 */
 		for (WorldObject hero : heroes) {
 
-			TilePath pathToHero = TilePathSearcher
-					.searchShortestPathAdjacentTiles(enemy, hero);
+//			TilePath pathToHero = TilePathSearcher
+//					.searchShortestPathAdjacentTiles(enemy, hero);
+			TilePath pathToHero = TilePathSearcher.search(enemy, hero);
 
 			if (pathToHero == null || pathToHero.length() == 0) {
 				continue;

@@ -24,6 +24,16 @@ public class TilePath {
 	public TilePath() {
 		tilesList = new ArrayList<Tile>();
 	}
+	
+	/**
+	 * Create path with a single tile.
+	 * 
+	 * @param tile
+	 */
+	public TilePath(Tile tile) {
+		this();
+		pushTile(tile);
+	}
 
 	/**
 	 * Adds {@link Tile} object to the list.

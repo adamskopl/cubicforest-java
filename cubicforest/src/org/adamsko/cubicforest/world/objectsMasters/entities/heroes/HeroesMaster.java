@@ -1,21 +1,18 @@
 package org.adamsko.cubicforest.world.objectsMasters.entities.heroes;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.text.ROLabel_e;
-import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -26,7 +23,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 
 	public HeroesMaster(MapsLoader mapsLoader, TilesMaster TM,
 			RoundsMaster roundsMaster, String textureName, int tileW, int tileH) {
-		super("HeroesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY,
+		super("HeroesMaster", mapsLoader, TM, WorldObjectType.OBJECT_ENTITY,
 				textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
@@ -36,12 +33,9 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 	}
 
 	public void handleServantTileEvent(WorldObject servant,
-			TileEvent_e tileEvent) {
+			TileEvent tileEvent) {
 		switch (tileEvent) {
 		case TILE_PICKED: {
-			RenderableObject servantConv = (RenderableObject) servant;
-			// int texNum = servantConv.getTexNum();
-			// servantConv.setTextureRegion(atlasRows.get(1)[texNum]);
 		}
 		default: {
 
@@ -75,12 +69,12 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 			hero.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -5));
 
-			hero.setSpeed(4);
+			hero.setSpeed(3);
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			hero.setTilesPos(pos);
 			hero.setName("H" + atlasIndex);
-			hero.addLabel(ROLabel_e.LABEL_NAME);
+			hero.addLabel(ROLabel.LABEL_NAME);
 			hero.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
 			hero.setVerticalPos(0.3f);
 
@@ -94,20 +88,18 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 		}
 
 	}
-
+	
 	@Override
-	public void reload(MapsLoader mapsLoader) {
-		try {
-			removeWorldObjects();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
+		removeWorldObjects();
+	}
 
+	public void removeHero(Hero heroToRemove ) {
 		try {
-			loadMapObjects(mapsLoader);
+			removeObject(heroToRemove);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 }

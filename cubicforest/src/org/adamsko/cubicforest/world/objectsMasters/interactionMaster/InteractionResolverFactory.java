@@ -32,7 +32,7 @@ public class InteractionResolverFactory {
 		case RESOLVER_ENEMIES:
 			return new InteractionResolverEnemies();
 		case RESOLVER_HEROES:
-			return new InteractionResolverHeroes();
+			return new InteractionResolverHeroes(heroesMaster);
 		case RESOLVER_HERO_TOOLS:
 			return new InteractionResolverHeroTools(heroesToolsMaster,
 					gatherCubesMaster, enemiesMaster);

@@ -2,15 +2,12 @@ package org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
-
-import com.badlogic.gdx.Gdx;
 
 public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		RoundPhase {
@@ -21,22 +18,19 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 
 	private List<WorldObject> phaseObjects;
 	private OrderableObjectsContainer objectsContainer;
-	protected OrdersMasterResultResolver ordersMasterResultResolver;
 
 	/**
 	 * Active object's position on the list.
 	 */
-	private int activeObjectPointer;
+	protected int activeObjectPointer;
 
 	protected PhaseOrderableObjects(
 			OrderableObjectsContainer orderableObjectsContainer,
-			OrdersMaster ordersMaster,
-			OrdersMasterResultResolver ordersMasterResultResolver, String name) {
+			OrdersMaster ordersMaster, String name) {
 
 		this.objectsContainer = orderableObjectsContainer;
 		this.ordersMaster = ordersMaster;
 		this.name = name;
-		this.ordersMasterResultResolver = ordersMasterResultResolver;
 
 		phaseObjects = new ArrayList<WorldObject>();
 
@@ -47,19 +41,20 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	 * 
 	 */
 	void addObject(WorldObject object) {
-		
+
 	}
-	
+
 	/**
 	 * 
 	 */
-	void removeObject(WorldObject object) {
+	public void removeObject(WorldObject object) {
 		activeObjectPointer--;
 		phaseObjects.remove(object);
 	}
-	
+
 	/**
-	 * 
+	 * @return decision if phase should be continued. E.g. if there are no more
+	 *         objects to move, phase should be finished
 	 */
 	protected void nextObject() {
 		if (phaseObjects.size() == 0)
@@ -87,7 +82,8 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	 * @return WorldObject pointed by activeObjectPointer.
 	 */
 	protected WorldObject activeObject() {
-		if(phaseObjects.size() == 0) return null;
+		if (phaseObjects.size() == 0)
+			return null;
 		WorldObject activeObject = phaseObjects.get(activeObjectPointer);
 		return activeObject;
 	}

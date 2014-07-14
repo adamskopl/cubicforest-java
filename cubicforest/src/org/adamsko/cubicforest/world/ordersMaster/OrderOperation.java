@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
-public enum OrderOperation_e {
+public enum OrderOperation {
 	/**
 	 * Don't change the order.
 	 */

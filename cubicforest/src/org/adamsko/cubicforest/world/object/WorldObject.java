@@ -1,9 +1,10 @@
 package org.adamsko.cubicforest.world.object;
 
-import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.render.world.RenderableObjectType_e;
+import org.adamsko.cubicforest.render.world.RenderableObjectType;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -13,19 +14,19 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class WorldObject extends RenderableObject {
 
-	protected WorldObjectType_e worldType;
-	
-	public WorldObjectType_e getWorldType() {
+	protected WorldObjectType worldType;
+
+	public WorldObjectType getWorldType() {
 		return worldType;
 	}
 
-	/*
+	/**
 	 * Position indicated by tiles. (0.0,0.0): uppper corner of the first tile.
 	 * (2.5, 1.5): center of the field with (2, 1) coordinates
 	 */
 	protected Vector2 tilesPos;
 
-	/*
+	/**
 	 * Vertical position of the object. Indicates order of the rendering.
 	 */
 	protected Float verticalPos;
@@ -34,18 +35,39 @@ public class WorldObject extends RenderableObject {
 	 * Long story short: WorldObject's name.
 	 */
 	protected String name;
-	
+
 	/**
-	 * How many tiles object can move. 
+	 * How many tiles object can move in it's turn.
 	 */
 	private int speed;
+
+	/**
+	 * Indicates how many movement points left. Every tile decreases this
+	 * variable by one. Restored before every new movement.
+	 */
+	private int movePointsLeft;
+
+	public int getMovePointsLeft() {
+		return movePointsLeft;
+	}
 	
+	public void restoreMovementPoints() {
+		movePointsLeft = speed;
+	}
+	
+	public void addMovePoints(int movePoints) {
+		movePointsLeft += movePoints;
+		if(movePointsLeft < 0) {
+			Gdx.app.error(getName(), "movePointsLeft < 0");
+		}
+	}
+
 	/**
 	 * Is this object occupying tile or leaving it free?
 	 */
 	private Boolean occupiesTile;
 
-	public WorldObject(TextureRegion tr, int texNum, WorldObjectType_e worldType) {
+	public WorldObject(TextureRegion tr, int texNum, WorldObjectType worldType) {
 		super(tr, texNum);
 		tilesPos = new Vector2(0.0f, 0.0f);
 		verticalPos = new Float(0.0f);
@@ -53,7 +75,7 @@ public class WorldObject extends RenderableObject {
 		speed = 0;
 		occupiesTile = true;
 		this.worldType = worldType;
-		this.renderType = RenderableObjectType_e.TYPE_WORLD;
+		this.renderType = RenderableObjectType.TYPE_WORLD;
 	}
 
 	public void setTilesPos(Vector2 pos) {
@@ -91,22 +113,24 @@ public class WorldObject extends RenderableObject {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setSpeed(int speed) {
 		this.speed = speed;
+		this.movePointsLeft = speed;
 	}
-	
+
 	public int getSpeed() {
 		return speed;
 	}
-	
+
 	public void setOccupiesTile(Boolean occupiesTile) {
 		this.occupiesTile = occupiesTile;
 	}
-	
+
 	public Boolean isOccupyingTile() {
 		return this.occupiesTile;
 	}
@@ -116,12 +140,12 @@ public class WorldObject extends RenderableObject {
 			return WorldObjectHelper.typeToString(worldType);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 		return "TYPE_ERROR";
 	}
-	
-	public void addLabel(ROLabel_e type) throws Exception {
-		switch(type) {
+
+	public void addLabel(ROLabel type) throws Exception {
+		switch (type) {
 		case LABEL_TILEPOS: {
 			labels.addLabel(tilesPos);
 			break;
@@ -139,6 +163,5 @@ public class WorldObject extends RenderableObject {
 		}
 		}
 	}
-	
 
 }

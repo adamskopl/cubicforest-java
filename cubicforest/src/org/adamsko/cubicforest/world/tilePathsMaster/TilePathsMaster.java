@@ -2,12 +2,9 @@ package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResult;
-import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterPathResult_e;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -40,10 +37,6 @@ public class TilePathsMaster {
 	public void startPath(WorldObject wanderer, Tile destinationTile) {
 		TilePath testPath = TilePathSearcher.search(wanderer, destinationTile);
 		startPath(wanderer, testPath);
-		// TilePathGuide guide = new TilePathGuide(wanderer, testPath, this,
-		// tilesMaster);
-		// tilePathGuides.add(guide);
-		// guide.start();
 	}
 
 	public void startPath(WorldObject wanderer, TilePath path) {
@@ -80,6 +73,7 @@ public class TilePathsMaster {
 		guide = null;
 	}
 
+	@SuppressWarnings("unused")
 	private TilePathGuide getTilePathGuide(WorldObject wanderer) {
 		for (TilePathGuide tilePathGuide : tilePathGuides) {
 			if (tilePathGuide.getWanderer() == wanderer)

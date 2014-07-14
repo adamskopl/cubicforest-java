@@ -2,12 +2,14 @@ package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
 
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
-import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+
+import com.badlogic.gdx.Gdx;
 
 /**
  * @author adamsko
@@ -23,17 +25,17 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 	}
 
 	public InteractionObjectsMaster(String name, MapsLoader mapsLoader,
-			TilesMaster TM, WorldObjectType_e worldObjectsType,
+			TilesMaster TM, WorldObjectType worldObjectsType,
 			String textureName, int tileW, int tileH) {
 		super(name, mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
 
 	}
 
 	@Override
-	public Boolean isTileEventValid(TileEvent_e eventType, Tile eventTile,
+	public Boolean isTileEventValid(TileEvent eventType, Tile eventTile,
 			WorldObject eventObject) {
 
-		WorldObjectType_e tileObjectType = WorldObjectType_e.OBJECT_UNDEFINED;
+		WorldObjectType tileObjectType = WorldObjectType.OBJECT_UNDEFINED;
 
 		if (eventTile.hasOccupant()) {
 			tileObjectType = eventTile.getOccupant().getWorldType();
@@ -48,11 +50,12 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 				return true;
 			}
 		}
+		
 		return false;
 	}
 
 	@Override
-	public InteractionResult processTileEvent(TileEvent_e eventType,
+	public InteractionResult processTileEvent(TileEvent eventType,
 			Tile eventTile, WorldObject eventObject) {
 
 		InteractionResult tileEventResult = interactionResolver

@@ -1,10 +1,12 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,13 +35,13 @@ public class Tile extends WorldObject {
 	private Boolean hasItem;
 
 	public Tile(Vector2 coords, TextureRegion tr) {
-		super(tr, 0, WorldObjectType_e.OBJECT_UNDEFINED);
+		super(tr, 0, WorldObjectType.OBJECT_UNDEFINED);
 		this.tilesPos = coords;
 
 		occupant = null;
 		hasOccupant = false;
 
-		item = null;		
+		item = null;
 		hasItem = false;
 	}
 
@@ -67,39 +69,39 @@ public class Tile extends WorldObject {
 	public WorldObject getOccupant() {
 		return occupant;
 	}
-	
+
 	public WorldObject getItem() {
 		return item;
 	}
-	
-	public void insertObject(WorldObject insertObject) throws Exception {
-		switch(insertObject.getWorldType()) {
+
+	public void insertObject(WorldObject insertObject, boolean ignoreOccupation)
+			throws Exception {
+		
+		switch (insertObject.getWorldType()) {
 		case OBJECT_ENTITY:
-			if (hasOccupant()) {
-				throw new Exception("insertWorldObject: tile is already occupied");
+			if (!ignoreOccupation && hasOccupant()) {
+				throw new Exception(
+						"insertWorldObject: tile is already occupied");
 			}
 			occupant = insertObject;
 			hasOccupant = true;
-			
+
 			break;
 		case OBJECT_ITEM:
-			if (hasItem()) {
+			if (!ignoreOccupation && hasItem()) {
 				throw new Exception("insertItem: tile has already an item");
 			}
 			item = insertObject;
 			hasItem = true;
 			break;
 		case OBJECT_TERRAIN:
-			if (hasOccupant()) {
-				throw new Exception("insertWorldObject: tile is already occupied");
-			}
 			occupant = insertObject;
 			hasOccupant = true;
 			break;
 		default:
 			Gdx.app.error("Tile::insertObject()", "worldType unsupported");
 			break;
-		
+
 		}
 	}
 
@@ -116,7 +118,7 @@ public class Tile extends WorldObject {
 		hasOccupant = false;
 		return takenObject;
 	}
-	
+
 	public WorldObject itemLeaves() throws Exception {
 		if (!hasItem()) {
 			throw new Exception("tile without item");
@@ -157,5 +159,5 @@ public class Tile extends WorldObject {
 	public String toString() {
 		return getTilesPos().toString();
 	}
-	
+
 }

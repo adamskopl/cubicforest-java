@@ -5,7 +5,7 @@ import java.util.List;
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.text.LabelsContainer;
 import org.adamsko.cubicforest.render.text.LabelsMaster;
-import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.render.text.ROLabel;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,13 +16,13 @@ public class RenderableObject implements LabelsMaster  {
 
 	protected LabelsContainer labels;
 	
-	protected RenderableObjectType_e renderType;
+	protected RenderableObjectType renderType;
 	
-	public RenderableObjectType_e getRenderType() {
+	public RenderableObjectType getRenderType() {
 		return renderType;
 	}
 
-	public void setRenderType(RenderableObjectType_e renderType) {
+	public void setRenderType(RenderableObjectType renderType) {
 		this.renderType = renderType;
 	}
 
@@ -47,7 +47,7 @@ public class RenderableObject implements LabelsMaster  {
 	public RenderableObject(TextureRegion tr, int texNum) {
 		this.textureRegion = tr;
 		this.texNum = texNum;
-		renderType = RenderableObjectType_e.TYPE_UNDEFINED;
+		renderType = RenderableObjectType.TYPE_UNDEFINED;
 		labels = new LabelsContainer();
 		renderVector = new Vector2();
 	}

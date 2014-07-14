@@ -2,13 +2,13 @@ package org.adamsko.cubicforest.world.objectsMasters.entities.enemies;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -20,7 +20,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
 	public EnemiesMaster(MapsLoader mapsLoader, TilesMaster TM, RoundsMaster roundsMaster, String textureName, int tileW, int tileH) {
-		super("enemiesMaster", mapsLoader, TM, WorldObjectType_e.OBJECT_ENTITY, textureName, tileW, tileH);
+		super("enemiesMaster", mapsLoader, TM, WorldObjectType.OBJECT_ENTITY, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -51,13 +51,13 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			enemy.setRenderVector(new Vector2(
 					-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 			
-			enemy.setSpeed(4);
+			enemy.setSpeed(2);
 			
 			pos.add(new Vector2(0.5f, 0.5f));
 			enemy.setTilesPos(pos);
 			enemy.setName("E" + atlasIndex);
 			enemy.setVerticalPos(0.3f);
-			enemy.addLabel(ROLabel_e.LABEL_NAME);
+			enemy.addLabel(ROLabel.LABEL_NAME);
 			enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
 			
 			addObject(enemy);
@@ -65,19 +65,16 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 			if(atlasIndex==2){atlasIndex=0;}else{atlasIndex++;}
 		}
 	}
-
+	
 	@Override
-	public void reload(MapsLoader mapsLoader) {
+	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
+		removeWorldObjects();
+	}
+	
+	public void removeEnemy(Enemy enemyToRemove) {
 		try {
-			removeWorldObjects();
+			removeObject(enemyToRemove);
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			loadMapObjects(mapsLoader);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,18 +1,18 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResult;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class HeroTool extends ItemObject {
 
-	HeroToolType_e heroToolType;
+	HeroToolType heroToolType;
 
-	public HeroToolType_e getHeroToolType() {
+	public HeroToolType getHeroToolType() {
 		return heroToolType;
 	}
 
@@ -32,7 +32,7 @@ public abstract class HeroTool extends ItemObject {
 		return buildCost;
 	}
 
-	public HeroTool(TextureRegion tr, int texNum, HeroToolType_e heroToolType) {
+	public HeroTool(TextureRegion tr, int texNum, HeroToolType heroToolType) {
 		super(tr, texNum, ItemObjectType_e.ITEM_HERO_TOOL);
 
 		this.heroToolType = heroToolType;
@@ -81,7 +81,7 @@ public abstract class HeroTool extends ItemObject {
 	 * @param eventType
 	 * @return
 	 */
-	public abstract InteractionResult onEntityTileEvent(
-			EntityObject entityObject, TileEvent_e eventType);
+	public abstract void onEntityTileEvent(InteractionResult interactionResult,
+			EntityObject entityObject, TileEvent eventType);
 
 }

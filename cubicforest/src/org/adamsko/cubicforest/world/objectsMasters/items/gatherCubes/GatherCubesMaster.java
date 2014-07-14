@@ -1,23 +1,16 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
-import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+
 import com.badlogic.gdx.math.Vector2;
 
 public class GatherCubesMaster extends InteractionObjectsMaster implements
@@ -28,7 +21,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM,
 			String textureName, int tileW, int tileH) {
 		super("GatherCubesMaster", mapsLoader, TM,
-				WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+				WorldObjectType.OBJECT_ITEM, textureName, tileW, tileH);
 		try {
 			loadMapObjects(mapsLoader);
 		} catch (Exception e) {
@@ -44,7 +37,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	/**
 	 * Check if counter allows heroTool to be build (if player can afford it).
 	 */
-	public Boolean isToolAffordable(HeroToolType_e heroToolType) {
+	public Boolean isToolAffordable(HeroToolType heroToolType) {
 		int toolCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
 		if (toolCost <= gatherCubesCounter.getCounter()) {
 			return true;
@@ -62,7 +55,7 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 				"cubes-atlas-medium", 25, 25, 650, -50);
 	}
 
-	void removeCube(GatherCube cubeToRemove) {
+	public void removeCube(GatherCube cubeToRemove) {
 		try {
 			removeObject(cubeToRemove);
 		} catch (Exception e) {
@@ -105,18 +98,11 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 		}
 
 	}
-
+	
 	@Override
-	public void reload(MapsLoader mapsLoader) {
+	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
 		gatherCubesCounter.reset();
-
-		try {
-			removeWorldObjects();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		loadMapObjects(mapsLoader);
+		removeWorldObjects();
 	}
 	
 	void cubeHighlight(GatherCube cube) {
@@ -125,6 +111,6 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	
 	void cubeUnHighlight(GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
-	}	
+	}
 
 }

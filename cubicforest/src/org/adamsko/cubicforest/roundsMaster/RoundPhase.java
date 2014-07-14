@@ -1,8 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster;
 
 import org.adamsko.cubicforest.gui.GuiMasterClient;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
 
 public interface RoundPhase extends TilesMasterClient, GuiMasterClient {

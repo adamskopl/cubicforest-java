@@ -169,15 +169,16 @@ public class TilePathSearcherHelper {
 	 * 1) Given tile is not already added to readyTiles (it does not have lower
 	 * cost than actually considered one).
 	 * 
-	 * 2) Given tile is passable.
+	 * 2) Given tile is passable or is a destiny tile
 	 * 
 	 * @param tile
 	 *            Tile checked
 	 * @return decision: tile can be added or not
 	 */
 	private boolean tileValidCurrentCost(Tile tileChecked) {
-		// Gdx.app.debug("tileValidCurrentCost", "");
-		if (!tileChecked.isPassable()) {
+
+		// if tile is not passable, don't add it, unless it's a destiny
+		if (!tileChecked.isPassable() && tileChecked != destiny) {
 			return false;
 		}
 		// check if tileChecked is not already added (does not have lower cost

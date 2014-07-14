@@ -2,11 +2,8 @@ package org.adamsko.cubicforest.world.mapsLoader.converter;
 
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObject;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.math.Vector2;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

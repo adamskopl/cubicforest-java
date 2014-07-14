@@ -6,7 +6,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
  * @author adamsko
  *
  */
-public enum PhaseHeroesMode_e {
+public enum PhaseHeroesMode {
 	/**
 	 * tile is picked for a move order 
 	 */

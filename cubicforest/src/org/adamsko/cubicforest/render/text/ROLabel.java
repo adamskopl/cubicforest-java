@@ -8,6 +8,6 @@ package org.adamsko.cubicforest.render.text;
  * @author adamsko
  * 
  */
-public enum ROLabel_e {
+public enum ROLabel {
 	LABEL_TILEPOS, LABEL_HEIGHT, LABEL_NAME
 }

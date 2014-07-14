@@ -1,8 +1,12 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -23,26 +27,22 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster {
 
 	private HeroTool heroToolMarker;
-
 	// indicates a type of the heroToolMarker
-	private HeroToolType_e heroToolMarkerType;
-
+	private HeroToolType heroToolMarkerType;
 	private HeroToolsFactory heroToolsFactory;
 
-	private GatherCubesMaster gatherCubesMaster;
-
 	public HeroesToolsMaster(MapsLoader mapsLoader, TilesMaster TM,
-			GatherCubesMaster gatherCubesMaster, String textureName, int tileW,
-			int tileH) {
-		super("HeroesToolsMaster", mapsLoader, TM,
-				WorldObjectType_e.OBJECT_ITEM, textureName, tileW, tileH);
+			GatherCubesMaster gatherCubesMaster, HeroesMaster heroesMaster,
+			String textureName, int tileW, int tileH) {
+		super("HeroesToolsMaster", mapsLoader, TM, WorldObjectType.OBJECT_ITEM,
+				textureName, tileW, tileH);
 
 		// addTestObjects();
 		heroToolMarker = null;
 		heroToolMarkerType = null;
 
-		heroToolsFactory = new HeroToolsFactory(atlasRows);
-		this.gatherCubesMaster = gatherCubesMaster;
+		heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
+		loadMapObjects(mapsLoader);
 	}
 
 	/**
@@ -96,8 +96,8 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	public void setToolTexture(HeroTool tool, int index) {
 		tool.setTextureRegion(atlasRows.get(index)[tool.getTexNum()]);
 	}
-	
-	public static Integer heroTooltypeToCost(HeroToolType_e type) {
+
+	public static Integer heroTooltypeToCost(HeroToolType type) {
 		switch (type) {
 		case TOOL_ORANGE:
 			return 0;
@@ -115,19 +115,19 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 		}
 	}
 
-	public void setHeroToolMarkerType(HeroToolType_e heroToolMarkerType) {
+	public void setHeroToolMarkerType(HeroToolType heroToolMarkerType) {
 		this.heroToolMarkerType = heroToolMarkerType;
 	}
 
-	void removeTool(HeroTool heroToolToRemove) {
+	public void removeTool(HeroTool heroToolToRemove) {
 		try {
 			removeObject(heroToolToRemove);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
-	
+
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
@@ -136,17 +136,33 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) {
-		// TODO Auto-generated method stub
+		List<Vector2> coordsTraps = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_HERO_TOOL_TRAP);
+
+		List<Vector2> coordsPortals = mapsLoader
+				.getCoords(TiledObjectType_e.TILED_HERO_TOOL_PORTAL);
+
+		HeroTool heroTool = null;
+		for (Vector2 pos : coordsTraps) {
+			heroTool = heroToolsFactory.createHeroTool(HeroToolType.TOOL_TRAP,
+					pos);
+			heroTool.setState(HeroToolStates_e.STATE_READY);
+			setToolTexture(heroTool, 0);
+			addObject(heroTool);
+		}
+		for (Vector2 pos : coordsPortals) {
+			heroTool = heroToolsFactory.createHeroTool(
+					HeroToolType.TOOL_PORTAL, pos);
+			heroTool.setState(HeroToolStates_e.STATE_READY);
+			setToolTexture(heroTool, 0);
+			addObject(heroTool);
+		}
 
 	}
 
 	@Override
-	public void reload(MapsLoader mapsLoader) {
-		try {
-			removeWorldObjects();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
+		removeWorldObjects();
 	}
 
 }

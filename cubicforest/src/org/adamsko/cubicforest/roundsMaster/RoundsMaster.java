@@ -6,14 +6,11 @@ import java.util.List;
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.world.World;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Setters.ACubemap;
 
 /**
  * A round consists of phases.
@@ -34,9 +31,37 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	 */
 	private boolean reloadAllowed = true;
 
+	private GameResult gameResult;
+
+	public GameResult getGameResult() {
+		return gameResult;
+	}
+
+	/**
+	 * Changes game result. It can be changed from 'PLAY' only once until
+	 * 'resetGameResult()' is not invoked..
+	 * 
+	 * @param gameResult
+	 */
+	public void setGameResultSingle(GameResult gameResult) {
+		if (gameResult != GameResult.GAME_PLAY
+				&& this.gameResult == GameResult.GAME_PLAY) {
+			Gdx.app.debug("setres", gameResult.toString());
+			this.gameResult = gameResult;
+		}
+	}
+
+	/**
+	 * Invoked when game result is read. From now game result can be changed.
+	 */
+	public void resetGameResult() {
+		this.gameResult = GameResult.GAME_PLAY;
+	}
+
 	public RoundsMaster(World world) {
 		this.world = world;
 		phases = new ArrayList<RoundPhase>();
+		gameResult = GameResult.GAME_PLAY;
 	}
 
 	public void nextRound() throws Exception {
@@ -77,11 +102,10 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 			throw new Exception("phaseIsOver: phasePointer error");
 		}
 		nextPhase();
-
 	}
 
 	@Override
-	public void onTileEvent(Tile tile, TileEvent_e event) {
+	public void onTileEvent(Tile tile, TileEvent event) {
 		RoundPhase actualPhase = actualPhase();
 
 		if (actualPhase != null)

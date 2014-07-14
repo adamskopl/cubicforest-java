@@ -1,27 +1,43 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResult;
+import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 
 public class OrdersMasterResult {
 	
-	private OrdersMasterPathResult_e pathResult;
+	private OrdersMasterPathResult pathResult;
 	private InteractionResult interactionResult;
+	private GameResult gameResult;
 	
-	public OrdersMasterResult(InteractionResult interactionResult) {
-		this.interactionResult = interactionResult;
-		pathResult = OrdersMasterPathResult_e.ORDER_PATH_FINISHED;
+	public GameResult getGameResult() {
+		return gameResult;
+	}
+
+	public void setGameResult(GameResult gameResult) {
+		this.gameResult = gameResult;
+	}
+
+	public OrdersMasterResult() {
+		this.gameResult = GameResult.GAME_PLAY;
 	}
 	
-	public OrdersMasterResult(OrdersMasterPathResult_e pathResult) {
-		this.interactionResult = new InteractionResult();
+	public OrdersMasterResult(InteractionResult interactionResult) {
+		this();
+		this.interactionResult = interactionResult;
+		pathResult = OrdersMasterPathResult.ORDER_PATH_FINISHED;
+	}
+	
+	public OrdersMasterResult(OrdersMasterPathResult pathResult) {
+		this();
+		this.interactionResult = new InteractionResult(null, null);
 		this.pathResult = pathResult;
 	}
 
-	public OrdersMasterPathResult_e getPathResult() {
+	public OrdersMasterPathResult getPathResult() {
 		return pathResult;
 	}
 
-	public void setPathResult(OrdersMasterPathResult_e pathResult) {
+	public void setPathResult(OrdersMasterPathResult pathResult) {
 		this.pathResult = pathResult;
 	}
 

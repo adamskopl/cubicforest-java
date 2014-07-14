@@ -2,11 +2,12 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortial;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -16,12 +17,15 @@ import com.badlogic.gdx.math.Vector2;
 public class HeroToolsFactory {
 
 	private List<TextureRegion[]> textureRegions;
+	private HeroesMaster heroesMaster;
 
-	public HeroToolsFactory(List<TextureRegion[]> textureRegions) {
+	public HeroToolsFactory(List<TextureRegion[]> textureRegions,
+			HeroesMaster heroesMaster) {
 		this.textureRegions = textureRegions;
+		this.heroesMaster = heroesMaster;
 	}
 
-	public HeroTool createHeroTool(HeroToolType_e heroToolType, Vector2 tilePos) {
+	public HeroTool createHeroTool(HeroToolType heroToolType, Vector2 tilePos) {
 		HeroTool newTool = null;
 
 		switch (heroToolType) {
@@ -38,7 +42,7 @@ public class HeroToolsFactory {
 			newTool = new HeroToolTrap(textureRegions.get(1)[3], 3);
 			break;
 		case TOOL_PORTAL:
-			newTool = new HeroToolPortial(textureRegions.get(1)[4], 4);
+			newTool = new HeroToolPortal(textureRegions.get(1)[4], 4, heroesMaster);
 			break;
 		default:
 			Gdx.app.error("createHeroTool", "unknown heroToolType");
@@ -46,8 +50,8 @@ public class HeroToolsFactory {
 		}
 
 		newTool.setRenderVector(new Vector2(-textureRegions.get(0)[0]
-				.getRegionWidth()/2 + 2, -30));
-		
+				.getRegionWidth() / 2 + 2, -30));
+
 		newTool.setTilesPos(tilePos);
 		newTool.setVerticalPos(0.1f);
 		newTool.addLabel(newTool.getHeroToolType().toString());

@@ -1,21 +1,17 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
 import java.util.List;
-
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuide;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * Manages orders (movement for now) for objects from different
@@ -30,14 +26,6 @@ import com.badlogic.gdx.math.Vector2;
 public class OrdersMaster {
 
 	private TilePathsMaster tilePathsMaster;
-	private HeroesMaster heroesMaster;
-
-	// TerrainObjectsMaster for testing purposes
-	private TerrainObjectsMaster testTerrainObjectsMaster;
-
-	private Boolean tempTestStarted;
-	private Vector2 tempTargetPos;
-
 	private TilesMaster tilesMaster;
 
 	/**
@@ -47,16 +35,13 @@ public class OrdersMaster {
 	 */
 	private OrdersMasterClient client = null;
 
-	public void tempSetTerrainObjectsMaster(TerrainObjectsMaster tom) {
-		this.testTerrainObjectsMaster = tom;
-	}
+	public OrdersMaster(TilesMaster tilesMaster, HeroesMaster heroesMaster,
+			EnemiesMaster enemiesMaster, HeroesToolsMaster heroesToolsMaster,
+			GatherCubesMaster gatherCubesMaster) {
 
-	public OrdersMaster(TilesMaster tilesMaster, HeroesMaster heroesMaster) {
 		tilePathsMaster = new TilePathsMaster(this, tilesMaster);
-		this.heroesMaster = heroesMaster;
+
 		this.tilesMaster = tilesMaster;
-		tempTestStarted = false;
-		tempTargetPos = new Vector2();
 	}
 
 	/**

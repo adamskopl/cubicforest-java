@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.object;
 
 public class WorldObjectHelper {
 
-	public static String typeToString(WorldObjectType_e type) {
+	public static String typeToString(WorldObjectType type) {
 		return "";
 //		switch (type) {
 //		case OBJECT_GENERIC:

@@ -1,9 +1,9 @@
 package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.ordersMaster.OrderOperation_e;
+import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent_e;
+import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 /**
  * @author adamsko
@@ -23,7 +23,7 @@ public interface InteractionResolver {
 	 *            object which is interacting with a tile
 	 * @return
 	 */
-	InteractionResult resolveInteracion(TileEvent_e eventType, Tile eventTile,
+	InteractionResult resolveInteracion(TileEvent eventType, Tile eventTile,
 			WorldObject eventObject);
 	
 	InteractionResolverType_e getType();

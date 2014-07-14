@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiType_e;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
@@ -27,7 +27,7 @@ public class GuiHeroTools extends GuiContainer {
 	private void createGui() {
 
 		int seqNum = 0;
-		for (HeroToolType_e type : HeroToolType_e.values()) {
+		for (HeroToolType type : HeroToolType.values()) {
 
 			GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
 					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 50, 0);

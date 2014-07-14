@@ -6,6 +6,6 @@ package org.adamsko.cubicforest.world.ordersMaster;
  * @author adamsko
  *
  */
-public enum OrdersMasterPathResult_e {
+public enum OrdersMasterPathResult {
 	ORDER_PATH_NOTFOUND, ORDER_PATH_FINISHED
 }

@@ -3,13 +3,16 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
-import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
+import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
-import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsMaster;
@@ -17,7 +20,6 @@ import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 /**
  * Tiles managing class. Map's model: <br>
@@ -36,7 +38,7 @@ public class TilesMaster implements PickMasterClient {
 	 * @author adamsko
 	 * 
 	 */
-	public enum TileEvent_e {
+	public enum TileEvent {
 		/**
 		 * {@link Tile} received input from {@link PickMaster}.
 		 */
@@ -56,7 +58,11 @@ public class TilesMaster implements PickMasterClient {
 		/**
 		 * Occupant ends his movement on a tile.
 		 */
-		OCCUPANT_STOPS
+		OCCUPANT_STOPS,
+		/**
+		 * Occupant stays on a tile (no movement).
+		 */
+		OCCUPANT_STAYS
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
@@ -99,6 +105,17 @@ public class TilesMaster implements PickMasterClient {
 												// view
 												// tilesContainer.addTile(fCoords);
 		}
+	}
+
+	public void initInteractionResultProcessor(HeroesMaster heroesMaster,
+			EnemiesMaster enemiesMaster, HeroesToolsMaster heroesToolsMaster,
+			GatherCubesMaster gatherCubesMaster, RoundsMaster roundsMaster,
+			PhaseEnemies phaseEnemies, PhaseHeroes phaseHeroes) {
+
+		tilesEventsMaster.initInteractionResultProcessor(heroesMaster,
+				enemiesMaster, heroesToolsMaster, gatherCubesMaster,
+				roundsMaster, phaseEnemies, phaseHeroes);
+
 	}
 
 	public TilesContainer getTilesContainer() {
@@ -150,7 +167,7 @@ public class TilesMaster implements PickMasterClient {
 		Tile parentTile = tilesContainer.getTileOnPos(addObject.getTilesPos());
 		if (parentTile != null) {
 			try {
-				parentTile.insertObject(addObject);
+				parentTile.insertObject(addObject, false);
 				switch (addObject.getWorldType()) {
 				case OBJECT_ENTITY:
 					tilesContainer.testHighlightTile(parentTile, 0, 1);
@@ -208,7 +225,7 @@ public class TilesMaster implements PickMasterClient {
 		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
 		if (clickedTile != null) {
 			for (TilesMasterClient client : clients) {
-				client.onTileEvent(clickedTile, TileEvent_e.TILE_PICKED);
+				client.onTileEvent(clickedTile, TileEvent.TILE_PICKED);
 			}
 		}
 	}

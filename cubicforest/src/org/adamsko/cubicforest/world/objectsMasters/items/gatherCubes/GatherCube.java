@@ -1,7 +1,5 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
-import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
 

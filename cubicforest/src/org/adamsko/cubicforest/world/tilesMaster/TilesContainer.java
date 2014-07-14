@@ -2,12 +2,13 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType_e;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 
 import com.badlogic.gdx.Gdx;
@@ -16,9 +17,12 @@ import com.badlogic.gdx.math.Vector2;
 public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
+	private boolean tilesLoaded;
+	
 	public TilesContainer(String name, MapsLoader mapsLoader, TilesMaster TM) {
-		super(name, mapsLoader, TM, WorldObjectType_e.OBJECT_UNDEFINED,
+		super(name, mapsLoader, TM, WorldObjectType.OBJECT_UNDEFINED,
 				"tiles-atlas-medium", 75, 45);
+		tilesLoaded = false;
 	}
 
 	public List<RenderableObject> getTiles() {
@@ -93,17 +97,20 @@ public class TilesContainer extends WorldObjectsContainer implements
 
 	@Override
 	public void loadMapObjects(MapsLoader mapsLoader) {
+		if (tilesLoaded) return;
+		
 		List<Vector2> coords = mapsLoader
 				.getCoords(TiledObjectType_e.TILED_TILE);
 		
 		for (Vector2 vec : coords) {			
 			addTile(vec);
 		}
-
+		// load tiles only once
+		tilesLoaded = true;
 	}
-
+	
 	@Override
-	public void reload(MapsLoader mapsLoader) {
-		
+	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
 	}
+
 }

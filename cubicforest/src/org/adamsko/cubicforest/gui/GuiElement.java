@@ -1,9 +1,9 @@
 package org.adamsko.cubicforest.gui;
 
 import org.adamsko.cubicforest.render.text.LabelsContainer;
-import org.adamsko.cubicforest.render.text.ROLabel_e;
+import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.render.world.RenderableObjectType_e;
+import org.adamsko.cubicforest.render.world.RenderableObjectType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -25,7 +25,7 @@ public class GuiElement extends RenderableObject {
 	public GuiElement(TextureRegion tr, int texNum, GuiContainer pareContainer,
 			float posX, float posY) {
 		super(tr, texNum);
-		this.renderType = RenderableObjectType_e.TYPE_GUI;
+		this.renderType = RenderableObjectType.TYPE_GUI;
 
 		this.parentContainer = pareContainer;
 		elementContainerPos = new Vector2(posX, posY);
