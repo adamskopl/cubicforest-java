@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>7</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>518</x>
-      <y>189</y>
-      <w>308</w>
-      <h>98</h>
+      <x>416</x>
+      <y>272</y>
+      <w>352</w>
+      <h>112</h>
     </coordinates>
-    <panel_attributes>*InteractionMaster*
+    <panel_attributes>InteractionMaster
 --
 + void tileEvent(TileEvent_e evenType, Tile eventTile,
 			WorldObject eventObject)
@@ -24,10 +24,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>266</x>
-      <y>161</y>
-      <w>112</w>
-      <h>63</h>
+      <x>128</x>
+      <y>240</y>
+      <w>128</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>World
 --</panel_attributes>
@@ -36,21 +36,21 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>357</x>
-      <y>175</y>
-      <w>174</w>
-      <h>55</h>
+      <x>232</x>
+      <y>256</y>
+      <w>200</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;161;42</additional_attributes>
+    <additional_attributes>24;24;184;48</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>245</x>
-      <y>126</y>
-      <w>168</w>
-      <h>126</h>
+      <x>104</x>
+      <y>200</y>
+      <w>192</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world
 --
@@ -60,10 +60,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>511</x>
-      <y>0</y>
-      <w>315</w>
-      <h>147</h>
+      <x>408</x>
+      <y>56</y>
+      <w>360</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.tilesMaster.tilesEvents
 </panel_attributes>
@@ -72,10 +72,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>560</x>
-      <y>49</y>
-      <w>203</w>
-      <h>56</h>
+      <x>464</x>
+      <y>112</y>
+      <w>232</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>TilesEventsMaster
 --
@@ -85,33 +85,33 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>630</x>
-      <y>84</y>
-      <w>34</w>
-      <h>118</h>
+      <x>544</x>
+      <y>152</y>
+      <w>40</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;21;105</additional_attributes>
+    <additional_attributes>24;24;24;120</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>637</x>
-      <y>84</y>
-      <w>94</w>
-      <h>118</h>
+      <x>552</x>
+      <y>152</y>
+      <w>104</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=-
 tileEvent()&gt;</panel_attributes>
-    <additional_attributes>49;21;49;105</additional_attributes>
+    <additional_attributes>56;24;56;120</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>882</x>
-      <y>357</y>
-      <w>350</w>
-      <h>98</h>
+      <x>832</x>
+      <y>464</y>
+      <w>400</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>/InteractionObjectsMaster/
 --
@@ -128,10 +128,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>889</x>
-      <y>182</y>
-      <w>196</w>
-      <h>112</h>
+      <x>840</x>
+      <y>264</y>
+      <w>224</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.render
 --
@@ -141,10 +141,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>910</x>
-      <y>217</y>
-      <w>154</w>
-      <h>63</h>
+      <x>864</x>
+      <y>304</y>
+      <w>176</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>RenderableObjectsContainer
 --</panel_attributes>
@@ -153,32 +153,32 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>959</x>
-      <y>259</y>
-      <w>90</w>
-      <h>111</h>
+      <x>920</x>
+      <y>352</y>
+      <w>104</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;77;98</additional_attributes>
+    <additional_attributes>24;24;88;112</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>805</x>
-      <y>385</y>
-      <w>90</w>
-      <h>34</h>
+      <x>744</x>
+      <y>496</y>
+      <w>104</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>21;21;77;21</additional_attributes>
+    <additional_attributes>24;24;88;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1323</x>
-      <y>112</y>
-      <w>308</w>
-      <h>217</h>
+      <x>1336</x>
+      <y>184</y>
+      <w>352</w>
+      <h>248</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.entities.enemies
 --
@@ -188,10 +188,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1309</x>
-      <y>567</y>
-      <w>357</w>
-      <h>231</h>
+      <x>1320</x>
+      <y>704</y>
+      <w>408</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes
 </panel_attributes>
@@ -200,10 +200,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1323</x>
-      <y>357</y>
-      <w>546</w>
-      <h>140</h>
+      <x>1336</x>
+      <y>464</y>
+      <w>624</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.entities.heroes
 --
@@ -213,10 +213,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1358</x>
-      <y>392</y>
-      <w>273</w>
-      <h>56</h>
+      <x>1376</x>
+      <y>504</y>
+      <w>312</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>EnemiesMaster
 --
@@ -227,55 +227,55 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1211</x>
-      <y>252</y>
-      <w>139</w>
-      <h>125</h>
+      <x>1208</x>
+      <y>344</y>
+      <w>160</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 </panel_attributes>
-    <additional_attributes>21;112;126;21</additional_attributes>
+    <additional_attributes>24;128;144;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1211</x>
-      <y>364</y>
-      <w>160</w>
-      <h>69</h>
+      <x>1208</x>
+      <y>472</y>
+      <w>184</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;147;56</additional_attributes>
+    <additional_attributes>24;24;168;64</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1211</x>
-      <y>385</y>
-      <w>167</w>
-      <h>265</h>
+      <x>1208</x>
+      <y>496</y>
+      <w>192</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;154;252</additional_attributes>
+    <additional_attributes>24;24;176;288</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>644</x>
-      <y>266</y>
-      <w>69</w>
-      <h>111</h>
+      <x>560</x>
+      <y>360</y>
+      <w>80</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>56;21;21;98</additional_attributes>
+    <additional_attributes>64;24;24;112</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1337</x>
-      <y>238</y>
-      <w>273</w>
-      <h>56</h>
+      <x>1352</x>
+      <y>328</y>
+      <w>312</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>HeroesMaster
 --
@@ -286,10 +286,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1365</x>
-      <y>609</y>
-      <w>273</w>
-      <h>56</h>
+      <x>1384</x>
+      <y>752</y>
+      <w>312</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>GatherCubesMaster
 --
@@ -302,22 +302,22 @@ color=yellow</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>546</x>
-      <y>266</y>
-      <w>104</w>
-      <h>111</h>
+      <x>448</x>
+      <y>360</y>
+      <w>120</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=-
 tileEvent()&gt;</panel_attributes>
-    <additional_attributes>91;21;49;63;63;98</additional_attributes>
+    <additional_attributes>104;24;56;64;72;112</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>917</x>
-      <y>14</y>
-      <w>119</w>
-      <h>105</h>
+      <x>872</x>
+      <y>72</y>
+      <w>136</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 OrderOperation_e
@@ -332,10 +332,10 @@ OrderOperation_e
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>889</x>
-      <y>518</y>
-      <w>308</w>
-      <h>84</h>
+      <x>840</x>
+      <y>648</y>
+      <w>352</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.items.heroTools</panel_attributes>
     <additional_attributes/>
@@ -343,10 +343,10 @@ OrderOperation_e
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>896</x>
-      <y>539</y>
-      <w>280</w>
-      <h>56</h>
+      <x>848</x>
+      <y>672</y>
+      <w>320</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>HeroesToolsMaster
 --
@@ -357,32 +357,32 @@ OrderOperation_e
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1022</x>
-      <y>434</y>
-      <w>34</w>
-      <h>97</h>
+      <x>992</x>
+      <y>552</y>
+      <w>40</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;21;21;84</additional_attributes>
+    <additional_attributes>24;24;24;96</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1078</x>
-      <y>245</y>
+      <x>1056</x>
+      <y>344</y>
       <w>104</w>
-      <h>125</h>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>21;112;91;21</additional_attributes>
+    <additional_attributes>24;120;88;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1337</x>
-      <y>175</y>
-      <w>175</w>
-      <h>42</h>
+      <x>1352</x>
+      <y>256</y>
+      <w>200</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>InteractionResolverHeroes
 --</panel_attributes>
@@ -391,21 +391,21 @@ OrderOperation_e
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1260</x>
-      <y>175</y>
-      <w>90</w>
-      <h>69</h>
+      <x>1248</x>
+      <y>256</y>
+      <w>120</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>21;56;77;21</additional_attributes>
+    <additional_attributes>24;72;104;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1358</x>
-      <y>679</y>
-      <w>231</w>
-      <h>70</h>
+      <x>1376</x>
+      <y>832</y>
+      <w>264</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>InteractionResolverGatherCubes
 --</panel_attributes>
@@ -414,21 +414,21 @@ OrderOperation_e
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1218</x>
-      <y>245</y>
-      <w>153</w>
-      <h>489</h>
+      <x>1200</x>
+      <y>344</y>
+      <w>192</w>
+      <h>552</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>21;21;140;476</additional_attributes>
+    <additional_attributes>24;24;176;536</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1148</x>
-      <y>196</y>
-      <w>133</w>
-      <h>70</h>
+      <x>1120</x>
+      <y>288</y>
+      <w>152</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /InteractionResolver/
@@ -439,10 +439,10 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>518</x>
-      <y>364</y>
-      <w>308</w>
-      <h>105</h>
+      <x>416</x>
+      <y>472</y>
+      <w>352</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /InteractionMasterClient/
@@ -458,12 +458,12 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>140</x>
-      <y>364</y>
-      <w>357</w>
-      <h>112</h>
+      <x>0</x>
+      <y>464</y>
+      <w>408</w>
+      <h>128</h>
     </coordinates>
-    <panel_attributes>*InteractionResolverFactory*
+    <panel_attributes>InteractionResolverFactory
 --
 + InteractionResolver createFactory(InteractionResolverType_e type)
 
@@ -473,21 +473,21 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>287</x>
-      <y>203</y>
-      <w>48</w>
-      <h>174</h>
+      <x>168</x>
+      <y>288</y>
+      <w>40</w>
+      <h>192</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>21;161;35;21</additional_attributes>
+    <additional_attributes>24;176;24;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>217</x>
-      <y>483</y>
-      <w>161</w>
-      <h>56</h>
+      <x>72</x>
+      <y>608</y>
+      <w>184</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 /InteractionResolverType_e/
@@ -497,17 +497,82 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>532</x>
-      <y>546</y>
-      <w>210</w>
-      <h>84</h>
+      <x>1536</x>
+      <y>8</y>
+      <w>312</w>
+      <h>120</h>
     </coordinates>
-    <panel_attributes>*InteractionResult*
+    <panel_attributes>InteractionResult
 --
 - OrderOperation_e orderOperation
 - ObjectOperation_e objectOperation
+--
+	private List&lt;Hero&gt; toRemoveHeroes;
+	private List&lt;Enemy&gt; toRemoveEnemies;
+	private List&lt;HeroTool&gt; toRemoveHeroTools;
+	private List&lt;GatherCube&gt; toRemoveGatherCubes;
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>744</x>
+      <y>352</y>
+      <w>160</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+processTileEvent()</panel_attributes>
+    <additional_attributes>144;112;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>1072</x>
+      <y>96</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>prepares 'InteractionResult'
+class</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1152</x>
+      <y>128</y>
+      <w>64</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>48;160;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1280</x>
+      <y>16</y>
+      <w>208</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>InteractionResultProcessor
+--
+
 
 bg=orange</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1464</x>
+      <y>40</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>24;24;72;24</additional_attributes>
   </element>
 </diagram>

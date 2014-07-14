@@ -4,8 +4,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>693</x>
-      <y>455</y>
+      <x>469</x>
+      <y>441</y>
       <w>119</w>
       <h>63</h>
     </coordinates>
@@ -17,8 +17,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>924</x>
-      <y>441</y>
+      <x>700</x>
+      <y>427</y>
       <w>287</w>
       <h>105</h>
     </coordinates>

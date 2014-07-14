@@ -46,8 +46,8 @@ void startPath(WorldObject wanderer, Tile destinationTile)
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>568</x>
-      <y>184</y>
+      <x>528</x>
+      <y>176</y>
       <w>208</w>
       <h>144</h>
     </coordinates>
@@ -59,8 +59,8 @@ void startPath(WorldObject wanderer, Tile destinationTile)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>600</x>
-      <y>264</y>
+      <x>560</x>
+      <y>256</y>
       <w>144</w>
       <h>48</h>
     </coordinates>
@@ -71,14 +71,14 @@ void startPath(WorldObject wanderer, Tile destinationTile)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
-      <y>288</y>
-      <w>128</w>
-      <h>128</h>
+      <x>552</x>
+      <y>280</y>
+      <w>108</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 TO DELETE</panel_attributes>
-    <additional_attributes>112;24;24;112</additional_attributes>
+    <additional_attributes>80;24;32;120</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -272,7 +272,7 @@ fg=red</panel_attributes>
       <w>168</w>
       <h>48</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>152;24;24;32</additional_attributes>
   </element>
   <element>
@@ -438,8 +438,8 @@ fg=red</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>616</x>
-      <y>208</y>
+      <x>576</x>
+      <y>200</y>
       <w>96</w>
       <h>48</h>
     </coordinates>
@@ -451,15 +451,15 @@ fg=red</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>168</x>
-      <y>200</y>
-      <w>464</w>
-      <h>136</h>
+      <y>192</y>
+      <w>424</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=-
 event().tileEvent()
 &gt;
 fg=magenta</panel_attributes>
-    <additional_attributes>24;120;216;40;448;24</additional_attributes>
+    <additional_attributes>24;128;200;40;408;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -480,13 +480,13 @@ Tile eventTile,
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>688</x>
-      <y>208</y>
-      <w>176</w>
-      <h>56</h>
+      <x>648</x>
+      <y>200</y>
+      <w>216</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;160;40</additional_attributes>
+    <additional_attributes>24;24;200;48</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
@@ -504,7 +504,7 @@ Tile eventTile,
     <coordinates>
       <x>1088</x>
       <y>0</y>
-      <w>752</w>
+      <w>896</w>
       <h>320</h>
     </coordinates>
     <panel_attributes>org.adamsko.cubicforest.world.objectsMasters.interactionMaster</panel_attributes>
@@ -513,8 +513,8 @@ Tile eventTile,
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1104</x>
-      <y>144</y>
+      <x>1112</x>
+      <y>160</y>
       <w>224</w>
       <h>88</h>
     </coordinates>
@@ -530,52 +530,52 @@ Tile eventTile,
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1032</x>
-      <y>152</y>
-      <w>88</w>
-      <h>112</h>
+      <y>184</y>
+      <w>96</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;96;72;24</additional_attributes>
+    <additional_attributes>24;64;80;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>640</x>
+      <x>600</x>
       <y>96</y>
-      <w>224</w>
+      <w>264</w>
       <h>152</h>
     </coordinates>
     <panel_attributes>lt=-
 tileEvent()
 &gt;
 fg=magenta</panel_attributes>
-    <additional_attributes>24;112;72;40;168;40;208;136</additional_attributes>
+    <additional_attributes>24;104;112;40;208;40;248;136</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>928</x>
       <y>88</y>
-      <w>248</w>
+      <w>256</w>
       <h>136</h>
     </coordinates>
     <panel_attributes>lt=-
 tileEvent()
 &gt;
 fg=magenta</panel_attributes>
-    <additional_attributes>24;120;48;40;168;32;232;56</additional_attributes>
+    <additional_attributes>24;120;48;40;168;32;240;72</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1408</x>
+      <x>1424</x>
       <y>72</y>
       <w>272</w>
       <h>104</h>
     </coordinates>
     <panel_attributes>/InteractionMasterClient/
 --
-+ OrderOperation_e 
++ InteractionResult
 processTileEvent(TileEvent_e evenType, 
 Tile eventTile,
 			WorldObject eventObject)
@@ -586,19 +586,19 @@ Tile eventTile,
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1304</x>
+      <x>1312</x>
       <y>80</y>
-      <w>120</w>
-      <h>88</h>
+      <w>128</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;72;104;24</additional_attributes>
+    <additional_attributes>24;88;112;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1344</x>
-      <y>208</y>
+      <x>1360</x>
+      <y>216</y>
       <w>432</w>
       <h>88</h>
     </coordinates>
@@ -613,49 +613,49 @@ Tile eventTile, WorldObject eventObject)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1504</x>
+      <x>1520</x>
       <y>152</y>
       <w>40</w>
-      <h>72</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>24;24;24;56</additional_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1472</x>
-      <y>272</y>
-      <w>104</w>
-      <h>160</h>
+      <x>1488</x>
+      <y>280</y>
+      <w>88</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;88;144</additional_attributes>
+    <additional_attributes>24;24;72;136</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1512</x>
-      <y>272</y>
-      <w>184</w>
-      <h>240</h>
+      <x>1528</x>
+      <y>280</y>
+      <w>168</w>
+      <h>232</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;168;136;136;224</additional_attributes>
+    <additional_attributes>24;24;152;128;120;216</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1304</x>
+      <x>1312</x>
       <y>104</y>
-      <w>120</w>
-      <h>88</h>
+      <w>128</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=-
 tileEvent()
 &gt;
 fg=magenta</panel_attributes>
-    <additional_attributes>24;72;104;24</additional_attributes>
+    <additional_attributes>24;88;112;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -686,13 +686,13 @@ Tile eventTile, WorldObject eventObject)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1568</x>
-      <y>272</y>
-      <w>176</w>
-      <h>312</h>
+      <x>1584</x>
+      <y>280</y>
+      <w>160</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;160;128;112;296</additional_attributes>
+    <additional_attributes>24;24;144;120;96;288</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -821,8 +821,8 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>400</x>
-      <y>792</y>
+      <x>408</x>
+      <y>816</y>
       <w>272</w>
       <h>112</h>
     </coordinates>
@@ -830,9 +830,58 @@ bg=orange</panel_attributes>
 --
 - OrdersMasterPathResult_e pathResult
 - InteractionResult interactionResult
+--
 + OrdersMasterPathResult_e getPathResult()
 bg=orange
 + InteractionResult getInteractionResult()</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1720</x>
+      <y>96</y>
+      <w>240</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>InteractionResult
+--
+- OrderOperation orderOperation
+- ObjectOperation objectOperation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>656</x>
+      <y>168</y>
+      <w>1216</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;704;1200;696;1184;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>792</x>
+      <y>8</y>
+      <w>200</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>InteractionResult is processed
+here</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>864</x>
+      <y>40</y>
+      <w>80</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>64;168;24;24</additional_attributes>
   </element>
 </diagram>
