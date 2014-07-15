@@ -15,8 +15,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class HeroToolPortal extends HeroTool {
 
 	private HeroesMaster heroesMaster;
-	
-	public HeroToolPortal(TextureRegion tr, int texNum, HeroesMaster heroesMaster) {
+
+	public HeroToolPortal(TextureRegion tr, int texNum,
+			HeroesMaster heroesMaster) {
 		super(tr, texNum, HeroToolType.TOOL_PORTAL);
 		this.heroesMaster = heroesMaster;
 	}
@@ -24,32 +25,49 @@ public class HeroToolPortal extends HeroTool {
 	@Override
 	public void onEntityTileEvent(InteractionResult interactionResult,
 			EntityObject entityObject, TileEvent eventType) {
-		
-		if(eventType != TileEvent.OCCUPANT_STOPS &&
-				eventType != TileEvent.OCCUPANT_STAYS) {
-			return;
-		}
-		
+
 		switch (entityObject.getEntityType()) {
 		case ENTITY_HERO:
+			if (!validHero(eventType))
+				return;
 			interactionResult.setOrderOperation(OrderOperation.ORDER_FINISH);
-			
+
 			// remove hero
-			interactionResult.remove((Hero)entityObject);
-			
+			interactionResult.remove((Hero) entityObject);
+
 			// remove portal
 			interactionResult.remove(this);
-			
+
 			// if removed hero is last, the game is won
-			if(heroesMaster.getOrderableObjects().size() == 1) {
+			if (heroesMaster.getOrderableObjects().size() == 1) {
 				interactionResult.setGameResult(GameResult.GAME_WON);
 			}
-			
+
 			break;
+
+		case ENTITY_ENEMY:
+			if (!validEnemy(eventType))
+				return;
+			/*
+			 * The enemy is destroying the portal.
+			 */
+			interactionResult.remove(this);
 
 		default:
 			break;
 		}
-		
+
+	}
+
+	private Boolean validHero(TileEvent eventType) {
+		if (eventType != TileEvent.OCCUPANT_STOPS
+				&& eventType != TileEvent.OCCUPANT_STAYS) {
+			return false;
+		}
+		return true;
+	}
+
+	private Boolean validEnemy(TileEvent eventType) {
+		return true;
 	}
 }
