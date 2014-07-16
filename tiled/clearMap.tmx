@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="50" tileheight="50">
+ <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50">
+  <image source="tileset.png" trans="ffffff" width="600" height="600"/>
+ </tileset>
+ <objectgroup name="atlas" width="10" height="10">
+  <object type="tile" gid="5" x="-150" y="50"/>
+  <object type="terrain" gid="4" x="-150" y="100"/>
+  <object type="hero" gid="2" x="-150" y="150"/>
+  <object type="enemy" gid="3" x="-150" y="200"/>
+  <object type="item" gid="1" x="-150" y="250"/>
+  <object gid="17" x="-150" y="350"/>
+  <object gid="16" x="-150" y="300"/>
+ </objectgroup>
+ <objectgroup name="TILED_TILE" width="10" height="10">
+  <object type="tile" gid="5" x="150" y="200"/>
+  <object type="tile" gid="5" x="200" y="200"/>
+  <object type="tile" gid="5" x="250" y="200"/>
+  <object type="tile" gid="5" x="250" y="250"/>
+  <object type="tile" gid="5" x="200" y="250"/>
+  <object type="tile" gid="5" x="150" y="250"/>
+  <object type="tile" gid="5" x="100" y="200"/>
+  <object type="tile" gid="5" x="100" y="250"/>
+  <object type="tile" gid="5" x="50" y="250"/>
+  <object type="tile" gid="5" x="50" y="200"/>
+  <object type="tile" gid="5" x="0" y="200"/>
+  <object type="tile" gid="5" x="0" y="250"/>
+  <object type="tile" gid="5" x="0" y="300"/>
+  <object type="tile" gid="5" x="50" y="300"/>
+  <object type="tile" gid="5" x="100" y="300"/>
+  <object type="tile" gid="5" x="200" y="300"/>
+  <object type="tile" gid="5" x="250" y="300"/>
+  <object type="tile" gid="5" x="150" y="300"/>
+  <object type="tile" gid="5" x="150" y="150"/>
+  <object type="tile" gid="5" x="200" y="50"/>
+  <object type="tile" gid="5" x="250" y="150"/>
+  <object type="tile" gid="5" x="50" y="100"/>
+  <object type="tile" gid="5" x="250" y="50"/>
+  <object type="tile" gid="5" x="0" y="150"/>
+  <object type="tile" gid="5" x="250" y="100"/>
+  <object type="tile" gid="5" x="50" y="150"/>
+  <object type="tile" gid="5" x="150" y="50"/>
+  <object type="tile" gid="5" x="200" y="100"/>
+  <object type="tile" gid="5" x="100" y="100"/>
+  <object type="tile" gid="5" x="100" y="50"/>
+  <object type="tile" gid="5" x="0" y="100"/>
+  <object type="tile" gid="5" x="100" y="150"/>
+  <object type="tile" gid="5" x="150" y="100"/>
+  <object type="tile" gid="5" x="200" y="150"/>
+  <object type="tile" gid="5" x="50" y="50"/>
+  <object type="tile" gid="5" x="300" y="400"/>
+  <object type="tile" gid="5" x="350" y="450"/>
+  <object type="tile" gid="5" x="350" y="400"/>
+  <object type="tile" gid="5" x="400" y="350"/>
+  <object type="tile" gid="5" x="300" y="450"/>
+  <object type="tile" gid="5" x="350" y="350"/>
+  <object type="tile" gid="5" x="300" y="350"/>
+  <object type="tile" gid="5" x="400" y="250"/>
+  <object type="tile" gid="5" x="300" y="250"/>
+  <object type="tile" gid="5" x="350" y="300"/>
+  <object type="tile" gid="5" x="400" y="300"/>
+  <object type="tile" gid="5" x="350" y="250"/>
+  <object type="tile" gid="5" x="400" y="200"/>
+  <object type="tile" gid="5" x="300" y="300"/>
+  <object type="tile" gid="5" x="350" y="200"/>
+  <object type="tile" gid="5" x="300" y="200"/>
+  <object type="tile" gid="5" x="400" y="100"/>
+  <object type="tile" gid="5" x="300" y="100"/>
+  <object type="tile" gid="5" x="350" y="100"/>
+  <object type="tile" gid="5" x="400" y="50"/>
+  <object type="tile" gid="5" x="300" y="150"/>
+  <object type="tile" gid="5" x="350" y="50"/>
+  <object type="tile" gid="5" x="300" y="50"/>
+  <object type="tile" gid="5" x="100" y="400"/>
+  <object type="tile" gid="5" x="50" y="450"/>
+  <object type="tile" gid="5" x="100" y="450"/>
+  <object type="tile" gid="5" x="50" y="400"/>
+  <object type="tile" gid="5" x="100" y="350"/>
+  <object type="tile" gid="5" x="0" y="450"/>
+  <object type="tile" gid="5" x="50" y="350"/>
+  <object type="tile" gid="5" x="0" y="350"/>
+  <object type="tile" gid="5" x="250" y="400"/>
+  <object type="tile" gid="5" x="150" y="400"/>
+  <object type="tile" gid="5" x="200" y="450"/>
+  <object type="tile" gid="5" x="250" y="450"/>
+  <object type="tile" gid="5" x="200" y="400"/>
+  <object type="tile" gid="5" x="250" y="350"/>
+  <object type="tile" gid="5" x="150" y="450"/>
+  <object type="tile" gid="5" x="200" y="350"/>
+  <object type="tile" gid="5" x="150" y="350"/>
+  <object type="tile" gid="5" x="450" y="50"/>
+  <object type="tile" gid="5" x="450" y="100"/>
+  <object type="tile" gid="5" x="450" y="450"/>
+  <object type="tile" gid="5" x="450" y="200"/>
+  <object type="tile" gid="5" x="450" y="300"/>
+  <object type="tile" gid="5" x="450" y="250"/>
+  <object type="tile" gid="5" x="250" y="500"/>
+  <object type="tile" gid="5" x="200" y="500"/>
+  <object type="tile" gid="5" x="350" y="500"/>
+  <object type="tile" gid="5" x="300" y="500"/>
+  <object type="tile" gid="5" x="150" y="500"/>
+  <object type="tile" gid="5" x="100" y="500"/>
+  <object type="tile" gid="5" x="50" y="500"/>
+  <object type="tile" gid="5" x="450" y="150"/>
+  <object type="tile" gid="5" x="400" y="150"/>
+  <object type="tile" gid="5" x="350" y="150"/>
+  <object type="tile" gid="5" x="0" y="50"/>
+  <object type="tile" gid="5" x="0" y="400"/>
+  <object type="tile" gid="5" x="0" y="500"/>
+  <object type="tile" gid="5" x="400" y="500"/>
+  <object type="tile" gid="5" x="450" y="500"/>
+  <object type="tile" gid="5" x="400" y="450"/>
+  <object type="tile" gid="5" x="400" y="400"/>
+  <object type="tile" gid="5" x="450" y="400"/>
+  <object type="tile" gid="5" x="450" y="350"/>
+ </objectgroup>
+ <objectgroup name="TILED_ENTITY_HERO" width="10" height="10"/>
+ <objectgroup name="TILED_ENTITY_ENEMY" width="10" height="10"/>
+ <objectgroup name="TILED_TERRAIN" width="10" height="10"/>
+ <objectgroup name="TILED_ITEM_GATHERCUBE" width="10" height="10"/>
+ <objectgroup name="TILED_HERO_TOOL_TRAP" width="10" height="10"/>
+ <objectgroup name="TILED_HERO_TOOL_PORTAL" width="10" height="10"/>
+</map>
