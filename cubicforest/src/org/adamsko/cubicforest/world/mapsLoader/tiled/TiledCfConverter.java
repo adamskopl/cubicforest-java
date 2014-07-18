@@ -1,9 +1,8 @@
-package org.adamsko.cubicforest.world.mapsLoader.converter;
+package org.adamsko.cubicforest.world.mapsLoader.tiled;
 
-import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMap;
-import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,17 +16,20 @@ import java.util.List;
 public class TiledCfConverter {
 
 	private TiledMap tiledMap;
-	HashMap<TiledObjectType_e, List<TiledObject>> tiledObjectsMap;
+	HashMap<TiledObjectType, List<TiledObject>> tiledObjectsMap;
 
 	public TiledCfConverter(TiledMap tiledMap) {
 		this.tiledMap = tiledMap;
-		loadTiledObjects();
 	}
 
-	private void loadTiledObjects() {
-		tiledObjectsMap = new HashMap<TiledObjectType_e, List<TiledObject>>();
+	/**
+	 * Load TileObject object to tiledObjectMap map.
+	 * Use after tiledMap is loaded.
+	 */
+	void loadTiledObjects() {
+		tiledObjectsMap = new HashMap<TiledObjectType, List<TiledObject>>();
 
-		for (TiledObjectType_e tiledType : TiledObjectType_e.values()) {
+		for (TiledObjectType tiledType : TiledObjectType.values()) {
 			List<TiledObject> tiledObjects;
 			tiledObjects = tiledMap.getObjectsFromLayer(tiledType);
 			if (tiledObjects == null) {
@@ -39,7 +41,7 @@ public class TiledCfConverter {
 		}
 	}
 
-	private List<Vector2> getCoords(List<TiledObject> tiledObjects) {
+	private List<Vector2> getObjectsCoords(List<TiledObject> tiledObjects) {
 		List<Vector2> coords = new ArrayList<Vector2>();
 		if (tiledObjects == null) {
 			Gdx.app.error("getCoords", "tiledObjects == null");
@@ -53,19 +55,19 @@ public class TiledCfConverter {
 
 			// TEMPORARY SOLUTION: center coordinates
 			coord.add(7, -3);
-			
+
 			coords.add(coord);
 		}
 		return coords;
 	}
 
-	public List<Vector2> getCoords(TiledObjectType_e objectType) {
+	List<Vector2> getObjectTypeCoords(TiledObjectType objectType) {
 		List<TiledObject> tiledObjects = tiledObjectsMap.get(objectType);
 		if (tiledObjects == null) {
 			Gdx.app.error("getCoords " + objectType.toString(), "not in a map");
 		}
 
-		return getCoords(tiledObjectsMap.get(objectType));
+		return getObjectsCoords(tiledObjectsMap.get(objectType));
 	}
 
 }

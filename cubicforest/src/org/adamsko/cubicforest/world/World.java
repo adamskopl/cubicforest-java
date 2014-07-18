@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.render.world.WorldRenderer;
@@ -9,6 +10,7 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
 import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -53,27 +55,29 @@ public class World {
 
 	public World(WorldRenderer renderer) {
 		this.renderer = renderer;
-		mapsLoader = new MapsLoader();
+		mapsLoader = new MapsLoaderTiled();
+		mapsLoader.loadMaps();
+		mapsLoader.setMapActive(0);		
 
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
 
-		tilesMaster = new TilesMaster(mapsLoader, 100);
+		tilesMaster = new TilesMaster(100);
 		TilesSearcher.setTilesMaster(tilesMaster);
 
 		roundsMaster = new RoundsMaster(this);
 
-		terrainObjectsMaster = new TerrainObjectsMaster(mapsLoader,
-				tilesMaster, "terrain-atlas-medium", 42, 50);
-		heroesMaster = new HeroesMaster(mapsLoader, tilesMaster, roundsMaster,
+		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster,
+				"terrain-atlas-medium", 42, 50);
+		heroesMaster = new HeroesMaster(tilesMaster, roundsMaster,
 				"heroes-atlas-medium", 30, 35);
-		enemiesMaster = new EnemiesMaster(mapsLoader, tilesMaster,
-				roundsMaster, "enemies-atlas-medium", 30, 35);
-		gatherCubesMaster = new GatherCubesMaster(mapsLoader, tilesMaster,
+		enemiesMaster = new EnemiesMaster(tilesMaster, roundsMaster,
+				"enemies-atlas-medium", 30, 35);
+		gatherCubesMaster = new GatherCubesMaster(tilesMaster,
 				"cubes-atlas-medium", 25, 40);
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 
-		heroesToolsMaster = new HeroesToolsMaster(mapsLoader, tilesMaster,
+		heroesToolsMaster = new HeroesToolsMaster(tilesMaster,
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
 
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster,
@@ -87,7 +91,6 @@ public class World {
 
 		tilesMaster.setInteractionMaster(interactionMaster);
 
-		initRoundsMaster();
 		initInteractionResolvers();
 
 		addWorldObjectsMaster(tilesMaster.getTilesContainer());
@@ -97,6 +100,10 @@ public class World {
 		addWorldObjectsMaster(gatherCubesMaster);
 		addWorldObjectsMaster(heroesToolsMaster);
 
+		reloadWorld();
+		
+		initRoundsMaster();
+		
 		guiMaster = new GuiMaster(tilesMaster);
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
 		guiMaster.addClient(roundsMaster);
@@ -159,14 +166,14 @@ public class World {
 	public void reloadWorld() {
 		for (WorldObjectsMaster wo : worldObjectsMasters) {
 			try {
-				wo.unloadMapObjects(mapsLoader);
+				wo.unloadMapObjects();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		for (WorldObjectsMaster wo : worldObjectsMasters) {
 			try {
-				wo.loadMapObjects(mapsLoader);
+				wo.loadMapObjects(mapsLoader.getMapActive());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

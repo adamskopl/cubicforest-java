@@ -5,8 +5,8 @@ import java.util.List;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
-import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -14,26 +14,20 @@ import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class HeroesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
-	public HeroesMaster(MapsLoader mapsLoader, TilesMaster TM,
-			RoundsMaster roundsMaster, String textureName, int tileW, int tileH) {
-		super("HeroesMaster", mapsLoader, TM, WorldObjectType.OBJECT_ENTITY,
-				textureName, tileW, tileH);
-		try {
-			loadMapObjects(mapsLoader);
-		} catch (Exception e) {
-			Gdx.app.error("HeroesMaster", e.toString());
-		}
+	public HeroesMaster(TilesMaster TM, RoundsMaster roundsMaster,
+			String textureName, int tileW, int tileH) {
+		super("HeroesMaster", TM, WorldObjectType.OBJECT_ENTITY, textureName,
+				tileW, tileH);
+
 	}
 
-	public void handleServantTileEvent(WorldObject servant,
-			TileEvent tileEvent) {
+	public void handleServantTileEvent(WorldObject servant, TileEvent tileEvent) {
 		switch (tileEvent) {
 		case TILE_PICKED: {
 		}
@@ -58,9 +52,9 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void loadMapObjects(MapsLoader mapsLoader) throws Exception {
-		List<Vector2> coords = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_ENTITY_HERO);
+	public void loadMapObjects(CFMap map) throws Exception {
+		List<Vector2> coords = map
+				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_HERO);
 
 		Hero hero;
 		int atlasIndex = 0;
@@ -88,18 +82,18 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 		}
 
 	}
-	
+
 	@Override
-	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
+	public void unloadMapObjects() throws Exception {
 		removeWorldObjects();
 	}
 
-	public void removeHero(Hero heroToRemove ) {
+	public void removeHero(Hero heroToRemove) {
 		try {
 			removeObject(heroToRemove);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

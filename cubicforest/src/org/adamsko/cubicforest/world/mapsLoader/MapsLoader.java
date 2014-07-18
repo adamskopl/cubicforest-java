@@ -1,43 +1,26 @@
 package org.adamsko.cubicforest.world.mapsLoader;
 
-import java.util.List;
+public interface MapsLoader {
 
-import org.adamsko.cubicforest.world.mapsLoader.converter.TiledCfConverter;
-import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
-import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledLayer;
-import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMap;
+	/**
+	 * Load all maps.
+	 */
+	public void loadMaps();
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.math.Vector2;
-import com.google.gson.Gson;
+	public int size();
 
-public class MapsLoader {
+	/**
+	 * Set active map. This map will be used by WorldObjectsMaster objects.
+	 * 
+	 * @param mapIndex
+	 */
+	public void setMapActive(int mapIndex);
 
-	TiledMap tiledMap;
-	TiledCfConverter tiledCfConverter;
-	
-	public MapsLoader() {
-		loadTestMap();
-		tiledCfConverter = new TiledCfConverter(tiledMap);
-	}
+	/**
+	 * Get active map.
+	 * 
+	 * @return active map
+	 */
+	public CFMap getMapActive();
 
-	private void loadTestMap() {
-
-		Boolean exists = new Boolean(Gdx.files.internal("data/maps/clearMap.json")
-				.exists());
-
-		FileHandle mapFile = Gdx.files.internal("data/maps/clearMap.json");
-
-		String mapFileString = mapFile.readString();
-		
-		tiledMap = new Gson().fromJson(mapFileString, TiledMap.class);
-		List <TiledLayer> layersList = tiledMap.getLayers();
-
-	}
-	
-	public List<Vector2> getCoords(TiledObjectType_e objectType) {
-		return tiledCfConverter.getCoords(objectType);
-	}
-	
 }

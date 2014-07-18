@@ -3,8 +3,9 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
-import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
@@ -31,10 +32,10 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	private HeroToolType heroToolMarkerType;
 	private HeroToolsFactory heroToolsFactory;
 
-	public HeroesToolsMaster(MapsLoader mapsLoader, TilesMaster TM,
+	public HeroesToolsMaster(TilesMaster TM,
 			GatherCubesMaster gatherCubesMaster, HeroesMaster heroesMaster,
 			String textureName, int tileW, int tileH) {
-		super("HeroesToolsMaster", mapsLoader, TM, WorldObjectType.OBJECT_ITEM,
+		super("HeroesToolsMaster", TM, WorldObjectType.OBJECT_ITEM,
 				textureName, tileW, tileH);
 
 		// addTestObjects();
@@ -42,7 +43,6 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 		heroToolMarkerType = null;
 
 		heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
-		loadMapObjects(mapsLoader);
 	}
 
 	/**
@@ -135,12 +135,12 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void loadMapObjects(MapsLoader mapsLoader) {
-		List<Vector2> coordsTraps = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_HERO_TOOL_TRAP);
+	public void loadMapObjects(CFMap map) {
+		List<Vector2> coordsTraps = map
+				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_TRAP);
 
-		List<Vector2> coordsPortals = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_HERO_TOOL_PORTAL);
+		List<Vector2> coordsPortals = map
+				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_PORTAL);
 
 		HeroTool heroTool = null;
 		for (Vector2 pos : coordsTraps) {
@@ -161,7 +161,7 @@ public class HeroesToolsMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
+	public void unloadMapObjects() throws Exception {
 		removeWorldObjects();
 	}
 

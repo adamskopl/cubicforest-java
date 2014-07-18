@@ -3,8 +3,9 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
-import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
@@ -18,16 +19,10 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 
 	private GatherCubesCounter gatherCubesCounter;
 
-	public GatherCubesMaster(MapsLoader mapsLoader, TilesMaster TM,
-			String textureName, int tileW, int tileH) {
-		super("GatherCubesMaster", mapsLoader, TM,
-				WorldObjectType.OBJECT_ITEM, textureName, tileW, tileH);
-		try {
-			loadMapObjects(mapsLoader);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public GatherCubesMaster(TilesMaster TM, String textureName, int tileW,
+			int tileH) {
+		super("GatherCubesMaster", TM, WorldObjectType.OBJECT_ITEM,
+				textureName, tileW, tileH);
 	}
 
 	public GatherCubesCounter getGatherCubesCounter() {
@@ -69,9 +64,9 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void loadMapObjects(MapsLoader mapsLoader) {
-		List<Vector2> coords = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_ITEM_GATHERCUBE);
+	public void loadMapObjects(CFMap map) {
+		List<Vector2> coords = map
+				.getObjectTypeCoords(TiledObjectType.TILED_ITEM_GATHERCUBE);
 
 		GatherCube gatherCube;
 		int atlasIndex = 0;
@@ -98,17 +93,17 @@ public class GatherCubesMaster extends InteractionObjectsMaster implements
 		}
 
 	}
-	
+
 	@Override
-	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
+	public void unloadMapObjects() throws Exception {
 		gatherCubesCounter.reset();
 		removeWorldObjects();
 	}
-	
+
 	void cubeHighlight(GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(1)[cube.getTexNum()]);
 	}
-	
+
 	void cubeUnHighlight(GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
 	}

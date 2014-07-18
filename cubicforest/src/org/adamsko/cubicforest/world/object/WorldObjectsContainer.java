@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
@@ -21,9 +20,9 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		return worldObjectsType;
 	}
 
-	public WorldObjectsContainer(String name, MapsLoader mapsLoader,
-			TilesMaster TM, WorldObjectType worldObjectsType,
-			String textureName, int tileW, int tileH) {
+	public WorldObjectsContainer(String name, TilesMaster TM,
+			WorldObjectType worldObjectsType, String textureName, int tileW,
+			int tileH) {
 		super(name, TM, textureName, tileW, tileH);
 		worldObjects = new ArrayList<WorldObject>();
 		tilesMaster = TM;
