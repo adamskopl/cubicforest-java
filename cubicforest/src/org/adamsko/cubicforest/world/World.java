@@ -95,6 +95,8 @@ public class World {
 
 		initInteractionResolvers();
 
+		// tiles container has to be added first, because objects are
+		// removed/added to tiles
 		addWorldObjectsMaster(tilesMaster.getTilesContainer());
 		addWorldObjectsMaster(terrainObjectsMaster);
 		addWorldObjectsMaster(heroesMaster);

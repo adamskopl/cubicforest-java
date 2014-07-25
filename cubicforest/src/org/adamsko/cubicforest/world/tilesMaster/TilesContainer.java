@@ -14,12 +14,10 @@ import com.badlogic.gdx.math.Vector2;
 public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
-	private boolean tilesLoaded;
 	
 	public TilesContainer(String name, TilesMaster TM) {
 		super(name, TM, WorldObjectType.OBJECT_UNDEFINED,
 				"tiles-atlas-medium", 75, 45);
-		tilesLoaded = false;
 	}
 
 	public List<RenderableObject> getTiles() {
@@ -94,7 +92,6 @@ public class TilesContainer extends WorldObjectsContainer implements
 
 	@Override
 	public void loadMapObjects(CFMap map) {
-		if (tilesLoaded) return;
 		
 		List<Vector2> coords = map
 				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
@@ -103,11 +100,15 @@ public class TilesContainer extends WorldObjectsContainer implements
 			addTile(vec);
 		}
 		// load tiles only once
-		tilesLoaded = true;
 	}
 	
 	@Override
 	public void unloadMapObjects() throws Exception {
+		while (getWorldObjects().size() != 0) {
+			WorldObject tile = getWorldObjects().get(0);
+			getWorldObjects().remove(tile);
+			removeRenderableObject(tile);
+		}		
 	}
 
 }

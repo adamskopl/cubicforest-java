@@ -24,8 +24,6 @@ import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-import com.badlogic.gdx.Gdx;
-
 public class PhaseHeroes extends PhaseOrderableObjects {
 
 	private PhaseHeroesOrdersMaster heroesOrdersMaster;
