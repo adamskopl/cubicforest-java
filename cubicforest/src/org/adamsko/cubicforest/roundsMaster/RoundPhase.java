@@ -11,7 +11,7 @@ public interface RoundPhase extends TilesMasterClient, GuiMasterClient {
 	 * 
 	 * @param masterToInform
 	 */
-	void phaseIsOver() throws Exception;
+	void phaseIsOver(RoundPhase phaseOver) throws Exception;
 	void startPhase();
 	void reloadPhase();
 	void setRoundsMaster(RoundsMaster roundsMaster);

@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.mapsLoader.tiled;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 
@@ -14,19 +15,19 @@ import com.google.gson.JsonSyntaxException;
 public class MapsLoaderTiled implements MapsLoader {
 
 	private List<TiledMap> maps;
-	private TiledMap activeMap = null;
+	private int activeMapIndex = 0;
 
 	public MapsLoaderTiled() {
 		maps = new ArrayList<TiledMap>();
 	}
-
+	
 	@Override
 	public void loadMaps() {
 		FileHandle mapsFolder = getMapsFolderHandle();
 		if (!mapsFolder.exists()) {
 			return;
 		}
-		
+
 		for (FileHandle entry : mapsFolder.list()) {
 			String mapFileString = entry.readString();
 			TiledMap newMap;
@@ -53,23 +54,18 @@ public class MapsLoaderTiled implements MapsLoader {
 			Gdx.app.error(toString(), "mapIndex > size()");
 			return;
 		}
-		activeMap = maps.get(mapIndex); 
+		activeMapIndex = mapIndex;
 	}
 
 	@Override
 	public CFMap getMapActive() {
-		return activeMap;
+		return maps.get(activeMapIndex);
 	}
-
-//	/**
-//	 * 
-//	 * 
-//	 * @param objectType
-//	 * @return
-//	 */
-//	public List<Vector2> getCoords(TiledObjectType objectType) {
-//		return tiledCfConverter.getCoords(objectType);
-//	}
+	
+	@Override
+	public int getMapActiveIndex() {
+		return activeMapIndex;
+	}
 
 	/**
 	 * Return file handle of not empty maps folder.

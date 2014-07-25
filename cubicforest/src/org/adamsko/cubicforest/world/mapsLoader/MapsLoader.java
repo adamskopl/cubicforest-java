@@ -22,5 +22,7 @@ public interface MapsLoader {
 	 * @return active map
 	 */
 	public CFMap getMapActive();
+	
+	public int getMapActiveIndex();
 
 }

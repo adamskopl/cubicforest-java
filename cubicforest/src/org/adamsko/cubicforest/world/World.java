@@ -24,6 +24,8 @@ import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * World class desc.
  * 
@@ -101,10 +103,10 @@ public class World {
 		addWorldObjectsMaster(heroesToolsMaster);
 
 		reloadWorld();
-		
+
 		initRoundsMaster();
-		
-		guiMaster = new GuiMaster(tilesMaster);
+
+		guiMaster = new GuiMaster(tilesMaster, mapsLoader);
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
 		guiMaster.addClient(roundsMaster);
 
@@ -158,6 +160,10 @@ public class World {
 				.createFactory(InteractionResolverType_e.RESOLVER_HERO_TOOLS));
 	}
 
+	public void setMapActive(int activeMapIndex) {
+		mapsLoader.setMapActive(activeMapIndex);
+	}
+
 	/**
 	 * Unload (clear), than load objects again to their original positions.
 	 * Objects from particular WorldObjectsMasters should not be loaded before
@@ -178,6 +184,7 @@ public class World {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	private void addGuiObjectsContainer(GuiContainer guiObjectsContainer) {

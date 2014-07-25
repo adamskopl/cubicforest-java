@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
+import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.World;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
@@ -26,10 +27,6 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	private World world;
 	private List<RoundPhase> phases;
 	int phasePointer = -1;
-	/**
-	 * Block reloading and unblock it later (one click = one reload)
-	 */
-	private boolean reloadAllowed = true;
 
 	private GameResult gameResult;
 
@@ -120,13 +117,14 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		phases.add(newPhase);
 	}
 
+	public void setMapActive(int activeMapIndex) {
+		world.setMapActive(activeMapIndex);
+	}
+	
 	/**
 	 * Reload {@link RoundsMaster}: reload all phases, reload World.
 	 */
 	public void reload() {
-		if (reloadAllowed) {
-			reloadAllowed = false;
-
 			world.reloadWorld();
 
 			// reload phases after reloading World (add new phaseObjects)
@@ -137,21 +135,12 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-	}
-
-	public boolean isReloadAllowed() {
-		return reloadAllowed;
 	}
 
 	private void reloadPhases() {
 		for (RoundPhase phase : phases) {
 			phase.reloadPhase();
 		}
-	}
-
-	public void reloadUnlock() {
-		reloadAllowed = true;
 	}
 
 	@Override
