@@ -3,10 +3,10 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
-import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -69,13 +69,11 @@ public class TilesMaster implements PickMasterClient {
 	private int mapSize;
 	private List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
-	private MapsLoader mapsLoader;
 
 	private TilesEventsMaster tilesEventsMaster;
 
-	public TilesMaster(MapsLoader mapsLoader, int mapSize) {
+	public TilesMaster(int mapSize) {
 		this.mapSize = mapSize;
-		this.mapsLoader = mapsLoader;
 		clients = new ArrayList<TilesMasterClient>();
 		TilesHelper.setMapSize(mapSize);
 		initTiles();
@@ -91,9 +89,7 @@ public class TilesMaster implements PickMasterClient {
 
 	public void initTiles() {
 
-		tilesContainer = new TilesContainer("tiles container", mapsLoader, this);
-		tilesContainer.loadMapObjects(mapsLoader);
-
+		tilesContainer = new TilesContainer("tiles container", this);
 		tilesEventsMaster = new TilesEventsMaster(tilesContainer);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
@@ -203,6 +199,7 @@ public class TilesMaster implements PickMasterClient {
 					throw new Exception(
 							"removeWorldObject removeObject != removedOccupant");
 				}
+				tilesContainer.testHighlightTile(parentTile, 0, 0);
 				break;
 			case OBJECT_ITEM:
 				WorldObject removedItem = parentTile.itemLeaves();
@@ -212,7 +209,12 @@ public class TilesMaster implements PickMasterClient {
 				}
 				break;
 			case OBJECT_TERRAIN:
-
+				WorldObject removedTerrain = parentTile.occupantLeaves();
+				if (removeObject != removedTerrain) {
+					throw new Exception(
+							"removeWorldObject removeObject != removedOccupant");
+				}
+				tilesContainer.testHighlightTile(parentTile, 0, 0);
 				break;
 			default:
 				throw new Exception("removeWorldObject unsupported type");
@@ -243,6 +245,16 @@ public class TilesMaster implements PickMasterClient {
 		for (Tile t : tilesToHighlight) {
 			tilesContainer.testHighlightTile(t, texRow, texCol);
 		}
+	}
+
+	public int occupiedTiles() {
+		int occupiedTiles = 0;
+		for (RenderableObject ro : tilesContainer.getTiles()) {
+			Tile t = (Tile) ro;
+			if (t.hasOccupant())
+				occupiedTiles++;
+		}
+		return occupiedTiles;
 	}
 
 	public TilesEventsMaster event() {

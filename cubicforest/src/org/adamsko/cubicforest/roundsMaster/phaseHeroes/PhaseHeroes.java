@@ -5,6 +5,8 @@ import org.adamsko.cubicforest.gui.debug.GuiDebug;
 import org.adamsko.cubicforest.gui.debug.GuiElementDebug;
 import org.adamsko.cubicforest.gui.heroTools.GuiElementHeroTool;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
+import org.adamsko.cubicforest.gui.levels.GuiElementLevel;
+import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
@@ -21,8 +23,6 @@ import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
-
-import com.badlogic.gdx.Gdx;
 
 public class PhaseHeroes extends PhaseOrderableObjects {
 
@@ -56,9 +56,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	public void onTileEvent(Tile tile, TileEvent event) {
 
 		WorldObject activeObject = null;
-
-		// allow 'reload' button to be clicked
-		roundsMaster.reloadUnlock();
 
 		if (!orderInProgress) {
 			activeObject = activeObject();
@@ -128,11 +125,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void phaseIsOver() throws Exception {
-		super.phaseIsOver(this);
-	}
-
-	@Override
 	public void startPhase() {
 		nextHero();
 	}
@@ -142,19 +134,13 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			WorldObject objectWithOrder) {
 
 		orderInProgress = false;
-		
+
 		if (roundsMaster.getGameResult() == GameResult.GAME_WON) {
-			if (roundsMaster.isReloadAllowed()) {
-				roundsMaster.reload();
-				roundsMaster.resetGameResult();
-				return;
-			} else
-				Gdx.app.error("onOrderFinished()",
-						"roundsMaster.isReloadAllowed()==false");
-			
+			roundsMaster.reload();
 			roundsMaster.resetGameResult();
+			return;
 		}
-		
+
 		try {
 			heroesOrdersMaster
 					.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
@@ -164,7 +150,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		if (isActiveObjectLast()) {
 			try {
-				phaseIsOver();
+				phaseIsOver(this);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -194,10 +180,24 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			guiDebugClicked((GuiDebug) eventGui);
 			break;
 
+		case GUI_LEVELS:
+			guiLevelsClicked((GuiLevels) eventGui);
+			break;
+
 		default:
 			break;
 		}
 
+	}
+
+	private void guiLevelsClicked(GuiLevels guiLevels) {
+		GuiElementLevel clickedElementLevel = (GuiElementLevel) guiLevels
+				.getClickedElement();
+
+		roundsMaster.setMapActive(clickedElementLevel.getLevelIndex());
+
+		ordersMaster.unhighlightTilesObjectRange(activeObject());
+		roundsMaster.reload();
 	}
 
 	private void guiDebugClicked(GuiDebug guiDebug) {
@@ -206,10 +206,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		switch (clickedElementDebug.getDebugType()) {
 		case DEBUG_RELOAD:
-			if (roundsMaster.isReloadAllowed()) {
-				ordersMaster.unhighlightTilesObjectRange(activeObject());
-				roundsMaster.reload();
-			}
+			ordersMaster.unhighlightTilesObjectRange(activeObject());
+			roundsMaster.reload();
 			break;
 
 		default:

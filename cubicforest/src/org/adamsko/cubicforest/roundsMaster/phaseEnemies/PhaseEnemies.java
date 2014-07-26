@@ -31,11 +31,6 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void phaseIsOver() throws Exception {
-		super.phaseIsOver(this);
-	}
-
-	@Override
 	public void startPhase() {
 		moveNextEnemy();
 	}
@@ -70,20 +65,14 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 			WorldObject objectWithOrder) {
 
 		if (roundsMaster.getGameResult() == GameResult.GAME_LOST) {
-			if (roundsMaster.isReloadAllowed()) {
-				roundsMaster.reload();
-				roundsMaster.resetGameResult();
-				return;
-			} else
-				Gdx.app.error("onOrderFinished()",
-						"roundsMaster.isReloadAllowed()==false");
-			
+			roundsMaster.reload();
 			roundsMaster.resetGameResult();
+			return;
 		}
 
 		if (isActiveObjectLast()) {
 			try {
-				phaseIsOver();
+				phaseIsOver(this);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

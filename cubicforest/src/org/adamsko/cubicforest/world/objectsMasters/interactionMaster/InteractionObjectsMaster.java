@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
 
-import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
@@ -8,8 +7,6 @@ import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.Int
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
-
-import com.badlogic.gdx.Gdx;
 
 /**
  * @author adamsko
@@ -24,10 +21,10 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 		this.interactionResolver = interactionResolver;
 	}
 
-	public InteractionObjectsMaster(String name, MapsLoader mapsLoader,
-			TilesMaster TM, WorldObjectType worldObjectsType,
-			String textureName, int tileW, int tileH) {
-		super(name, mapsLoader, TM, worldObjectsType, textureName, tileW, tileH);
+	public InteractionObjectsMaster(String name, TilesMaster TM,
+			WorldObjectType worldObjectsType, String textureName, int tileW,
+			int tileH) {
+		super(name, TM, worldObjectsType, textureName, tileW, tileH);
 
 	}
 

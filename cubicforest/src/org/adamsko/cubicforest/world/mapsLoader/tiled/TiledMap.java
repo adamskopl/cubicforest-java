@@ -2,26 +2,31 @@ package org.adamsko.cubicforest.world.mapsLoader.tiled;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 
 import com.badlogic.gdx.Gdx;
-
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Class representing JSON format of Tiled map.
  * 
  * @author adamsko
- *
+ * 
  */
-public class TiledMap {
-	
+public class TiledMap implements CFMap {
+
 	private Integer width;
 	private Integer height;
 	private Integer tileheight;
 	private Integer tilewidth;
 	private List<TiledLayer> layers;
-	
-	
+
+	TiledCfConverter tiledCfConverter;
+
+	public TiledMap() {
+		tiledCfConverter = new TiledCfConverter(this);
+	}
+
 	// < GETTERS SETTERS
 	public Integer getWidth() {
 		return width;
@@ -62,28 +67,42 @@ public class TiledMap {
 	public void setLayers(List<TiledLayer> layers) {
 		this.layers = layers;
 	}
+
+	/**
+	 * After successful load, initialize {@link TiledCfConverter} object.
+	 */
+	void initConverter() {
+		tiledCfConverter.loadTiledObjects();
+	}
+
 	// GETTERS SETTERS >
-	
+
 	public void printLayers() {
-		for(TiledLayer tl : getLayers()) {
+		for (TiledLayer tl : getLayers()) {
 			Gdx.app.debug("layer ", tl.getName());
 		}
 	}
-	
+
 	public TiledLayer getLayer(String layerName) {
-		for(TiledLayer tl : layers) {
-			if(tl.getName().equals(layerName))
+		for (TiledLayer tl : layers) {
+			if (tl.getName().equals(layerName))
 				return tl;
 		}
 		Gdx.app.error("getLayer " + layerName, "no layer");
 		return null;
 	}
-	
-	public List<TiledObject> getObjectsFromLayer(TiledObjectType_e objectType) {
-		TiledLayer layer = getLayer(objectType.toString());
-		if(layer != null)
+
+	List<TiledObject> getObjectsFromLayer(TiledObjectType layerObjectType) {
+		TiledLayer layer = getLayer(layerObjectType.toString());
+		if (layer != null)
 			return layer.getObjects();
-		
+
 		return null;
 	}
+
+	@Override
+	public List<Vector2> getObjectTypeCoords(TiledObjectType objectType) {
+		return tiledCfConverter.getObjectTypeCoords(objectType);
+	}
+
 }

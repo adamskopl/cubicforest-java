@@ -1,6 +1,6 @@
-package org.adamsko.cubicforest.world.mapsLoader.converter;
+package org.adamsko.cubicforest.world.mapsLoader.tiled;
 
-public enum TiledObjectType_e {
+public enum TiledObjectType {
 	TILED_TILE,
 	TILED_TERRAIN,
 	TILED_ENTITY_HERO,

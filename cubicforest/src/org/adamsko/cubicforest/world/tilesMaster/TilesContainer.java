@@ -2,27 +2,22 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
-import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.mapsLoader.converter.TiledObjectType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
-	private boolean tilesLoaded;
 	
-	public TilesContainer(String name, MapsLoader mapsLoader, TilesMaster TM) {
-		super(name, mapsLoader, TM, WorldObjectType.OBJECT_UNDEFINED,
+	public TilesContainer(String name, TilesMaster TM) {
+		super(name, TM, WorldObjectType.OBJECT_UNDEFINED,
 				"tiles-atlas-medium", 75, 45);
-		tilesLoaded = false;
 	}
 
 	public List<RenderableObject> getTiles() {
@@ -96,21 +91,24 @@ public class TilesContainer extends WorldObjectsContainer implements
 	}
 
 	@Override
-	public void loadMapObjects(MapsLoader mapsLoader) {
-		if (tilesLoaded) return;
+	public void loadMapObjects(CFMap map) {
 		
-		List<Vector2> coords = mapsLoader
-				.getCoords(TiledObjectType_e.TILED_TILE);
+		List<Vector2> coords = map
+				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
 		
 		for (Vector2 vec : coords) {			
 			addTile(vec);
 		}
 		// load tiles only once
-		tilesLoaded = true;
 	}
 	
 	@Override
-	public void unloadMapObjects(MapsLoader mapsLoader) throws Exception {
+	public void unloadMapObjects() throws Exception {
+		while (getWorldObjects().size() != 0) {
+			WorldObject tile = getWorldObjects().get(0);
+			getWorldObjects().remove(tile);
+			removeRenderableObject(tile);
+		}		
 	}
 
 }

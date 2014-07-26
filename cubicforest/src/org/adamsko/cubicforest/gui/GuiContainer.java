@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class GuiContainer extends RenderableObjectsContainer implements
@@ -59,18 +60,27 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 	 * Check if any of the gui elements is clicked.
 	 * 
 	 * @param screenPos
-	 * @return
+	 * @return is any of the children clicked?
 	 */
-	public Boolean isClicked(Vector2 screenPos) {
+	public Boolean handleClick(Vector2 screenPos) {
 		Boolean isElementClicked = false;
 		for(GuiElement e : guiElements) {
 			if(e.isClicked(screenPos)) {
 				isElementClicked = true;
 				clickedElement = e;
+				guiElementClicked(e);
 				break;
 			}
 		}
 		return isElementClicked;
 	}
-
+	
+	/**
+	 * Override if container is reacting itself on an element click.
+	 * 
+	 * @param clickedElement
+	 */
+	protected void guiElementClicked(GuiElement clickedElement) {
+	}
+	
 }

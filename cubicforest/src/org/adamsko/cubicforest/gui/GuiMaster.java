@@ -5,13 +5,11 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.debug.GuiDebug;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
+import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
-import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
-import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesCounter;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiMaster implements PickMasterClient {
@@ -27,8 +25,9 @@ public class GuiMaster implements PickMasterClient {
 	private GuiHeroTools guiHeroTools;
 	private GuiOrders guiOrders;
 	private GuiDebug guiDebug;
+	private GuiLevels guiLevels;
 
-	public GuiMaster(TilesMaster tilesMaster) {
+	public GuiMaster(TilesMaster tilesMaster, MapsLoader mapsLoader) {
 		guiList = new ArrayList<GuiContainer>();
 		clients = new ArrayList<GuiMasterClient>();
 
@@ -41,9 +40,13 @@ public class GuiMaster implements PickMasterClient {
 		guiDebug = new GuiDebug(tilesMaster, "orders-atlas-medium", 50, 50,
 				680, -100);
 
+		guiLevels = new GuiLevels(mapsLoader, tilesMaster,
+				"levels-atlas-medium", 30, 30, 600, -80);
+
 		addGui(guiHeroTools);
 		addGui(guiOrders);
 		addGui(guiDebug);
+		addGui(guiLevels);
 	}
 
 	public void addGui(GuiContainer newGui) {
@@ -62,7 +65,7 @@ public class GuiMaster implements PickMasterClient {
 		 * 1. search for clicked GUI 2. pass clicked gui to clients
 		 */
 		for (GuiContainer guiContainer : guiList) {
-			if (guiContainer.isClicked(inputScreenPos)) {
+			if (guiContainer.handleClick(inputScreenPos)) {
 				clientsOnClicked(guiContainer);
 			}
 		}
