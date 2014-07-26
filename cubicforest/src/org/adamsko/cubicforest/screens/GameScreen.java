@@ -11,17 +11,19 @@ import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 
-public class GameScreen extends CubicScreen {
+public class GameScreen implements Screen {
 	
+	Game game;
 	World world;
 	WorldRenderer worldRenderer;
 	
 	public static TweenManager tweenManager;
 	
 	public GameScreen (Game game) {
-		super(game);
+		this.game = game;
 	}
 	
 	private void initTween() {
@@ -61,6 +63,30 @@ public class GameScreen extends CubicScreen {
 	public void hide () {
 		worldRenderer.dispose();
 //		controlRenderer.dispose();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
