@@ -8,8 +8,6 @@ import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
 import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,7 +16,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 /**
  * 
@@ -52,11 +49,7 @@ public class WorldRenderer {
 		renderListMasterWorld = new RenderListMaster();
 		renderListMasterGui = new RenderListMaster();
 		CoordCalc.setTileSize(tileWidth);
-		// this.cam = new OrthographicCamera(480, 320);
 		this.cam = new OrthographicCamera(780, 460);
-		// this.cam.position.set(0, 0, 0);
-		// this.cam.position.set(0, -100, 0);
-		// this.cam.position.set(240, -160, 0);
 		this.cam.position.set(390, -230, 0);
 		renderableObjectsMastersWorld = new ArrayList<RenderableObjectsMaster>();
 		renderableObjectsMastersGui = new ArrayList<RenderableObjectsMaster>();
@@ -74,8 +67,6 @@ public class WorldRenderer {
 
 		batch.end();
 
-		// renderGrid();
-//		 fps.log();
 	}
 
 	void renderGrid() {
