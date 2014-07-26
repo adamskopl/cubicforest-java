@@ -4,6 +4,8 @@ Turn based logic game about three pigs, trying to protect themselves
 from hungry wolves. Collect scattered cubes, to create items helping
 pigs to defeat cubic predators.
 
+-  Project forum : http://ost.io/@adamskopl/cubicforest-java
+
 # Tools:
 
 -  libGDX, http://libgdx.badlogicgames.com/
