@@ -57,6 +57,7 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_HERO);
 
 		Hero hero;
+		int nameIndex = 0;
 		int atlasIndex = 0;
 		for (Vector2 pos : coords) {
 			hero = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex);
@@ -67,13 +68,14 @@ public class HeroesMaster extends InteractionObjectsMaster implements
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			hero.setTilesPos(pos);
-			hero.setName("H" + atlasIndex);
+			hero.setName("H" + nameIndex);
 			hero.addLabel(ROLabel.LABEL_NAME);
 			hero.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
 			hero.setVerticalPos(0.3f);
 
 			addObject(hero);
 
+			nameIndex++;
 			if (atlasIndex == 2) {
 				atlasIndex = 0;
 			} else {

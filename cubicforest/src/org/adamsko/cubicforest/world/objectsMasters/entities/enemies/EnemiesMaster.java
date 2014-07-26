@@ -42,6 +42,7 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_ENEMY);
 
 		Enemy enemy;
+		int nameIndex = 0;
 		int atlasIndex = 0;
 		for (Vector2 pos : coords) {
 			enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex);
@@ -52,13 +53,14 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			enemy.setTilesPos(pos);
-			enemy.setName("E" + atlasIndex);
+			enemy.setName("E" + nameIndex);
 			enemy.setVerticalPos(0.3f);
 			enemy.addLabel(ROLabel.LABEL_NAME);
 			enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
 
 			addObject(enemy);
 
+			nameIndex++;
 			if (atlasIndex == 2) {
 				atlasIndex = 0;
 			} else {
