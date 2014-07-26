@@ -3,10 +3,8 @@ package org.adamsko.cubicforest.world.mapsLoader.tiled;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.google.gson.Gson;
@@ -16,6 +14,8 @@ public class MapsLoaderTiled implements MapsLoader {
 
 	private List<TiledMap> maps;
 	private int activeMapIndex = 0;
+	// file handle for folder containing maps
+	private FileHandle mapsFolder;
 
 	public MapsLoaderTiled() {
 		maps = new ArrayList<TiledMap>();
@@ -23,11 +23,16 @@ public class MapsLoaderTiled implements MapsLoader {
 	
 	@Override
 	public void loadMaps() {
-		FileHandle mapsFolder = getMapsFolderHandle();
+		mapsFolder = getMapsFolderHandle();
 		if (!mapsFolder.exists()) {
 			return;
 		}
+		reloadMaps();
+	}
 
+	@Override
+	public void reloadMaps() {
+		maps.clear();
 		for (FileHandle entry : mapsFolder.list()) {
 			String mapFileString = entry.readString();
 			TiledMap newMap;

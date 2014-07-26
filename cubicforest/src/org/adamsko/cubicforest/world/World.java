@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world;
 
+import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,6 +173,9 @@ public class World {
 	 * all other Masters unload their objects.
 	 */
 	public void reloadWorld() {
+		
+		mapsLoader.reloadMaps();
+		
 		for (WorldObjectsMaster wo : worldObjectsMasters) {
 			try {
 				wo.unloadMapObjects();

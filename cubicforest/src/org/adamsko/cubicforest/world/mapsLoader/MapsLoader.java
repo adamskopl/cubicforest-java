@@ -6,6 +6,11 @@ public interface MapsLoader {
 	 * Load all maps.
 	 */
 	public void loadMaps();
+	
+	/**
+	 * Load all maps after first 'loadMaps()'
+	 */
+	public void reloadMaps();
 
 	public int size();
 
