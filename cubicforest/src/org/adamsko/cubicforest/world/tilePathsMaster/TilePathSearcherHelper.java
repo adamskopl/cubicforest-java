@@ -7,23 +7,20 @@ import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesHelper;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-
 public class TilePathSearcherHelper {
 
-	private TilesMaster tilesMaster;
+	private final TilesMaster tilesMaster;
 	/**
 	 * List of ready tiles found during searching.
 	 * 
-	 * Key: cost of reaching tiles for readyTiles[Key] values.
+	 * Key: cost of reaching tiles for costTiles[Key] values.
 	 * 
 	 * Value: tiles with Key reaching cost.
 	 */
-	private List<List<Tile>> costTiles;
+	private final List<List<Tile>> costTiles;
 	Tile source, destiny;
 
-	public TilePathSearcherHelper(TilesMaster tilesMaster) {
+	public TilePathSearcherHelper(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
 		costTiles = new ArrayList<List<Tile>>();
 	}
@@ -35,7 +32,7 @@ public class TilePathSearcherHelper {
 	 * @param source
 	 * @param destiny
 	 */
-	public void searchCostTiles(Tile source, Tile destiny) {
+	public void searchCostTiles(final Tile source, final Tile destiny) {
 		this.source = source;
 		this.destiny = destiny;
 		costTiles.clear();
@@ -55,7 +52,7 @@ public class TilePathSearcherHelper {
 	 * @throws Exception
 	 */
 	public TilePath costTilesToPath() throws Exception {
-		TilePath path = new TilePath();
+		final TilePath path = new TilePath();
 
 		// return empty path
 		if (!destinyFound()) {
@@ -80,14 +77,11 @@ public class TilePathSearcherHelper {
 	 *            TilePath filled with removed Tile.
 	 * @throws Exception
 	 */
-	private void popCostsToSource(TilePath path) throws Exception {
-		// Gdx.app.debug("popCostsToSource", new String() + getActualCost());
-		List<Tile> actualCostTiles = actualCostTiles();
-		// Gdx.app.debug("actualCostTiles",
-		// TilesHelper.toString(actualCostTiles));
-		Tile pathFirstTile = path.getFrontTile();
+	private void popCostsToSource(final TilePath path) throws Exception {
+		final List<Tile> actualCostTiles = actualCostTiles();
+		final Tile pathFirstTile = path.getFrontTile();
 		boolean tileAdded = false;
-		for (Tile costTile : actualCostTiles) {
+		for (final Tile costTile : actualCostTiles) {
 			if (TilesHelper.areTilesAdjecant(pathFirstTile, costTile)) {
 				addTilePathFront(path, costTile);
 				tileAdded = true;
@@ -106,7 +100,6 @@ public class TilePathSearcherHelper {
 		if (!tileAdded) {
 			throw new Exception("popCostsToSource: no tile added");
 		}
-		// Gdx.app.debug("popCostsToSource path ", path.toString());
 		popCostsToSource(path);
 	}
 
@@ -119,11 +112,11 @@ public class TilePathSearcherHelper {
 		// add vector of tiles for actually considered cost
 		addNextCost();
 		boolean anyTileAdded = false;
-		for (Tile prevTile : previousCostTiles()) {
-			List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(prevTile,
-					true);
+		for (final Tile prevTile : previousCostTiles()) {
+			final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(
+					prevTile, true);
 
-			int tilesAdded = addAdjacentTilesCurrentCost(adjacentTiles);
+			final int tilesAdded = addAdjacentTilesCurrentCost(adjacentTiles);
 
 			if (tilesAdded > 0) {
 				anyTileAdded = true;
@@ -149,9 +142,9 @@ public class TilePathSearcherHelper {
 	 * @return Number of added tiles to currently considered cost. -1 if destiny
 	 *         tile found.
 	 */
-	private int addAdjacentTilesCurrentCost(List<Tile> adjacentTiles) {
+	private int addAdjacentTilesCurrentCost(final List<Tile> adjacentTiles) {
 		int tilesAdded = 0;
-		for (Tile tile : adjacentTiles) {
+		for (final Tile tile : adjacentTiles) {
 			if (tileValidCurrentCost(tile)) {
 				addActualCostTile(tile);
 				if (tile == destiny) {
@@ -175,7 +168,7 @@ public class TilePathSearcherHelper {
 	 *            Tile checked
 	 * @return decision: tile can be added or not
 	 */
-	private boolean tileValidCurrentCost(Tile tileChecked) {
+	private boolean tileValidCurrentCost(final Tile tileChecked) {
 
 		// if tile is not passable, don't add it, unless it's a destiny
 		if (!tileChecked.isPassable() && tileChecked != destiny) {
@@ -183,8 +176,8 @@ public class TilePathSearcherHelper {
 		}
 		// check if tileChecked is not already added (does not have lower cost
 		// already)
-		for (List<Tile> cTiles : costTiles) {
-			for (Tile costTile : cTiles) {
+		for (final List<Tile> cTiles : costTiles) {
+			for (final Tile costTile : cTiles) {
 				if (tileChecked == costTile) {
 					return false;
 				}
@@ -194,7 +187,7 @@ public class TilePathSearcherHelper {
 	}
 
 	private void addNextCost() {
-		List<Tile> nextCostTiles = new ArrayList<Tile>();
+		final List<Tile> nextCostTiles = new ArrayList<Tile>();
 		costTiles.add(nextCostTiles);
 	}
 
@@ -203,17 +196,8 @@ public class TilePathSearcherHelper {
 	 * 
 	 * @param readyTile
 	 */
-	private void addActualCostTile(Tile readyTile) {
+	private void addActualCostTile(final Tile readyTile) {
 		actualCostTiles().add(readyTile);
-	}
-
-	/**
-	 * Get actually considered cost.
-	 * 
-	 * @return actually considered cost
-	 */
-	private int getActualCost() {
-		return costTiles.size() - 1;
 	}
 
 	/**
@@ -241,7 +225,7 @@ public class TilePathSearcherHelper {
 	 * @return
 	 */
 	private boolean destinyFound() {
-		List<Tile> highestCostTiles = actualCostTiles();
+		final List<Tile> highestCostTiles = actualCostTiles();
 		if (highestCostTiles.contains(destiny)) {
 			return true;
 		}
@@ -251,7 +235,7 @@ public class TilePathSearcherHelper {
 	/**
 	 * @param tile
 	 */
-	private void addTilePathFront(TilePath path, Tile tile) {
+	private void addTilePathFront(final TilePath path, final Tile tile) {
 		path.addTileFront(tile);
 	}
 

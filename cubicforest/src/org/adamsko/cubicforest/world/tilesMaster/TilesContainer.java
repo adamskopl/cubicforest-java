@@ -9,15 +9,16 @@ import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
-	
-	public TilesContainer(String name, TilesMaster TM) {
-		super(name, TM, WorldObjectType.OBJECT_UNDEFINED,
-				"tiles-atlas-medium", 75, 45);
+	public TilesContainer(final String name, final TilesMaster TM) {
+		super(name, TM, WorldObjectType.OBJECT_UNDEFINED, "tiles-atlas-medium",
+				75, 45);
 	}
 
 	public List<RenderableObject> getTiles() {
@@ -31,10 +32,10 @@ public class TilesContainer extends WorldObjectsContainer implements
 	 *            tilePosition of the searched Tile
 	 * @return Tile which contains tilePos position. null if Tile not found
 	 */
-	public Tile getTileOnPos(Vector2 tilePos) {
+	public Tile getTileOnPos(final Vector2 tilePos) {
 
-		for (WorldObject wo : getWorldObjects()) {
-			Tile tile = (Tile) wo;
+		for (final WorldObject wo : getWorldObjects()) {
+			final Tile tile = (Tile) wo;
 			if (tile.isPosInTile(tilePos)) {
 				return tile;
 			}
@@ -42,9 +43,9 @@ public class TilesContainer extends WorldObjectsContainer implements
 		return null;
 	}
 
-	public Tile getTileWithObject(WorldObject object) {
-		for (WorldObject wo : getWorldObjects()) {
-			Tile tile = (Tile) wo;
+	public Tile getTileWithObject(final WorldObject object) {
+		for (final WorldObject wo : getWorldObjects()) {
+			final Tile tile = (Tile) wo;
 			if (tile.getOccupant() == object) {
 				return tile;
 			}
@@ -52,12 +53,15 @@ public class TilesContainer extends WorldObjectsContainer implements
 		return null;
 	}
 
-	public void addTile(Vector2 tilePos) {
-		Tile newTile = new Tile(tilePos, atlasRows.get(0)[0]);
+	public void addTile(final Vector2 tilePos) {
+		final Tile newTile = new Tile(tilePos, atlasRows.get(0)[0]);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects
 		newTile.setVerticalPos(-0.01f);
+
+		newTile.addLabel(newTile.getTilesPos().toString());
+		newTile.altLabelLast(Color.WHITE, 0.8f, -20.0f, -10.0f);
 
 		// FIXME: don't add newTile through addRenderableObject(), because it's
 		// a Tile. Is it ok?
@@ -74,41 +78,42 @@ public class TilesContainer extends WorldObjectsContainer implements
 	 * @param texNum
 	 *            sequence number of the texture in an atlas row.
 	 */
-	public void testHighlightTile(Tile tileToHighlight, int texRow, int texCol) {
+	public void testHighlightTile(final Tile tileToHighlight, final int texRow,
+			final int texCol) {
 		tileToHighlight.setTextureRegion(atlasRows.get(texRow)[texCol]);
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void update(final float deltaTime) {
 		// TODO Auto-generated method stub
 	}
 
 	public void clearTilesLabels() {
-		for (WorldObject wo : getWorldObjects()) {
-			Tile tile = (Tile) wo;
+		for (final WorldObject wo : getWorldObjects()) {
+			final Tile tile = (Tile) wo;
 			tile.clearLabels();
 		}
 	}
 
 	@Override
-	public void loadMapObjects(CFMap map) {
-		
-		List<Vector2> coords = map
+	public void loadMapObjects(final CFMap map) {
+
+		final List<Vector2> coords = map
 				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
-		
-		for (Vector2 vec : coords) {			
+
+		for (final Vector2 vec : coords) {
 			addTile(vec);
 		}
 		// load tiles only once
 	}
-	
+
 	@Override
 	public void unloadMapObjects() throws Exception {
 		while (getWorldObjects().size() != 0) {
-			WorldObject tile = getWorldObjects().get(0);
+			final WorldObject tile = getWorldObjects().get(0);
 			getWorldObjects().remove(tile);
 			removeRenderableObject(tile);
-		}		
+		}
 	}
 
 }

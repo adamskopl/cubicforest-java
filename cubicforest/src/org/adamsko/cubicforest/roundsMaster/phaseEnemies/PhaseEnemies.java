@@ -12,14 +12,13 @@ import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-import com.badlogic.gdx.Gdx;
-
 public class PhaseEnemies extends PhaseOrderableObjects {
 
-	private PhaseEnemiesHeroesHelper heroesHelper;
+	private final PhaseEnemiesHeroesHelper heroesHelper;
 
-	public PhaseEnemies(OrderableObjectsContainer enemiesContainer,
-			OrderableObjectsContainer heroesContainer, OrdersMaster ordersMaster) {
+	public PhaseEnemies(final OrderableObjectsContainer enemiesContainer,
+			final OrderableObjectsContainer heroesContainer,
+			final OrdersMaster ordersMaster) {
 		super(enemiesContainer, ordersMaster, "PhaseEnemies");
 
 		heroesHelper = new PhaseEnemiesHeroesHelper(heroesContainer);
@@ -27,7 +26,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onTileEvent(Tile tile, TileEvent event) {
+	public void onTileEvent(final Tile tile, final TileEvent event) {
 	}
 
 	@Override
@@ -37,12 +36,13 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 
 	private void moveNextEnemy() {
 		nextObject();
-		WorldObject activeEnemy = activeObject();
+		final WorldObject activeEnemy = activeObject();
 
-		if (activeEnemy == null)
+		if (activeEnemy == null) {
 			return;
+		}
 
-		TilePath shortestPathTileAdjacentHero = heroesHelper
+		final TilePath shortestPathTileAdjacentHero = heroesHelper
 				.searchPathShortestHero(activeEnemy);
 
 		if (shortestPathTileAdjacentHero == null
@@ -61,8 +61,8 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onOrderFinished(OrdersMasterResult result,
-			WorldObject objectWithOrder) {
+	public void onOrderFinished(final OrdersMasterResult result,
+			final WorldObject objectWithOrder) {
 
 		if (roundsMaster.getGameResult() == GameResult.GAME_LOST) {
 			roundsMaster.reload();
@@ -73,7 +73,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 		if (isActiveObjectLast()) {
 			try {
 				phaseIsOver(this);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 			return;
@@ -83,7 +83,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onGuiEvent(GuiContainer eventGui) {
+	public void onGuiEvent(final GuiContainer eventGui) {
 		// TODO Auto-generated method stub
 
 	}

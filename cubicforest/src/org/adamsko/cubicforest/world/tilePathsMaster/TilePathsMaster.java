@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
@@ -19,11 +20,12 @@ import com.badlogic.gdx.Gdx;
  */
 public class TilePathsMaster {
 
-	private List<TilePathGuide> tilePathGuides;
-	private TilesMaster tilesMaster;
-	private OrdersMaster master;
+	private final List<TilePathGuide> tilePathGuides;
+	private final TilesMaster tilesMaster;
+	private final OrdersMaster master;
 
-	public TilePathsMaster(OrdersMaster master, TilesMaster tilesMaster) {
+	public TilePathsMaster(final OrdersMaster master,
+			final TilesMaster tilesMaster) {
 		this.master = master;
 		this.tilesMaster = tilesMaster;
 		TilePathSearcher.setTilesMaster(tilesMaster);
@@ -34,13 +36,14 @@ public class TilePathsMaster {
 		return "TilePathsMaster";
 	}
 
-	public void startPath(WorldObject wanderer, Tile destinationTile) {
-		TilePath testPath = TilePathSearcher.search(wanderer, destinationTile);
+	public void startPath(final WorldObject wanderer, final Tile destinationTile) {
+		final TilePath testPath = TilePathSearcher.search(wanderer,
+				destinationTile);
 		startPath(wanderer, testPath);
 	}
 
-	public void startPath(WorldObject wanderer, TilePath path) {
-		TilePathGuide guide = new TilePathGuide(wanderer, path, this,
+	public void startPath(final WorldObject wanderer, final TilePath path) {
+		final TilePathGuide guide = new TilePathGuide(wanderer, path, this,
 				tilesMaster);
 		tilePathGuides.add(guide);
 		guide.start();
@@ -53,10 +56,10 @@ public class TilePathsMaster {
 	 * @param guide
 	 */
 	protected void onPathEnd(TilePathGuide guide,
-			InteractionResult interactionResult) {
-		WorldObject wanderer = guide.getWanderer();
+			final InteractionResult interactionResult) {
+		final WorldObject wanderer = guide.getWanderer();
 
-		OrdersMasterResult ordersMasterResult = new OrdersMasterResult(
+		final OrdersMasterResult ordersMasterResult = new OrdersMasterResult(
 				interactionResult);
 
 		master.onPathFinished(ordersMasterResult, wanderer);
@@ -64,20 +67,23 @@ public class TilePathsMaster {
 		// remove guide from TilePathGuide vector
 		try {
 			tilePathGuides.remove(guide);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Gdx.app.error("TilePathsMaster::onPathEnd", e.toString());
 		}
 
-		tilesMaster.clearTilesLabels();
+		// uncoment for tiles labels removal
+		// tilesMaster.clearTilesLabels();
+
 		// guide is no longer needed
 		guide = null;
 	}
 
 	@SuppressWarnings("unused")
-	private TilePathGuide getTilePathGuide(WorldObject wanderer) {
-		for (TilePathGuide tilePathGuide : tilePathGuides) {
-			if (tilePathGuide.getWanderer() == wanderer)
+	private TilePathGuide getTilePathGuide(final WorldObject wanderer) {
+		for (final TilePathGuide tilePathGuide : tilePathGuides) {
+			if (tilePathGuide.getWanderer() == wanderer) {
 				return tilePathGuide;
+			}
 		}
 		return null;
 	}

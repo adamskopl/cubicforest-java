@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -12,12 +13,12 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
 public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		RoundPhase {
 
-	private String name;
+	private final String name;
 	protected RoundsMaster roundsMaster;
 	protected OrdersMaster ordersMaster;
 
-	private List<WorldObject> phaseObjects;
-	private OrderableObjectsContainer objectsContainer;
+	private final List<WorldObject> phaseObjects;
+	private final OrderableObjectsContainer objectsContainer;
 
 	/**
 	 * Active object's position on the list.
@@ -25,8 +26,8 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	protected int activeObjectPointer;
 
 	protected PhaseOrderableObjects(
-			OrderableObjectsContainer orderableObjectsContainer,
-			OrdersMaster ordersMaster, String name) {
+			final OrderableObjectsContainer orderableObjectsContainer,
+			final OrdersMaster ordersMaster, final String name) {
 
 		this.objectsContainer = orderableObjectsContainer;
 		this.ordersMaster = ordersMaster;
@@ -40,14 +41,14 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	/**
 	 * 
 	 */
-	void addObject(WorldObject object) {
+	void addObject(final WorldObject object) {
 
 	}
 
 	/**
 	 * 
 	 */
-	public void removeObject(WorldObject object) {
+	public void removeObject(final WorldObject object) {
 		activeObjectPointer--;
 		phaseObjects.remove(object);
 	}
@@ -57,12 +58,13 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	 *         objects to move, phase should be finished
 	 */
 	protected void nextObject() {
-		if (phaseObjects.size() == 0)
+		if (phaseObjects.size() == 0) {
 			try {
 				phaseIsOver(this);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
+		}
 
 		activeObjectPointer++;
 		// check if previous object was the last one
@@ -82,21 +84,24 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	 * @return WorldObject pointed by activeObjectPointer.
 	 */
 	protected WorldObject activeObject() {
-		if (phaseObjects.size() == 0)
+		if (phaseObjects.size() == 0) {
 			return null;
-		WorldObject activeObject = phaseObjects.get(activeObjectPointer);
+		}
+		final WorldObject activeObject = phaseObjects.get(activeObjectPointer);
 		return activeObject;
 	}
 
 	@Override
-	public void phaseIsOver(RoundPhase phaseOver) throws Exception {
+	public void phaseIsOver(final RoundPhase phaseOver) throws Exception {
 		roundsMaster.phaseIsOver(phaseOver);
 	}
 
-	public void setRoundsMaster(RoundsMaster roundsMaster) {
+	@Override
+	public void setRoundsMaster(final RoundsMaster roundsMaster) {
 		this.roundsMaster = roundsMaster;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -106,7 +111,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		activeObjectPointer = -1;
 
 		phaseObjects.clear();
-		for (WorldObject wo : objectsContainer.getOrderableObjects()) {
+		for (final WorldObject wo : objectsContainer.getOrderableObjects()) {
 			phaseObjects.add(wo);
 		}
 	}
