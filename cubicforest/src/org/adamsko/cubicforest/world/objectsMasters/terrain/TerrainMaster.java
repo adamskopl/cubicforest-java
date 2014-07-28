@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.objectsMasters;
+package org.adamsko.cubicforest.world.objectsMasters.terrain;
 
 import java.util.List;
 
@@ -7,15 +7,14 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
-import org.adamsko.cubicforest.world.objectsMasters.terrain.Tree;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class TerrainObjectsMaster extends WorldObjectsContainer implements
+public class TerrainMaster extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
-	public TerrainObjectsMaster(final TilesMaster TM, final String textureName,
+	public TerrainMaster(final TilesMaster TM, final String textureName,
 			final int tileW, final int tileH) {
 		super("TerrainObjectsMaster", WorldObjectType.OBJECT_TERRAIN, TM,
 				textureName, tileW, tileH);

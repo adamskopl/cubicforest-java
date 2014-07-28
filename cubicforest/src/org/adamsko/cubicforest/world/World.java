@@ -12,7 +12,6 @@ import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
-import org.adamsko.cubicforest.world.objectsMasters.TerrainObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
@@ -20,6 +19,7 @@ import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.Interactio
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -46,7 +46,7 @@ public class World {
 	private RoundsMaster roundsMaster;
 	private InteractionMaster interactionMaster;
 
-	TerrainObjectsMaster terrainObjectsMaster;
+	TerrainMaster terrainObjectsMaster;
 	HeroesMaster heroesMaster;
 	EnemiesMaster enemiesMaster;
 
@@ -70,7 +70,7 @@ public class World {
 
 		roundsMaster = new RoundsMaster(this);
 
-		terrainObjectsMaster = new TerrainObjectsMaster(tilesMaster,
+		terrainObjectsMaster = new TerrainMaster(tilesMaster,
 				"terrain-atlas-medium", 42, 50);
 		heroesMaster = new HeroesMaster(tilesMaster, roundsMaster,
 				"heroes-atlas-medium", 30, 35);
