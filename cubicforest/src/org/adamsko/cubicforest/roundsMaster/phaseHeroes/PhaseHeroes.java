@@ -19,15 +19,16 @@ import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
+import org.adamsko.cubicforest.world.tilePathsMaster.tilePathsSearcher.SearchMethodType;
+import org.adamsko.cubicforest.world.tilePathsMaster.tilePathsSearcher.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 public class PhaseHeroes extends PhaseOrderableObjects {
 
-	private PhaseHeroesOrdersMaster heroesOrdersMaster;
-	private GatherCubesMaster gatherCubesMaster;
+	private final PhaseHeroesOrdersMaster heroesOrdersMaster;
+	private final GatherCubesMaster gatherCubesMaster;
 
 	/**
 	 * Active path created by picking order valid Tile.
@@ -41,10 +42,11 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	 */
 	private Boolean orderInProgress = false;
 
-	public PhaseHeroes(OrderableObjectsContainer orderableObjectsContainer,
-			OrdersMaster ordersMaster, TilesMaster tilesMaster,
-			HeroesToolsMaster heroesToolsMaster,
-			GatherCubesMaster gatherCubesMaster) {
+	public PhaseHeroes(
+			final OrderableObjectsContainer orderableObjectsContainer,
+			final OrdersMaster ordersMaster, final TilesMaster tilesMaster,
+			final HeroesToolsMaster heroesToolsMaster,
+			final GatherCubesMaster gatherCubesMaster) {
 		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
 
 		this.gatherCubesMaster = gatherCubesMaster;
@@ -53,15 +55,16 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onTileEvent(Tile tile, TileEvent event) {
+	public void onTileEvent(final Tile tile, final TileEvent event) {
 
 		WorldObject activeObject = null;
 
 		if (!orderInProgress) {
 			activeObject = activeObject();
-			TilePath pathToTile = TilePathSearcher.search(activeObject, tile);
+			final TilePath pathToTile = TilePathSearcher.search(activeObject,
+					tile, SearchMethodType.METHOD_VALID_PATH);
 
-			boolean startOrderValid = startOrderValid(activeObject, tile,
+			final boolean startOrderValid = startOrderValid(activeObject, tile,
 					pathToTile);
 
 			heroesOrdersMaster.tilePicked(tile, startOrderValid);
@@ -86,7 +89,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 				try {
 					heroesOrdersMaster
 							.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				}
 
@@ -107,19 +110,21 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	 * 
 	 * @return can given order be started?
 	 */
-	private Boolean startOrderValid(WorldObject activeObject, Tile tile,
-			TilePath pathToTile) {
+	private Boolean startOrderValid(final WorldObject activeObject,
+			final Tile tile, final TilePath pathToTile) {
 
 		if (tile.hasOccupant()) {
 			// occupied tile with an active object can be chosen
-			if (tile.getOccupant() == activeObject)
+			if (tile.getOccupant() == activeObject) {
 				return true;
+			}
 			return false;
 		}
 
 		if (!orderInProgress
-				&& pathToTile.length() - 1 <= activeObject.getSpeed())
+				&& pathToTile.length() - 1 <= activeObject.getSpeed()) {
 			return true;
+		}
 
 		return false;
 	}
@@ -130,8 +135,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onOrderFinished(OrdersMasterResult result,
-			WorldObject objectWithOrder) {
+	public void onOrderFinished(final OrdersMasterResult result,
+			final WorldObject objectWithOrder) {
 
 		orderInProgress = false;
 
@@ -144,14 +149,14 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		try {
 			heroesOrdersMaster
 					.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-		} catch (Exception e1) {
+		} catch (final Exception e1) {
 			e1.printStackTrace();
 		}
 
 		if (isActiveObjectLast()) {
 			try {
 				phaseIsOver(this);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 			return;
@@ -168,7 +173,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onGuiEvent(GuiContainer eventGui) {
+	public void onGuiEvent(final GuiContainer eventGui) {
 		switch (eventGui.getType()) {
 		case GUI_ORDERS:
 			guiOrdersClicked((GuiOrders) eventGui);
@@ -190,8 +195,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 	}
 
-	private void guiLevelsClicked(GuiLevels guiLevels) {
-		GuiElementLevel clickedElementLevel = (GuiElementLevel) guiLevels
+	private void guiLevelsClicked(final GuiLevels guiLevels) {
+		final GuiElementLevel clickedElementLevel = (GuiElementLevel) guiLevels
 				.getClickedElement();
 
 		roundsMaster.setMapActive(clickedElementLevel.getLevelIndex());
@@ -200,8 +205,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		roundsMaster.reload();
 	}
 
-	private void guiDebugClicked(GuiDebug guiDebug) {
-		GuiElementDebug clickedElementDebug = (GuiElementDebug) guiDebug
+	private void guiDebugClicked(final GuiDebug guiDebug) {
+		final GuiElementDebug clickedElementDebug = (GuiElementDebug) guiDebug
 				.getClickedElement();
 
 		switch (clickedElementDebug.getDebugType()) {
@@ -215,11 +220,11 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		}
 	}
 
-	private void guiHeroToolsClicked(GuiHeroTools guiHeroTools) {
+	private void guiHeroToolsClicked(final GuiHeroTools guiHeroTools) {
 		try {
-			GuiElementHeroTool clickedElement = (GuiElementHeroTool) guiHeroTools
+			final GuiElementHeroTool clickedElement = (GuiElementHeroTool) guiHeroTools
 					.getClickedElement();
-			HeroToolType heroToolType = clickedElement.getHeroToolType();
+			final HeroToolType heroToolType = clickedElement.getHeroToolType();
 
 			if (gatherCubesMaster.isToolAffordable(heroToolType)) {
 				// change mode and also set marker's type
@@ -227,13 +232,13 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 						PhaseHeroesMode.MODE_CHOICE_TOOL, heroToolType);
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void guiOrdersClicked(GuiOrders guiOrders) {
-		GuiElementOrder clickedElement = (GuiElementOrder) guiOrders
+	private void guiOrdersClicked(final GuiOrders guiOrders) {
+		final GuiElementOrder clickedElement = (GuiElementOrder) guiOrders
 				.getClickedElement();
 
 		switch (clickedElement.getOrderType()) {
@@ -245,7 +250,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 				// cancel tool adding
 				heroesOrdersMaster
 						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 			break;

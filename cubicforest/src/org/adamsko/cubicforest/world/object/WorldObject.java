@@ -14,10 +14,10 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class WorldObject extends RenderableObject {
 
-	protected WorldObjectType worldType;
+	protected WorldObjectType type;
 
-	public WorldObjectType getWorldType() {
-		return worldType;
+	public WorldObjectType getType() {
+		return type;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class WorldObject extends RenderableObject {
 		name = new String("WorldObject");
 		speed = 0;
 		occupiesTile = true;
-		this.worldType = worldType;
+		this.type = worldType;
 		this.renderType = RenderableObjectType.TYPE_WORLD;
 	}
 
@@ -137,7 +137,7 @@ public class WorldObject extends RenderableObject {
 
 	public String typeToString() {
 		try {
-			return WorldObjectHelper.typeToString(worldType);
+			return WorldObjectHelper.typeToString(type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

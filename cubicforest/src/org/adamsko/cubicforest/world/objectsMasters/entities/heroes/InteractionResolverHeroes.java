@@ -32,7 +32,7 @@ public class InteractionResolverHeroes implements InteractionResolver {
 		
 		Hero tileHero = (Hero) eventTile.getOccupant();
 
-		if (eventObject.getWorldType() == WorldObjectType.OBJECT_ENTITY) {
+		if (eventObject.getType() == WorldObjectType.OBJECT_ENTITY) {
 			EntityObject eventEntity = (EntityObject) eventObject;
 			switch (eventEntity.getEntityType()) {
 			case ENTITY_ENEMY:
@@ -55,7 +55,7 @@ public class InteractionResolverHeroes implements InteractionResolver {
 
 		WorldObject worldObjectTile = eventTile.getOccupant();
 
-		if (worldObjectTile.getWorldType() != WorldObjectType.OBJECT_ENTITY) {
+		if (worldObjectTile.getType() != WorldObjectType.OBJECT_ENTITY) {
 			return false;
 		}
 

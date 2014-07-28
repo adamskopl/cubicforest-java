@@ -17,7 +17,7 @@ public class TilesContainer extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
 	public TilesContainer(final String name, final TilesMaster TM) {
-		super(name, TM, WorldObjectType.OBJECT_UNDEFINED, "tiles-atlas-medium",
+		super(name, WorldObjectType.OBJECT_UNDEFINED, TM, "tiles-atlas-medium",
 				75, 45);
 	}
 

@@ -9,33 +9,40 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 public class WorldObjectsContainer extends RenderableObjectsContainer {
 
-	private List<WorldObject> worldObjects;
-	private TilesMaster tilesMaster;
 	/**
-	 * Every container contains only one type of objects.
+	 * Every container holds one type of objects.
 	 */
-	private WorldObjectType worldObjectsType;
+	private final WorldObjectType type;
 
-	public WorldObjectType getWorldObjectsType() {
-		return worldObjectsType;
+	/**
+	 * Get type of WorldObject objects from this container.
+	 * 
+	 * @return
+	 */
+	public WorldObjectType getType() {
+		return type;
 	}
 
-	public WorldObjectsContainer(String name, TilesMaster TM,
-			WorldObjectType worldObjectsType, String textureName, int tileW,
-			int tileH) {
-		super(name, TM, textureName, tileW, tileH);
+	private final List<WorldObject> worldObjects;
+	private final TilesMaster tilesMaster;
+
+	public WorldObjectsContainer(final String name, final WorldObjectType type,
+			final TilesMaster tilesMaster, final String textureName,
+			final int tileW, final int tileH) {
+
+		super(name, textureName, tileW, tileH);
+		this.type = type;
+		this.tilesMaster = tilesMaster;
 		worldObjects = new ArrayList<WorldObject>();
-		tilesMaster = TM;
-		this.worldObjectsType = worldObjectsType;
 	}
 
-	public void removeObject(WorldObject objectRemove) throws Exception {
+	public void removeObject(final WorldObject objectRemove) throws Exception {
 		worldObjects.remove(objectRemove);
 		removeRenderableObject(objectRemove);
 		tilesMaster.removeWorldObject(objectRemove);
 	}
 
-	public void addObject(WorldObject worldObject) {
+	public void addObject(final WorldObject worldObject) {
 		worldObjects.add(worldObject);
 		addRenderableObject(worldObject);
 		// associate newObject with a tile (every WorldObject is associated with
@@ -43,7 +50,7 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		tilesMaster.addWorldObject(worldObject);
 	}
 
-	public boolean containsObject(WorldObject object) {
+	public boolean containsObject(final WorldObject object) {
 		return worldObjects.contains(object);
 	}
 
@@ -56,14 +63,14 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 		return worldObjects;
 	}
 
-	public void handleServantTileEvent(WorldObject servant,
-			TileEvent tileEvent) {
+	public void handleServantTileEvent(final WorldObject servant,
+			final TileEvent tileEvent) {
 
 	}
 
 	protected void removeWorldObjects() throws Exception {
 		while (worldObjects.size() != 0) {
-			WorldObject object = worldObjects.get(0);
+			final WorldObject object = worldObjects.get(0);
 			removeObject(object);
 		}
 	}

@@ -9,21 +9,21 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GuiDebug extends GuiContainer {
 
-	public GuiDebug(TilesMaster TM, String textureName,
-			int tileW, int tileH, float posX, float posY) {
-		super("guiDebug", TM, GuiType_e.GUI_DEBUG, textureName, tileW, tileH, posX, posY);
+	public GuiDebug(final TilesMaster TM, final String textureName,
+			final int tileW, final int tileH, final float posX, final float posY) {
+		super("guiDebug", GuiType_e.GUI_DEBUG, textureName, tileW, tileH, posX,
+				posY);
 		createGui();
 	}
 
 	private void createGui() {
 
-		GuiElementDebug elementDebug = new GuiElementDebug(
-				GuiDebugType_e.DEBUG_RELOAD, atlasRows.get(0)[0], 0, this, 0,
-				0);
+		final GuiElementDebug elementDebug = new GuiElementDebug(
+				GuiDebugType_e.DEBUG_RELOAD, atlasRows.get(0)[0], 0, this, 0, 0);
 		elementDebug.setRenderVector(new Vector2(0, 0));
 		elementDebug.addLabel("R");
 		elementDebug.altLabelLast(Color.WHITE, 1.0f, 20.0f, 32.0f);
-		
+
 		addGuiElement(elementDebug);
 
 	}

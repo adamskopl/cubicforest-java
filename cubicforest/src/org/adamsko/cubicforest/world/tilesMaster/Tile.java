@@ -77,7 +77,7 @@ public class Tile extends WorldObject {
 	public void insertObject(WorldObject insertObject, boolean ignoreOccupation)
 			throws Exception {
 		
-		switch (insertObject.getWorldType()) {
+		switch (insertObject.getType()) {
 		case OBJECT_ENTITY:
 			if (!ignoreOccupation && hasOccupant()) {
 				throw new Exception(

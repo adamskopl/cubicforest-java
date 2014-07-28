@@ -5,13 +5,14 @@ import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+
 import com.badlogic.gdx.graphics.Color;
 
 public class GuiHeroTools extends GuiContainer {
 
-	public GuiHeroTools(TilesMaster TM, String textureName, int tileW,
-			int tileH, float posX, float posY) {
-		super("guiHeroTools", TM, GuiType_e.GUI_HERO_TOOLS, textureName, tileW,
+	public GuiHeroTools(final TilesMaster TM, final String textureName,
+			final int tileW, final int tileH, final float posX, final float posY) {
+		super("guiHeroTools", GuiType_e.GUI_HERO_TOOLS, textureName, tileW,
 				tileH, posX, posY);
 		createGui();
 	}
@@ -19,9 +20,9 @@ public class GuiHeroTools extends GuiContainer {
 	private void createGui() {
 
 		int seqNum = 0;
-		for (HeroToolType type : HeroToolType.values()) {
+		for (final HeroToolType type : HeroToolType.values()) {
 
-			GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
+			final GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
 					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 70, 0);
 
 			guiElementHeroTool.addLabel(HeroesToolsMaster

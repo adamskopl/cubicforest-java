@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,12 +15,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class RenderableObjectsContainer {
 
-	private String name;
-	
+	private final String name;
+
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Types of {@link RenderableObject} objects lists in container.
 	 * 
@@ -39,8 +37,7 @@ public class RenderableObjectsContainer {
 		 * {@link RenderListMaster} and need to be updated (render order
 		 * recalculated)
 		 */
-		RO_TO_UPDATE,
-		RO_TO_REMOVE,
+		RO_TO_UPDATE, RO_TO_REMOVE,
 		/**
 		 * list with all {@link RenderableObject} objects in container
 		 */
@@ -52,14 +49,14 @@ public class RenderableObjectsContainer {
 	 * renderableObjectsToServe, it contains all objects which should be
 	 * rendered.
 	 */
-	private List<RenderableObject> renderableObjects;
+	private final List<RenderableObject> renderableObjects;
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
 	 * renderableObjects objects should be added to {@link RenderListMaster}
 	 * (e.g. objects just created). The purpose is to separate new objects from
 	 * those being already in {@link RenderListMaster}.
 	 */
-	private List<RenderableObject> renderableObjectsUnserved;
+	private final List<RenderableObject> renderableObjectsUnserved;
 
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
@@ -68,8 +65,8 @@ public class RenderableObjectsContainer {
 	 * be updated from those staying unchanged.
 	 */
 	private List<RenderableObject> renderableObjectsToUpdate;
-	
-	private List<RenderableObject> renderableObjectsToRemove;
+
+	private final List<RenderableObject> renderableObjectsToRemove;
 
 	protected Texture objectsTexture;
 
@@ -78,31 +75,31 @@ public class RenderableObjectsContainer {
 	 */
 	protected List<TextureRegion[]> atlasRows;
 
-	public RenderableObjectsContainer(String name, TilesMaster TM, String textureName,
-			int tileW, int tileH) {
+	public RenderableObjectsContainer(final String name,
+			final String textureName, final int tileW, final int tileH) {
 		this.name = new String(name);
-		
+
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		renderableObjectsToRemove = new ArrayList<RenderableObject>();
-		
+
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName
 				+ ".png"));
-		
+
 		atlasRows = new ArrayList<TextureRegion[]>();
 		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[0]);
 		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[1]);
 	}
 
-	public void addRenderableObject(RenderableObject newObject) {
+	public void addRenderableObject(final RenderableObject newObject) {
 		// add newObject to other RenderableObject objects
 		renderableObjects.add(newObject);
 		// add newObject to RenderableObject objects, which are not in
 		// RenderListMaster yet
 		renderableObjectsUnserved.add(newObject);
 	}
-	
-	public void removeRenderableObject(RenderableObject newObject) {
+
+	public void removeRenderableObject(final RenderableObject newObject) {
 		renderableObjects.remove(newObject);
 		renderableObjectsToRemove.add(newObject);
 	}
@@ -112,10 +109,10 @@ public class RenderableObjectsContainer {
 	 * 
 	 * @param type
 	 *            type of {@link RenderableObject} objects list.
-	 * @return {@link RenderableObject} objects list of given {@link ROListType_e}
-	 *         type.
+	 * @return {@link RenderableObject} objects list of given
+	 *         {@link ROListType_e} type.
 	 */
-	public List<RenderableObject> getRenderableObjects(ROListType_e type) {
+	public List<RenderableObject> getRenderableObjects(final ROListType_e type) {
 		switch (type) {
 		case RO_TO_UPDATE: {
 			return renderableObjectsToUpdate;
@@ -128,8 +125,7 @@ public class RenderableObjectsContainer {
 		case RO_TO_REMOVE: {
 			return renderableObjectsToRemove;
 		}
-		
-		
+
 		case RO_ALL: {
 			return renderableObjects;
 		}
@@ -141,8 +137,8 @@ public class RenderableObjectsContainer {
 	}
 
 	/**
-	 * Get {@link RenderableObject} list of given {@link ROListType_e} type. Clear
-	 * corresponding list in container afterwards.
+	 * Get {@link RenderableObject} list of given {@link ROListType_e} type.
+	 * Clear corresponding list in container afterwards.
 	 * 
 	 * @param type
 	 *            type of {@link RenderableObject} objects list.
@@ -150,9 +146,9 @@ public class RenderableObjectsContainer {
 	 * @return Copy of the {@link RenderableObject} objects list of given
 	 *         {@link ROListType_e} type.
 	 */
-	public List<RenderableObject> popRenderableObjects(ROListType_e type) {
-		List<RenderableObject> listOriginal = getRenderableObjects(type);
-		List<RenderableObject> listCopy = new ArrayList<RenderableObject>(
+	public List<RenderableObject> popRenderableObjects(final ROListType_e type) {
+		final List<RenderableObject> listOriginal = getRenderableObjects(type);
+		final List<RenderableObject> listCopy = new ArrayList<RenderableObject>(
 				listOriginal);
 		listOriginal.clear();
 

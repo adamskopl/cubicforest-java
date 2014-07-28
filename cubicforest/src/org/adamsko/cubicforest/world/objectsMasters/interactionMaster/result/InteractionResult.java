@@ -168,7 +168,7 @@ public class InteractionResult {
 	 */
 	private void resolveRemoval(WorldObject objectRemoved) {
 
-		switch (objectRemoved.getWorldType()) {
+		switch (objectRemoved.getType()) {
 		case OBJECT_ENTITY:
 			if (objectRemoved == orderObject) {
 				orderObjectOperation = ObjectOperation.OBJECT_REMOVE;

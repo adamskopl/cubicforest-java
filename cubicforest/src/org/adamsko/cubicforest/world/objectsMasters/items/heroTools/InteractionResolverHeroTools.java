@@ -50,7 +50,7 @@ public class InteractionResolverHeroTools implements InteractionResolver {
 				tileTool.setState(HeroToolStates_e.STATE_READY);
 				gatherCubesMaster.counterAddValue(-tileTool.getBuildCost());
 			}
-		} else if (eventObject.getWorldType() == WorldObjectType.OBJECT_ENTITY) {
+		} else if (eventObject.getType() == WorldObjectType.OBJECT_ENTITY) {
 			tileTool.onEntityTileEvent(interactionResult,
 					(EntityObject) eventObject, eventType);
 		}

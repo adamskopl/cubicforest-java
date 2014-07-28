@@ -5,20 +5,17 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class GuiContainer extends RenderableObjectsContainer implements
 		RenderableObjectsMaster {
 
 	protected List<GuiElement> guiElements;
-	private GuiType_e type;
-	// holds actually clicked element 
+	private final GuiType_e type;
+	// holds actually clicked element
 	private GuiElement clickedElement = null;
-	
+
 	public GuiElement getClickedElement() {
 		return clickedElement;
 	}
@@ -37,13 +34,14 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 		return new Vector2(containerScreenPos);
 	}
 
-	public void setContainerScreenPos(Vector2 containerScreenPos) {
+	public void setContainerScreenPos(final Vector2 containerScreenPos) {
 		this.containerScreenPos = containerScreenPos;
 	}
 
-	public GuiContainer(String name, TilesMaster TM, GuiType_e guiType, String textureName, int tileW,
-			int tileH, float posX, float posY) {
-		super(name, TM, textureName, tileW, tileH);
+	public GuiContainer(final String name, final GuiType_e guiType,
+			final String textureName, final int tileW, final int tileH,
+			final float posX, final float posY) {
+		super(name, textureName, tileW, tileH);
 
 		guiElements = new ArrayList<GuiElement>();
 
@@ -51,21 +49,21 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 		this.type = guiType;
 	}
 
-	public void addGuiElement(GuiElement guiElement) {
+	public void addGuiElement(final GuiElement guiElement) {
 		guiElements.add(guiElement);
 		addRenderableObject(guiElement);
 	}
-	
+
 	/**
 	 * Check if any of the gui elements is clicked.
 	 * 
 	 * @param screenPos
 	 * @return is any of the children clicked?
 	 */
-	public Boolean handleClick(Vector2 screenPos) {
+	public Boolean handleClick(final Vector2 screenPos) {
 		Boolean isElementClicked = false;
-		for(GuiElement e : guiElements) {
-			if(e.isClicked(screenPos)) {
+		for (final GuiElement e : guiElements) {
+			if (e.isClicked(screenPos)) {
 				isElementClicked = true;
 				clickedElement = e;
 				guiElementClicked(e);
@@ -74,13 +72,13 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 		}
 		return isElementClicked;
 	}
-	
+
 	/**
 	 * Override if container is reacting itself on an element click.
 	 * 
 	 * @param clickedElement
 	 */
-	protected void guiElementClicked(GuiElement clickedElement) {
+	protected void guiElementClicked(final GuiElement clickedElement) {
 	}
-	
+
 }

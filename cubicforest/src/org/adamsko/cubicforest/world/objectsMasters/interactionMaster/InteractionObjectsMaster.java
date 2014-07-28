@@ -17,45 +17,46 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 
 	protected InteractionResolver interactionResolver;
 
-	public void setInteractionResolver(InteractionResolver interactionResolver) {
+	public void setInteractionResolver(
+			final InteractionResolver interactionResolver) {
 		this.interactionResolver = interactionResolver;
 	}
 
-	public InteractionObjectsMaster(String name, TilesMaster TM,
-			WorldObjectType worldObjectsType, String textureName, int tileW,
-			int tileH) {
-		super(name, TM, worldObjectsType, textureName, tileW, tileH);
+	public InteractionObjectsMaster(final String name, final TilesMaster TM,
+			final WorldObjectType type, final String textureName,
+			final int tileW, final int tileH) {
+		super(name, type, TM, textureName, tileW, tileH);
 
 	}
 
 	@Override
-	public Boolean isTileEventValid(TileEvent eventType, Tile eventTile,
-			WorldObject eventObject) {
+	public Boolean isTileEventValid(final TileEvent eventType,
+			final Tile eventTile, final WorldObject eventObject) {
 
 		WorldObjectType tileObjectType = WorldObjectType.OBJECT_UNDEFINED;
 
 		if (eventTile.hasOccupant()) {
-			tileObjectType = eventTile.getOccupant().getWorldType();
-			if (tileObjectType == getWorldObjectsType()) {
+			tileObjectType = eventTile.getOccupant().getType();
+			if (tileObjectType == getType()) {
 				return true;
 			}
 		}
 
 		if (eventTile.hasItem()) {
-			tileObjectType = eventTile.getItem().getWorldType();
-			if (tileObjectType == getWorldObjectsType()) {
+			tileObjectType = eventTile.getItem().getType();
+			if (tileObjectType == getType()) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
 	@Override
-	public InteractionResult processTileEvent(TileEvent eventType,
-			Tile eventTile, WorldObject eventObject) {
+	public InteractionResult processTileEvent(final TileEvent eventType,
+			final Tile eventTile, final WorldObject eventObject) {
 
-		InteractionResult tileEventResult = interactionResolver
+		final InteractionResult tileEventResult = interactionResolver
 				.resolveInteracion(eventType, eventTile, eventObject);
 
 		return tileEventResult;

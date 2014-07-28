@@ -164,7 +164,7 @@ public class TilesMaster implements PickMasterClient {
 		if (parentTile != null) {
 			try {
 				parentTile.insertObject(addObject, false);
-				switch (addObject.getWorldType()) {
+				switch (addObject.getType()) {
 				case OBJECT_ENTITY:
 					tilesContainer.testHighlightTile(parentTile, 0, 1);
 					break;
@@ -192,7 +192,7 @@ public class TilesMaster implements PickMasterClient {
 		Tile parentTile = tilesContainer.getTileOnPos(removeObject
 				.getTilesPos());
 		if (parentTile != null) {
-			switch (removeObject.getWorldType()) {
+			switch (removeObject.getType()) {
 			case OBJECT_ENTITY:
 				WorldObject removedOccupant = parentTile.occupantLeaves();
 				if (removeObject != removedOccupant) {

@@ -6,66 +6,67 @@ import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiLevels extends GuiContainer {
 
-	public GuiLevels(MapsLoader mapsLoader, TilesMaster TM, String textureName,
-			int tileW, int tileH, float posX, float posY) {
-		super("guiLevels", TM, GuiType_e.GUI_LEVELS, textureName, tileW, tileH,
+	public GuiLevels(final MapsLoader mapsLoader, final TilesMaster TM,
+			final String textureName, final int tileW, final int tileH,
+			final float posX, final float posY) {
+		super("guiLevels", GuiType_e.GUI_LEVELS, textureName, tileW, tileH,
 				posX, posY);
 		createGui(mapsLoader);
 	}
 
-	private void createGui(MapsLoader mapsLoader) {
+	private void createGui(final MapsLoader mapsLoader) {
 
-		int levelsNumber = mapsLoader.size();
-		int activeLevel = mapsLoader.getMapActiveIndex();
-		
+		final int levelsNumber = mapsLoader.size();
+		final int activeLevel = mapsLoader.getMapActiveIndex();
+
 		int posX = 0;
 		int posY = 40;
 		for (int i = 0; i < levelsNumber; i++) {
-			if(i % 2 == 0) {
+			if (i % 2 == 0) {
 				posX = 0;
 				posY -= 40;
 			}
-			
-			GuiElementLevel guiElementLevel = new GuiElementLevel(i,
+
+			final GuiElementLevel guiElementLevel = new GuiElementLevel(i,
 					atlasRows.get(0)[0], 0, this, posX, posY);
 
-			if(activeLevel == i) {
+			if (activeLevel == i) {
 				higlightButton(guiElementLevel);
 			}
-			
+
 			guiElementLevel.setRenderVector(new Vector2(0, 0));
 			guiElementLevel.addLabel(i + 1);
 			guiElementLevel.altLabelLast(Color.WHITE, 1.0f, 12.0f, 22.0f);
 			addGuiElement(guiElementLevel);
-			
+
 			posX += 40;
 		}
-		
+
 	}
-	
+
 	@Override
-	protected void guiElementClicked(GuiElement clickedElement) {
+	protected void guiElementClicked(final GuiElement clickedElement) {
 		unhilightButtons();
 		higlightButton(clickedElement);
 	}
-	
-	public void levelClicked(int levelIndex) {
-		GuiElement e = guiElements.get(levelIndex);
+
+	public void levelClicked(final int levelIndex) {
+		final GuiElement e = guiElements.get(levelIndex);
 		e.setTextureRegion(atlasRows.get(1)[0]);
 	}
-	
+
 	private void unhilightButtons() {
-		for(GuiElement e: guiElements) {
+		for (final GuiElement e : guiElements) {
 			e.setTextureRegion(atlasRows.get(0)[0]);
 		}
 	}
-	private void higlightButton(GuiElement element) {
+
+	private void higlightButton(final GuiElement element) {
 		element.setTextureRegion(atlasRows.get(1)[0]);
 	}
 }

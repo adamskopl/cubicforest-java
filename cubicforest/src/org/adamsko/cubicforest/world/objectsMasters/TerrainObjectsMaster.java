@@ -10,33 +10,32 @@ import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.terrain.Tree;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class TerrainObjectsMaster extends WorldObjectsContainer implements
 		WorldObjectsMaster {
 
-	public TerrainObjectsMaster(TilesMaster TM, String textureName, int tileW,
-			int tileH) {
-		super("TerrainObjectsMaster", TM, WorldObjectType.OBJECT_TERRAIN,
+	public TerrainObjectsMaster(final TilesMaster TM, final String textureName,
+			final int tileW, final int tileH) {
+		super("TerrainObjectsMaster", WorldObjectType.OBJECT_TERRAIN, TM,
 				textureName, tileW, tileH);
 
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void update(final float deltaTime) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void loadMapObjects(CFMap map) {
-		List<Vector2> coords = map
+	public void loadMapObjects(final CFMap map) {
+		final List<Vector2> coords = map
 				.getObjectTypeCoords(TiledObjectType.TILED_TERRAIN);
 
 		Tree tree;
 		int atlasIndex = 0;
-		for (Vector2 pos : coords) {
+		for (final Vector2 pos : coords) {
 			tree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex);
 			tree.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -5));
