@@ -50,14 +50,14 @@ public class WorldObject extends RenderableObject {
 	public int getMovePointsLeft() {
 		return movePointsLeft;
 	}
-	
+
 	public void restoreMovementPoints() {
 		movePointsLeft = speed;
 	}
-	
-	public void addMovePoints(int movePoints) {
+
+	public void addMovePoints(final int movePoints) {
 		movePointsLeft += movePoints;
-		if(movePointsLeft < 0) {
+		if (movePointsLeft < 0) {
 			Gdx.app.error(getName(), "movePointsLeft < 0");
 		}
 	}
@@ -67,7 +67,8 @@ public class WorldObject extends RenderableObject {
 	 */
 	private Boolean occupiesTile;
 
-	public WorldObject(TextureRegion tr, int texNum, WorldObjectType worldType) {
+	public WorldObject(final TextureRegion tr, final int texNum,
+			final WorldObjectType worldType) {
 		super(tr, texNum);
 		tilesPos = new Vector2(0.0f, 0.0f);
 		verticalPos = new Float(0.0f);
@@ -78,15 +79,15 @@ public class WorldObject extends RenderableObject {
 		this.renderType = RenderableObjectType.TYPE_WORLD;
 	}
 
-	public void setTilesPos(Vector2 pos) {
+	public void setTilesPos(final Vector2 pos) {
 		this.tilesPos.set(pos);
 	}
 
-	public void setTilesPosX(float x) {
+	public void setTilesPosX(final float x) {
 		this.tilesPos.set(x, this.tilesPos.y);
 	}
 
-	public void setTilesPosY(float y) {
+	public void setTilesPosY(final float y) {
 		this.tilesPos.set(this.tilesPos.x, y);
 	}
 
@@ -102,7 +103,7 @@ public class WorldObject extends RenderableObject {
 		return this.tilesPos.y;
 	}
 
-	public void setVerticalPos(Float height) {
+	public void setVerticalPos(final Float height) {
 		this.verticalPos = height;
 	}
 
@@ -110,7 +111,7 @@ public class WorldObject extends RenderableObject {
 		return verticalPos;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -118,7 +119,7 @@ public class WorldObject extends RenderableObject {
 		return name;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(final int speed) {
 		this.speed = speed;
 		this.movePointsLeft = speed;
 	}
@@ -127,7 +128,7 @@ public class WorldObject extends RenderableObject {
 		return speed;
 	}
 
-	public void setOccupiesTile(Boolean occupiesTile) {
+	public void setOccupiesTile(final Boolean occupiesTile) {
 		this.occupiesTile = occupiesTile;
 	}
 
@@ -135,16 +136,7 @@ public class WorldObject extends RenderableObject {
 		return this.occupiesTile;
 	}
 
-	public String typeToString() {
-		try {
-			return WorldObjectHelper.typeToString(type);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "TYPE_ERROR";
-	}
-
-	public void addLabel(ROLabel type) throws Exception {
+	public void addLabel(final ROLabel type) throws Exception {
 		switch (type) {
 		case LABEL_TILEPOS: {
 			labels.addLabel(tilesPos);

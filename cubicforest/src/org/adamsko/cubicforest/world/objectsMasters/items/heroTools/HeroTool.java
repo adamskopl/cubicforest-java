@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,7 +33,7 @@ public abstract class HeroTool extends ItemObject {
 	}
 
 	public HeroTool(TextureRegion tr, int texNum, HeroToolType heroToolType) {
-		super(tr, texNum, ItemObjectType_e.ITEM_HERO_TOOL);
+		super(tr, texNum, ItemObjectType.ITEM_HERO_TOOL);
 
 		this.heroToolType = heroToolType;
 

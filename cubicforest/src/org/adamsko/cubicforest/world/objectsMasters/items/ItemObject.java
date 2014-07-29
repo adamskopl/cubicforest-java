@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class ItemObject extends WorldObject {
 
-	private ItemObjectType_e itemType;
+	private ItemObjectType itemType;
 	
-	public ItemObject(TextureRegion tr, int texNum, ItemObjectType_e itemType) {
+	public ItemObject(TextureRegion tr, int texNum, ItemObjectType itemType) {
 		super(tr, texNum, WorldObjectType.OBJECT_ITEM);
 		this.itemType = itemType;
 	}
 
-	public ItemObjectType_e getItemType() {
+	public ItemObjectType getItemType() {
 		return itemType;
 	}
 

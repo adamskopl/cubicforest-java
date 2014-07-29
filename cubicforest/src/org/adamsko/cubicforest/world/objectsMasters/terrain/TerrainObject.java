@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TerrainObject extends WorldObject {
 
-	public TerrainObject(TextureRegion tr, int texNum, TerrainObjectType_e terrainType) {
+	public TerrainObject(TextureRegion tr, int texNum, TerrainObjectType terrainType) {
 		super(tr, texNum, WorldObjectType.OBJECT_TERRAIN);
 	}
 

@@ -1,5 +1,5 @@
 package org.adamsko.cubicforest.world.objectsMasters.terrain;
 
-public enum TerrainObjectType_e {
+public enum TerrainObjectType {
 	TERRAIN_TREE
 }

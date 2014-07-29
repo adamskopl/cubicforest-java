@@ -15,7 +15,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 		implements InteractionMasterClient {
 
-	protected InteractionResolver interactionResolver;
+	private InteractionResolver interactionResolver;
 
 	public void setInteractionResolver(
 			final InteractionResolver interactionResolver) {

@@ -5,7 +5,7 @@ import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.Interactio
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverType_e;
 import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
@@ -25,7 +25,7 @@ public class InteractionResolverGatherCubes implements InteractionResolver {
 				eventObject);
 
 		ItemObject item = (ItemObject) eventTile.getItem();
-		if (item.getItemType() != ItemObjectType_e.ITEM_GATHER_CUBE) {
+		if (item.getItemType() != ItemObjectType.ITEM_GATHER_CUBE) {
 			return interactionResult;
 		}
 

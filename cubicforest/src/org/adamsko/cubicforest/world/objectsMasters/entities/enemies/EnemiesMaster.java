@@ -19,15 +19,15 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemiesMaster extends InteractionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
-	public EnemiesMaster(TilesMaster TM, RoundsMaster roundsMaster,
-			String textureName, int tileW, int tileH) {
+	public EnemiesMaster(final TilesMaster TM, final RoundsMaster roundsMaster,
+			final String textureName, final int tileW, final int tileH) {
 		super("enemiesMaster", TM, WorldObjectType.OBJECT_ENTITY, textureName,
 				tileW, tileH);
 
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void update(final float deltaTime) {
 
 	}
 
@@ -37,14 +37,14 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 	}
 
 	@Override
-	public void loadMapObjects(CFMap map) throws Exception {
-		List<Vector2> coords = map
+	public void loadMapObjects(final CFMap map) throws Exception {
+		final List<Vector2> coords = map
 				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_ENEMY);
 
 		Enemy enemy;
 		int nameIndex = 0;
 		int atlasIndex = 0;
-		for (Vector2 pos : coords) {
+		for (final Vector2 pos : coords) {
 			enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex);
 			enemy.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -7));
@@ -74,10 +74,10 @@ public class EnemiesMaster extends InteractionObjectsMaster implements
 		removeWorldObjects();
 	}
 
-	public void removeEnemy(Enemy enemyToRemove) {
+	public void removeEnemy(final Enemy enemyToRemove) {
 		try {
 			removeObject(enemyToRemove);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

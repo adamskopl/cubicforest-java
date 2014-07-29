@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world;
 
-import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +24,6 @@ import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
 
-import com.badlogic.gdx.Gdx;
-
 /**
  * World class desc.
  * 
@@ -35,16 +32,16 @@ import com.badlogic.gdx.Gdx;
  */
 public class World {
 
-	private WorldRenderer renderer;
+	private final WorldRenderer renderer;
 	MapsLoader mapsLoader;
 
-	private List<WorldObjectsMaster> worldObjectsMasters;
-	private PickMaster pickMaster;
+	private final List<WorldObjectsMaster> worldObjectsMasters;
+	private final PickMaster pickMaster;
 
-	private TilesMaster tilesMaster;
-	private OrdersMaster ordersMaster;
-	private RoundsMaster roundsMaster;
-	private InteractionMaster interactionMaster;
+	private final TilesMaster tilesMaster;
+	private final OrdersMaster ordersMaster;
+	private final RoundsMaster roundsMaster;
+	private final InteractionMaster interactionMaster;
 
 	TerrainMaster terrainObjectsMaster;
 	HeroesMaster heroesMaster;
@@ -56,11 +53,11 @@ public class World {
 
 	GuiMaster guiMaster;
 
-	public World(WorldRenderer renderer) {
+	public World(final WorldRenderer renderer) {
 		this.renderer = renderer;
 		mapsLoader = new MapsLoaderTiled();
 		mapsLoader.loadMaps();
-		mapsLoader.setMapActive(0);		
+		mapsLoader.setMapActive(0);
 
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
@@ -96,14 +93,7 @@ public class World {
 
 		initInteractionResolvers();
 
-		// tiles container has to be added first, because objects are
-		// removed/added to tiles
-		addWorldObjectsMaster(tilesMaster.getTilesContainer());
-		addWorldObjectsMaster(terrainObjectsMaster);
-		addWorldObjectsMaster(heroesMaster);
-		addWorldObjectsMaster(enemiesMaster);
-		addWorldObjectsMaster(gatherCubesMaster);
-		addWorldObjectsMaster(heroesToolsMaster);
+		initWorldObjectsMasters();
 
 		reloadWorld();
 
@@ -114,7 +104,7 @@ public class World {
 		guiMaster.addClient(roundsMaster);
 
 		addGuiObjectsContainer(gatherCubesMaster.getGatherCubesCounter());
-		for (GuiContainer GC : guiMaster.getGuiList()) {
+		for (final GuiContainer GC : guiMaster.getGuiList()) {
 			addGuiObjectsContainer(GC);
 		}
 
@@ -124,14 +114,25 @@ public class World {
 
 	}
 
+	private void initWorldObjectsMasters() {
+		// tiles container has to be added first, because objects are
+		// removed/added to tiles
+		addWorldObjectsMaster(tilesMaster.getTilesContainer());
+		addWorldObjectsMaster(terrainObjectsMaster);
+		addWorldObjectsMaster(heroesMaster);
+		addWorldObjectsMaster(enemiesMaster);
+		addWorldObjectsMaster(gatherCubesMaster);
+		addWorldObjectsMaster(heroesToolsMaster);
+	}
+
 	private void initRoundsMaster() {
 
-		PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster, ordersMaster,
-				tilesMaster, heroesToolsMaster, gatherCubesMaster);
+		final PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster,
+				ordersMaster, tilesMaster, heroesToolsMaster, gatherCubesMaster);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseHeroes);
 
-		PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster,
+		final PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster,
 				heroesMaster, ordersMaster);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseEnemies);
@@ -142,13 +143,13 @@ public class World {
 
 		try {
 			roundsMaster.nextRound();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void initInteractionResolvers() {
-		InteractionResolverFactory interactionResolverFactory = new InteractionResolverFactory(
+		final InteractionResolverFactory interactionResolverFactory = new InteractionResolverFactory(
 				heroesMaster, enemiesMaster, heroesToolsMaster,
 				gatherCubesMaster);
 
@@ -163,7 +164,7 @@ public class World {
 				.createFactory(InteractionResolverType_e.RESOLVER_HERO_TOOLS));
 	}
 
-	public void setMapActive(int activeMapIndex) {
+	public void setMapActive(final int activeMapIndex) {
 		mapsLoader.setMapActive(activeMapIndex);
 	}
 
@@ -173,36 +174,36 @@ public class World {
 	 * all other Masters unload their objects.
 	 */
 	public void reloadWorld() {
-		
+
 		mapsLoader.reloadMaps();
-		
-		for (WorldObjectsMaster wo : worldObjectsMasters) {
+
+		for (final WorldObjectsMaster wo : worldObjectsMasters) {
 			try {
 				wo.unloadMapObjects();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
-		for (WorldObjectsMaster wo : worldObjectsMasters) {
+		for (final WorldObjectsMaster wo : worldObjectsMasters) {
 			try {
 				wo.loadMapObjects(mapsLoader.getMapActive());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
 
 	}
 
-	private void addGuiObjectsContainer(GuiContainer guiObjectsContainer) {
+	private void addGuiObjectsContainer(final GuiContainer guiObjectsContainer) {
 		renderer.addROMGui(guiObjectsContainer);
 	}
 
-	public void addWorldObjectsMaster(WorldObjectsMaster newWorldMaster) {
+	public void addWorldObjectsMaster(final WorldObjectsMaster newWorldMaster) {
 		worldObjectsMasters.add(newWorldMaster);
 		renderer.addROMWorld(newWorldMaster);
 	}
 
-	public void update(float deltaTime) {
+	public void update(final float deltaTime) {
 		pickMaster.update();
 	}
 }
