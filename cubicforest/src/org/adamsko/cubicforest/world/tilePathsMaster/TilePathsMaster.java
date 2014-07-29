@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -56,11 +56,11 @@ public class TilePathsMaster {
 	 * @param guide
 	 */
 	protected void onPathEnd(TilePathGuide guide,
-			final InteractionResult interactionResult) {
+			final CollisionResult collisionResult) {
 		final WorldObject wanderer = guide.getWanderer();
 
 		final OrdersMasterResult ordersMasterResult = new OrdersMasterResult(
-				interactionResult);
+				collisionResult);
 
 		master.onPathFinished(ordersMasterResult, wanderer);
 

@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
 
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
@@ -16,7 +16,7 @@ public class HeroToolTurret extends HeroTool {
 	}
 
 	@Override
-	public void onEntityTileEvent(InteractionResult interactionResult,
+	public void onEntityTileEvent(CollisionResult collisionResult,
 			EntityObject entityObject, TileEvent eventType) {
 		// TODO Auto-generated method stub
 		

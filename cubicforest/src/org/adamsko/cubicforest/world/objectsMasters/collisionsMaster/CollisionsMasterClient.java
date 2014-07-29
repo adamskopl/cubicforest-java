@@ -1,7 +1,7 @@
-package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
+package org.adamsko.cubicforest.world.objectsMasters.collisionsMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
@@ -14,25 +14,24 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
  * @author adamsko
  * 
  */
-public interface InteractionMasterClient {
+public interface CollisionsMasterClient {
 
 	/**
-	 * Interaction: an {@link WorldObject} is interacting with a tile in some
-	 * way.
+	 * Collision: an {@link WorldObject} is interacting with a tile in some way.
 	 * 
 	 * @param evenType
 	 * @param eventTile
 	 * @param eventObject
-	 * @return the effect of the interaction: should current order be modified?
-	 *         E.g object should stop, because of the interaction with object,
+	 * @return the effect of the collision: should current order be modified?
+	 *         E.g object should stop, because of the collision with object,
 	 *         which stops other objects.
 	 */
-	public InteractionResult processTileEvent(TileEvent evenType,
-			Tile eventTile, WorldObject eventObject);
+	public CollisionResult processTileEvent(TileEvent evenType, Tile eventTile,
+			WorldObject eventObject);
 
 	/**
-	 * Check if client is responsible for resolving interaction event of an
-	 * object occupying tile.
+	 * Check if client is responsible for resolving collision event of an object
+	 * occupying tile.
 	 * 
 	 * @param evenType
 	 * @param eventTile

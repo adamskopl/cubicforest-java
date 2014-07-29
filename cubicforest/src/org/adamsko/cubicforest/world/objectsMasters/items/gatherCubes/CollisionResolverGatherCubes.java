@@ -1,32 +1,32 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolver;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverType_e;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-public class InteractionResolverGatherCubes implements InteractionResolver {
+public class CollisionResolverGatherCubes implements CollisionResolver {
 
 	private GatherCubesMaster gatherCubesMaster;
 
-	public InteractionResolverGatherCubes(GatherCubesMaster gatherCubesMaster) {
+	public CollisionResolverGatherCubes(GatherCubesMaster gatherCubesMaster) {
 		this.gatherCubesMaster = gatherCubesMaster;
 	}
 
 	@Override
-	public InteractionResult resolveInteracion(TileEvent eventType,
+	public CollisionResult resolveInteracion(TileEvent eventType,
 			Tile eventTile, WorldObject eventObject) {
 
-		InteractionResult interactionResult = new InteractionResult(eventTile,
+		CollisionResult collisionResult = new CollisionResult(eventTile,
 				eventObject);
 
 		ItemObject item = (ItemObject) eventTile.getItem();
 		if (item.getItemType() != ItemObjectType.ITEM_GATHER_CUBE) {
-			return interactionResult;
+			return collisionResult;
 		}
 
 		GatherCube tileCube = (GatherCube) item;
@@ -43,18 +43,18 @@ public class InteractionResolverGatherCubes implements InteractionResolver {
 		case OCCUPANT_STOPS:
 			gatherCubesMaster.cubeUnHighlight(tileCube);
 			gatherCubesMaster.counterAddValue(1);
-			interactionResult.remove(tileCube);
+			collisionResult.remove(tileCube);
 			break;
 		default:
 			break;
 		}
 
-		return interactionResult;
+		return collisionResult;
 	}
 
 	@Override
-	public InteractionResolverType_e getType() {
-		return InteractionResolverType_e.RESOLVER_GATHER_CUBES;
+	public CollisionResolverType_e getType() {
+		return CollisionResolverType_e.RESOLVER_GATHER_CUBES;
 	}
 
 }

@@ -1,10 +1,10 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
 
 import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
@@ -23,24 +23,24 @@ public class HeroToolPortal extends HeroTool {
 	}
 
 	@Override
-	public void onEntityTileEvent(InteractionResult interactionResult,
+	public void onEntityTileEvent(CollisionResult collisionResult,
 			EntityObject entityObject, TileEvent eventType) {
 
 		switch (entityObject.getEntityType()) {
 		case ENTITY_HERO:
 			if (!validHero(eventType))
 				return;
-			interactionResult.setOrderOperation(OrderOperation.ORDER_FINISH);
+			collisionResult.setOrderOperation(OrderOperation.ORDER_FINISH);
 
 			// remove hero
-			interactionResult.remove((Hero) entityObject);
+			collisionResult.remove((Hero) entityObject);
 
 			// remove portal
-			interactionResult.remove(this);
+			collisionResult.remove(this);
 
 			// if removed hero is last, the game is won
 			if (heroesMaster.getOrderableObjects().size() == 1) {
-				interactionResult.setGameResult(GameResult.GAME_WON);
+				collisionResult.setGameResult(GameResult.GAME_WON);
 			}
 
 			break;
@@ -51,7 +51,7 @@ public class HeroToolPortal extends HeroTool {
 			/*
 			 * The enemy is destroying the portal.
 			 */
-			interactionResult.remove(this);
+			collisionResult.remove(this);
 
 		default:
 			break;

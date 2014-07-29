@@ -5,11 +5,11 @@ import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResultProcessor;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResultProcessor;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -18,28 +18,30 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 public class TilesEventsMaster {
 
-	private TilesContainer tilesContainer;
-	private InteractionMaster interactionMaster;
-	private InteractionResultProcessor interactionResultProcessor;
+	private final TilesContainer tilesContainer;
+	private CollisionsMaster collisionMaster;
+	private CollisionResultProcessor collisionResultProcessor;
 
-	public TilesEventsMaster(TilesContainer tilesContainer) {
+	public TilesEventsMaster(final TilesContainer tilesContainer) {
 		this.tilesContainer = tilesContainer;
 	}
 
-	public void setInteractionMaster(InteractionMaster interactionMaster) {
-		this.interactionMaster = interactionMaster;
+	public void setCollisionMaster(final CollisionsMaster collisionMaster) {
+		this.collisionMaster = collisionMaster;
 	}
-	
-	public void initInteractionResultProcessor(HeroesMaster heroesMaster,
-			EnemiesMaster enemiesMaster, HeroesToolsMaster heroesToolsMaster,
-			GatherCubesMaster gatherCubesMaster, RoundsMaster roundsMaster, PhaseEnemies phaseEnemies,
-			PhaseHeroes phaseHeroes) {
 
-		interactionResultProcessor = new InteractionResultProcessor(
-				heroesMaster, enemiesMaster, heroesToolsMaster,
-				gatherCubesMaster);
-		interactionResultProcessor.initPhases(roundsMaster, phaseEnemies, phaseHeroes);
-		
+	public void initCollisionResultProcessor(final HeroesMaster heroesMaster,
+			final EnemiesMaster enemiesMaster,
+			final HeroesToolsMaster heroesToolsMaster,
+			final GatherCubesMaster gatherCubesMaster,
+			final RoundsMaster roundsMaster, final PhaseEnemies phaseEnemies,
+			final PhaseHeroes phaseHeroes) {
+
+		collisionResultProcessor = new CollisionResultProcessor(heroesMaster,
+				enemiesMaster, heroesToolsMaster, gatherCubesMaster);
+		collisionResultProcessor.initPhases(roundsMaster, phaseEnemies,
+				phaseHeroes);
+
 	}
 
 	/**
@@ -50,18 +52,19 @@ public class TilesEventsMaster {
 	 * @param eventObject
 	 * @throws Exception
 	 */
-	public InteractionResult tileEvent(TileEvent evenType, Tile eventTile,
-			WorldObject eventObject) throws Exception {
+	public CollisionResult tileEvent(final TileEvent evenType,
+			final Tile eventTile, final WorldObject eventObject)
+			throws Exception {
 
-		InteractionResult interactionResult = interactionMaster.tileEvent(
+		final CollisionResult collisionResult = collisionMaster.tileEvent(
 				evenType, eventTile, eventObject);
 
-		// interaction results should be resolved 
-		interactionResultProcessor.resolve(interactionResult);		
-		
+		// collision results should be resolved
+		collisionResultProcessor.resolve(collisionResult);
+
 		// if active object is not removed after tile event, perform common
 		// operations: object insert/take out
-		if (interactionResult.getOrderObjectOperation() != ObjectOperation.OBJECT_REMOVE) {
+		if (collisionResult.getOrderObjectOperation() != ObjectOperation.OBJECT_REMOVE) {
 			switch (evenType) {
 			case OCCUPANT_ENTERS: {
 				eventTile.insertObject(eventObject, true);
@@ -88,7 +91,7 @@ public class TilesEventsMaster {
 			}
 		}
 
-		return interactionResult;
+		return collisionResult;
 	}
 
 	/**
@@ -96,7 +99,8 @@ public class TilesEventsMaster {
 	 * @param eventTile
 	 * @throws Exception
 	 */
-	public void tileEvent(TileEvent evenType, Tile eventTile) throws Exception {
+	public void tileEvent(final TileEvent evenType, final Tile eventTile)
+			throws Exception {
 
 		switch (evenType) {
 		case OCCUPANT_ENTERS: {

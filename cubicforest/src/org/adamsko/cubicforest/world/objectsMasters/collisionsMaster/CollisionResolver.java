@@ -1,7 +1,7 @@
-package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
+package org.adamsko.cubicforest.world.objectsMasters.collisionsMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
@@ -9,11 +9,11 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
  * @author adamsko
  * 
  */
-public interface InteractionResolver {
+public interface CollisionResolver {
 
 	/**
-	 * Resolve interaction for event passed to related Master (e.g.
-	 * InteractionResolverGatherCubes resolves event related to
+	 * Resolve collision for event passed to related Master (e.g.
+	 * CollisionResolverGatherCubes resolves event related to
 	 * GatherCubesMaster).
 	 * 
 	 * @param eventType
@@ -23,9 +23,9 @@ public interface InteractionResolver {
 	 *            object which is interacting with a tile
 	 * @return
 	 */
-	InteractionResult resolveInteracion(TileEvent eventType, Tile eventTile,
+	CollisionResult resolveInteracion(TileEvent eventType, Tile eventTile,
 			WorldObject eventObject);
-	
-	InteractionResolverType_e getType();
+
+	CollisionResolverType_e getType();
 
 }

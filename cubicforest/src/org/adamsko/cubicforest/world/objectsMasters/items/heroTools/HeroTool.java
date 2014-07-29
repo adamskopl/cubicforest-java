@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
@@ -18,7 +18,7 @@ public abstract class HeroTool extends ItemObject {
 
 	HeroToolStates_e state;
 
-	public void setState(HeroToolStates_e state) {
+	public void setState(final HeroToolStates_e state) {
 		this.state = state;
 	}
 
@@ -32,7 +32,8 @@ public abstract class HeroTool extends ItemObject {
 		return buildCost;
 	}
 
-	public HeroTool(TextureRegion tr, int texNum, HeroToolType heroToolType) {
+	public HeroTool(final TextureRegion tr, final int texNum,
+			final HeroToolType heroToolType) {
 		super(tr, texNum, ItemObjectType.ITEM_HERO_TOOL);
 
 		this.heroToolType = heroToolType;
@@ -43,7 +44,7 @@ public abstract class HeroTool extends ItemObject {
 
 	}
 
-	public void changeState(HeroToolStates_e newState) {
+	public void changeState(final HeroToolStates_e newState) {
 		switch (newState) {
 		case STATE_CONSTRUCTION:
 			newStateConstruction();
@@ -74,14 +75,14 @@ public abstract class HeroTool extends ItemObject {
 	}
 
 	/**
-	 * Process tile interaction with given object. Return order result for that
+	 * Process tile collision with given object. Return order result for that
 	 * object.
 	 * 
 	 * @param entityObject
 	 * @param eventType
 	 * @return
 	 */
-	public abstract void onEntityTileEvent(InteractionResult interactionResult,
+	public abstract void onEntityTileEvent(CollisionResult collisionResult,
 			EntityObject entityObject, TileEvent eventType);
 
 }

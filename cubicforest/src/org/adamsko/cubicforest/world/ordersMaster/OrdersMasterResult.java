@@ -1,12 +1,12 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
 import org.adamsko.cubicforest.roundsMaster.GameResult;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 
 public class OrdersMasterResult {
 	
 	private OrdersMasterPathResult pathResult;
-	private InteractionResult interactionResult;
+	private CollisionResult collisionResult;
 	private GameResult gameResult;
 	
 	public GameResult getGameResult() {
@@ -21,15 +21,15 @@ public class OrdersMasterResult {
 		this.gameResult = GameResult.GAME_PLAY;
 	}
 	
-	public OrdersMasterResult(InteractionResult interactionResult) {
+	public OrdersMasterResult(CollisionResult collisionResult) {
 		this();
-		this.interactionResult = interactionResult;
+		this.collisionResult = collisionResult;
 		pathResult = OrdersMasterPathResult.ORDER_PATH_FINISHED;
 	}
 	
 	public OrdersMasterResult(OrdersMasterPathResult pathResult) {
 		this();
-		this.interactionResult = new InteractionResult(null, null);
+		this.collisionResult = new CollisionResult(null, null);
 		this.pathResult = pathResult;
 	}
 
@@ -41,12 +41,12 @@ public class OrdersMasterResult {
 		this.pathResult = pathResult;
 	}
 
-	public InteractionResult getInteractionResult() {
-		return interactionResult;
+	public CollisionResult getCollisionResult() {
+		return collisionResult;
 	}
 
-	public void setInteractionResult(InteractionResult interactionResult) {
-		this.interactionResult = interactionResult;
+	public void setCollisionResult(CollisionResult collisionResult) {
+		this.collisionResult = collisionResult;
 	}
 
 }

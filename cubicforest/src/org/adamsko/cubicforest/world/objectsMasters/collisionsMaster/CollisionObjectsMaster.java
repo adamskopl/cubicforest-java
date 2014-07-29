@@ -1,9 +1,9 @@
-package org.adamsko.cubicforest.world.objectsMasters.interactionMaster;
+package org.adamsko.cubicforest.world.objectsMasters.collisionsMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
@@ -12,17 +12,17 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
  * @author adamsko
  * 
  */
-public abstract class InteractionObjectsMaster extends WorldObjectsContainer
-		implements InteractionMasterClient {
+public abstract class CollisionObjectsMaster extends WorldObjectsContainer
+		implements CollisionsMasterClient {
 
-	private InteractionResolver interactionResolver;
+	private CollisionResolver collisionResolver;
 
-	public void setInteractionResolver(
-			final InteractionResolver interactionResolver) {
-		this.interactionResolver = interactionResolver;
+	public void setCollisionResolver(
+			final CollisionResolver collisionResolver) {
+		this.collisionResolver = collisionResolver;
 	}
 
-	public InteractionObjectsMaster(final String name, final TilesMaster TM,
+	public CollisionObjectsMaster(final String name, final TilesMaster TM,
 			final WorldObjectType type, final String textureName,
 			final int tileW, final int tileH) {
 		super(name, type, TM, textureName, tileW, tileH);
@@ -53,10 +53,10 @@ public abstract class InteractionObjectsMaster extends WorldObjectsContainer
 	}
 
 	@Override
-	public InteractionResult processTileEvent(final TileEvent eventType,
+	public CollisionResult processTileEvent(final TileEvent eventType,
 			final Tile eventTile, final WorldObject eventObject) {
 
-		final InteractionResult tileEventResult = interactionResolver
+		final CollisionResult tileEventResult = collisionResolver
 				.resolveInteracion(eventType, eventTile, eventObject);
 
 		return tileEventResult;

@@ -11,11 +11,11 @@ import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverFactory;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverFactory;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverType_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
@@ -41,7 +41,7 @@ public class World {
 	private final TilesMaster tilesMaster;
 	private final OrdersMaster ordersMaster;
 	private final RoundsMaster roundsMaster;
-	private final InteractionMaster interactionMaster;
+	private final CollisionsMaster collisionMaster;
 
 	TerrainMaster terrainObjectsMaster;
 	HeroesMaster heroesMaster;
@@ -83,15 +83,15 @@ public class World {
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster,
 				enemiesMaster, heroesToolsMaster, gatherCubesMaster);
 
-		interactionMaster = new InteractionMaster();
-		interactionMaster.addClient(gatherCubesMaster);
-		interactionMaster.addClient(heroesToolsMaster);
-		interactionMaster.addClient(heroesMaster);
-		interactionMaster.addClient(enemiesMaster);
+		collisionMaster = new CollisionsMaster();
+		collisionMaster.addClient(gatherCubesMaster);
+		collisionMaster.addClient(heroesToolsMaster);
+		collisionMaster.addClient(heroesMaster);
+		collisionMaster.addClient(enemiesMaster);
 
-		tilesMaster.setInteractionMaster(interactionMaster);
+		tilesMaster.setCollisionMaster(collisionMaster);
 
-		initInteractionResolvers();
+		initCollisionResolvers();
 
 		initWorldObjectsMasters();
 
@@ -137,7 +137,7 @@ public class World {
 		phaseEnemies.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseEnemies);
 
-		tilesMaster.initInteractionResultProcessor(heroesMaster, enemiesMaster,
+		tilesMaster.initCollisionResultProcessor(heroesMaster, enemiesMaster,
 				heroesToolsMaster, gatherCubesMaster, roundsMaster,
 				phaseEnemies, phaseHeroes);
 
@@ -148,20 +148,19 @@ public class World {
 		}
 	}
 
-	private void initInteractionResolvers() {
-		final InteractionResolverFactory interactionResolverFactory = new InteractionResolverFactory(
+	private void initCollisionResolvers() {
+		final CollisionResolverFactory collisionResolverFactory = new CollisionResolverFactory(
 				heroesMaster, enemiesMaster, heroesToolsMaster,
 				gatherCubesMaster);
 
-		heroesMaster.setInteractionResolver(interactionResolverFactory
-				.createFactory(InteractionResolverType_e.RESOLVER_HEROES));
-		enemiesMaster.setInteractionResolver(interactionResolverFactory
-				.createFactory(InteractionResolverType_e.RESOLVER_ENEMIES));
-		gatherCubesMaster
-				.setInteractionResolver(interactionResolverFactory
-						.createFactory(InteractionResolverType_e.RESOLVER_GATHER_CUBES));
-		heroesToolsMaster.setInteractionResolver(interactionResolverFactory
-				.createFactory(InteractionResolverType_e.RESOLVER_HERO_TOOLS));
+		heroesMaster.setCollisionResolver(collisionResolverFactory
+				.createFactory(CollisionResolverType_e.RESOLVER_HEROES));
+		enemiesMaster.setCollisionResolver(collisionResolverFactory
+				.createFactory(CollisionResolverType_e.RESOLVER_ENEMIES));
+		gatherCubesMaster.setCollisionResolver(collisionResolverFactory
+				.createFactory(CollisionResolverType_e.RESOLVER_GATHER_CUBES));
+		heroesToolsMaster.setCollisionResolver(collisionResolverFactory
+				.createFactory(CollisionResolverType_e.RESOLVER_HERO_TOOLS));
 	}
 
 	public void setMapActive(final int activeMapIndex) {

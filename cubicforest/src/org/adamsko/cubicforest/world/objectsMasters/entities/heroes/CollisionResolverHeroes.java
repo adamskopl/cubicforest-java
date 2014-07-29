@@ -3,31 +3,31 @@ package org.adamsko.cubicforest.world.objectsMasters.entities.heroes;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolver;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionResolverType_e;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.Gdx;
 
-public class InteractionResolverHeroes implements InteractionResolver {
+public class CollisionResolverHeroes implements CollisionResolver {
 
-	public InteractionResolverHeroes(HeroesMaster heroesMaster) {
+	public CollisionResolverHeroes(HeroesMaster heroesMaster) {
 	}
 
 	@Override
-	public InteractionResult resolveInteracion(TileEvent eventType,
+	public CollisionResult resolveInteracion(TileEvent eventType,
 			Tile eventTile, WorldObject eventObject) {
 
-		InteractionResult interactionResult = new InteractionResult(eventTile,
+		CollisionResult collisionResult = new CollisionResult(eventTile,
 				eventObject);
 
 		if (!eventTileHasHero(eventTile)) {
-			return interactionResult;
+			return collisionResult;
 		}
 		
 		Hero tileHero = (Hero) eventTile.getOccupant();
@@ -36,19 +36,19 @@ public class InteractionResolverHeroes implements InteractionResolver {
 			EntityObject eventEntity = (EntityObject) eventObject;
 			switch (eventEntity.getEntityType()) {
 			case ENTITY_ENEMY:
-				resolveInteractionEnemy(interactionResult, eventType, tileHero,
+				resolveCollisionEnemy(collisionResult, eventType, tileHero,
 						(Enemy) eventEntity);
 				break;
 			default:
 			}
 		}
 
-		return interactionResult;
+		return collisionResult;
 	}
 
 	@Override
-	public InteractionResolverType_e getType() {
-		return InteractionResolverType_e.RESOLVER_HEROES;
+	public CollisionResolverType_e getType() {
+		return CollisionResolverType_e.RESOLVER_HEROES;
 	}
 
 	private boolean eventTileHasHero(Tile eventTile) {
@@ -68,12 +68,12 @@ public class InteractionResolverHeroes implements InteractionResolver {
 		return true;
 	}
 
-	private void resolveInteractionEnemy(InteractionResult interactionResult,
+	private void resolveCollisionEnemy(CollisionResult collisionResult,
 			TileEvent eventType, Hero hero, Enemy enemy) {
 		
 		if(eventType == TileEvent.OCCUPANT_ENTERS) {
-			interactionResult.remove(hero);
-			interactionResult.setGameResult(GameResult.GAME_LOST);
+			collisionResult.remove(hero);
+			collisionResult.setGameResult(GameResult.GAME_LOST);
 		}
 	}
 

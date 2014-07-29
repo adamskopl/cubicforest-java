@@ -7,14 +7,14 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class GatherCubesMaster extends InteractionObjectsMaster implements
+public class GatherCubesMaster extends CollisionObjectsMaster implements
 		WorldObjectsMaster {
 
 	private GatherCubesCounter gatherCubesCounter;

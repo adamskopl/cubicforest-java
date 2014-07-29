@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result;
+package org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.adamsko.cubicforest.world.tilesMaster.Tile;
  * @author adamsko
  * 
  */
-public class InteractionResult {
+public class CollisionResult {
 
 	/**
 	 * How the order of active object (guided by TilePathGuide right now) should
@@ -44,26 +44,26 @@ public class InteractionResult {
 	 * modified, when enemy is interacting with it?
 	 */
 	private ObjectOperation tileItemOperation;
-	
+
 	/**
 	 * Modify if game is lost or won.
 	 */
 	private GameResult gameResult;
 
 	/**
-	 * Tile for which interaction result is resolved. Needed among others to
+	 * Tile for which collision result is resolved. Needed among others to
 	 * indicate tileObjectOperation value.
 	 */
-	private Tile eventTile;
+	private final Tile eventTile;
 	/**
 	 * Object interacting with a tile.
 	 */
-	private WorldObject orderObject;
+	private final WorldObject orderObject;
 
-	private List<Hero> toRemoveHeroes;
-	private List<Enemy> toRemoveEnemies;
-	private List<HeroTool> toRemoveHeroTools;
-	private List<GatherCube> toRemoveGatherCubes;
+	private final List<Hero> toRemoveHeroes;
+	private final List<Enemy> toRemoveEnemies;
+	private final List<HeroTool> toRemoveHeroTools;
+	private final List<GatherCube> toRemoveGatherCubes;
 
 	public ObjectOperation getTileObjectOperation() {
 		return tileObjectOperation;
@@ -85,7 +85,7 @@ public class InteractionResult {
 		return toRemoveGatherCubes;
 	}
 
-	public InteractionResult(Tile eventTile, WorldObject eventObject) {
+	public CollisionResult(final Tile eventTile, final WorldObject eventObject) {
 
 		this.eventTile = eventTile;
 		this.orderObject = eventObject;
@@ -106,7 +106,7 @@ public class InteractionResult {
 		return orderOperation;
 	}
 
-	public void setOrderOperation(OrderOperation orderOperation) {
+	public void setOrderOperation(final OrderOperation orderOperation) {
 		this.orderOperation = orderOperation;
 	}
 
@@ -118,43 +118,47 @@ public class InteractionResult {
 		return gameResult;
 	}
 
-	public void setGameResult(GameResult gameResult) {
+	public void setGameResult(final GameResult gameResult) {
 		this.gameResult = gameResult;
 	}
-	
+
 	/**
-	 * Check if InteractionResult has values different than default.
+	 * Check if CollisionResult has values different than default.
 	 * 
 	 * @return
 	 */
 	public boolean defaultValues() {
-		if (orderOperation != OrderOperation.ORDER_CONTINUE)
+		if (orderOperation != OrderOperation.ORDER_CONTINUE) {
 			return false;
-		if (orderObjectOperation != ObjectOperation.OBJECT_NOTHING)
+		}
+		if (orderObjectOperation != ObjectOperation.OBJECT_NOTHING) {
 			return false;
-		if (tileObjectOperation != ObjectOperation.OBJECT_NOTHING)
+		}
+		if (tileObjectOperation != ObjectOperation.OBJECT_NOTHING) {
 			return false;
-		if (tileItemOperation != ObjectOperation.OBJECT_NOTHING)
+		}
+		if (tileItemOperation != ObjectOperation.OBJECT_NOTHING) {
 			return false;
+		}
 		return true;
 	}
 
-	public void remove(Enemy enemy) {
+	public void remove(final Enemy enemy) {
 		toRemoveEnemies.add(enemy);
 		resolveRemoval(enemy);
 	}
 
-	public void remove(Hero hero) {
+	public void remove(final Hero hero) {
 		toRemoveHeroes.add(hero);
 		resolveRemoval(hero);
 	}
 
-	public void remove(HeroTool heroTool) {
+	public void remove(final HeroTool heroTool) {
 		toRemoveHeroTools.add(heroTool);
 		resolveRemoval(heroTool);
 	}
 
-	public void remove(GatherCube gatherCube) {
+	public void remove(final GatherCube gatherCube) {
 		toRemoveGatherCubes.add(gatherCube);
 		resolveRemoval(gatherCube);
 	}
@@ -166,14 +170,14 @@ public class InteractionResult {
 	 * @param object
 	 *            object just removed
 	 */
-	private void resolveRemoval(WorldObject objectRemoved) {
+	private void resolveRemoval(final WorldObject objectRemoved) {
 
 		switch (objectRemoved.getType()) {
 		case OBJECT_ENTITY:
 			if (objectRemoved == orderObject) {
 				orderObjectOperation = ObjectOperation.OBJECT_REMOVE;
 			}
-			WorldObject occupant = eventTile.getOccupant();
+			final WorldObject occupant = eventTile.getOccupant();
 			if (occupant != null) {
 				if (objectRemoved == occupant) {
 					tileObjectOperation = ObjectOperation.OBJECT_REMOVE;
@@ -181,7 +185,7 @@ public class InteractionResult {
 			}
 			break;
 		case OBJECT_ITEM:
-			ItemObject item = (ItemObject) eventTile.getItem();
+			final ItemObject item = (ItemObject) eventTile.getItem();
 			if (item != null) {
 				if (objectRemoved == item) {
 					tileItemOperation = ObjectOperation.OBJECT_REMOVE;

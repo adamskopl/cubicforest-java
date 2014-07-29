@@ -8,9 +8,9 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
@@ -66,25 +66,25 @@ public class TilesMaster implements PickMasterClient {
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
-	private int mapSize;
-	private List<TilesMasterClient> clients;
+	private final int mapSize;
+	private final List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
 
 	private TilesEventsMaster tilesEventsMaster;
 
-	public TilesMaster(int mapSize) {
+	public TilesMaster(final int mapSize) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
 		TilesHelper.setMapSize(mapSize);
 		initTiles();
 	}
 
-	public void addClient(TilesMasterClient client) {
+	public void addClient(final TilesMasterClient client) {
 		clients.add(client);
 	}
 
-	public void setInteractionMaster(InteractionMaster interactionMaster) {
-		tilesEventsMaster.setInteractionMaster(interactionMaster);
+	public void setCollisionMaster(final CollisionsMaster collisionMaster) {
+		tilesEventsMaster.setCollisionMaster(collisionMaster);
 	}
 
 	public void initTiles() {
@@ -96,19 +96,21 @@ public class TilesMaster implements PickMasterClient {
 			if (TilesHelper.isTileonTestMap(fIndex)) {
 				continue;
 			}
-			Vector2 fCoords = TilesHelper.calcCoords(fIndex);
+			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);
 			fCoords.add(new Vector2(7, -3)); // temporary solution for centering
 												// view
 												// tilesContainer.addTile(fCoords);
 		}
 	}
 
-	public void initInteractionResultProcessor(HeroesMaster heroesMaster,
-			EnemiesMaster enemiesMaster, HeroesToolsMaster heroesToolsMaster,
-			GatherCubesMaster gatherCubesMaster, RoundsMaster roundsMaster,
-			PhaseEnemies phaseEnemies, PhaseHeroes phaseHeroes) {
+	public void initCollisionResultProcessor(final HeroesMaster heroesMaster,
+			final EnemiesMaster enemiesMaster,
+			final HeroesToolsMaster heroesToolsMaster,
+			final GatherCubesMaster gatherCubesMaster,
+			final RoundsMaster roundsMaster, final PhaseEnemies phaseEnemies,
+			final PhaseHeroes phaseHeroes) {
 
-		tilesEventsMaster.initInteractionResultProcessor(heroesMaster,
+		tilesEventsMaster.initCollisionResultProcessor(heroesMaster,
 				enemiesMaster, heroesToolsMaster, gatherCubesMaster,
 				roundsMaster, phaseEnemies, phaseHeroes);
 
@@ -118,7 +120,7 @@ public class TilesMaster implements PickMasterClient {
 		return tilesContainer;
 	}
 
-	public Tile getTileWithObject(WorldObject object) {
+	public Tile getTileWithObject(final WorldObject object) {
 		return tilesContainer.getTileWithObject(object);
 	}
 
@@ -130,7 +132,8 @@ public class TilesMaster implements PickMasterClient {
 	 *            indicates if occupied tiles should be considered
 	 * @return
 	 */
-	public List<Tile> getTilesAdjacent(Tile tile, Boolean getOccupied) {
+	public List<Tile> getTilesAdjacent(final Tile tile,
+			final Boolean getOccupied) {
 		return TilesSearcher
 				.getTilesAdjacent(tile, tilesContainer, getOccupied);
 	}
@@ -145,9 +148,10 @@ public class TilesMaster implements PickMasterClient {
 	 *            don't consider)
 	 * @return
 	 */
-	public List<Tile> getTilesInRange(WorldObject object, int range,
-			Boolean getOccupied) {
-		Tile objectTile = tilesContainer.getTileOnPos(object.getTilesPos());
+	public List<Tile> getTilesInRange(final WorldObject object,
+			final int range, final Boolean getOccupied) {
+		final Tile objectTile = tilesContainer.getTileOnPos(object
+				.getTilesPos());
 
 		return TilesSearcher.getTilesInRange(objectTile, range, getOccupied);
 	}
@@ -159,8 +163,9 @@ public class TilesMaster implements PickMasterClient {
 	 *            {@link WorldObject} object to be associated with a
 	 *            {@link Tile}.
 	 */
-	public void addWorldObject(WorldObject addObject) {
-		Tile parentTile = tilesContainer.getTileOnPos(addObject.getTilesPos());
+	public void addWorldObject(final WorldObject addObject) {
+		final Tile parentTile = tilesContainer.getTileOnPos(addObject
+				.getTilesPos());
 		if (parentTile != null) {
 			try {
 				parentTile.insertObject(addObject, false);
@@ -178,7 +183,7 @@ public class TilesMaster implements PickMasterClient {
 							"unknown");
 					break;
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -188,13 +193,14 @@ public class TilesMaster implements PickMasterClient {
 	 * @param removeObject
 	 * @throws Exception
 	 */
-	public void removeWorldObject(WorldObject removeObject) throws Exception {
-		Tile parentTile = tilesContainer.getTileOnPos(removeObject
+	public void removeWorldObject(final WorldObject removeObject)
+			throws Exception {
+		final Tile parentTile = tilesContainer.getTileOnPos(removeObject
 				.getTilesPos());
 		if (parentTile != null) {
 			switch (removeObject.getType()) {
 			case OBJECT_ENTITY:
-				WorldObject removedOccupant = parentTile.occupantLeaves();
+				final WorldObject removedOccupant = parentTile.occupantLeaves();
 				if (removeObject != removedOccupant) {
 					throw new Exception(
 							"removeWorldObject removeObject != removedOccupant");
@@ -202,14 +208,14 @@ public class TilesMaster implements PickMasterClient {
 				tilesContainer.testHighlightTile(parentTile, 0, 0);
 				break;
 			case OBJECT_ITEM:
-				WorldObject removedItem = parentTile.itemLeaves();
+				final WorldObject removedItem = parentTile.itemLeaves();
 				if (removeObject != removedItem) {
 					throw new Exception(
 							"removeWorldObject removeObject != removedOccupant");
 				}
 				break;
 			case OBJECT_TERRAIN:
-				WorldObject removedTerrain = parentTile.occupantLeaves();
+				final WorldObject removedTerrain = parentTile.occupantLeaves();
 				if (removeObject != removedTerrain) {
 					throw new Exception(
 							"removeWorldObject removeObject != removedOccupant");
@@ -223,10 +229,11 @@ public class TilesMaster implements PickMasterClient {
 	}
 
 	@Override
-	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {
-		Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
+	public void onInput(final Vector2 inputScreenPos,
+			final Vector2 inputTilesPos) {
+		final Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
 		if (clickedTile != null) {
-			for (TilesMasterClient client : clients) {
+			for (final TilesMasterClient client : clients) {
 				client.onTileEvent(clickedTile, TileEvent.TILE_PICKED);
 			}
 		}
@@ -236,23 +243,25 @@ public class TilesMaster implements PickMasterClient {
 		tilesContainer.clearTilesLabels();
 	}
 
-	public void highlightTile(Tile tileToHighlight, int texRow, int texCol) {
+	public void highlightTile(final Tile tileToHighlight, final int texRow,
+			final int texCol) {
 		tilesContainer.testHighlightTile(tileToHighlight, texRow, texCol);
 	}
 
-	public void highlightTiles(List<Tile> tilesToHighlight, int texRow,
-			int texCol) {
-		for (Tile t : tilesToHighlight) {
+	public void highlightTiles(final List<Tile> tilesToHighlight,
+			final int texRow, final int texCol) {
+		for (final Tile t : tilesToHighlight) {
 			tilesContainer.testHighlightTile(t, texRow, texCol);
 		}
 	}
 
 	public int occupiedTiles() {
 		int occupiedTiles = 0;
-		for (RenderableObject ro : tilesContainer.getTiles()) {
-			Tile t = (Tile) ro;
-			if (t.hasOccupant())
+		for (final RenderableObject ro : tilesContainer.getTiles()) {
+			final Tile t = (Tile) ro;
+			if (t.hasOccupant()) {
 				occupiedTiles++;
+			}
 		}
 		return occupiedTiles;
 	}

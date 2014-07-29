@@ -2,8 +2,8 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsMaster;

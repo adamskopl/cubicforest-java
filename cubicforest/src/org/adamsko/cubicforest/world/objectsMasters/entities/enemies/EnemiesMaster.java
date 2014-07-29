@@ -9,14 +9,14 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class EnemiesMaster extends InteractionObjectsMaster implements
+public class EnemiesMaster extends CollisionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
 	public EnemiesMaster(final TilesMaster TM, final RoundsMaster roundsMaster,

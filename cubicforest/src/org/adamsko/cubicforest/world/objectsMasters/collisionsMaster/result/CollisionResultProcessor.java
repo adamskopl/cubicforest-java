@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result;
+package org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result;
 
 import java.util.List;
 
@@ -6,17 +6,17 @@ import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.result.InteractionResult;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 
-public class InteractionResultProcessor {
+public class CollisionResultProcessor {
 
 	private HeroesMaster heroesMaster;
 	private EnemiesMaster enemiesMaster;
@@ -28,7 +28,7 @@ public class InteractionResultProcessor {
 	private PhaseEnemies phaseEnemies;
 	private PhaseHeroes phaseHeroes;
 
-	public InteractionResultProcessor(HeroesMaster heroesMaster,
+	public CollisionResultProcessor(HeroesMaster heroesMaster,
 			EnemiesMaster enemiesMaster, HeroesToolsMaster heroesToolsMaster,
 			GatherCubesMaster gatherCubesMaster) {
 
@@ -46,13 +46,13 @@ public class InteractionResultProcessor {
 		this.phaseHeroes = phaseHeroes;
 	}
 
-	public void resolve(InteractionResult interactionResult) {
-		removeHeroes(interactionResult.getRemovalsHeroes());
-		removeEnemies(interactionResult.getRemovalsEnemies());
-		removeHeroTools(interactionResult.getRemovalsHeroTools());
-		removeGatherCubes(interactionResult.getRemovalsGatherCubes());
+	public void resolve(CollisionResult collisionResult) {
+		removeHeroes(collisionResult.getRemovalsHeroes());
+		removeEnemies(collisionResult.getRemovalsEnemies());
+		removeHeroTools(collisionResult.getRemovalsHeroTools());
+		removeGatherCubes(collisionResult.getRemovalsGatherCubes());
 		
-		roundsMaster.setGameResultSingle(interactionResult.getGameResult());
+		roundsMaster.setGameResultSingle(collisionResult.getGameResult());
 	}
 
 	private void removeHeroes(List<Hero> toRemoveHeroes) {

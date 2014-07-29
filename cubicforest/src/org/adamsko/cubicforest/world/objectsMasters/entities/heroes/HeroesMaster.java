@@ -9,7 +9,7 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.interactionMaster.InteractionObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
@@ -17,7 +17,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class HeroesMaster extends InteractionObjectsMaster implements
+public class HeroesMaster extends CollisionObjectsMaster implements
 		WorldObjectsMaster, OrderableObjectsContainer {
 
 	public HeroesMaster(TilesMaster TM, RoundsMaster roundsMaster,
