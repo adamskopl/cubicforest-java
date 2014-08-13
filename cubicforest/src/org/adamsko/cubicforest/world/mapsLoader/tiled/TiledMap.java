@@ -15,10 +15,10 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class TiledMap implements CFMap {
 
-	private Integer width;
-	private Integer height;
-	private Integer tileheight;
-	private Integer tilewidth;
+	private int width;
+	private int height;
+	private int tileheight;
+	private int tilewidth;
 	private List<TiledLayer> layers;
 
 	TiledCfConverter tiledCfConverter;
@@ -28,35 +28,35 @@ public class TiledMap implements CFMap {
 	}
 
 	// < GETTERS SETTERS
-	public Integer getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public void setWidth(Integer width) {
+	public void setWidth(final int width) {
 		this.width = width;
 	}
 
-	public Integer getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(Integer height) {
+	public void setHeight(final int height) {
 		this.height = height;
 	}
 
-	public Integer getTileheight() {
+	public int getTileheight() {
 		return tileheight;
 	}
 
-	public void setTileheight(Integer tileheight) {
+	public void setTileheight(final int tileheight) {
 		this.tileheight = tileheight;
 	}
 
-	public Integer getTilewidth() {
+	public int getTilewidth() {
 		return tilewidth;
 	}
 
-	public void setTilewidth(Integer tilewidth) {
+	public void setTilewidth(final int tilewidth) {
 		this.tilewidth = tilewidth;
 	}
 
@@ -64,7 +64,7 @@ public class TiledMap implements CFMap {
 		return layers;
 	}
 
-	public void setLayers(List<TiledLayer> layers) {
+	public void setLayers(final List<TiledLayer> layers) {
 		this.layers = layers;
 	}
 
@@ -78,30 +78,32 @@ public class TiledMap implements CFMap {
 	// GETTERS SETTERS >
 
 	public void printLayers() {
-		for (TiledLayer tl : getLayers()) {
+		for (final TiledLayer tl : getLayers()) {
 			Gdx.app.debug("layer ", tl.getName());
 		}
 	}
 
-	public TiledLayer getLayer(String layerName) {
-		for (TiledLayer tl : layers) {
-			if (tl.getName().equals(layerName))
+	public TiledLayer getLayer(final String layerName) {
+		for (final TiledLayer tl : layers) {
+			if (tl.getName().equals(layerName)) {
 				return tl;
+			}
 		}
 		Gdx.app.error("getLayer " + layerName, "no layer");
 		return null;
 	}
 
-	List<TiledObject> getObjectsFromLayer(TiledObjectType layerObjectType) {
-		TiledLayer layer = getLayer(layerObjectType.toString());
-		if (layer != null)
+	List<TiledObject> getObjectsFromLayer(final TiledObjectType layerObjectType) {
+		final TiledLayer layer = getLayer(layerObjectType.toString());
+		if (layer != null) {
 			return layer.getObjects();
+		}
 
 		return null;
 	}
 
 	@Override
-	public List<Vector2> getObjectTypeCoords(TiledObjectType objectType) {
+	public List<Vector2> getObjectTypeCoords(final TiledObjectType objectType) {
 		return tiledCfConverter.getObjectTypeCoords(objectType);
 	}
 

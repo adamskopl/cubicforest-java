@@ -26,9 +26,9 @@ public abstract class HeroTool extends ItemObject {
 		return state;
 	}
 
-	Integer buildCost;
+	final int buildCost;
 
-	public Integer getBuildCost() {
+	public int getBuildCost() {
 		return buildCost;
 	}
 

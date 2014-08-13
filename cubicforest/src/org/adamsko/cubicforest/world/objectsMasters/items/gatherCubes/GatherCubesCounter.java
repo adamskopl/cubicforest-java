@@ -36,7 +36,7 @@ public class GatherCubesCounter extends GuiContainer {
 		counter.add(value, 0);
 	}
 
-	public Integer getCounter() {
+	public int getCounter() {
 		return (int) counter.x;
 	}
 

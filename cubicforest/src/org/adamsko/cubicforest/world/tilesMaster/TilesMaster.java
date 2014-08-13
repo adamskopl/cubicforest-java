@@ -93,9 +93,6 @@ public class TilesMaster implements PickMasterClient {
 		tilesEventsMaster = new TilesEventsMaster(tilesContainer);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
-			if (TilesHelper.isTileonTestMap(fIndex)) {
-				continue;
-			}
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);
 			fCoords.add(new Vector2(7, -3)); // temporary solution for centering
 												// view

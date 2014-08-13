@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -36,8 +36,8 @@ public class TilesHelper {
 		 */
 		NONE
 	}
-	
-	public static String toString(TilesConnection_e conn) {
+
+	public static String toString(final TilesConnection_e conn) {
 		switch (conn) {
 		case HORIZONTAL:
 			return new String("TILES HORIZONTAL");
@@ -50,48 +50,14 @@ public class TilesHelper {
 		}
 	}
 
-	private static List<Integer> testEmptyTiles;
-
 	/**
 	 * DESC
 	 * 
 	 * @param size
 	 */
-	public static void setMapSize(int size) {
+	public static void setMapSize(final int size) {
 		mapSize = size;
 		sideSize = (int) Math.sqrt(size);
-
-		testEmptyTiles = new ArrayList<Integer>();
-//		testEmptyTiles.add(5);
-//		testEmptyTiles.add(6);
-//		testEmptyTiles.add(7);
-//		
-//		testEmptyTiles.add(32);
-//		testEmptyTiles.add(33);
-//		testEmptyTiles.add(43);
-//		
-//		testEmptyTiles.add(72);
-//		testEmptyTiles.add(73);
-//		testEmptyTiles.add(82);
-//		testEmptyTiles.add(83);
-//		
-//		testEmptyTiles.add(25);
-//		testEmptyTiles.add(35);
-//		testEmptyTiles.add(45);
-//		testEmptyTiles.add(55);
-//		testEmptyTiles.add(65);
-//		
-//		testEmptyTiles.add(56);
-//		testEmptyTiles.add(57);
-//		testEmptyTiles.add(58);
-//		
-//		testEmptyTiles.add(28);
-//		testEmptyTiles.add(38);
-//		
-//		testEmptyTiles.add(86);
-//		testEmptyTiles.add(87);
-		
-
 	}
 
 	/**
@@ -105,17 +71,12 @@ public class TilesHelper {
 	 *            index of the map's tile
 	 * @return calculated coordinates on the 2d map
 	 */
-	public static Vector2 calcCoords(int tileIndex) {
-		Vector2 coords = new Vector2();
+	public static Vector2 calcCoords(final int tileIndex) {
+		final Vector2 coords = new Vector2();
 		coords.y = tileIndex / sideSize;
 		coords.x = tileIndex % sideSize;
 
 		return coords;
-	}
-
-	// temporary function for test map
-	public static boolean isTileonTestMap(int tileIndex) {
-		return testEmptyTiles.contains(tileIndex);
 	}
 
 	/**
@@ -123,19 +84,24 @@ public class TilesHelper {
 	 * @param tileB
 	 * @return
 	 */
-	public static Boolean areTilesAdjecant(Tile tileA, Tile tileB) {
-		float xDiff = Math.abs(tileA.getTilesPosX() - tileB.getTilesPosX());
-		float yDiff = Math.abs(tileA.getTilesPosY() - tileB.getTilesPosY());
+	public static Boolean areTilesAdjecant(final Tile tileA, final Tile tileB) {
+		final float xDiff = Math.abs(tileA.getTilesPosX()
+				- tileB.getTilesPosX());
+		final float yDiff = Math.abs(tileA.getTilesPosY()
+				- tileB.getTilesPosY());
 
-		if (xDiff == 1 && yDiff == 0)
+		if (xDiff == 1 && yDiff == 0) {
 			return true;
-		if (yDiff == 1 && xDiff == 0)
+		}
+		if (yDiff == 1 && xDiff == 0) {
 			return true;
+		}
 
 		return false;
 	}
 
-	public static TilesConnection_e getConnectionType(Tile tileA, Tile tileB) {
+	public static TilesConnection_e getConnectionType(final Tile tileA,
+			final Tile tileB) {
 		if (!areTilesAdjecant(tileA, tileB)) {
 			return TilesConnection_e.NONE;
 		}
@@ -153,9 +119,9 @@ public class TilesHelper {
 	 * @return Position between tiles or null;
 	 * @throws Exception
 	 */
-	public static Vector2 getPosBetween(Tile tileA, Tile tileB)
+	public static Vector2 getPosBetween(final Tile tileA, final Tile tileB)
 			throws Exception {
-		TilesConnection_e connType = getConnectionType(tileA, tileB);
+		final TilesConnection_e connType = getConnectionType(tileA, tileB);
 		switch (connType) {
 		case HORIZONTAL: {
 			if (tileA.getTilesPosX() < tileB.getTilesPosX()) {
@@ -179,17 +145,18 @@ public class TilesHelper {
 		}
 		}
 	}
-	
+
 	/**
 	 * Convert list of tiles to String
 	 * 
-	 * @param tiles list of tiles to convert
+	 * @param tiles
+	 *            list of tiles to convert
 	 * @return String containing tiles converted to String
 	 */
-	public static String toString(List<Tile> tiles) {
+	public static String toString(final List<Tile> tiles) {
 		String ret = new String();
-		for(Tile t : tiles) {
-			ret+=t.toString() + " ";
+		for (final Tile t : tiles) {
+			ret += t.toString() + " ";
 		}
 		return ret;
 	}

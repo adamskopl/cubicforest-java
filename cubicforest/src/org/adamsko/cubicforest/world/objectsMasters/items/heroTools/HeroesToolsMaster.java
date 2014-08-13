@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
-import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
@@ -30,11 +29,12 @@ public class HeroesToolsMaster extends CollisionObjectsMaster implements
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker
 	private HeroToolType heroToolMarkerType;
-	private HeroToolsFactory heroToolsFactory;
+	private final HeroToolsFactory heroToolsFactory;
 
-	public HeroesToolsMaster(TilesMaster TM,
-			GatherCubesMaster gatherCubesMaster, HeroesMaster heroesMaster,
-			String textureName, int tileW, int tileH) {
+	public HeroesToolsMaster(final TilesMaster TM,
+			final GatherCubesMaster gatherCubesMaster,
+			final HeroesMaster heroesMaster, final String textureName,
+			final int tileW, final int tileH) {
 		super("HeroesToolsMaster", TM, WorldObjectType.OBJECT_ITEM,
 				textureName, tileW, tileH);
 
@@ -48,7 +48,7 @@ public class HeroesToolsMaster extends CollisionObjectsMaster implements
 	/**
 	 * Add hero tool in 'construction' state for marking purpose.
 	 */
-	public void heroToolMarkerAdd(Tile heroToolTile) {
+	public void heroToolMarkerAdd(final Tile heroToolTile) {
 
 		if (heroToolTile == null) {
 			Gdx.app.error("addHeroToolMarker", "heroToolTile == null");
@@ -65,7 +65,7 @@ public class HeroesToolsMaster extends CollisionObjectsMaster implements
 			return;
 		}
 
-		Vector2 heroToolTilePos = heroToolTile.getTilesPos();
+		final Vector2 heroToolTilePos = heroToolTile.getTilesPos();
 
 		heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
 				heroToolTilePos);
@@ -93,11 +93,11 @@ public class HeroesToolsMaster extends CollisionObjectsMaster implements
 		heroToolMarker = null;
 	}
 
-	public void setToolTexture(HeroTool tool, int index) {
+	public void setToolTexture(final HeroTool tool, final int index) {
 		tool.setTextureRegion(atlasRows.get(index)[tool.getTexNum()]);
 	}
 
-	public static Integer heroTooltypeToCost(HeroToolType type) {
+	public static int heroTooltypeToCost(final HeroToolType type) {
 		switch (type) {
 		case TOOL_ORANGE:
 			return 0;
@@ -115,42 +115,42 @@ public class HeroesToolsMaster extends CollisionObjectsMaster implements
 		}
 	}
 
-	public void setHeroToolMarkerType(HeroToolType heroToolMarkerType) {
+	public void setHeroToolMarkerType(final HeroToolType heroToolMarkerType) {
 		this.heroToolMarkerType = heroToolMarkerType;
 	}
 
-	public void removeTool(HeroTool heroToolToRemove) {
+	public void removeTool(final HeroTool heroToolToRemove) {
 		try {
 			removeObject(heroToolToRemove);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void update(final float deltaTime) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void loadMapObjects(CFMap map) {
-		List<Vector2> coordsTraps = map
+	public void loadMapObjects(final CFMap map) {
+		final List<Vector2> coordsTraps = map
 				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_TRAP);
 
-		List<Vector2> coordsPortals = map
+		final List<Vector2> coordsPortals = map
 				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_PORTAL);
 
 		HeroTool heroTool = null;
-		for (Vector2 pos : coordsTraps) {
+		for (final Vector2 pos : coordsTraps) {
 			heroTool = heroToolsFactory.createHeroTool(HeroToolType.TOOL_TRAP,
 					pos);
 			heroTool.setState(HeroToolStates_e.STATE_READY);
 			setToolTexture(heroTool, 0);
 			addObject(heroTool);
 		}
-		for (Vector2 pos : coordsPortals) {
+		for (final Vector2 pos : coordsPortals) {
 			heroTool = heroToolsFactory.createHeroTool(
 					HeroToolType.TOOL_PORTAL, pos);
 			heroTool.setState(HeroToolStates_e.STATE_READY);
