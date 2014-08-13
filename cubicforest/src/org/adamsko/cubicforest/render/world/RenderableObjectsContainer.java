@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @author adamsko
  * 
  */
-public class RenderableObjectsContainer {
+public class RenderableObjectsContainer implements RenderableObjectsMaster {
 
 	private final String name;
 
@@ -112,6 +112,7 @@ public class RenderableObjectsContainer {
 	 * @return {@link RenderableObject} objects list of given
 	 *         {@link ROListType_e} type.
 	 */
+	@Override
 	public List<RenderableObject> getRenderableObjects(final ROListType_e type) {
 		switch (type) {
 		case RO_TO_UPDATE: {
@@ -146,6 +147,7 @@ public class RenderableObjectsContainer {
 	 * @return Copy of the {@link RenderableObject} objects list of given
 	 *         {@link ROListType_e} type.
 	 */
+	@Override
 	public List<RenderableObject> popRenderableObjects(final ROListType_e type) {
 		final List<RenderableObject> listOriginal = getRenderableObjects(type);
 		final List<RenderableObject> listCopy = new ArrayList<RenderableObject>(

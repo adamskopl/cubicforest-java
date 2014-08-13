@@ -27,7 +27,7 @@ public class CollisionResolverHeroTools implements CollisionResolver {
 	}
 
 	@Override
-	public CollisionResult resolveInteracion(final TileEvent eventType,
+	public CollisionResult resolveCollision(final TileEvent eventType,
 			final Tile eventTile, final WorldObject eventObject) {
 
 		final CollisionResult collisionResult = new CollisionResult(eventTile,

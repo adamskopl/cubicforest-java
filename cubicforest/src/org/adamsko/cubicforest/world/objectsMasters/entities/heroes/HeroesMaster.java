@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -18,16 +17,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class HeroesMaster extends CollisionObjectsMaster implements
-		WorldObjectsMaster, OrderableObjectsContainer {
+		OrderableObjectsContainer {
 
-	public HeroesMaster(TilesMaster TM, RoundsMaster roundsMaster,
-			String textureName, int tileW, int tileH) {
+	public HeroesMaster(final TilesMaster TM, final RoundsMaster roundsMaster,
+			final String textureName, final int tileW, final int tileH) {
 		super("HeroesMaster", TM, WorldObjectType.OBJECT_ENTITY, textureName,
 				tileW, tileH);
 
 	}
 
-	public void handleServantTileEvent(WorldObject servant, TileEvent tileEvent) {
+	@Override
+	public void handleServantTileEvent(final WorldObject servant,
+			final TileEvent tileEvent) {
 		switch (tileEvent) {
 		case TILE_PICKED: {
 		}
@@ -42,7 +43,7 @@ public class HeroesMaster extends CollisionObjectsMaster implements
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void update(final float deltaTime) {
 		// TODO Auto-generated method stub
 	}
 
@@ -52,14 +53,14 @@ public class HeroesMaster extends CollisionObjectsMaster implements
 	}
 
 	@Override
-	public void loadMapObjects(CFMap map) throws Exception {
-		List<Vector2> coords = map
+	public void loadMapObjects(final CFMap map) throws Exception {
+		final List<Vector2> coords = map
 				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_HERO);
 
 		Hero hero;
 		int nameIndex = 0;
 		int atlasIndex = 0;
-		for (Vector2 pos : coords) {
+		for (final Vector2 pos : coords) {
 			hero = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex);
 			hero.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -5));
@@ -90,10 +91,10 @@ public class HeroesMaster extends CollisionObjectsMaster implements
 		removeWorldObjects();
 	}
 
-	public void removeHero(Hero heroToRemove) {
+	public void removeHero(final Hero heroToRemove) {
 		try {
 			removeObject(heroToRemove);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

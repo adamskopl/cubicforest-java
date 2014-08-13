@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.world;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -17,7 +16,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
  * @author adamsko
  * 
  */
-public interface WorldObjectsMaster extends RenderableObjectsMaster {
+public interface WorldObjectsMaster {
 	public void update(float deltaTime);
 
 	public List<WorldObject> getWorldObjects();

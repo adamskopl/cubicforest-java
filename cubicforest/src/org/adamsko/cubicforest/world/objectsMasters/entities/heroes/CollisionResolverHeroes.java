@@ -20,7 +20,7 @@ public class CollisionResolverHeroes implements CollisionResolver {
 	}
 
 	@Override
-	public CollisionResult resolveInteracion(TileEvent eventType,
+	public CollisionResult resolveCollision(TileEvent eventType,
 			Tile eventTile, WorldObject eventObject) {
 
 		CollisionResult collisionResult = new CollisionResult(eventTile,

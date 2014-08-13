@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
@@ -118,11 +119,17 @@ public class World {
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles
 		addWorldObjectsMaster(tilesMaster.getTilesContainer());
+		addRenderableObjectsMaster(tilesMaster.getTilesContainer());
 		addWorldObjectsMaster(terrainObjectsMaster);
+		addRenderableObjectsMaster(terrainObjectsMaster);
 		addWorldObjectsMaster(heroesMaster);
+		addRenderableObjectsMaster(heroesMaster);
 		addWorldObjectsMaster(enemiesMaster);
+		addRenderableObjectsMaster(enemiesMaster);
 		addWorldObjectsMaster(gatherCubesMaster);
+		addRenderableObjectsMaster(gatherCubesMaster);
 		addWorldObjectsMaster(heroesToolsMaster);
+		addRenderableObjectsMaster(heroesToolsMaster);
 	}
 
 	private void initRoundsMaster() {
@@ -199,7 +206,10 @@ public class World {
 
 	public void addWorldObjectsMaster(final WorldObjectsMaster newWorldMaster) {
 		worldObjectsMasters.add(newWorldMaster);
-		renderer.addROMWorld(newWorldMaster);
+	}
+
+	public void addRenderableObjectsMaster(final RenderableObjectsMaster newROM) {
+		renderer.addROMWorld(newROM);
 	}
 
 	public void update(final float deltaTime) {

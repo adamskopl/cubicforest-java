@@ -23,7 +23,7 @@ public interface CollisionResolver {
 	 *            object which is interacting with a tile (e.g. entering it)
 	 * @return
 	 */
-	CollisionResult resolveInteracion(TileEvent eventType, Tile eventTile,
+	CollisionResult resolveCollision(TileEvent eventType, Tile eventTile,
 			WorldObject eventObject);
 
 	CollisionResolverType_e getType();

@@ -23,8 +23,7 @@ import com.badlogic.gdx.math.Vector2;
  *         TODO: add tool marker master (class responsible for tool marker)
  * 
  */
-public class HeroesToolsMaster extends CollisionObjectsMaster implements
-		WorldObjectsMaster {
+public class HeroesToolsMaster extends CollisionObjectsMaster {
 
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker

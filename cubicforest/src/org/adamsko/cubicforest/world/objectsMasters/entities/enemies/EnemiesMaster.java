@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -17,7 +16,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class EnemiesMaster extends CollisionObjectsMaster implements
-		WorldObjectsMaster, OrderableObjectsContainer {
+		OrderableObjectsContainer {
 
 	public EnemiesMaster(final TilesMaster TM, final RoundsMaster roundsMaster,
 			final String textureName, final int tileW, final int tileH) {

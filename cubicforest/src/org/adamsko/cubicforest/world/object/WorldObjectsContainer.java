@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-public class WorldObjectsContainer extends RenderableObjectsContainer {
+public abstract class WorldObjectsContainer extends RenderableObjectsContainer
+		implements WorldObjectsMaster {
 
 	/**
 	 * Every container holds one type of objects.
@@ -19,6 +21,7 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 	 * 
 	 * @return
 	 */
+	@Override
 	public WorldObjectType getType() {
 		return type;
 	}
@@ -59,6 +62,7 @@ public class WorldObjectsContainer extends RenderableObjectsContainer {
 	 * 
 	 * @return {@link WorldObject} objects list.
 	 */
+	@Override
 	public List<WorldObject> getWorldObjects() {
 		return worldObjects;
 	}

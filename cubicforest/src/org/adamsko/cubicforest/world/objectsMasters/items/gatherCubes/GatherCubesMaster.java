@@ -2,7 +2,6 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -13,8 +12,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class GatherCubesMaster extends CollisionObjectsMaster implements
-		WorldObjectsMaster {
+public class GatherCubesMaster extends CollisionObjectsMaster {
 
 	private GatherCubesCounter gatherCubesCounter;
 

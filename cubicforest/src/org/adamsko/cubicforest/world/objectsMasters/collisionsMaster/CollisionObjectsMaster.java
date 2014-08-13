@@ -56,7 +56,7 @@ public abstract class CollisionObjectsMaster extends WorldObjectsContainer
 			final Tile eventTile, final WorldObject eventObject) {
 
 		final CollisionResult tileEventResult = collisionResolver
-				.resolveInteracion(eventType, eventTile, eventObject);
+				.resolveCollision(eventType, eventTile, eventObject);
 
 		return tileEventResult;
 	}

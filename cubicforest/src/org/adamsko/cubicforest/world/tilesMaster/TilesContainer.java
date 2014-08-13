@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.world.tilesMaster;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -13,8 +12,7 @@ import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class TilesContainer extends WorldObjectsContainer implements
-		WorldObjectsMaster {
+public class TilesContainer extends WorldObjectsContainer {
 
 	public TilesContainer(final String name, final TilesMaster TM) {
 		super(name, WorldObjectType.OBJECT_UNDEFINED, TM, "tiles-atlas-medium",
