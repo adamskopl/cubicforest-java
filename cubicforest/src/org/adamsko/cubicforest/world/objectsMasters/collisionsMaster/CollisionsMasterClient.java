@@ -38,7 +38,6 @@ public interface CollisionsMasterClient {
 	 * @param eventObject
 	 * @return
 	 */
-	public Boolean isTileEventValid(TileEvent evenType, Tile eventTile,
-			WorldObject eventObject);
+	public Boolean isTileEventValid(TileEvent evenType, Tile eventTile);
 
 }

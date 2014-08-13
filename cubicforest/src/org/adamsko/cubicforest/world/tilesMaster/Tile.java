@@ -2,11 +2,6 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
-import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
-import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,7 +29,7 @@ public class Tile extends WorldObject {
 	 */
 	private Boolean hasItem;
 
-	public Tile(Vector2 coords, TextureRegion tr) {
+	public Tile(final Vector2 coords, final TextureRegion tr) {
 		super(tr, 0, WorldObjectType.OBJECT_UNDEFINED);
 		this.tilesPos = coords;
 
@@ -52,12 +47,13 @@ public class Tile extends WorldObject {
 	 *            vector being checked for inclusion
 	 * @return
 	 */
-	public boolean isPosInTile(Vector2 tilePos) {
+	public boolean isPosInTile(final Vector2 tilePos) {
 
-		if (tilePos.x >= tilesPos.x && tilePos.x < tilesPos.x + 1)
+		if (tilePos.x >= tilesPos.x && tilePos.x < tilesPos.x + 1) {
 			if (tilePos.y >= tilesPos.y && tilePos.y < tilesPos.y + 1) {
 				return true;
 			}
+		}
 		return false;
 	}
 
@@ -74,9 +70,9 @@ public class Tile extends WorldObject {
 		return item;
 	}
 
-	public void insertObject(WorldObject insertObject, boolean ignoreOccupation)
-			throws Exception {
-		
+	public void insertObject(final WorldObject insertObject,
+			final boolean ignoreOccupation) throws Exception {
+
 		switch (insertObject.getType()) {
 		case OBJECT_ENTITY:
 			if (!ignoreOccupation && hasOccupant()) {
@@ -101,7 +97,6 @@ public class Tile extends WorldObject {
 		default:
 			Gdx.app.error("Tile::insertObject()", "worldType unsupported");
 			break;
-
 		}
 	}
 
@@ -113,7 +108,7 @@ public class Tile extends WorldObject {
 		if (!hasOccupant()) {
 			throw new Exception("tile not occupied");
 		}
-		WorldObject takenObject = occupant;
+		final WorldObject takenObject = occupant;
 		occupant = null;
 		hasOccupant = false;
 		return takenObject;
@@ -123,7 +118,7 @@ public class Tile extends WorldObject {
 		if (!hasItem()) {
 			throw new Exception("tile without item");
 		}
-		WorldObject takenItem = item;
+		final WorldObject takenItem = item;
 		item = null;
 		hasItem = false;
 		return takenItem;
@@ -156,6 +151,7 @@ public class Tile extends WorldObject {
 		return !hasOccupant();
 	}
 
+	@Override
 	public String toString() {
 		return getTilesPos().toString();
 	}

@@ -20,7 +20,7 @@ public interface CollisionResolver {
 	 * @param eventTile
 	 *            tile on which object from related Master should be
 	 * @param eventObject
-	 *            object which is interacting with a tile
+	 *            object which is interacting with a tile (e.g. entering it)
 	 * @return
 	 */
 	CollisionResult resolveInteracion(TileEvent eventType, Tile eventTile,

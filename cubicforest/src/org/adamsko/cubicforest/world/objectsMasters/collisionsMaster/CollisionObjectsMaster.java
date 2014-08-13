@@ -17,8 +17,7 @@ public abstract class CollisionObjectsMaster extends WorldObjectsContainer
 
 	private CollisionResolver collisionResolver;
 
-	public void setCollisionResolver(
-			final CollisionResolver collisionResolver) {
+	public void setCollisionResolver(final CollisionResolver collisionResolver) {
 		this.collisionResolver = collisionResolver;
 	}
 
@@ -31,7 +30,7 @@ public abstract class CollisionObjectsMaster extends WorldObjectsContainer
 
 	@Override
 	public Boolean isTileEventValid(final TileEvent eventType,
-			final Tile eventTile, final WorldObject eventObject) {
+			final Tile eventTile) {
 
 		WorldObjectType tileObjectType = WorldObjectType.OBJECT_UNDEFINED;
 

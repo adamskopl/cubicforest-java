@@ -164,8 +164,8 @@ public class CollisionResult {
 	}
 
 	/**
-	 * Check if removed object has an influence on tileObjectOperation or
-	 * interactingObjectOperation.
+	 * Check if removed object has an influence on tileObjectOperation,
+	 * orderObjectOperation or tileItemOperation.
 	 * 
 	 * @param object
 	 *            object just removed

@@ -33,7 +33,7 @@ public class CollisionsMaster {
 		 * Resolve effects of collision for every client.
 		 */
 		for (final CollisionsMasterClient client : clients) {
-			if (client.isTileEventValid(evenType, eventTile, eventObject)) {
+			if (client.isTileEventValid(evenType, eventTile)) {
 
 				final CollisionResult clientCollisionResult = client
 						.processTileEvent(evenType, eventTile, eventObject);
