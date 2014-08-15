@@ -6,10 +6,10 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObjectType;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Enemy extends EntityObject {
-	
-	public Enemy(TextureRegion tr, int texNum) {
-		super(tr, texNum, EntityObjectType.ENTITY_ENEMY);
-	}
 
+	public Enemy(final TextureRegion tr, final int texNum) {
+		super(tr, texNum, EntityObjectType.ENTITY_ENEMY);
+		collisionResolver = new CollisionResolverEnemies();
+	}
 
 }

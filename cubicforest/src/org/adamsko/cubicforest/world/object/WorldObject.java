@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.object;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,13 +13,15 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  * 
  */
-public class WorldObject extends RenderableObject {
+public abstract class WorldObject extends RenderableObject {
 
 	protected WorldObjectType type;
 
 	public WorldObjectType getType() {
 		return type;
 	}
+
+	protected static CollisionResolver collisionResolver;
 
 	/**
 	 * Position indicated by tiles. (0.0,0.0): uppper corner of the first tile.

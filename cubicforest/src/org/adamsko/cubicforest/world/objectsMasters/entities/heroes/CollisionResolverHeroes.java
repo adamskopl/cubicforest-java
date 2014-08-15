@@ -12,28 +12,26 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-import com.badlogic.gdx.Gdx;
-
 public class CollisionResolverHeroes implements CollisionResolver {
 
-	public CollisionResolverHeroes(HeroesMaster heroesMaster) {
+	public CollisionResolverHeroes(final HeroesMaster heroesMaster) {
 	}
 
 	@Override
-	public CollisionResult resolveCollision(TileEvent eventType,
-			Tile eventTile, WorldObject eventObject) {
+	public CollisionResult resolveCollision(final TileEvent eventType,
+			final Tile eventTile, final WorldObject eventObject) {
 
-		CollisionResult collisionResult = new CollisionResult(eventTile,
+		final CollisionResult collisionResult = new CollisionResult(eventTile,
 				eventObject);
 
 		if (!eventTileHasHero(eventTile)) {
 			return collisionResult;
 		}
-		
-		Hero tileHero = (Hero) eventTile.getOccupant();
+
+		final Hero tileHero = (Hero) eventTile.getOccupant();
 
 		if (eventObject.getType() == WorldObjectType.OBJECT_ENTITY) {
-			EntityObject eventEntity = (EntityObject) eventObject;
+			final EntityObject eventEntity = (EntityObject) eventObject;
 			switch (eventEntity.getEntityType()) {
 			case ENTITY_ENEMY:
 				resolveCollisionEnemy(collisionResult, eventType, tileHero,
@@ -51,15 +49,15 @@ public class CollisionResolverHeroes implements CollisionResolver {
 		return CollisionResolverType_e.RESOLVER_HEROES;
 	}
 
-	private boolean eventTileHasHero(Tile eventTile) {
+	private boolean eventTileHasHero(final Tile eventTile) {
 
-		WorldObject worldObjectTile = eventTile.getOccupant();
+		final WorldObject worldObjectTile = eventTile.getOccupant();
 
 		if (worldObjectTile.getType() != WorldObjectType.OBJECT_ENTITY) {
 			return false;
 		}
 
-		EntityObject entityObjectTile = (EntityObject) worldObjectTile;
+		final EntityObject entityObjectTile = (EntityObject) worldObjectTile;
 
 		if (entityObjectTile.getEntityType() != EntityObjectType.ENTITY_HERO) {
 			return false;
@@ -68,10 +66,10 @@ public class CollisionResolverHeroes implements CollisionResolver {
 		return true;
 	}
 
-	private void resolveCollisionEnemy(CollisionResult collisionResult,
-			TileEvent eventType, Hero hero, Enemy enemy) {
-		
-		if(eventType == TileEvent.OCCUPANT_ENTERS) {
+	private void resolveCollisionEnemy(final CollisionResult collisionResult,
+			final TileEvent eventType, final Hero hero, final Enemy enemy) {
+
+		if (eventType == TileEvent.OCCUPANT_ENTERS) {
 			collisionResult.remove(hero);
 			collisionResult.setGameResult(GameResult.GAME_LOST);
 		}
