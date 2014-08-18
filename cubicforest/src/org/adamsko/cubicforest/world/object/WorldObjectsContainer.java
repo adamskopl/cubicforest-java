@@ -14,7 +14,7 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 	/**
 	 * Every container holds one type of objects.
 	 */
-	private final Type type;
+	private final WorldObjectType type;
 
 	/**
 	 * Get type of WorldObject objects from this container.
@@ -22,14 +22,14 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 	 * @return
 	 */
 	@Override
-	public Type getType() {
+	public WorldObjectType getType() {
 		return type;
 	}
 
 	private final List<WorldObject> worldObjects;
 	private final TilesMaster tilesMaster;
 
-	public WorldObjectsContainer(final String name, final Type type,
+	public WorldObjectsContainer(final String name, final WorldObjectType type,
 			final TilesMaster tilesMaster, final String textureName,
 			final int tileW, final int tileH) {
 

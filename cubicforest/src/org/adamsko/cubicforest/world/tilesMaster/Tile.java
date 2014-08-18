@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.tilesMaster;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.world.object.Type;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 
 import com.badlogic.gdx.Gdx;
@@ -34,7 +34,7 @@ public class Tile extends WorldObject {
 	private Boolean hasItem;
 
 	public Tile(final Vector2 coords, final TextureRegion tr) {
-		super(tr, 0, Type.OBJECT_UNDEFINED);
+		super(tr, 0, WorldObjectType.OBJECT_UNDEFINED);
 		this.tilesPos = coords;
 
 		occupant = null;

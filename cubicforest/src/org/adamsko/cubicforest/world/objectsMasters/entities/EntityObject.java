@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.entities;
 
-import org.adamsko.cubicforest.world.object.Type;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,7 +15,7 @@ public class EntityObject extends WorldObject {
 
 	public EntityObject(final TextureRegion tr, final int texNum,
 			final EntityObjectType entityType) {
-		super(tr, texNum, Type.OBJECT_ENTITY);
+		super(tr, texNum, WorldObjectType.OBJECT_ENTITY);
 		this.entityType = entityType;
 	}
 

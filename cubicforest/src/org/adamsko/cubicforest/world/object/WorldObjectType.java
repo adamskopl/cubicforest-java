@@ -1,22 +1,8 @@
 package org.adamsko.cubicforest.world.object;
 
-/**
- * @author adamsko
- *
- */
-
 public enum WorldObjectType {
-	OBJECT_UNDEFINED,
-	/**
-	 * Heroes, enemies..
-	 */
-	OBJECT_ENTITY,
-	/**
-	 * GatherCubes...
-	 */
-	OBJECT_ITEM,
-	/**
-	 * Trees...
-	 */
-	OBJECT_TERRAIN
+	// OLD TYPES TO REMOVE (from WorldObejctType)
+	OBJECT_UNDEFINED, OBJECT_ENTITY, OBJECT_ITEM, OBJECT_TERRAIN,
+	// NEW, SPECIFIC TYPES
+	HERO, ENEMY, GATHERCUBE, TOOLTRAP, TOOLPORTAL, TREE
 }

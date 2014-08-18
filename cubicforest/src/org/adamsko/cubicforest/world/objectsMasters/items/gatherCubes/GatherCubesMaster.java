@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
-import org.adamsko.cubicforest.world.object.Type;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
@@ -18,7 +18,7 @@ public class GatherCubesMaster extends CollisionObjectsMaster {
 
 	public GatherCubesMaster(final TilesMaster TM, final String textureName,
 			final int tileW, final int tileH) {
-		super("GatherCubesMaster", TM, Type.OBJECT_ITEM, textureName, tileW,
+		super("GatherCubesMaster", TM, WorldObjectType.OBJECT_ITEM, textureName, tileW,
 				tileH);
 	}
 

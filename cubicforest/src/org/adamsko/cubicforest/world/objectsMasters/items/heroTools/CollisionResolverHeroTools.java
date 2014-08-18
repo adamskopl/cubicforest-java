@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
-import org.adamsko.cubicforest.world.object.Type;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
@@ -52,7 +52,7 @@ public class CollisionResolverHeroTools implements CollisionResolver {
 				tileTool.setState(HeroToolStates_e.STATE_READY);
 				gatherCubesMaster.counterAddValue(-tileTool.getBuildCost());
 			}
-		} else if (eventObject.getType() == Type.OBJECT_ENTITY) {
+		} else if (eventObject.getType() == WorldObjectType.OBJECT_ENTITY) {
 			tileTool.onEntityTileEvent(collisionResult,
 					(EntityObject) eventObject, eventType);
 		}

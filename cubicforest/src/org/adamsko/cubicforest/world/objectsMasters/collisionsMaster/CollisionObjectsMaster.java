@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.collisionsMaster;
 
-import org.adamsko.cubicforest.world.object.Type;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
@@ -22,7 +22,7 @@ public abstract class CollisionObjectsMaster extends WorldObjectsContainer
 	}
 
 	public CollisionObjectsMaster(final String name, final TilesMaster TM,
-			final Type type, final String textureName, final int tileW,
+			final WorldObjectType type, final String textureName, final int tileW,
 			final int tileH) {
 		super(name, type, TM, textureName, tileW, tileH);
 
@@ -32,7 +32,7 @@ public abstract class CollisionObjectsMaster extends WorldObjectsContainer
 	public Boolean isTileEventValid(final TileEvent eventType,
 			final Tile eventTile) {
 
-		Type tileObjectType = Type.OBJECT_UNDEFINED;
+		WorldObjectType tileObjectType = WorldObjectType.OBJECT_UNDEFINED;
 
 		if (eventTile.hasOccupant()) {
 			tileObjectType = eventTile.getOccupant().getType();
