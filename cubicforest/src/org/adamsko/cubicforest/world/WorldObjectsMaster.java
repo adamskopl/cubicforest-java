@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.Type;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -42,5 +43,5 @@ public interface WorldObjectsMaster {
 	/**
 	 * @return type of managed world objects
 	 */
-	WorldObjectType getType();
+	Type getType();
 }

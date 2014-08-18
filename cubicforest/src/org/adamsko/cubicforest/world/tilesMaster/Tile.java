@@ -1,7 +1,9 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
+import java.util.List;
+
+import org.adamsko.cubicforest.world.object.Type;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,6 +15,8 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  */
 public class Tile extends WorldObject {
+
+	private List<WorldObject> occupants;
 
 	private WorldObject occupant;
 	/**
@@ -30,7 +34,7 @@ public class Tile extends WorldObject {
 	private Boolean hasItem;
 
 	public Tile(final Vector2 coords, final TextureRegion tr) {
-		super(tr, 0, WorldObjectType.OBJECT_UNDEFINED);
+		super(tr, 0, Type.OBJECT_UNDEFINED);
 		this.tilesPos = coords;
 
 		occupant = null;

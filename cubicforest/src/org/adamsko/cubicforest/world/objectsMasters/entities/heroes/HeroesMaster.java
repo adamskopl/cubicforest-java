@@ -6,8 +6,8 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.Type;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
@@ -21,8 +21,7 @@ public class HeroesMaster extends CollisionObjectsMaster implements
 
 	public HeroesMaster(final TilesMaster TM, final RoundsMaster roundsMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("HeroesMaster", TM, WorldObjectType.OBJECT_ENTITY, textureName,
-				tileW, tileH);
+		super("HeroesMaster", TM, Type.OBJECT_ENTITY, textureName, tileW, tileH);
 
 	}
 

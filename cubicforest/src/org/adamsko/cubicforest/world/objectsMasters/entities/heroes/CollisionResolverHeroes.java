@@ -1,8 +1,8 @@
 package org.adamsko.cubicforest.world.objectsMasters.entities.heroes;
 
 import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.world.object.Type;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
@@ -30,7 +30,7 @@ public class CollisionResolverHeroes implements CollisionResolver {
 
 		final Hero tileHero = (Hero) eventTile.getOccupant();
 
-		if (eventObject.getType() == WorldObjectType.OBJECT_ENTITY) {
+		if (eventObject.getType() == Type.OBJECT_ENTITY) {
 			final EntityObject eventEntity = (EntityObject) eventObject;
 			switch (eventEntity.getEntityType()) {
 			case ENTITY_ENEMY:
@@ -53,7 +53,7 @@ public class CollisionResolverHeroes implements CollisionResolver {
 
 		final WorldObject worldObjectTile = eventTile.getOccupant();
 
-		if (worldObjectTile.getType() != WorldObjectType.OBJECT_ENTITY) {
+		if (worldObjectTile.getType() != Type.OBJECT_ENTITY) {
 			return false;
 		}
 

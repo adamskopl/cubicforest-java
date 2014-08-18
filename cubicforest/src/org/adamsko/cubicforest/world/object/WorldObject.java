@@ -15,9 +15,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public abstract class WorldObject extends RenderableObject {
 
-	protected WorldObjectType type;
+	private final Type type;
 
-	public WorldObjectType getType() {
+	// protected WorldObjectType type;
+
+	public Type getType() {
 		return type;
 	}
 
@@ -71,7 +73,7 @@ public abstract class WorldObject extends RenderableObject {
 	private Boolean occupiesTile;
 
 	public WorldObject(final TextureRegion tr, final int texNum,
-			final WorldObjectType worldType) {
+			final Type worldType) {
 		super(tr, texNum);
 		tilesPos = new Vector2(0.0f, 0.0f);
 		verticalPos = new Float(0.0f);

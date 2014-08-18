@@ -5,8 +5,8 @@ import java.util.List;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.Type;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 
 import com.badlogic.gdx.graphics.Color;
@@ -15,8 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 public class TilesContainer extends WorldObjectsContainer {
 
 	public TilesContainer(final String name, final TilesMaster TM) {
-		super(name, WorldObjectType.OBJECT_UNDEFINED, TM, "tiles-atlas-medium",
-				75, 45);
+		super(name, Type.OBJECT_UNDEFINED, TM, "tiles-atlas-medium", 75, 45);
 	}
 
 	public List<RenderableObject> getTiles() {
