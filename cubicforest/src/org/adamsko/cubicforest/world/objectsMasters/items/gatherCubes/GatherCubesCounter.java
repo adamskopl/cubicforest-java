@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 public class GatherCubesCounter extends GuiContainer {
 
 	private final Vector2 counter;
-	private final int startVal = 0;
+	private final int startVal = 30;
 
 	public GatherCubesCounter(final TilesMaster TM, final String textureName,
 			final int tileW, final int tileH, final int posX, final int posY) {

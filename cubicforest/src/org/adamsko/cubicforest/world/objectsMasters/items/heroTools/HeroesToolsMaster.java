@@ -33,8 +33,8 @@ public class HeroesToolsMaster extends CollisionObjectsMaster {
 			final GatherCubesMaster gatherCubesMaster,
 			final HeroesMaster heroesMaster, final String textureName,
 			final int tileW, final int tileH) {
-		super("HeroesToolsMaster", TM, WorldObjectType.OBJECT_ITEM, textureName, tileW,
-				tileH);
+		super("HeroesToolsMaster", TM, WorldObjectType.OBJECT_ITEM,
+				textureName, tileW, tileH);
 
 		// addTestObjects();
 		heroToolMarker = null;
@@ -53,9 +53,13 @@ public class HeroesToolsMaster extends CollisionObjectsMaster {
 			return;
 		}
 
-		if (heroToolTile.hasItem()) {
-			Gdx.app.error("addHeroToolMarker", "heroToolTile.hasItem()");
-			return;
+		if (Tile.occupantsRefactor) {
+
+		} else {
+			if (heroToolTile.hasItem()) {
+				Gdx.app.error("addHeroToolMarker", "heroToolTile.hasItem()");
+				return;
+			}
 		}
 
 		if (heroToolMarkerType == null) {

@@ -1,9 +1,10 @@
 package org.adamsko.cubicforest.world.tilesMaster;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,7 +17,9 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Tile extends WorldObject {
 
-	private List<WorldObject> occupants;
+	public static boolean occupantsRefactor = true;
+
+	private final List<WorldObject> occupants;
 
 	private WorldObject occupant;
 	/**
@@ -36,6 +39,8 @@ public class Tile extends WorldObject {
 	public Tile(final Vector2 coords, final TextureRegion tr) {
 		super(tr, 0, WorldObjectType.OBJECT_UNDEFINED);
 		this.tilesPos = coords;
+
+		occupants = new ArrayList<WorldObject>();
 
 		occupant = null;
 		hasOccupant = false;
@@ -62,6 +67,16 @@ public class Tile extends WorldObject {
 	}
 
 	/**
+	 * Check if tile is occupied by given object.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public boolean isOccupied(final WorldObject object) {
+		return occupants.contains(object);
+	}
+
+	/**
 	 * Get {@link WorldObject} object associated with this tile.
 	 * 
 	 * @return {@link WorldObject} object associated with this tile.
@@ -74,33 +89,53 @@ public class Tile extends WorldObject {
 		return item;
 	}
 
-	public void insertObject(final WorldObject insertObject,
+	public void addOccupant(final WorldObject insertObject,
 			final boolean ignoreOccupation) throws Exception {
 
-		switch (insertObject.getType()) {
-		case OBJECT_ENTITY:
-			if (!ignoreOccupation && hasOccupant()) {
-				throw new Exception(
-						"insertWorldObject: tile is already occupied");
-			}
-			occupant = insertObject;
-			hasOccupant = true;
+		if (Tile.occupantsRefactor) {
+			occupants.add(insertObject);
+		} else {
 
-			break;
-		case OBJECT_ITEM:
-			if (!ignoreOccupation && hasItem()) {
-				throw new Exception("insertItem: tile has already an item");
+			switch (insertObject.getType()) {
+			case OBJECT_ENTITY:
+				if (!ignoreOccupation && hasOccupant()) {
+					throw new Exception(
+							"insertWorldObject: tile is already occupied");
+				}
+				occupant = insertObject;
+				hasOccupant = true;
+
+				break;
+			case OBJECT_ITEM:
+				if (!ignoreOccupation && hasItem()) {
+					throw new Exception("insertItem: tile has already an item");
+				}
+				item = insertObject;
+				hasItem = true;
+				break;
+			case OBJECT_TERRAIN:
+				occupant = insertObject;
+				hasOccupant = true;
+				break;
+			default:
+				Gdx.app.error("Tile::insertObject()", "worldType unsupported");
+				break;
 			}
-			item = insertObject;
-			hasItem = true;
-			break;
-		case OBJECT_TERRAIN:
-			occupant = insertObject;
-			hasOccupant = true;
-			break;
-		default:
-			Gdx.app.error("Tile::insertObject()", "worldType unsupported");
-			break;
+
+		}
+	}
+
+	/**
+	 * Removes given occupant from 'occupants' collection. Removed occupant is
+	 * no longer connected with this tile.
+	 * 
+	 * @param removedOccupant
+	 */
+	public void removeOccupant(final WorldObject removedOccupant) {
+		if (!occupants.remove(removedOccupant)) {
+			// if there was no 'removedOccupant' object in a collection
+			Gdx.app.error("Tile::removeOccupant()",
+					"no 'removedOccupant' in 'occupants'");
 		}
 	}
 
@@ -138,6 +173,15 @@ public class Tile extends WorldObject {
 	}
 
 	/**
+	 * Does tile have any occupant?
+	 * 
+	 * @return
+	 */
+	public Boolean hasOccupant2() {
+		return !occupants.isEmpty();
+	}
+
+	/**
 	 * Does tile have an item?
 	 * 
 	 * @return
@@ -152,7 +196,11 @@ public class Tile extends WorldObject {
 	 * @return
 	 */
 	public Boolean isPassable() {
-		return !hasOccupant();
+		if (Tile.occupantsRefactor) {
+			return !hasOccupant2();
+		} else {
+			return !hasOccupant();
+		}
 	}
 
 	@Override

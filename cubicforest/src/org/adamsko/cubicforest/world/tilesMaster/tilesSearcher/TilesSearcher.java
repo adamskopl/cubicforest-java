@@ -14,36 +14,44 @@ public class TilesSearcher {
 	private static TilesMaster tilesMaster;
 	private static AdjacentTilesSearcher adjacentTilesSearcher;
 
-	public static void setTilesMaster(TilesMaster tilesMaster) {
+	public static void setTilesMaster(final TilesMaster tilesMaster) {
 		TilesSearcher.tilesMaster = tilesMaster;
 		adjacentTilesSearcher = new AdjacentTilesSearcher(tilesMaster);
 	}
 
-	public static List<Tile> getTilesAdjacent(Tile tile,
-			TilesContainer tilesContainer, Boolean getOccupied) {
+	public static List<Tile> getTilesAdjacent(final Tile tile,
+			final TilesContainer tilesContainer, final Boolean getOccupied) {
 
-		List<Tile> adjTiles = new ArrayList<Tile>();
-		List<Vector2> adjPositions = new ArrayList<Vector2>();
+		final List<Tile> adjTiles = new ArrayList<Tile>();
+		final List<Vector2> adjPositions = new ArrayList<Vector2>();
 		adjPositions.add(new Vector2(-1.0f, 0.0f));
 		adjPositions.add(new Vector2(0.0f, 1.0f));
 		adjPositions.add(new Vector2(1.0f, 0.0f));
 		adjPositions.add(new Vector2(0.0f, -1.0f));
-		for (Vector2 adjPos : adjPositions) {
+		for (final Vector2 adjPos : adjPositions) {
 			adjPos.add(tile.getTilesPos());
-			Tile adjTile = tilesContainer.getTileOnPos(adjPos);
+			final Tile adjTile = tilesContainer.getTileOnPos(adjPos);
 			if (adjTile == null) {
 				continue;
 			}
-			if (!getOccupied && adjTile.hasOccupant()) {
-				continue;
+
+			if (Tile.occupantsRefactor) {
+				if (!getOccupied && adjTile.hasOccupant2()) {
+					continue;
+				}
+			} else {
+				if (!getOccupied && adjTile.hasOccupant()) {
+					continue;
+				}
 			}
+
 			adjTiles.add(adjTile);
 		}
 		return adjTiles;
 	}
 
-	public static List<Tile> getTilesInRange(Tile tile, int range,
-			Boolean getOccupied) {
+	public static List<Tile> getTilesInRange(final Tile tile, final int range,
+			final Boolean getOccupied) {
 		return adjacentTilesSearcher.getTilesInRange(tile, range, getOccupied);
 	}
 }

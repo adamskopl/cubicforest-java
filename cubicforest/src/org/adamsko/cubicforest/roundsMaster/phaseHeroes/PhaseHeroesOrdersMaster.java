@@ -5,13 +5,14 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 class PhaseHeroesOrdersMaster {
 
-	private HeroesToolsMaster heroesToolsMaster;
-	private TilesMaster tilesMaster;
+	private final HeroesToolsMaster heroesToolsMaster;
+	private final TilesMaster tilesMaster;
 
 	private Tile tilePickedOrder;
 	private PhaseHeroesMode phaseHeroesMode;
@@ -20,10 +21,10 @@ class PhaseHeroesOrdersMaster {
 	 * Coordinates of the texture in image atlas of the picked {@link Tile}
 	 * object. Used to revert texture before a pick.
 	 */
-	private Vector2 tilePickedTexCooords;
+	private final Vector2 tilePickedTexCooords;
 
-	PhaseHeroesOrdersMaster(TilesMaster tilesMaster,
-			HeroesToolsMaster heroesToolsMaster) {
+	PhaseHeroesOrdersMaster(final TilesMaster tilesMaster,
+			final HeroesToolsMaster heroesToolsMaster) {
 		tilePickedOrder = null;
 		tilePickedTexCooords = new Vector2();
 		this.tilesMaster = tilesMaster;
@@ -40,8 +41,8 @@ class PhaseHeroesOrdersMaster {
 	 * @param heroToolType
 	 * @throws Exception
 	 */
-	public void changePhaseHeroesMode(PhaseHeroesMode newMode,
-			HeroToolType heroToolType) throws Exception {
+	public void changePhaseHeroesMode(final PhaseHeroesMode newMode,
+			final HeroToolType heroToolType) throws Exception {
 		heroesToolsMaster.setHeroToolMarkerType(heroToolType);
 		changePhaseHeroesMode(newMode);
 	}
@@ -50,7 +51,7 @@ class PhaseHeroesOrdersMaster {
 	 * @param newMode
 	 * @throws Exception
 	 */
-	public void changePhaseHeroesMode(PhaseHeroesMode newMode)
+	public void changePhaseHeroesMode(final PhaseHeroesMode newMode)
 			throws Exception {
 
 		switch (newMode) {
@@ -67,16 +68,16 @@ class PhaseHeroesOrdersMaster {
 		default:
 			Gdx.app.error("changePhaseHeroesMode", "unknown new mode");
 			break;
-		}		
+		}
 
 		this.phaseHeroesMode = newMode;
 	}
 
-	/////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////
 	//
 	// SHOULD BE IN A SEPERATE CLASS
 	//
-	/////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////
 	private void newModeChoiceTool() throws Exception {
 		switch (phaseHeroesMode) {
 		case MODE_CHOICE_MOVEMENT:
@@ -90,7 +91,7 @@ class PhaseHeroesOrdersMaster {
 			break;
 		}
 	}
-	
+
 	private void newModeChoiceMovement() throws Exception {
 		switch (phaseHeroesMode) {
 		case MODE_CHOICE_TOOL:
@@ -101,7 +102,7 @@ class PhaseHeroesOrdersMaster {
 			break;
 		}
 	}
-	
+
 	private void newModeOrderExecution() throws Exception {
 		switch (phaseHeroesMode) {
 		case MODE_CHOICE_MOVEMENT:
@@ -112,14 +113,16 @@ class PhaseHeroesOrdersMaster {
 			heroesToolsMaster.heroToolMarkerAccept();
 			break;
 		case MODE_ORDER_EXECUTION:
-			Gdx.app.error("newModeOrderExecution", "MODE_ORDER_EXECUTION->MODE_ORDER_EXECUTION");
+			Gdx.app.error("newModeOrderExecution",
+					"MODE_ORDER_EXECUTION->MODE_ORDER_EXECUTION");
 			break;
 		default:
-			
+
 			break;
 		}
 	}
-	/////////////////////////////////////////////////////////////
+
+	// ///////////////////////////////////////////////////////////
 
 	/**
 	 * Handle tile picked in {@link PhaseHeroes} phase.
@@ -130,7 +133,7 @@ class PhaseHeroesOrdersMaster {
 	 * @param tileOrderValid
 	 *            picked tile is valid for an order issue
 	 */
-	void tilePicked(Tile tilePickedOrder, Boolean tileOrderValid) {
+	void tilePicked(final Tile tilePickedOrder, final Boolean tileOrderValid) {
 		if (this.tilePickedOrder != null) {
 			unhighlightPickedTile(tileOrderValid);
 		}
@@ -152,10 +155,11 @@ class PhaseHeroesOrdersMaster {
 		}
 	}
 
-	private void addHeroToolMarker(Tile tilePickedOrder, Boolean tileOrderValid) {
+	private void addHeroToolMarker(final Tile tilePickedOrder,
+			final Boolean tileOrderValid) {
 		try {
 			heroesToolsMaster.heroToolMarkerRemove();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
@@ -164,26 +168,38 @@ class PhaseHeroesOrdersMaster {
 		}
 	}
 
-	private void saveTilePickedTexCoords(Boolean tileOrderValid) {
+	private void saveTilePickedTexCoords(final Boolean tileOrderValid) {
 		if (tileOrderValid) {
 			tilePickedTexCooords.set(1, 1);
 		} else {
-			if (tilePickedOrder.hasOccupant()) {
-				tilePickedTexCooords.set(0, 1);
+			if (Tile.occupantsRefactor) {
+				// ////////////////
+				if (tilePickedOrder.hasOccupant2()) {
+					tilePickedTexCooords.set(0, 1);
+				} else {
+					tilePickedTexCooords.set(0, 0);
+				}
+				// ////////////////
 			} else {
-				tilePickedTexCooords.set(0, 0);
+				// ////////////////
+				if (tilePickedOrder.hasOccupant()) {
+					tilePickedTexCooords.set(0, 1);
+				} else {
+					tilePickedTexCooords.set(0, 0);
+				}
+				// ////////////////
 			}
 		}
 	}
 
-	private void unhighlightPickedTile(Boolean tileOrderValid) {
+	private void unhighlightPickedTile(final Boolean tileOrderValid) {
 		tilesMaster.highlightTile(tilePickedOrder,
 				(int) tilePickedTexCooords.x, (int) tilePickedTexCooords.y);
 
 	}
 
-	private void highlightPickedTile(Tile tilePickedOrder,
-			Boolean tileOrderValid) {
+	private void highlightPickedTile(final Tile tilePickedOrder,
+			final Boolean tileOrderValid) {
 		if (tileOrderValid) {
 			tilesMaster.highlightTile(tilePickedOrder, 0, 2);
 		} else {

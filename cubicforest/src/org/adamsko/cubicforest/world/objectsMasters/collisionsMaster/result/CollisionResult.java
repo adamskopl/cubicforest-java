@@ -172,27 +172,39 @@ public class CollisionResult {
 	 */
 	private void resolveRemoval(final WorldObject objectRemoved) {
 
-		switch (objectRemoved.getType()) {
-		case OBJECT_ENTITY:
+		if (Tile.occupantsRefactor) {
 			if (objectRemoved == orderObject) {
 				orderObjectOperation = ObjectOperation.OBJECT_REMOVE;
 			}
-			final WorldObject occupant = eventTile.getOccupant();
-			if (occupant != null) {
-				if (objectRemoved == occupant) {
-					tileObjectOperation = ObjectOperation.OBJECT_REMOVE;
-				}
+
+			if (eventTile.isOccupied(objectRemoved)) {
+				tileObjectOperation = ObjectOperation.OBJECT_REMOVE;
 			}
-			break;
-		case OBJECT_ITEM:
-			final ItemObject item = (ItemObject) eventTile.getItem();
-			if (item != null) {
-				if (objectRemoved == item) {
-					tileItemOperation = ObjectOperation.OBJECT_REMOVE;
+
+		} else {
+			switch (objectRemoved.getType()) {
+			case OBJECT_ENTITY:
+				if (objectRemoved == orderObject) {
+					orderObjectOperation = ObjectOperation.OBJECT_REMOVE;
 				}
+				final WorldObject occupant = eventTile.getOccupant();
+				if (occupant != null) {
+					if (objectRemoved == occupant) {
+						tileObjectOperation = ObjectOperation.OBJECT_REMOVE;
+					}
+				}
+				break;
+			case OBJECT_ITEM:
+				final ItemObject item = (ItemObject) eventTile.getItem();
+				if (item != null) {
+					if (objectRemoved == item) {
+						tileItemOperation = ObjectOperation.OBJECT_REMOVE;
+					}
+				}
+				break;
+			default:
 			}
-			break;
-		default:
 		}
+
 	}
 }

@@ -67,7 +67,7 @@ public class TilesEventsMaster {
 		if (collisionResult.getOrderObjectOperation() != ObjectOperation.OBJECT_REMOVE) {
 			switch (evenType) {
 			case OCCUPANT_ENTERS: {
-				eventTile.insertObject(eventObject, true);
+				eventTile.addOccupant(eventObject, true);
 				tilesContainer.testHighlightTile(eventTile, 0, 1);
 				break;
 			}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+
 import com.badlogic.gdx.Gdx;
 
 /**
@@ -17,31 +18,34 @@ public class TilePathSearcher {
 
 	private static TilesMaster tilesMaster = null;
 	private static TilePathSearcherHelper helper;
-//
-//	public String toString() {
-//		return "TilePathSearcher";
-//	}
-	
-	public static void setTilesMaster(TilesMaster tilesMaster) {
+
+	//
+	// public String toString() {
+	// return "TilePathSearcher";
+	// }
+
+	public static void setTilesMaster(final TilesMaster tilesMaster) {
 		TilePathSearcher.tilesMaster = tilesMaster;
 		helper = new TilePathSearcherHelper(tilesMaster);
 	}
 
-	public static TilePath search(WorldObject objectOnPath, Tile destTile) {
-		Tile srcTile = tilesMaster.getTileWithObject(objectOnPath);
+	public static TilePath search(final WorldObject objectOnPath,
+			final Tile destTile) {
+		final Tile srcTile = tilesMaster.getTileWithObject(objectOnPath);
 
-		if(srcTile == null) {
+		if (srcTile == null) {
 			Gdx.app.error("search", "NULL");
 		}
-		
+
 		return search(srcTile, destTile);
 	}
 
-	public static TilePath search(WorldObject objectFrom, WorldObject objectTo) {
-		Tile srcTile = tilesMaster.getTileWithObject(objectFrom);
-		Tile destTile = tilesMaster.getTileWithObject(objectTo);
+	public static TilePath search(final WorldObject objectFrom,
+			final WorldObject objectTo) {
+		final Tile srcTile = tilesMaster.getTileWithObject(objectFrom);
+		final Tile destTile = tilesMaster.getTileWithObject(objectTo);
 
-		TilePath searchedPath = search(srcTile, destTile);
+		final TilePath searchedPath = search(srcTile, destTile);
 		return searchedPath;
 
 	}
@@ -58,18 +62,26 @@ public class TilePathSearcher {
 	 * @return
 	 */
 	public static TilePath searchShortestPathAdjacentTiles(
-			WorldObject objectFrom, WorldObject objectTo) {
+			final WorldObject objectFrom, final WorldObject objectTo) {
 
-		Tile tileTo = tilesMaster.getTileWithObject(objectTo);
-		List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo, true);
+		final Tile tileTo = tilesMaster.getTileWithObject(objectTo);
+		final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo,
+				true);
 
 		TilePath shortestPath = null;
-		for (Tile adjacentTile : adjacentTiles) {
-			if (adjacentTile.hasOccupant()) {
-				continue;
+		for (final Tile adjacentTile : adjacentTiles) {
+
+			if (Tile.occupantsRefactor) {
+				if (adjacentTile.hasOccupant2()) {
+					continue;
+				}
+			} else {
+				if (adjacentTile.hasOccupant()) {
+					continue;
+				}
 			}
 
-			TilePath adjacentTilePath = search(objectFrom, adjacentTile);
+			final TilePath adjacentTilePath = search(objectFrom, adjacentTile);
 			if (shortestPath == null) {
 				shortestPath = adjacentTilePath;
 				continue;
@@ -89,7 +101,7 @@ public class TilePathSearcher {
 	 * @return Founded {@link TilePath}, starting with {@link Tile} next to
 	 *         given 'from' {@link Tile} object
 	 */
-	public static TilePath search(Tile from, Tile to) {
+	public static TilePath search(final Tile from, final Tile to) {
 
 		if (from == to) {
 			// return path with 'from' tile
@@ -99,10 +111,10 @@ public class TilePathSearcher {
 		TilePath path = null;
 
 		helper.searchCostTiles(from, to);
-		
+
 		try {
 			path = helper.costTilesToPath();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Gdx.app.error("TilePath::search()", e.toString());
 		}
 

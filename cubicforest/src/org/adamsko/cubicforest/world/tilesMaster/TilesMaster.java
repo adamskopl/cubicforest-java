@@ -165,7 +165,7 @@ public class TilesMaster implements PickMasterClient {
 				.getTilesPos());
 		if (parentTile != null) {
 			try {
-				parentTile.insertObject(addObject, false);
+				parentTile.addOccupant(addObject, false);
 				switch (addObject.getType()) {
 				case OBJECT_ENTITY:
 					tilesContainer.testHighlightTile(parentTile, 0, 1);
@@ -194,33 +194,40 @@ public class TilesMaster implements PickMasterClient {
 			throws Exception {
 		final Tile parentTile = tilesContainer.getTileOnPos(removeObject
 				.getTilesPos());
-		if (parentTile != null) {
-			switch (removeObject.getType()) {
-			case OBJECT_ENTITY:
-				final WorldObject removedOccupant = parentTile.occupantLeaves();
-				if (removeObject != removedOccupant) {
-					throw new Exception(
-							"removeWorldObject removeObject != removedOccupant");
+
+		if (Tile.occupantsRefactor) {
+			parentTile.removeOccupant(removeObject);
+		} else {
+			if (parentTile != null) {
+				switch (removeObject.getType()) {
+				case OBJECT_ENTITY:
+					final WorldObject removedOccupant = parentTile
+							.occupantLeaves();
+					if (removeObject != removedOccupant) {
+						throw new Exception(
+								"removeWorldObject removeObject != removedOccupant");
+					}
+					tilesContainer.testHighlightTile(parentTile, 0, 0);
+					break;
+				case OBJECT_ITEM:
+					final WorldObject removedItem = parentTile.itemLeaves();
+					if (removeObject != removedItem) {
+						throw new Exception(
+								"removeWorldObject removeObject != removedOccupant");
+					}
+					break;
+				case OBJECT_TERRAIN:
+					final WorldObject removedTerrain = parentTile
+							.occupantLeaves();
+					if (removeObject != removedTerrain) {
+						throw new Exception(
+								"removeWorldObject removeObject != removedOccupant");
+					}
+					tilesContainer.testHighlightTile(parentTile, 0, 0);
+					break;
+				default:
+					throw new Exception("removeWorldObject unsupported type");
 				}
-				tilesContainer.testHighlightTile(parentTile, 0, 0);
-				break;
-			case OBJECT_ITEM:
-				final WorldObject removedItem = parentTile.itemLeaves();
-				if (removeObject != removedItem) {
-					throw new Exception(
-							"removeWorldObject removeObject != removedOccupant");
-				}
-				break;
-			case OBJECT_TERRAIN:
-				final WorldObject removedTerrain = parentTile.occupantLeaves();
-				if (removeObject != removedTerrain) {
-					throw new Exception(
-							"removeWorldObject removeObject != removedOccupant");
-				}
-				tilesContainer.testHighlightTile(parentTile, 0, 0);
-				break;
-			default:
-				throw new Exception("removeWorldObject unsupported type");
 			}
 		}
 	}
@@ -256,9 +263,17 @@ public class TilesMaster implements PickMasterClient {
 		int occupiedTiles = 0;
 		for (final RenderableObject ro : tilesContainer.getTiles()) {
 			final Tile t = (Tile) ro;
-			if (t.hasOccupant()) {
-				occupiedTiles++;
+
+			if (Tile.occupantsRefactor) {
+				if (t.hasOccupant2()) {
+					occupiedTiles++;
+				}
+			} else {
+				if (t.hasOccupant()) {
+					occupiedTiles++;
+				}
 			}
+
 		}
 		return occupiedTiles;
 	}
