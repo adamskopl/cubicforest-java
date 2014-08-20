@@ -72,7 +72,12 @@ public class TilesEventsMaster {
 				break;
 			}
 			case OCCUPANT_LEAVES: {
-				eventTile.occupantLeaves();
+				if (Tile.occupantsRefactor) {
+					eventTile.removeOccupant(eventObject);
+				} else {
+					eventTile.occupantLeaves();
+				}
+
 				tilesContainer.testHighlightTile(eventTile, 0, 0);
 				break;
 			}
