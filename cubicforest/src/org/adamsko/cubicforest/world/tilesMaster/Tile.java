@@ -37,7 +37,8 @@ public class Tile extends WorldObject {
 	private Boolean hasItem;
 
 	public Tile(final Vector2 coords, final TextureRegion tr) {
-		super(tr, 0, WorldObjectType.OBJECT_UNDEFINED);
+		super(tr, 0, WorldObjectType.OBJECT_UNDEFINED,
+				WorldObjectType.OBJECT_UNDEFINED);
 		this.tilesPos = coords;
 
 		occupants = new ArrayList<WorldObject>();
@@ -83,6 +84,10 @@ public class Tile extends WorldObject {
 	 */
 	public WorldObject getOccupant() {
 		return occupant;
+	}
+
+	public List<WorldObject> getOccupants() {
+		return occupants;
 	}
 
 	public WorldObject getItem() {

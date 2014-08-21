@@ -3,6 +3,8 @@ package org.adamsko.cubicforest.world.object;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
+import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
 
 import com.badlogic.gdx.Gdx;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class WorldObject extends RenderableObject {
 
 	private final WorldObjectType type;
+	private final WorldObjectType refactorType;
 
 	// protected WorldObjectType type;
 
@@ -23,6 +26,9 @@ public abstract class WorldObject extends RenderableObject {
 		return type;
 	}
 
+	private final CollisionVisitorsManager collisionVisitorsManager;
+
+	// TO DELETE (refactor)
 	protected static CollisionResolver collisionResolver;
 
 	/**
@@ -52,6 +58,33 @@ public abstract class WorldObject extends RenderableObject {
 	 */
 	private int movePointsLeft;
 
+	public WorldObject(final TextureRegion tr, final int texNum,
+			final WorldObjectType type, final WorldObjectType refactorType) {
+		super(tr, texNum);
+		// initCollisionVisitorsManager();
+
+		collisionVisitorsManager = CollisionVisitorsManagerFactory
+				.instance().create(refactorType);
+
+		// initCollisionVisitorsManager();
+		tilesPos = new Vector2(0.0f, 0.0f);
+		verticalPos = new Float(0.0f);
+		name = new String("WorldObject");
+		speed = 0;
+		occupiesTile = true;
+		this.type = type;
+		this.refactorType = type;
+		this.renderType = RenderableObjectType.TYPE_WORLD;
+	}
+
+	public void accept(final WorldObjectVisitor visitor) {
+		visitor.visitWorldObject(this);
+	}
+
+	public CollisionVisitorsManager collision() {
+		return collisionVisitorsManager;
+	}
+
 	public int getMovePointsLeft() {
 		return movePointsLeft;
 	}
@@ -71,18 +104,6 @@ public abstract class WorldObject extends RenderableObject {
 	 * Is this object occupying tile or leaving it free?
 	 */
 	private Boolean occupiesTile;
-
-	public WorldObject(final TextureRegion tr, final int texNum,
-			final WorldObjectType worldType) {
-		super(tr, texNum);
-		tilesPos = new Vector2(0.0f, 0.0f);
-		verticalPos = new Float(0.0f);
-		name = new String("WorldObject");
-		speed = 0;
-		occupiesTile = true;
-		this.type = worldType;
-		this.renderType = RenderableObjectType.TYPE_WORLD;
-	}
 
 	public void setTilesPos(final Vector2 pos) {
 		this.tilesPos.set(pos);

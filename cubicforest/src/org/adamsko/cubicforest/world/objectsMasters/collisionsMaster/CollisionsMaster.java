@@ -29,26 +29,44 @@ public class CollisionsMaster {
 		Boolean orderChanged = false;
 		CollisionResult collisionResult = new CollisionResult(null, null);
 
-		/**
-		 * Resolve effects of collision for every client.
-		 */
-		for (final CollisionsMasterClient client : clients) {
-			if (client.isTileEventValid(evenType, eventTile)) {
+		if (Tile.occupantsRefactor) {
+			for (final WorldObject o : eventTile.getOccupants()) {
+				switch (evenType) {
+				case OCCUPANT_ENTERS:
+					o.accept(eventObject.collision().visitEnter());
+					break;
 
-				final CollisionResult clientCollisionResult = client
-						.processTileEvent(evenType, eventTile, eventObject);
+				case OCCUPANT_STOPS:
+					o.accept(eventObject.collision().visitStop());
+				default:
+					break;
+				}
 
-				/**
-				 * Design flaw assumption: only one client is changing
-				 * 'collisionResult' value
-				 */
-				if (!clientCollisionResult.defaultValues()) {
-					if (orderChanged) {
-						Gdx.app.error("CollisionMaster",
-								"order is changed more than one time");
+			}
+
+		} else {
+
+			/**
+			 * Resolve effects of collision for every client.
+			 */
+			for (final CollisionsMasterClient client : clients) {
+				if (client.isTileEventValid(evenType, eventTile)) {
+
+					final CollisionResult clientCollisionResult = client
+							.processTileEvent(evenType, eventTile, eventObject);
+
+					/**
+					 * Design flaw assumption: only one client is changing
+					 * 'collisionResult' value
+					 */
+					if (!clientCollisionResult.defaultValues()) {
+						if (orderChanged) {
+							Gdx.app.error("CollisionMaster",
+									"order is changed more than one time");
+						}
+						collisionResult = clientCollisionResult;
+						orderChanged = true;
 					}
-					collisionResult = clientCollisionResult;
-					orderChanged = true;
 				}
 			}
 		}
