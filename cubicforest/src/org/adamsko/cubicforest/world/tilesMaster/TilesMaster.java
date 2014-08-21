@@ -8,7 +8,6 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
@@ -81,10 +80,6 @@ public class TilesMaster implements PickMasterClient {
 
 	public void addClient(final TilesMasterClient client) {
 		clients.add(client);
-	}
-
-	public void setCollisionMaster(final CollisionsMaster collisionMaster) {
-		tilesEventsMaster.setCollisionMaster(collisionMaster);
 	}
 
 	public void initTiles() {

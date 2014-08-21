@@ -42,7 +42,6 @@ public class World {
 	private final TilesMaster tilesMaster;
 	private final OrdersMaster ordersMaster;
 	private final RoundsMaster roundsMaster;
-	private final CollisionsMaster collisionMaster;
 
 	TerrainMaster terrainObjectsMaster;
 	HeroesMaster heroesMaster;
@@ -84,13 +83,10 @@ public class World {
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster,
 				enemiesMaster, heroesToolsMaster, gatherCubesMaster);
 
-		collisionMaster = new CollisionsMaster();
-		collisionMaster.addClient(gatherCubesMaster);
-		collisionMaster.addClient(heroesToolsMaster);
-		collisionMaster.addClient(heroesMaster);
-		collisionMaster.addClient(enemiesMaster);
-
-		tilesMaster.setCollisionMaster(collisionMaster);
+		CollisionsMaster.instance().addClient(gatherCubesMaster);
+		CollisionsMaster.instance().addClient(heroesToolsMaster);
+		CollisionsMaster.instance().addClient(heroesMaster);
+		CollisionsMaster.instance().addClient(enemiesMaster);
 
 		initCollisionResolvers();
 

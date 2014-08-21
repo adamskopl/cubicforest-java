@@ -19,15 +19,10 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 public class TilesEventsMaster {
 
 	private final TilesContainer tilesContainer;
-	private CollisionsMaster collisionMaster;
 	private CollisionResultProcessor collisionResultProcessor;
 
 	public TilesEventsMaster(final TilesContainer tilesContainer) {
 		this.tilesContainer = tilesContainer;
-	}
-
-	public void setCollisionMaster(final CollisionsMaster collisionMaster) {
-		this.collisionMaster = collisionMaster;
 	}
 
 	public void initCollisionResultProcessor(final HeroesMaster heroesMaster,
@@ -56,8 +51,8 @@ public class TilesEventsMaster {
 			final Tile eventTile, final WorldObject eventObject)
 			throws Exception {
 
-		final CollisionResult collisionResult = collisionMaster.tileEvent(
-				evenType, eventTile, eventObject);
+		final CollisionResult collisionResult = CollisionsMaster.instance()
+				.tileEvent(evenType, eventTile, eventObject);
 
 		// collision results should be resolved
 		collisionResultProcessor.resolve(collisionResult);

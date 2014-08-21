@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Tile extends WorldObject {
 
-	public static boolean occupantsRefactor = true;
+	public static boolean occupantsRefactor = false;
 
 	private final List<WorldObject> occupants;
 

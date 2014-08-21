@@ -12,11 +12,23 @@ import com.badlogic.gdx.Gdx;
 
 public class CollisionsMaster {
 
-	private final List<CollisionsMasterClient> clients;
+	// SINGLETON /////////////////////////////////////
+	private static CollisionsMaster instance = null;
 
-	public CollisionsMaster() {
+	public static CollisionsMaster instance() {
+		if (instance == null) {
+			instance = new CollisionsMaster();
+		}
+		return instance;
+	}
+
+	private CollisionsMaster() {
 		clients = new ArrayList<CollisionsMasterClient>();
 	}
+
+	// SINGLETON /////////////////////////////////////
+
+	private final List<CollisionsMasterClient> clients;
 
 	public void addClient(final CollisionsMasterClient client) {
 		clients.add(client);
