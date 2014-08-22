@@ -14,7 +14,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
-import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsMaster;
+import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsHandler;
 import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
 
 import com.badlogic.gdx.Gdx;
@@ -69,7 +69,7 @@ public class TilesMaster implements PickMasterClient {
 	private final List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
 
-	private TilesEventsMaster tilesEventsMaster;
+	private TilesEventsHandler tilesEventsHandler;
 
 	public TilesMaster(final int mapSize) {
 		this.mapSize = mapSize;
@@ -85,7 +85,7 @@ public class TilesMaster implements PickMasterClient {
 	public void initTiles() {
 
 		tilesContainer = new TilesContainer("tiles container", this);
-		tilesEventsMaster = new TilesEventsMaster(tilesContainer);
+		tilesEventsHandler = new TilesEventsHandler(tilesContainer);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);
@@ -102,7 +102,7 @@ public class TilesMaster implements PickMasterClient {
 			final RoundsMaster roundsMaster, final PhaseEnemies phaseEnemies,
 			final PhaseHeroes phaseHeroes) {
 
-		tilesEventsMaster.initCollisionResultProcessor(heroesMaster,
+		tilesEventsHandler.initCollisionResultProcessor(heroesMaster,
 				enemiesMaster, heroesToolsMaster, gatherCubesMaster,
 				roundsMaster, phaseEnemies, phaseHeroes);
 
@@ -273,8 +273,8 @@ public class TilesMaster implements PickMasterClient {
 		return occupiedTiles;
 	}
 
-	public TilesEventsMaster event() {
-		return tilesEventsMaster;
+	public TilesEventsHandler getTilesEventsHandler() {
+		return tilesEventsHandler;
 	}
 
 }

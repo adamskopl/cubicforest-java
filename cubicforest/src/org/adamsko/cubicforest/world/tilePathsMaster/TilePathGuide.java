@@ -294,7 +294,7 @@ public class TilePathGuide implements TweenCallback {
 	private CollisionResult processTileEvent(TileEvent tileEvent, Tile tile,
 			WorldObject wanderer) throws Exception {
 
-		CollisionResult tileEventOrderResult = tilesMaster.event().tileEvent(
+		CollisionResult tileEventOrderResult = tilesMaster.getTilesEventsHandler().tileEvent(
 				tileEvent, tile, wanderer);
 
 		return tileEventOrderResult;

@@ -19,13 +19,13 @@ import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-public class TilesEventsMaster {
+public class TilesEventsHandler {
 
 	private final TilesContainer tilesContainer;
 	private CollisionResultProcessor collisionResultProcessor;
 	private final CollisionsMaster collisionsMaster;
 
-	public TilesEventsMaster(final TilesContainer tilesContainer) {
+	public TilesEventsHandler(final TilesContainer tilesContainer) {
 		this.tilesContainer = tilesContainer;
 
 		collisionsMaster = new CollisionsMasterDefault();
@@ -104,27 +104,4 @@ public class TilesEventsMaster {
 		return collisionResult;
 	}
 
-	/**
-	 * @param evenType
-	 * @param eventTile
-	 * @throws Exception
-	 */
-	public void tileEvent(final TileEvent evenType, final Tile eventTile)
-			throws Exception {
-
-		switch (evenType) {
-		case OCCUPANT_ENTERS: {
-
-			break;
-		}
-		case OCCUPANT_LEAVES: {
-
-			break;
-		}
-		default: {
-			throw new Exception("tileEvent: unsupported event type");
-		}
-		}
-
-	}
 }
