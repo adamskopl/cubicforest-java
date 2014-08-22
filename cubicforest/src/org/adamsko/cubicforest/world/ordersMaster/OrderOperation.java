@@ -5,11 +5,8 @@ public enum OrderOperation {
 	 * Don't change the order.
 	 */
 	ORDER_CONTINUE,
-	ORDER_START,
 	/**
-	 * Pause the order.
+	 * Finis the order.
 	 */
-	ORDER_PAUSE,
-	ORDER_RESUME,	
 	ORDER_FINISH
 }

@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
 import java.util.List;
+
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
@@ -25,8 +26,8 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
  */
 public class OrdersMaster {
 
-	private TilePathsMaster tilePathsMaster;
-	private TilesMaster tilesMaster;
+	private final TilePathsMaster tilePathsMaster;
+	private final TilesMaster tilesMaster;
 
 	/**
 	 * Client which will be informed about the result of the order. Don't know
@@ -35,9 +36,10 @@ public class OrdersMaster {
 	 */
 	private OrdersMasterClient client = null;
 
-	public OrdersMaster(TilesMaster tilesMaster, HeroesMaster heroesMaster,
-			EnemiesMaster enemiesMaster, HeroesToolsMaster heroesToolsMaster,
-			GatherCubesMaster gatherCubesMaster) {
+	public OrdersMaster(final TilesMaster tilesMaster,
+			final HeroesMaster heroesMaster, final EnemiesMaster enemiesMaster,
+			final HeroesToolsMaster heroesToolsMaster,
+			final GatherCubesMaster gatherCubesMaster) {
 
 		tilePathsMaster = new TilePathsMaster(this, tilesMaster);
 
@@ -51,8 +53,8 @@ public class OrdersMaster {
 	 *            {@link WorldObject} which was guided by one of the
 	 *            {@link TilePathsMaster} object {@link TilePathGuide} objects
 	 */
-	public void onPathFinished(OrdersMasterResult result, WorldObject wanderer) {
-		client.onOrderFinished(result, wanderer);
+	public void onPathFinished() {
+		client.onOrderFinished();
 	}
 
 	/**
@@ -61,14 +63,8 @@ public class OrdersMaster {
 	 * @param client
 	 *            client to be informed about the order's result
 	 */
-	public void startOrder(WorldObject wanderer, Tile destinationTile,
-			OrdersMasterClient client) {
-		this.client = client;
-		tilePathsMaster.startPath(wanderer, destinationTile);
-	}
-
-	public void startOrder(WorldObject wanderer, TilePath path,
-			OrdersMasterClient client) {
+	public void startOrder(final WorldObject wanderer, final TilePath path,
+			final OrdersMasterClient client) {
 		this.client = client;
 		tilePathsMaster.startPath(wanderer, path);
 	}
@@ -78,14 +74,14 @@ public class OrdersMaster {
 	 * 
 	 * @param object
 	 */
-	public void highlightTilesObjectRange(WorldObject object) {
-		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
+	public void highlightTilesObjectRange(final WorldObject object) {
+		final List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
 				object.getSpeed(), false);
 		tilesMaster.highlightTiles(tilesInRange, 1, 1);
 	}
 
-	public void unhighlightTilesObjectRange(WorldObject object) {
-		List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
+	public void unhighlightTilesObjectRange(final WorldObject object) {
+		final List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
 				object.getSpeed(), false);
 		tilesMaster.highlightTiles(tilesInRange, 0, 0);
 	}

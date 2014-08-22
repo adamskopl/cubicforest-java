@@ -6,8 +6,6 @@ import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderable
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterPathResult;
-import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
@@ -48,8 +46,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 		if (shortestPathTileAdjacentHero == null
 				|| shortestPathTileAdjacentHero.length() == 0) {
 
-			onOrderFinished(new OrdersMasterResult(
-					OrdersMasterPathResult.ORDER_PATH_NOTFOUND), activeEnemy);
+			onOrderFinished();
 
 		} else {
 			// shorten path to enemy's speed
@@ -61,8 +58,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onOrderFinished(final OrdersMasterResult result,
-			final WorldObject objectWithOrder) {
+	public void onOrderFinished() {
 
 		if (roundsMaster.getGameResult() == GameResult.GAME_LOST) {
 			roundsMaster.reload();

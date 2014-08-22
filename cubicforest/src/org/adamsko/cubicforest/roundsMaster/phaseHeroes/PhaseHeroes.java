@@ -17,7 +17,6 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterResult;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -148,8 +147,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onOrderFinished(final OrdersMasterResult result,
-			final WorldObject objectWithOrder) {
+	public void onOrderFinished() {
 
 		orderInProgress = false;
 

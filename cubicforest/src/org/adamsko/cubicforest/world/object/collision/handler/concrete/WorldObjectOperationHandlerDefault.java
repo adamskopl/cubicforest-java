@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.object.collision.master.concrete;
+package org.adamsko.cubicforest.world.object.collision.handler.concrete;
 
 import org.adamsko.cubicforest.world.object.collision.handler.WorldObjectOperationHandler;
 

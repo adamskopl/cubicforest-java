@@ -5,7 +5,8 @@ import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
-import org.adamsko.cubicforest.world.object.collision.master.concrete.CollisionsHandlerDefault;
+import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
+import org.adamsko.cubicforest.world.object.collision.handler.concrete.CollisionsHandlerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
@@ -55,7 +56,7 @@ public class TilesEventsHandler {
 	 * @param eventObject
 	 * @throws Exception
 	 */
-	public CollisionResult tileEvent(final TileEvent evenType,
+	public OrderOperationHandler tileEvent(final TileEvent evenType,
 			final Tile eventTile, final WorldObject eventObject)
 			throws Exception {
 
@@ -101,7 +102,7 @@ public class TilesEventsHandler {
 			}
 		}
 
-		return collisionResult;
+		return collisionsHandler.orderOperation();
 	}
 
 }

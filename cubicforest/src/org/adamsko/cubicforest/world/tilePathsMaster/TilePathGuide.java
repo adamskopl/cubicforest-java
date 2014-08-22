@@ -2,18 +2,18 @@ package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import org.adamsko.cubicforest.screens.GameScreen;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
+import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-import com.badlogic.gdx.Gdx;
-
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
+
+import com.badlogic.gdx.Gdx;
 
 /**
  * Guides {@link WorldObject} through {@link TilePath} with tweeners.
@@ -42,7 +42,7 @@ public class TilePathGuide implements TweenCallback {
 		HEADING_BORDER
 	}
 
-	public static String toString(GuideStage_e stage) {
+	public static String toString(final GuideStage_e stage) {
 		switch (stage) {
 		case HEADING_BORDER:
 			return new String("HEADING_BORDER");
@@ -62,9 +62,9 @@ public class TilePathGuide implements TweenCallback {
 	 */
 	private WorldObject wanderer = null;
 	private TilePath path = null;
-	private TilePathGuideHelper helper;
-	private TilePathsMaster master;
-	private TilesMaster tilesMaster;
+	private final TilePathGuideHelper helper;
+	private final TilePathsMaster master;
+	private final TilesMaster tilesMaster;
 
 	/**
 	 * Pair of tiles: from which and to which wanderers is heading right now.
@@ -78,8 +78,8 @@ public class TilePathGuide implements TweenCallback {
 	 * @param startingTile
 	 * @param path
 	 */
-	public TilePathGuide(WorldObject wanderer, TilePath path,
-			TilePathsMaster master, TilesMaster tilesMaster) {
+	public TilePathGuide(final WorldObject wanderer, final TilePath path,
+			final TilePathsMaster master, final TilesMaster tilesMaster) {
 
 		this.wanderer = wanderer;
 		this.path = path;
@@ -105,7 +105,7 @@ public class TilePathGuide implements TweenCallback {
 		if (singleTile()) {
 			try {
 				handleSingleTile();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 			return;
@@ -113,17 +113,17 @@ public class TilePathGuide implements TweenCallback {
 
 		try {
 			nextStage();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Gdx.app.error("TilePathGuide", "nextStage()");
 			e.printStackTrace();
 		}
 	}
 
 	private void handleSingleTile() throws Exception {
-		CollisionResult tileEventResult = processTileEvent(
-				TileEvent.OCCUPANT_STAYS, helper.getTileHeadingTo(), wanderer);
+		processTileEvent(TileEvent.OCCUPANT_STAYS, helper.getTileHeadingTo(),
+				wanderer);
 
-		master.onPathEnd(this, tileEventResult);
+		master.onPathEnd(this);
 	}
 
 	/**
@@ -172,28 +172,28 @@ public class TilePathGuide implements TweenCallback {
 				// path composed from a single tile
 
 				// path is empty: occupant has reached its goal
-				CollisionResult tileEventResult = processTileEvent(
+				final OrderOperationHandler orderOperationHandler = processTileEvent(
 						TileEvent.OCCUPANT_STOPS, helper.getTileHeadingTo(),
 						wanderer);
 
-				master.onPathEnd(this, tileEventResult);
+				master.onPathEnd(this);
 				return;
 			}
-			CollisionResult stageResult = stageBorder();
+			final OrderOperationHandler orderOperationHandler = stageBorder();
 
 			/* CODE DUPLICATION IN HEADING_CENTER */
-			if (stageResult.getOrderOperation() == OrderOperation.ORDER_FINISH) {
-				master.onPathEnd(this, stageResult);
+			if (orderOperationHandler.getOrderOperation() == OrderOperation.ORDER_FINISH) {
+				master.onPathEnd(this);
 				return;
 			}
 
 			break;
 		}
 		case HEADING_CENTER: {
-			CollisionResult stageResult = stageCenter();
+			final OrderOperationHandler orderOperationHandler = stageCenter();
 			/* CODE DUPLICATION IN HEADING_BORDER */
-			if (stageResult.getOrderOperation() == OrderOperation.ORDER_FINISH) {
-				master.onPathEnd(this, stageResult);
+			if (orderOperationHandler.getOrderOperation() == OrderOperation.ORDER_FINISH) {
+				master.onPathEnd(this);
 				return;
 			}
 
@@ -224,9 +224,9 @@ public class TilePathGuide implements TweenCallback {
 	 * 
 	 * @throws Exception
 	 */
-	private CollisionResult stageBorder() throws Exception {
+	private OrderOperationHandler stageBorder() throws Exception {
 		// path is not empty, occupant passes tile
-		CollisionResult tileEventResult = processTileEvent(
+		final OrderOperationHandler orderOperationHandler = processTileEvent(
 				TileEvent.OCCUPANT_PASSES, helper.getTileHeadingTo(), wanderer);
 
 		wanderer.addMovePoints(-1);
@@ -237,7 +237,7 @@ public class TilePathGuide implements TweenCallback {
 		// tileHeadingTom, remove first Tile, assign it
 		helper.setTileHeadingTo(path.removeFrontTile());
 
-		return tileEventResult;
+		return orderOperationHandler;
 	}
 
 	/**
@@ -247,19 +247,15 @@ public class TilePathGuide implements TweenCallback {
 	 * 
 	 * @throws Exception
 	 */
-	private CollisionResult stageCenter() throws Exception {
+	private OrderOperationHandler stageCenter() throws Exception {
 
-		CollisionResult tileEventResult = processTileEvent(
+		final OrderOperationHandler orderOperationHandler = processTileEvent(
 				TileEvent.OCCUPANT_ENTERS, helper.getTileHeadingTo(), wanderer);
 
-		CollisionResult tileEventResult2 = processTileEvent(
-				TileEvent.OCCUPANT_LEAVES, helper.getTileHeadingFrom(),
-				wanderer);
+		processTileEvent(TileEvent.OCCUPANT_LEAVES,
+				helper.getTileHeadingFrom(), wanderer);
 
-		/*
-		 * TODO: which tileEventResult to return?
-		 */
-		return tileEventResult;
+		return orderOperationHandler;
 	}
 
 	public WorldObject getWanderer() {
@@ -273,10 +269,10 @@ public class TilePathGuide implements TweenCallback {
 	 * aurelienribon.tweenengine.BaseTween)
 	 */
 	@Override
-	public void onEvent(int type, BaseTween<?> source) {
+	public void onEvent(final int type, final BaseTween<?> source) {
 		try {
 			nextStage();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -291,12 +287,12 @@ public class TilePathGuide implements TweenCallback {
 	 * @return
 	 * @throws Exception
 	 */
-	private CollisionResult processTileEvent(TileEvent tileEvent, Tile tile,
-			WorldObject wanderer) throws Exception {
+	private OrderOperationHandler processTileEvent(final TileEvent tileEvent,
+			final Tile tile, final WorldObject wanderer) throws Exception {
 
-		CollisionResult tileEventOrderResult = tilesMaster.getTilesEventsHandler().tileEvent(
-				tileEvent, tile, wanderer);
+		final OrderOperationHandler orderOperationHandler = tilesMaster
+				.getTilesEventsHandler().tileEvent(tileEvent, tile, wanderer);
 
-		return tileEventOrderResult;
+		return orderOperationHandler;
 	}
 }
