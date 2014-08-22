@@ -4,6 +4,9 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.collision.master.CollisionsMaster;
+import org.adamsko.cubicforest.world.object.collision.master.concrete.CollisionsMasterDefault;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
@@ -20,9 +23,14 @@ public class TilesEventsMaster {
 
 	private final TilesContainer tilesContainer;
 	private CollisionResultProcessor collisionResultProcessor;
+	private final CollisionsMaster collisionsMaster;
 
 	public TilesEventsMaster(final TilesContainer tilesContainer) {
 		this.tilesContainer = tilesContainer;
+
+		collisionsMaster = new CollisionsMasterDefault();
+		CollisionVisitorsManagerFactory.instance().setCollisionsMaster(
+				collisionsMaster);
 	}
 
 	public void initCollisionResultProcessor(final HeroesMaster heroesMaster,
@@ -51,8 +59,10 @@ public class TilesEventsMaster {
 			final Tile eventTile, final WorldObject eventObject)
 			throws Exception {
 
-		final CollisionResult collisionResult = CollisionsMasterBeforeRefactor.instance()
-				.tileEvent(evenType, eventTile, eventObject);
+		final CollisionResult collisionResult = CollisionsMasterBeforeRefactor
+				.instance().tileEvent(evenType, eventTile, eventObject);
+
+		collisionsMaster.collision(evenType, eventTile, eventObject);
 
 		// collision results should be resolved
 		collisionResultProcessor.resolve(collisionResult);

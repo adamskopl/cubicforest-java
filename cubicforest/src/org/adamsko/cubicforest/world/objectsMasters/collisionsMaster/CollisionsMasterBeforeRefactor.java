@@ -42,19 +42,6 @@ public class CollisionsMasterBeforeRefactor {
 		CollisionResult collisionResult = new CollisionResult(null, null);
 
 		if (Tile.occupantsRefactor) {
-			for (final WorldObject o : eventTile.getOccupants()) {
-				switch (evenType) {
-				case OCCUPANT_ENTERS:
-					o.accept(eventObject.collision().visitEnter());
-					break;
-
-				case OCCUPANT_STOPS:
-					o.accept(eventObject.collision().visitStop());
-				default:
-					break;
-				}
-
-			}
 
 		} else {
 

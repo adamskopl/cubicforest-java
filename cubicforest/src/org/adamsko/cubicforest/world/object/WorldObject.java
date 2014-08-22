@@ -61,10 +61,9 @@ public abstract class WorldObject extends RenderableObject {
 	public WorldObject(final TextureRegion tr, final int texNum,
 			final WorldObjectType type, final WorldObjectType refactorType) {
 		super(tr, texNum);
-		// initCollisionVisitorsManager();
 
-		collisionVisitorsManager = CollisionVisitorsManagerFactory
-				.instance().create(refactorType);
+		collisionVisitorsManager = CollisionVisitorsManagerFactory.instance()
+				.create(refactorType);
 
 		// initCollisionVisitorsManager();
 		tilesPos = new Vector2(0.0f, 0.0f);
