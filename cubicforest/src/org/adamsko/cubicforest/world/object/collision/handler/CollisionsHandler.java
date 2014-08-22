@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.object.collision.master;
+package org.adamsko.cubicforest.world.object.collision.handler;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
@@ -11,7 +11,7 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
  * @author adamsko
  * 
  */
-public interface CollisionsMaster {
+public interface CollisionsHandler {
 
 	void collision(final TileEvent evenType, final Tile collidingTile,
 			final WorldObject collidingObject);

@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.object.collision.visitors;
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
-import org.adamsko.cubicforest.world.object.collision.master.CollisionsMaster;
+import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
@@ -15,10 +15,10 @@ import com.badlogic.gdx.Gdx;
 public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 		Nullable {
 
-	private final CollisionsMaster collisionsMaster;
+	private final CollisionsHandler collisionsHandler;
 
-	public CollisionVisitorDefault(final CollisionsMaster collisionsMaster) {
-		this.collisionsMaster = collisionsMaster;
+	public CollisionVisitorDefault(final CollisionsHandler collisionsHandler) {
+		this.collisionsHandler = collisionsHandler;
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 		return false;
 	}
 
-	protected CollisionsMaster collision() {
-		return collisionsMaster;
+	protected CollisionsHandler collision() {
+		return collisionsHandler;
 	}
 
 	@Override

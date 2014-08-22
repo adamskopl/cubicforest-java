@@ -4,8 +4,8 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.collision.master.CollisionsMaster;
-import org.adamsko.cubicforest.world.object.collision.master.concrete.CollisionsMasterDefault;
+import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
+import org.adamsko.cubicforest.world.object.collision.master.concrete.CollisionsHandlerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
@@ -23,14 +23,14 @@ public class TilesEventsHandler {
 
 	private final TilesContainer tilesContainer;
 	private CollisionResultProcessor collisionResultProcessor;
-	private final CollisionsMaster collisionsMaster;
+	private final CollisionsHandler collisionsHandler;
 
 	public TilesEventsHandler(final TilesContainer tilesContainer) {
 		this.tilesContainer = tilesContainer;
 
-		collisionsMaster = new CollisionsMasterDefault();
-		CollisionVisitorsManagerFactory.instance().setCollisionsMaster(
-				collisionsMaster);
+		collisionsHandler = new CollisionsHandlerDefault();
+		CollisionVisitorsManagerFactory.instance().setCollisionsHandler(
+				collisionsHandler);
 	}
 
 	public void initCollisionResultProcessor(final HeroesMaster heroesMaster,
@@ -62,7 +62,7 @@ public class TilesEventsHandler {
 		final CollisionResult collisionResult = CollisionsMasterBeforeRefactor
 				.instance().tileEvent(evenType, eventTile, eventObject);
 
-		collisionsMaster.collision(evenType, eventTile, eventObject);
+		collisionsHandler.collision(evenType, eventTile, eventObject);
 
 		// collision results should be resolved
 		collisionResultProcessor.resolve(collisionResult);

@@ -1,20 +1,20 @@
 package org.adamsko.cubicforest.world.object.collision.master.concrete;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.collision.master.CollisionsMaster;
-import org.adamsko.cubicforest.world.object.collision.master.GameResultOperationHandler;
-import org.adamsko.cubicforest.world.object.collision.master.OrderOperationHandler;
-import org.adamsko.cubicforest.world.object.collision.master.WorldObjectOperationHandler;
+import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
+import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperationHandler;
+import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
+import org.adamsko.cubicforest.world.object.collision.handler.WorldObjectOperationHandler;
 import org.adamsko.cubicforest.world.tilesMaster.Tile;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
-public class CollisionsMasterDefault implements CollisionsMaster {
+public class CollisionsHandlerDefault implements CollisionsHandler {
 
 	OrderOperationHandler orderOperationHandler = new OrderOperationHandlerDefault();
 	WorldObjectOperationHandler worldObjectOperationHandler = new WorldObjectOperationHandlerDefault();
 	GameResultOperationHandler gameResultOperationHandler = new GameResultOperationHandlerDefault();
 
-	public CollisionsMasterDefault() {
+	public CollisionsHandlerDefault() {
 	}
 
 	@Override

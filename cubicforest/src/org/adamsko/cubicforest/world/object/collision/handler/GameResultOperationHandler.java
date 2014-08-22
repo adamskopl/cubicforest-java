@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.object.collision.master;
+package org.adamsko.cubicforest.world.object.collision.handler;
 
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 
