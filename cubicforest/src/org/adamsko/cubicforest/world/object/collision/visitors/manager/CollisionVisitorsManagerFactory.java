@@ -6,8 +6,12 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.collision.master.CollisionsMaster;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
+import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorEnter;
+import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorStop;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroCollisionVisitorEnter;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroCollisionVisitorStop;
+
+import com.badlogic.gdx.Gdx;
 
 public class CollisionVisitorsManagerFactory {
 
@@ -41,6 +45,13 @@ public class CollisionVisitorsManagerFactory {
 				missingManager.setVisitorEnter(new HeroCollisionVisitorEnter(
 						collisionsMaster));
 				missingManager.setVisitorStop(new HeroCollisionVisitorStop(
+						collisionsMaster));
+				break;
+
+			case ENEMY:
+				missingManager.setVisitorEnter(new EnemyCollisionVisitorEnter(
+						collisionsMaster));
+				missingManager.setVisitorStop(new EnemyCollisionVisitorStop(
 						collisionsMaster));
 				break;
 			default:

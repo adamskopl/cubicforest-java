@@ -15,7 +15,7 @@ import com.badlogic.gdx.Gdx;
 public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 		Nullable {
 
-	CollisionsMaster collisionsMaster;
+	private final CollisionsMaster collisionsMaster;
 
 	public CollisionVisitorDefault(final CollisionsMaster collisionsMaster) {
 		this.collisionsMaster = collisionsMaster;
@@ -24,6 +24,10 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 	@Override
 	public boolean isNull() {
 		return false;
+	}
+
+	protected CollisionsMaster collision() {
+		return collisionsMaster;
 	}
 
 	@Override

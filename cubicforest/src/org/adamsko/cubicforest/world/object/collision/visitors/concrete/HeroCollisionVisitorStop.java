@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	public HeroCollisionVisitorStop(final CollisionsMaster collisionsMaster) {
 		super(collisionsMaster);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
