@@ -26,10 +26,12 @@ public class TilesEventsHandler {
 	private CollisionResultProcessor collisionResultProcessor;
 	private final CollisionsHandler collisionsHandler;
 
-	public TilesEventsHandler(final TilesContainer tilesContainer) {
+	public TilesEventsHandler(final TilesContainer tilesContainer,
+			final RoundsMaster roundsMaster) {
 		this.tilesContainer = tilesContainer;
 
-		collisionsHandler = new CollisionsHandlerDefault();
+		collisionsHandler = new CollisionsHandlerDefault(roundsMaster);
+
 		CollisionVisitorsManagerFactory.instance().setCollisionsHandler(
 				collisionsHandler);
 	}

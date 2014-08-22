@@ -6,6 +6,4 @@ public interface GameResultOperationHandler {
 
 	void setGameResult(final GameResult gameResult);
 
-	GameResult getGameResult();
-
 }

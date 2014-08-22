@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.object.collision.handler.concrete;
 
 import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperationHandler;
 
 public class GameResultOperationHandlerDefault implements
@@ -9,16 +10,15 @@ public class GameResultOperationHandlerDefault implements
 	/**
 	 * Modified if game is lost or won.
 	 */
-	private GameResult gameResult;
+	private final RoundsMaster roundsMaster;
 
-	@Override
-	public void setGameResult(final GameResult gameResult) {
-		this.gameResult = gameResult;
+	public GameResultOperationHandlerDefault(final RoundsMaster roundsMaster) {
+		this.roundsMaster = roundsMaster;
 	}
 
 	@Override
-	public GameResult getGameResult() {
-		return gameResult;
+	public void setGameResult(final GameResult gameResult) {
+		roundsMaster.setGameResultSingle(gameResult);
 	}
 
 }

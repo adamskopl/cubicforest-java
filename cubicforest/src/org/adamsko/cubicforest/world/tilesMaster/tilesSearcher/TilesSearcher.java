@@ -11,11 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TilesSearcher {
 
-	private static TilesMaster tilesMaster;
 	private static AdjacentTilesSearcher adjacentTilesSearcher;
 
 	public static void setTilesMaster(final TilesMaster tilesMaster) {
-		TilesSearcher.tilesMaster = tilesMaster;
 		adjacentTilesSearcher = new AdjacentTilesSearcher(tilesMaster);
 	}
 

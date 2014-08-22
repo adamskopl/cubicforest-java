@@ -62,10 +62,10 @@ public class World {
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
 
-		tilesMaster = new TilesMaster(100);
-		TilesSearcher.setTilesMaster(tilesMaster);
-
 		roundsMaster = new RoundsMaster(this);
+
+		tilesMaster = new TilesMaster(100, roundsMaster);
+		TilesSearcher.setTilesMaster(tilesMaster);
 
 		terrainObjectsMaster = new TerrainMaster(tilesMaster,
 				"terrain-atlas-medium", 42, 50);

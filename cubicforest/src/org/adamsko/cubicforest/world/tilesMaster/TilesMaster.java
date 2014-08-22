@@ -71,21 +71,22 @@ public class TilesMaster implements PickMasterClient {
 
 	private TilesEventsHandler tilesEventsHandler;
 
-	public TilesMaster(final int mapSize) {
+	public TilesMaster(final int mapSize, final RoundsMaster roundsMaster) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
 		TilesHelper.setMapSize(mapSize);
-		initTiles();
+		initTiles(roundsMaster);
 	}
 
 	public void addClient(final TilesMasterClient client) {
 		clients.add(client);
 	}
 
-	public void initTiles() {
+	public void initTiles(final RoundsMaster roundsMaster) {
 
 		tilesContainer = new TilesContainer("tiles container", this);
-		tilesEventsHandler = new TilesEventsHandler(tilesContainer);
+		tilesEventsHandler = new TilesEventsHandler(tilesContainer,
+				roundsMaster);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);

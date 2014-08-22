@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object.collision.handler.concrete;
 
+import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperationHandler;
@@ -10,11 +11,15 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 public class CollisionsHandlerDefault implements CollisionsHandler {
 
-	OrderOperationHandler orderOperationHandler = new OrderOperationHandlerDefault();
-	WorldObjectOperationHandler worldObjectOperationHandler = new WorldObjectOperationHandlerDefault();
-	GameResultOperationHandler gameResultOperationHandler = new GameResultOperationHandlerDefault();
+	OrderOperationHandler orderOperationHandler;
+	WorldObjectOperationHandler worldObjectOperationHandler;
+	GameResultOperationHandler gameResultOperationHandler;
 
-	public CollisionsHandlerDefault() {
+	public CollisionsHandlerDefault(final RoundsMaster roundsMaster) {
+		orderOperationHandler = new OrderOperationHandlerDefault();
+		worldObjectOperationHandler = new WorldObjectOperationHandlerDefault();
+		gameResultOperationHandler = new GameResultOperationHandlerDefault(
+				roundsMaster);
 	}
 
 	@Override
