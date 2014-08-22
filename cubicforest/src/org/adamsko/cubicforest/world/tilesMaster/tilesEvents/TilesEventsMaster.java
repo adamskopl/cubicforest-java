@@ -5,7 +5,7 @@ import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResultProcessor;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
@@ -51,7 +51,7 @@ public class TilesEventsMaster {
 			final Tile eventTile, final WorldObject eventObject)
 			throws Exception {
 
-		final CollisionResult collisionResult = CollisionsMaster.instance()
+		final CollisionResult collisionResult = CollisionsMasterBeforeRefactor.instance()
 				.tileEvent(evenType, eventTile, eventObject);
 
 		// collision results should be resolved

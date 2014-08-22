@@ -10,19 +10,19 @@ import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.Gdx;
 
-public class CollisionsMaster {
+public class CollisionsMasterBeforeRefactor {
 
 	// SINGLETON /////////////////////////////////////
-	private static CollisionsMaster instance = null;
+	private static CollisionsMasterBeforeRefactor instance = null;
 
-	public static CollisionsMaster instance() {
+	public static CollisionsMasterBeforeRefactor instance() {
 		if (instance == null) {
-			instance = new CollisionsMaster();
+			instance = new CollisionsMasterBeforeRefactor();
 		}
 		return instance;
 	}
 
-	private CollisionsMaster() {
+	private CollisionsMasterBeforeRefactor() {
 		clients = new ArrayList<CollisionsMasterClient>();
 	}
 

@@ -14,7 +14,7 @@ import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverFactory;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
@@ -83,10 +83,10 @@ public class World {
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster,
 				enemiesMaster, heroesToolsMaster, gatherCubesMaster);
 
-		CollisionsMaster.instance().addClient(gatherCubesMaster);
-		CollisionsMaster.instance().addClient(heroesToolsMaster);
-		CollisionsMaster.instance().addClient(heroesMaster);
-		CollisionsMaster.instance().addClient(enemiesMaster);
+		CollisionsMasterBeforeRefactor.instance().addClient(gatherCubesMaster);
+		CollisionsMasterBeforeRefactor.instance().addClient(heroesToolsMaster);
+		CollisionsMasterBeforeRefactor.instance().addClient(heroesMaster);
+		CollisionsMasterBeforeRefactor.instance().addClient(enemiesMaster);
 
 		initCollisionResolvers();
 
