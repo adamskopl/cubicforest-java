@@ -151,6 +151,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		orderInProgress = false;
 
+		removeDeadObjects();
+
 		if (roundsMaster.getGameResult() == GameResult.GAME_WON) {
 			roundsMaster.reload();
 			roundsMaster.resetGameResult();

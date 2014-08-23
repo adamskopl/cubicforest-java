@@ -60,6 +60,8 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	@Override
 	public void onOrderFinished() {
 
+		removeDeadObjects();
+
 		if (roundsMaster.getGameResult() == GameResult.GAME_LOST) {
 			roundsMaster.reload();
 			roundsMaster.resetGameResult();

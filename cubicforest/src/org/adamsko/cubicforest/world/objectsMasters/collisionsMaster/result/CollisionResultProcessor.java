@@ -57,14 +57,14 @@ public class CollisionResultProcessor {
 	private void removeHeroes(final List<Hero> toRemoveHeroes) {
 		for (final Hero hero : toRemoveHeroes) {
 			heroesMaster.removeHero(hero);
-			phaseHeroes.removeObject(hero);
+			// phaseHeroes.removeObject(hero);
 		}
 	}
 
 	private void removeEnemies(final List<Enemy> toRemoveEnemies) {
 		for (final Enemy enemy : toRemoveEnemies) {
 			enemiesMaster.removeEnemy(enemy);
-			phaseEnemies.removeObject(enemy);
+			// phaseEnemies.removeObject(enemy);
 		}
 	}
 

@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
@@ -48,9 +49,17 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	/**
 	 * 
 	 */
-	public void removeObject(final WorldObject object) {
+	private void removeObject(final WorldObject object) {
 		activeObjectPointer--;
 		phaseObjects.remove(object);
+	}
+
+	protected void removeDeadObjects() {
+		for (final WorldObject o : phaseObjects) {
+			if (o.getState() == WorldObjectState.DEAD) {
+				removeObject(o);
+			}
+		}
 	}
 
 	/**
