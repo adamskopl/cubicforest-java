@@ -5,6 +5,7 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
+import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
 
@@ -12,6 +13,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * @author adamsko
+ * 
+ */
 /**
  * @author adamsko
  * 
@@ -71,6 +76,20 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	 * variable by one. Restored before every new movement.
 	 */
 	private int movePointsLeft;
+
+	/**
+	 * Needed for NullWorldObject constructor. Otherwise
+	 * {@link CollisionVisitorsManagerDefault} is invoked recursively.
+	 */
+	WorldObject() {
+		super(null, 0);
+		this.parentContainer = null;
+		this.collisionVisitorsManager = null;
+		this.type = WorldObjectType.DEFAULT;
+		this.refactorType = type;
+		this.renderType = RenderableObjectType.TYPE_WORLD;
+		this.state = WorldObjectState.ALIVE;
+	}
 
 	public WorldObject(final TextureRegion tr, final int texNum,
 			final WorldObjectsContainer container, final WorldObjectType type,

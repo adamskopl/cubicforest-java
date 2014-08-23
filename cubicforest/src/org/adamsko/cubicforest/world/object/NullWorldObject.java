@@ -1,12 +1,11 @@
 package org.adamsko.cubicforest.world.object;
 
-
 public class NullWorldObject extends WorldObject {
 
 	private static NullWorldObject instance = null;
 
 	public NullWorldObject() {
-		super(null, 0, null, null, null);
+		super();
 	}
 
 	public static NullWorldObject instance() {
