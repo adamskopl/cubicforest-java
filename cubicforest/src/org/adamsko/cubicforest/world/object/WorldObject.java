@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
@@ -15,7 +16,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  * 
  */
-public abstract class WorldObject extends RenderableObject {
+public abstract class WorldObject extends RenderableObject implements Nullable {
 
 	private final WorldObjectType type;
 	private WorldObjectState state;
@@ -91,6 +92,11 @@ public abstract class WorldObject extends RenderableObject {
 		this.refactorType = type;
 		this.renderType = RenderableObjectType.TYPE_WORLD;
 		this.state = WorldObjectState.ALIVE;
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	public void setState(final WorldObjectState newState) {
