@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class WorldObject extends RenderableObject {
 
 	private final WorldObjectType type;
+	private WorldObjectState state;
 	private final WorldObjectType refactorType;
 
 	/**
@@ -80,6 +81,15 @@ public abstract class WorldObject extends RenderableObject {
 		this.type = type;
 		this.refactorType = type;
 		this.renderType = RenderableObjectType.TYPE_WORLD;
+		this.state = WorldObjectState.ALIVE;
+	}
+
+	public void setState(final WorldObjectState newState) {
+		this.state = newState;
+	}
+
+	public WorldObjectState getState() {
+		return state;
 	}
 
 	public void accept(final WorldObjectVisitor visitor) {

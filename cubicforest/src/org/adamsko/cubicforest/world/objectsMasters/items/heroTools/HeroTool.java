@@ -17,14 +17,14 @@ public abstract class HeroTool extends ItemObject {
 		return heroToolType;
 	}
 
-	HeroToolStates_e state;
+	HeroToolStates_e toolState;
 
 	public void setState(final HeroToolStates_e state) {
-		this.state = state;
+		this.toolState = state;
 	}
 
-	public HeroToolStates_e getState() {
-		return state;
+	public HeroToolStates_e getToolState() {
+		return toolState;
 	}
 
 	final int buildCost;
@@ -42,7 +42,7 @@ public abstract class HeroTool extends ItemObject {
 
 		this.buildCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
 
-		state = HeroToolStates_e.STATE_CONSTRUCTION;
+		toolState = HeroToolStates_e.STATE_CONSTRUCTION;
 
 	}
 
@@ -58,7 +58,7 @@ public abstract class HeroTool extends ItemObject {
 			break;
 		}
 
-		this.state = newState;
+		this.toolState = newState;
 	}
 
 	private void newStateConstruction() {
@@ -66,7 +66,7 @@ public abstract class HeroTool extends ItemObject {
 	}
 
 	private void newStateReady() {
-		switch (state) {
+		switch (toolState) {
 		case STATE_CONSTRUCTION:
 
 			break;

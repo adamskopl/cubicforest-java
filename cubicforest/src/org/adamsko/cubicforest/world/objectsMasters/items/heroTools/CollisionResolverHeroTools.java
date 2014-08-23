@@ -40,7 +40,7 @@ public class CollisionResolverHeroTools implements CollisionResolver {
 		}
 
 		final HeroTool tileTool = (HeroTool) item;
-		final HeroToolStates_e toolState = tileTool.getState();
+		final HeroToolStates_e toolState = tileTool.getToolState();
 
 		/*
 		 * Build tool or resolve collision for particular type of tool?
