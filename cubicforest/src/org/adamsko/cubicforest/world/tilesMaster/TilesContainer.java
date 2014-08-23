@@ -58,7 +58,7 @@ public class TilesContainer extends WorldObjectsContainer {
 	}
 
 	public void addTile(final Vector2 tilePos) {
-		final Tile newTile = new Tile(tilePos, atlasRows.get(0)[0]);
+		final Tile newTile = new Tile(tilePos, atlasRows.get(0)[0], this);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects

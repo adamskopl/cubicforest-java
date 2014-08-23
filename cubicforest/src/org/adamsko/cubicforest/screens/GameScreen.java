@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.screens;
 
-import org.adamsko.cubicforest.TestClass;
 import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.world.World;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -34,13 +33,6 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.setLogLevel(com.badlogic.gdx.Application.LOG_DEBUG);
-
-		final Boolean performTest = false;
-		if (performTest) {
-			@SuppressWarnings("unused")
-			final TestClass testClass = new TestClass();
-			Gdx.app.exit();
-		}
 		initTween();
 		worldRenderer = new WorldRenderer();
 		world = new World(worldRenderer);

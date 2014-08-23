@@ -89,18 +89,6 @@ public class TilesEventsHandler {
 				tilesContainer.testHighlightTile(eventTile, 0, 0);
 				break;
 			}
-			case OCCUPANT_STOPS: {
-				break;
-			}
-			case OCCUPANT_PASSES: {
-				break;
-			}
-			case OCCUPANT_STAYS: {
-				break;
-			}
-			default: {
-				throw new Exception("tileEvent: unsupported event type");
-			}
 			}
 		}
 

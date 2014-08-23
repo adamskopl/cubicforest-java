@@ -20,7 +20,10 @@ public abstract class WorldObject extends RenderableObject {
 	private final WorldObjectType type;
 	private final WorldObjectType refactorType;
 
-	// protected WorldObjectType type;
+	/**
+	 * Container holding this WorldObject.
+	 */
+	private final WorldObjectsContainer parentContainer;
 
 	public WorldObjectType getType() {
 		return type;
@@ -59,8 +62,11 @@ public abstract class WorldObject extends RenderableObject {
 	private int movePointsLeft;
 
 	public WorldObject(final TextureRegion tr, final int texNum,
-			final WorldObjectType type, final WorldObjectType refactorType) {
+			final WorldObjectsContainer container, final WorldObjectType type,
+			final WorldObjectType refactorType) {
 		super(tr, texNum);
+
+		this.parentContainer = container;
 
 		collisionVisitorsManager = CollisionVisitorsManagerFactory.instance()
 				.create(refactorType);

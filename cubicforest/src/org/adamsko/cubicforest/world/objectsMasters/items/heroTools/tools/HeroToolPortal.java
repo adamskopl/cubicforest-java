@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
 
 import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
@@ -14,22 +15,24 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class HeroToolPortal extends HeroTool {
 
-	private HeroesMaster heroesMaster;
+	private final HeroesMaster heroesMaster;
 
-	public HeroToolPortal(TextureRegion tr, int texNum,
-			HeroesMaster heroesMaster) {
-		super(tr, texNum, HeroToolType.TOOL_PORTAL);
+	public HeroToolPortal(final TextureRegion tr, final int texNum,
+			final WorldObjectsContainer container,
+			final HeroesMaster heroesMaster) {
+		super(tr, texNum, container, HeroToolType.TOOL_PORTAL);
 		this.heroesMaster = heroesMaster;
 	}
 
 	@Override
-	public void onEntityTileEvent(CollisionResult collisionResult,
-			EntityObject entityObject, TileEvent eventType) {
+	public void onEntityTileEvent(final CollisionResult collisionResult,
+			final EntityObject entityObject, final TileEvent eventType) {
 
 		switch (entityObject.getEntityType()) {
 		case ENTITY_HERO:
-			if (!validHero(eventType))
+			if (!validHero(eventType)) {
 				return;
+			}
 			collisionResult.setOrderOperation(OrderOperation.ORDER_FINISH);
 
 			// remove hero
@@ -46,8 +49,9 @@ public class HeroToolPortal extends HeroTool {
 			break;
 
 		case ENTITY_ENEMY:
-			if (!validEnemy(eventType))
+			if (!validEnemy(eventType)) {
 				return;
+			}
 			/*
 			 * The enemy is destroying the portal.
 			 */
@@ -59,7 +63,7 @@ public class HeroToolPortal extends HeroTool {
 
 	}
 
-	private Boolean validHero(TileEvent eventType) {
+	private Boolean validHero(final TileEvent eventType) {
 		if (eventType != TileEvent.OCCUPANT_STOPS
 				&& eventType != TileEvent.OCCUPANT_STAYS) {
 			return false;
@@ -67,7 +71,7 @@ public class HeroToolPortal extends HeroTool {
 		return true;
 	}
 
-	private Boolean validEnemy(TileEvent eventType) {
+	private Boolean validEnemy(final TileEvent eventType) {
 		return true;
 	}
 }

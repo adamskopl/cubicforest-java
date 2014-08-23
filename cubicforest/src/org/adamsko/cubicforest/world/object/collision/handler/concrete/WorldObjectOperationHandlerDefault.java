@@ -8,7 +8,6 @@ public class WorldObjectOperationHandlerDefault implements
 
 	@Override
 	public void remove(final WorldObject worldObject) {
-		// TODO Auto-generated method stub
 
 	}
 

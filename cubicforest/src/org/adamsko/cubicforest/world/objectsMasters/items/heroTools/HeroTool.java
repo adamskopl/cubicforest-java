@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
@@ -33,8 +34,9 @@ public abstract class HeroTool extends ItemObject {
 	}
 
 	public HeroTool(final TextureRegion tr, final int texNum,
+			final WorldObjectsContainer container,
 			final HeroToolType heroToolType) {
-		super(tr, texNum, ItemObjectType.ITEM_HERO_TOOL);
+		super(tr, texNum, container, ItemObjectType.ITEM_HERO_TOOL);
 
 		this.heroToolType = heroToolType;
 

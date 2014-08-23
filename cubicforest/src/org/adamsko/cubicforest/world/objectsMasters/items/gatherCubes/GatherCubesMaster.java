@@ -18,8 +18,8 @@ public class GatherCubesMaster extends CollisionObjectsMaster {
 
 	public GatherCubesMaster(final TilesMaster TM, final String textureName,
 			final int tileW, final int tileH) {
-		super("GatherCubesMaster", TM, WorldObjectType.OBJECT_ITEM, textureName, tileW,
-				tileH);
+		super("GatherCubesMaster", TM, WorldObjectType.OBJECT_ITEM,
+				textureName, tileW, tileH);
 	}
 
 	public GatherCubesCounter getGatherCubesCounter() {
@@ -69,7 +69,7 @@ public class GatherCubesMaster extends CollisionObjectsMaster {
 		int atlasIndex = 0;
 		for (final Vector2 pos : coords) {
 			gatherCube = new GatherCube(atlasRows.get(0)[atlasIndex],
-					atlasIndex);
+					atlasIndex, this);
 			gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -2));
 

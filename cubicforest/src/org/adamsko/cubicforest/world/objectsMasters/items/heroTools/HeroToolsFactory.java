@@ -2,12 +2,13 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -16,33 +17,35 @@ import com.badlogic.gdx.math.Vector2;
 
 public class HeroToolsFactory {
 
-	private List<TextureRegion[]> textureRegions;
-	private HeroesMaster heroesMaster;
+	private final List<TextureRegion[]> textureRegions;
+	private final HeroesMaster heroesMaster;
 
-	public HeroToolsFactory(List<TextureRegion[]> textureRegions,
-			HeroesMaster heroesMaster) {
+	public HeroToolsFactory(final List<TextureRegion[]> textureRegions,
+			final HeroesMaster heroesMaster) {
 		this.textureRegions = textureRegions;
 		this.heroesMaster = heroesMaster;
 	}
 
-	public HeroTool createHeroTool(HeroToolType heroToolType, Vector2 tilePos) {
+	public HeroTool createHeroTool(final HeroToolType heroToolType,
+			final Vector2 tilePos, final WorldObjectsContainer container) {
 		HeroTool newTool = null;
 
 		switch (heroToolType) {
 		case TOOL_ORANGE:
-			newTool = new HeroToolOrange(textureRegions.get(1)[0], 0);
+			newTool = new HeroToolOrange(textureRegions.get(1)[0], 0, container);
 			break;
 		case TOOL_RED:
-			newTool = new HeroToolRed(textureRegions.get(1)[1], 1);
+			newTool = new HeroToolRed(textureRegions.get(1)[1], 1, container);
 			break;
 		case TOOL_TURRET:
-			newTool = new HeroToolTurret(textureRegions.get(1)[2], 2);
+			newTool = new HeroToolTurret(textureRegions.get(1)[2], 2, container);
 			break;
 		case TOOL_TRAP:
-			newTool = new HeroToolTrap(textureRegions.get(1)[3], 3);
+			newTool = new HeroToolTrap(textureRegions.get(1)[3], 3, container);
 			break;
 		case TOOL_PORTAL:
-			newTool = new HeroToolPortal(textureRegions.get(1)[4], 4, heroesMaster);
+			newTool = new HeroToolPortal(textureRegions.get(1)[4], 4,
+					container, heroesMaster);
 			break;
 		default:
 			Gdx.app.error("createHeroTool", "unknown heroToolType");

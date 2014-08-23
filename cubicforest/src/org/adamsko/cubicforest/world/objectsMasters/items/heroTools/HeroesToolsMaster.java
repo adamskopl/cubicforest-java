@@ -70,7 +70,7 @@ public class HeroesToolsMaster extends CollisionObjectsMaster {
 		final Vector2 heroToolTilePos = heroToolTile.getTilesPos();
 
 		heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
-				heroToolTilePos);
+				heroToolTilePos, this);
 
 		addObject(heroToolMarker);
 	}
@@ -147,14 +147,14 @@ public class HeroesToolsMaster extends CollisionObjectsMaster {
 		HeroTool heroTool = null;
 		for (final Vector2 pos : coordsTraps) {
 			heroTool = heroToolsFactory.createHeroTool(HeroToolType.TOOL_TRAP,
-					pos);
+					pos, this);
 			heroTool.setState(HeroToolStates_e.STATE_READY);
 			setToolTexture(heroTool, 0);
 			addObject(heroTool);
 		}
 		for (final Vector2 pos : coordsPortals) {
 			heroTool = heroToolsFactory.createHeroTool(
-					HeroToolType.TOOL_PORTAL, pos);
+					HeroToolType.TOOL_PORTAL, pos, this);
 			heroTool.setState(HeroToolStates_e.STATE_READY);
 			setToolTexture(heroTool, 0);
 			addObject(heroTool);

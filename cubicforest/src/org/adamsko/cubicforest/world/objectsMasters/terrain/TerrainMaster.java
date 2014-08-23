@@ -14,8 +14,8 @@ public class TerrainMaster extends WorldObjectsContainer {
 
 	public TerrainMaster(final TilesMaster TM, final String textureName,
 			final int tileW, final int tileH) {
-		super("TerrainObjectsMaster", WorldObjectType.OBJECT_TERRAIN, TM, textureName,
-				tileW, tileH);
+		super("TerrainObjectsMaster", WorldObjectType.OBJECT_TERRAIN, TM,
+				textureName, tileW, tileH);
 
 	}
 
@@ -33,7 +33,7 @@ public class TerrainMaster extends WorldObjectsContainer {
 		Tree tree;
 		int atlasIndex = 0;
 		for (final Vector2 pos : coords) {
-			tree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex);
+			tree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex, this);
 			tree.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -5));
 			pos.add(new Vector2(0.5f, 0.5f));
