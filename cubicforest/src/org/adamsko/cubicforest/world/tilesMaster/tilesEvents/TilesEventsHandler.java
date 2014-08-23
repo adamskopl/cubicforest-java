@@ -4,13 +4,11 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.concrete.CollisionsHandlerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
-import org.adamsko.cubicforest.world.objectsMasters.ObjectOperation;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResultProcessor;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -62,17 +60,11 @@ public class TilesEventsHandler {
 			final Tile eventTile, final WorldObject eventObject)
 			throws Exception {
 
-		final CollisionResult collisionResult = CollisionsMasterBeforeRefactor
-				.instance().tileEvent(evenType, eventTile, eventObject);
-
 		collisionsHandler.collision(evenType, eventTile, eventObject);
-
-		// collision results should be resolved
-		collisionResultProcessor.resolve(collisionResult);
 
 		// if active object is not removed after tile event, perform common
 		// operations: object insert/take out
-		if (collisionResult.getOrderObjectOperation() != ObjectOperation.OBJECT_REMOVE) {
+		if (eventObject.getState() != WorldObjectState.DEAD) {
 			switch (evenType) {
 			case OCCUPANT_ENTERS: {
 				eventTile.addOccupant(eventObject, true);
@@ -89,6 +81,7 @@ public class TilesEventsHandler {
 				tilesContainer.testHighlightTile(eventTile, 0, 0);
 				break;
 			}
+			default:
 			}
 		}
 
