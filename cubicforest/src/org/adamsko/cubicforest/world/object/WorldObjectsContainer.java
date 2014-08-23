@@ -39,7 +39,7 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 		worldObjects = new ArrayList<WorldObject>();
 	}
 
-	public void removeObject(final WorldObject objectRemove) throws Exception {
+	public void removeObject(final WorldObject objectRemove) {
 		worldObjects.remove(objectRemove);
 		removeRenderableObject(objectRemove);
 		tilesMaster.removeWorldObject(objectRemove);

@@ -26,6 +26,15 @@ public abstract class WorldObject extends RenderableObject {
 	 */
 	private final WorldObjectsContainer parentContainer;
 
+	/**
+	 * Return container holding this WorldObject. <br>
+	 * FIXME: design flaw. Every class having contact with WorldObject can
+	 * remove it.
+	 */
+	public WorldObjectsContainer getParentContainer() {
+		return parentContainer;
+	}
+
 	public WorldObjectType getType() {
 		return type;
 	}

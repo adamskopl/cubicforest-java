@@ -186,45 +186,44 @@ public class TilesMaster implements PickMasterClient {
 	 * @param removeObject
 	 * @throws Exception
 	 */
-	public void removeWorldObject(final WorldObject removeObject)
-			throws Exception {
+	public void removeWorldObject(final WorldObject removeObject) {
 		final Tile parentTile = tilesContainer.getTileOnPos(removeObject
 				.getTilesPos());
 
 		if (Tile.occupantsRefactor) {
 			parentTile.removeOccupant(removeObject);
 		} else {
-			if (parentTile != null) {
-				switch (removeObject.getType()) {
-				case OBJECT_ENTITY:
-					final WorldObject removedOccupant = parentTile
-							.occupantLeaves();
-					if (removeObject != removedOccupant) {
-						throw new Exception(
-								"removeWorldObject removeObject != removedOccupant");
-					}
-					tilesContainer.testHighlightTile(parentTile, 0, 0);
-					break;
-				case OBJECT_ITEM:
-					final WorldObject removedItem = parentTile.itemLeaves();
-					if (removeObject != removedItem) {
-						throw new Exception(
-								"removeWorldObject removeObject != removedOccupant");
-					}
-					break;
-				case OBJECT_TERRAIN:
-					final WorldObject removedTerrain = parentTile
-							.occupantLeaves();
-					if (removeObject != removedTerrain) {
-						throw new Exception(
-								"removeWorldObject removeObject != removedOccupant");
-					}
-					tilesContainer.testHighlightTile(parentTile, 0, 0);
-					break;
-				default:
-					throw new Exception("removeWorldObject unsupported type");
-				}
-			}
+			// if (parentTile != null) {
+			// switch (removeObject.getType()) {
+			// case OBJECT_ENTITY:
+			// final WorldObject removedOccupant = parentTile
+			// .occupantLeaves();
+			// if (removeObject != removedOccupant) {
+			// throw new Exception(
+			// "removeWorldObject removeObject != removedOccupant");
+			// }
+			// tilesContainer.testHighlightTile(parentTile, 0, 0);
+			// break;
+			// case OBJECT_ITEM:
+			// final WorldObject removedItem = parentTile.itemLeaves();
+			// if (removeObject != removedItem) {
+			// throw new Exception(
+			// "removeWorldObject removeObject != removedOccupant");
+			// }
+			// break;
+			// case OBJECT_TERRAIN:
+			// final WorldObject removedTerrain = parentTile
+			// .occupantLeaves();
+			// if (removeObject != removedTerrain) {
+			// throw new Exception(
+			// "removeWorldObject removeObject != removedOccupant");
+			// }
+			// tilesContainer.testHighlightTile(parentTile, 0, 0);
+			// break;
+			// default:
+			// throw new Exception("removeWorldObject unsupported type");
+			// }
+			// }
 		}
 	}
 
