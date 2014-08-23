@@ -18,6 +18,12 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
  */
 public interface WorldObjectVisitor {
 
+	void setVisitingObject(WorldObject visitingObject);
+
+	WorldObject getVisitingObject();
+
+	// ///////////////////////////////////////////////////////////////////
+
 	void visitWorldObject(WorldObject worldObject);
 
 	void visitHero(Hero hero);

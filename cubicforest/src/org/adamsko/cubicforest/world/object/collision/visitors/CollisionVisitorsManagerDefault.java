@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object.collision.visitors;
 
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 
 /**
@@ -20,6 +21,14 @@ public class CollisionVisitorsManagerDefault implements
 		collisionVisitorPass = NullCollisionVisitor.instance();
 		collisionVisitorLeave = NullCollisionVisitor.instance();
 		collisionVisitorStop = NullCollisionVisitor.instance();
+	}
+
+	@Override
+	public void setVisitingObject(final WorldObject visitingObject) {
+		collisionVisitorEnter.setVisitingObject(visitingObject);
+		collisionVisitorPass.setVisitingObject(visitingObject);
+		collisionVisitorLeave.setVisitingObject(visitingObject);
+		collisionVisitorStop.setVisitingObject(visitingObject);
 	}
 
 	public void setVisitorEnter(final WorldObjectVisitor visitor) {

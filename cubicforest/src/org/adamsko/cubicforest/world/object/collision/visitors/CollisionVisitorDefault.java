@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.object.collision.visitors;
 
 import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.world.object.NullWorldObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
@@ -17,13 +18,30 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 
 	private final CollisionsHandler collisionsHandler;
 
+	/**
+	 * Object which is actually related with a specific visitor. Needed for e.g.
+	 * removing this object in its visitor's methods.
+	 */
+	private WorldObject visitingObject;
+
 	public CollisionVisitorDefault(final CollisionsHandler collisionsHandler) {
 		this.collisionsHandler = collisionsHandler;
+		this.visitingObject = NullWorldObject.instance();
 	}
 
 	@Override
 	public boolean isNull() {
 		return false;
+	}
+
+	@Override
+	public void setVisitingObject(final WorldObject visitingObject) {
+		this.visitingObject = visitingObject;
+	}
+
+	@Override
+	public WorldObject getVisitingObject() {
+		return visitingObject;
 	}
 
 	protected CollisionsHandler collision() {

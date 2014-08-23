@@ -112,6 +112,7 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	}
 
 	public CollisionVisitorsManager collision() {
+		collisionVisitorsManager.setVisitingObject(this);
 		return collisionVisitorsManager;
 	}
 

@@ -10,6 +10,9 @@ import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
  * 
  */
 public interface CollisionVisitorsManager {
+
+	void setVisitingObject(WorldObject visitingObject);
+
 	WorldObjectVisitor visitEnter();
 
 	WorldObjectVisitor visitPass();

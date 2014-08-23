@@ -12,6 +12,7 @@ public class EnemyCollisionVisitorStop extends CollisionVisitorDefault {
 
 	@Override
 	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
+		collision().wordlObjectOperation().remove(getVisitingObject());
 	}
 
 }
