@@ -2,17 +2,43 @@ package org.adamsko.cubicforest.world.object.collision.visitors.concrete;
 
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
-
-import com.badlogic.gdx.Gdx;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 
 public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
-	public HeroCollisionVisitorStop(final CollisionsHandler collisionsHandler) {
+
+	private final HeroesToolsMaster heroesToolsMaster;
+	private final GatherCubesMaster gatherCubesMaster;
+
+	public HeroCollisionVisitorStop(final CollisionsHandler collisionsHandler,
+			final GatherCubesMaster gatherCubesMaster,
+			final HeroesToolsMaster heroesToolsMaster) {
 		super(collisionsHandler);
+		this.gatherCubesMaster = gatherCubesMaster;
+		this.heroesToolsMaster = heroesToolsMaster;
+	}
+
+	@Override
+	public void visitHeroTool(final HeroTool heroTool) {
+		final HeroToolStates_e toolState = heroTool.getToolState();
+		if (toolState == HeroToolStates_e.STATE_CONSTRUCTION) {
+			heroTool.setState(HeroToolStates_e.STATE_READY);
+			heroesToolsMaster.setToolTexture(heroTool, 0);
+			gatherCubesMaster.counterAddValue(-heroTool.getBuildCost());
+		}
 	}
 
 	@Override
 	public void visitToolOrange(final HeroToolOrange heroToolOrange) {
-		Gdx.app.debug("hero STOP", "visits tool orange");
+		super.visitToolOrange(heroToolOrange);
+	}
+
+	@Override
+	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
+		super.visitToolTrap(heroToolTrap);
 	}
 }

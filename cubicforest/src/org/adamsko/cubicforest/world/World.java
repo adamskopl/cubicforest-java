@@ -12,6 +12,7 @@ import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverFactory;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
@@ -92,6 +93,8 @@ public class World {
 
 		initWorldObjectsMasters();
 
+		initCollisionVisitorsManagerFactory();
+
 		reloadWorld();
 
 		initRoundsMaster();
@@ -164,6 +167,13 @@ public class World {
 				.createFactory(CollisionResolverType_e.RESOLVER_GATHER_CUBES));
 		heroesToolsMaster.setCollisionResolver(collisionResolverFactory
 				.createFactory(CollisionResolverType_e.RESOLVER_HERO_TOOLS));
+	}
+
+	private void initCollisionVisitorsManagerFactory() {
+		CollisionVisitorsManagerFactory.instance().setGatherCubesMaster(
+				gatherCubesMaster);
+		CollisionVisitorsManagerFactory.instance().setHeroToolsMaster(
+				heroesToolsMaster);
 	}
 
 	public void setMapActive(final int activeMapIndex) {

@@ -17,10 +17,6 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  * 
  */
-/**
- * @author adamsko
- * 
- */
 public abstract class WorldObject extends RenderableObject implements Nullable {
 
 	private final WorldObjectType type;

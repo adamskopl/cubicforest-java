@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 
@@ -72,16 +73,20 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 
 	}
 
+	// HERO TOOLS
 	@Override
-	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
-		// TODO Auto-generated method stub
+	public void visitHeroTool(final HeroTool heroTool) {
 
 	}
 
 	@Override
-	public void visitToolOrange(final HeroToolOrange heroToolOrange) {
-		// TODO Auto-generated method stub
+	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
+		visitHeroTool(heroToolTrap);
+	}
 
+	@Override
+	public void visitToolOrange(final HeroToolOrange heroToolOrange) {
+		visitHeroTool(heroToolOrange);
 	}
 
 }

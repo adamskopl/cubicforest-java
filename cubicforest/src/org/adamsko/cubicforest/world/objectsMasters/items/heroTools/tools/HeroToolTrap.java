@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
 
+import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
@@ -44,6 +45,11 @@ public class HeroToolTrap extends HeroTool {
 			break;
 		}
 
+	}
+
+	@Override
+	public void accept(final WorldObjectVisitor visitor) {
+		visitor.visitToolTrap(this);
 	}
 
 }

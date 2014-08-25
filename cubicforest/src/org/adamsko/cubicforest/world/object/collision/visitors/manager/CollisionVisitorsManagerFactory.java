@@ -10,6 +10,8 @@ import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCol
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorStop;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroCollisionVisitorEnter;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroCollisionVisitorStop;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 
 public class CollisionVisitorsManagerFactory {
 
@@ -17,6 +19,8 @@ public class CollisionVisitorsManagerFactory {
 
 	private final HashMap<WorldObjectType, CollisionVisitorsManager> managers;
 	private CollisionsHandler collisionsHandler;
+	private GatherCubesMaster gatherCubesMaster;
+	private HeroesToolsMaster heroesToolsMaster;
 
 	private CollisionVisitorsManagerFactory() {
 		managers = new HashMap<WorldObjectType, CollisionVisitorsManager>();
@@ -33,6 +37,14 @@ public class CollisionVisitorsManagerFactory {
 		this.collisionsHandler = collisionsHandler;
 	}
 
+	public void setGatherCubesMaster(final GatherCubesMaster gatherCubesMaster) {
+		this.gatherCubesMaster = gatherCubesMaster;
+	}
+
+	public void setHeroToolsMaster(final HeroesToolsMaster heroesToolsMaster) {
+		this.heroesToolsMaster = heroesToolsMaster;
+	}
+
 	public CollisionVisitorsManager create(final WorldObjectType managerType) {
 
 		if (!managers.containsKey(managerType)) {
@@ -42,8 +54,10 @@ public class CollisionVisitorsManagerFactory {
 			case HERO:
 				missingManager.setVisitorEnter(new HeroCollisionVisitorEnter(
 						collisionsHandler));
-				missingManager.setVisitorStop(new HeroCollisionVisitorStop(
-						collisionsHandler));
+				missingManager
+						.setVisitorStop(new HeroCollisionVisitorStop(
+								collisionsHandler, gatherCubesMaster,
+								heroesToolsMaster));
 				break;
 
 			case ENEMY:

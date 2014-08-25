@@ -120,7 +120,7 @@ public class TilePathGuide implements TweenCallback {
 	}
 
 	private void handleSingleTile() throws Exception {
-		processTileEvent(TileEvent.OCCUPANT_STAYS, helper.getTileHeadingTo(),
+		processTileEvent(TileEvent.OCCUPANT_STOPS, helper.getTileHeadingTo(),
 				wanderer);
 
 		master.onPathEnd(this);
