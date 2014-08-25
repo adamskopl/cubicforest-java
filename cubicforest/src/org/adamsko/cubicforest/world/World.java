@@ -118,6 +118,7 @@ public class World {
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles
 		addWorldObjectsMaster(tilesMaster.getTilesContainer());
+
 		addRenderableObjectsMaster(tilesMaster.getTilesContainer());
 		addWorldObjectsMaster(terrainObjectsMaster);
 		addRenderableObjectsMaster(terrainObjectsMaster);
@@ -189,16 +190,22 @@ public class World {
 
 		mapsLoader.reloadMaps();
 
-		for (final WorldObjectsMaster wo : worldObjectsMasters) {
+		/*
+		 * Unloading has to be done in reverse order, because TilesMaster's
+		 * objects (tiles) should be unloaded in the end.
+		 */
+		for (int i = worldObjectsMasters.size() - 1; i >= 0; i--) {
+			final WorldObjectsMaster master = worldObjectsMasters.get(i);
 			try {
-				wo.unloadMapObjects();
+				master.unloadMapObjects();
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
-		for (final WorldObjectsMaster wo : worldObjectsMasters) {
+
+		for (final WorldObjectsMaster master : worldObjectsMasters) {
 			try {
-				wo.loadMapObjects(mapsLoader.getMapActive());
+				master.loadMapObjects(mapsLoader.getMapActive());
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}

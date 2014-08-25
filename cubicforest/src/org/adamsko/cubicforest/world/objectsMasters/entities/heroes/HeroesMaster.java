@@ -13,6 +13,7 @@ import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
 import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
@@ -92,6 +93,7 @@ public class HeroesMaster extends CollisionObjectsMaster implements
 	}
 
 	public void removeHero(final Hero heroToRemove) {
+		Gdx.app.debug("removeHero", heroToRemove.getName());
 		try {
 			removeObject(heroToRemove);
 		} catch (final Exception e) {

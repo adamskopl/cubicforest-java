@@ -5,6 +5,7 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 
 /**
@@ -39,5 +40,7 @@ public interface WorldObjectVisitor {
 	void visitToolTrap(HeroToolTrap heroToolTrap);
 
 	void visitToolOrange(HeroToolOrange heroToolOrange);
+
+	void visitToolPortal(HeroToolPortal heroToolPortal);
 
 }

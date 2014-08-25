@@ -33,7 +33,7 @@ public class TilePathSearcher {
 			final Tile destTile) {
 		final Tile srcTile = tilesMaster.getTileWithObject(objectOnPath);
 
-		if (srcTile == null) {
+		if (srcTile.isNull()) {
 			Gdx.app.error("search", "NULL");
 		}
 

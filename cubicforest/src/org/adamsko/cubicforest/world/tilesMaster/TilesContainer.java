@@ -31,14 +31,13 @@ public class TilesContainer extends WorldObjectsContainer {
 	 * @return Tile which contains tilePos position. null if Tile not found
 	 */
 	public Tile getTileOnPos(final Vector2 tilePos) {
-
 		for (final WorldObject wo : getWorldObjects()) {
 			final Tile tile = (Tile) wo;
 			if (tile.isPosInTile(tilePos)) {
 				return tile;
 			}
 		}
-		return null;
+		return NullTile.instance();
 	}
 
 	public Tile getTileWithObject(final WorldObject object) {
@@ -54,7 +53,7 @@ public class TilesContainer extends WorldObjectsContainer {
 				}
 			}
 		}
-		return null;
+		return NullTile.instance();
 	}
 
 	public void addTile(final Vector2 tilePos) {
@@ -108,7 +107,6 @@ public class TilesContainer extends WorldObjectsContainer {
 		for (final Vector2 vec : coords) {
 			addTile(vec);
 		}
-		// load tiles only once
 	}
 
 	@Override

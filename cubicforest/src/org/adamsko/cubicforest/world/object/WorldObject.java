@@ -77,7 +77,7 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	 * Needed for NullWorldObject constructor. Otherwise
 	 * {@link CollisionVisitorsManagerDefault} is invoked recursively.
 	 */
-	WorldObject() {
+	protected WorldObject() {
 		super(null, 0);
 		this.parentContainer = null;
 		this.collisionVisitorsManager = null;

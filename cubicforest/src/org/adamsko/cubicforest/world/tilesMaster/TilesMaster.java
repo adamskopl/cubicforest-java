@@ -159,7 +159,7 @@ public class TilesMaster implements PickMasterClient {
 	public void addWorldObject(final WorldObject addObject) {
 		final Tile parentTile = tilesContainer.getTileOnPos(addObject
 				.getTilesPos());
-		if (parentTile != null) {
+		if (!parentTile.isNull()) {
 			try {
 				parentTile.addOccupant(addObject, false);
 				switch (addObject.getType()) {
@@ -190,40 +190,11 @@ public class TilesMaster implements PickMasterClient {
 		final Tile parentTile = tilesContainer.getTileOnPos(removeObject
 				.getTilesPos());
 
-		if (Tile.occupantsRefactor) {
+		if (!parentTile.isNull()) {
 			parentTile.removeOccupant(removeObject);
 		} else {
-			// if (parentTile != null) {
-			// switch (removeObject.getType()) {
-			// case OBJECT_ENTITY:
-			// final WorldObject removedOccupant = parentTile
-			// .occupantLeaves();
-			// if (removeObject != removedOccupant) {
-			// throw new Exception(
-			// "removeWorldObject removeObject != removedOccupant");
-			// }
-			// tilesContainer.testHighlightTile(parentTile, 0, 0);
-			// break;
-			// case OBJECT_ITEM:
-			// final WorldObject removedItem = parentTile.itemLeaves();
-			// if (removeObject != removedItem) {
-			// throw new Exception(
-			// "removeWorldObject removeObject != removedOccupant");
-			// }
-			// break;
-			// case OBJECT_TERRAIN:
-			// final WorldObject removedTerrain = parentTile
-			// .occupantLeaves();
-			// if (removeObject != removedTerrain) {
-			// throw new Exception(
-			// "removeWorldObject removeObject != removedOccupant");
-			// }
-			// tilesContainer.testHighlightTile(parentTile, 0, 0);
-			// break;
-			// default:
-			// throw new Exception("removeWorldObject unsupported type");
-			// }
-			// }
+			Gdx.app.error("removeWorldObject() " + removeObject.getName(),
+					"no tile");
 		}
 	}
 
@@ -231,7 +202,7 @@ public class TilesMaster implements PickMasterClient {
 	public void onInput(final Vector2 inputScreenPos,
 			final Vector2 inputTilesPos) {
 		final Tile clickedTile = tilesContainer.getTileOnPos(inputTilesPos);
-		if (clickedTile != null) {
+		if (!clickedTile.isNull()) {
 			for (final TilesMasterClient client : clients) {
 				client.onTileEvent(clickedTile, TileEvent.TILE_PICKED);
 			}
@@ -268,7 +239,6 @@ public class TilesMaster implements PickMasterClient {
 					occupiedTiles++;
 				}
 			}
-
 		}
 		return occupiedTiles;
 	}

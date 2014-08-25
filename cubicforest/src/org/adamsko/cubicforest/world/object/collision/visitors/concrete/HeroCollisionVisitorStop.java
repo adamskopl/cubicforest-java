@@ -6,8 +6,9 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
+
+import com.badlogic.gdx.Gdx;
 
 public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 
@@ -33,12 +34,9 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	}
 
 	@Override
-	public void visitToolOrange(final HeroToolOrange heroToolOrange) {
-		super.visitToolOrange(heroToolOrange);
+	public void visitToolPortal(final HeroToolPortal heroToolPortal) {
+		super.visitToolPortal(heroToolPortal);
+		Gdx.app.debug("PORTAL! ", "");
 	}
 
-	@Override
-	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
-		super.visitToolTrap(heroToolTrap);
-	}
 }

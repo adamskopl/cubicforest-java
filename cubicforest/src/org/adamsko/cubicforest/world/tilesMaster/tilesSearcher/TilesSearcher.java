@@ -29,7 +29,7 @@ public class TilesSearcher {
 		for (final Vector2 adjPos : adjPositions) {
 			adjPos.add(tile.getTilesPos());
 			final Tile adjTile = tilesContainer.getTileOnPos(adjPos);
-			if (adjTile == null) {
+			if (adjTile.isNull()) {
 				continue;
 			}
 

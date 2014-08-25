@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
 
 import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
@@ -22,6 +23,11 @@ public class HeroToolPortal extends HeroTool {
 			final HeroesMaster heroesMaster) {
 		super(tr, texNum, container, HeroToolType.TOOL_PORTAL);
 		this.heroesMaster = heroesMaster;
+	}
+
+	@Override
+	public void accept(final WorldObjectVisitor visitor) {
+		visitor.visitToolPortal(this);
 	}
 
 	@Override
@@ -74,4 +80,5 @@ public class HeroToolPortal extends HeroTool {
 	private Boolean validEnemy(final TileEvent eventType) {
 		return true;
 	}
+
 }

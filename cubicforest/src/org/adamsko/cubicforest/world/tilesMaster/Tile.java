@@ -37,6 +37,14 @@ public class Tile extends WorldObject {
 	 */
 	private Boolean hasItem;
 
+	/**
+	 * For NullTile constructor.
+	 */
+	Tile() {
+		super();
+		occupants = null;
+	}
+
 	public Tile(final Vector2 coords, final TextureRegion tr,
 			final WorldObjectsContainer container) {
 		super(tr, 0, container, WorldObjectType.OBJECT_UNDEFINED,
