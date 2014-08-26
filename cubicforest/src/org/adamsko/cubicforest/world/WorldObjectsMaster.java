@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 /**
  * Interface for classes managing {@link WorldObjectType} type objects. If there is a new

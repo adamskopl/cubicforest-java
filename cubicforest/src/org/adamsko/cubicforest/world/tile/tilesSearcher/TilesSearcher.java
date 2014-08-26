@@ -1,11 +1,11 @@
-package org.adamsko.cubicforest.world.tilesMaster.tilesSearcher;
+package org.adamsko.cubicforest.world.tile.tilesSearcher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesContainer;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesContainer;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 

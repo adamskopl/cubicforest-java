@@ -4,9 +4,9 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 /**
  * @author adamsko

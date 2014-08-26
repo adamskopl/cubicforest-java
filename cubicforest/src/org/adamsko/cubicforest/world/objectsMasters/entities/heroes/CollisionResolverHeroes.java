@@ -9,8 +9,8 @@ import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.Coll
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 public class CollisionResolverHeroes implements CollisionResolver {
 

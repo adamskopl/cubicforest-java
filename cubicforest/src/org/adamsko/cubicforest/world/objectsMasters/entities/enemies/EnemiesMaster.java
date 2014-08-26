@@ -10,7 +10,7 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -48,7 +48,7 @@ public class EnemiesMaster extends CollisionObjectsMaster implements
 			enemy.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -7));
 
-			enemy.setSpeed(5);
+			enemy.setSpeed(1);
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			enemy.setTilesPos(pos);

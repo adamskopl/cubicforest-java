@@ -7,9 +7,9 @@ import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.World;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMasterClient;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMasterClient;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.Gdx;
 

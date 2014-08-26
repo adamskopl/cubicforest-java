@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.tilesMaster;
+package org.adamsko.cubicforest.world.tile;
 
 public class NullTile extends Tile {
 

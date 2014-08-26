@@ -1,8 +1,8 @@
 package org.adamsko.cubicforest.world.object.collision.handler;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 /**
  * Handles requests about resolving collisions effects. <br>

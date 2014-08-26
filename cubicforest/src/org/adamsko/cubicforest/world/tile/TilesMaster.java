@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.tilesMaster;
+package org.adamsko.cubicforest.world.tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
-import org.adamsko.cubicforest.world.tilesMaster.tilesEvents.TilesEventsHandler;
-import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
+import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcher;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;

@@ -8,7 +8,7 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

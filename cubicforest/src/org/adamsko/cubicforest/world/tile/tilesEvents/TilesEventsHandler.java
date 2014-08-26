@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.tilesMaster.tilesEvents;
+package org.adamsko.cubicforest.world.tile.tilesEvents;
 
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
@@ -14,9 +14,9 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMast
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesContainer;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesContainer;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 public class TilesEventsHandler {
 

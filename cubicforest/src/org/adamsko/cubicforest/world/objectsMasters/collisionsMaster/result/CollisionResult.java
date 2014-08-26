@@ -12,7 +12,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
+import org.adamsko.cubicforest.world.tile.Tile;
 
 /**
  * Defines the result of one interatcion

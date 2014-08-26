@@ -9,7 +9,8 @@ import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
+
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiMaster implements PickMasterClient {

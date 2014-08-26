@@ -1,10 +1,10 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObjectAccessor;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesHelper;
+import org.adamsko.cubicforest.world.tile.TilesHelper.TilesConnection_e;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuide.GuideStage_e;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesHelper;
-import org.adamsko.cubicforest.world.tilesMaster.TilesHelper.TilesConnection_e;
 
 import com.badlogic.gdx.math.Vector2;
 

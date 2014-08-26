@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.tilesMaster;
+package org.adamsko.cubicforest.world.tile;
 
 import java.util.ArrayList;
 import java.util.List;

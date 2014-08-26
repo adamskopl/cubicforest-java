@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 		implements WorldObjectsMaster {

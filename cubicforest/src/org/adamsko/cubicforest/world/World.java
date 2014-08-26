@@ -23,8 +23,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsM
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
-import org.adamsko.cubicforest.world.tilesMaster.tilesSearcher.TilesSearcher;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcher;
 
 /**
  * World class desc.

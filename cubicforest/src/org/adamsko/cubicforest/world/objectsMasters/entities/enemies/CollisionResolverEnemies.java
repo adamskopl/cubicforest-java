@@ -4,8 +4,8 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 public class CollisionResolverEnemies implements CollisionResolver {
 

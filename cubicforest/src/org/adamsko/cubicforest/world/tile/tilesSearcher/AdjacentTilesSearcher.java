@@ -1,10 +1,10 @@
-package org.adamsko.cubicforest.world.tilesMaster.tilesSearcher;
+package org.adamsko.cubicforest.world.tile.tilesSearcher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
-import org.adamsko.cubicforest.world.tilesMaster.TilesMaster;
+import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 public class AdjacentTilesSearcher {
 

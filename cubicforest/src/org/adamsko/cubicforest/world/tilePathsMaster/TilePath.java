@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.tilesMaster.Tile;
+import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.Gdx;
 
