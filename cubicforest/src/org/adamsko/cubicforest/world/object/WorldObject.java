@@ -8,6 +8,8 @@ import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitors
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
+import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
+import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicatorDefault;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -22,6 +24,8 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	private final WorldObjectType type;
 	private WorldObjectState state;
 	private final WorldObjectType refactorType;
+
+	private TilePropertiesIndicator tilePropertiesIndicator = null;
 
 	/**
 	 * Container holding this WorldObject.
@@ -97,6 +101,8 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 		collisionVisitorsManager = CollisionVisitorsManagerFactory.instance()
 				.create(refactorType);
 
+		initTilePropertiesIndicator();
+
 		// initCollisionVisitorsManager();
 		tilesPos = new Vector2(0.0f, 0.0f);
 		verticalPos = new Float(0.0f);
@@ -107,6 +113,14 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 		this.refactorType = type;
 		this.renderType = RenderableObjectType.TYPE_WORLD;
 		this.state = WorldObjectState.ALIVE;
+	}
+
+	public TilePropertiesIndicator getTilePropertiesIndicator() {
+		return tilePropertiesIndicator;
+	}
+
+	protected void initTilePropertiesIndicator() {
+		tilePropertiesIndicator = new TilePropertiesIndicatorDefault();
 	}
 
 	@Override

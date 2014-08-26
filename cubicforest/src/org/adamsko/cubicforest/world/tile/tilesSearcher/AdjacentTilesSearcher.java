@@ -8,7 +8,7 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 public class AdjacentTilesSearcher {
 
-	private TilesMaster tilesMaster;
+	private final TilesMaster tilesMaster;
 
 	/**
 	 * List of ready tiles found during the search.
@@ -17,52 +17,53 @@ public class AdjacentTilesSearcher {
 	 * 
 	 * Value: tiles with Key reaching cost.
 	 */
-	private List<List<Tile>> costTiles;
+	private final List<List<Tile>> costTiles;
 	// should occupied tiles be considered?
 	private Boolean getOccupiedTiles;
-	
+
 	/**
-	 * range in which adjacent tiles are searched 
+	 * range in which adjacent tiles are searched
 	 */
 	private int range;
-	
-	public AdjacentTilesSearcher(TilesMaster tilesMaster) {
+
+	public AdjacentTilesSearcher(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
 		costTiles = new ArrayList<List<Tile>>();
 	}
 
-	List<Tile> getTilesInRange(Tile tile, int range, Boolean getOccupiedTiles) {
+	List<Tile> getTilesInRange(final Tile tile, final int range,
+			final Boolean getOccupiedTiles) {
 
 		this.getOccupiedTiles = getOccupiedTiles;
 		this.range = range;
-		
+
 		costTiles.clear();
-		
+
 		// initialize search with source Tile (cost == 0)
 		addNextCost();
 		addActualCostTile(tile);
-		
+
 		// begin recursive adding of the next costs
 		handleNextCost();
-		
+
 		return costTilesToList();
 	}
-	
+
 	/**
 	 * Convert @costTiles to a list of tiles
 	 * 
 	 * @return list of all tiles from @costTiles
 	 */
 	private List<Tile> costTilesToList() {
-		List<Tile> tilesFound = new ArrayList<Tile>();
-		for (List<Tile> cTiles : costTiles) {
-			for (Tile costTile : cTiles) {
+		final List<Tile> tilesFound = new ArrayList<Tile>();
+		for (final List<Tile> cTiles : costTiles) {
+			for (final Tile costTile : cTiles) {
 				tilesFound.add(costTile);
 			}
 		}
 		return tilesFound;
 	}
-	
+
 	/**
 	 * nextCost() recursively performs search operations for actually considered
 	 * cost
@@ -71,9 +72,10 @@ public class AdjacentTilesSearcher {
 		// add vector of tiles for actually considered cost
 		addNextCost();
 		boolean anyTileAdded = false;
-		for (Tile prevTile : previousCostTiles()) {
-			List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(prevTile, true);
-			int tilesAdded = addAdjacentTilesCurrentCost(adjacentTiles);
+		for (final Tile prevTile : previousCostTiles()) {
+			final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(
+					prevTile, true);
+			final int tilesAdded = addAdjacentTilesCurrentCost(adjacentTiles);
 			if (tilesAdded > 0) {
 				anyTileAdded = true;
 			}
@@ -82,18 +84,18 @@ public class AdjacentTilesSearcher {
 			// no tiles added for current cost, no further tiles will be added
 			return;
 		}
-		if(getActualCost() == range) {
+		if (getActualCost() == range) {
 			return;
 		}
-		
+
 		handleNextCost();
 	}
-	
+
 	private void addNextCost() {
-		List<Tile> nextCostTiles = new ArrayList<Tile>();
+		final List<Tile> nextCostTiles = new ArrayList<Tile>();
 		costTiles.add(nextCostTiles);
 	}
-	
+
 	/**
 	 * Consider adding adjacent tiles (tiles adjacent to one of the tiles from
 	 * previous cost) to current cost tiles list.
@@ -102,18 +104,18 @@ public class AdjacentTilesSearcher {
 	 * @return Number of added tiles to currently considered cost. -1 if destiny
 	 *         tile found.
 	 */
-	private int addAdjacentTilesCurrentCost(List<Tile> adjacentTiles) {
+	private int addAdjacentTilesCurrentCost(final List<Tile> adjacentTiles) {
 		int tilesAdded = 0;
-		for (Tile tile : adjacentTiles) {
+		for (final Tile tile : adjacentTiles) {
 			if (tileValidCurrentCost(tile)) {
 				addActualCostTile(tile);
 				tilesAdded++;
 			}
 		}
-		
+
 		return tilesAdded;
 	}
-	
+
 	/**
 	 * Check if given tile can be added to current cost tiles. Conditions:
 	 * 
@@ -126,14 +128,14 @@ public class AdjacentTilesSearcher {
 	 *            Tile checked
 	 * @return decision: tile can be added or not
 	 */
-	private boolean tileValidCurrentCost(Tile tileChecked) {
-		if (!getOccupiedTiles && !tileChecked.isPassable()) {
+	private boolean tileValidCurrentCost(final Tile tileChecked) {
+		if (!getOccupiedTiles && !tileChecked.getTilePathSearchValid()) {
 			return false;
 		}
 		// check if tileChecked is not already added (does not have lower cost
 		// already)
-		for (List<Tile> cTiles : costTiles) {
-			for (Tile costTile : cTiles) {
+		for (final List<Tile> cTiles : costTiles) {
+			for (final Tile costTile : cTiles) {
 				if (tileChecked == costTile) {
 					return false;
 				}
@@ -141,16 +143,16 @@ public class AdjacentTilesSearcher {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Add tile to readyTile with actually considered cost.
 	 * 
 	 * @param readyTile
 	 */
-	private void addActualCostTile(Tile readyTile) {
+	private void addActualCostTile(final Tile readyTile) {
 		actualCostTiles().add(readyTile);
 	}
-	
+
 	/**
 	 * For actual cost N there are N+1 elements.
 	 * 
@@ -159,7 +161,7 @@ public class AdjacentTilesSearcher {
 	private List<Tile> actualCostTiles() {
 		return costTiles.get(costTiles.size() - 1);
 	}
-	
+
 	/**
 	 * For actual cost N there are N+1 elements.
 	 * 
@@ -168,7 +170,7 @@ public class AdjacentTilesSearcher {
 	private List<Tile> previousCostTiles() {
 		return costTiles.get(costTiles.size() - 2);
 	}
-	
+
 	/**
 	 * Get actually considered cost.
 	 * 

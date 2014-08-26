@@ -46,6 +46,12 @@ public abstract class HeroTool extends ItemObject {
 
 	}
 
+	@Override
+	protected void initTilePropertiesIndicator() {
+		super.initTilePropertiesIndicator();
+		getTilePropertiesIndicator().setTilePathSearchValid(true);
+	}
+
 	public void changeState(final HeroToolStates_e newState) {
 		switch (newState) {
 		case STATE_CONSTRUCTION:

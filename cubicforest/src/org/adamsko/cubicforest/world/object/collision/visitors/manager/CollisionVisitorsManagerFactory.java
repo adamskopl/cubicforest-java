@@ -45,6 +45,13 @@ public class CollisionVisitorsManagerFactory {
 		this.heroesToolsMaster = heroesToolsMaster;
 	}
 
+	/**
+	 * Creates one instance of manager for every {@link WorldObjectType}, so
+	 * objects of the same type, share on manager.
+	 * 
+	 * @param managerType
+	 * @return
+	 */
 	public CollisionVisitorsManager create(final WorldObjectType managerType) {
 
 		if (!managers.containsKey(managerType)) {

@@ -218,6 +218,23 @@ public class Tile extends WorldObject {
 		}
 	}
 
+	/**
+	 * Is tile valid for search algorithms (if it can be included in tile
+	 * paths)? If at least one occupant is not valid for search algorithms, the
+	 * whole tile is not.
+	 * 
+	 * @return
+	 */
+	public boolean getTilePathSearchValid() {
+		for (final WorldObject occupant : getOccupants()) {
+			if (!occupant.getTilePropertiesIndicator().getTilePathSearchValid()) {
+				// one of the occupants is not valid - Tile is not valid
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return getTilesPos().toString();

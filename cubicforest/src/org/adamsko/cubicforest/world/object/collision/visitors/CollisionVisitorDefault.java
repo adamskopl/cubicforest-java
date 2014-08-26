@@ -13,8 +13,6 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 
-import com.badlogic.gdx.Gdx;
-
 public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 		Nullable {
 
@@ -52,7 +50,6 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 
 	@Override
 	public void visitWorldObject(final WorldObject worldObject) {
-		Gdx.app.debug("VISIT", worldObject.getName());
 
 	}
 

@@ -111,26 +111,12 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private Boolean startOrderValid(final WorldObject activeObject,
 			final Tile tile, final TilePath pathToTile) {
 
-		if (Tile.occupantsRefactor) {
-			if (tile.hasOccupant2()) {
-				if (tile.isOccupied(activeObject)) {
-					// tile occupied by active object can be chosen
-					return true;
-				}
+		if (tile.isOccupied(activeObject)) {
+			return true;
+		}
 
-				// FIXME: tiles occupied by items should be able to be chosen
-
-				// occupied tile can't be chosen
-				return false;
-			}
-		} else {
-			if (tile.hasOccupant()) {
-				// occupied tile with an active object can be chosen
-				if (tile.getOccupant() == activeObject) {
-					return true;
-				}
-				return false;
-			}
+		if (!tile.getTilePathSearchValid()) {
+			return false;
 		}
 
 		if (!orderInProgress

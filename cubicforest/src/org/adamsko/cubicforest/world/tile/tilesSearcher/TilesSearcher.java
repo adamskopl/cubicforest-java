@@ -34,7 +34,7 @@ public class TilesSearcher {
 			}
 
 			if (Tile.occupantsRefactor) {
-				if (!getOccupied && adjTile.hasOccupant2()) {
+				if (!getOccupied && adjTile.getTilePathSearchValid()) {
 					continue;
 				}
 			} else {

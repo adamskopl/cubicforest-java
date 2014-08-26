@@ -13,4 +13,10 @@ public class GatherCube extends ItemObject {
 		super(tr, texNum, container, ItemObjectType.ITEM_GATHER_CUBE);
 	}
 
+	@Override
+	protected void initTilePropertiesIndicator() {
+		super.initTilePropertiesIndicator();
+		getTilePropertiesIndicator().setTilePathSearchValid(true);
+	}
+
 }
