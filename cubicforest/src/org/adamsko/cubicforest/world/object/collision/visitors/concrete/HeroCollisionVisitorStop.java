@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object.collision.visitors.concrete;
 
+import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
@@ -34,7 +35,11 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 
 	@Override
 	public void visitToolPortal(final HeroToolPortal heroToolPortal) {
-		super.visitToolPortal(heroToolPortal);
+		if (heroToolPortal.getToolState() == HeroToolStates_e.STATE_CONSTRUCTION) {
+			super.visitToolPortal(heroToolPortal);
+			return;
+		}
+		collision().gameResultOperation().setGameResult(GameResult.GAME_WON);
 	}
 
 	@Override
