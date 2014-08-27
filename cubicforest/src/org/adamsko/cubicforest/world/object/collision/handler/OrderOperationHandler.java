@@ -8,4 +8,6 @@ public interface OrderOperationHandler {
 
 	OrderOperation getOrderOperation();
 
+	void reset();
+
 }

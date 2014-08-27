@@ -33,6 +33,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	}
 
 	private void moveNextEnemy() {
+
 		nextObject();
 		final WorldObject activeEnemy = activeObject();
 
@@ -60,8 +61,6 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	@Override
 	public void onOrderFinished() {
 
-		removeDeadObjects();
-
 		if (roundsMaster.getGameResult() == GameResult.GAME_LOST) {
 			roundsMaster.reload();
 			roundsMaster.resetGameResult();
@@ -76,6 +75,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 			}
 			return;
 		}
+		removeDeadObjects();
 		moveNextEnemy();
 
 	}
@@ -83,7 +83,6 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	@Override
 	public void onGuiEvent(final GuiContainer eventGui) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

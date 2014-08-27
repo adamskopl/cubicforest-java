@@ -25,6 +25,9 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 	@Override
 	public void collision(final TileEvent evenType, final Tile collidingTile,
 			final WorldObject collidingObject) {
+
+		orderOperationHandler.reset();
+
 		for (final WorldObject o : collidingTile.getOccupants()) {
 			switch (evenType) {
 			case OCCUPANT_ENTERS:
@@ -44,8 +47,8 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 			default:
 				break;
 			}
-
 		}
+		removeDeadObjects(collidingTile);
 	}
 
 	@Override
@@ -63,4 +66,7 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 		return gameResultOperationHandler;
 	}
 
+	private void removeDeadObjects(final Tile collidingTile) {
+		collidingTile.removeDeadOccupants();
+	}
 }

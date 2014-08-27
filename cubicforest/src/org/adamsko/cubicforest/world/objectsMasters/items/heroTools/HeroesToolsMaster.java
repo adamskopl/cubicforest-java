@@ -81,7 +81,7 @@ public class HeroesToolsMaster extends CollisionObjectsMaster {
 	 */
 	public void heroToolMarkerRemove() throws Exception {
 		if (heroToolMarker != null) {
-			removeObject(heroToolMarker);
+			removeObjectFromContainer(heroToolMarker);
 			heroToolMarker = null;
 		}
 	}
@@ -123,7 +123,7 @@ public class HeroesToolsMaster extends CollisionObjectsMaster {
 
 	public void removeTool(final HeroTool heroToolToRemove) {
 		try {
-			removeObject(heroToolToRemove);
+			removeObjectFromContainer(heroToolToRemove);
 		} catch (final Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

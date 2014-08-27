@@ -48,7 +48,7 @@ public class EnemiesMaster extends CollisionObjectsMaster implements
 			enemy.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -7));
 
-			enemy.setSpeed(1);
+			enemy.setSpeed(3);
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			enemy.setTilesPos(pos);
@@ -75,7 +75,7 @@ public class EnemiesMaster extends CollisionObjectsMaster implements
 
 	public void removeEnemy(final Enemy enemyToRemove) {
 		try {
-			removeObject(enemyToRemove);
+			removeObjectFromContainer(enemyToRemove);
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

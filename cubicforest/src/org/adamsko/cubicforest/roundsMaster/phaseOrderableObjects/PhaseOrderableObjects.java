@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
@@ -55,9 +56,10 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	}
 
 	protected void removeDeadObjects() {
-		for (final WorldObject o : phaseObjects) {
-			if (o.getState() == WorldObjectState.DEAD) {
-				removeObject(o);
+		final Iterator<WorldObject> iter = phaseObjects.iterator();
+		while (iter.hasNext()) {
+			if (iter.next().getState() == WorldObjectState.DEAD) {
+				iter.remove();
 			}
 		}
 	}
@@ -102,6 +104,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 
 	@Override
 	public void phaseIsOver(final RoundPhase phaseOver) throws Exception {
+		removeDeadObjects();
 		roundsMaster.phaseIsOver(phaseOver);
 	}
 

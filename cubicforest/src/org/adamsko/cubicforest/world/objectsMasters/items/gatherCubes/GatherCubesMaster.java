@@ -49,7 +49,7 @@ public class GatherCubesMaster extends CollisionObjectsMaster {
 
 	public void removeCube(final GatherCube cubeToRemove) {
 		try {
-			removeObject(cubeToRemove);
+			removeObjectFromContainer(cubeToRemove);
 		} catch (final Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,11 +97,11 @@ public class GatherCubesMaster extends CollisionObjectsMaster {
 		removeWorldObjects();
 	}
 
-	void cubeHighlight(final GatherCube cube) {
+	public void cubeHighlight(final GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(1)[cube.getTexNum()]);
 	}
 
-	void cubeUnHighlight(final GatherCube cube) {
+	public void cubeUnHighlight(final GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
 	}
 

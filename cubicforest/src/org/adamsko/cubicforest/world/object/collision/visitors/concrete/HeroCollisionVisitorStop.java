@@ -2,13 +2,12 @@ package org.adamsko.cubicforest.world.object.collision.visitors.concrete;
 
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
-
-import com.badlogic.gdx.Gdx;
 
 public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 
@@ -36,7 +35,13 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	@Override
 	public void visitToolPortal(final HeroToolPortal heroToolPortal) {
 		super.visitToolPortal(heroToolPortal);
-		Gdx.app.debug("PORTAL! ", "");
+	}
+
+	@Override
+	public void visitGatherCube(final GatherCube gatherCube) {
+		super.visitGatherCube(gatherCube);
+		gatherCubesMaster.counterAddValue(1);
+		collision().wordlObjectOperation().remove(gatherCube);
 	}
 
 }

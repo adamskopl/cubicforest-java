@@ -1,9 +1,11 @@
 package org.adamsko.cubicforest.world.tile;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 
@@ -150,7 +152,19 @@ public class Tile extends WorldObject {
 		if (!occupants.remove(removedOccupant)) {
 			// if there was no 'removedOccupant' object in a collection
 			Gdx.app.error("Tile::removeOccupant()",
-					"no 'removedOccupant' in 'occupants'");
+					"no " + removedOccupant.getName() + " in 'occupants'");
+		}
+	}
+
+	public void removeDeadOccupants() {
+		final Iterator<WorldObject> iter = getOccupants().iterator();
+		while (iter.hasNext()) {
+			final WorldObject tileObject = iter.next();
+			if (tileObject.getState() == WorldObjectState.DEAD) {
+				tileObject.getParentContainer().removeObjectFromContainer(
+						tileObject);
+				iter.remove();
+			}
 		}
 	}
 

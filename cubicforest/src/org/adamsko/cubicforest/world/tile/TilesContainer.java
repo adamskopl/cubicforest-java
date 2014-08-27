@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
@@ -118,4 +119,17 @@ public class TilesContainer extends WorldObjectsContainer {
 		}
 	}
 
+	public void debugPrintOccupants(final boolean printParticular) {
+		int number = 0;
+		for (final WorldObject t : getWorldObjects()) {
+			final Tile tile = (Tile) t;
+			for (final WorldObject o : tile.getOccupants()) {
+				if (printParticular) {
+					Gdx.app.debug("tile occupant", o.getName());
+				}
+				number++;
+			}
+		}
+		Gdx.app.debug("tile occupant total", Integer.toString(number));
+	}
 }

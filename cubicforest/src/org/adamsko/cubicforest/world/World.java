@@ -23,6 +23,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsM
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
+import org.adamsko.cubicforest.world.tile.TilesContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcher;
 
@@ -211,6 +212,9 @@ public class World {
 			}
 		}
 
+		// uncomment to print tiles occupants
+		final TilesContainer tc = (TilesContainer) worldObjectsMasters.get(0);
+		tc.debugPrintOccupants(false);
 	}
 
 	private void addGuiObjectsContainer(final GuiContainer guiObjectsContainer) {

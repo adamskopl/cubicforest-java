@@ -7,8 +7,10 @@ import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorEnter;
+import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorPass;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorStop;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroCollisionVisitorEnter;
+import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroCollisionVisitorLeave;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroCollisionVisitorStop;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
@@ -60,17 +62,22 @@ public class CollisionVisitorsManagerFactory {
 			switch (managerType) {
 			case HERO:
 				missingManager.setVisitorEnter(new HeroCollisionVisitorEnter(
-						collisionsHandler));
+						collisionsHandler, gatherCubesMaster));
 				missingManager
 						.setVisitorStop(new HeroCollisionVisitorStop(
 								collisionsHandler, gatherCubesMaster,
 								heroesToolsMaster));
+
+				missingManager.setVisitorLeave(new HeroCollisionVisitorLeave(
+						collisionsHandler, gatherCubesMaster));
 				break;
 
 			case ENEMY:
 				missingManager.setVisitorEnter(new EnemyCollisionVisitorEnter(
 						collisionsHandler));
 				missingManager.setVisitorStop(new EnemyCollisionVisitorStop(
+						collisionsHandler));
+				missingManager.setVisitorPass(new EnemyCollisionVisitorPass(
 						collisionsHandler));
 				break;
 			default:

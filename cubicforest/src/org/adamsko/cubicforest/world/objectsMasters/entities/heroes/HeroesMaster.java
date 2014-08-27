@@ -95,7 +95,7 @@ public class HeroesMaster extends CollisionObjectsMaster implements
 	public void removeHero(final Hero heroToRemove) {
 		Gdx.app.debug("removeHero", heroToRemove.getName());
 		try {
-			removeObject(heroToRemove);
+			removeObjectFromContainer(heroToRemove);
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

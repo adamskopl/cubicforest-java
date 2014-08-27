@@ -5,15 +5,15 @@ import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorD
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
 
-public class EnemyCollisionVisitorStop extends CollisionVisitorDefault {
+public class EnemyCollisionVisitorPass extends CollisionVisitorDefault {
 
-	public EnemyCollisionVisitorStop(final CollisionsHandler collisionsHandler) {
+	public EnemyCollisionVisitorPass(final CollisionsHandler collisionsHandler) {
 		super(collisionsHandler);
 	}
 
 	@Override
 	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
-		// same as in EnemyCollisionVisitorPass
+		// same as in EnemyCollisionVisitorStop
 		super.visitToolTrap(heroToolTrap);
 		collision().orderOperation().setOrderOperation(
 				OrderOperation.ORDER_FINISH);

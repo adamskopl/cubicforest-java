@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
+import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType;
@@ -17,6 +18,11 @@ public class GatherCube extends ItemObject {
 	protected void initTilePropertiesIndicator() {
 		super.initTilePropertiesIndicator();
 		getTilePropertiesIndicator().setTilePathSearchValid(true);
+	}
+
+	@Override
+	public void accept(final WorldObjectVisitor visitor) {
+		visitor.visitGatherCube(this);
 	}
 
 }

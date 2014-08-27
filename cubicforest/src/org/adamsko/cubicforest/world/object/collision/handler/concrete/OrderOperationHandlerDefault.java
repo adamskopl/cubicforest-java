@@ -8,7 +8,7 @@ public class OrderOperationHandlerDefault implements OrderOperationHandler {
 	private OrderOperation orderOperation;
 
 	public OrderOperationHandlerDefault() {
-		orderOperation = OrderOperation.ORDER_CONTINUE;
+		reset();
 	}
 
 	@Override
@@ -19,6 +19,11 @@ public class OrderOperationHandlerDefault implements OrderOperationHandler {
 	@Override
 	public void setOrderOperation(final OrderOperation orderOperation) {
 		this.orderOperation = orderOperation;
+	}
+
+	@Override
+	public void reset() {
+		orderOperation = OrderOperation.ORDER_CONTINUE;
 	}
 
 }

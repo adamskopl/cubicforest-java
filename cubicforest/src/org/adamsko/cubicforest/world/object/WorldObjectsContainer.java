@@ -39,10 +39,21 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 		worldObjects = new ArrayList<WorldObject>();
 	}
 
-	public void removeObject(final WorldObject objectRemove) {
+	public void removeObjectFromContainer(final WorldObject objectRemove) {
 		worldObjects.remove(objectRemove);
 		removeRenderableObject(objectRemove);
+	}
+
+	public void removeObjectFromTile(final WorldObject objectRemove) {
 		tilesMaster.removeWorldObject(objectRemove);
+	}
+
+	protected void removeWorldObjects() throws Exception {
+		while (worldObjects.size() != 0) {
+			final WorldObject object = worldObjects.get(0);
+			removeObjectFromContainer(object);
+			removeObjectFromTile(object);
+		}
 	}
 
 	public void addObject(final WorldObject worldObject) {
@@ -70,13 +81,6 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 	public void handleServantTileEvent(final WorldObject servant,
 			final TileEvent tileEvent) {
 
-	}
-
-	protected void removeWorldObjects() throws Exception {
-		while (worldObjects.size() != 0) {
-			final WorldObject object = worldObjects.get(0);
-			removeObject(object);
-		}
 	}
 
 }

@@ -4,7 +4,6 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.concrete.CollisionsHandlerDefault;
@@ -62,27 +61,23 @@ public class TilesEventsHandler {
 
 		collisionsHandler.collision(evenType, eventTile, eventObject);
 
-		// if active object is not removed after tile event, perform common
-		// operations: object insert/take out
-		if (eventObject.getState() != WorldObjectState.DEAD) {
-			switch (evenType) {
-			case OCCUPANT_ENTERS: {
-				eventTile.addOccupant(eventObject, true);
-				tilesContainer.testHighlightTile(eventTile, 0, 1);
-				break;
+		switch (evenType) {
+		case OCCUPANT_ENTERS: {
+			eventTile.addOccupant(eventObject, true);
+			tilesContainer.testHighlightTile(eventTile, 0, 1);
+			break;
+		}
+		case OCCUPANT_LEAVES: {
+			if (Tile.occupantsRefactor) {
+				eventTile.removeOccupant(eventObject);
+			} else {
+				eventTile.occupantLeaves();
 			}
-			case OCCUPANT_LEAVES: {
-				if (Tile.occupantsRefactor) {
-					eventTile.removeOccupant(eventObject);
-				} else {
-					eventTile.occupantLeaves();
-				}
 
-				tilesContainer.testHighlightTile(eventTile, 0, 0);
-				break;
-			}
-			default:
-			}
+			tilesContainer.testHighlightTile(eventTile, 0, 0);
+			break;
+		}
+		default:
 		}
 
 		return collisionsHandler.orderOperation();
