@@ -42,14 +42,8 @@ public class TilesContainer extends WorldObjectsContainer {
 	public Tile getTileWithObject(final WorldObject object) {
 		for (final WorldObject wo : getWorldObjects()) {
 			final Tile tile = (Tile) wo;
-			if (Tile.occupantsRefactor) {
-				if (tile.isOccupied(object)) {
-					return tile;
-				}
-			} else {
-				if (tile.getOccupant() == object) {
-					return tile;
-				}
+			if (tile.isOccupied(object)) {
+				return tile;
 			}
 		}
 		return NullTile.instance();

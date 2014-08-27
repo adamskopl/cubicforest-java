@@ -172,22 +172,10 @@ class PhaseHeroesOrdersMaster {
 		if (tileOrderValid) {
 			tilePickedTexCooords.set(1, 1);
 		} else {
-			if (Tile.occupantsRefactor) {
-				// ////////////////
-				if (tilePickedOrder.hasOccupant2()) {
-					tilePickedTexCooords.set(0, 1);
-				} else {
-					tilePickedTexCooords.set(0, 0);
-				}
-				// ////////////////
+			if (tilePickedOrder.hasOccupant()) {
+				tilePickedTexCooords.set(0, 1);
 			} else {
-				// ////////////////
-				if (tilePickedOrder.hasOccupant()) {
-					tilePickedTexCooords.set(0, 1);
-				} else {
-					tilePickedTexCooords.set(0, 0);
-				}
-				// ////////////////
+				tilePickedTexCooords.set(0, 0);
 			}
 		}
 	}

@@ -22,7 +22,6 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 
 	private final WorldObjectType type;
 	private WorldObjectState state;
-	private final WorldObjectType refactorType;
 
 	private TilePropertiesIndicator tilePropertiesIndicator = null;
 
@@ -82,7 +81,6 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 		this.parentContainer = null;
 		this.collisionVisitorsManager = null;
 		this.type = WorldObjectType.DEFAULT;
-		this.refactorType = type;
 		this.renderType = RenderableObjectType.TYPE_WORLD;
 		this.state = WorldObjectState.ALIVE;
 	}
@@ -106,7 +104,6 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 		speed = 0;
 		occupiesTile = true;
 		this.type = type;
-		this.refactorType = type;
 		this.renderType = RenderableObjectType.TYPE_WORLD;
 		this.state = WorldObjectState.ALIVE;
 	}

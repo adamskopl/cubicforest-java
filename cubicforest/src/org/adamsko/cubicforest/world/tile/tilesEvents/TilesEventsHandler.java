@@ -46,12 +46,7 @@ public class TilesEventsHandler {
 			break;
 		}
 		case OCCUPANT_LEAVES: {
-			if (Tile.occupantsRefactor) {
-				eventTile.removeOccupant(eventObject);
-			} else {
-				eventTile.occupantLeaves();
-			}
-
+			eventTile.removeOccupant(eventObject);
 			tilesContainer.testHighlightTile(eventTile, 0, 0);
 			break;
 		}

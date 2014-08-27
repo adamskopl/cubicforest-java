@@ -210,15 +210,8 @@ public class TilesMaster implements PickMasterClient {
 		int occupiedTiles = 0;
 		for (final RenderableObject ro : tilesContainer.getTiles()) {
 			final Tile t = (Tile) ro;
-
-			if (Tile.occupantsRefactor) {
-				if (t.hasOccupant2()) {
-					occupiedTiles++;
-				}
-			} else {
-				if (t.hasOccupant()) {
-					occupiedTiles++;
-				}
+			if (t.hasOccupant()) {
+				occupiedTiles++;
 			}
 		}
 		return occupiedTiles;

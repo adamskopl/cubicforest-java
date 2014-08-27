@@ -20,24 +20,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Tile extends WorldObject {
 
-	public static boolean occupantsRefactor = true;
-
 	private final List<WorldObject> occupants;
-
-	private WorldObject occupant;
-	/**
-	 * For now: item created by Heroes and GatherCubes
-	 */
-	private WorldObject item;
-
-	/**
-	 * Does tile contain a {@link WorldObject} object?
-	 */
-	private Boolean hasOccupant;
-	/**
-	 * 
-	 */
-	private Boolean hasItem;
 
 	/**
 	 * For NullTile constructor.
@@ -54,12 +37,6 @@ public class Tile extends WorldObject {
 		this.tilesPos = coords;
 
 		occupants = new ArrayList<WorldObject>();
-
-		occupant = null;
-		hasOccupant = false;
-
-		item = null;
-		hasItem = false;
 	}
 
 	/**
@@ -89,57 +66,13 @@ public class Tile extends WorldObject {
 		return occupants.contains(object);
 	}
 
-	/**
-	 * Get {@link WorldObject} object associated with this tile.
-	 * 
-	 * @return {@link WorldObject} object associated with this tile.
-	 */
-	public WorldObject getOccupant() {
-		return occupant;
-	}
-
 	public List<WorldObject> getOccupants() {
 		return occupants;
 	}
 
-	public WorldObject getItem() {
-		return item;
-	}
-
 	public void addOccupant(final WorldObject insertObject,
 			final boolean ignoreOccupation) throws Exception {
-
-		if (Tile.occupantsRefactor) {
-			occupants.add(insertObject);
-		} else {
-
-			switch (insertObject.getType()) {
-			case OBJECT_ENTITY:
-				if (!ignoreOccupation && hasOccupant()) {
-					throw new Exception(
-							"insertWorldObject: tile is already occupied");
-				}
-				occupant = insertObject;
-				hasOccupant = true;
-
-				break;
-			case OBJECT_ITEM:
-				if (!ignoreOccupation && hasItem()) {
-					throw new Exception("insertItem: tile has already an item");
-				}
-				item = insertObject;
-				hasItem = true;
-				break;
-			case OBJECT_TERRAIN:
-				occupant = insertObject;
-				hasOccupant = true;
-				break;
-			default:
-				Gdx.app.error("Tile::insertObject()", "worldType unsupported");
-				break;
-			}
-
-		}
+		occupants.add(insertObject);
 	}
 
 	/**
@@ -169,67 +102,12 @@ public class Tile extends WorldObject {
 	}
 
 	/**
-	 * @return
-	 * @throws Exception
-	 */
-	public WorldObject occupantLeaves() throws Exception {
-		if (!hasOccupant()) {
-			throw new Exception("tile not occupied");
-		}
-		final WorldObject takenObject = occupant;
-		occupant = null;
-		hasOccupant = false;
-		return takenObject;
-	}
-
-	public WorldObject itemLeaves() throws Exception {
-		if (!hasItem()) {
-			throw new Exception("tile without item");
-		}
-		final WorldObject takenItem = item;
-		item = null;
-		hasItem = false;
-		return takenItem;
-	}
-
-	/**
-	 * Does tile have an occupant?
-	 * 
-	 * @return
-	 */
-	public Boolean hasOccupant() {
-		return hasOccupant;
-	}
-
-	/**
 	 * Does tile have any occupant?
 	 * 
 	 * @return
 	 */
-	public Boolean hasOccupant2() {
+	public Boolean hasOccupant() {
 		return !occupants.isEmpty();
-	}
-
-	/**
-	 * Does tile have an item?
-	 * 
-	 * @return
-	 */
-	public Boolean hasItem() {
-		return hasItem;
-	}
-
-	/**
-	 * Is tile passable? Could it be occupied/passed?
-	 * 
-	 * @return
-	 */
-	public Boolean isPassable() {
-		if (Tile.occupantsRefactor) {
-			return !hasOccupant2();
-		} else {
-			return !hasOccupant();
-		}
 	}
 
 	/**

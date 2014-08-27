@@ -51,15 +51,6 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 			return;
 		}
 
-		if (Tile.occupantsRefactor) {
-
-		} else {
-			if (heroToolTile.hasItem()) {
-				Gdx.app.error("addHeroToolMarker", "heroToolTile.hasItem()");
-				return;
-			}
-		}
-
 		if (heroToolMarkerType == null) {
 			Gdx.app.error("addHeroToolMarker", "heroToolMarkerType == null");
 			return;

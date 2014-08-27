@@ -71,14 +71,8 @@ public class TilePathSearcher {
 		TilePath shortestPath = null;
 		for (final Tile adjacentTile : adjacentTiles) {
 
-			if (Tile.occupantsRefactor) {
-				if (adjacentTile.hasOccupant2()) {
-					continue;
-				}
-			} else {
-				if (adjacentTile.hasOccupant()) {
-					continue;
-				}
+			if (adjacentTile.hasOccupant()) {
+				continue;
 			}
 
 			final TilePath adjacentTilePath = search(objectFrom, adjacentTile);
