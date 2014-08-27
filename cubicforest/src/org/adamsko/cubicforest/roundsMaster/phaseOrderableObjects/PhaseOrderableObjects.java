@@ -47,19 +47,12 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 
 	}
 
-	/**
-	 * 
-	 */
-	private void removeObject(final WorldObject object) {
-		activeObjectPointer--;
-		phaseObjects.remove(object);
-	}
-
 	protected void removeDeadObjects() {
 		final Iterator<WorldObject> iter = phaseObjects.iterator();
 		while (iter.hasNext()) {
 			if (iter.next().getState() == WorldObjectState.DEAD) {
 				iter.remove();
+				activeObjectPointer--;
 			}
 		}
 	}
