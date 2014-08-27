@@ -41,7 +41,7 @@ public class AdjacentTilesSearcher {
 
 		// initialize search with source Tile (cost == 0)
 		addNextCost();
-		addActualCostTile(tile);
+		addCurrentCostTile(tile);
 
 		// begin recursive adding of the next costs
 		handleNextCost();
@@ -65,11 +65,11 @@ public class AdjacentTilesSearcher {
 	}
 
 	/**
-	 * nextCost() recursively performs search operations for actually considered
-	 * cost
+	 * nextCost() recursively performs search operations for currently
+	 * considered cost
 	 */
 	private void handleNextCost() {
-		// add vector of tiles for actually considered cost
+		// add vector of tiles for currently considered cost
 		addNextCost();
 		boolean anyTileAdded = false;
 		for (final Tile prevTile : previousCostTiles()) {
@@ -84,7 +84,7 @@ public class AdjacentTilesSearcher {
 			// no tiles added for current cost, no further tiles will be added
 			return;
 		}
-		if (getActualCost() == range) {
+		if (getCurrentC() == range) {
 			return;
 		}
 
@@ -108,7 +108,7 @@ public class AdjacentTilesSearcher {
 		int tilesAdded = 0;
 		for (final Tile tile : adjacentTiles) {
 			if (tileValidCurrentCost(tile)) {
-				addActualCostTile(tile);
+				addCurrentCostTile(tile);
 				tilesAdded++;
 			}
 		}
@@ -120,7 +120,7 @@ public class AdjacentTilesSearcher {
 	 * Check if given tile can be added to current cost tiles. Conditions:
 	 * 
 	 * 1) Given tile is not already added to readyTiles (it does not have lower
-	 * cost than actually considered one).
+	 * cost than currently considered one).
 	 * 
 	 * 2) Tile is valid depend from getOccupiedTiles variable
 	 * 
@@ -145,25 +145,25 @@ public class AdjacentTilesSearcher {
 	}
 
 	/**
-	 * Add tile to readyTile with actually considered cost.
+	 * Add tile to readyTile with currently considered cost.
 	 * 
 	 * @param readyTile
 	 */
-	private void addActualCostTile(final Tile readyTile) {
-		actualCostTiles().add(readyTile);
+	private void addCurrentCostTile(final Tile readyTile) {
+		currentCostTiles().add(readyTile);
 	}
 
 	/**
-	 * For actual cost N there are N+1 elements.
+	 * For current cost N there are N+1 elements.
 	 * 
 	 * @return
 	 */
-	private List<Tile> actualCostTiles() {
+	private List<Tile> currentCostTiles() {
 		return costTiles.get(costTiles.size() - 1);
 	}
 
 	/**
-	 * For actual cost N there are N+1 elements.
+	 * For current cost N there are N+1 elements.
 	 * 
 	 * @return
 	 */
@@ -172,11 +172,11 @@ public class AdjacentTilesSearcher {
 	}
 
 	/**
-	 * Get actually considered cost.
+	 * Get currently considered cost.
 	 * 
-	 * @return actually considered cost
+	 * @return currently considered cost
 	 */
-	private int getActualCost() {
+	private int getCurrentC() {
 		return costTiles.size() - 1;
 	}
 

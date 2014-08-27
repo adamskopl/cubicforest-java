@@ -13,7 +13,7 @@ public abstract class GuiContainer extends RenderableObjectsContainer implements
 
 	protected List<GuiElement> guiElements;
 	private final GuiType_e type;
-	// holds actually clicked element
+	// holds currently clicked element
 	private GuiElement clickedElement = null;
 
 	public GuiElement getClickedElement() {

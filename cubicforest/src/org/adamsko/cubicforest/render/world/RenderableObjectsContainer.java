@@ -45,7 +45,7 @@ public class RenderableObjectsContainer implements RenderableObjectsMaster {
 	}
 
 	/**
-	 * Actual list of {@link RenderableObject} objects. In contrary to
+	 * Current list of {@link RenderableObject} objects. In contrary to
 	 * renderableObjectsToServe, it contains all objects which should be
 	 * rendered.
 	 */

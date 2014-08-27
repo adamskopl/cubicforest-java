@@ -19,8 +19,8 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 	private final CollisionsHandler collisionsHandler;
 
 	/**
-	 * Object which is actually related with a specific visitor. Needed for e.g.
-	 * removing this object in its visitor's methods.
+	 * Object which is currently related with a specific visitor. Needed for
+	 * e.g. removing this object in its visitor's methods.
 	 */
 	private WorldObject visitingObject;
 

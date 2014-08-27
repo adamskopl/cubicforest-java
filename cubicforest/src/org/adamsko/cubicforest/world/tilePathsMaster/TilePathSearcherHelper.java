@@ -39,7 +39,7 @@ public class TilePathSearcherHelper {
 
 		// initialize search with source Tile (cost == 0)
 		addNextCost();
-		addActualCostTile(source);
+		addCurrentCostTile(source);
 
 		// begin recursive adding of the next costs
 		handleNextCost();
@@ -78,10 +78,10 @@ public class TilePathSearcherHelper {
 	 * @throws Exception
 	 */
 	private void popCostsToSource(final TilePath path) throws Exception {
-		final List<Tile> actualCostTiles = actualCostTiles();
+		final List<Tile> currentCostTiles = currentCostTiles();
 		final Tile pathFirstTile = path.getFrontTile();
 		boolean tileAdded = false;
-		for (final Tile costTile : actualCostTiles) {
+		for (final Tile costTile : currentCostTiles) {
 			if (TilesHelper.areTilesAdjecant(pathFirstTile, costTile)) {
 				addTilePathFront(path, costTile);
 				tileAdded = true;
@@ -104,12 +104,12 @@ public class TilePathSearcherHelper {
 	}
 
 	/**
-	 * nextCost() recursively performs search operations for actually considered
-	 * cost
+	 * nextCost() recursively performs search operations for currently
+	 * considered cost
 	 */
 	private void handleNextCost() {
 
-		// add vector of tiles for actually considered cost
+		// add vector of tiles for currently considered cost
 		addNextCost();
 		boolean anyTileAdded = false;
 		for (final Tile prevTile : previousCostTiles()) {
@@ -146,7 +146,7 @@ public class TilePathSearcherHelper {
 		int tilesAdded = 0;
 		for (final Tile tile : adjacentTiles) {
 			if (tileValidCurrentCost(tile)) {
-				addActualCostTile(tile);
+				addCurrentCostTile(tile);
 				if (tile == destiny) {
 					return -1;
 				}
@@ -160,7 +160,7 @@ public class TilePathSearcherHelper {
 	 * Check if given tile can be added to current cost tiles. Conditions:
 	 * 
 	 * 1) Given tile is not already added to readyTiles (it does not have lower
-	 * cost than actually considered one).
+	 * cost than currently considered one).
 	 * 
 	 * 2) Given tile is passable or is a destiny tile
 	 * 
@@ -192,25 +192,25 @@ public class TilePathSearcherHelper {
 	}
 
 	/**
-	 * Add tile to readyTile with actually considered cost.
+	 * Add tile to readyTile with currently considered cost.
 	 * 
 	 * @param readyTile
 	 */
-	private void addActualCostTile(final Tile readyTile) {
-		actualCostTiles().add(readyTile);
+	private void addCurrentCostTile(final Tile readyTile) {
+		currentCostTiles().add(readyTile);
 	}
 
 	/**
-	 * For actual cost N there are N+1 elements.
+	 * For current cost N there are N+1 elements.
 	 * 
 	 * @return
 	 */
-	private List<Tile> actualCostTiles() {
+	private List<Tile> currentCostTiles() {
 		return costTiles.get(costTiles.size() - 1);
 	}
 
 	/**
-	 * For actual cost N there are N+1 elements.
+	 * For current cost N there are N+1 elements.
 	 * 
 	 * @return
 	 */
@@ -225,7 +225,7 @@ public class TilePathSearcherHelper {
 	 * @return
 	 */
 	private boolean destinyFound() {
-		final List<Tile> highestCostTiles = actualCostTiles();
+		final List<Tile> highestCostTiles = currentCostTiles();
 		if (highestCostTiles.contains(destiny)) {
 			return true;
 		}

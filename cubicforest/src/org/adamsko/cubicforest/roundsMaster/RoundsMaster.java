@@ -66,7 +66,7 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		nextPhase();
 	}
 
-	private RoundPhase actualPhase() {
+	private RoundPhase currentPhase() {
 		if (phases.size() == 0)
 			return null;
 		return phases.get(phasePointer);
@@ -103,10 +103,10 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 
 	@Override
 	public void onTileEvent(Tile tile, TileEvent event) {
-		RoundPhase actualPhase = actualPhase();
+		RoundPhase currentPhase = currentPhase();
 
-		if (actualPhase != null)
-			actualPhase.onTileEvent(tile, event);
+		if (currentPhase != null)
+			currentPhase.onTileEvent(tile, event);
 
 	}
 
@@ -145,7 +145,7 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 
 	@Override
 	public void onGuiEvent(GuiContainer eventGui) {
-		actualPhase().onGuiEvent(eventGui);
+		currentPhase().onGuiEvent(eventGui);
 	}
 
 }
