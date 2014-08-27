@@ -5,11 +5,10 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
-import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.World;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMasterClient;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.TilesMasterClient;
 
 import com.badlogic.gdx.Gdx;
 
@@ -24,8 +23,8 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	/**
 	 * for the rounds/world restart
 	 */
-	private World world;
-	private List<RoundPhase> phases;
+	private final World world;
+	private final List<RoundPhase> phases;
 	int phasePointer = -1;
 
 	private GameResult gameResult;
@@ -40,7 +39,7 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	 * 
 	 * @param gameResult
 	 */
-	public void setGameResultSingle(GameResult gameResult) {
+	public void setGameResultSingle(final GameResult gameResult) {
 		if (gameResult != GameResult.GAME_PLAY
 				&& this.gameResult == GameResult.GAME_PLAY) {
 			Gdx.app.debug("setres", gameResult.toString());
@@ -55,7 +54,7 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		this.gameResult = GameResult.GAME_PLAY;
 	}
 
-	public RoundsMaster(World world) {
+	public RoundsMaster(final World world) {
 		this.world = world;
 		phases = new ArrayList<RoundPhase>();
 		gameResult = GameResult.GAME_PLAY;
@@ -67,21 +66,23 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	}
 
 	private RoundPhase currentPhase() {
-		if (phases.size() == 0)
+		if (phases.size() == 0) {
 			return null;
+		}
 		return phases.get(phasePointer);
 	}
 
 	public void nextPhase() throws Exception {
-		if (phases.size() == 0)
+		if (phases.size() == 0) {
 			return;
+		}
 
 		phasePointer++;
 		// check if previous phase was the last one
 		if (phasePointer == phases.size()) {
 			nextRound();
 		} else {
-			RoundPhase nextPhase = phases.get(phasePointer);
+			final RoundPhase nextPhase = phases.get(phasePointer);
 			nextPhase.startPhase();
 		}
 	}
@@ -94,7 +95,7 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	 *            phase which has ended right now
 	 * @throws Exception
 	 */
-	public void phaseIsOver(RoundPhase phaseEnded) throws Exception {
+	public void phaseIsOver(final RoundPhase phaseEnded) throws Exception {
 		if (phases.get(phasePointer) != phaseEnded) {
 			throw new Exception("phaseIsOver: phasePointer error");
 		}
@@ -102,49 +103,50 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	}
 
 	@Override
-	public void onTileEvent(Tile tile, TileEvent event) {
-		RoundPhase currentPhase = currentPhase();
+	public void onTileEvent(final Tile tile, final TileEvent event) {
+		final RoundPhase currentPhase = currentPhase();
 
-		if (currentPhase != null)
+		if (currentPhase != null) {
 			currentPhase.onTileEvent(tile, event);
+		}
 
 	}
 
 	/**
 	 * @param newPhase
 	 */
-	public void addPhase(RoundPhase newPhase) {
+	public void addPhase(final RoundPhase newPhase) {
 		phases.add(newPhase);
 	}
 
-	public void setMapActive(int activeMapIndex) {
+	public void setMapActive(final int activeMapIndex) {
 		world.setMapActive(activeMapIndex);
 	}
-	
+
 	/**
 	 * Reload {@link RoundsMaster}: reload all phases, reload World.
 	 */
 	public void reload() {
-			world.reloadWorld();
+		world.reloadWorld();
 
-			// reload phases after reloading World (add new phaseObjects)
-			reloadPhases();
+		// reload phases after reloading World (add new phaseObjects)
+		reloadPhases();
 
-			try {
-				nextRound();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			nextRound();
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void reloadPhases() {
-		for (RoundPhase phase : phases) {
+		for (final RoundPhase phase : phases) {
 			phase.reloadPhase();
 		}
 	}
 
 	@Override
-	public void onGuiEvent(GuiContainer eventGui) {
+	public void onGuiEvent(final GuiContainer eventGui) {
 		currentPhase().onGuiEvent(eventGui);
 	}
 

@@ -12,8 +12,8 @@ import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
@@ -115,7 +115,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			return true;
 		}
 
-		if (!tile.getTilePathSearchValid()) {
+		if (!tile.isTilePathSearchValid()) {
 			return false;
 		}
 
@@ -223,7 +223,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		try {
 			final GuiElementHeroTool clickedElement = (GuiElementHeroTool) guiHeroTools
 					.getClickedElement();
-			final HeroToolType heroToolType = clickedElement.getHeroToolType();
+			final WorldObjectType heroToolType = clickedElement.getType();
 
 			if (gatherCubesMaster.isToolAffordable(heroToolType)) {
 				// change mode and also set marker's type

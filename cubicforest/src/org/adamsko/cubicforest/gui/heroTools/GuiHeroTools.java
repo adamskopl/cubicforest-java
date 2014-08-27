@@ -1,8 +1,11 @@
 package org.adamsko.cubicforest.gui.heroTools;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiType_e;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -19,8 +22,15 @@ public class GuiHeroTools extends GuiContainer {
 
 	private void createGui() {
 
+		final List<WorldObjectType> types = new ArrayList<WorldObjectType>();
+		types.add(WorldObjectType.TOOLORANGE);
+		types.add(WorldObjectType.TOOLRED);
+		types.add(WorldObjectType.TOOLTURRET);
+		types.add(WorldObjectType.TOOLTRAP);
+		types.add(WorldObjectType.TOOLPORTAL);
+
 		int seqNum = 0;
-		for (final HeroToolType type : HeroToolType.values()) {
+		for (final WorldObjectType type : types) {
 
 			final GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
 					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 70, 0);

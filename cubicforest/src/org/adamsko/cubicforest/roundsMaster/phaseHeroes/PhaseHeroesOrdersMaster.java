@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -42,7 +42,7 @@ class PhaseHeroesOrdersMaster {
 	 * @throws Exception
 	 */
 	public void changePhaseHeroesMode(final PhaseHeroesMode newMode,
-			final HeroToolType heroToolType) throws Exception {
+			final WorldObjectType heroToolType) throws Exception {
 		heroesToolsMaster.setHeroToolMarkerType(heroToolType);
 		changePhaseHeroesMode(newMode);
 	}

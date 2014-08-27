@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
@@ -25,7 +26,7 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker
-	private HeroToolType heroToolMarkerType;
+	private WorldObjectType heroToolMarkerType;
 	private final HeroToolsFactory heroToolsFactory;
 
 	public HeroesToolsMaster(final TilesMaster TM,
@@ -88,17 +89,17 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 		tool.setTextureRegion(atlasRows.get(index)[tool.getTexNum()]);
 	}
 
-	public static int heroTooltypeToCost(final HeroToolType type) {
-		switch (type) {
-		case TOOL_ORANGE:
+	public static int heroTooltypeToCost(final WorldObjectType worldObjectType) {
+		switch (worldObjectType) {
+		case TOOLORANGE:
 			return 0;
-		case TOOL_RED:
+		case TOOLRED:
 			return 1;
-		case TOOL_TURRET:
+		case TOOLTURRET:
 			return 3;
-		case TOOL_TRAP:
+		case TOOLTRAP:
 			return 5;
-		case TOOL_PORTAL:
+		case TOOLPORTAL:
 			return 10;
 		default:
 			Gdx.app.error("heroTooltypeToCost", "unknown type");
@@ -106,7 +107,7 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 		}
 	}
 
-	public void setHeroToolMarkerType(final HeroToolType heroToolMarkerType) {
+	public void setHeroToolMarkerType(final WorldObjectType heroToolMarkerType) {
 		this.heroToolMarkerType = heroToolMarkerType;
 	}
 
@@ -135,15 +136,15 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 
 		HeroTool heroTool = null;
 		for (final Vector2 pos : coordsTraps) {
-			heroTool = heroToolsFactory.createHeroTool(HeroToolType.TOOL_TRAP,
-					pos, this);
+			heroTool = heroToolsFactory.createHeroTool(
+					WorldObjectType.TOOLTRAP, pos, this);
 			heroTool.setState(HeroToolStates_e.STATE_READY);
 			setToolTexture(heroTool, 0);
 			addObject(heroTool);
 		}
 		for (final Vector2 pos : coordsPortals) {
 			heroTool = heroToolsFactory.createHeroTool(
-					HeroToolType.TOOL_PORTAL, pos, this);
+					WorldObjectType.TOOLPORTAL, pos, this);
 			heroTool.setState(HeroToolStates_e.STATE_READY);
 			setToolTexture(heroTool, 0);
 			addObject(heroTool);

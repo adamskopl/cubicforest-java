@@ -16,7 +16,15 @@ public interface TilePropertiesIndicator {
 	 * 
 	 * @return
 	 */
-	boolean getTilePathSearchValid();
+	boolean isTilePathSearchValid();
+
+	/**
+	 * Returns information, if related tile should be highlighted as being
+	 * occupied (not accessible to heroes).
+	 * 
+	 * @return
+	 */
+	boolean isTileHighlightedAsOccupied();
 
 	/**
 	 * Set information, for getTilePathSearchValid().

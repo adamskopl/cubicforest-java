@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -27,7 +27,7 @@ public class GatherCubesMaster extends WorldObjectsContainer {
 	/**
 	 * Check if counter allows heroTool to be build (if player can afford it).
 	 */
-	public Boolean isToolAffordable(final HeroToolType heroToolType) {
+	public Boolean isToolAffordable(final WorldObjectType heroToolType) {
 		final int toolCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
 		if (toolCost <= gatherCubesCounter.getCounter()) {
 			return true;

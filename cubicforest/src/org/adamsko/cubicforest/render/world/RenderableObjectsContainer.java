@@ -157,4 +157,9 @@ public class RenderableObjectsContainer implements RenderableObjectsMaster {
 		return listCopy;
 	}
 
+	@Override
+	public void changeTexture(final RenderableObject object,
+			final int atlasRow, final int atlasCol) {
+		object.setTextureRegion(atlasRows.get(atlasRow)[atlasCol]);
+	}
 }

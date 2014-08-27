@@ -1,12 +1,10 @@
 package org.adamsko.cubicforest.render.text;
 
-import com.badlogic.gdx.Gdx;
-
 public class LabelFloat extends Label {
 
 	Float value;
 
-	public LabelFloat(Float value) {
+	public LabelFloat(final Float value) {
 		this.value = value;
 	}
 

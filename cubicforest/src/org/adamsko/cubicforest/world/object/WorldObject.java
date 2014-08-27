@@ -86,14 +86,13 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	}
 
 	public WorldObject(final TextureRegion tr, final int texNum,
-			final WorldObjectsContainer container, final WorldObjectType type,
-			final WorldObjectType refactorType) {
+			final WorldObjectsContainer container, final WorldObjectType type) {
 		super(tr, texNum);
 
 		this.parentContainer = container;
 
 		collisionVisitorsManager = CollisionVisitorsManagerFactory.instance()
-				.create(refactorType);
+				.create(type);
 
 		initTilePropertiesIndicator();
 

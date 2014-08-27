@@ -129,7 +129,7 @@ public class AdjacentTilesSearcher {
 	 * @return decision: tile can be added or not
 	 */
 	private boolean tileValidCurrentCost(final Tile tileChecked) {
-		if (!getOccupiedTiles && !tileChecked.getTilePathSearchValid()) {
+		if (!getOccupiedTiles && !tileChecked.isTilePathSearchValid()) {
 			return false;
 		}
 		// check if tileChecked is not already added (does not have lower cost

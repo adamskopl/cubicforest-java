@@ -33,7 +33,7 @@ public class TilesSearcher {
 				continue;
 			}
 
-			if (!getOccupied && adjTile.getTilePathSearchValid()) {
+			if (!getOccupied && adjTile.isTilePathSearchValid()) {
 				continue;
 			}
 

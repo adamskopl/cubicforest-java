@@ -171,7 +171,7 @@ public class TilePathSearcherHelper {
 	private boolean tileValidCurrentCost(final Tile tileChecked) {
 
 		// if tile is not passable, don't add it, unless it's a destiny
-		if (!tileChecked.getTilePathSearchValid() && tileChecked != destiny) {
+		if (!tileChecked.isTilePathSearchValid() && tileChecked != destiny) {
 			return false;
 		}
 		// check if tileChecked is not already added (does not have lower cost

@@ -79,8 +79,7 @@ public class TilesMaster implements PickMasterClient {
 	public void initTiles(final RoundsMaster roundsMaster) {
 
 		tilesContainer = new TilesContainer("tiles container", this);
-		tilesEventsHandler = new TilesEventsHandler(tilesContainer,
-				roundsMaster);
+		tilesEventsHandler = new TilesEventsHandler(roundsMaster);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);
@@ -143,24 +142,14 @@ public class TilesMaster implements PickMasterClient {
 		if (!parentTile.isNull()) {
 			try {
 				parentTile.addOccupant(addObject, false);
-				switch (addObject.getType()) {
-				case OBJECT_ENTITY:
-					tilesContainer.testHighlightTile(parentTile, 0, 1);
-					break;
-				case OBJECT_ITEM:
-					break;
-				case OBJECT_TERRAIN:
-					tilesContainer.testHighlightTile(parentTile, 0, 1);
-					break;
-				default:
-					Gdx.app.error("addWorldObject " + addObject.getName(),
-							"unknown");
-					break;
-				}
 			} catch (final Exception e) {
-				e.printStackTrace();
+				Gdx.app.error("addWorldObject", e.toString());
 			}
 		}
+
+		/*
+		 * TODO higlighting
+		 */
 	}
 
 	/**
@@ -196,13 +185,13 @@ public class TilesMaster implements PickMasterClient {
 
 	public void highlightTile(final Tile tileToHighlight, final int texRow,
 			final int texCol) {
-		tilesContainer.testHighlightTile(tileToHighlight, texRow, texCol);
+		tilesContainer.changeTexture(tileToHighlight, texRow, texCol);
 	}
 
 	public void highlightTiles(final List<Tile> tilesToHighlight,
 			final int texRow, final int texCol) {
 		for (final Tile t : tilesToHighlight) {
-			tilesContainer.testHighlightTile(t, texRow, texCol);
+			tilesContainer.changeTexture(t, texRow, texCol);
 		}
 	}
 

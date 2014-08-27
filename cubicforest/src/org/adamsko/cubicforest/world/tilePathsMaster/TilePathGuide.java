@@ -172,9 +172,8 @@ public class TilePathGuide implements TweenCallback {
 				// path composed from a single tile
 
 				// path is empty: occupant has reached its goal
-				final OrderOperationHandler orderOperationHandler = processTileEvent(
-						TileEvent.OCCUPANT_STOPS, helper.getTileHeadingTo(),
-						wanderer);
+				processTileEvent(TileEvent.OCCUPANT_STOPS,
+						helper.getTileHeadingTo(), wanderer);
 
 				master.onPathEnd(this);
 				return;

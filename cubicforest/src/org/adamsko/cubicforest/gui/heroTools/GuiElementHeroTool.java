@@ -2,24 +2,25 @@ package org.adamsko.cubicforest.gui.heroTools;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiElement;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class GuiElementHeroTool extends GuiElement {
 
-	private HeroToolType heroToolType;
+	private final WorldObjectType type;
 
-	public HeroToolType getHeroToolType() {
-		return heroToolType;
-	}
-
-	public GuiElementHeroTool(HeroToolType heroToolType, TextureRegion tr,
-			int texNum, GuiContainer pareContainer, float posX, float posY) {
+	public GuiElementHeroTool(final WorldObjectType heroToolType,
+			final TextureRegion tr, final int texNum,
+			final GuiContainer pareContainer, final float posX, final float posY) {
 		super(tr, texNum, pareContainer, posX, posY);
 
-		this.heroToolType = heroToolType;
-		
+		this.type = heroToolType;
+
+	}
+
+	public WorldObjectType getType() {
+		return type;
 	}
 
 }

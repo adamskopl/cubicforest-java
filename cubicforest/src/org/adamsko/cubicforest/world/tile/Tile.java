@@ -32,8 +32,7 @@ public class Tile extends WorldObject {
 
 	public Tile(final Vector2 coords, final TextureRegion tr,
 			final WorldObjectsContainer container) {
-		super(tr, 0, container, WorldObjectType.OBJECT_UNDEFINED,
-				WorldObjectType.OBJECT_UNDEFINED);
+		super(tr, 0, container, WorldObjectType.DEFAULT);
 		this.tilesPos = coords;
 
 		occupants = new ArrayList<WorldObject>();
@@ -73,6 +72,7 @@ public class Tile extends WorldObject {
 	public void addOccupant(final WorldObject insertObject,
 			final boolean ignoreOccupation) throws Exception {
 		occupants.add(insertObject);
+		refresh();
 	}
 
 	/**
@@ -87,6 +87,7 @@ public class Tile extends WorldObject {
 			Gdx.app.error("Tile::removeOccupant()",
 					"no " + removedOccupant.getName() + " in 'occupants'");
 		}
+		refresh();
 	}
 
 	public void removeDeadOccupants() {
@@ -99,6 +100,7 @@ public class Tile extends WorldObject {
 				iter.remove();
 			}
 		}
+		refresh();
 	}
 
 	/**
@@ -117,14 +119,35 @@ public class Tile extends WorldObject {
 	 * 
 	 * @return
 	 */
-	public boolean getTilePathSearchValid() {
+	public boolean isTilePathSearchValid() {
 		for (final WorldObject occupant : getOccupants()) {
-			if (!occupant.getTilePropertiesIndicator().getTilePathSearchValid()) {
+			if (!occupant.getTilePropertiesIndicator().isTilePathSearchValid()) {
 				// one of the occupants is not valid - Tile is not valid
 				return false;
 			}
 		}
 		return true;
+	}
+
+	// /////////////
+	// highlighting. other class needed.
+	// /////////////
+	public void refresh() {
+		if (isTileHighlightedAsOccupied()) {
+			getParentContainer().changeTexture(this, 0, 1);
+		} else {
+			getParentContainer().changeTexture(this, 0, 0);
+		}
+	}
+
+	private boolean isTileHighlightedAsOccupied() {
+		for (final WorldObject occupant : getOccupants()) {
+			if (occupant.getTilePropertiesIndicator()
+					.isTileHighlightedAsOccupied()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

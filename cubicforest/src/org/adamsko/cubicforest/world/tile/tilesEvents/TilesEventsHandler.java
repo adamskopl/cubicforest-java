@@ -7,17 +7,13 @@ import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHand
 import org.adamsko.cubicforest.world.object.collision.handler.concrete.CollisionsHandlerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 public class TilesEventsHandler {
 
-	private final TilesContainer tilesContainer;
 	private final CollisionsHandler collisionsHandler;
 
-	public TilesEventsHandler(final TilesContainer tilesContainer,
-			final RoundsMaster roundsMaster) {
-		this.tilesContainer = tilesContainer;
+	public TilesEventsHandler(final RoundsMaster roundsMaster) {
 
 		collisionsHandler = new CollisionsHandlerDefault(roundsMaster);
 
@@ -42,12 +38,10 @@ public class TilesEventsHandler {
 		switch (evenType) {
 		case OCCUPANT_ENTERS: {
 			eventTile.addOccupant(eventObject, true);
-			tilesContainer.testHighlightTile(eventTile, 0, 1);
 			break;
 		}
 		case OCCUPANT_LEAVES: {
 			eventTile.removeOccupant(eventObject);
-			tilesContainer.testHighlightTile(eventTile, 0, 0);
 			break;
 		}
 		default:

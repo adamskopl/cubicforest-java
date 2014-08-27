@@ -9,7 +9,6 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsContainer {
@@ -56,27 +55,14 @@ public class TilesContainer extends WorldObjectsContainer {
 		// tiles are slightly lower than other objects
 		newTile.setVerticalPos(-0.01f);
 
-		newTile.addLabel(newTile.getTilesPos().toString());
-		newTile.altLabelLast(Color.WHITE, 0.8f, -20.0f, -10.0f);
+		// newTile.addLabel(newTile.getTilesPos().toString());
+		// newTile.altLabelLast(Color.WHITE, 0.8f, -20.0f, -10.0f);
 
 		// FIXME: don't add newTile through addRenderableObject(), because it's
 		// a Tile. Is it ok?
 		super.getWorldObjects().add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_ALL).add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_UNSERVED).add(newTile);
-	}
-
-	/**
-	 * Change given tile's texture to a flashy one.
-	 * 
-	 * @param tileToHighlight
-	 *            tile to be changed.
-	 * @param texNum
-	 *            sequence number of the texture in an atlas row.
-	 */
-	public void testHighlightTile(final Tile tileToHighlight, final int texRow,
-			final int texCol) {
-		tileToHighlight.setTextureRegion(atlasRows.get(texRow)[texCol]);
 	}
 
 	@Override

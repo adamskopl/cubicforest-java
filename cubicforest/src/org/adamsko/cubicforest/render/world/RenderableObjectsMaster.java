@@ -18,4 +18,7 @@ public interface RenderableObjectsMaster {
 	 */
 	public List<RenderableObject> popRenderableObjects(ROListType_e type);
 
+	public void changeTexture(final RenderableObject object,
+			final int atlasRow, final int atlasCol);
+
 }

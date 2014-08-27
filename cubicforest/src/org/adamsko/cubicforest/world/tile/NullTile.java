@@ -4,7 +4,7 @@ public class NullTile extends Tile {
 
 	private static NullTile instance = null;
 
-	public NullTile() {
+	private NullTile() {
 		super();
 	}
 

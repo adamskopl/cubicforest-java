@@ -1,20 +1,34 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
-import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public abstract class HeroTool extends ItemObject {
+public abstract class HeroTool extends WorldObject {
 
-	HeroToolType heroToolType;
+	final int buildCost;
+	HeroToolStates_e toolState;
 
-	public HeroToolType getHeroToolType() {
-		return heroToolType;
+	/**
+	 * For NullHeroTool
+	 */
+	HeroTool() {
+		super();
+		buildCost = 0;
 	}
 
-	HeroToolStates_e toolState;
+	public HeroTool(final TextureRegion tr, final int texNum,
+			final WorldObjectsContainer container,
+			final WorldObjectType worldObjectType) {
+		super(tr, texNum, container, worldObjectType);
+
+		this.buildCost = HeroesToolsMaster.heroTooltypeToCost(worldObjectType);
+
+		toolState = HeroToolStates_e.STATE_CONSTRUCTION;
+
+	}
 
 	public void setState(final HeroToolStates_e state) {
 		this.toolState = state;
@@ -24,23 +38,8 @@ public abstract class HeroTool extends ItemObject {
 		return toolState;
 	}
 
-	final int buildCost;
-
 	public int getBuildCost() {
 		return buildCost;
-	}
-
-	public HeroTool(final TextureRegion tr, final int texNum,
-			final WorldObjectsContainer container,
-			final HeroToolType heroToolType) {
-		super(tr, texNum, container, ItemObjectType.ITEM_HERO_TOOL);
-
-		this.heroToolType = heroToolType;
-
-		this.buildCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
-
-		toolState = HeroToolStates_e.STATE_CONSTRUCTION;
-
 	}
 
 	@Override

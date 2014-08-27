@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
@@ -26,24 +27,24 @@ public class HeroToolsFactory {
 		this.heroesMaster = heroesMaster;
 	}
 
-	public HeroTool createHeroTool(final HeroToolType heroToolType,
+	public HeroTool createHeroTool(final WorldObjectType heroToolType,
 			final Vector2 tilePos, final WorldObjectsContainer container) {
-		HeroTool newTool = null;
+		HeroTool newTool = NullHeroTool.instance();
 
 		switch (heroToolType) {
-		case TOOL_ORANGE:
+		case TOOLORANGE:
 			newTool = new HeroToolOrange(textureRegions.get(1)[0], 0, container);
 			break;
-		case TOOL_RED:
+		case TOOLRED:
 			newTool = new HeroToolRed(textureRegions.get(1)[1], 1, container);
 			break;
-		case TOOL_TURRET:
+		case TOOLTURRET:
 			newTool = new HeroToolTurret(textureRegions.get(1)[2], 2, container);
 			break;
-		case TOOL_TRAP:
+		case TOOLTRAP:
 			newTool = new HeroToolTrap(textureRegions.get(1)[3], 3, container);
 			break;
-		case TOOL_PORTAL:
+		case TOOLPORTAL:
 			newTool = new HeroToolPortal(textureRegions.get(1)[4], 4,
 					container, heroesMaster);
 			break;
@@ -57,7 +58,7 @@ public class HeroToolsFactory {
 
 		newTool.setTilesPos(tilePos);
 		newTool.setVerticalPos(0.1f);
-		newTool.addLabel(newTool.getHeroToolType().toString());
+		newTool.addLabel(newTool.getType().toString());
 		newTool.altLabelLast(Color.YELLOW, 0.8f, -40.0f, -10.0f);
 
 		return newTool;
