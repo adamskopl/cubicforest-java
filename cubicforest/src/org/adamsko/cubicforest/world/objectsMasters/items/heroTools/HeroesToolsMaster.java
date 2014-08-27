@@ -69,7 +69,7 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 	 * @throws Exception
 	 * 
 	 */
-	public void heroToolMarkerRemove() throws Exception {
+	public void heroToolMarkerRemove() {
 		if (heroToolMarker != null) {
 			removeObjectFromContainer(heroToolMarker);
 			heroToolMarker = null;
@@ -111,19 +111,8 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 		this.heroToolMarkerType = heroToolMarkerType;
 	}
 
-	public void removeTool(final HeroTool heroToolToRemove) {
-		try {
-			removeObjectFromContainer(heroToolToRemove);
-		} catch (final Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void update(final float deltaTime) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

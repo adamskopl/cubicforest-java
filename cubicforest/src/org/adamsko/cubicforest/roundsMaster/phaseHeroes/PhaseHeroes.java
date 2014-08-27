@@ -80,10 +80,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	 */
 	private void startOrderClicked() {
 		if (!orderInProgress) {
-			// if (activePath != null && activePath.length() > 0) {
 			if (activePath != null) {
 				orderInProgress = true;
-
 				try {
 					heroesOrdersMaster
 							.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);

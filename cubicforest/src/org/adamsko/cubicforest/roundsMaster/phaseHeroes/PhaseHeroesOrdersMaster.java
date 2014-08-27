@@ -78,7 +78,7 @@ class PhaseHeroesOrdersMaster {
 	// SHOULD BE IN A SEPERATE CLASS
 	//
 	// ///////////////////////////////////////////////////////////
-	private void newModeChoiceTool() throws Exception {
+	private void newModeChoiceTool() {
 		switch (phaseHeroesMode) {
 		case MODE_CHOICE_MOVEMENT:
 			heroesToolsMaster.heroToolMarkerAdd(tilePickedOrder);
@@ -92,7 +92,7 @@ class PhaseHeroesOrdersMaster {
 		}
 	}
 
-	private void newModeChoiceMovement() throws Exception {
+	private void newModeChoiceMovement() {
 		switch (phaseHeroesMode) {
 		case MODE_CHOICE_TOOL:
 			heroesToolsMaster.heroToolMarkerRemove();
@@ -103,7 +103,7 @@ class PhaseHeroesOrdersMaster {
 		}
 	}
 
-	private void newModeOrderExecution() throws Exception {
+	private void newModeOrderExecution() {
 		switch (phaseHeroesMode) {
 		case MODE_CHOICE_MOVEMENT:
 			heroesToolsMaster.heroToolMarkerRemove();
@@ -157,11 +157,8 @@ class PhaseHeroesOrdersMaster {
 
 	private void addHeroToolMarker(final Tile tilePickedOrder,
 			final Boolean tileOrderValid) {
-		try {
-			heroesToolsMaster.heroToolMarkerRemove();
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
+
+		heroesToolsMaster.heroToolMarkerRemove();
 
 		if (tileOrderValid) {
 			heroesToolsMaster.heroToolMarkerAdd(tilePickedOrder);

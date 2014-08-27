@@ -20,19 +20,10 @@ public class PhaseEnemiesHeroesHelper {
 	 * enemies.
 	 */
 	private final List<WorldObject> heroes;
-	/**
-	 * How many heroes are at the start of the level?
-	 */
-	private final int startHeroesNumber;
 
 	public PhaseEnemiesHeroesHelper(
 			final OrderableObjectsContainer heroesContainer) {
 		heroes = heroesContainer.getOrderableObjects();
-		startHeroesNumber = heroes.size();
-	}
-
-	public boolean gameOver() {
-		return heroes.size() != startHeroesNumber;
 	}
 
 	/**

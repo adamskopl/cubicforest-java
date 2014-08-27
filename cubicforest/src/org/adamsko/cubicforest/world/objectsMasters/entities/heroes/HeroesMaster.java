@@ -11,7 +11,6 @@ import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
@@ -76,15 +75,6 @@ public class HeroesMaster extends WorldObjectsContainer implements
 	@Override
 	public void unloadMapObjects() throws Exception {
 		removeWorldObjects();
-	}
-
-	public void removeHero(final Hero heroToRemove) {
-		Gdx.app.debug("removeHero", heroToRemove.getName());
-		try {
-			removeObjectFromContainer(heroToRemove);
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }

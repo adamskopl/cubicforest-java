@@ -72,12 +72,4 @@ public class EnemiesMaster extends WorldObjectsContainer implements
 		removeWorldObjects();
 	}
 
-	public void removeEnemy(final Enemy enemyToRemove) {
-		try {
-			removeObjectFromContainer(enemyToRemove);
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

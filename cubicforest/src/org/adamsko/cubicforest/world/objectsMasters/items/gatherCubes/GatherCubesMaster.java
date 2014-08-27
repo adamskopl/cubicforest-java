@@ -45,15 +45,6 @@ public class GatherCubesMaster extends WorldObjectsContainer {
 				"cubes-atlas-medium", 25, 25, 650, -50);
 	}
 
-	public void removeCube(final GatherCube cubeToRemove) {
-		try {
-			removeObjectFromContainer(cubeToRemove);
-		} catch (final Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public void counterAddValue(final int value) {
 		gatherCubesCounter.addValue(value);
 	}

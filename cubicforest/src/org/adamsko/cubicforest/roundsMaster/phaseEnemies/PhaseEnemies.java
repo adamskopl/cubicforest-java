@@ -82,7 +82,6 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 
 	@Override
 	public void onGuiEvent(final GuiContainer eventGui) {
-		// TODO Auto-generated method stub
 	}
 
 }
