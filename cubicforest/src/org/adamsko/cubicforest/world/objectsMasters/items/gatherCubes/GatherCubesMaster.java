@@ -4,22 +4,20 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class GatherCubesMaster extends CollisionObjectsMaster {
+public class GatherCubesMaster extends WorldObjectsContainer {
 
 	private GatherCubesCounter gatherCubesCounter;
 
-	public GatherCubesMaster(final TilesMaster TM, final String textureName,
-			final int tileW, final int tileH) {
-		super("GatherCubesMaster", TM, WorldObjectType.OBJECT_ITEM,
-				textureName, tileW, tileH);
+	public GatherCubesMaster(final TilesMaster tilesMaster,
+			final String textureName, final int tileW, final int tileH) {
+		super("GatherCubesMaster", tilesMaster, textureName, tileW, tileH);
 	}
 
 	public GatherCubesCounter getGatherCubesCounter() {

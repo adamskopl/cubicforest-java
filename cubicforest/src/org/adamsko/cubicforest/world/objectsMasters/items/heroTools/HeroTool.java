@@ -1,11 +1,8 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.result.CollisionResult;
-import org.adamsko.cubicforest.world.objectsMasters.entities.EntityObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObject;
 import org.adamsko.cubicforest.world.objectsMasters.items.ItemObjectType;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -81,16 +78,5 @@ public abstract class HeroTool extends ItemObject {
 			break;
 		}
 	}
-
-	/**
-	 * Process tile collision with given object. Return order result for that
-	 * object.
-	 * 
-	 * @param entityObject
-	 * @param eventType
-	 * @return
-	 */
-	public abstract void onEntityTileEvent(CollisionResult collisionResult,
-			EntityObject entityObject, TileEvent eventType);
 
 }

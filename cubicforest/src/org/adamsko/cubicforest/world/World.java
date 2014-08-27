@@ -13,9 +13,6 @@ import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverFactory;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolverType_e;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionsMasterBeforeRefactor;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
@@ -85,13 +82,6 @@ public class World {
 		ordersMaster = new OrdersMaster(tilesMaster, heroesMaster,
 				enemiesMaster, heroesToolsMaster, gatherCubesMaster);
 
-		CollisionsMasterBeforeRefactor.instance().addClient(gatherCubesMaster);
-		CollisionsMasterBeforeRefactor.instance().addClient(heroesToolsMaster);
-		CollisionsMasterBeforeRefactor.instance().addClient(heroesMaster);
-		CollisionsMasterBeforeRefactor.instance().addClient(enemiesMaster);
-
-		initCollisionResolvers();
-
 		initWorldObjectsMasters();
 
 		initCollisionVisitorsManagerFactory();
@@ -145,30 +135,11 @@ public class World {
 		phaseEnemies.setRoundsMaster(roundsMaster);
 		roundsMaster.addPhase(phaseEnemies);
 
-		tilesMaster.initCollisionResultProcessor(heroesMaster, enemiesMaster,
-				heroesToolsMaster, gatherCubesMaster, roundsMaster,
-				phaseEnemies, phaseHeroes);
-
 		try {
 			roundsMaster.nextRound();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void initCollisionResolvers() {
-		final CollisionResolverFactory collisionResolverFactory = new CollisionResolverFactory(
-				heroesMaster, enemiesMaster, heroesToolsMaster,
-				gatherCubesMaster);
-
-		heroesMaster.setCollisionResolver(collisionResolverFactory
-				.createFactory(CollisionResolverType_e.RESOLVER_HEROES));
-		enemiesMaster.setCollisionResolver(collisionResolverFactory
-				.createFactory(CollisionResolverType_e.RESOLVER_ENEMIES));
-		gatherCubesMaster.setCollisionResolver(collisionResolverFactory
-				.createFactory(CollisionResolverType_e.RESOLVER_GATHER_CUBES));
-		heroesToolsMaster.setCollisionResolver(collisionResolverFactory
-				.createFactory(CollisionResolverType_e.RESOLVER_HERO_TOOLS));
 	}
 
 	private void initCollisionVisitorsManagerFactory() {

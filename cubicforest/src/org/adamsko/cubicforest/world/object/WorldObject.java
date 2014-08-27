@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.render.world.RenderableObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionResolver;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicatorDefault;
 
@@ -46,9 +45,6 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	}
 
 	private final CollisionVisitorsManager collisionVisitorsManager;
-
-	// TO DELETE (refactor)
-	protected static CollisionResolver collisionResolver;
 
 	/**
 	 * Position indicated by tiles. (0.0,0.0): uppper corner of the first tile.

@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
@@ -22,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
  *         TODO: add tool marker master (class responsible for tool marker)
  * 
  */
-public class HeroesToolsMaster extends CollisionObjectsMaster {
+public class HeroesToolsMaster extends WorldObjectsContainer {
 
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker
@@ -33,8 +32,7 @@ public class HeroesToolsMaster extends CollisionObjectsMaster {
 			final GatherCubesMaster gatherCubesMaster,
 			final HeroesMaster heroesMaster, final String textureName,
 			final int tileW, final int tileH) {
-		super("HeroesToolsMaster", TM, WorldObjectType.OBJECT_ITEM,
-				textureName, tileW, tileH);
+		super("HeroesToolsMaster", TM, textureName, tileW, tileH);
 
 		// addTestObjects();
 		heroToolMarker = null;

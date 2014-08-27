@@ -40,13 +40,6 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		reloadPhase();
 	}
 
-	/**
-	 * 
-	 */
-	void addObject(final WorldObject object) {
-
-	}
-
 	protected void removeDeadObjects() {
 		final Iterator<WorldObject> iter = phaseObjects.iterator();
 		while (iter.hasNext()) {

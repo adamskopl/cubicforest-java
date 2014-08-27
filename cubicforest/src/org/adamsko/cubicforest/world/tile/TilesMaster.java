@@ -5,13 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
-import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
-import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
@@ -94,19 +88,6 @@ public class TilesMaster implements PickMasterClient {
 												// view
 												// tilesContainer.addTile(fCoords);
 		}
-	}
-
-	public void initCollisionResultProcessor(final HeroesMaster heroesMaster,
-			final EnemiesMaster enemiesMaster,
-			final HeroesToolsMaster heroesToolsMaster,
-			final GatherCubesMaster gatherCubesMaster,
-			final RoundsMaster roundsMaster, final PhaseEnemies phaseEnemies,
-			final PhaseHeroes phaseHeroes) {
-
-		tilesEventsHandler.initCollisionResultProcessor(heroesMaster,
-				enemiesMaster, heroesToolsMaster, gatherCubesMaster,
-				roundsMaster, phaseEnemies, phaseHeroes);
-
 	}
 
 	public TilesContainer getTilesContainer() {

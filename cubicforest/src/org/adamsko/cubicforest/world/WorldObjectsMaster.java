@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 /**
- * Interface for classes managing {@link WorldObjectType} type objects. If there is a new
- * type of world objects, their manager should implement this interface.
+ * Interface for classes managing {@link WorldObjectType} type objects. If there
+ * is a new type of world objects, their manager should implement this
+ * interface.
  * 
  * @author adamsko
  * 
@@ -38,8 +39,4 @@ public interface WorldObjectsMaster {
 	 */
 	void unloadMapObjects() throws Exception;
 
-	/**
-	 * @return type of managed world objects
-	 */
-	WorldObjectType getType();
 }

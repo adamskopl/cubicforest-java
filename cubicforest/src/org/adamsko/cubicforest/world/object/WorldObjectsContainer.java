@@ -6,35 +6,18 @@ import java.util.List;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 		implements WorldObjectsMaster {
 
-	/**
-	 * Every container holds one type of objects.
-	 */
-	private final WorldObjectType type;
-
-	/**
-	 * Get type of WorldObject objects from this container.
-	 * 
-	 * @return
-	 */
-	@Override
-	public WorldObjectType getType() {
-		return type;
-	}
-
 	private final List<WorldObject> worldObjects;
 	private final TilesMaster tilesMaster;
 
-	public WorldObjectsContainer(final String name, final WorldObjectType type,
+	public WorldObjectsContainer(final String name,
 			final TilesMaster tilesMaster, final String textureName,
 			final int tileW, final int tileH) {
 
 		super(name, textureName, tileW, tileH);
-		this.type = type;
 		this.tilesMaster = tilesMaster;
 		worldObjects = new ArrayList<WorldObject>();
 	}
@@ -77,10 +60,10 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 	public List<WorldObject> getWorldObjects() {
 		return worldObjects;
 	}
-
-	public void handleServantTileEvent(final WorldObject servant,
-			final TileEvent tileEvent) {
-
-	}
+	//
+	// public void handleServantTileEvent(final WorldObject servant,
+	// final TileEvent tileEvent) {
+	//
+	// }
 
 }

@@ -7,36 +7,22 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class HeroesMaster extends CollisionObjectsMaster implements
+public class HeroesMaster extends WorldObjectsContainer implements
 		OrderableObjectsContainer {
 
-	public HeroesMaster(final TilesMaster TM, final RoundsMaster roundsMaster,
-			final String textureName, final int tileW, final int tileH) {
-		super("HeroesMaster", TM, WorldObjectType.OBJECT_ENTITY, textureName,
-				tileW, tileH);
+	public HeroesMaster(final TilesMaster tilesMaster,
+			final RoundsMaster roundsMaster, final String textureName,
+			final int tileW, final int tileH) {
+		super("HeroesMaster", tilesMaster, textureName, tileW, tileH);
 
-	}
-
-	@Override
-	public void handleServantTileEvent(final WorldObject servant,
-			final TileEvent tileEvent) {
-		switch (tileEvent) {
-		case TILE_PICKED: {
-		}
-		default: {
-
-		}
-		}
 	}
 
 	public WorldObject getTestObject() {

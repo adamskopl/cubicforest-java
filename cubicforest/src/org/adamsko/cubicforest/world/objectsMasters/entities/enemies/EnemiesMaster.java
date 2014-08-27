@@ -7,21 +7,20 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.collisionsMaster.CollisionObjectsMaster;
+import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class EnemiesMaster extends CollisionObjectsMaster implements
+public class EnemiesMaster extends WorldObjectsContainer implements
 		OrderableObjectsContainer {
 
-	public EnemiesMaster(final TilesMaster TM, final RoundsMaster roundsMaster,
-			final String textureName, final int tileW, final int tileH) {
-		super("enemiesMaster", TM, WorldObjectType.OBJECT_ENTITY, textureName,
-				tileW, tileH);
+	public EnemiesMaster(final TilesMaster tilesMaster,
+			final RoundsMaster roundsMaster, final String textureName,
+			final int tileW, final int tileH) {
+		super("enemiesMaster", tilesMaster, textureName, tileW, tileH);
 
 	}
 

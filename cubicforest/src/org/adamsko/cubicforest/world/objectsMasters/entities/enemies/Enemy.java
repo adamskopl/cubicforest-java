@@ -14,7 +14,6 @@ public class Enemy extends EntityObject {
 			final WorldObjectsContainer container) {
 		super(tr, texNum, container, EntityObjectType.ENTITY_ENEMY,
 				WorldObjectType.ENEMY);
-		collisionResolver = new CollisionResolverEnemies();
 	}
 
 	@Override
