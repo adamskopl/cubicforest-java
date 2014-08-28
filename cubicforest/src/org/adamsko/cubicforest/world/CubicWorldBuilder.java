@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
+import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
-import org.adamsko.cubicforest.render.world.WorldRenderer;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
@@ -30,9 +30,9 @@ import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcher;
  * @author adamsko
  * 
  */
-public class World {
+public class CubicWorldBuilder implements GameWorldBuilder {
 
-	private final WorldRenderer renderer;
+	private final GameRenderer renderer;
 	MapsLoader mapsLoader;
 
 	private final List<WorldObjectsMaster> worldObjectsMasters;
@@ -52,11 +52,10 @@ public class World {
 
 	GuiMaster guiMaster;
 
-	public World(final WorldRenderer renderer) {
+	public CubicWorldBuilder(final GameRenderer renderer) {
 		this.renderer = renderer;
-		mapsLoader = new MapsLoaderTiled();
-		mapsLoader.loadMaps();
-		mapsLoader.setMapActive(0);
+
+		initMapsLoader();
 
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		pickMaster = new PickMaster();
@@ -103,6 +102,12 @@ public class World {
 		pickMaster.addClient(tilesMaster);
 		tilesMaster.addClient(roundsMaster);
 
+	}
+
+	private void initMapsLoader() {
+		mapsLoader = new MapsLoaderTiled();
+		mapsLoader.loadMaps();
+		mapsLoader.setMapActive(0);
 	}
 
 	private void initWorldObjectsMasters() {
@@ -200,6 +205,7 @@ public class World {
 		renderer.addROMWorld(newROM);
 	}
 
+	@Override
 	public void update(final float deltaTime) {
 		pickMaster.update();
 	}

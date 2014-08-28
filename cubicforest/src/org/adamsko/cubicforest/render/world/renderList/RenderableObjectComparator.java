@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.world.queue;
+package org.adamsko.cubicforest.render.world.renderList;
 
 import java.util.Comparator;
 

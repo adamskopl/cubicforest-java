@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class GuiContainer extends RenderableObjectsContainer implements
-		RenderableObjectsMaster {
+public abstract class GuiContainer extends RenderableObjectsContainer {
 
 	protected List<GuiElement> guiElements;
 	private final GuiType_e type;

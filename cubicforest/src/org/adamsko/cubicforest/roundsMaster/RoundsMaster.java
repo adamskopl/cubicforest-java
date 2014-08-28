@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
-import org.adamsko.cubicforest.world.World;
+import org.adamsko.cubicforest.world.CubicWorldBuilder;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 import org.adamsko.cubicforest.world.tile.TilesMasterClient;
@@ -23,7 +23,7 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	/**
 	 * for the rounds/world restart
 	 */
-	private final World world;
+	private final CubicWorldBuilder world;
 	private final List<RoundPhase> phases;
 	int phasePointer = -1;
 
@@ -54,7 +54,7 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		this.gameResult = GameResult.GAME_PLAY;
 	}
 
-	public RoundsMaster(final World world) {
+	public RoundsMaster(final CubicWorldBuilder world) {
 		this.world = world;
 		phases = new ArrayList<RoundPhase>();
 		gameResult = GameResult.GAME_PLAY;

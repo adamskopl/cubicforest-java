@@ -6,31 +6,31 @@ import java.util.List;
 import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
-import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
+import org.adamsko.cubicforest.render.world.renderList.RenderList;
+import org.adamsko.cubicforest.render.world.renderList.RenderListDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
+
 import com.badlogic.gdx.graphics.FPSLogger;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 /**
  * 
  * @author adamsko
  * 
  */
-public class WorldRenderer {
+public class CubicWorldRenderer implements GameRenderer {
 
 	OrthographicCamera cam;
 
 	List<RenderableObjectsMaster> renderableObjectsMastersWorld;
 	List<RenderableObjectsMaster> renderableObjectsMastersGui;
 
-	RenderListMaster renderListMasterWorld;
-	RenderListMaster renderListMasterGui;
+	RenderList renderListMasterWorld;
+	RenderList renderListMasterGui;
 
 	SpriteBatch batch = new SpriteBatch(5460);
 	BitmapFont font = new BitmapFont();
@@ -44,10 +44,12 @@ public class WorldRenderer {
 
 	FPSLogger fps = new FPSLogger();
 
-	public WorldRenderer() {
+	public CubicWorldRenderer() {
 		renderer = new ImmediateModeRenderer10();
-		renderListMasterWorld = new RenderListMaster();
-		renderListMasterGui = new RenderListMaster();
+
+		renderListMasterWorld = new RenderListDefault();
+		renderListMasterGui = new RenderListDefault();
+
 		CoordCalc.setTileSize(tileWidth);
 		this.cam = new OrthographicCamera(780, 460);
 		this.cam.position.set(390, -230, 0);
@@ -55,7 +57,8 @@ public class WorldRenderer {
 		renderableObjectsMastersGui = new ArrayList<RenderableObjectsMaster>();
 	}
 
-	public void render(float deltaTime) {
+	@Override
+	public void render(final float deltaTime) {
 
 		cam.update();
 
@@ -69,56 +72,40 @@ public class WorldRenderer {
 
 	}
 
-	void renderGrid() {
-		cam.update(false);
-		renderer.begin(cam.combined, GL10.GL_POINTS);
-
-		int amount = 20;
-		Vector3 vec = new Vector3();
-		for (int row = 0; row < amount; row++) {
-			for (int col = 0; col < amount; col++) {
-				Vector2 screenCoord = CoordCalc.tilesToRender(new Vector2(row,
-						col));
-				vec.set(screenCoord, 0);
-				renderer.color(1.0f, 0.8f, 0.8f, 1.0f);
-				renderer.vertex(vec);
-			}
-		}
-		renderer.end();
-	}
-
-	public void dispose() {
-		batch.dispose();
-	}
-
-	public void addROMWorld(RenderableObjectsMaster ROM) {
+	@Override
+	public void addROMWorld(final RenderableObjectsMaster ROM) {
 		renderableObjectsMastersWorld.add(ROM);
 	}
 
-	public void addROMGui(RenderableObjectsMaster ROM) {
+	@Override
+	public void addROMGui(final RenderableObjectsMaster ROM) {
 		renderableObjectsMastersGui.add(ROM);
 	}
 
+	@Override
+	public void dispose() {
+		batch.dispose();
+	};
+
 	/**
-	 * Prepare {@link RenderListMaster} for render: add new
+	 * Prepare {@link RenderListDefault} for render: add new
 	 * {@link RenderableObject} objects, update old ones, sort list.
 	 */
-	private void updateRenderList(
-			List<RenderableObjectsMaster> renderableObjectsMasters,
-			RenderListMaster renderListMaster) {
+	private void updateList(
+			final List<RenderableObjectsMaster> renderableObjectsMasters,
+			final RenderList renderListMaster) {
 		Boolean sortNeeded = false;
-		for (RenderableObjectsMaster rOM : renderableObjectsMasters) {
-			List<RenderableObject> objectsUnserved = rOM
+		for (final RenderableObjectsMaster rOM : renderableObjectsMasters) {
+			final List<RenderableObject> objectsUnserved = rOM
 					.popRenderableObjects(ROListType_e.RO_UNSERVED);
 
-			List<RenderableObject> objectsToRemove = rOM
+			final List<RenderableObject> objectsToRemove = rOM
 					.popRenderableObjects(ROListType_e.RO_TO_REMOVE);
 
-			if (objectsUnserved.size() != 0 || 
-					objectsToRemove.size() != 0) {
+			if (objectsUnserved.size() != 0 || objectsToRemove.size() != 0) {
 				sortNeeded = true;
-				renderListMaster.addRenderableObjects(objectsUnserved);
-				renderListMaster.removeRenderableObjects(objectsToRemove);
+				renderListMaster.add(objectsUnserved);
+				renderListMaster.remove(objectsToRemove);
 			}
 
 			/*
@@ -129,24 +116,23 @@ public class WorldRenderer {
 
 		if (sortNeeded) {
 			// renderListMaster has new objects added from ROMs: sort needed
-			renderListMaster.sortRenderList();
+			renderListMaster.sort();
 		}
 	}
 
-	private void renderObject(RenderableObject rObj) {
+	private void renderObject(final RenderableObject rObj) {
 		switch (rObj.getRenderType()) {
 		case TYPE_WORLD:
-			WorldObject wObj = (WorldObject) rObj;
-			Vector2 objPos = wObj.getTilesPos();
+			final WorldObject wObj = (WorldObject) rObj;
+			final Vector2 objPos = wObj.getTilesPos();
 			Vector2 renderPos = CoordCalc.tilesToRender(objPos);
 			renderPos.add(rObj.getRenderVector());
 			batch.draw(wObj.getTextureRegion(), renderPos.x, renderPos.y);
 			break;
 		case TYPE_GUI:
-			GuiElement gObj = (GuiElement) rObj;
+			final GuiElement gObj = (GuiElement) rObj;
 			renderPos = gObj.getScreenPos();
 			renderPos.add(gObj.getRenderVector());
-//			renderPos.add(new Vector2(100, 100));
 			batch.draw(gObj.getTextureRegion(), renderPos.x, renderPos.y);
 			break;
 		default:
@@ -154,19 +140,19 @@ public class WorldRenderer {
 		}
 	}
 
-	private void renderObjectsLabels(RenderableObject rObj) {
+	private void renderObjectsLabels(final RenderableObject rObj) {
 
 		Vector2 renderPos = new Vector2();
 
 		switch (rObj.getRenderType()) {
 		case TYPE_WORLD:
-			WorldObject wObj = (WorldObject) rObj;
-			Vector2 objPos = wObj.getTilesPos();
+			final WorldObject wObj = (WorldObject) rObj;
+			final Vector2 objPos = wObj.getTilesPos();
 			renderPos = CoordCalc.tilesToRender(objPos);
 
 			break;
 		case TYPE_GUI:
-			GuiElement gObj = (GuiElement) rObj;
+			final GuiElement gObj = (GuiElement) rObj;
 			renderPos = new Vector2(gObj.getScreenPos().x,
 					gObj.getScreenPos().y);
 			break;
@@ -175,14 +161,14 @@ public class WorldRenderer {
 		}
 
 		if (rObj.hasLabels()) {
-			for (Label l : rObj.getLabels()) {
+			for (final Label l : rObj.getLabels()) {
 				renderLabel(l, renderPos);
 			}
 		}
 
 	}
 
-	private void renderLabel(Label label, Vector2 pos) {
+	private void renderLabel(final Label label, final Vector2 pos) {
 		font.setColor(label.getColor());
 		font.setScale(label.getScale());
 		pos.add(label.getVecX(), label.getVecY());
@@ -190,32 +176,24 @@ public class WorldRenderer {
 	}
 
 	private void renderROMs() {
-		updateRenderList(renderableObjectsMastersWorld, renderListMasterWorld);
-		updateRenderList(renderableObjectsMastersGui, renderListMasterGui);
-		renderRenderList(renderListMasterWorld);
-		renderRenderList(renderListMasterGui);
+		updateList(renderableObjectsMastersWorld, renderListMasterWorld);
+		updateList(renderableObjectsMastersGui, renderListMasterGui);
+		renderList(renderListMasterWorld);
+		renderList(renderListMasterGui);
 
 	}
 
-	private void renderRenderList(RenderListMaster renderListMaster) {
-		for (RenderableObject rObj : renderListMaster.gerRenderList()) {
+	private void renderList(final RenderList renderListMaster) {
+		for (final RenderableObject rObj : renderListMaster.get()) {
 			renderObject(rObj);
 		}
 		/*
 		 * Labels are rendered in the end: so they are not covered by
 		 * RenderableObject objects
 		 */
-		for (RenderableObject rObj : renderListMaster.gerRenderList()) {
+		for (final RenderableObject rObj : renderListMaster.get()) {
 			renderObjectsLabels(rObj);
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private void renderROM(RenderableObjectsMaster ROM) {
-		List<RenderableObject> rObjects = ROM
-				.getRenderableObjects(ROListType_e.RO_ALL);
-		for (RenderableObject rObj : rObjects) {
-			renderObject(rObj);
-		}
-	}
 }

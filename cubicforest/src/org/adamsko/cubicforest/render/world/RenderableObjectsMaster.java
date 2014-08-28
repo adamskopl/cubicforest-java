@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.render.world;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
-import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
+import org.adamsko.cubicforest.render.world.renderList.RenderListDefault;
 
 public interface RenderableObjectsMaster {
 
@@ -14,7 +14,7 @@ public interface RenderableObjectsMaster {
 
 	/**
 	 * @return {@link RenderableObject} objects, which are not added to
-	 *         {@link RenderListMaster} yet. Clean objects afterwards.
+	 *         {@link RenderListDefault} yet. Clean objects afterwards.
 	 */
 	public List<RenderableObject> popRenderableObjects(ROListType_e type);
 

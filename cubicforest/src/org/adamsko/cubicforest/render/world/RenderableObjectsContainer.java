@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.render.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.queue.RenderListMaster;
+import org.adamsko.cubicforest.render.world.renderList.RenderListDefault;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -52,16 +52,16 @@ public class RenderableObjectsContainer implements RenderableObjectsMaster {
 	private final List<RenderableObject> renderableObjects;
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
-	 * renderableObjects objects should be added to {@link RenderListMaster}
+	 * renderableObjects objects should be added to {@link RenderListDefault}
 	 * (e.g. objects just created). The purpose is to separate new objects from
-	 * those being already in {@link RenderListMaster}.
+	 * those being already in {@link RenderListDefault}.
 	 */
 	private final List<RenderableObject> renderableObjectsUnserved;
 
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
 	 * renderableObjects objects should be updated (sorted) in
-	 * {@link RenderListMaster}. The purpose is to separate objects needing to
+	 * {@link RenderListDefault}. The purpose is to separate objects needing to
 	 * be updated from those staying unchanged.
 	 */
 	private List<RenderableObject> renderableObjectsToUpdate;

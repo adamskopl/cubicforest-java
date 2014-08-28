@@ -14,6 +14,9 @@ public class RenderableObject implements LabelsMaster {
 
 	protected LabelsContainer labels;
 
+	/**
+	 * FIXME: replace type with inheritance.
+	 */
 	protected RenderableObjectType renderType;
 
 	public RenderableObjectType getRenderType() {
