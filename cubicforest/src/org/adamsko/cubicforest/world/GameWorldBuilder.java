@@ -69,7 +69,11 @@ public interface GameWorldBuilder {
 	void initRoundsMaster();
 
 	void initRoundsMasterPhases(final OrdersMaster ordersMaster,
-			final WorldObjectsMastersContainer worldObjectsMastersContainer);
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+
+	void initRoundsMasterCVMFactory(
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
 	RoundsMaster getRoundsMaster();
 

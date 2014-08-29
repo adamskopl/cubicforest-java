@@ -83,6 +83,9 @@ public class GameScreen implements Screen {
 	}
 
 	private void initGameBuilder(final GameRenderer worldRenderer) {
+
+		// the following operations should be performed in the presented order
+
 		worldBuilder = new CubicWorldBuilder();
 
 		worldBuilder.initRoundsMaster();
@@ -110,7 +113,11 @@ public class GameScreen implements Screen {
 				.getCollisionVisitorsManagerFactory());
 
 		worldBuilder.initRoundsMasterPhases(worldBuilder.getOrdersMaster(),
-				worldObjectsMastersContainer);
+				worldObjectsMastersContainer,
+				worldBuilder.getCollisionVisitorsManagerFactory());
+
+		worldBuilder.initRoundsMasterCVMFactory(worldBuilder
+				.getCollisionVisitorsManagerFactory());
 
 		worldBuilder.initGuiMaster(worldRenderer,
 				worldObjectsMastersContainer.getTilesMaster(),

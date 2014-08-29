@@ -172,9 +172,6 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 		worldObjectsMastersContainer.getTilesMaster().addClient(roundsMaster);
 
-		roundsMaster
-				.setCollisionVisitorsManagerFactory(collisionVisitorsManagerFactory);
-
 	}
 
 	@Override
@@ -185,8 +182,10 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	}
 
 	@Override
-	public void initRoundsMasterPhases(final OrdersMaster ordersMaster,
-			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
+	public void initRoundsMasterPhases(
+			final OrdersMaster ordersMaster,
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
 
 		final HeroesMaster heroesMaster = worldObjectsMastersContainer
 				.getHeroesMaster();
@@ -244,6 +243,13 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void initRoundsMasterCVMFactory(
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+		roundsMaster
+				.setCollisionVisitorsManagerFactory(collisionVisitorsManagerFactory);
 	}
 
 	@Override
