@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -22,12 +23,17 @@ import com.badlogic.gdx.math.Vector2;
  *         TODO: add tool marker master (class responsible for tool marker)
  * 
  */
-public class HeroesToolsMaster extends WorldObjectsContainer {
+public class HeroesToolsMaster extends WorldObjectsContainer implements
+		Nullable {
 
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker
 	private WorldObjectType heroToolMarkerType;
-	private final HeroToolsFactory heroToolsFactory;
+	private HeroToolsFactory heroToolsFactory;
+
+	public HeroesToolsMaster() {
+		super(0);
+	}
 
 	public HeroesToolsMaster(final TilesMaster TM,
 			final GatherCubesMaster gatherCubesMaster,
@@ -40,6 +46,11 @@ public class HeroesToolsMaster extends WorldObjectsContainer {
 		heroToolMarkerType = null;
 
 		heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	/**

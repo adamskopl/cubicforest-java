@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class RenderableObjectsContainer implements RenderableObjectsMaster {
 
-	private final String name;
+	private String name;
 
 	public String getName() {
 		return name;
@@ -49,14 +49,14 @@ public class RenderableObjectsContainer implements RenderableObjectsMaster {
 	 * renderableObjectsToServe, it contains all objects which should be
 	 * rendered.
 	 */
-	private final List<RenderableObject> renderableObjects;
+	private List<RenderableObject> renderableObjects;
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
 	 * renderableObjects objects should be added to {@link RenderListDefault}
 	 * (e.g. objects just created). The purpose is to separate new objects from
 	 * those being already in {@link RenderListDefault}.
 	 */
-	private final List<RenderableObject> renderableObjectsUnserved;
+	private List<RenderableObject> renderableObjectsUnserved;
 
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
@@ -66,7 +66,7 @@ public class RenderableObjectsContainer implements RenderableObjectsMaster {
 	 */
 	private List<RenderableObject> renderableObjectsToUpdate;
 
-	private final List<RenderableObject> renderableObjectsToRemove;
+	private List<RenderableObject> renderableObjectsToRemove;
 
 	protected Texture objectsTexture;
 
@@ -74,6 +74,9 @@ public class RenderableObjectsContainer implements RenderableObjectsMaster {
 	 * Temporary solution. Keep rows of atlas in a list.
 	 */
 	protected List<TextureRegion[]> atlasRows;
+
+	public RenderableObjectsContainer(final int nullConstructor) {
+	}
 
 	public RenderableObjectsContainer(final String name,
 			final String textureName, final int tileW, final int tileH) {

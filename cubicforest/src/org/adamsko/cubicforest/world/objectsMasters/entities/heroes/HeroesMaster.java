@@ -24,6 +24,11 @@ public class HeroesMaster extends WorldObjectsContainer implements
 
 	}
 
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
 	public WorldObject getTestObject() {
 		return getWorldObjects().get(0);
 	}

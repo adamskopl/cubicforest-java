@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.world.CubicWorldBuilder;
 import org.adamsko.cubicforest.world.GameWorldBuilder;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectAccessor;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
@@ -38,8 +39,7 @@ public class GameScreen implements Screen {
 		initTween();
 
 		worldRenderer = new CubicWorldRenderer();
-		worldBuilder = new CubicWorldBuilder(worldRenderer);
-
+		initGameBuilder(worldRenderer);
 	}
 
 	@Override
@@ -82,4 +82,43 @@ public class GameScreen implements Screen {
 
 	}
 
+	private void initGameBuilder(final GameRenderer worldRenderer) {
+		worldBuilder = new CubicWorldBuilder();
+
+		worldBuilder.initRoundsMaster();
+
+		worldBuilder.initWorldObjectsMastersContainer(worldRenderer,
+				worldBuilder.getRoundsMaster());
+
+		final WorldObjectsMastersContainer worldObjectsMastersContainer = worldBuilder
+				.getWorldObjectsMastersContainer();
+
+		worldBuilder.initOrdersMaster(worldObjectsMastersContainer
+				.getTilesMaster());
+
+		worldBuilder.initMapsLoader();
+
+		worldBuilder.initCollisionVisitorsManagerFactory(
+				worldObjectsMastersContainer.getGatherCubesMaster(),
+				worldObjectsMastersContainer.getHeroesToolsMaster());
+
+		worldBuilder.initTilesMasterRoundsMaster(
+				worldBuilder.getRoundsMaster(),
+				worldBuilder.getCollisionVisitorsManagerFactory());
+
+		worldBuilder.mapsLoaderReloadWorld(worldBuilder
+				.getCollisionVisitorsManagerFactory());
+
+		worldBuilder.initRoundsMasterPhases(worldBuilder.getOrdersMaster(),
+				worldObjectsMastersContainer);
+
+		worldBuilder.initGuiMaster(worldRenderer,
+				worldObjectsMastersContainer.getTilesMaster(),
+				worldBuilder.getMapsLoader(),
+				worldObjectsMastersContainer.getGatherCubesMaster());
+
+		worldBuilder.initPickMaster(worldBuilder.getGuiMaster(),
+				worldBuilder.getRoundsMaster());
+
+	}
 }

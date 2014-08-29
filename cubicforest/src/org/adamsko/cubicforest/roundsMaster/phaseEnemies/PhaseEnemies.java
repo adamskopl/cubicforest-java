@@ -20,7 +20,6 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 		super(enemiesContainer, ordersMaster, "PhaseEnemies");
 
 		heroesHelper = new PhaseEnemiesHeroesHelper(heroesContainer);
-
 	}
 
 	@Override

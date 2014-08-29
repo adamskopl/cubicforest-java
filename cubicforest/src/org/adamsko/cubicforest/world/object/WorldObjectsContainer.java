@@ -5,13 +5,20 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+
+import com.badlogic.gdx.Gdx;
 
 public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 		implements WorldObjectsMaster {
 
-	private final List<WorldObject> worldObjects;
-	private final TilesMaster tilesMaster;
+	private List<WorldObject> worldObjects;
+	private TilesMaster tilesMaster;
+
+	public WorldObjectsContainer(final int nullConstructor) {
+		super(0);
+	}
 
 	public WorldObjectsContainer(final String name,
 			final TilesMaster tilesMaster, final String textureName,
@@ -20,6 +27,36 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 		super(name, textureName, tileW, tileH);
 		this.tilesMaster = tilesMaster;
 		worldObjects = new ArrayList<WorldObject>();
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * Get {@link WorldObject} objects.
+	 * 
+	 * @return {@link WorldObject} objects list.
+	 */
+	@Override
+	public List<WorldObject> getWorldObjects() {
+		return worldObjects;
+	}
+
+	@Override
+	public void initCollisionVisitorsManagers(
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+		if (collisionVisitorsManagerFactory.isNull()) {
+			Gdx.app.error(
+					"WorldObjectsContainer::initCollisionVisitorsManagers()",
+					"collisionVisitorsManagerFactory.isNull()");
+			return;
+		}
+		for (final WorldObject worldObject : getWorldObjects()) {
+			worldObject
+					.initCollisionVisitorsManager(collisionVisitorsManagerFactory);
+		}
 	}
 
 	public void removeObjectFromContainer(final WorldObject objectRemove) {
@@ -50,20 +87,5 @@ public abstract class WorldObjectsContainer extends RenderableObjectsContainer
 	public boolean containsObject(final WorldObject object) {
 		return worldObjects.contains(object);
 	}
-
-	/**
-	 * Get {@link WorldObject} objects.
-	 * 
-	 * @return {@link WorldObject} objects list.
-	 */
-	@Override
-	public List<WorldObject> getWorldObjects() {
-		return worldObjects;
-	}
-	//
-	// public void handleServantTileEvent(final WorldObject servant,
-	// final TileEvent tileEvent) {
-	//
-	// }
 
 }

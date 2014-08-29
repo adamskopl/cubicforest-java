@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object.collision.visitors;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 
@@ -9,7 +10,7 @@ import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
  * @author adamsko
  * 
  */
-public interface CollisionVisitorsManager {
+public interface CollisionVisitorsManager extends Nullable {
 
 	void setVisitingObject(WorldObject visitingObject);
 

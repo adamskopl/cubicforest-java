@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.debug.GuiDebug;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
 import org.adamsko.cubicforest.gui.levels.GuiLevels;
@@ -13,7 +14,7 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class GuiMaster implements PickMasterClient {
+public class GuiMaster implements PickMasterClient, Nullable {
 
 	private List<GuiContainer> guiList;
 
@@ -28,7 +29,10 @@ public class GuiMaster implements PickMasterClient {
 	private GuiDebug guiDebug;
 	private GuiLevels guiLevels;
 
-	public GuiMaster(TilesMaster tilesMaster, MapsLoader mapsLoader) {
+	GuiMaster() {
+	}
+
+	public GuiMaster(final TilesMaster tilesMaster, final MapsLoader mapsLoader) {
 		guiList = new ArrayList<GuiContainer>();
 		clients = new ArrayList<GuiMasterClient>();
 
@@ -50,22 +54,28 @@ public class GuiMaster implements PickMasterClient {
 		addGui(guiLevels);
 	}
 
-	public void addGui(GuiContainer newGui) {
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	public void addGui(final GuiContainer newGui) {
 		guiList.add(newGui);
 	}
 
-	public void addClient(GuiMasterClient newClient) {
+	public void addClient(final GuiMasterClient newClient) {
 		clients.add(newClient);
 	}
 
 	@Override
-	public void onInput(Vector2 inputScreenPos, Vector2 inputTilesPos) {
+	public void onInput(final Vector2 inputScreenPos,
+			final Vector2 inputTilesPos) {
 
 		/*
 		 * 
 		 * 1. search for clicked GUI 2. pass clicked gui to clients
 		 */
-		for (GuiContainer guiContainer : guiList) {
+		for (final GuiContainer guiContainer : guiList) {
 			if (guiContainer.handleClick(inputScreenPos)) {
 				clientsOnClicked(guiContainer);
 			}
@@ -73,8 +83,8 @@ public class GuiMaster implements PickMasterClient {
 
 	}
 
-	private void clientsOnClicked(GuiContainer clickedContainer) {
-		for (GuiMasterClient guiMasterClient : clients) {
+	private void clientsOnClicked(final GuiContainer clickedContainer) {
+		for (final GuiMasterClient guiMasterClient : clients) {
 			guiMasterClient.onGuiEvent(clickedContainer);
 		}
 	}

@@ -2,12 +2,9 @@ package org.adamsko.cubicforest.world.ordersMaster;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
@@ -24,10 +21,10 @@ import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
  * @author adamsko
  * 
  */
-public class OrdersMaster {
+public class OrdersMaster implements Nullable {
 
-	private final TilePathsMaster tilePathsMaster;
-	private final TilesMaster tilesMaster;
+	private TilePathsMaster tilePathsMaster;
+	private TilesMaster tilesMaster;
 
 	/**
 	 * Client which will be informed about the result of the order. Don't know
@@ -36,14 +33,22 @@ public class OrdersMaster {
 	 */
 	private OrdersMasterClient client = null;
 
-	public OrdersMaster(final TilesMaster tilesMaster,
-			final HeroesMaster heroesMaster, final EnemiesMaster enemiesMaster,
-			final HeroesToolsMaster heroesToolsMaster,
-			final GatherCubesMaster gatherCubesMaster) {
+	/**
+	 * For NullOrdersMaster
+	 */
+	public OrdersMaster() {
+	}
+
+	public OrdersMaster(final TilesMaster tilesMaster) {
 
 		tilePathsMaster = new TilePathsMaster(this, tilesMaster);
 
 		this.tilesMaster = tilesMaster;
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	/**

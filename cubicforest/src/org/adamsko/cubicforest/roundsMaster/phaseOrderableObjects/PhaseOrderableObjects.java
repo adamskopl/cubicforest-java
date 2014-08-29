@@ -12,6 +12,8 @@ import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
 
+import com.badlogic.gdx.Gdx;
+
 public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		RoundPhase {
 
@@ -23,6 +25,11 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	private final OrderableObjectsContainer objectsContainer;
 
 	/**
+	 * Indicates if phase was skipped without doing anything
+	 */
+	private boolean phaseSkippedLastTime;
+
+	/**
 	 * Active object's position on the list.
 	 */
 	protected int activeObjectPointer;
@@ -31,9 +38,16 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 			final OrderableObjectsContainer orderableObjectsContainer,
 			final OrdersMaster ordersMaster, final String name) {
 
+		if (orderableObjectsContainer.isNull()) {
+			Gdx.app.error("PhaseOrderableObjects()",
+					"orderableObjectsContainer.isNull()");
+		}
+
 		this.objectsContainer = orderableObjectsContainer;
 		this.ordersMaster = ordersMaster;
 		this.name = name;
+
+		this.phaseSkippedLastTime = false;
 
 		phaseObjects = new ArrayList<WorldObject>();
 
@@ -57,6 +71,9 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	protected void nextObject() {
 		if (phaseObjects.size() == 0) {
 			try {
+				// phase is over, indicate that nothing happened during this
+				// phase
+				setPhaseSkippedLastTime(true);
 				phaseIsOver(this);
 			} catch (final Exception e) {
 				e.printStackTrace();
@@ -108,9 +125,22 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	public void reloadPhase() {
 		activeObjectPointer = -1;
 
+		if (objectsContainer.getOrderableObjects().size() == 0) {
+			Gdx.app.debug("reloadPhase()", "0");
+		}
+
 		phaseObjects.clear();
 		for (final WorldObject wo : objectsContainer.getOrderableObjects()) {
 			phaseObjects.add(wo);
 		}
+	}
+
+	private void setPhaseSkippedLastTime(final boolean phaseSkippedLastTime) {
+		this.phaseSkippedLastTime = phaseSkippedLastTime;
+	}
+
+	@Override
+	public boolean phaseSkippedLastTime() {
+		return phaseSkippedLastTime;
 	}
 }

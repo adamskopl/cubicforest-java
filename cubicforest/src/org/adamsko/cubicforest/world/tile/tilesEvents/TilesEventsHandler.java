@@ -13,12 +13,12 @@ public class TilesEventsHandler {
 
 	private final CollisionsHandler collisionsHandler;
 
-	public TilesEventsHandler(final RoundsMaster roundsMaster) {
+	public TilesEventsHandler(
+			final RoundsMaster roundsMaster,
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
 
 		collisionsHandler = new CollisionsHandlerDefault(roundsMaster);
-
-		CollisionVisitorsManagerFactory.instance().setCollisionsHandler(
-				collisionsHandler);
+		collisionVisitorsManagerFactory.setCollisionsHandler(collisionsHandler);
 	}
 
 	/**

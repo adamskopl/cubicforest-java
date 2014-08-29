@@ -25,6 +25,11 @@ public class EnemiesMaster extends WorldObjectsContainer implements
 	}
 
 	@Override
+	public boolean isNull() {
+		return false;
+	};
+
+	@Override
 	public void update(final float deltaTime) {
 
 	}

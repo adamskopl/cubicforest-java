@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object.collision.handler;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
@@ -11,7 +12,7 @@ import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
  * @author adamsko
  * 
  */
-public interface CollisionsHandler {
+public interface CollisionsHandler extends Nullable {
 
 	void collision(final TileEvent evenType, final Tile collidingTile,
 			final WorldObject collidingObject);

@@ -13,7 +13,7 @@ public class EnemyCollisionVisitorPass extends CollisionVisitorDefault {
 
 	@Override
 	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
-		// same as in EnemyCollisionVisitorStop
+		// same operations as in EnemyCollisionVisitorStop
 		super.visitToolTrap(heroToolTrap);
 		collision().orderOperation().setOrderOperation(
 				OrderOperation.ORDER_FINISH);

@@ -13,7 +13,6 @@ public class EnemyCollisionVisitorEnter extends CollisionVisitorDefault {
 
 	@Override
 	public void visitHero(final Hero hero) {
-		// collision().wordlObjectOperation().
 		collision().gameResultOperation().setGameResult(GameResult.GAME_LOST);
 	}
 }

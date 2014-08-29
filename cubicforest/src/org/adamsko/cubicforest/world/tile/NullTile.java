@@ -1,7 +1,6 @@
 package org.adamsko.cubicforest.world.tile;
 
 public class NullTile extends Tile {
-
 	private static NullTile instance = null;
 
 	private NullTile() {
@@ -19,5 +18,4 @@ public class NullTile extends Tile {
 	public boolean isNull() {
 		return true;
 	}
-
 }

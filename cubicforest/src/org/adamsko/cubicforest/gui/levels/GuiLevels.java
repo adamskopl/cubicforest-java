@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
@@ -20,7 +21,10 @@ public class GuiLevels extends GuiContainer {
 	}
 
 	private void createGui(final MapsLoader mapsLoader) {
-
+		if (mapsLoader.isNull()) {
+			Gdx.app.error("GuiLevels::createGui()", "mapsLoader.isNull()");
+			return;
+		}
 		final int levelsNumber = mapsLoader.size();
 		final int activeLevel = mapsLoader.getMapActiveIndex();
 

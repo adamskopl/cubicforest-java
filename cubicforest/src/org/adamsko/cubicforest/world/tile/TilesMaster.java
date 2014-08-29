@@ -3,9 +3,11 @@ package org.adamsko.cubicforest.world.tile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
@@ -23,7 +25,8 @@ import com.badlogic.gdx.math.Vector2;
  * 
  * @author adamsko
  */
-public class TilesMaster implements PickMasterClient {
+// FIXME: interface needed
+public class TilesMaster implements PickMasterClient, Nullable {
 
 	/**
 	 * Event types connected with a {@link Tile}.
@@ -59,27 +62,37 @@ public class TilesMaster implements PickMasterClient {
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)
-	private final int mapSize;
-	private final List<TilesMasterClient> clients;
+	private int mapSize;
+	private List<TilesMasterClient> clients;
 	private TilesContainer tilesContainer;
 
 	private TilesEventsHandler tilesEventsHandler;
 
-	public TilesMaster(final int mapSize, final RoundsMaster roundsMaster) {
+	/**
+	 * For NullTilesMaster
+	 */
+	TilesMaster() {
+	}
+
+	public TilesMaster(final int mapSize) {
 		this.mapSize = mapSize;
 		clients = new ArrayList<TilesMasterClient>();
 		TilesHelper.setMapSize(mapSize);
-		initTiles(roundsMaster);
+		initTiles();
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	public void addClient(final TilesMasterClient client) {
 		clients.add(client);
 	}
 
-	public void initTiles(final RoundsMaster roundsMaster) {
+	public void initTiles() {
 
 		tilesContainer = new TilesContainer("tiles container", this);
-		tilesEventsHandler = new TilesEventsHandler(roundsMaster);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);
@@ -87,6 +100,14 @@ public class TilesMaster implements PickMasterClient {
 												// view
 												// tilesContainer.addTile(fCoords);
 		}
+	}
+
+	public void initTilesEventsHandler(
+			final RoundsMaster roundsMaster,
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+
+		tilesEventsHandler = new TilesEventsHandler(roundsMaster,
+				collisionVisitorsManagerFactory);
 	}
 
 	public TilesContainer getTilesContainer() {

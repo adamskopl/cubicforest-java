@@ -2,10 +2,12 @@ package org.adamsko.cubicforest.world;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 /**
@@ -16,7 +18,7 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
  * @author adamsko
  * 
  */
-public interface WorldObjectsMaster {
+public interface WorldObjectsMaster extends Nullable {
 	public void update(float deltaTime);
 
 	public List<WorldObject> getWorldObjects();
@@ -38,5 +40,8 @@ public interface WorldObjectsMaster {
 	 * @throws Exception
 	 */
 	void unloadMapObjects() throws Exception;
+
+	void initCollisionVisitorsManagers(
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
 }

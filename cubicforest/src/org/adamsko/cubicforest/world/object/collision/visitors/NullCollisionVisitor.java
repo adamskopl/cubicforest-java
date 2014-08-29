@@ -1,18 +1,16 @@
 package org.adamsko.cubicforest.world.object.collision.visitors;
 
-import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
-
 public class NullCollisionVisitor extends CollisionVisitorDefault {
 
-	public NullCollisionVisitor(final CollisionsHandler collisionsHandler) {
-		super(collisionsHandler);
+	public NullCollisionVisitor() {
+		super();
 	}
 
 	private static NullCollisionVisitor instance = null;
 
 	public static NullCollisionVisitor instance() {
 		if (instance == null) {
-			instance = new NullCollisionVisitor(null);
+			instance = new NullCollisionVisitor();
 		}
 		return instance;
 	}

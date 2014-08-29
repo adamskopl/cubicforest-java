@@ -12,11 +12,14 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
+
+import com.badlogic.gdx.Gdx;
 
 public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 		Nullable {
 
-	private final CollisionsHandler collisionsHandler;
+	private CollisionsHandler collisionsHandler;
 
 	/**
 	 * Object which is currently related with a specific visitor. Needed for
@@ -24,7 +27,17 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 	 */
 	private WorldObject visitingObject;
 
+	/**
+	 * For NullCollisionVisitorDefault
+	 */
+	CollisionVisitorDefault() {
+	}
+
 	public CollisionVisitorDefault(final CollisionsHandler collisionsHandler) {
+		if (collisionsHandler.isNull()) {
+			Gdx.app.error("CollisionVisitorDefault::CollisionVisitorDefault",
+					"collisionsHandler.isNull()");
+		}
 		this.collisionsHandler = collisionsHandler;
 		this.visitingObject = NullWorldObject.instance();
 	}
@@ -90,6 +103,11 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 	@Override
 	public void visitToolPortal(final HeroToolPortal heroToolPortal) {
 		visitHeroTool(heroToolPortal);
+	}
+
+	@Override
+	public void visitToolTurret(final HeroToolTurret heroToolTurret) {
+		visitHeroTool(heroToolTurret);
 	}
 
 }

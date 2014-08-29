@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.ordersMaster;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.object.WorldObject;
 
 /**
@@ -11,7 +12,7 @@ import org.adamsko.cubicforest.world.object.WorldObject;
  * @author adamsko
  * 
  */
-public interface OrderableObjectsContainer {
+public interface OrderableObjectsContainer extends Nullable {
 
 	List<WorldObject> getOrderableObjects();
 

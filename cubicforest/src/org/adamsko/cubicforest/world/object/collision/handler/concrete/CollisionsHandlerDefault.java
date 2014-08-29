@@ -15,11 +15,22 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 	WorldObjectOperationHandler worldObjectOperationHandler;
 	GameResultOperationHandler gameResultOperationHandler;
 
+	/**
+	 * For NullCollisionsHandlerDefault
+	 */
+	CollisionsHandlerDefault() {
+	}
+
 	public CollisionsHandlerDefault(final RoundsMaster roundsMaster) {
 		orderOperationHandler = new OrderOperationHandlerDefault();
 		worldObjectOperationHandler = new WorldObjectOperationHandlerDefault();
 		gameResultOperationHandler = new GameResultOperationHandlerDefault(
 				roundsMaster);
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	@Override

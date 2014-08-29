@@ -1,12 +1,14 @@
 package org.adamsko.cubicforest.world.mapsLoader;
 
-public interface MapsLoader {
+import org.adamsko.cubicforest.Nullable;
+
+public interface MapsLoader extends Nullable {
 
 	/**
 	 * Load all maps.
 	 */
 	public void loadMaps();
-	
+
 	/**
 	 * Load all maps after first 'loadMaps()'
 	 */
@@ -27,7 +29,7 @@ public interface MapsLoader {
 	 * @return active map
 	 */
 	public CFMap getMapActive();
-	
+
 	public int getMapActiveIndex();
 
 }

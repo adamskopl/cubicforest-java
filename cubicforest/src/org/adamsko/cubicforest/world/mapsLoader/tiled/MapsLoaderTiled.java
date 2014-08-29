@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.google.gson.Gson;
@@ -17,10 +18,19 @@ public class MapsLoaderTiled implements MapsLoader {
 	// file handle for folder containing maps
 	private FileHandle mapsFolder;
 
+	MapsLoaderTiled(final boolean nullConstructor) {
+
+	}
+
 	public MapsLoaderTiled() {
 		maps = new ArrayList<TiledMap>();
 	}
-	
+
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
 	@Override
 	public void loadMaps() {
 		mapsFolder = getMapsFolderHandle();
@@ -33,12 +43,12 @@ public class MapsLoaderTiled implements MapsLoader {
 	@Override
 	public void reloadMaps() {
 		maps.clear();
-		for (FileHandle entry : mapsFolder.list()) {
-			String mapFileString = entry.readString();
+		for (final FileHandle entry : mapsFolder.list()) {
+			final String mapFileString = entry.readString();
 			TiledMap newMap;
 			try {
 				newMap = new Gson().fromJson(mapFileString, TiledMap.class);
-			} catch (JsonSyntaxException ex) {
+			} catch (final JsonSyntaxException ex) {
 				Gdx.app.error(entry.toString(), ex.toString());
 				continue;
 			}
@@ -54,8 +64,8 @@ public class MapsLoaderTiled implements MapsLoader {
 	}
 
 	@Override
-	public void setMapActive(int mapIndex) {
-		if(mapIndex > size()) {
+	public void setMapActive(final int mapIndex) {
+		if (mapIndex > size()) {
 			Gdx.app.error(toString(), "mapIndex > size()");
 			return;
 		}
@@ -66,7 +76,7 @@ public class MapsLoaderTiled implements MapsLoader {
 	public CFMap getMapActive() {
 		return maps.get(activeMapIndex);
 	}
-	
+
 	@Override
 	public int getMapActiveIndex() {
 		return activeMapIndex;
@@ -79,7 +89,7 @@ public class MapsLoaderTiled implements MapsLoader {
 	 */
 	private FileHandle getMapsFolderHandle() {
 
-		List<String> mFoldersList = new ArrayList<String>();
+		final List<String> mFoldersList = new ArrayList<String>();
 		// path for users testing executable .jar file
 		mFoldersList.add("./userMaps");
 		// Desktop path
@@ -87,8 +97,8 @@ public class MapsLoaderTiled implements MapsLoader {
 		// Android path
 		mFoldersList.add("data/maps");
 
-		for (String path : mFoldersList) {
-			FileHandle handle = Gdx.files.internal(path);
+		for (final String path : mFoldersList) {
+			final FileHandle handle = Gdx.files.internal(path);
 			if (handle.exists() && handle.list().length != 0) {
 				return Gdx.files.internal(path);
 			}

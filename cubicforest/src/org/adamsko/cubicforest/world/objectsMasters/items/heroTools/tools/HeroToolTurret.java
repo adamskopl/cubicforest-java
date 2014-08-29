@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
 
 import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 
@@ -12,6 +13,11 @@ public class HeroToolTurret extends HeroTool {
 			final WorldObjectsContainer container) {
 		super(tr, texNum, container, WorldObjectType.TOOLTURRET);
 
+	}
+
+	@Override
+	public void accept(final WorldObjectVisitor visitor) {
+		visitor.visitToolTurret(this);
 	}
 
 }

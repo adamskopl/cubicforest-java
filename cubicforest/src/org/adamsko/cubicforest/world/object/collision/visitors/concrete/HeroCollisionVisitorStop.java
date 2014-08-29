@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
 
 public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 
@@ -19,6 +20,7 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 			final GatherCubesMaster gatherCubesMaster,
 			final HeroesToolsMaster heroesToolsMaster) {
 		super(collisionsHandler);
+
 		this.gatherCubesMaster = gatherCubesMaster;
 		this.heroesToolsMaster = heroesToolsMaster;
 	}
@@ -40,6 +42,11 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 			return;
 		}
 		collision().gameResultOperation().setGameResult(GameResult.GAME_WON);
+	}
+
+	@Override
+	public void visitToolTurret(final HeroToolTurret heroToolTurret) {
+		super.visitToolTurret(heroToolTurret);
 	}
 
 	@Override

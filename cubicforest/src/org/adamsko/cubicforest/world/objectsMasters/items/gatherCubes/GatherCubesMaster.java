@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -11,13 +12,23 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class GatherCubesMaster extends WorldObjectsContainer {
+public class GatherCubesMaster extends WorldObjectsContainer implements
+		Nullable {
 
 	private GatherCubesCounter gatherCubesCounter;
+
+	GatherCubesMaster() {
+		super(0);
+	}
 
 	public GatherCubesMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
 		super("GatherCubesMaster", tilesMaster, textureName, tileW, tileH);
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	public GatherCubesCounter getGatherCubesCounter() {

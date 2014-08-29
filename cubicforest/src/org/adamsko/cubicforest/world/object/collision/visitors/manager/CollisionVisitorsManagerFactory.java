@@ -2,10 +2,13 @@ package org.adamsko.cubicforest.world.object.collision.visitors.manager;
 
 import java.util.HashMap;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
+import org.adamsko.cubicforest.world.object.collision.handler.concrete.NullCollisionsHandlerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
+import org.adamsko.cubicforest.world.object.collision.visitors.NullCollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorEnter;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorPass;
 import org.adamsko.cubicforest.world.object.collision.visitors.concrete.EnemyCollisionVisitorStop;
@@ -15,36 +18,54 @@ import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroColl
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 
-public class CollisionVisitorsManagerFactory {
+import com.badlogic.gdx.Gdx;
 
-	private static CollisionVisitorsManagerFactory instance = null;
+public class CollisionVisitorsManagerFactory implements Nullable {
 
-	private final HashMap<WorldObjectType, CollisionVisitorsManager> managers;
+	private HashMap<WorldObjectType, CollisionVisitorsManager> managers;
 	private CollisionsHandler collisionsHandler;
 	private GatherCubesMaster gatherCubesMaster;
 	private HeroesToolsMaster heroesToolsMaster;
 
-	private CollisionVisitorsManagerFactory() {
-		managers = new HashMap<WorldObjectType, CollisionVisitorsManager>();
+	/**
+	 * For NullCollisionVisitorsManagerFactory
+	 */
+	CollisionVisitorsManagerFactory() {
 	}
 
-	public static CollisionVisitorsManagerFactory instance() {
-		if (instance == null) {
-			instance = new CollisionVisitorsManagerFactory();
+	public CollisionVisitorsManagerFactory(
+			final GatherCubesMaster gatherCubesMaster,
+			final HeroesToolsMaster heroesToolsMaster) {
+
+		managers = new HashMap<WorldObjectType, CollisionVisitorsManager>();
+
+		this.collisionsHandler = NullCollisionsHandlerDefault.instance();
+		this.gatherCubesMaster = gatherCubesMaster;
+		this.heroesToolsMaster = heroesToolsMaster;
+
+		if (gatherCubesMaster.isNull()) {
+			Gdx.app.error("CollisionVisitorsManagerFactory()",
+					"gatherCubesMaster.isNull()");
 		}
-		return instance;
+		if (heroesToolsMaster.isNull()) {
+			Gdx.app.error("CollisionVisitorsManagerFactory()",
+					"heroesToolsMaster.isNull()");
+		}
+
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	public void setCollisionsHandler(final CollisionsHandler collisionsHandler) {
+		if (collisionsHandler.isNull()) {
+			Gdx.app.error(
+					"CollisionVisitorsManagerFactory::setCollisionsHandler()",
+					"collisionsHandler.isNull()");
+		}
 		this.collisionsHandler = collisionsHandler;
-	}
-
-	public void setGatherCubesMaster(final GatherCubesMaster gatherCubesMaster) {
-		this.gatherCubesMaster = gatherCubesMaster;
-	}
-
-	public void setHeroToolsMaster(final HeroesToolsMaster heroesToolsMaster) {
-		this.heroesToolsMaster = heroesToolsMaster;
 	}
 
 	/**
@@ -55,6 +76,12 @@ public class CollisionVisitorsManagerFactory {
 	 * @return
 	 */
 	public CollisionVisitorsManager create(final WorldObjectType managerType) {
+
+		if (collisionsHandler.isNull()) {
+			Gdx.app.error("CollisionVisitorsManagerFactory::create()",
+					"collisionsHandler.isNull()");
+			return NullCollisionVisitorsManagerDefault.instance();
+		}
 
 		if (!managers.containsKey(managerType)) {
 			final CollisionVisitorsManagerDefault missingManager = new CollisionVisitorsManagerDefault();

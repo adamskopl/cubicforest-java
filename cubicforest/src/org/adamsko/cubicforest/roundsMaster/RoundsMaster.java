@@ -3,9 +3,13 @@ package org.adamsko.cubicforest.roundsMaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.world.CubicWorldBuilder;
+import org.adamsko.cubicforest.world.GameWorldBuilder;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.NullCollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 import org.adamsko.cubicforest.world.tile.TilesMasterClient;
@@ -18,16 +22,42 @@ import com.badlogic.gdx.Gdx;
  * @author adamsko
  * 
  */
-public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
+public class RoundsMaster implements TilesMasterClient, GuiMasterClient,
+		Nullable {
 
 	/**
-	 * for the rounds/world restart
+	 * GameWorldBuilder for the rounds/world restart
 	 */
-	private final CubicWorldBuilder world;
+	private final GameWorldBuilder world;
 	private final List<RoundPhase> phases;
 	int phasePointer = -1;
 
 	private GameResult gameResult;
+	CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
+
+	// For NullRoundsMaster
+	RoundsMaster() {
+		world = null;
+		phases = null;
+	}
+
+	public RoundsMaster(final CubicWorldBuilder world) {
+		this.world = world;
+		phases = new ArrayList<RoundPhase>();
+		gameResult = GameResult.GAME_PLAY;
+		collisionVisitorsManagerFactory = NullCollisionVisitorsManagerFactory
+				.instance();
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	public void setCollisionVisitorsManagerFactory(
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+		this.collisionVisitorsManagerFactory = collisionVisitorsManagerFactory;
+	}
 
 	public GameResult getGameResult() {
 		return gameResult;
@@ -54,14 +84,14 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		this.gameResult = GameResult.GAME_PLAY;
 	}
 
-	public RoundsMaster(final CubicWorldBuilder world) {
-		this.world = world;
-		phases = new ArrayList<RoundPhase>();
-		gameResult = GameResult.GAME_PLAY;
-	}
-
 	public void nextRound() throws Exception {
 		phasePointer = -1;
+		if (allPhasesSkipped()) {
+			// all phases were skipped: stop program
+			Gdx.app.error("RoundsMaster::nextRound()",
+					"all phases skipped. STOP.");
+			return;
+		}
 		nextPhase();
 	}
 
@@ -127,7 +157,11 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 	 * Reload {@link RoundsMaster}: reload all phases, reload World.
 	 */
 	public void reload() {
-		world.reloadWorld();
+		if (collisionVisitorsManagerFactory.isNull()) {
+			Gdx.app.error("RoundsMaster::reload()",
+					"collisionVisitorsManagerFactory.isNull()");
+		}
+		world.mapsLoaderReloadWorld(collisionVisitorsManagerFactory);
 
 		// reload phases after reloading World (add new phaseObjects)
 		reloadPhases();
@@ -150,4 +184,18 @@ public class RoundsMaster implements TilesMasterClient, GuiMasterClient {
 		currentPhase().onGuiEvent(eventGui);
 	}
 
+	/**
+	 * Check if all phases were skipped
+	 * 
+	 * @return
+	 */
+	private boolean allPhasesSkipped() {
+		for (final RoundPhase roundPhase : phases) {
+			if (!roundPhase.phaseSkippedLastTime()) {
+				// at least one phase was not skipped
+				return false;
+			}
+		}
+		return true;
+	}
 }

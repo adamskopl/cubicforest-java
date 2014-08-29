@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
 
 /**
  * 'Visitor' design pattern. 'With Default' variation assumption. <br>
@@ -40,6 +41,8 @@ public interface WorldObjectVisitor {
 	void visitToolTrap(HeroToolTrap heroToolTrap);
 
 	void visitToolOrange(HeroToolOrange heroToolOrange);
+
+	void visitToolTurret(HeroToolTurret heroToolTurret);
 
 	void visitToolPortal(HeroToolPortal heroToolPortal);
 

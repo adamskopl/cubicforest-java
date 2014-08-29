@@ -24,6 +24,11 @@ public class CollisionVisitorsManagerDefault implements
 	}
 
 	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	@Override
 	public void setVisitingObject(final WorldObject visitingObject) {
 		collisionVisitorEnter.setVisitingObject(visitingObject);
 		collisionVisitorPass.setVisitingObject(visitingObject);

@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
+import org.adamsko.cubicforest.world.object.collision.visitors.NullCollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicatorDefault;
@@ -43,7 +44,7 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 		return type;
 	}
 
-	private final CollisionVisitorsManager collisionVisitorsManager;
+	private CollisionVisitorsManager collisionVisitorsManager;
 
 	/**
 	 * Position indicated by tiles. (0.0,0.0): uppper corner of the first tile.
@@ -91,8 +92,11 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 
 		this.parentContainer = container;
 
-		collisionVisitorsManager = CollisionVisitorsManagerFactory.instance()
-				.create(type);
+		// collisionVisitorsManager = CollisionVisitorsManagerFactory.instance()
+		// .create(type);
+
+		collisionVisitorsManager = NullCollisionVisitorsManagerDefault
+				.instance();
 
 		initTilePropertiesIndicator();
 
@@ -113,6 +117,18 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 
 	protected void initTilePropertiesIndicator() {
 		tilePropertiesIndicator = new TilePropertiesIndicatorDefault();
+	}
+
+	/**
+	 * Should be invoked after initializing CollisionVisitorsManager
+	 */
+	public void initCollisionVisitorsManager(
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+		if (collisionVisitorsManagerFactory.isNull()) {
+			Gdx.app.error("WorldObject::initCollisionVisitorsManager",
+					"collisionVisitorsManagerFactory.isNull()");
+		}
+		collisionVisitorsManager = collisionVisitorsManagerFactory.create(type);
 	}
 
 	@Override
