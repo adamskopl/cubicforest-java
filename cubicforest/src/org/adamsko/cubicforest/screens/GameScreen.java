@@ -122,7 +122,8 @@ public class GameScreen implements Screen {
 		worldBuilder.initGuiMaster(worldRenderer,
 				worldObjectsMastersContainer.getTilesMaster(),
 				worldBuilder.getMapsLoader(),
-				worldObjectsMastersContainer.getGatherCubesMaster());
+				worldObjectsMastersContainer.getGatherCubesMaster(),
+				worldBuilder.getRoundsMaster());
 
 		worldBuilder.initPickMaster(worldBuilder.getGuiMaster(),
 				worldBuilder.getRoundsMaster());

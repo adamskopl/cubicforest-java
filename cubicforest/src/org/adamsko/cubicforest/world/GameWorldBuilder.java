@@ -31,7 +31,8 @@ public interface GameWorldBuilder {
 	WorldObjectsMastersContainer getWorldObjectsMastersContainer();
 
 	void initGuiMaster(GameRenderer renderer, TilesMaster tilesMaster,
-			MapsLoader mapsLoader, GatherCubesMaster gatherCubesMaster);
+			MapsLoader mapsLoader, GatherCubesMaster gatherCubesMaster,
+			RoundsMaster roundsMaster);
 
 	GuiMaster getGuiMaster();
 

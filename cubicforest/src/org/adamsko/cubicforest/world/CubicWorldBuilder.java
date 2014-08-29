@@ -89,7 +89,8 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public void initGuiMaster(final GameRenderer renderer,
 			final TilesMaster tilesMaster, final MapsLoader mapsLoader,
-			final GatherCubesMaster gatherCubesMaster) {
+			final GatherCubesMaster gatherCubesMaster,
+			final RoundsMaster roundsMaster) {
 
 		if (mapsLoader.isNull()) {
 			Gdx.app.error("initGuiMaster()", "mapsLoader.isNull()");
@@ -248,8 +249,10 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public void initRoundsMasterCVMFactory(
 			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+
 		roundsMaster
 				.setCollisionVisitorsManagerFactory(collisionVisitorsManagerFactory);
+
 	}
 
 	@Override
