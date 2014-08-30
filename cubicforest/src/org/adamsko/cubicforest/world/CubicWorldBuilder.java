@@ -1,7 +1,5 @@
 package org.adamsko.cubicforest.world;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
@@ -26,7 +24,6 @@ import org.adamsko.cubicforest.world.ordersMaster.NullOrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.NullPickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
-import org.adamsko.cubicforest.world.tile.TilesContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -75,10 +72,9 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	}
 
 	@Override
-	public void initWorldObjectsMastersContainer(final GameRenderer renderer,
-			final RoundsMaster roundsMaster) {
+	public void initWorldObjectsMastersContainer(final GameRenderer renderer) {
 		worldObjectsMastersContainer = new WorldObjectsMastersContainerDefault(
-				renderer, roundsMaster);
+				renderer);
 	}
 
 	@Override
@@ -122,8 +118,12 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	};
 
 	@Override
-	public void initMapsLoader() {
-		mapsLoader = new MapsLoaderTiled();
+	public void initMapsLoader(
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+
+		mapsLoader = new MapsLoaderTiled(worldObjectsMastersContainer,
+				collisionVisitorsManagerFactory);
 		mapsLoader.loadMaps();
 		mapsLoader.setMapActive(0);
 	}
@@ -148,7 +148,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initPickMaster(final GuiMaster guiMaster,
-			final RoundsMaster roundsMaster) {
+			final RoundsMaster roundsMaster, final TilesMaster tilesMaster) {
 		if (guiMaster.isNull()) {
 			Gdx.app.error("initPickMaster()", "guiMaster.isNull()");
 			return;
@@ -160,26 +160,25 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 		pickMaster = new PickMaster();
 		pickMaster.addClient(guiMaster);
-		pickMaster.addClient(worldObjectsMastersContainer.getTilesMaster());
+		pickMaster.addClient(tilesMaster);
 	}
 
 	@Override
 	public void initTilesMasterRoundsMaster(
+			final TilesMaster tilesMaster,
 			final RoundsMaster roundsMaster,
 			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
 
-		worldObjectsMastersContainer.getTilesMaster().initTilesEventsHandler(
-				roundsMaster, collisionVisitorsManagerFactory);
+		tilesMaster.initTilesEventsHandler(roundsMaster,
+				collisionVisitorsManagerFactory);
 
-		worldObjectsMastersContainer.getTilesMaster().addClient(roundsMaster);
+		tilesMaster.addClient(roundsMaster);
 
 	}
 
 	@Override
-	public void initRoundsMaster() {
-
-		roundsMaster = new RoundsMaster(this);
-
+	public void initRoundsMaster(final MapsLoader mapsLoader) {
+		roundsMaster = new RoundsMaster(mapsLoader);
 	}
 
 	@Override
@@ -231,11 +230,12 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		final PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster,
 				ordersMaster, tilesMaster, heroesToolsMaster, gatherCubesMaster);
 		phaseHeroes.setRoundsMaster(roundsMaster);
-		roundsMaster.addPhase(phaseHeroes);
 
 		final PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster,
 				heroesMaster, ordersMaster);
 		phaseEnemies.setRoundsMaster(roundsMaster);
+
+		roundsMaster.addPhase(phaseHeroes);
 		roundsMaster.addPhase(phaseEnemies);
 
 		try {
@@ -243,15 +243,6 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-
-	}
-
-	@Override
-	public void initRoundsMasterCVMFactory(
-			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
-
-		roundsMaster
-				.setCollisionVisitorsManagerFactory(collisionVisitorsManagerFactory);
 
 	}
 
@@ -291,45 +282,9 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		mapsLoader.setMapActive(activeMapIndex);
 	}
 
-	/**
-	 * Unload (clear), than load objects again to their original positions.
-	 * Objects from particular WorldObjectsMasters should not be loaded before
-	 * all other Masters unload their objects.
-	 */
 	@Override
-	public void mapsLoaderReloadWorld(
-			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
-
-		mapsLoader.reloadMaps();
-
-		final List<WorldObjectsMaster> worldObjectsMasters = worldObjectsMastersContainer
-				.getWorldObjectsMasters();
-
-		/*
-		 * Unloading has to be done in reverse order, because TilesMaster's
-		 * objects (tiles) should be unloaded in the end.
-		 */
-		for (int i = worldObjectsMasters.size() - 1; i >= 0; i--) {
-			final WorldObjectsMaster master = worldObjectsMasters.get(i);
-			try {
-				master.unloadMapObjects();
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		for (final WorldObjectsMaster master : worldObjectsMasters) {
-			try {
-				master.loadMapObjects(mapsLoader.getMapActive());
-				master.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		// uncomment to print tiles occupants
-		final TilesContainer tc = (TilesContainer) worldObjectsMasters.get(0);
-		tc.debugPrintOccupants(false);
+	public void mapsLoaderReloadWorld() {
+		mapsLoader.reloadWorld();
 	}
 
 	@Override

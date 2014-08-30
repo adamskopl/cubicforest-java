@@ -3,8 +3,12 @@ package org.adamsko.cubicforest.world.mapsLoader.tiled;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
+import org.adamsko.cubicforest.world.tile.TilesContainer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -18,11 +22,21 @@ public class MapsLoaderTiled implements MapsLoader {
 	// file handle for folder containing maps
 	private FileHandle mapsFolder;
 
-	MapsLoaderTiled(final boolean nullConstructor) {
+	private final WorldObjectsMastersContainer worldObjectsMastersContainer;
+	private final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
 
+	MapsLoaderTiled(final boolean nullConstructor) {
+		this.worldObjectsMastersContainer = null;
+		this.collisionVisitorsManagerFactory = null;
 	}
 
-	public MapsLoaderTiled() {
+	public MapsLoaderTiled(
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+
+		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
+		this.collisionVisitorsManagerFactory = collisionVisitorsManagerFactory;
+
 		maps = new ArrayList<TiledMap>();
 	}
 
@@ -56,6 +70,41 @@ public class MapsLoaderTiled implements MapsLoader {
 			maps.add(newMap);
 			Gdx.app.error(entry.toString(), "OK");
 		}
+	}
+
+	@Override
+	public void reloadWorld() {
+		reloadMaps();
+
+		final List<WorldObjectsMaster> worldObjectsMasters = worldObjectsMastersContainer
+				.getWorldObjectsMasters();
+
+		/*
+		 * Unloading has to be done in reverse order, because TilesMaster's
+		 * objects (tiles) should be unloaded in the end.
+		 */
+		for (int i = worldObjectsMasters.size() - 1; i >= 0; i--) {
+			final WorldObjectsMaster master = worldObjectsMasters.get(i);
+			try {
+				master.unloadMapObjects();
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		for (final WorldObjectsMaster master : worldObjectsMasters) {
+			try {
+				master.loadMapObjects(getMapActive());
+				master.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// uncomment to print tiles occupants
+		final TilesContainer tc = (TilesContainer) worldObjectsMasters.get(0);
+		tc.debugPrintOccupants(false);
+
 	}
 
 	@Override

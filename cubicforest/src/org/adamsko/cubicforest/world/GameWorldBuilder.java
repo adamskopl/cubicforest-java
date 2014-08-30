@@ -21,14 +21,35 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 public interface GameWorldBuilder {
 
 	/**
+	 * Standard 'update' function. Passes deltaTime for interested objects
+	 * 
 	 * @param deltaTime
 	 */
 	void update(final float deltaTime);
 
-	void initWorldObjectsMastersContainer(final GameRenderer renderer,
-			final RoundsMaster roundsMaster);
+	/**
+	 * Initialize {@link WorldObjectsMastersContainer}, so it's ready for
+	 * 'getWorldObjectsMastersContainer()'. All {@link WorldObjectsMaster}
+	 * objects should be ready for use.
+	 * 
+	 * @param renderer
+	 * @param roundsMaster
+	 */
+	void initWorldObjectsMastersContainer(final GameRenderer renderer);
 
 	WorldObjectsMastersContainer getWorldObjectsMastersContainer();
+
+	/**
+	 * Initialize {@link OrdersMaster} object, so it's ready for
+	 * 'getOrdersMaster()'.
+	 * 
+	 * @param tilesMaster
+	 *            Needed to initialize 'TilePathsMaster' Also needed for some
+	 *            public methods.
+	 */
+	void initOrdersMaster(final TilesMaster tilesMaster);
+
+	OrdersMaster getOrdersMaster();
 
 	void initGuiMaster(GameRenderer renderer, TilesMaster tilesMaster,
 			MapsLoader mapsLoader, GatherCubesMaster gatherCubesMaster,
@@ -36,17 +57,16 @@ public interface GameWorldBuilder {
 
 	GuiMaster getGuiMaster();
 
-	void initPickMaster(GuiMaster guiMaster, RoundsMaster roundsMaster);
-
-	void initOrdersMaster(final TilesMaster tilesMaster);
-
-	OrdersMaster getOrdersMaster();
+	void initPickMaster(GuiMaster guiMaster, RoundsMaster roundsMaster,
+			TilesMaster tilesMaster);
 
 	/**
 	 * Initialize {@link MapsLoader} to load game objects from
 	 * {@link WorldObjectsMaster} objects.
 	 */
-	void initMapsLoader();
+	void initMapsLoader(
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
 	MapsLoader getMapsLoader();
 
@@ -61,24 +81,21 @@ public interface GameWorldBuilder {
 	/**
 	 * Reload world objects with {@link MapsLoader}.
 	 */
-	void mapsLoaderReloadWorld(
-			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+	void mapsLoaderReloadWorld();
 
 	/**
 	 * FIXME: pass {@link WorldObjectsMaster} manager
 	 */
-	void initRoundsMaster();
+	void initRoundsMaster(MapsLoader mapsLoader);
 
 	void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
-	void initRoundsMasterCVMFactory(
-			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
-
 	RoundsMaster getRoundsMaster();
 
-	void initTilesMasterRoundsMaster(final RoundsMaster roundsMaster,
+	void initTilesMasterRoundsMaster(TilesMaster tilesMaster,
+			final RoundsMaster roundsMaster,
 			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
 	void initCollisionVisitorsManagerFactory(

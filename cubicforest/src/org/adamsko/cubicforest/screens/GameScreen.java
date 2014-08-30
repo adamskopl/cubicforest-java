@@ -84,14 +84,13 @@ public class GameScreen implements Screen {
 
 	private void initGameBuilder(final GameRenderer worldRenderer) {
 
-		// the following operations should be performed in the presented order
+		// the following operations should be performed in the presented order,
+		// some classes are initialized partially and finished being initialized
+		// after some previous classes finish their initialization
 
 		worldBuilder = new CubicWorldBuilder();
 
-		worldBuilder.initRoundsMaster();
-
-		worldBuilder.initWorldObjectsMastersContainer(worldRenderer,
-				worldBuilder.getRoundsMaster());
+		worldBuilder.initWorldObjectsMastersContainer(worldRenderer);
 
 		final WorldObjectsMastersContainer worldObjectsMastersContainer = worldBuilder
 				.getWorldObjectsMastersContainer();
@@ -99,25 +98,25 @@ public class GameScreen implements Screen {
 		worldBuilder.initOrdersMaster(worldObjectsMastersContainer
 				.getTilesMaster());
 
-		worldBuilder.initMapsLoader();
-
 		worldBuilder.initCollisionVisitorsManagerFactory(
 				worldObjectsMastersContainer.getGatherCubesMaster(),
 				worldObjectsMastersContainer.getHeroesToolsMaster());
 
+		worldBuilder.initMapsLoader(worldObjectsMastersContainer,
+				worldBuilder.getCollisionVisitorsManagerFactory());
+
+		worldBuilder.initRoundsMaster(worldBuilder.getMapsLoader());
+
 		worldBuilder.initTilesMasterRoundsMaster(
+				worldObjectsMastersContainer.getTilesMaster(),
 				worldBuilder.getRoundsMaster(),
 				worldBuilder.getCollisionVisitorsManagerFactory());
 
-		worldBuilder.mapsLoaderReloadWorld(worldBuilder
-				.getCollisionVisitorsManagerFactory());
+		worldBuilder.mapsLoaderReloadWorld();
 
 		worldBuilder.initRoundsMasterPhases(worldBuilder.getOrdersMaster(),
 				worldObjectsMastersContainer,
 				worldBuilder.getCollisionVisitorsManagerFactory());
-
-		worldBuilder.initRoundsMasterCVMFactory(worldBuilder
-				.getCollisionVisitorsManagerFactory());
 
 		worldBuilder.initGuiMaster(worldRenderer,
 				worldObjectsMastersContainer.getTilesMaster(),
@@ -126,7 +125,8 @@ public class GameScreen implements Screen {
 				worldBuilder.getRoundsMaster());
 
 		worldBuilder.initPickMaster(worldBuilder.getGuiMaster(),
-				worldBuilder.getRoundsMaster());
+				worldBuilder.getRoundsMaster(),
+				worldObjectsMastersContainer.getTilesMaster());
 
 	}
 }

@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.world.objectsMasters.entities.enemies;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.text.ROLabel;
-import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -18,8 +17,7 @@ public class EnemiesMaster extends WorldObjectsContainer implements
 		OrderableObjectsContainer {
 
 	public EnemiesMaster(final TilesMaster tilesMaster,
-			final RoundsMaster roundsMaster, final String textureName,
-			final int tileW, final int tileH) {
+			final String textureName, final int tileW, final int tileH) {
 		super("enemiesMaster", tilesMaster, textureName, tileW, tileH);
 
 	}

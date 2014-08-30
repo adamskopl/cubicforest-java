@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.world.GameRenderer;
-import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -13,8 +12,6 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsM
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcher;
-
-import com.badlogic.gdx.Gdx;
 
 public class WorldObjectsMastersContainerDefault implements
 		WorldObjectsMastersContainer {
@@ -28,16 +25,9 @@ public class WorldObjectsMastersContainerDefault implements
 	private GatherCubesMaster gatherCubesMaster;
 	private HeroesToolsMaster heroesToolsMaster;
 
-	public WorldObjectsMastersContainerDefault(final GameRenderer renderer,
-			final RoundsMaster roundsMaster) {
-
-		if (roundsMaster.isNull()) {
-			Gdx.app.error("WorldObjectsMastersContainerDefault()",
-					"roundsMaster.isNull()");
-		}
-
+	public WorldObjectsMastersContainerDefault(final GameRenderer renderer) {
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
-		initMasters(renderer, roundsMaster);
+		initMasters(renderer);
 	}
 
 	@Override
@@ -46,16 +36,15 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	@Override
-	public void initMasters(final GameRenderer renderer,
-			final RoundsMaster roundsMaster) {
+	public void initMasters(final GameRenderer renderer) {
 		initTilesMaster();
 
 		terrainObjectsMaster = new TerrainMaster(tilesMaster,
 				"terrain-atlas-medium", 42, 50);
-		heroesMaster = new HeroesMaster(tilesMaster, roundsMaster,
-				"heroes-atlas-medium", 30, 35);
-		enemiesMaster = new EnemiesMaster(tilesMaster, roundsMaster,
-				"enemies-atlas-medium", 30, 35);
+		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30,
+				35);
+		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",
+				30, 35);
 		gatherCubesMaster = new GatherCubesMaster(tilesMaster,
 				"cubes-atlas-medium", 25, 40);
 		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
