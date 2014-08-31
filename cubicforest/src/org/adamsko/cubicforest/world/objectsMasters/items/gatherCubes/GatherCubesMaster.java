@@ -6,13 +6,13 @@ import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class GatherCubesMaster extends WorldObjectsContainer implements
+public class GatherCubesMaster extends WorldObjectsMasterDefault implements
 		Nullable {
 
 	private GatherCubesCounter gatherCubesCounter;

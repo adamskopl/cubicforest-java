@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
@@ -23,7 +23,7 @@ import com.badlogic.gdx.math.Vector2;
  *         TODO: add tool marker master (class responsible for tool marker)
  * 
  */
-public class HeroesToolsMaster extends WorldObjectsContainer implements
+public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 		Nullable {
 
 	private HeroTool heroToolMarker;

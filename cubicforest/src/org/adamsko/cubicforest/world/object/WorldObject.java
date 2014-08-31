@@ -29,14 +29,14 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	/**
 	 * Container holding this WorldObject.
 	 */
-	private final WorldObjectsContainer parentContainer;
+	private final WorldObjectsMasterDefault parentContainer;
 
 	/**
 	 * Return container holding this WorldObject. <br>
 	 * FIXME: design flaw. Every class having contact with WorldObject can
 	 * remove it.
 	 */
-	public WorldObjectsContainer getParentContainer() {
+	public WorldObjectsMasterDefault getParentContainer() {
 		return parentContainer;
 	}
 
@@ -87,7 +87,7 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	}
 
 	public WorldObject(final TextureRegion tr, final int texNum,
-			final WorldObjectsContainer container, final WorldObjectType type) {
+			final WorldObjectsMasterDefault container, final WorldObjectType type) {
 		super(tr, texNum);
 
 		this.parentContainer = container;

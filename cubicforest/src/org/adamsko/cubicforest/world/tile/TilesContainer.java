@@ -6,12 +6,12 @@ import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class TilesContainer extends WorldObjectsContainer {
+public class TilesContainer extends WorldObjectsMasterDefault {
 
 	public TilesContainer(final String name, final TilesMaster tilesMaster) {
 		super(name, tilesMaster, "tiles-atlas-medium", 75, 45);

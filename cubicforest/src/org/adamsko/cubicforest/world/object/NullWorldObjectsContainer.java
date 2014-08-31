@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.object;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 
-public class NullWorldObjectsContainer extends WorldObjectsContainer {
+public class NullWorldObjectsContainer extends WorldObjectsMasterDefault {
 
 	private static NullWorldObjectsContainer instance = null;
 

@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @author adamsko
  * 
  */
-public class RenderableObjectsContainer implements RenderableObjectsMaster {
+public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	private String name;
 
@@ -75,10 +75,10 @@ public class RenderableObjectsContainer implements RenderableObjectsMaster {
 	 */
 	protected List<TextureRegion[]> atlasRows;
 
-	public RenderableObjectsContainer(final int nullConstructor) {
+	public RenderableObjectsMasterDefault(final int nullConstructor) {
 	}
 
-	public RenderableObjectsContainer(final String name,
+	public RenderableObjectsMasterDefault(final String name,
 			final String textureName, final int tileW, final int tileH) {
 		this.name = new String(name);
 

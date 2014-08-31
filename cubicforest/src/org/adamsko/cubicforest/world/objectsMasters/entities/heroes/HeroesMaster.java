@@ -6,14 +6,14 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
-public class HeroesMaster extends WorldObjectsContainer implements
+public class HeroesMaster extends WorldObjectsMasterDefault implements
 		OrderableObjectsContainer {
 
 	public HeroesMaster(final TilesMaster tilesMaster,

@@ -3,24 +3,24 @@ package org.adamsko.cubicforest.world.object;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.RenderableObjectsContainer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
 
-public abstract class WorldObjectsContainer extends RenderableObjectsContainer
+public abstract class WorldObjectsMasterDefault extends RenderableObjectsMasterDefault
 		implements WorldObjectsMaster {
 
 	private List<WorldObject> worldObjects;
 	private TilesMaster tilesMaster;
 
-	public WorldObjectsContainer(final int nullConstructor) {
+	public WorldObjectsMasterDefault(final int nullConstructor) {
 		super(0);
 	}
 
-	public WorldObjectsContainer(final String name,
+	public WorldObjectsMasterDefault(final String name,
 			final TilesMaster tilesMaster, final String textureName,
 			final int tileW, final int tileH) {
 

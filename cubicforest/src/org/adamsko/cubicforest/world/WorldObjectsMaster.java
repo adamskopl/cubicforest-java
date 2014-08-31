@@ -12,7 +12,7 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 /**
  * Interface for classes managing {@link WorldObjectType} type objects. If there
- * is a new type of world objects, their manager should implement this
+ * is a new type of world objects, their container should implement this
  * interface.
  * 
  * @author adamsko
@@ -21,6 +21,11 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 public interface WorldObjectsMaster extends Nullable {
 	public void update(float deltaTime);
 
+	/**
+	 * Return list of all {@link WorldObject} objects in container
+	 * 
+	 * @return
+	 */
 	public List<WorldObject> getWorldObjects();
 
 	/**

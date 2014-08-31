@@ -7,7 +7,7 @@ import java.util.List;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsContainer;
+import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -31,7 +31,7 @@ public class Tile extends WorldObject {
 	}
 
 	public Tile(final Vector2 coords, final TextureRegion tr,
-			final WorldObjectsContainer container) {
+			final WorldObjectsMasterDefault container) {
 		super(tr, 0, container, WorldObjectType.DEFAULT);
 		this.tilesPos = coords;
 

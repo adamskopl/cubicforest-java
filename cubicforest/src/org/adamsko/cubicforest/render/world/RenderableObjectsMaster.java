@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.render.world;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.RenderableObjectsContainer.ROListType_e;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault.ROListType_e;
 import org.adamsko.cubicforest.render.world.renderList.RenderListDefault;
 
 public interface RenderableObjectsMaster {
