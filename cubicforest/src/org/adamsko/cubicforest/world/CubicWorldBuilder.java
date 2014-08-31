@@ -84,7 +84,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initGuiMaster(final GameRenderer renderer,
-			final TilesMaster tilesMaster, final MapsLoader mapsLoader,
+			final MapsLoader mapsLoader,
 			final GatherCubesMaster gatherCubesMaster,
 			final RoundsMaster roundsMaster) {
 
@@ -93,17 +93,12 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			return;
 		}
 
-		if (tilesMaster.isNull()) {
-			Gdx.app.error("initGuiMaster()", "tilesMaster.isNull()");
-			return;
-		}
-
 		if (gatherCubesMaster.isNull()) {
 			Gdx.app.error("initGuiMaster()", "tilesMaster.isNull()");
 			return;
 		}
 
-		guiMaster = new GuiMaster(tilesMaster, mapsLoader);
+		guiMaster = new GuiMaster(mapsLoader);
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
 		guiMaster.addClient(roundsMaster);
 
@@ -148,7 +143,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initPickMaster(final GuiMaster guiMaster,
-			final RoundsMaster roundsMaster, final TilesMaster tilesMaster) {
+			final TilesMaster tilesMaster) {
 		if (guiMaster.isNull()) {
 			Gdx.app.error("initPickMaster()", "guiMaster.isNull()");
 			return;
@@ -182,10 +177,8 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	}
 
 	@Override
-	public void initRoundsMasterPhases(
-			final OrdersMaster ordersMaster,
-			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+	public void initRoundsMasterPhases(final OrdersMaster ordersMaster,
+			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
 
 		final HeroesMaster heroesMaster = worldObjectsMastersContainer
 				.getHeroesMaster();
@@ -221,10 +214,6 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		if (gatherCubesMaster.isNull()) {
 			Gdx.app.error("initRoundsMaster()", "gatherCubesMaster.isNull()");
 			return;
-		}
-
-		if (heroesMaster.getOrderableObjects().size() == 0) {
-			Gdx.app.debug("getOrderableObjects", "0");
 		}
 
 		final PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster,
@@ -275,11 +264,6 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public CollisionVisitorsManagerFactory getCollisionVisitorsManagerFactory() {
 		return collisionVisitorsManagerFactory;
-	}
-
-	@Override
-	public void setMapActive(final int activeMapIndex) {
-		mapsLoader.setMapActive(activeMapIndex);
 	}
 
 	@Override

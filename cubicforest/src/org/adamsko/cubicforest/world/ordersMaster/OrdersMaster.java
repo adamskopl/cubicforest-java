@@ -12,6 +12,8 @@ import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuide;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 
 /**
+ * FIXME: interface needed
+ * 
  * Manages orders (movement for now) for objects from different
  * {@link PhaseOrderableObjects} client objects. Handles only one client for
  * now.

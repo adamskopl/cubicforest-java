@@ -2,15 +2,14 @@ package org.adamsko.cubicforest.gui.debug;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiType_e;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiDebug extends GuiContainer {
 
-	public GuiDebug(final TilesMaster TM, final String textureName,
-			final int tileW, final int tileH, final float posX, final float posY) {
+	public GuiDebug(final String textureName, final int tileW, final int tileH,
+			final float posX, final float posY) {
 		super("guiDebug", GuiType_e.GUI_DEBUG, textureName, tileW, tileH, posX,
 				posY);
 		createGui();

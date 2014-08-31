@@ -4,7 +4,6 @@ import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -12,9 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GuiLevels extends GuiContainer {
 
-	public GuiLevels(final MapsLoader mapsLoader, final TilesMaster TM,
-			final String textureName, final int tileW, final int tileH,
-			final float posX, final float posY) {
+	public GuiLevels(final MapsLoader mapsLoader, final String textureName,
+			final int tileW, final int tileH, final float posX, final float posY) {
 		super("guiLevels", GuiType_e.GUI_LEVELS, textureName, tileW, tileH,
 				posX, posY);
 		createGui(mapsLoader);

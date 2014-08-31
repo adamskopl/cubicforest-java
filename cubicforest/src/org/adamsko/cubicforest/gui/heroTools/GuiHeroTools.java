@@ -7,14 +7,13 @@ import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
 
 public class GuiHeroTools extends GuiContainer {
 
-	public GuiHeroTools(final TilesMaster TM, final String textureName,
-			final int tileW, final int tileH, final float posX, final float posY) {
+	public GuiHeroTools(final String textureName, final int tileW,
+			final int tileH, final float posX, final float posY) {
 		super("guiHeroTools", GuiType_e.GUI_HERO_TOOLS, textureName, tileW,
 				tileH, posX, posY);
 		createGui();

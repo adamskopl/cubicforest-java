@@ -2,14 +2,13 @@ package org.adamsko.cubicforest.gui.orders;
 
 import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiType_e;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiOrders extends GuiContainer {
 
-	public GuiOrders(final TilesMaster TM, final String textureName,
-			final int tileW, final int tileH, final float posX, final float posY) {
+	public GuiOrders(final String textureName, final int tileW,
+			final int tileH, final float posX, final float posY) {
 		super("gui orders", GuiType_e.GUI_ORDERS, textureName, tileW, tileH,
 				posX, posY);
 		createGui();

@@ -10,7 +10,6 @@ import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -32,21 +31,18 @@ public class GuiMaster implements PickMasterClient, Nullable {
 	GuiMaster() {
 	}
 
-	public GuiMaster(final TilesMaster tilesMaster, final MapsLoader mapsLoader) {
+	public GuiMaster(final MapsLoader mapsLoader) {
 		guiList = new ArrayList<GuiContainer>();
 		clients = new ArrayList<GuiMasterClient>();
 
-		guiHeroTools = new GuiHeroTools(tilesMaster, "tools-atlas-medium", 40,
-				42, 25, -50);
+		guiHeroTools = new GuiHeroTools("tools-atlas-medium", 40, 42, 25, -50);
 
-		guiOrders = new GuiOrders(tilesMaster, "orders-atlas-medium", 100, 100,
-				20, -340);
+		guiOrders = new GuiOrders("orders-atlas-medium", 100, 100, 20, -340);
 
-		guiDebug = new GuiDebug(tilesMaster, "orders-atlas-medium", 50, 50,
-				680, -100);
+		guiDebug = new GuiDebug("orders-atlas-medium", 50, 50, 680, -100);
 
-		guiLevels = new GuiLevels(mapsLoader, tilesMaster,
-				"levels-atlas-medium", 30, 30, 600, -80);
+		guiLevels = new GuiLevels(mapsLoader, "levels-atlas-medium", 30, 30,
+				600, -80);
 
 		addGui(guiHeroTools);
 		addGui(guiOrders);
