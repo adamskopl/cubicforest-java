@@ -127,7 +127,7 @@ public class CubicWorldRenderer implements GameRenderer {
 			final Vector2 objPos = wObj.getTilesPos();
 			Vector2 renderPos = CoordCalc.tilesToRender(objPos);
 			renderPos.add(rObj.getRenderVector());
-			batch.draw(wObj.getTextureRegion(), renderPos.x, renderPos.y);
+			batch.draw(rObj.getTextureRegion(), renderPos.x, renderPos.y);
 			break;
 		case TYPE_GUI:
 			final GuiElement gObj = (GuiElement) rObj;

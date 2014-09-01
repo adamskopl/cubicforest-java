@@ -8,6 +8,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * FIXME: develop {@link CFMap} interface
+ * 
  * Class representing JSON format of Tiled map.
  * 
  * @author adamsko
@@ -68,14 +70,14 @@ public class TiledMap implements CFMap {
 		this.layers = layers;
 	}
 
+	// GETTERS SETTERS >
+
 	/**
 	 * After successful load, initialize {@link TiledCfConverter} object.
 	 */
 	void initConverter() {
 		tiledCfConverter.loadTiledObjects();
 	}
-
-	// GETTERS SETTERS >
 
 	public void printLayers() {
 		for (final TiledLayer tl : getLayers()) {

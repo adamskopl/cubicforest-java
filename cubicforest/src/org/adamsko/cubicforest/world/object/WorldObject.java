@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.object;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.text.ROLabel;
-import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
@@ -19,7 +19,8 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  * 
  */
-public abstract class WorldObject extends RenderableObject implements Nullable {
+public abstract class WorldObject extends RenderableObjectDefault implements
+		Nullable {
 
 	private final WorldObjectType type;
 	private WorldObjectState state;
@@ -87,7 +88,8 @@ public abstract class WorldObject extends RenderableObject implements Nullable {
 	}
 
 	public WorldObject(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container, final WorldObjectType type) {
+			final WorldObjectsMasterDefault container,
+			final WorldObjectType type) {
 		super(tr, texNum);
 
 		this.parentContainer = container;

@@ -28,12 +28,6 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
 
-/**
- * World class desc.
- * 
- * @author adamsko
- * 
- */
 public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
