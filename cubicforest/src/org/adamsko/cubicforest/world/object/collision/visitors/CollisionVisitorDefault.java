@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.object.collision.visitors;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.world.object.NullWorldObject;
+import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
@@ -39,7 +39,7 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 					"collisionsHandler.isNull()");
 		}
 		this.collisionsHandler = collisionsHandler;
-		this.visitingObject = NullWorldObject.instance();
+		this.visitingObject = NullCubicObject.instance();
 	}
 
 	@Override

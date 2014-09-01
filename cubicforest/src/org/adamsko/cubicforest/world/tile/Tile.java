@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -18,7 +19,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  * @author adamsko
  */
-public class Tile extends WorldObject {
+public class Tile extends CubicObject {
 
 	private final List<WorldObject> occupants;
 

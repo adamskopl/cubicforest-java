@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * Interface for classes that have to be rendered on the screen.
+ * 
  * @author adamsko
  * 
  */

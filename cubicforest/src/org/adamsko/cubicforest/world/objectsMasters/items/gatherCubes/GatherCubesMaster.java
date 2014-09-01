@@ -74,7 +74,6 @@ public class GatherCubesMaster extends WorldObjectsMasterDefault implements
 					.getRegionWidth() / 2, -2));
 
 			gatherCube.setSpeed(2);
-			gatherCube.setOccupiesTile(false);
 			gatherCube.setVerticalPos(0.5f);
 
 			pos.add(new Vector2(0.5f, 0.5f));

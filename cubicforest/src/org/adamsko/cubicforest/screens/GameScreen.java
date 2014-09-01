@@ -4,8 +4,8 @@ import org.adamsko.cubicforest.render.world.CubicWorldRenderer;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.world.CubicWorldBuilder;
 import org.adamsko.cubicforest.world.GameWorldBuilder;
-import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectAccessor;
+import org.adamsko.cubicforest.world.object.CubicObject;
+import org.adamsko.cubicforest.world.object.accessor.WorldObjectAccessor;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 
 import aurelienribon.tweenengine.Tween;
@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
 
 	private void initTween() {
 		tweenManager = new TweenManager();
-		Tween.registerAccessor(WorldObject.class, new WorldObjectAccessor());
+		Tween.registerAccessor(CubicObject.class, new WorldObjectAccessor());
 	}
 
 	@Override

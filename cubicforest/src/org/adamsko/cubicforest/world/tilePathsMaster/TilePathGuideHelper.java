@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
-import org.adamsko.cubicforest.world.object.WorldObjectAccessor;
+import org.adamsko.cubicforest.world.object.accessor.WorldObjectAccessor;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesHelper;
 import org.adamsko.cubicforest.world.tile.TilesHelper.TilesConnection_e;

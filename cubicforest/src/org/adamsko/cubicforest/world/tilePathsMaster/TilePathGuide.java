@@ -228,7 +228,6 @@ public class TilePathGuide implements TweenCallback {
 		final OrderOperationHandler orderOperationHandler = processTileEvent(
 				TileEvent.OCCUPANT_PASSES, helper.getTileHeadingTo(), wanderer);
 
-		wanderer.addMovePoints(-1);
 		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is
 		// a tile that has been reached right now)
 		helper.reassignTileFrom();

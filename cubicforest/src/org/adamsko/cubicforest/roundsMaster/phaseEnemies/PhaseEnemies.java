@@ -51,7 +51,6 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 		} else {
 			// shorten path to enemy's speed
 			shortestPathTileAdjacentHero.shortenPath(activeEnemy.getSpeed());
-			activeEnemy.restoreMovementPoints();
 			ordersMaster.startOrder(activeEnemy, shortestPathTileAdjacentHero,
 					this);
 		}

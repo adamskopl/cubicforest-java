@@ -1,13 +1,13 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
-import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class GatherCube extends WorldObject {
+public class GatherCube extends CubicObject {
 
 	public GatherCube(final TextureRegion tr, final int texNum,
 			final WorldObjectsMasterDefault container) {
@@ -15,7 +15,7 @@ public class GatherCube extends WorldObject {
 	}
 
 	@Override
-	protected void initTilePropertiesIndicator() {
+	public void initTilePropertiesIndicator() {
 		super.initTilePropertiesIndicator();
 		getTilePropertiesIndicator().setTilePathSearchValid(true);
 	}

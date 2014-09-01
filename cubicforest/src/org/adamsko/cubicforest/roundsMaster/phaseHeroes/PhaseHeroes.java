@@ -91,7 +91,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 				ordersMaster.unhighlightTilesObjectRange(activeObject());
 
-				activeObject().restoreMovementPoints();
 				ordersMaster.startOrder(activeObject(), activePath, this);
 				activePath = null;
 			}

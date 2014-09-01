@@ -1,4 +1,6 @@
-package org.adamsko.cubicforest.world.object;
+package org.adamsko.cubicforest.world.object.accessor;
+
+import org.adamsko.cubicforest.world.object.WorldObject;
 
 import aurelienribon.tweenengine.TweenAccessor;
 

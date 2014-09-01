@@ -1,12 +1,12 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
-import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public abstract class HeroTool extends WorldObject {
+public abstract class HeroTool extends CubicObject {
 
 	final int buildCost;
 	HeroToolStates_e toolState;
@@ -43,7 +43,7 @@ public abstract class HeroTool extends WorldObject {
 	}
 
 	@Override
-	protected void initTilePropertiesIndicator() {
+	public void initTilePropertiesIndicator() {
 		super.initTilePropertiesIndicator();
 		getTilePropertiesIndicator().setTilePathSearchValid(true);
 	}
