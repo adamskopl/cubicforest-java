@@ -3,6 +3,12 @@ package org.adamsko.cubicforest.world.mapsLoader;
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 
+/**
+ * Interface for class res
+ * 
+ * @author adamsko
+ * 
+ */
 public interface MapsLoader extends Nullable {
 
 	/**

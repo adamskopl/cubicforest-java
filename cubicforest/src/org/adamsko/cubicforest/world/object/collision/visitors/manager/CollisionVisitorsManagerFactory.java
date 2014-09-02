@@ -20,6 +20,13 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsM
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * Creates {@link CollisionVisitorsManager} objects. For every
+ * {@link WorldObjectType} there is one manager kept in {@link #managers}
+ * 
+ * @author adamsko
+ * 
+ */
 public class CollisionVisitorsManagerFactory implements Nullable {
 
 	private HashMap<WorldObjectType, CollisionVisitorsManager> managers;

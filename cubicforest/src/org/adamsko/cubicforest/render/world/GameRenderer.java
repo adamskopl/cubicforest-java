@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.render.world;
 
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.Screen;
@@ -20,6 +21,13 @@ public interface GameRenderer {
 	 * @param deltaTime
 	 */
 	void render(final float deltaTime);
+
+	/**
+	 * Set {@link CoordCalc} object for coordinations calculations.
+	 * 
+	 * @param coordCalcX
+	 */
+	void setCoordCalc(CoordCalc coordCalcX);
 
 	/**
 	 * As seen in Libgdx demos. Invoked in hide() of {@link Screen} implementing

@@ -54,11 +54,7 @@ public class TilesMaster implements PickMasterClient, Nullable {
 		/**
 		 * Occupant ends his movement on a tile.
 		 */
-		OCCUPANT_STOPS,
-		/**
-		 * Occupant stays on a tile (no movement).
-		 */
-		OCCUPANT_STAYS
+		OCCUPANT_STOPS
 	}
 
 	// number of tiles (mapSize = 16 -> 4x4 tiles)

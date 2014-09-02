@@ -1,12 +1,11 @@
 package org.adamsko.cubicforest.world.pickmaster;
 
-
 public class NullPickMaster extends PickMaster {
 
 	private static NullPickMaster instance = null;
 
 	private NullPickMaster() {
-		super();
+		super(0);
 	}
 
 	public static NullPickMaster instance() {

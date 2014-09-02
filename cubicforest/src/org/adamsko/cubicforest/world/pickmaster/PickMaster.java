@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.render.world.CoordCalc;
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class PickMaster implements Nullable {
 	private List<PickMasterClient> clients;
+	private CoordCalc coordCalc;
 
 	PickMaster(final int nullConstructor) {
 	}
 
-	public PickMaster() {
+	public PickMaster(final CoordCalc coordCalc) {
 		clients = new ArrayList<PickMasterClient>();
+		this.coordCalc = coordCalc;
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class PickMaster implements Nullable {
 			final Vector2 screenPos = new Vector2(Gdx.input.getX(),
 					Gdx.input.getY());
 			final Vector2 tilesPos = new Vector2(
-					CoordCalc.screenToTiles(screenPos));
+					coordCalc.screenToTiles(screenPos));
 			for (final PickMasterClient client : clients) {
 				client.onInput(screenPos, tilesPos);
 			}

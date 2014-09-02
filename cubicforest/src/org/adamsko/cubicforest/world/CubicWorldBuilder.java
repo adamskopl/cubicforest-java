@@ -5,6 +5,8 @@ import org.adamsko.cubicforest.gui.GuiContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.gui.NullGuiMaster;
 import org.adamsko.cubicforest.render.world.GameRenderer;
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalcDefault;
 import org.adamsko.cubicforest.roundsMaster.NullRoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
@@ -29,6 +31,8 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 import com.badlogic.gdx.Gdx;
 
 public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
+
+	private CoordCalc coordCalc;
 
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
@@ -137,7 +141,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initPickMaster(final GuiMaster guiMaster,
-			final TilesMaster tilesMaster) {
+			final TilesMaster tilesMaster, final CoordCalc coordCalc) {
 		if (guiMaster.isNull()) {
 			Gdx.app.error("initPickMaster()", "guiMaster.isNull()");
 			return;
@@ -147,7 +151,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			return;
 		}
 
-		pickMaster = new PickMaster();
+		pickMaster = new PickMaster(coordCalc);
 		pickMaster.addClient(guiMaster);
 		pickMaster.addClient(tilesMaster);
 	}
@@ -268,6 +272,16 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public void update(final float deltaTime) {
 		pickMaster.update();
+	}
+
+	@Override
+	public void initCoordCalc(final float tileSize) {
+		coordCalc = new CoordCalcDefault(tileSize);
+	}
+
+	@Override
+	public CoordCalc getCoordCalc() {
+		return coordCalc;
 	}
 
 }

@@ -2,6 +2,8 @@ package org.adamsko.cubicforest.screens;
 
 import org.adamsko.cubicforest.render.world.CubicWorldRenderer;
 import org.adamsko.cubicforest.render.world.GameRenderer;
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalcDefault;
 import org.adamsko.cubicforest.world.CubicWorldBuilder;
 import org.adamsko.cubicforest.world.GameWorldBuilder;
 import org.adamsko.cubicforest.world.object.CubicObject;
@@ -21,6 +23,7 @@ public class GameScreen implements Screen {
 	Game game;
 	GameRenderer worldRenderer;
 	GameWorldBuilder worldBuilder;
+	CoordCalc coordCalcX;
 
 	public static TweenManager tweenManager;
 
@@ -38,8 +41,14 @@ public class GameScreen implements Screen {
 		Gdx.app.setLogLevel(com.badlogic.gdx.Application.LOG_DEBUG);
 		initTween();
 
+		coordCalcX = new CoordCalcDefault(75);
+
 		worldRenderer = new CubicWorldRenderer();
+
 		initGameBuilder(worldRenderer);
+
+		worldRenderer.setCoordCalc(worldBuilder.getCoordCalc());
+
 	}
 
 	@Override
@@ -90,6 +99,8 @@ public class GameScreen implements Screen {
 
 		worldBuilder = new CubicWorldBuilder();
 
+		worldBuilder.initCoordCalc(75);
+
 		worldBuilder.initWorldObjectsMastersContainer(worldRenderer);
 
 		final WorldObjectsMastersContainer worldObjectsMastersContainer = worldBuilder
@@ -122,7 +133,8 @@ public class GameScreen implements Screen {
 				worldBuilder.getRoundsMaster());
 
 		worldBuilder.initPickMaster(worldBuilder.getGuiMaster(),
-				worldObjectsMastersContainer.getTilesMaster());
+				worldObjectsMastersContainer.getTilesMaster(),
+				worldBuilder.getCoordCalc());
 
 	}
 }

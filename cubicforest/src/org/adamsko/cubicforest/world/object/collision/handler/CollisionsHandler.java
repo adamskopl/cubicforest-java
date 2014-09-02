@@ -7,7 +7,7 @@ import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 /**
  * Handles requests about resolving collisions effects. <br>
- * Additionally exposes operations needed to be performed during resolve.
+ * Additionally exposes handlers needed to perform operations during resolve.
  * 
  * @author adamsko
  * 

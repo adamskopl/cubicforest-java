@@ -14,7 +14,7 @@ public class TilesSearcher {
 	private static AdjacentTilesSearcher adjacentTilesSearcher;
 
 	public static void setTilesMaster(final TilesMaster tilesMaster) {
-		adjacentTilesSearcher = new AdjacentTilesSearcher(tilesMaster);
+		adjacentTilesSearcher = new AdjacentTilesSearcherDefault(tilesMaster);
 	}
 
 	public static List<Tile> getTilesAdjacent(final Tile tile,

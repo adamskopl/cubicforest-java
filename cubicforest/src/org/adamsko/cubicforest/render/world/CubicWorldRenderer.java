@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault.ROListType_e;
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
 import org.adamsko.cubicforest.render.world.renderList.RenderListDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -25,6 +26,8 @@ import com.badlogic.gdx.math.Vector2;
 public class CubicWorldRenderer implements GameRenderer {
 
 	OrthographicCamera cam;
+
+	private CoordCalc coordCalcX;
 
 	List<RenderableObjectsMaster> renderableObjectsMastersWorld;
 	List<RenderableObjectsMaster> renderableObjectsMastersGui;
@@ -50,7 +53,6 @@ public class CubicWorldRenderer implements GameRenderer {
 		renderListMasterWorld = new RenderListDefault();
 		renderListMasterGui = new RenderListDefault();
 
-		CoordCalc.setTileSize(tileWidth);
 		this.cam = new OrthographicCamera(780, 460);
 		this.cam.position.set(390, -230, 0);
 		renderableObjectsMastersWorld = new ArrayList<RenderableObjectsMaster>();
@@ -70,6 +72,11 @@ public class CubicWorldRenderer implements GameRenderer {
 
 		batch.end();
 
+	}
+
+	@Override
+	public void setCoordCalc(final CoordCalc coordCalcX) {
+		this.coordCalcX = coordCalcX;
 	}
 
 	@Override
@@ -125,7 +132,7 @@ public class CubicWorldRenderer implements GameRenderer {
 		case TYPE_WORLD:
 			final WorldObject wObj = (WorldObject) rObj;
 			final Vector2 objPos = wObj.getTilesPos();
-			Vector2 renderPos = CoordCalc.tilesToRender(objPos);
+			Vector2 renderPos = coordCalcX.tilesToRender(objPos);
 			renderPos.add(rObj.getRenderVector());
 			batch.draw(rObj.getTextureRegion(), renderPos.x, renderPos.y);
 			break;
@@ -148,7 +155,7 @@ public class CubicWorldRenderer implements GameRenderer {
 		case TYPE_WORLD:
 			final WorldObject wObj = (WorldObject) rObj;
 			final Vector2 objPos = wObj.getTilesPos();
-			renderPos = CoordCalc.tilesToRender(objPos);
+			renderPos = coordCalcX.tilesToRender(objPos);
 
 			break;
 		case TYPE_GUI:

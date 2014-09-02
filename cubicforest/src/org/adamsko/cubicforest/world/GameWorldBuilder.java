@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world;
 import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
@@ -35,6 +36,19 @@ public interface GameWorldBuilder {
 	 * @param deltaTime
 	 */
 	void update(final float deltaTime);
+
+	/**
+	 * Initialize {@link CoordCalc} for calculating screen/tiles coordinations.
+	 * 
+	 * @param tileSize
+	 *            tile's size in pixels (see {@link CoordCalc})
+	 */
+	void initCoordCalc(final float tileSize);
+
+	/**
+	 * Get ready {@link CoordCalc} object.
+	 */
+	CoordCalc getCoordCalc();
 
 	/**
 	 * Initialize {@link WorldObjectsMastersContainer}, so it's ready for
@@ -81,8 +95,12 @@ public interface GameWorldBuilder {
 	 *            client receiving input informations from {@link GuiMaster}
 	 * @param tilesMaster
 	 *            client receiving input informations from {@link GuiMaster}
+	 * @param coordCalc
+	 *            {@link CoordCalc} object for coordinates calculations in
+	 *            {@link PickMaster}
 	 */
-	void initPickMaster(GuiMaster guiMaster, TilesMaster tilesMaster);
+	void initPickMaster(GuiMaster guiMaster, TilesMaster tilesMaster,
+			CoordCalc coordCalc);
 
 	/**
 	 * Initialize {@link MapsLoader} to load game objects from
