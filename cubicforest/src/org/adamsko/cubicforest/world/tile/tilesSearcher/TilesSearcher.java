@@ -26,7 +26,7 @@ public interface TilesSearcher {
 	/**
 	 * Searches for all tiles that are in a range of given starting tile. It
 	 * means, that these tiles can be reached from starting tile with a valid
-	 * {@link TilePath}.
+	 * {@link TilePath}. Don't count initial tile.
 	 * 
 	 * 
 	 * @param tile

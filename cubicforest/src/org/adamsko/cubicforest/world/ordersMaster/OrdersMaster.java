@@ -37,13 +37,13 @@ public interface OrdersMaster extends Nullable {
 
 	/**
 	 * Highlight tiles which are in object's range <br>
-	 * FIXME: definetly should be somewhere else
+	 * FIXME: definitely should be somewhere else
 	 */
 	void highlightTilesObjectRange(final WorldObject object);
 
 	/**
 	 * Unhiglight tiles which are in object's range <br>
-	 * FIXME: definetly should be somewhere else
+	 * FIXME: definitely should be somewhere else
 	 */
 	void unhighlightTilesObjectRange(final WorldObject object);
 

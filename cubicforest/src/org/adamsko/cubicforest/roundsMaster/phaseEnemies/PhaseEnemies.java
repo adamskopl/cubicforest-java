@@ -4,7 +4,7 @@ import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
@@ -15,13 +15,15 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 
 	private final PhaseEnemiesHeroesHelper heroesHelper;
 
-	public PhaseEnemies(final OrderableObjectsContainer enemiesContainer,
-			final OrderableObjectsContainer heroesContainer,
+	public PhaseEnemies(
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final OrdersMaster ordersMaster,
 			final TilePathSearcher tilePathSearcher) {
-		super(enemiesContainer, ordersMaster, "PhaseEnemies");
+		super(worldObjectsMastersContainer.getEnemiesMaster(), ordersMaster,
+				"PhaseEnemies");
 
-		heroesHelper = new PhaseEnemiesHeroesHelper(heroesContainer,
+		heroesHelper = new PhaseEnemiesHeroesHelper(
+				worldObjectsMastersContainer.getHeroesMaster(),
 				tilePathSearcher);
 	}
 

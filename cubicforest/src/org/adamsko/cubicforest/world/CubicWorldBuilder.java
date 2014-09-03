@@ -20,8 +20,6 @@ import org.adamsko.cubicforest.world.object.collision.visitors.manager.Collision
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.NullCollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainerDefault;
-import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.NullOrdersMaster;
@@ -185,49 +183,22 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final TilePathSearcher tilePathSearcher) {
 
-		final HeroesMaster heroesMaster = worldObjectsMastersContainer
-				.getHeroesMaster();
-		final EnemiesMaster enemiesMaster = worldObjectsMastersContainer
-				.getEnemiesMaster();
-		final TilesMaster tilesMaster = worldObjectsMastersContainer
-				.getTilesMaster();
-		final HeroesToolsMaster heroesToolsMaster = worldObjectsMastersContainer
-				.getHeroesToolsMaster();
-		final GatherCubesMaster gatherCubesMaster = worldObjectsMastersContainer
-				.getGatherCubesMaster();
-
-		if (heroesMaster.isNull()) {
-			Gdx.app.error("initRoundsMaster()", "heroesMaster.isNull()");
-			return;
-		}
-		if (enemiesMaster.isNull()) {
-			Gdx.app.error("initRoundsMaster()", "enemiesMaster.isNull()");
-			return;
-		}
 		if (ordersMaster.isNull()) {
 			Gdx.app.error("initRoundsMaster()", "ordersMaster.isNull()");
 			return;
 		}
-		if (tilesMaster.isNull()) {
-			Gdx.app.error("initRoundsMaster()", "tilesMaster.isNull()");
-			return;
-		}
-		if (heroesToolsMaster.isNull()) {
-			Gdx.app.error("initRoundsMaster()", "heroesToolsMaster.isNull()");
-			return;
-		}
-		if (gatherCubesMaster.isNull()) {
-			Gdx.app.error("initRoundsMaster()", "gatherCubesMaster.isNull()");
-			return;
+
+		if (!worldObjectsMastersContainer.allMastersInitialized()) {
+			Gdx.app.error("initRoundsMaster()",
+					"!worldObjectsMastersContainer.allMastersInitialized()");
 		}
 
-		final PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster,
-				ordersMaster, tilesMaster, heroesToolsMaster,
-				gatherCubesMaster, tilePathSearcher);
+		final PhaseHeroes phaseHeroes = new PhaseHeroes(
+				worldObjectsMastersContainer, ordersMaster, tilePathSearcher);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 
-		final PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster,
-				heroesMaster, ordersMaster, tilePathSearcher);
+		final PhaseEnemies phaseEnemies = new PhaseEnemies(
+				worldObjectsMastersContainer, ordersMaster, tilePathSearcher);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 
 		roundsMaster.addPhase(phaseHeroes);

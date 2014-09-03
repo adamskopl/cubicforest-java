@@ -31,11 +31,6 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	@Override
-	public List<WorldObjectsMaster> getWorldObjectsMasters() {
-		return worldObjectsMasters;
-	}
-
-	@Override
 	public void initMasters(final GameRenderer renderer) {
 		initTilesMaster();
 
@@ -68,6 +63,21 @@ public class WorldObjectsMastersContainerDefault implements
 		renderer.addROMWorld(heroesToolsMaster);
 
 		renderer.addROMGui(gatherCubesMaster.getGatherCubesCounter());
+	}
+
+	@Override
+	public boolean allMastersInitialized() {
+		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
+			if (worldObjectsMaster.isNull()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public List<WorldObjectsMaster> getWorldObjectsMasters() {
+		return worldObjectsMasters;
 	}
 
 	@Override

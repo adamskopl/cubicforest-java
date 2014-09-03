@@ -151,16 +151,8 @@ public class TilesMaster implements PickMasterClient, Nullable {
 				Gdx.app.error("addWorldObject", e.toString());
 			}
 		}
-
-		/*
-		 * TODO higlighting
-		 */
 	}
 
-	/**
-	 * @param removeObject
-	 * @throws Exception
-	 */
 	public void removeWorldObject(final WorldObject removeObject) {
 		final Tile parentTile = tilesContainer.getTileOnPos(removeObject
 				.getTilesPos());

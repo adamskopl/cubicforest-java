@@ -13,12 +13,10 @@ import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
-import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
@@ -42,17 +40,19 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private Boolean orderInProgress = false;
 
 	public PhaseHeroes(
-			final OrderableObjectsContainer orderableObjectsContainer,
-			final OrdersMaster ordersMaster, final TilesMaster tilesMaster,
-			final HeroesToolsMaster heroesToolsMaster,
-			final GatherCubesMaster gatherCubesMaster,
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final OrdersMaster ordersMaster,
 			final TilePathSearcher tilePathSearcher) {
-		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
+		super(worldObjectsMastersContainer.getHeroesMaster(), ordersMaster,
+				"PhaseHeroes");
 
-		this.gatherCubesMaster = gatherCubesMaster;
+		this.gatherCubesMaster = worldObjectsMastersContainer
+				.getGatherCubesMaster();
 		this.tilePathSearcher = tilePathSearcher;
-		heroesOrdersMaster = new PhaseHeroesOrdersMasterDefault(tilesMaster,
-				heroesToolsMaster);
+
+		heroesOrdersMaster = new PhaseHeroesOrdersMasterDefault(
+				worldObjectsMastersContainer.getTilesMaster(),
+				worldObjectsMastersContainer.getHeroesToolsMaster());
 	}
 
 	@Override
@@ -78,9 +78,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		}
 	}
 
-	/**
-	 * 
-	 */
 	private void startOrderClicked() {
 		if (!orderInProgress) {
 			if (activePath != null) {
@@ -102,9 +99,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 	/**
 	 * Check if given order can be started.
-	 * 
-	 * @param activeObject
-	 * @param pathToTile
 	 * 
 	 * @return can given order be started?
 	 */

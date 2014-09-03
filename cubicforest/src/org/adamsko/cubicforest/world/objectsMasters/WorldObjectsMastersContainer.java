@@ -21,6 +21,14 @@ public interface WorldObjectsMastersContainer {
 
 	void initMasters(GameRenderer gameRenderer);
 
+	/**
+	 * Check if all contained {@link WorldObjectsMaster} objects are initialized
+	 * (not null)
+	 * 
+	 * @return true if all masters are not null
+	 */
+	boolean allMastersInitialized();
+
 	List<WorldObjectsMaster> getWorldObjectsMasters();
 
 	TilesMaster getTilesMaster();
