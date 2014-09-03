@@ -83,7 +83,6 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 
 		initTilePropertiesIndicator();
 
-		// initCollisionVisitorsManager();
 		tilesPos = new Vector2(0.0f, 0.0f);
 		verticalPos = new Float(0.0f);
 		name = new String("WorldObject");

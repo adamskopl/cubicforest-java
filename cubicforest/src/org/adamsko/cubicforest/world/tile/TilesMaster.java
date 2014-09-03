@@ -98,8 +98,6 @@ public class TilesMaster implements PickMasterClient, Nullable {
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);
 			fCoords.add(new Vector2(7, -3)); // temporary solution for centering
-												// view
-												// tilesContainer.addTile(fCoords);
 		}
 	}
 

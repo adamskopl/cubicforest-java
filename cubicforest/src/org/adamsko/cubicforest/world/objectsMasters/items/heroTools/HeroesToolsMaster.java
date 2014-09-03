@@ -41,7 +41,6 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 			final int tileW, final int tileH) {
 		super("HeroesToolsMaster", TM, textureName, tileW, tileH);
 
-		// addTestObjects();
 		heroToolMarker = null;
 		heroToolMarkerType = null;
 

@@ -55,9 +55,6 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 		// tiles are slightly lower than other objects
 		newTile.setVerticalPos(-0.01f);
 
-		// newTile.addLabel(newTile.getTilesPos().toString());
-		// newTile.altLabelLast(Color.WHITE, 0.8f, -20.0f, -10.0f);
-
 		// FIXME: don't add newTile through addRenderableObject(), because it's
 		// a Tile. Is it ok?
 		super.getWorldObjects().add(newTile);

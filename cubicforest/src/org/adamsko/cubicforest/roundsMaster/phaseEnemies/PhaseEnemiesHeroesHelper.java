@@ -46,8 +46,6 @@ public class PhaseEnemiesHeroesHelper {
 		 */
 		for (final WorldObject hero : heroes) {
 
-			// TilePath pathToHero = TilePathSearcher
-			// .searchShortestPathAdjacentTiles(enemy, hero);
 			final TilePath pathToHero = tilePathSearcher.search(enemy, hero);
 
 			if (pathToHero == null || pathToHero.length() == 0) {

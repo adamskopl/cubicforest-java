@@ -18,7 +18,6 @@ import com.badlogic.gdx.Gdx;
 public class TilePathsMasterDefault implements TilePathsMaster {
 
 	private final List<TilePathGuide> tilePathGuides;
-	// private final TilesMaster tilesMaster;
 	private final TilesEventsHandlerDefault tilesEventsHandler;
 	private final OrdersMaster master;
 
@@ -62,7 +61,7 @@ public class TilePathsMasterDefault implements TilePathsMaster {
 			Gdx.app.error("TilePathsMaster::onPathEnd", e.toString());
 		}
 
-		// uncoment for tiles labels removal
+		// uncomment for tiles labels removal
 		// tilesMaster.clearTilesLabels();
 
 		// guide is no longer needed
