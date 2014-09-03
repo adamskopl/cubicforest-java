@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 
-import org.adamsko.cubicforest.gui.GuiContainer;
+import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 
 public class PhaseEnemies extends PhaseOrderableObjects {
 
@@ -16,10 +17,12 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 
 	public PhaseEnemies(final OrderableObjectsContainer enemiesContainer,
 			final OrderableObjectsContainer heroesContainer,
-			final OrdersMaster ordersMaster) {
+			final OrdersMaster ordersMaster,
+			final TilePathSearcher tilePathSearcher) {
 		super(enemiesContainer, ordersMaster, "PhaseEnemies");
 
-		heroesHelper = new PhaseEnemiesHeroesHelper(heroesContainer);
+		heroesHelper = new PhaseEnemiesHeroesHelper(heroesContainer,
+				tilePathSearcher);
 	}
 
 	@Override
@@ -79,7 +82,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onGuiEvent(final GuiContainer eventGui) {
+	public void onGuiEvent(final GuiElementsContainer eventGui) {
 	}
 
 }

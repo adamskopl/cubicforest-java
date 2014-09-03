@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
-public class NullOrdersMaster extends OrdersMaster {
+public class NullOrdersMaster extends OrdersMasterDefault {
 	private static NullOrdersMaster instance = null;
 
 	private NullOrdersMaster() {

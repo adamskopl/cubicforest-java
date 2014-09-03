@@ -7,36 +7,21 @@ import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class GuiContainer extends RenderableObjectsMasterDefault {
+public abstract class GuiElementsContainerDefault extends
+		RenderableObjectsMasterDefault implements GuiElementsContainer {
+
+	/**
+	 * Absolute screen position of the container. Its elements positions are
+	 * translated by these coordinates.
+	 */
+	private final Vector2 containerScreenPos;
 
 	protected List<GuiElement> guiElements;
 	private final GuiType_e type;
 	// holds currently clicked element
 	private GuiElement clickedElement = null;
 
-	public GuiElement getClickedElement() {
-		return clickedElement;
-	}
-
-	public GuiType_e getType() {
-		return type;
-	}
-
-	/**
-	 * Absolute screen position of the container. Its elements positions are
-	 * translated by these coordinates.
-	 */
-	private Vector2 containerScreenPos;
-
-	public Vector2 getContainerScreenPos() {
-		return new Vector2(containerScreenPos);
-	}
-
-	public void setContainerScreenPos(final Vector2 containerScreenPos) {
-		this.containerScreenPos = containerScreenPos;
-	}
-
-	public GuiContainer(final String name, final GuiType_e guiType,
+	public GuiElementsContainerDefault(final String name, final GuiType_e guiType,
 			final String textureName, final int tileW, final int tileH,
 			final float posX, final float posY) {
 		super(name, textureName, tileW, tileH);
@@ -47,6 +32,22 @@ public abstract class GuiContainer extends RenderableObjectsMasterDefault {
 		this.type = guiType;
 	}
 
+	@Override
+	public GuiElement getClickedElement() {
+		return clickedElement;
+	}
+
+	@Override
+	public GuiType_e getType() {
+		return type;
+	}
+
+	@Override
+	public Vector2 getContainerScreenPos() {
+		return new Vector2(containerScreenPos);
+	}
+
+	@Override
 	public void addGuiElement(final GuiElement guiElement) {
 		guiElements.add(guiElement);
 		addRenderableObject(guiElement);
@@ -58,6 +59,7 @@ public abstract class GuiContainer extends RenderableObjectsMasterDefault {
 	 * @param screenPos
 	 * @return is any of the children clicked?
 	 */
+	@Override
 	public Boolean handleClick(final Vector2 screenPos) {
 		Boolean isElementClicked = false;
 		for (final GuiElement e : guiElements) {

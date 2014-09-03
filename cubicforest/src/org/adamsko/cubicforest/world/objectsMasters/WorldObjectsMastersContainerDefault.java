@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -45,9 +46,8 @@ public class WorldObjectsMastersContainerDefault implements
 				35);
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",
 				30, 35);
-		gatherCubesMaster = new GatherCubesMaster(tilesMaster,
+		gatherCubesMaster = new GatherCubesMasterDefault(tilesMaster,
 				"cubes-atlas-medium", 25, 40);
-		gatherCubesMaster.initGatherCubesCounter(tilesMaster);
 
 		heroesToolsMaster = new HeroesToolsMaster(tilesMaster,
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);

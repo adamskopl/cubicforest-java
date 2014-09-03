@@ -26,7 +26,7 @@ public class TiledMap implements CFMap {
 	TiledCfConverter tiledCfConverter;
 
 	public TiledMap() {
-		tiledCfConverter = new TiledCfConverter(this);
+		tiledCfConverter = new TiledCfConverterDefault();
 	}
 
 	// < GETTERS SETTERS
@@ -99,10 +99,10 @@ public class TiledMap implements CFMap {
 	}
 
 	/**
-	 * After successful load, initialize {@link TiledCfConverter} object.
+	 * After successful load, initialize {@link TiledCfConverterDefault} object.
 	 */
 	void initConverter() {
-		tiledCfConverter.loadTiledObjects();
+		tiledCfConverter.loadTiledObjects(this);
 	}
 
 	public void printLayers() {

@@ -47,7 +47,7 @@ public class TilePathGuideHelper {
 	 * 
 	 * @throws Exception
 	 */
-	protected void recalculate(GuideStage_e guideStage) throws Exception {
+	protected void recalculate(final GuideStage_e guideStage) throws Exception {
 		switch (guideStage) {
 		case HEADING_BORDER: {
 			recalculateHeadingBorder();
@@ -71,10 +71,10 @@ public class TilePathGuideHelper {
 	 * @throws Exception
 	 */
 	private void recalculateHeadingBorder() throws Exception {
-		currentConn = TilesHelper
-				.getConnectionType(tileHeadingFrom, tileHeadingTo);
+		currentConn = TilesHelper.getConnectionType(tileHeadingFrom,
+				tileHeadingTo);
 
-		Vector2 edgePosition = TilesHelper.getPosBetween(tileHeadingFrom,
+		final Vector2 edgePosition = TilesHelper.getPosBetween(tileHeadingFrom,
 				tileHeadingTo);
 
 		// based on connection type between tiles, set Tween variables
@@ -111,19 +111,20 @@ public class TilePathGuideHelper {
 			throw new Exception("recalculateHeadingCenter(): connType == NONE");
 		}
 		default: {
-			throw new Exception("recalculateHeadingCenter(): unsupported connType");
+			throw new Exception(
+					"recalculateHeadingCenter(): unsupported connType");
 		}
 		}
 	}
 
-	protected void setTileHeadingFrom(Tile tileHeadingFrom) {
+	protected void setTileHeadingFrom(final Tile tileHeadingFrom) {
 		this.tileHeadingFrom = tileHeadingFrom;
 	}
 
-	protected void setTileHeadingTo(Tile tileHeadingTo) {
+	protected void setTileHeadingTo(final Tile tileHeadingTo) {
 		this.tileHeadingTo = tileHeadingTo;
 	}
-	
+
 	/**
 	 * Assign tileHeadingTo to tileHeadingFrom
 	 */
@@ -138,13 +139,13 @@ public class TilePathGuideHelper {
 	protected int getTweenType() {
 		return tweenType;
 	}
-	
+
 	protected Tile getTileHeadingFrom() {
 		return tileHeadingFrom;
 	}
-	
+
 	protected Tile getTileHeadingTo() {
 		return tileHeadingTo;
 	}
-	
+
 }

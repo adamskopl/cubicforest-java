@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.render.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.renderList.RenderListDefault;
+import org.adamsko.cubicforest.render.world.renderList.RenderList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -52,17 +52,17 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	private List<RenderableObject> renderableObjects;
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
-	 * renderableObjects objects should be added to {@link RenderListDefault}
-	 * (e.g. objects just created). The purpose is to separate new objects from
-	 * those being already in {@link RenderListDefault}.
+	 * renderableObjects objects should be added to {@link RenderList} (e.g.
+	 * objects just created). The purpose is to separate new objects from those
+	 * being already in {@link RenderList}.
 	 */
 	private List<RenderableObject> renderableObjectsUnserved;
 
 	/**
 	 * List of {@link RenderableObject}. Indicates which objects from
 	 * renderableObjects objects should be updated (sorted) in
-	 * {@link RenderListDefault}. The purpose is to separate objects needing to
-	 * be updated from those staying unchanged.
+	 * {@link RenderList}. The purpose is to separate objects needing to be
+	 * updated from those staying unchanged.
 	 */
 	private List<RenderableObject> renderableObjectsToUpdate;
 
@@ -107,14 +107,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		renderableObjectsToRemove.add(newObject);
 	}
 
-	/**
-	 * Get {@link RenderableObject} list of given {@link ROListType_e} type.
-	 * 
-	 * @param type
-	 *            type of {@link RenderableObject} objects list.
-	 * @return {@link RenderableObject} objects list of given
-	 *         {@link ROListType_e} type.
-	 */
 	@Override
 	public List<RenderableObject> getRenderableObjects(final ROListType_e type) {
 		switch (type) {
@@ -140,16 +132,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		}
 	}
 
-	/**
-	 * Get {@link RenderableObject} list of given {@link ROListType_e} type.
-	 * Clear corresponding list in container afterwards.
-	 * 
-	 * @param type
-	 *            type of {@link RenderableObject} objects list.
-	 * 
-	 * @return Copy of the {@link RenderableObject} objects list of given
-	 *         {@link ROListType_e} type.
-	 */
 	@Override
 	public List<RenderableObject> popRenderableObjects(final ROListType_e type) {
 		final List<RenderableObject> listOriginal = getRenderableObjects(type);

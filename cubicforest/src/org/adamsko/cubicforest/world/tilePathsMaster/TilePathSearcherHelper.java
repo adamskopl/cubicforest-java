@@ -52,7 +52,7 @@ public class TilePathSearcherHelper {
 	 * @throws Exception
 	 */
 	public TilePath costTilesToPath() throws Exception {
-		final TilePath path = new TilePath();
+		final TilePath path = new TilePathDefault();
 
 		// return empty path
 		if (!destinyFound()) {

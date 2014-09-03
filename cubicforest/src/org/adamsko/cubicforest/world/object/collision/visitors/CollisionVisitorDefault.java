@@ -16,6 +16,12 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * Default implementation of {@link WorldObjectVisitor} responsible for
+ * collisions effects resolving.
+ * 
+ * @author adamsko
+ */
 public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 		Nullable {
 

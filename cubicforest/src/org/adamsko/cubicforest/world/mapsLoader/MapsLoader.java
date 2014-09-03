@@ -4,7 +4,7 @@ import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 
 /**
- * Interface for class res
+ * Responsible for loading and managing {@link CFMap} levels in the game.
  * 
  * @author adamsko
  * 
@@ -29,6 +29,9 @@ public interface MapsLoader extends Nullable {
 	 */
 	public void reloadWorld();
 
+	/**
+	 * Get number of loaded maps.
+	 */
 	public int size();
 
 	/**
@@ -45,6 +48,9 @@ public interface MapsLoader extends Nullable {
 	 */
 	public CFMap getMapActive();
 
+	/**
+	 * Get index number of active map.
+	 */
 	public int getMapActiveIndex();
 
 }

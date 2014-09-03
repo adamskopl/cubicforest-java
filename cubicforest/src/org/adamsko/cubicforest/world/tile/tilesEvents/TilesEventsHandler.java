@@ -37,7 +37,7 @@ public class TilesEventsHandler {
 
 		switch (evenType) {
 		case OCCUPANT_ENTERS: {
-			eventTile.addOccupant(eventObject, true);
+			eventTile.addOccupant(eventObject);
 			break;
 		}
 		case OCCUPANT_LEAVES: {

@@ -1,20 +1,12 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuide;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 
 /**
- * FIXME: interface needed
- * 
- * Manages orders (movement for now) for objects from different
+ * Receives and manages orders (movement for now) for objects from different
  * {@link PhaseOrderableObjects} client objects. Handles only one client for
  * now.
  * 
@@ -23,74 +15,36 @@ import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
  * @author adamsko
  * 
  */
-public class OrdersMaster implements Nullable {
-
-	private TilePathsMaster tilePathsMaster;
-	private TilesMaster tilesMaster;
+public interface OrdersMaster extends Nullable {
 
 	/**
-	 * Client which will be informed about the result of the order. Don't know
-	 * if assumption about single order will not be changed on any number of
-	 * clients.
+	 * Invoked when path is finished. Information should be passed to interested
+	 * client passed in
+	 * {@link #startOrder(WorldObject, TilePath, OrdersMasterClient)}.
 	 */
-	private OrdersMasterClient client = null;
-
-	/**
-	 * For NullOrdersMaster
-	 */
-	public OrdersMaster() {
-	}
-
-	public OrdersMaster(final TilesMaster tilesMaster) {
-
-		tilePathsMaster = new TilePathsMaster(this, tilesMaster);
-
-		this.tilesMaster = tilesMaster;
-	}
-
-	@Override
-	public boolean isNull() {
-		return false;
-	}
-
-	/**
-	 * Invoked by {@link TilePathsMaster} object. Path is finished:
-	 * 
-	 * @param wanderer
-	 *            {@link WorldObject} which was guided by one of the
-	 *            {@link TilePathsMaster} object {@link TilePathGuide} objects
-	 */
-	public void onPathFinished() {
-		client.onOrderFinished();
-	}
+	void onPathFinished();
 
 	/**
 	 * @param wanderer
-	 * @param destinationTile
+	 *            object which will follow given path
+	 * @param path
+	 *            path which wanderer will follow
 	 * @param client
 	 *            client to be informed about the order's result
 	 */
-	public void startOrder(final WorldObject wanderer, final TilePath path,
-			final OrdersMasterClient client) {
-		this.client = client;
-		tilePathsMaster.startPath(wanderer, path);
-	}
+	void startOrder(final WorldObject wanderer, final TilePath path,
+			final OrdersMasterClient client);
 
 	/**
-	 * Highlight tiles which are in object's range
-	 * 
-	 * @param object
+	 * Highlight tiles which are in object's range <br>
+	 * FIXME: definetly should be somewhere else
 	 */
-	public void highlightTilesObjectRange(final WorldObject object) {
-		final List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
-				object.getSpeed(), false);
-		tilesMaster.highlightTiles(tilesInRange, 1, 1);
-	}
+	void highlightTilesObjectRange(final WorldObject object);
 
-	public void unhighlightTilesObjectRange(final WorldObject object) {
-		final List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
-				object.getSpeed(), false);
-		tilesMaster.highlightTiles(tilesInRange, 0, 0);
-	}
+	/**
+	 * Unhiglight tiles which are in object's range <br>
+	 * FIXME: definetly should be somewhere else
+	 */
+	void unhighlightTilesObjectRange(final WorldObject object);
 
 }

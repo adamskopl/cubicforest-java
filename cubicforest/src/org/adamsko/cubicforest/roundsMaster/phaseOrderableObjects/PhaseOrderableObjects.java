@@ -14,8 +14,8 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
 
 import com.badlogic.gdx.Gdx;
 
-public abstract class PhaseOrderableObjects implements OrdersMasterClient,
-		RoundPhase {
+public abstract class PhaseOrderableObjects implements RoundPhase,
+		OrdersMasterClient {
 
 	private final String name;
 	protected RoundsMaster roundsMaster;
@@ -54,6 +54,9 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		reloadPhase();
 	}
 
+	/**
+	 * Remove every object that has {@link WorldObjectState#DEAD} state
+	 */
 	protected void removeDeadObjects() {
 		final Iterator<WorldObject> iter = phaseObjects.iterator();
 		while (iter.hasNext()) {
@@ -68,7 +71,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 	 * @return decision if phase should be continued. E.g. if there are no more
 	 *         objects to move, phase should be finished
 	 */
-	protected void nextObject() {
+	public void nextObject() {
 		if (phaseObjects.size() == 0) {
 			try {
 				// phase is over, indicate that nothing happened during this
@@ -126,7 +129,7 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		activeObjectPointer = -1;
 
 		if (objectsContainer.getOrderableObjects().size() == 0) {
-			Gdx.app.debug("reloadPhase()", "0");
+			Gdx.app.error("reloadPhase()", "0");
 		}
 
 		phaseObjects.clear();
@@ -135,12 +138,15 @@ public abstract class PhaseOrderableObjects implements OrdersMasterClient,
 		}
 	}
 
-	private void setPhaseSkippedLastTime(final boolean phaseSkippedLastTime) {
-		this.phaseSkippedLastTime = phaseSkippedLastTime;
-	}
-
 	@Override
 	public boolean phaseSkippedLastTime() {
 		return phaseSkippedLastTime;
+	}
+
+	/**
+	 * Set value for {@link #phaseSkippedLastTime()}
+	 */
+	private void setPhaseSkippedLastTime(final boolean phaseSkippedLastTime) {
+		this.phaseSkippedLastTime = phaseSkippedLastTime;
 	}
 }

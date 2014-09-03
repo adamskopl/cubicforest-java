@@ -20,6 +20,7 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 
 /**
  * Interface for a class responsible for managing all game managers/masters.
@@ -61,12 +62,23 @@ public interface GameWorldBuilder {
 	void initWorldObjectsMastersContainer(final GameRenderer renderer);
 
 	/**
+	 * Initialize {@link TilePathSearcher}
+	 */
+	void initTilePathSearcher(final TilesMaster tilesMaster);
+
+	TilePathSearcher getTilePathSearcher();
+
+	/**
 	 * Initialize {@link OrdersMaster} object, so it's ready for
 	 * 'getOrdersMaster()'.
 	 * 
 	 * @param tilesMaster
 	 *            Needed to initialize 'TilePathsMaster'. Also for some public
 	 *            methods.
+	 * 
+	 * @param tilePathSearcher
+	 *            needed for {@link OrdersMaster} for searching paths based on
+	 *            given order
 	 */
 	void initOrdersMaster(final TilesMaster tilesMaster);
 
@@ -140,9 +152,12 @@ public interface GameWorldBuilder {
 	 * @param worldObjectsMastersContainer
 	 *            used in {@link RoundPhase} objects to access needed
 	 *            {@link WorldObject} objects.
+	 * @param tilePathSearcher
+	 *            used in initialized phases for path searching
 	 */
 	void initRoundsMasterPhases(final OrdersMaster ordersMaster,
-			final WorldObjectsMastersContainer worldObjectsMastersContainer);
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			TilePathSearcher tilePathSearcher);
 
 	/**
 	 * Initialize {@link TilesMaster} parts that are needing
@@ -152,7 +167,7 @@ public interface GameWorldBuilder {
 	 *            initialized {@link TilesMaster}
 	 * @param roundsMaster
 	 *            {@link RoundsMaster} needed for complete {@link TilesMaster}
-	 *            initialization ({@link GameResultOperationHandler} object)
+	 *            initialization ( {@link GameResultOperationHandler} object)
 	 * @param collisionVisitorsManagerFactory
 	 *            needs {@link CollisionsHandler} to being set, and its
 	 *            initialization is in {@link TilesEventsHandler}, that belongs

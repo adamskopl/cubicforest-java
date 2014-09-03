@@ -1,14 +1,16 @@
 package org.adamsko.cubicforest.world;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.gui.GuiContainer;
+import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
-import org.adamsko.cubicforest.gui.NullGuiMaster;
+import org.adamsko.cubicforest.gui.GuiMasterDefault;
+import org.adamsko.cubicforest.gui.NullGuiMasterDefault;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalcDefault;
 import org.adamsko.cubicforest.roundsMaster.NullRoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.roundsMaster.RoundsMasterDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
@@ -24,9 +26,12 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.NullOrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
+import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterDefault;
 import org.adamsko.cubicforest.world.pickmaster.NullPickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcherDefault;
 
 import com.badlogic.gdx.Gdx;
 
@@ -35,6 +40,8 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	private CoordCalc coordCalc;
 
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
+
+	private TilePathSearcher tilePathSearcher;
 
 	private PickMaster pickMaster;
 
@@ -57,7 +64,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	private void initNullables() {
 		pickMaster = NullPickMaster.instance();
 		roundsMaster = NullRoundsMaster.instance();
-		guiMaster = NullGuiMaster.instance();
+		guiMaster = NullGuiMasterDefault.instance();
 		ordersMaster = NullOrdersMaster.instance();
 		mapsLoader = NullMapsLoaderTiled.instance();
 		collisionVisitorsManagerFactory = NullCollisionVisitorsManagerFactory
@@ -96,11 +103,11 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			return;
 		}
 
-		guiMaster = new GuiMaster(mapsLoader);
+		guiMaster = new GuiMasterDefault(mapsLoader);
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
 		guiMaster.addClient(roundsMaster);
 
-		for (final GuiContainer GC : guiMaster.getGuiList()) {
+		for (final GuiElementsContainer GC : guiMaster.getGuiList()) {
 			renderer.addROMGui(GC);
 		}
 	}
@@ -128,7 +135,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initOrdersMaster(final TilesMaster tilesMaster) {
-		ordersMaster = new OrdersMaster(tilesMaster);
+		ordersMaster = new OrdersMasterDefault(tilesMaster);
 	}
 
 	@Override
@@ -171,12 +178,13 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initRoundsMaster(final MapsLoader mapsLoader) {
-		roundsMaster = new RoundsMaster(mapsLoader);
+		roundsMaster = new RoundsMasterDefault(mapsLoader);
 	}
 
 	@Override
 	public void initRoundsMasterPhases(final OrdersMaster ordersMaster,
-			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final TilePathSearcher tilePathSearcher) {
 
 		final HeroesMaster heroesMaster = worldObjectsMastersContainer
 				.getHeroesMaster();
@@ -215,11 +223,12 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		}
 
 		final PhaseHeroes phaseHeroes = new PhaseHeroes(heroesMaster,
-				ordersMaster, tilesMaster, heroesToolsMaster, gatherCubesMaster);
+				ordersMaster, tilesMaster, heroesToolsMaster,
+				gatherCubesMaster, tilePathSearcher);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 
 		final PhaseEnemies phaseEnemies = new PhaseEnemies(enemiesMaster,
-				heroesMaster, ordersMaster);
+				heroesMaster, ordersMaster, tilePathSearcher);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 
 		roundsMaster.addPhase(phaseHeroes);
@@ -283,5 +292,16 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	public CoordCalc getCoordCalc() {
 		return coordCalc;
 	}
+
+	@Override
+	public void initTilePathSearcher(final TilesMaster tilesMaster) {
+		tilePathSearcher = new TilePathSearcherDefault();
+		tilePathSearcher.setTilesMaster(tilesMaster);
+	}
+
+	@Override
+	public TilePathSearcher getTilePathSearcher() {
+		return tilePathSearcher;
+	};
 
 }

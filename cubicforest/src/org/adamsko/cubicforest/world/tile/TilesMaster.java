@@ -158,7 +158,7 @@ public class TilesMaster implements PickMasterClient, Nullable {
 				.getTilesPos());
 		if (!parentTile.isNull()) {
 			try {
-				parentTile.addOccupant(addObject, false);
+				parentTile.addOccupant(addObject);
 			} catch (final Exception e) {
 				Gdx.app.error("addWorldObject", e.toString());
 			}

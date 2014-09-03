@@ -1,43 +1,52 @@
 package org.adamsko.cubicforest.world.tile;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.object.CubicObject;
+import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * A tile which is a base indicator of all objects positions in the world.
+ * A tile which is a base indicator of all {@link WorldObject} objects positions
+ * in the world. Base element of every level. Controls the movement of objects,
+ * indicates when they are colliding. Element of calculated paths.
  * 
  * @author adamsko
  */
-public class Tile extends CubicObject {
-
-	private final List<WorldObject> occupants;
+public interface Tile extends WorldObject, RenderableObject, Nullable {
 
 	/**
-	 * For NullTile constructor.
+	 * Get all {@link WorldObject} objects occupying this tile.
+	 * 
+	 * @return
 	 */
-	Tile() {
-		super();
-		occupants = null;
-	}
+	List<WorldObject> getOccupants();
 
-	public Tile(final Vector2 coords, final TextureRegion tr,
-			final WorldObjectsMasterDefault container) {
-		super(tr, 0, container, WorldObjectType.DEFAULT);
-		this.tilesPos = coords;
+	/**
+	 * Check if tile is occupied by given object.
+	 */
+	boolean isOccupied(final WorldObject object);
 
-		occupants = new ArrayList<WorldObject>();
-	}
+	/**
+	 * Does tile have any occupant?
+	 */
+	boolean hasOccupant();
+
+	/**
+	 * Add new {@link WorldObject} object to this tile. From now on this object
+	 * is associated with this tile and 'tile driven' events will be also
+	 * associated with this object (e.g. collisions).
+	 */
+	void addOccupant(final WorldObject insertObject) throws Exception;
+
+	/**
+	 * Invoked when tile's state has changed. E.g. object has left tile, so
+	 * maybe it should change the texture.
+	 */
+	void refresh();
 
 	/**
 	 * Check if vector belongs to tile's area.
@@ -46,114 +55,29 @@ public class Tile extends CubicObject {
 	 *            vector being checked for inclusion
 	 * @return
 	 */
-	public boolean isPosInTile(final Vector2 tilePos) {
-
-		if (tilePos.x >= tilesPos.x && tilePos.x < tilesPos.x + 1) {
-			if (tilePos.y >= tilesPos.y && tilePos.y < tilesPos.y + 1) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Check if tile is occupied by given object.
-	 * 
-	 * @param object
-	 * @return
-	 */
-	public boolean isOccupied(final WorldObject object) {
-		return occupants.contains(object);
-	}
-
-	public List<WorldObject> getOccupants() {
-		return occupants;
-	}
-
-	public void addOccupant(final WorldObject insertObject,
-			final boolean ignoreOccupation) throws Exception {
-		occupants.add(insertObject);
-		refresh();
-	}
+	boolean isPosInTile(final Vector2 tilePos);
 
 	/**
 	 * Removes given occupant from 'occupants' collection. Removed occupant is
-	 * no longer connected with this tile.
-	 * 
-	 * @param removedOccupant
+	 * no longer connected with this tile. If the passed object is not on the
+	 * tile, it's considered as an error.
 	 */
-	public void removeOccupant(final WorldObject removedOccupant) {
-		if (!occupants.remove(removedOccupant)) {
-			// if there was no 'removedOccupant' object in a collection
-			Gdx.app.error("Tile::removeOccupant()",
-					"no " + removedOccupant.getName() + " in 'occupants'");
-		}
-		refresh();
-	}
-
-	public void removeDeadOccupants() {
-		final Iterator<WorldObject> iter = getOccupants().iterator();
-		while (iter.hasNext()) {
-			final WorldObject tileObject = iter.next();
-			if (tileObject.getState() == WorldObjectState.DEAD) {
-				tileObject.getParentContainer().removeObjectFromContainer(
-						tileObject);
-				iter.remove();
-			}
-		}
-		refresh();
-	}
+	void removeOccupant(final WorldObject occupantToRemove);
 
 	/**
-	 * Does tile have any occupant?
-	 * 
-	 * @return
+	 * Remove all occupants that have {@link WorldObjectState#DEAD} state.
 	 */
-	public Boolean hasOccupant() {
-		return !occupants.isEmpty();
-	}
+	void removeDeadOccupants();
 
 	/**
-	 * Is tile valid for search algorithms (if it can be included in tile
+	 * Is tile valid for search algorithms (can it be included in the tile
 	 * paths)? If at least one occupant is not valid for search algorithms, the
-	 * whole tile is not.
+	 * whole tile is not valid.
 	 * 
-	 * @return
+	 * @return yes, if this tile should be considered by search algorithms. e.g
+	 *         tile with an impassable {@link WorldObject} object is excluded by
+	 *         search algorithms
 	 */
-	public boolean isTilePathSearchValid() {
-		for (final WorldObject occupant : getOccupants()) {
-			if (!occupant.getTilePropertiesIndicator().isTilePathSearchValid()) {
-				// one of the occupants is not valid - Tile is not valid
-				return false;
-			}
-		}
-		return true;
-	}
-
-	// /////////////
-	// highlighting. other class needed.
-	// /////////////
-	public void refresh() {
-		if (isTileHighlightedAsOccupied()) {
-			getParentContainer().changeTexture(this, 0, 1);
-		} else {
-			getParentContainer().changeTexture(this, 0, 0);
-		}
-	}
-
-	private boolean isTileHighlightedAsOccupied() {
-		for (final WorldObject occupant : getOccupants()) {
-			if (occupant.getTilePropertiesIndicator()
-					.isTileHighlightedAsOccupied()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return getTilesPos().toString();
-	}
+	boolean isTilePathSearchValid();
 
 }

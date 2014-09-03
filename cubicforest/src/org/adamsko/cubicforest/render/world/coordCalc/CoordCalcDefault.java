@@ -34,13 +34,6 @@ public class CoordCalcDefault implements CoordCalc, Nullable {
 		return false;
 	}
 
-	/**
-	 * @param tilePos
-	 *            Coordinates in the tiles space. (0.0, 0.0) is the left upper
-	 *            corner of the first tile. (1.5, 2.5) is the center of the (1,
-	 *            2) tile.
-	 * @return Coordinates in the render space.
-	 */
 	@Override
 	public Vector2 tilesToRender(final Vector2 tilePos) {
 		final Vector2 renderPos = new Vector2();

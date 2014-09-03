@@ -3,14 +3,14 @@ package org.adamsko.cubicforest.gui.heroTools;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.gui.GuiContainer;
+import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 
 import com.badlogic.gdx.graphics.Color;
 
-public class GuiHeroTools extends GuiContainer {
+public class GuiHeroTools extends GuiElementsContainerDefault {
 
 	public GuiHeroTools(final String textureName, final int tileW,
 			final int tileH, final float posX, final float posY) {

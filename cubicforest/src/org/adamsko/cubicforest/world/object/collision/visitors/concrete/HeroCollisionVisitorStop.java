@@ -31,7 +31,8 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 		if (toolState == HeroToolStates_e.STATE_CONSTRUCTION) {
 			heroTool.setState(HeroToolStates_e.STATE_READY);
 			heroesToolsMaster.setToolTexture(heroTool, 0);
-			gatherCubesMaster.counterAddValue(-heroTool.getBuildCost());
+			gatherCubesMaster.getGatherCubesCounter().addValue(
+					-heroTool.getBuildCost());
 		}
 	}
 
@@ -52,7 +53,7 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	@Override
 	public void visitGatherCube(final GatherCube gatherCube) {
 		super.visitGatherCube(gatherCube);
-		gatherCubesMaster.counterAddValue(1);
+		gatherCubesMaster.getGatherCubesCounter().addValue(1);
 		collision().wordlObjectOperation().remove(gatherCube);
 	}
 

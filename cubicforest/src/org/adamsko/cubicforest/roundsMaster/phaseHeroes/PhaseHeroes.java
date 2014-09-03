@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
-import org.adamsko.cubicforest.gui.GuiContainer;
+import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.gui.debug.GuiDebug;
 import org.adamsko.cubicforest.gui.debug.GuiElementDebug;
 import org.adamsko.cubicforest.gui.heroTools.GuiElementHeroTool;
@@ -27,6 +27,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 	private final PhaseHeroesOrdersMaster heroesOrdersMaster;
 	private final GatherCubesMaster gatherCubesMaster;
+	private final TilePathSearcher tilePathSearcher;
 
 	/**
 	 * Active path created by picking order valid Tile.
@@ -44,11 +45,13 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			final OrderableObjectsContainer orderableObjectsContainer,
 			final OrdersMaster ordersMaster, final TilesMaster tilesMaster,
 			final HeroesToolsMaster heroesToolsMaster,
-			final GatherCubesMaster gatherCubesMaster) {
+			final GatherCubesMaster gatherCubesMaster,
+			final TilePathSearcher tilePathSearcher) {
 		super(orderableObjectsContainer, ordersMaster, "PhaseHeroes");
 
 		this.gatherCubesMaster = gatherCubesMaster;
-		heroesOrdersMaster = new PhaseHeroesOrdersMaster(tilesMaster,
+		this.tilePathSearcher = tilePathSearcher;
+		heroesOrdersMaster = new PhaseHeroesOrdersMasterDefault(tilesMaster,
 				heroesToolsMaster);
 	}
 
@@ -59,7 +62,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		if (!orderInProgress) {
 			activeObject = activeObject();
-			final TilePath pathToTile = TilePathSearcher.search(activeObject,
+			final TilePath pathToTile = tilePathSearcher.search(activeObject,
 					tile);
 
 			final boolean startOrderValid = startOrderValid(activeObject, tile,
@@ -169,7 +172,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	}
 
 	@Override
-	public void onGuiEvent(final GuiContainer eventGui) {
+	public void onGuiEvent(final GuiElementsContainer eventGui) {
 		switch (eventGui.getType()) {
 		case GUI_ORDERS:
 			guiOrdersClicked((GuiOrders) eventGui);
@@ -222,7 +225,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 					.getClickedElement();
 			final WorldObjectType heroToolType = clickedElement.getType();
 
-			if (gatherCubesMaster.isToolAffordable(heroToolType)) {
+			if (gatherCubesMaster.getGatherCubesCounter().isToolAffordable(
+					heroToolType)) {
 				// change mode and also set marker's type
 				heroesOrdersMaster.changePhaseHeroesMode(
 						PhaseHeroesMode.MODE_CHOICE_TOOL, heroToolType);

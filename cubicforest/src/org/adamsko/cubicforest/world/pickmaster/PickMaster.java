@@ -5,10 +5,18 @@ import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
+import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Handles device inputs and passes them (also converted to {@link Tile}
+ * positions) to interested {@link PickMasterClient} objects.
+ * 
+ * @author adamsko
+ * 
+ */
 public class PickMaster implements Nullable {
 	private List<PickMasterClient> clients;
 	private CoordCalc coordCalc;
@@ -31,7 +39,6 @@ public class PickMaster implements Nullable {
 	}
 
 	public void update() {
-
 		// justTouched() used because the game is handling only single clicks
 		if (Gdx.input.justTouched()) {
 			final Vector2 screenPos = new Vector2(Gdx.input.getX(),

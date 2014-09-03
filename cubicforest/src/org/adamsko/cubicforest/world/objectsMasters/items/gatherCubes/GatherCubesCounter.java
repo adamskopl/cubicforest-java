@@ -1,47 +1,41 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
-import org.adamsko.cubicforest.gui.GuiContainer;
-import org.adamsko.cubicforest.gui.GuiElement;
-import org.adamsko.cubicforest.gui.GuiType_e;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.gui.GuiElementsContainer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
+/**
+ * Holds data about {@link GatherCube} collected by heroes. FIXME: for now also
+ * acts as a GUI element representing cubes number
+ * 
+ * @author adamsko
+ */
+public interface GatherCubesCounter extends RenderableObjectsMaster,
+		GuiElementsContainer {
 
-public class GatherCubesCounter extends GuiContainer {
+	/**
+	 * Set starting counter value.
+	 */
+	void setStartingValue(int startingValue);
 
-	private final Vector2 counter;
-	private final int startVal = 30;
+	/**
+	 * Restore starting value.
+	 */
+	void reset();
 
-	public GatherCubesCounter(final TilesMaster TM, final String textureName,
-			final int tileW, final int tileH, final int posX, final int posY) {
-		super("gatherCubesCounter", GuiType_e.GUI_CUBES_COUNTER, textureName,
-				tileW, tileH, posX, posY);
+	/**
+	 * Get current number of gathered cubes
+	 */
+	int getCounter();
 
-		counter = new Vector2(startVal, 0);
+	/**
+	 * Increase gathered cubes number by given value
+	 */
+	void addValue(final int value);
 
-		createGui();
-	}
-
-	private void createGui() {
-
-		GuiElement testObject;
-		testObject = new GuiElement(atlasRows.get(0)[3], 0, this, 0, 0);
-		testObject.addLabel(counter);
-		testObject.altLabelLast(Color.WHITE, 1.0f, 30.0f, 20.0f);
-		addGuiElement(testObject);
-	}
-
-	public void addValue(final int value) {
-		counter.add(value, 0);
-	}
-
-	public int getCounter() {
-		return (int) counter.x;
-	}
-
-	public void reset() {
-		counter.set(startVal, 0);
-	}
+	/**
+	 * Check if counter allows heroTool to be build (if player can afford it).
+	 */
+	Boolean isToolAffordable(final WorldObjectType heroToolType);
 
 }

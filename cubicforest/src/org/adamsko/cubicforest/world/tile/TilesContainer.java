@@ -35,7 +35,7 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 				return tile;
 			}
 		}
-		return NullTile.instance();
+		return NullCubicTile.instance();
 	}
 
 	public Tile getTileWithObject(final WorldObject object) {
@@ -45,11 +45,11 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 				return tile;
 			}
 		}
-		return NullTile.instance();
+		return NullCubicTile.instance();
 	}
 
 	public void addTile(final Vector2 tilePos) {
-		final Tile newTile = new Tile(tilePos, atlasRows.get(0)[0], this);
+		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects

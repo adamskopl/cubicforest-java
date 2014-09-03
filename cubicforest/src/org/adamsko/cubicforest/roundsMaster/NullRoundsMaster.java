@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.roundsMaster;
 
 
-public class NullRoundsMaster extends RoundsMaster {
+public class NullRoundsMaster extends RoundsMasterDefault {
 
 	private static NullRoundsMaster instance = null;
 

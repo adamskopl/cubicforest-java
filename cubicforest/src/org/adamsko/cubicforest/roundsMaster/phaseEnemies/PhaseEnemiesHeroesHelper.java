@@ -21,9 +21,13 @@ public class PhaseEnemiesHeroesHelper {
 	 */
 	private final List<WorldObject> heroes;
 
+	private final TilePathSearcher tilePathSearcher;
+
 	public PhaseEnemiesHeroesHelper(
-			final OrderableObjectsContainer heroesContainer) {
+			final OrderableObjectsContainer heroesContainer,
+			final TilePathSearcher tilePathSearcher) {
 		heroes = heroesContainer.getOrderableObjects();
+		this.tilePathSearcher = tilePathSearcher;
 	}
 
 	/**
@@ -44,7 +48,7 @@ public class PhaseEnemiesHeroesHelper {
 
 			// TilePath pathToHero = TilePathSearcher
 			// .searchShortestPathAdjacentTiles(enemy, hero);
-			final TilePath pathToHero = TilePathSearcher.search(enemy, hero);
+			final TilePath pathToHero = tilePathSearcher.search(enemy, hero);
 
 			if (pathToHero == null || pathToHero.length() == 0) {
 				continue;

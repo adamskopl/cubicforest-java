@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.gui.heroTools;
 
-import org.adamsko.cubicforest.gui.GuiContainer;
+import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
@@ -12,7 +12,7 @@ public class GuiElementHeroTool extends GuiElement {
 
 	public GuiElementHeroTool(final WorldObjectType heroToolType,
 			final TextureRegion tr, final int texNum,
-			final GuiContainer pareContainer, final float posX, final float posY) {
+			final GuiElementsContainerDefault pareContainer, final float posX, final float posY) {
 		super(tr, texNum, pareContainer, posX, posY);
 
 		this.type = heroToolType;
