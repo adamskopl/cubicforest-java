@@ -32,8 +32,6 @@ public interface WorldObject extends RenderableObject,
 	/**
 	 * Returns {@link TilePropertiesIndicator} to check how this object affects
 	 * {@link Tile} objects.
-	 * 
-	 * @return
 	 */
 	TilePropertiesIndicator getTilePropertiesIndicator();
 
@@ -56,8 +54,6 @@ public interface WorldObject extends RenderableObject,
 	/**
 	 * Return properly set {@link CollisionVisitorsManager} object, which will
 	 * handle collision with this object.
-	 * 
-	 * @return
 	 */
 	CollisionVisitorsManager collision();
 
@@ -68,22 +64,16 @@ public interface WorldObject extends RenderableObject,
 	/**
 	 * 'Accept' method from 'Visitor' design pattern. Indicate which method from
 	 * {@link WorldObjectVisitor} is proper for this object.
-	 * 
-	 * @param visitor
 	 */
 	void accept(final WorldObjectVisitor visitor);
 
 	/**
 	 * Set tiles position handled by {@link TilesMaster}.
-	 * 
-	 * @param pos
 	 */
 	void setTilesPos(final Vector2 pos);
 
 	/**
 	 * Get tiles position handled by {@link TilesMaster}.
-	 * 
-	 * @param pos
 	 */
 	Vector2 getTilesPos();
 
@@ -93,15 +83,11 @@ public interface WorldObject extends RenderableObject,
 
 	/**
 	 * Set the amount of how many tiles object can move in its turn.
-	 * 
-	 * @param speed
 	 */
 	void setSpeed(final int speed);
 
 	/**
 	 * Get the amount of how many tiles object can move in its turn.
-	 * 
-	 * @param speed
 	 */
 	int getSpeed();
 
@@ -111,7 +97,6 @@ public interface WorldObject extends RenderableObject,
 	 * 
 	 * @param type
 	 *            indicates which object's parameter should be displayed
-	 * @throws Exception
 	 */
 	void addLabel(final ROLabel type) throws Exception;
 

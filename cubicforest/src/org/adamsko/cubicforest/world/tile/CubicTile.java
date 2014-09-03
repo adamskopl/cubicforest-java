@@ -55,7 +55,7 @@ public class CubicTile extends CubicObject implements Tile {
 	}
 
 	@Override
-	public void addOccupant(final WorldObject insertObject) throws Exception {
+	public void addOccupant(final WorldObject insertObject) {
 		occupants.add(insertObject);
 		refresh();
 	}

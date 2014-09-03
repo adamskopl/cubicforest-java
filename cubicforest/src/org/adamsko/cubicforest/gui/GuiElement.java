@@ -37,7 +37,6 @@ public class GuiElement extends RenderableObjectDefault {
 	/**
 	 * @param clickedScreenPos
 	 *            coordinates of the screen click
-	 * @return
 	 */
 	public Boolean isClicked(final Vector2 clickedScreenPos) {
 		final Vector2 screenPos = new Vector2(getScreenPos());

@@ -148,8 +148,6 @@ public class RoundsMasterDefault implements RoundsMaster {
 
 	/**
 	 * Check if all phases were skipped
-	 * 
-	 * @return
 	 */
 	private boolean allPhasesSkipped() {
 		for (final RoundPhase roundPhase : phases) {

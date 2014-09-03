@@ -80,7 +80,6 @@ public class CollisionVisitorsManagerFactory implements Nullable {
 	 * objects of the same type, share on manager.
 	 * 
 	 * @param managerType
-	 * @return
 	 */
 	public CollisionVisitorsManager create(final WorldObjectType managerType) {
 

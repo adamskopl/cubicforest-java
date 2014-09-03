@@ -79,11 +79,6 @@ public class TilesHelper {
 		return coords;
 	}
 
-	/**
-	 * @param tileA
-	 * @param tileB
-	 * @return
-	 */
 	public static Boolean areTilesAdjecant(final Tile tileA, final Tile tileB) {
 		final float xDiff = Math.abs(tileA.getTilesPosX()
 				- tileB.getTilesPosX());
@@ -114,10 +109,7 @@ public class TilesHelper {
 	/**
 	 * Calculate position between adjacent tiles.
 	 * 
-	 * @param tileA
-	 * @param tileB
 	 * @return Position between tiles or null;
-	 * @throws Exception
 	 */
 	public static Vector2 getPosBetween(final Tile tileA, final Tile tileB)
 			throws Exception {

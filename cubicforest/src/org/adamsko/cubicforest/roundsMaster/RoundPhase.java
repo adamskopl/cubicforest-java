@@ -9,8 +9,7 @@ public interface RoundPhase extends TilesMasterClient, GuiMasterClient {
 	 * Function to invoke, when phase is over. Phase should invoke 'phaseIsOver'
 	 * for {@link RoundsMaster}
 	 * 
-	 * @param masterToInform
-	 * @param phasePassed
+	 * @param phaseOver
 	 *            information if phase has passed without doing anything. needed
 	 *            for monitoring how phases are acting
 	 */
@@ -26,8 +25,6 @@ public interface RoundPhase extends TilesMasterClient, GuiMasterClient {
 	 * Check if phase has skipped last time. Needed to monitor how phases are
 	 * acting (e.g. to check if phases aren't only passing creating infinite
 	 * phases passing loop)
-	 * 
-	 * @return
 	 */
 	boolean phaseSkippedLastTime();
 

@@ -9,10 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-/**
- * @author adamsko
- * 
- */
 public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	private String name;
@@ -29,13 +25,12 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	public enum ROListType_e {
 		/**
 		 * list with {@link RenderableObject} objects, that are not in
-		 * {@link RenderListMaster} yet
+		 * {@link RenderList} yet
 		 */
 		RO_UNSERVED,
 		/**
 		 * list with {@link RenderableObject} objects that are already in
-		 * {@link RenderListMaster} and need to be updated (render order
-		 * recalculated)
+		 * {@link RenderList} and need to be updated (render order recalculated)
 		 */
 		RO_TO_UPDATE, RO_TO_REMOVE,
 		/**

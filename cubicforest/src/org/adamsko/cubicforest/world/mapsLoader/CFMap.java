@@ -23,9 +23,6 @@ public interface CFMap {
 	/**
 	 * Get list of {@link Tile} coordinations of given Tile objects type. Allows
 	 * to find coordinates of all objects of given type on a map.
-	 * 
-	 * @param objectType
-	 * @return
 	 */
 	List<Vector2> getObjectTypeCoords(TiledObjectType objectType);
 
@@ -36,71 +33,52 @@ public interface CFMap {
 	 * 
 	 * @param layerObjectType
 	 *            indicates layer from which objects should be returned
-	 * @return
 	 */
 	List<TiledObject> getObjectsFromLayer(final TiledObjectType layerObjectType);
 
 	/**
 	 * get map's width (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	int getWidth();
 
 	/**
 	 * set map's width (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	void setWidth(final int width);
 
 	/**
 	 * get map's height (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	int getHeight();
 
 	/**
 	 * set map's height (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	void setHeight(final int height);
 
 	/**
 	 * get map's tile height (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	int getTileheight();
 
 	/**
 	 * set map's tile height (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	void setTileheight(final int tileheight);
 
 	/**
 	 * get map's tile width (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	int getTilewidth();
 
 	/**
 	 * set map's tile width (from Tiled format). used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	void setTilewidth(final int tilewidth);
 
 	/**
 	 * get layers Tile format layers represented by {@link TiledLayer} format.
 	 * used by {@link Gson}
-	 * 
-	 * @return
 	 */
 	List<TiledLayer> getLayers();
 

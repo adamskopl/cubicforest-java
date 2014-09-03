@@ -58,17 +58,11 @@ public class RenderableObjectDefault implements RenderableObject {
 		return renderVector;
 	}
 
-	/**
-	 * @param tr
-	 */
 	@Override
 	public void setTextureRegion(final TextureRegion tr) {
 		this.textureRegion = tr;
 	}
 
-	/**
-	 * @return
-	 */
 	@Override
 	public TextureRegion getTextureRegion() {
 		return this.textureRegion;

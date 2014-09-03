@@ -20,8 +20,6 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 
 	/**
 	 * Get all {@link WorldObject} objects occupying this tile.
-	 * 
-	 * @return
 	 */
 	List<WorldObject> getOccupants();
 
@@ -40,7 +38,7 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 	 * is associated with this tile and 'tile driven' events will be also
 	 * associated with this object (e.g. collisions).
 	 */
-	void addOccupant(final WorldObject insertObject) throws Exception;
+	void addOccupant(final WorldObject insertObject);
 
 	/**
 	 * Invoked when tile's state has changed. E.g. object has left tile, so
@@ -53,7 +51,6 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 	 * 
 	 * @param tilePos
 	 *            vector being checked for inclusion
-	 * @return
 	 */
 	boolean isPosInTile(final Vector2 tilePos);
 

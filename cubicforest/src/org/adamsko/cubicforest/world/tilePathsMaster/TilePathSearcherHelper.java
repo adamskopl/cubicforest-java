@@ -49,7 +49,6 @@ public class TilePathSearcherHelper {
 	 * Generate {@link TilePath} path from ready costTiles list.
 	 * 
 	 * @return {@link TilePath} generated from costTiles list.
-	 * @throws Exception
 	 */
 	public TilePath costTilesToPath() throws Exception {
 		final TilePath path = new TilePathDefault();
@@ -113,8 +112,8 @@ public class TilePathSearcherHelper {
 		addNextCost();
 		boolean anyTileAdded = false;
 		for (final Tile prevTile : previousCostTiles()) {
-			final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(
-					prevTile, true);
+			final List<Tile> adjacentTiles = tilesMaster
+					.getTilesAdjacent(prevTile);
 
 			final int tilesAdded = addAdjacentTilesCurrentCost(adjacentTiles);
 
@@ -164,7 +163,7 @@ public class TilePathSearcherHelper {
 	 * 
 	 * 2) Given tile is passable or is a destiny tile
 	 * 
-	 * @param tile
+	 * @param tileChecked
 	 *            Tile checked
 	 * @return decision: tile can be added or not
 	 */
@@ -193,8 +192,6 @@ public class TilePathSearcherHelper {
 
 	/**
 	 * Add tile to readyTile with currently considered cost.
-	 * 
-	 * @param readyTile
 	 */
 	private void addCurrentCostTile(final Tile readyTile) {
 		currentCostTiles().add(readyTile);
@@ -202,8 +199,6 @@ public class TilePathSearcherHelper {
 
 	/**
 	 * For current cost N there are N+1 elements.
-	 * 
-	 * @return
 	 */
 	private List<Tile> currentCostTiles() {
 		return costTiles.get(costTiles.size() - 1);
@@ -211,8 +206,6 @@ public class TilePathSearcherHelper {
 
 	/**
 	 * For current cost N there are N+1 elements.
-	 * 
-	 * @return
 	 */
 	private List<Tile> previousCostTiles() {
 		return costTiles.get(costTiles.size() - 2);
@@ -221,8 +214,6 @@ public class TilePathSearcherHelper {
 	/**
 	 * Check if destiny Tile is found for the current cost (for the highest
 	 * cost)
-	 * 
-	 * @return
 	 */
 	private boolean destinyFound() {
 		final List<Tile> highestCostTiles = currentCostTiles();

@@ -21,9 +21,6 @@ public class TilePropertiesIndicatorFactory {
 	 * Every objects has its own indicator, because they can be modified (so two
 	 * objects of the same {@link WorldObjectType} type can have different
 	 * indicators).
-	 * 
-	 * @param indicatorType
-	 * @return
 	 */
 	public TilePropertiesIndicator create(final WorldObjectType indicatorType) {
 		final TilePropertiesIndicator newIndicator = new TilePropertiesIndicatorDefault();

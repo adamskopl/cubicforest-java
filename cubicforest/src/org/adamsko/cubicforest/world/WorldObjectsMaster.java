@@ -24,8 +24,6 @@ public interface WorldObjectsMaster extends Nullable {
 	/**
 	 * Return list of all {@link WorldObject} objects in contained by
 	 * {@link WorldObjectsMaster}
-	 * 
-	 * @return
 	 */
 	public List<WorldObject> getWorldObjects();
 

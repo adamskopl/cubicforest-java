@@ -133,8 +133,6 @@ public class MapsLoaderTiled implements MapsLoader {
 
 	/**
 	 * Return file handle of not empty maps folder.
-	 * 
-	 * @return
 	 */
 	private FileHandle getMapsFolderHandle() {
 

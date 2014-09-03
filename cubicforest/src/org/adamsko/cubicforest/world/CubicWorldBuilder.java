@@ -173,7 +173,6 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 				collisionVisitorsManagerFactory);
 
 		tilesMaster.addClient(roundsMaster);
-
 	}
 
 	@Override

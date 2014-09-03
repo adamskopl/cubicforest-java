@@ -19,7 +19,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsM
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
-import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
+import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandlerDefault;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 
 /**
@@ -55,9 +55,6 @@ public interface GameWorldBuilder {
 	 * Initialize {@link WorldObjectsMastersContainer}, so it's ready for
 	 * 'getWorldObjectsMastersContainer()'. All {@link WorldObjectsMaster}
 	 * objects should be ready for use.
-	 * 
-	 * @param renderer
-	 * @param roundsMaster
 	 */
 	void initWorldObjectsMastersContainer(final GameRenderer renderer);
 
@@ -75,10 +72,6 @@ public interface GameWorldBuilder {
 	 * @param tilesMaster
 	 *            Needed to initialize 'TilePathsMaster'. Also for some public
 	 *            methods.
-	 * 
-	 * @param tilePathSearcher
-	 *            needed for {@link OrdersMaster} for searching paths based on
-	 *            given order
 	 */
 	void initOrdersMaster(final TilesMaster tilesMaster);
 
@@ -170,7 +163,7 @@ public interface GameWorldBuilder {
 	 *            initialization ( {@link GameResultOperationHandler} object)
 	 * @param collisionVisitorsManagerFactory
 	 *            needs {@link CollisionsHandler} to being set, and its
-	 *            initialization is in {@link TilesEventsHandler}, that belongs
+	 *            initialization is in {@link TilesEventsHandlerDefault}, that belongs
 	 *            to {@link TilesMaster}
 	 */
 	void initTilesMasterRoundsMaster(TilesMaster tilesMaster,

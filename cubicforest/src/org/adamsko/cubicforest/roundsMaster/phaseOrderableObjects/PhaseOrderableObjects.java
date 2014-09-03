@@ -67,10 +67,6 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 		}
 	}
 
-	/**
-	 * @return decision if phase should be continued. E.g. if there are no more
-	 *         objects to move, phase should be finished
-	 */
 	public void nextObject() {
 		if (phaseObjects.size() == 0) {
 			try {

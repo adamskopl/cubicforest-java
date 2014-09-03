@@ -70,8 +70,7 @@ public class TilePathSearcherDefault implements TilePathSearcher {
 	public TilePath searchShortestPathAdjacentTiles(
 			final WorldObject objectFrom, final WorldObject objectTo) {
 		final Tile tileTo = tilesMaster.getTileWithObject(objectTo);
-		final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo,
-				true);
+		final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo);
 
 		TilePath shortestPath = null;
 		for (final Tile adjacentTile : adjacentTiles) {

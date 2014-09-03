@@ -25,12 +25,8 @@ public interface AdjacentTilesSearcher {
 	 * @param range
 	 *            how far search should be performed (tiles that are farther are
 	 *            excluded from the search)
-	 * @param getOccupiedTiles
-	 *            if true, tiles that are consider occupied, are excluded from
-	 *            the search
 	 * @return list with found tiles
 	 */
-	List<Tile> getTilesInRange(final Tile tile, final int range,
-			final Boolean getOccupiedTiles);
+	List<Tile> getTilesInRange(final Tile tile, final int range);
 
 }

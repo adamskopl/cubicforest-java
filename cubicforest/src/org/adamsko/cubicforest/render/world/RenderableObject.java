@@ -19,15 +19,11 @@ public interface RenderableObject extends LabelsMaster {
 
 	/**
 	 * Returns vector for which object's image is translated by
-	 * 
-	 * @return
 	 */
 	Vector2 getRenderVector();
 
 	/**
 	 * Sets the vector for which object's image is translated by
-	 * 
-	 * @param vec
 	 */
 	void setRenderVector(final Vector2 vec);
 
@@ -44,15 +40,11 @@ public interface RenderableObject extends LabelsMaster {
 
 	/**
 	 * Get object's texture width
-	 * 
-	 * @return
 	 */
 	int getTexWidth();
 
 	/**
 	 * Get object's texture height
-	 * 
-	 * @return
 	 */
 	int getTexHeight();
 

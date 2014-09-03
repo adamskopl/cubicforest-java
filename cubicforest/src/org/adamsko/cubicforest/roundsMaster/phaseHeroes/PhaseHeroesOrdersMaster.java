@@ -27,7 +27,7 @@ public interface PhaseHeroesOrdersMaster {
 	/**
 	 * Handle tile picked in {@link PhaseHeroes} phase.
 	 * 
-	 * @param tile
+	 * @param tilePickedOrder
 	 *            tile picked for an order issue
 	 * 
 	 * @param tileOrderValid

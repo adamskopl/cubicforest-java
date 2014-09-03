@@ -1,49 +1,41 @@
 package org.adamsko.cubicforest.world.tile.tilesSearcher;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesContainer;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 
-import com.badlogic.gdx.math.Vector2;
+/**
+ * Searches for specific tiles.
+ * 
+ * @author adamsko
+ * 
+ */
+public interface TilesSearcher {
 
-public class TilesSearcher {
+	/**
+	 * Get tiles adjacent to given tile.
+	 * 
+	 * @param tile
+	 *            tile for which search is performed
+	 * 
+	 * @return list of tiles adjacent to given tile
+	 */
+	List<Tile> getTilesAdjacent(final Tile tile);
 
-	private static AdjacentTilesSearcher adjacentTilesSearcher;
+	/**
+	 * Searches for all tiles that are in a range of given starting tile. It
+	 * means, that these tiles can be reached from starting tile with a valid
+	 * {@link TilePath}.
+	 * 
+	 * 
+	 * @param tile
+	 *            initial tile for which range tiles are searched
+	 * @param range
+	 *            how far search should be performed (tiles that are farther are
+	 *            excluded from the search)
+	 * @return list with found tiles
+	 */
+	List<Tile> getTilesInRange(final Tile tile, final int range);
 
-	public static void setTilesMaster(final TilesMaster tilesMaster) {
-		adjacentTilesSearcher = new AdjacentTilesSearcherDefault(tilesMaster);
-	}
-
-	public static List<Tile> getTilesAdjacent(final Tile tile,
-			final TilesContainer tilesContainer, final Boolean getOccupied) {
-
-		final List<Tile> adjTiles = new ArrayList<Tile>();
-		final List<Vector2> adjPositions = new ArrayList<Vector2>();
-		adjPositions.add(new Vector2(-1.0f, 0.0f));
-		adjPositions.add(new Vector2(0.0f, 1.0f));
-		adjPositions.add(new Vector2(1.0f, 0.0f));
-		adjPositions.add(new Vector2(0.0f, -1.0f));
-		for (final Vector2 adjPos : adjPositions) {
-			adjPos.add(tile.getTilesPos());
-			final Tile adjTile = tilesContainer.getTileOnPos(adjPos);
-			if (adjTile.isNull()) {
-				continue;
-			}
-
-			if (!getOccupied && adjTile.isTilePathSearchValid()) {
-				continue;
-			}
-
-			adjTiles.add(adjTile);
-		}
-		return adjTiles;
-	}
-
-	public static List<Tile> getTilesInRange(final Tile tile, final int range,
-			final Boolean getOccupied) {
-		return adjacentTilesSearcher.getTilesInRange(tile, range, getOccupied);
-	}
 }

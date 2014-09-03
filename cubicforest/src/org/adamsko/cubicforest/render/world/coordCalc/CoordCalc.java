@@ -22,7 +22,6 @@ public interface CoordCalc {
 	 * chosen with given screen input)
 	 * 
 	 * @param screenPos
-	 * @return
 	 */
 	Vector2 screenToTiles(final Vector2 screenPos);
 

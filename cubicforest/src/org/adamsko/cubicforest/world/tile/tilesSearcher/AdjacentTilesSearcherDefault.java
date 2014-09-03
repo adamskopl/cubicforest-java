@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.world.tile.tilesSearcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.tile.CubicTile;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -19,8 +18,6 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 	 * Value: tiles with Key reaching cost.
 	 */
 	private final List<List<Tile>> costTiles;
-	// should occupied tiles be considered?
-	private Boolean getOccupiedTiles;
 
 	/**
 	 * range in which adjacent tiles are searched
@@ -33,10 +30,8 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 	}
 
 	@Override
-	public List<Tile> getTilesInRange(final Tile tile, final int range,
-			final Boolean getOccupiedTiles) {
+	public List<Tile> getTilesInRange(final Tile tile, final int range) {
 
-		this.getOccupiedTiles = getOccupiedTiles;
 		this.range = range;
 
 		costTiles.clear();
@@ -75,8 +70,8 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 		addNextCost();
 		boolean anyTileAdded = false;
 		for (final Tile prevTile : previousCostTiles()) {
-			final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(
-					prevTile, true);
+			final List<Tile> adjacentTiles = tilesMaster
+					.getTilesAdjacent(prevTile);
 			final int tilesAdded = addAdjacentTilesCurrentCost(adjacentTiles);
 			if (tilesAdded > 0) {
 				anyTileAdded = true;
@@ -126,12 +121,12 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 	 * 
 	 * 2) Tile is valid depend from getOccupiedTiles variable
 	 * 
-	 * @param tile
+	 * @param tileChecked
 	 *            Tile checked
 	 * @return decision: tile can be added or not
 	 */
 	private boolean tileValidCurrentCost(final Tile tileChecked) {
-		if (!getOccupiedTiles && !tileChecked.isTilePathSearchValid()) {
+		if (!tileChecked.isTilePathSearchValid()) {
 			return false;
 		}
 		// check if tileChecked is not already added (does not have lower cost
@@ -157,8 +152,6 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 
 	/**
 	 * For current cost N there are N+1 elements.
-	 * 
-	 * @return
 	 */
 	private List<Tile> currentCostTiles() {
 		return costTiles.get(costTiles.size() - 1);
@@ -166,8 +159,6 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 
 	/**
 	 * For current cost N there are N+1 elements.
-	 * 
-	 * @return
 	 */
 	private List<Tile> previousCostTiles() {
 		return costTiles.get(costTiles.size() - 2);

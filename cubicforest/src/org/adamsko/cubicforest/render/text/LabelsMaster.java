@@ -22,36 +22,26 @@ public interface LabelsMaster {
 
 	/**
 	 * Check if {@link LabelsMaster} has any labels to render.
-	 * 
-	 * @return
 	 */
 	public Boolean hasLabels();
 
 	/**
 	 * Add label tracking {@link Float} value.
-	 * 
-	 * @param value
 	 */
 	void addLabel(final Float value);
 
 	/**
 	 * Add label tracking {@link Float} value.
-	 * 
-	 * @param value
 	 */
 	void addLabel(final Integer value);
 
 	/**
 	 * Add label tracking {@link String} value.
-	 * 
-	 * @param value
 	 */
 	void addLabel(final String value);
 
 	/**
 	 * Add label tracking {@link Vector2} value.
-	 * 
-	 * @param value
 	 */
 	void addLabel(final Vector2 value);
 

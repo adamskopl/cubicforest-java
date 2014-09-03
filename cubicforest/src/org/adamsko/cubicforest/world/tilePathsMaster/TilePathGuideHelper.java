@@ -4,13 +4,13 @@ import org.adamsko.cubicforest.world.object.accessor.WorldObjectAccessor;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesHelper;
 import org.adamsko.cubicforest.world.tile.TilesHelper.TilesConnection_e;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuide.GuideStage_e;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuideDefault.GuideStage_e;
 
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * Helping class containing constantly changed variables needed by
- * {@link TilePathGuide}.
+ * {@link TilePathGuideDefault}.
  * 
  * @author adamsko
  * 
