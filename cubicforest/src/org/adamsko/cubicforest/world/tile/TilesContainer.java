@@ -90,16 +90,13 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 	}
 
 	public void debugPrintOccupants(final boolean printParticular) {
-		int number = 0;
 		for (final WorldObject t : getWorldObjects()) {
 			final Tile tile = (Tile) t;
 			for (final WorldObject o : tile.getOccupants()) {
 				if (printParticular) {
 					Gdx.app.debug("tile occupant", o.getName());
 				}
-				number++;
 			}
 		}
-		Gdx.app.debug("tile occupant total", Integer.toString(number));
 	}
 }
