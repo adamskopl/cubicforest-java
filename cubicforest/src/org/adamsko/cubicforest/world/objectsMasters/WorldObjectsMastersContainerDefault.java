@@ -12,6 +12,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.TilesMasterDefault;
 
 public class WorldObjectsMastersContainerDefault implements
 		WorldObjectsMastersContainer {
@@ -111,7 +112,7 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	private void initTilesMaster() {
-		tilesMaster = new TilesMaster(100);
+		tilesMaster = new TilesMasterDefault(100);
 	}
 
 }

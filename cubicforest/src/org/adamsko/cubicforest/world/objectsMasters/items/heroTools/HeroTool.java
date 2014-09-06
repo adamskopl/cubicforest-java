@@ -46,6 +46,8 @@ public abstract class HeroTool extends CubicObject {
 	public void initTilePropertiesIndicator() {
 		super.initTilePropertiesIndicator();
 		getTilePropertiesIndicator().setTilePathSearchValid(true);
+		getTilePropertiesIndicator().setTileHeroesRangeValid(true);
+		getTilePropertiesIndicator().setTileHighlightedAsOccupied(false);
 	}
 
 	public void changeState(final HeroToolStates_e newState) {
@@ -64,7 +66,6 @@ public abstract class HeroTool extends CubicObject {
 	}
 
 	private void newStateConstruction() {
-
 	}
 
 	private void newStateReady() {

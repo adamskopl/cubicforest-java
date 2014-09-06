@@ -1,11 +1,8 @@
 package org.adamsko.cubicforest.world.ordersMaster;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
-import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandlerDefault;
+import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMaster;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathsMasterDefault;
@@ -32,7 +29,7 @@ public class OrdersMasterDefault implements OrdersMaster {
 
 	public OrdersMasterDefault(final TilesMaster tilesMaster) {
 
-		final TilesEventsHandlerDefault tilesEventsHandler = tilesMaster
+		final TilesEventsHandler tilesEventsHandler = tilesMaster
 				.getTilesEventsHandler();
 
 		if (tilesEventsHandler.isNull()) {
@@ -61,20 +58,6 @@ public class OrdersMasterDefault implements OrdersMaster {
 			final OrdersMasterClient client) {
 		this.client = client;
 		tilePathsMaster.startPath(wanderer, path);
-	}
-
-	@Override
-	public void highlightTilesObjectRange(final WorldObject object) {
-		final List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
-				object.getSpeed());
-		tilesMaster.highlightTiles(tilesInRange, 1, 1);
-	}
-
-	@Override
-	public void unhighlightTilesObjectRange(final WorldObject object) {
-		final List<Tile> tilesInRange = tilesMaster.getTilesInRange(object,
-				object.getSpeed());
-		tilesMaster.highlightTiles(tilesInRange, 0, 0);
 	}
 
 }

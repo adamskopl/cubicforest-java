@@ -7,7 +7,7 @@ import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperatio
 import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.WorldObjectOperationHandler;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.TilesMasterDefault.TileCollisionType;
 
 public class CollisionsHandlerDefault implements CollisionsHandler {
 
@@ -34,8 +34,8 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 	}
 
 	@Override
-	public void collision(final TileEvent evenType, final Tile collidingTile,
-			final WorldObject collidingObject) {
+	public void collision(final TileCollisionType evenType,
+			final Tile collidingTile, final WorldObject collidingObject) {
 
 		orderOperationHandler.reset();
 

@@ -28,6 +28,7 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterDefault;
 import org.adamsko.cubicforest.world.pickmaster.NullPickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcherDefault;
 
@@ -170,7 +171,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		tilesMaster.initTilesEventsHandler(roundsMaster,
 				collisionVisitorsManagerFactory);
 
-		tilesMaster.addClient(roundsMaster);
+		tilesMaster.addPickClient(roundsMaster);
 	}
 
 	@Override
@@ -181,7 +182,8 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final TilePathSearcher tilePathSearcher) {
+			final TilePathSearcher tilePathSearcher,
+			final TilesLookController tilesLookController) {
 
 		if (ordersMaster.isNull()) {
 			Gdx.app.error("initRoundsMaster()", "ordersMaster.isNull()");
@@ -194,11 +196,13 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		}
 
 		final PhaseHeroes phaseHeroes = new PhaseHeroes(
-				worldObjectsMastersContainer, ordersMaster, tilePathSearcher);
+				worldObjectsMastersContainer, ordersMaster, tilePathSearcher,
+				tilesLookController);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 
 		final PhaseEnemies phaseEnemies = new PhaseEnemies(
-				worldObjectsMastersContainer, ordersMaster, tilePathSearcher);
+				worldObjectsMastersContainer, ordersMaster, tilePathSearcher,
+				tilesLookController);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 
 		roundsMaster.addPhase(phaseHeroes);

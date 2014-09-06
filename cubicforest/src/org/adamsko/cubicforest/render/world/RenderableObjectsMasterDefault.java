@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.render.world.renderList.RenderList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
@@ -84,9 +85,12 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName
 				+ ".png"));
 
+		final int rowsNum = objectsTexture.getHeight() / tileH;
 		atlasRows = new ArrayList<TextureRegion[]>();
-		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[0]);
-		atlasRows.add(new TextureRegion(objectsTexture).split(tileW, tileH)[1]);
+		for (int i = 0; i < rowsNum; i++) {
+			atlasRows
+					.add(new TextureRegion(objectsTexture).split(tileW, tileH)[i]);
+		}
 	}
 
 	public void addRenderableObject(final RenderableObject newObject) {
@@ -135,6 +139,12 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		listOriginal.clear();
 
 		return listCopy;
+	}
+
+	@Override
+	public void changeTexture(final RenderableObject object,
+			final Vector2 textureCoordinates) {
+		object.setTextureRegion(atlasRows.get((int) textureCoordinates.x)[(int) textureCoordinates.y]);
 	}
 
 	@Override

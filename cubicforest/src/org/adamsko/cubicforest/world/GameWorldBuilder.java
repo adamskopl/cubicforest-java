@@ -19,7 +19,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsM
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
-import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandlerDefault;
+import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
+import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 
 /**
@@ -147,10 +148,13 @@ public interface GameWorldBuilder {
 	 *            {@link WorldObject} objects.
 	 * @param tilePathSearcher
 	 *            used in initialized phases for path searching
+	 * @param tilesLookController
+	 *            used in phases to change tiles look
 	 */
 	void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			TilePathSearcher tilePathSearcher);
+			TilePathSearcher tilePathSearcher,
+			final TilesLookController tilesLookController);
 
 	/**
 	 * Initialize {@link TilesMaster} parts that are needing
@@ -163,7 +167,7 @@ public interface GameWorldBuilder {
 	 *            initialization ( {@link GameResultOperationHandler} object)
 	 * @param collisionVisitorsManagerFactory
 	 *            needs {@link CollisionsHandler} to being set, and its
-	 *            initialization is in {@link TilesEventsHandlerDefault}, that belongs
+	 *            initialization is in {@link TilesEventsHandler}, that belongs
 	 *            to {@link TilesMaster}
 	 */
 	void initTilesMasterRoundsMaster(TilesMaster tilesMaster,

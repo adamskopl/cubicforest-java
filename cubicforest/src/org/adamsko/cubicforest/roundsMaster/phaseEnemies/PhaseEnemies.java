@@ -7,28 +7,29 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 
 public class PhaseEnemies extends PhaseOrderableObjects {
 
-	private final PhaseEnemiesHeroesHelper heroesHelper;
+	private final HeroesHelper heroesHelper;
 
 	public PhaseEnemies(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final OrdersMaster ordersMaster,
-			final TilePathSearcher tilePathSearcher) {
+			final TilePathSearcher tilePathSearcher,
+			final TilesLookController tilesLookController) {
 		super(worldObjectsMastersContainer.getEnemiesMaster(), ordersMaster,
-				"PhaseEnemies");
+				tilesLookController, "PhaseEnemies");
 
-		heroesHelper = new PhaseEnemiesHeroesHelper(
+		heroesHelper = new HeroesHelper(
 				worldObjectsMastersContainer.getHeroesMaster(),
 				tilePathSearcher);
 	}
 
 	@Override
-	public void onTileEvent(final Tile tile, final TileEvent event) {
+	public void onTilePicked(final Tile tile) {
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	private void moveNextEnemy() {
 
 		nextObject();
-		final WorldObject activeEnemy = activeObject();
+		final WorldObject activeEnemy = currentObject();
 
 		if (activeEnemy == null) {
 			return;
@@ -70,7 +71,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 			return;
 		}
 
-		if (isActiveObjectLast()) {
+		if (isCurrentObjectLast()) {
 			try {
 				phaseIsOver(this);
 			} catch (final Exception e) {

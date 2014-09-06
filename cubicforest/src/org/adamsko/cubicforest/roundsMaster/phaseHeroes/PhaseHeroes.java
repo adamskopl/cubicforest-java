@@ -17,7 +17,7 @@ import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
 
@@ -26,6 +26,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private final PhaseHeroesOrdersMaster heroesOrdersMaster;
 	private final GatherCubesMaster gatherCubesMaster;
 	private final TilePathSearcher tilePathSearcher;
+	private final EnemiesHelper enemiesHelper;
 
 	/**
 	 * Active path created by picking order valid Tile.
@@ -42,26 +43,32 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	public PhaseHeroes(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final OrdersMaster ordersMaster,
-			final TilePathSearcher tilePathSearcher) {
+			final TilePathSearcher tilePathSearcher,
+			final TilesLookController tilesLookController) {
 		super(worldObjectsMastersContainer.getHeroesMaster(), ordersMaster,
-				"PhaseHeroes");
+				tilesLookController, "PhaseHeroes");
 
 		this.gatherCubesMaster = worldObjectsMastersContainer
 				.getGatherCubesMaster();
 		this.tilePathSearcher = tilePathSearcher;
 
+		enemiesHelper = new EnemiesHelper(
+				worldObjectsMastersContainer.getEnemiesMaster());
+
 		heroesOrdersMaster = new PhaseHeroesOrdersMasterDefault(
-				worldObjectsMastersContainer.getTilesMaster(),
-				worldObjectsMastersContainer.getHeroesToolsMaster());
+				tilesLookController,
+				worldObjectsMastersContainer.getHeroesToolsMaster(),
+				enemiesHelper);
+
 	}
 
 	@Override
-	public void onTileEvent(final Tile tile, final TileEvent event) {
+	public void onTilePicked(final Tile tile) {
 
 		WorldObject activeObject = null;
 
 		if (!orderInProgress) {
-			activeObject = activeObject();
+			activeObject = currentObject();
 			final TilePath pathToTile = tilePathSearcher.search(activeObject,
 					tile);
 
@@ -89,9 +96,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 					e.printStackTrace();
 				}
 
-				ordersMaster.unhighlightTilesObjectRange(activeObject());
-
-				ordersMaster.startOrder(activeObject(), activePath, this);
+				ordersMaster.startOrder(currentObject(), activePath, this);
 				activePath = null;
 			}
 		}
@@ -124,6 +129,9 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	@Override
 	public void startPhase() {
 		nextHero();
+		heroesOrdersMaster.setCurrentHero(currentObject());
+		heroesOrdersMaster
+				.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 	}
 
 	@Override
@@ -139,14 +147,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			return;
 		}
 
-		try {
-			heroesOrdersMaster
-					.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-		} catch (final Exception e1) {
-			e1.printStackTrace();
-		}
-
-		if (isActiveObjectLast()) {
+		if (isCurrentObjectLast()) {
 			try {
 				phaseIsOver(this);
 			} catch (final Exception e) {
@@ -154,6 +155,12 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			}
 			return;
 		} else {
+			try {
+				heroesOrdersMaster
+						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
+			} catch (final Exception e1) {
+				e1.printStackTrace();
+			}
 			// handle next object
 			nextHero();
 		}
@@ -162,7 +169,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 	private void nextHero() {
 		nextObject();
-		ordersMaster.highlightTilesObjectRange(activeObject());
 	}
 
 	@Override
@@ -193,8 +199,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 				.getClickedElement();
 
 		roundsMaster.setMapActive(clickedElementLevel.getLevelIndex());
-
-		ordersMaster.unhighlightTilesObjectRange(activeObject());
 		roundsMaster.reload();
 	}
 
@@ -204,7 +208,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		switch (clickedElementDebug.getDebugType()) {
 		case DEBUG_RELOAD:
-			ordersMaster.unhighlightTilesObjectRange(activeObject());
 			roundsMaster.reload();
 			break;
 

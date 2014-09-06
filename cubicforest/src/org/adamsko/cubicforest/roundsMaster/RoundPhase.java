@@ -1,9 +1,9 @@
 package org.adamsko.cubicforest.roundsMaster;
 
 import org.adamsko.cubicforest.gui.GuiMasterClient;
-import org.adamsko.cubicforest.world.tile.TilesMasterClient;
+import org.adamsko.cubicforest.world.tile.TilePickClient;
 
-public interface RoundPhase extends TilesMasterClient, GuiMasterClient {
+public interface RoundPhase extends TilePickClient, GuiMasterClient {
 
 	/**
 	 * Function to invoke, when phase is over. Phase should invoke 'phaseIsOver'

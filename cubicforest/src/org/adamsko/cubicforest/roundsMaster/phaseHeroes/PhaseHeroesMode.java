@@ -4,11 +4,11 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
  * Enum describing mode of the PhaseHeroes
  * 
  * @author adamsko
- *
+ * 
  */
 public enum PhaseHeroesMode {
 	/**
-	 * tile is picked for a move order 
+	 * tile is picked for a move order
 	 */
 	MODE_CHOICE_MOVEMENT,
 	/**
@@ -16,7 +16,7 @@ public enum PhaseHeroesMode {
 	 */
 	MODE_CHOICE_TOOL,
 	/**
-	 * choses order is being executed
+	 * chooses order is being executed
 	 */
 	MODE_ORDER_EXECUTION
 }

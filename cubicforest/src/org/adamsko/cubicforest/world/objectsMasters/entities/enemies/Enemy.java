@@ -19,4 +19,11 @@ public class Enemy extends CubicObject {
 		visitor.visitEnemy(this);
 	}
 
+	@Override
+	public void initTilePropertiesIndicator() {
+		super.initTilePropertiesIndicator();
+		getTilePropertiesIndicator().setTileEnemiesRangeValid(false);
+		getTilePropertiesIndicator().setTileHeroesRangeValid(false);
+	}
+
 }

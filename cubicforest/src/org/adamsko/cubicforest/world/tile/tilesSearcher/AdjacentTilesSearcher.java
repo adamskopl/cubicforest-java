@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tile.tilesSearcher;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 
 /**
@@ -27,6 +28,7 @@ public interface AdjacentTilesSearcher {
 	 *            excluded from the search)
 	 * @return list with found tiles
 	 */
-	List<Tile> getTilesInRange(final Tile tile, final int range);
+	List<Tile> getTilesInRange(final Tile tile, final int range,
+			TilesSearchParameter tilesSearchParameter);
 
 }

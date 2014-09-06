@@ -129,8 +129,9 @@ public class GameScreen implements Screen {
 		worldBuilder.mapsLoaderReloadWorld();
 
 		worldBuilder.initRoundsMasterPhases(worldBuilder.getOrdersMaster(),
-				worldObjectsMastersContainer,
-				worldBuilder.getTilePathSearcher());
+				worldObjectsMastersContainer, worldBuilder
+						.getTilePathSearcher(), worldObjectsMastersContainer
+						.getTilesMaster().getTilesLookController());
 
 		worldBuilder.initGuiMaster(worldRenderer, worldBuilder.getMapsLoader(),
 				worldObjectsMastersContainer.getGatherCubesMaster(),

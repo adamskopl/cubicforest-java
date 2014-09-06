@@ -9,6 +9,8 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -57,7 +59,7 @@ public class CubicTile extends CubicObject implements Tile {
 	@Override
 	public void addOccupant(final WorldObject insertObject) {
 		occupants.add(insertObject);
-		refresh();
+		refreshTexture();
 	}
 
 	@Override
@@ -67,7 +69,7 @@ public class CubicTile extends CubicObject implements Tile {
 			Gdx.app.error("Tile::removeOccupant()",
 					"no " + occupantToRemove.getName() + " in 'occupants'");
 		}
-		refresh();
+		refreshTexture();
 	}
 
 	@Override
@@ -81,7 +83,7 @@ public class CubicTile extends CubicObject implements Tile {
 				iter.remove();
 			}
 		}
-		refresh();
+		refreshTexture();
 	}
 
 	@Override
@@ -92,7 +94,7 @@ public class CubicTile extends CubicObject implements Tile {
 	@Override
 	public boolean isTilePathSearchValid() {
 		for (final WorldObject occupant : getOccupants()) {
-			if (!occupant.getTilePropertiesIndicator().isTilePathSearchValid()) {
+			if (!occupant.getTilePropertiesIndicator().getTilePathSearchValid()) {
 				// one of the occupants is not valid - Tile is not valid
 				return false;
 			}
@@ -101,9 +103,9 @@ public class CubicTile extends CubicObject implements Tile {
 	}
 
 	@Override
-	public void refresh() {
+	public void refreshTexture() {
 		if (isTileHighlightedAsOccupied()) {
-			getParentContainer().changeTexture(this, 0, 1);
+			getParentContainer().changeTexture(this, 2, 1);
 		} else {
 			getParentContainer().changeTexture(this, 0, 0);
 		}
@@ -112,11 +114,28 @@ public class CubicTile extends CubicObject implements Tile {
 	private boolean isTileHighlightedAsOccupied() {
 		for (final WorldObject occupant : getOccupants()) {
 			if (occupant.getTilePropertiesIndicator()
-					.isTileHighlightedAsOccupied()) {
+					.getTileHighlightedAsOccupied()) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	@Override
+	public boolean isTileValidSearchParameter(
+			final TilesSearchParameter tilesSearchParameter) {
+		// check if tile properties indicator of every tile is compatible with
+		// given search parameter
+		for (final WorldObject occupant : getOccupants()) {
+			final TilePropertiesIndicator tilePropertiesIndicator = occupant
+					.getTilePropertiesIndicator();
+			if (!tilesSearchParameter
+					.tilePropertiesValid(tilePropertiesIndicator)) {
+				// one of the properties indicator is not compatible with search
+				// parameter
+				return false;
+			}
+		}
+		return true;
+	}
 }

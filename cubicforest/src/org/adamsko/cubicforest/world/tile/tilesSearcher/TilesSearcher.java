@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tile.tilesSearcher;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 
 /**
@@ -26,7 +27,7 @@ public interface TilesSearcher {
 	/**
 	 * Searches for all tiles that are in a range of given starting tile. It
 	 * means, that these tiles can be reached from starting tile with a valid
-	 * {@link TilePath}. Don't count initial tile.
+	 * {@link TilePath}.
 	 * 
 	 * 
 	 * @param tile
@@ -36,6 +37,7 @@ public interface TilesSearcher {
 	 *            excluded from the search)
 	 * @return list with found tiles
 	 */
-	List<Tile> getTilesInRange(final Tile tile, final int range);
+	List<Tile> getTilesInRange(final Tile tile, final int range,
+			TilesSearchParameter tilesSearchParameter);
 
 }

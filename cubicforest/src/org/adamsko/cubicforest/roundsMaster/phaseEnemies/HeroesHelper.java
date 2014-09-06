@@ -13,7 +13,7 @@ import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
  * @author adamsko
  * 
  */
-public class PhaseEnemiesHeroesHelper {
+public class HeroesHelper {
 
 	/**
 	 * List of {@link WorldObject} objects (heroes) which will be chased by
@@ -23,8 +23,7 @@ public class PhaseEnemiesHeroesHelper {
 
 	private final TilePathSearcher tilePathSearcher;
 
-	public PhaseEnemiesHeroesHelper(
-			final OrderableObjectsContainer heroesContainer,
+	public HeroesHelper(final OrderableObjectsContainer heroesContainer,
 			final TilePathSearcher tilePathSearcher) {
 		heroes = heroesContainer.getOrderableObjects();
 		this.tilePathSearcher = tilePathSearcher;

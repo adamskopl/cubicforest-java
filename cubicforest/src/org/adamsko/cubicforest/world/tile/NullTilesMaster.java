@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.tile;
 
-public class NullTilesMaster extends TilesMaster {
+public class NullTilesMaster extends TilesMasterDefault {
 
 	private static NullTilesMaster instance = null;
 

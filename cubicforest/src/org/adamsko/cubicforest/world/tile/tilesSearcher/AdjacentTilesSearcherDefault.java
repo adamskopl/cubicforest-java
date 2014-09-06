@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 
 public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 
@@ -24,15 +25,19 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 	 */
 	private int range;
 
+	private TilesSearchParameter tilesSearchParameter;
+
 	public AdjacentTilesSearcherDefault(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
 		costTiles = new ArrayList<List<Tile>>();
 	}
 
 	@Override
-	public List<Tile> getTilesInRange(final Tile tile, final int range) {
+	public List<Tile> getTilesInRange(final Tile tile, final int range,
+			final TilesSearchParameter tilesSearchParameter) {
 
 		this.range = range;
+		this.tilesSearchParameter = tilesSearchParameter;
 
 		costTiles.clear();
 
@@ -126,18 +131,19 @@ public class AdjacentTilesSearcherDefault implements AdjacentTilesSearcher {
 	 * @return decision: tile can be added or not
 	 */
 	private boolean tileValidCurrentCost(final Tile tileChecked) {
-		if (!tileChecked.isTilePathSearchValid()) {
+
+		if (!tileChecked.isTileValidSearchParameter(tilesSearchParameter)) {
 			return false;
 		}
+
 		// check if tileChecked is not already added (does not have lower cost
 		// already)
 		for (final List<Tile> cTiles : costTiles) {
-			for (final Tile costTile : cTiles) {
-				if (tileChecked == costTile) {
-					return false;
-				}
+			if (cTiles.contains(tileChecked)) {
+				return false;
 			}
 		}
+
 		return true;
 	}
 

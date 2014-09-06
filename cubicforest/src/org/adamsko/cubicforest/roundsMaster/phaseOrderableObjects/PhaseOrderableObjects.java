@@ -11,6 +11,7 @@ import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
+import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 
 import com.badlogic.gdx.Gdx;
 
@@ -20,6 +21,7 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 	private final String name;
 	protected RoundsMaster roundsMaster;
 	protected OrdersMaster ordersMaster;
+	protected TilesLookController tilesLookController;
 
 	private final List<WorldObject> phaseObjects;
 	private final OrderableObjectsContainer objectsContainer;
@@ -30,13 +32,14 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 	private boolean phaseSkippedLastTime;
 
 	/**
-	 * Active object's position on the list.
+	 * Current object's position on the list.
 	 */
-	protected int activeObjectPointer;
+	protected int currentObjectPointer;
 
 	protected PhaseOrderableObjects(
 			final OrderableObjectsContainer orderableObjectsContainer,
-			final OrdersMaster ordersMaster, final String name) {
+			final OrdersMaster ordersMaster,
+			final TilesLookController tilesLookController, final String name) {
 
 		if (orderableObjectsContainer.isNull()) {
 			Gdx.app.error("PhaseOrderableObjects()",
@@ -45,6 +48,7 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 
 		this.objectsContainer = orderableObjectsContainer;
 		this.ordersMaster = ordersMaster;
+		this.tilesLookController = tilesLookController;
 		this.name = name;
 
 		this.phaseSkippedLastTime = false;
@@ -62,7 +66,7 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 		while (iter.hasNext()) {
 			if (iter.next().getState() == WorldObjectState.DEAD) {
 				iter.remove();
-				activeObjectPointer--;
+				currentObjectPointer--;
 			}
 		}
 	}
@@ -79,29 +83,29 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 			}
 		}
 
-		activeObjectPointer++;
+		currentObjectPointer++;
 		// check if previous object was the last one
-		if (activeObjectPointer == phaseObjects.size()) {
-			activeObjectPointer = 0;
+		if (currentObjectPointer == phaseObjects.size()) {
+			currentObjectPointer = 0;
 		}
 	}
 
-	protected Boolean isActiveObjectLast() {
-		if (activeObjectPointer + 1 == phaseObjects.size()) {
+	protected Boolean isCurrentObjectLast() {
+		if (currentObjectPointer + 1 == phaseObjects.size()) {
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * @return WorldObject pointed by activeObjectPointer.
+	 * @return WorldObject pointed by currentObjectPointer.
 	 */
-	protected WorldObject activeObject() {
+	protected WorldObject currentObject() {
 		if (phaseObjects.size() == 0) {
 			return null;
 		}
-		final WorldObject activeObject = phaseObjects.get(activeObjectPointer);
-		return activeObject;
+		final WorldObject currentObject = phaseObjects.get(currentObjectPointer);
+		return currentObject;
 	}
 
 	@Override
@@ -122,7 +126,7 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 
 	@Override
 	public void reloadPhase() {
-		activeObjectPointer = -1;
+		currentObjectPointer = -1;
 
 		if (objectsContainer.getOrderableObjects().size() == 0) {
 			Gdx.app.error("reloadPhase()", "0");

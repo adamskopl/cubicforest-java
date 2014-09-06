@@ -19,4 +19,11 @@ public class Hero extends CubicObject {
 		visitor.visitHero(this);
 	}
 
+	@Override
+	public void initTilePropertiesIndicator() {
+		super.initTilePropertiesIndicator();
+		// heroes tiles can be reached by enemies
+		getTilePropertiesIndicator().setTileEnemiesRangeValid(true);
+		getTilePropertiesIndicator().setTileHeroesRangeValid(false);
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -43,7 +44,9 @@ public class TilesSearcherDefault implements TilesSearcher {
 	}
 
 	@Override
-	public List<Tile> getTilesInRange(final Tile tile, final int range) {
-		return adjacentTilesSearcher.getTilesInRange(tile, range);
+	public List<Tile> getTilesInRange(final Tile tile, final int range,
+			final TilesSearchParameter tilesSearchParameter) {
+		return adjacentTilesSearcher.getTilesInRange(tile, range,
+				tilesSearchParameter);
 	}
 }

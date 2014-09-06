@@ -6,7 +6,6 @@ import java.util.List;
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
 
 import com.badlogic.gdx.Gdx;
 
@@ -96,11 +95,11 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
-	public void onTileEvent(final Tile tile, final TileEvent event) {
+	public void onTilePicked(final Tile tile) {
 		final RoundPhase currentPhase = currentPhase();
 
 		if (currentPhase != null) {
-			currentPhase.onTileEvent(tile, event);
+			currentPhase.onTilePicked(tile);
 		}
 
 	}

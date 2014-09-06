@@ -234,4 +234,9 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 		return verticalPos;
 	}
 
+	@Override
+	public void refreshTexture() {
+
+	}
+
 }

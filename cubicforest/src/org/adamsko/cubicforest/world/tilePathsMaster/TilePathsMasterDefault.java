@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
-import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandlerDefault;
+import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
 
 import com.badlogic.gdx.Gdx;
 
@@ -18,11 +18,11 @@ import com.badlogic.gdx.Gdx;
 public class TilePathsMasterDefault implements TilePathsMaster {
 
 	private final List<TilePathGuide> tilePathGuides;
-	private final TilesEventsHandlerDefault tilesEventsHandler;
+	private final TilesEventsHandler tilesEventsHandler;
 	private final OrdersMaster master;
 
 	public TilePathsMasterDefault(final OrdersMaster master,
-			final TilesEventsHandlerDefault tilesEventsHandler) {
+			final TilesEventsHandler tilesEventsHandler) {
 		if (tilesEventsHandler.isNull()) {
 			Gdx.app.error("TilePathsMasterDefault()",
 					"tilesEventsHandler.isNull()");

@@ -5,8 +5,8 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
-import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandlerDefault;
+import org.adamsko.cubicforest.world.tile.TilesMasterDefault.TileCollisionType;
+import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
@@ -43,7 +43,7 @@ public class TilePathGuideDefault implements TilePathGuide {
 	private TilePath path = null;
 	private final TilePathGuideHelper helper;
 	private TilePathsMaster master;
-	private TilesEventsHandlerDefault tilesEventsHandler;
+	private TilesEventsHandler tilesEventsHandler;
 
 	private GuideStage_e guideStage;
 
@@ -59,7 +59,7 @@ public class TilePathGuideDefault implements TilePathGuide {
 	@Override
 	public void start(final WorldObject wanderer, final TilePath path,
 			final TilePathsMaster master,
-			final TilesEventsHandlerDefault tilesEventsHandler) {
+			final TilesEventsHandler tilesEventsHandler) {
 
 		if (tilesEventsHandler.isNull()) {
 			Gdx.app.error("TilePathGuideDefault::start",
@@ -110,8 +110,8 @@ public class TilePathGuideDefault implements TilePathGuide {
 	}
 
 	private void handleSingleTile() throws Exception {
-		handleCollision(TileEvent.OCCUPANT_STOPS, helper.getTileHeadingTo(),
-				wanderer);
+		handleCollision(TileCollisionType.OCCUPANT_STOPS,
+				helper.getTileHeadingTo(), wanderer);
 
 		master.onPathEnd(this);
 	}
@@ -156,7 +156,7 @@ public class TilePathGuideDefault implements TilePathGuide {
 				// path composed from a single tile
 
 				// path is empty: occupant has reached its goal
-				handleCollision(TileEvent.OCCUPANT_STOPS,
+				handleCollision(TileCollisionType.OCCUPANT_STOPS,
 						helper.getTileHeadingTo(), wanderer);
 
 				master.onPathEnd(this);
@@ -210,7 +210,8 @@ public class TilePathGuideDefault implements TilePathGuide {
 	private OrderOperationHandler stageBorder() throws Exception {
 		// path is not empty, occupant passes tile
 		final OrderOperationHandler orderOperationHandler = handleCollision(
-				TileEvent.OCCUPANT_PASSES, helper.getTileHeadingTo(), wanderer);
+				TileCollisionType.OCCUPANT_PASSES, helper.getTileHeadingTo(),
+				wanderer);
 
 		// assign tileHeadingTo to tileHeadingFrom (tileHeadingTo is
 		// a tile that has been reached right now)
@@ -232,10 +233,11 @@ public class TilePathGuideDefault implements TilePathGuide {
 	private OrderOperationHandler stageCenter() throws Exception {
 
 		final OrderOperationHandler orderOperationHandler = handleCollision(
-				TileEvent.OCCUPANT_ENTERS, helper.getTileHeadingTo(), wanderer);
-
-		handleCollision(TileEvent.OCCUPANT_LEAVES, helper.getTileHeadingFrom(),
+				TileCollisionType.OCCUPANT_ENTERS, helper.getTileHeadingTo(),
 				wanderer);
+
+		handleCollision(TileCollisionType.OCCUPANT_LEAVES,
+				helper.getTileHeadingFrom(), wanderer);
 
 		return orderOperationHandler;
 	}
@@ -244,11 +246,12 @@ public class TilePathGuideDefault implements TilePathGuide {
 	 * Used in: nextStage()[OCCUPANT_STOPS], stageBorder()[OCCUPANT_PASSES],
 	 * stageCenter()[OCCUPANT_ENTERS, OCCUPANT_LEAVES]
 	 */
-	private OrderOperationHandler handleCollision(final TileEvent tileEvent,
-			final Tile tile, final WorldObject wanderer) throws Exception {
+	private OrderOperationHandler handleCollision(
+			final TileCollisionType tileEvent, final Tile tile,
+			final WorldObject wanderer) throws Exception {
 
 		final OrderOperationHandler orderOperationHandler = tilesEventsHandler
-				.tileEvent(tileEvent, tile, wanderer);
+				.tileCollision(tileEvent, tile, wanderer);
 
 		return orderOperationHandler;
 	}

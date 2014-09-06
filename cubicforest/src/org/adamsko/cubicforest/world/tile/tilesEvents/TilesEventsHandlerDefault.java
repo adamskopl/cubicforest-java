@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world.tile.tilesEvents;
 
-import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
@@ -8,9 +7,9 @@ import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHand
 import org.adamsko.cubicforest.world.object.collision.handler.concrete.CollisionsHandlerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster.TileEvent;
+import org.adamsko.cubicforest.world.tile.TilesMasterDefault.TileCollisionType;
 
-public class TilesEventsHandlerDefault implements TilesEventsHandler, Nullable {
+public class TilesEventsHandlerDefault implements TilesEventsHandler {
 
 	private CollisionsHandler collisionsHandler;
 
@@ -34,8 +33,9 @@ public class TilesEventsHandlerDefault implements TilesEventsHandler, Nullable {
 	}
 
 	@Override
-	public OrderOperationHandler tileEvent(final TileEvent evenType,
-			final Tile eventTile, final WorldObject eventObject) {
+	public OrderOperationHandler tileCollision(
+			final TileCollisionType evenType, final Tile eventTile,
+			final WorldObject eventObject) {
 
 		collisionsHandler.collision(evenType, eventTile, eventObject);
 

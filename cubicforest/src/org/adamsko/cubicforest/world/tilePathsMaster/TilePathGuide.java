@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandlerDefault;
+import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
@@ -31,6 +31,6 @@ public interface TilePathGuide extends TweenCallback {
 	 *            handles collision events during guidance through the path
 	 */
 	void start(WorldObject wanderer, TilePath path, TilePathsMaster master,
-			TilesEventsHandlerDefault tilesEventsHandler);
+			TilesEventsHandler tilesEventsHandler);
 
 }

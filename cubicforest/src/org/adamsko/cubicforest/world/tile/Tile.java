@@ -6,6 +6,8 @@ import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
+import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -41,12 +43,6 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 	void addOccupant(final WorldObject insertObject);
 
 	/**
-	 * Invoked when tile's state has changed. E.g. object has left tile, so
-	 * maybe it should change the texture.
-	 */
-	void refresh();
-
-	/**
 	 * Check if vector belongs to tile's area.
 	 * 
 	 * @param tilePos
@@ -76,5 +72,14 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 	 *         search algorithms
 	 */
 	boolean isTilePathSearchValid();
+
+	/**
+	 * Indicate if tile is compatible with given {@link TilesSearchParameter}.
+	 * Decision is based on occupants {@link TilePropertiesIndicator}.
+	 * 
+	 * @return yes, if tile should be considered in search method parameterized
+	 *         by {@link TilesSearchParameter}
+	 */
+	boolean isTileValidSearchParameter(TilesSearchParameter tilesSearchParameter);
 
 }

@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
@@ -34,5 +35,13 @@ public interface PhaseHeroesOrdersMaster {
 	 *            is picked tile is valid for an order issue
 	 */
 	void tilePicked(final Tile tilePickedOrder, final Boolean tileOrderValid);
+
+	/**
+	 * Helper needs to know which hero is active right now.
+	 * 
+	 * @param currentHero
+	 *            current hero in {@link PhaseHeroes}
+	 */
+	void setCurrentHero(WorldObject currentHero);
 
 }

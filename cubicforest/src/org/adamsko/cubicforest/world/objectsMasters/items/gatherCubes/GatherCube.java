@@ -18,6 +18,7 @@ public class GatherCube extends CubicObject {
 	public void initTilePropertiesIndicator() {
 		super.initTilePropertiesIndicator();
 		getTilePropertiesIndicator().setTilePathSearchValid(true);
+		getTilePropertiesIndicator().setTileHighlightedAsOccupied(false);
 	}
 
 	@Override

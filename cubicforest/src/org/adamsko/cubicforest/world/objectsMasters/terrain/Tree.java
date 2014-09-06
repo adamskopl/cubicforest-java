@@ -13,4 +13,11 @@ public class Tree extends CubicObject {
 		super(tr, texNum, container, WorldObjectType.TREE);
 	}
 
+	@Override
+	public void initTilePropertiesIndicator() {
+		super.initTilePropertiesIndicator();
+		getTilePropertiesIndicator().setTileEnemiesRangeValid(false);
+		getTilePropertiesIndicator().setTileHeroesRangeValid(false);
+	}
+
 }

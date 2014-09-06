@@ -100,4 +100,11 @@ public interface WorldObject extends RenderableObject,
 	 */
 	void addLabel(final ROLabel type) throws Exception;
 
+	/**
+	 * For now: invoked to set default texture. Tile example: invoked when
+	 * tile's state has changed. E.g. object has left tile, so maybe it should
+	 * change the texture.
+	 */
+	void refreshTexture();
+
 }

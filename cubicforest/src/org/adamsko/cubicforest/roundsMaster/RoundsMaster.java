@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.roundsMaster;
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoaderCoordinator;
-import org.adamsko.cubicforest.world.tile.TilesMasterClient;
+import org.adamsko.cubicforest.world.tile.TilePickClient;
 
 /**
  * A round is a manager of {@link RoundPhase} objects. The round consists of
@@ -13,7 +13,7 @@ import org.adamsko.cubicforest.world.tile.TilesMasterClient;
  * @author adamsko
  * 
  */
-public interface RoundsMaster extends TilesMasterClient, GuiMasterClient,
+public interface RoundsMaster extends TilePickClient, GuiMasterClient,
 		MapsLoaderCoordinator, Nullable {
 
 	void addPhase(final RoundPhase newPhase);
