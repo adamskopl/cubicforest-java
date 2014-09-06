@@ -10,7 +10,6 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TSPFactoryDefatult;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesRangeTextureChanger {
@@ -46,7 +45,6 @@ public class TilesRangeTextureChanger {
 		objectTilesInRange = tilesMaster.getTilesInRange(object,
 				object.getSpeed(),
 				tilesSearchParameterFactory.create(WorldObjectType.HERO));
-		Gdx.app.debug("heroes", Integer.toString(objectTilesInRange.size()));
 
 		for (final WorldObject worldObject : otherObjects) {
 			final List<Tile> othersTilesInRange = tilesMaster.getTilesInRange(
@@ -54,7 +52,6 @@ public class TilesRangeTextureChanger {
 					tilesSearchParameterFactory.create(WorldObjectType.ENEMY));
 			addTilesToGroupAndCommon(othersTilesInRange);
 		}
-		Gdx.app.debug("enemies", Integer.toString(groupTilesInRange.size()));
 
 		tilesLookController.changeTilesTexture(objectTilesInRange, texCoords1);
 		// uncomment to highlight enemies range

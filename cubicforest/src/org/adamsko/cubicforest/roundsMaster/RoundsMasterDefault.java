@@ -41,7 +41,6 @@ public class RoundsMasterDefault implements RoundsMaster {
 	public void setGameResultSingle(final GameResult gameResult) {
 		if (gameResult != GameResult.GAME_PLAY
 				&& this.gameResult == GameResult.GAME_PLAY) {
-			Gdx.app.debug("setres", gameResult.toString());
 			this.gameResult = gameResult;
 		}
 	}

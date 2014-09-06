@@ -182,6 +182,7 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 	 * Common tiles should have other texture.
 	 */
 	private void highlightHeroEnemiesRanges() {
+		Gdx.app.debug("HIGH", "");
 		tilesLookController.highlightTilesObjectsRange(currentHero,
 				textureTileMovementValid, enemiesHelper.getEnemies(),
 				textureTileMovementValid, textureCommonRanges);

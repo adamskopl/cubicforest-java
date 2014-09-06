@@ -129,7 +129,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	@Override
 	public void startPhase() {
 		nextHero();
-		heroesOrdersMaster.setCurrentHero(currentObject());
 		heroesOrdersMaster
 				.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 	}
@@ -155,20 +154,21 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			}
 			return;
 		} else {
+			// handle next object
+			nextHero();
 			try {
 				heroesOrdersMaster
 						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 			} catch (final Exception e1) {
 				e1.printStackTrace();
 			}
-			// handle next object
-			nextHero();
 		}
 
 	}
 
 	private void nextHero() {
 		nextObject();
+		heroesOrdersMaster.setCurrentHero(currentObject());
 	}
 
 	@Override
