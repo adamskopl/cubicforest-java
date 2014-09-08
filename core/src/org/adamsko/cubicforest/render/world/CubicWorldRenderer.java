@@ -15,7 +15,8 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
+import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer;
+import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer20;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -43,12 +44,12 @@ public class CubicWorldRenderer implements GameRenderer {
 	 */
 	int tileWidth = 75;
 
-	ImmediateModeRenderer10 renderer;
+	ImmediateModeRenderer renderer;
 
 	FPSLogger fps = new FPSLogger();
 
 	public CubicWorldRenderer() {
-		renderer = new ImmediateModeRenderer10();
+		renderer = new ImmediateModeRenderer20(false, true, 0);
 
 		renderListMasterWorld = new RenderListDefault();
 		renderListMasterGui = new RenderListDefault();
