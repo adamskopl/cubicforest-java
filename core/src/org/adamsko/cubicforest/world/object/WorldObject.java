@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.accessor.WorldObjectAccessorClient;
@@ -18,7 +19,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  */
 public interface WorldObject extends RenderableObject,
-		WorldObjectAccessorClient {
+		WorldObjectAccessorClient, Nullable {
 
 	WorldObjectType getType();
 

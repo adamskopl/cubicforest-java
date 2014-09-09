@@ -42,7 +42,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 		nextObject();
 		final WorldObject activeEnemy = currentObject();
 
-		if (activeEnemy == null) {
+		if (activeEnemy.isNull()) {
 			return;
 		}
 

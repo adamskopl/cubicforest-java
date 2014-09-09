@@ -1,7 +1,5 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -64,33 +62,6 @@ public class TilePathSearcherDefault implements TilePathSearcher {
 
 		final TilePath searchedPath = search(srcTile, destTile);
 		return searchedPath;
-	}
-
-	@Override
-	public TilePath searchShortestPathAdjacentTiles(
-			final WorldObject objectFrom, final WorldObject objectTo) {
-		final Tile tileTo = tilesMaster.getTileWithObject(objectTo);
-		final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo);
-
-		TilePath shortestPath = null;
-		for (final Tile adjacentTile : adjacentTiles) {
-
-			if (adjacentTile.hasOccupant()) {
-				continue;
-			}
-
-			final TilePath adjacentTilePath = search(objectFrom, adjacentTile);
-			if (shortestPath == null) {
-				shortestPath = adjacentTilePath;
-				continue;
-			}
-
-			if (adjacentTilePath.length() < shortestPath.length()
-					|| shortestPath.length() == 0) {
-				shortestPath = adjacentTilePath;
-			}
-		}
-		return shortestPath;
 	}
 
 }

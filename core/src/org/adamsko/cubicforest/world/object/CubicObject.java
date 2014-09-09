@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world.object;
 
-import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
@@ -23,7 +22,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  */
 public abstract class CubicObject extends RenderableObjectDefault implements
-		WorldObject, Nullable {
+		WorldObject {
 
 	private final WorldObjectType type;
 	private WorldObjectState state;
