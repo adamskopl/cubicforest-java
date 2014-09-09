@@ -112,7 +112,735 @@
         {
          "height":10,
          "name":"TILED_TILE",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":200,
+                 "y":200
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":200
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":250,
+                 "y":200
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":250
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":200,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":250,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":300
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":250,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":450
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":200,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":200,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":250,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":100
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":100
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":100
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":100
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":250
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":200
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":250
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":200
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":200
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":300
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":300
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":450
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":450
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":450
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":100
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":150
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":250
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":400
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":450
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":300
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":200
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":350
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":100
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":450
+                }, 
+                {
+                 "gid":5,
+                 "height":0,
+                 "name":"CubicTile",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":200
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -123,7 +851,35 @@
         {
          "height":10,
          "name":"TILED_ENTITY_HERO",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":2,
+                 "height":0,
+                 "name":"Hero",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":100
+                }, 
+                {
+                 "gid":2,
+                 "height":0,
+                 "name":"Hero",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":100
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -134,7 +890,91 @@
         {
          "height":10,
          "name":"TILED_ENTITY_ENEMY",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"Enemy",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":450
+                }, 
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"Enemy",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":400
+                }, 
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"Enemy",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":400
+                }, 
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"Enemy",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":450
+                }, 
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"Enemy",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":250,
+                 "y":400
+                }, 
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"Enemy",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":200,
+                 "y":400
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -145,7 +985,91 @@
         {
          "height":10,
          "name":"TILED_TERRAIN",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":4,
+                 "height":0,
+                 "name":"Tree",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":200
+                }, 
+                {
+                 "gid":4,
+                 "height":0,
+                 "name":"Tree",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":200
+                }, 
+                {
+                 "gid":4,
+                 "height":0,
+                 "name":"Tree",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":100
+                }, 
+                {
+                 "gid":4,
+                 "height":0,
+                 "name":"Tree",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":450
+                }, 
+                {
+                 "gid":4,
+                 "height":0,
+                 "name":"Tree",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":100
+                }, 
+                {
+                 "gid":4,
+                 "height":0,
+                 "name":"Tree",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":450
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -156,7 +1080,91 @@
         {
          "height":10,
          "name":"TILED_ITEM_GATHERCUBE",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":1,
+                 "height":0,
+                 "name":"GatherCube",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150,
+                 "y":300
+                }, 
+                {
+                 "gid":1,
+                 "height":0,
+                 "name":"GatherCube",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":300
+                }, 
+                {
+                 "gid":1,
+                 "height":0,
+                 "name":"GatherCube",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":350,
+                 "y":150
+                }, 
+                {
+                 "gid":1,
+                 "height":0,
+                 "name":"GatherCube",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":150
+                }, 
+                {
+                 "gid":1,
+                 "height":0,
+                 "name":"GatherCube",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":200
+                }, 
+                {
+                 "gid":1,
+                 "height":0,
+                 "name":"GatherCube",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":50,
+                 "y":200
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -195,7 +1203,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/tiledData\/tileset.png",
+         "image":"..\/..\/..\/..\/..\/..\/Dropbox\/cubicforest\/tiledData\/tileset.png",
          "imageheight":600,
          "imagewidth":600,
          "margin":0,
