@@ -5,7 +5,7 @@ import java.util.List;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
 /**
  * Manages Heroes for PhaseEnemies. All operations connected with Heroes.
@@ -21,12 +21,12 @@ public class HeroesHelper {
 	 */
 	private final List<WorldObject> heroes;
 
-	private final TilePathSearcher tilePathSearcher;
+	private final TilePathSearchersMaster tilePathSearchersMaster;
 
 	public HeroesHelper(final OrderableObjectsContainer heroesContainer,
-			final TilePathSearcher tilePathSearcher) {
+			final TilePathSearchersMaster tilePathSearchersMaster) {
 		heroes = heroesContainer.getOrderableObjects();
-		this.tilePathSearcher = tilePathSearcher;
+		this.tilePathSearchersMaster = tilePathSearchersMaster;
 	}
 
 	/**
@@ -45,7 +45,8 @@ public class HeroesHelper {
 		 */
 		for (final WorldObject hero : heroes) {
 
-			final TilePath pathToHero = tilePathSearcher.search(enemy, hero);
+			final TilePath pathToHero = tilePathSearchersMaster
+					.getTilePathSearcherValidPath().search(enemy, hero);
 
 			if (pathToHero == null || pathToHero.length() == 0) {
 				continue;

@@ -1,8 +1,9 @@
-package org.adamsko.cubicforest.world.tilePathsMaster;
+package org.adamsko.cubicforest.world.tilePathsMaster.searcher;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 
 /**
  * Searches for {@link TilePath} basing on tiles from {@link TilesMaster}.

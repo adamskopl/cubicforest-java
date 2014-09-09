@@ -1,26 +1,29 @@
-package org.adamsko.cubicforest.world.tilePathsMaster;
+package org.adamsko.cubicforest.world.tilePathsMaster.searcher;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathDefault;
 
 import com.badlogic.gdx.Gdx;
 
 /**
- * Generates {@link TilePathDefault} object from (...)
+ * Implementation of search method: look for the shortest valid path. Such path
+ * leads from starting tile to the ending tile and is uninterrupted.
  * 
  * @author adamsko
  * 
  */
-public class TilePathSearcherDefault implements TilePathSearcher {
+public class TilePathSearcherValidPath implements TilePathSearcher {
 
 	private TilesMaster tilesMaster = null;
-	private TilePathSearcherHelper helper;
+	private TilePathSearcherVPHelper helper;
 
 	@Override
 	public void setTilesMaster(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
-		helper = new TilePathSearcherHelper(tilesMaster);
+		helper = new TilePathSearcherVPHelper(tilesMaster);
 	}
 
 	@Override

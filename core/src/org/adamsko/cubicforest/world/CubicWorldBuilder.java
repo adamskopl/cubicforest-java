@@ -29,8 +29,8 @@ import org.adamsko.cubicforest.world.pickmaster.NullPickMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcherDefault;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMasterDefault;
 
 import com.badlogic.gdx.Gdx;
 
@@ -40,7 +40,8 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
-	private TilePathSearcher tilePathSearcher;
+	private TilePathSearchersMaster tilePathSearchersMaster;
+	// private TilePathSearcher tilePathSearcher;
 
 	private PickMaster pickMaster;
 
@@ -182,7 +183,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final TilePathSearcher tilePathSearcher,
+			final TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController) {
 
 		if (ordersMaster.isNull()) {
@@ -196,13 +197,13 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		}
 
 		final PhaseHeroes phaseHeroes = new PhaseHeroes(
-				worldObjectsMastersContainer, ordersMaster, tilePathSearcher,
-				tilesLookController);
+				worldObjectsMastersContainer, ordersMaster,
+				tilePathSearchersMaster, tilesLookController);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 
 		final PhaseEnemies phaseEnemies = new PhaseEnemies(
-				worldObjectsMastersContainer, ordersMaster, tilePathSearcher,
-				tilesLookController);
+				worldObjectsMastersContainer, ordersMaster,
+				tilePathSearchersMaster, tilesLookController);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 
 		roundsMaster.addPhase(phaseHeroes);
@@ -268,14 +269,14 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	}
 
 	@Override
-	public void initTilePathSearcher(final TilesMaster tilesMaster) {
-		tilePathSearcher = new TilePathSearcherDefault();
-		tilePathSearcher.setTilesMaster(tilesMaster);
+	public void initTilePathSearchersMaster(final TilesMaster tilesMaster) {
+		tilePathSearchersMaster = new TilePathSearchersMasterDefault(
+				tilesMaster);
 	}
 
 	@Override
-	public TilePathSearcher getTilePathSearcher() {
-		return tilePathSearcher;
+	public TilePathSearchersMaster getTilePathSearchersMaster() {
+		return tilePathSearchersMaster;
 	};
 
 }

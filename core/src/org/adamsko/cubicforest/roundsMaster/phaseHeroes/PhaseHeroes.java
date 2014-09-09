@@ -19,13 +19,13 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
 public class PhaseHeroes extends PhaseOrderableObjects {
 
 	private final PhaseHeroesOrdersMaster heroesOrdersMaster;
 	private final GatherCubesMaster gatherCubesMaster;
-	private final TilePathSearcher tilePathSearcher;
+	private final TilePathSearchersMaster tilePathSearchersMaster;
 	private final EnemiesHelper enemiesHelper;
 
 	/**
@@ -43,14 +43,14 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	public PhaseHeroes(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final OrdersMaster ordersMaster,
-			final TilePathSearcher tilePathSearcher,
+			final TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController) {
 		super(worldObjectsMastersContainer.getHeroesMaster(), ordersMaster,
 				tilesLookController, "PhaseHeroes");
 
 		this.gatherCubesMaster = worldObjectsMastersContainer
 				.getGatherCubesMaster();
-		this.tilePathSearcher = tilePathSearcher;
+		this.tilePathSearchersMaster = tilePathSearchersMaster;
 
 		enemiesHelper = new EnemiesHelper(
 				worldObjectsMastersContainer.getEnemiesMaster());
@@ -69,8 +69,8 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		if (!orderInProgress) {
 			activeObject = currentObject();
-			final TilePath pathToTile = tilePathSearcher.search(activeObject,
-					tile);
+			final TilePath pathToTile = tilePathSearchersMaster
+					.getTilePathSearcherValidPath().search(activeObject, tile);
 
 			final boolean startOrderValid = startOrderValid(activeObject, tile,
 					pathToTile);

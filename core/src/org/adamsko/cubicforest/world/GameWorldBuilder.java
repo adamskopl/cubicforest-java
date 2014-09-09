@@ -21,7 +21,7 @@ import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
 /**
  * Interface for a class responsible for managing all game managers/masters.
@@ -60,11 +60,11 @@ public interface GameWorldBuilder {
 	void initWorldObjectsMastersContainer(final GameRenderer renderer);
 
 	/**
-	 * Initialize {@link TilePathSearcher}
+	 * Initialize {@link TilePathSearchersMaster}
 	 */
-	void initTilePathSearcher(final TilesMaster tilesMaster);
+	void initTilePathSearchersMaster(final TilesMaster tilesMaster);
 
-	TilePathSearcher getTilePathSearcher();
+	TilePathSearchersMaster getTilePathSearchersMaster();
 
 	/**
 	 * Initialize {@link OrdersMaster} object, so it's ready for
@@ -146,14 +146,14 @@ public interface GameWorldBuilder {
 	 * @param worldObjectsMastersContainer
 	 *            used in {@link RoundPhase} objects to access needed
 	 *            {@link WorldObject} objects.
-	 * @param tilePathSearcher
+	 * @param tilePathSearchersMaster
 	 *            used in initialized phases for path searching
 	 * @param tilesLookController
 	 *            used in phases to change tiles look
 	 */
 	void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			TilePathSearcher tilePathSearcher,
+			TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController);
 
 	/**
