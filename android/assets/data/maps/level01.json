@@ -7,12 +7,12 @@
                 {
                  "gid":5,
                  "height":0,
-                 "name":"",
+                 "name":"CubicTile",
                  "properties":
                     {
 
                     },
-                 "type":"tile",
+                 "type":"",
                  "visible":true,
                  "width":0,
                  "x":-150,
@@ -21,12 +21,12 @@
                 {
                  "gid":4,
                  "height":0,
-                 "name":"",
+                 "name":"Tree",
                  "properties":
                     {
 
                     },
-                 "type":"terrain",
+                 "type":"",
                  "visible":true,
                  "width":0,
                  "x":-150,
@@ -35,12 +35,12 @@
                 {
                  "gid":2,
                  "height":0,
-                 "name":"",
+                 "name":"Hero",
                  "properties":
                     {
 
                     },
-                 "type":"hero",
+                 "type":"",
                  "visible":true,
                  "width":0,
                  "x":-150,
@@ -49,12 +49,12 @@
                 {
                  "gid":3,
                  "height":0,
-                 "name":"",
+                 "name":"Enemy",
                  "properties":
                     {
 
                     },
-                 "type":"enemy",
+                 "type":"",
                  "visible":true,
                  "width":0,
                  "x":-150,
@@ -63,12 +63,12 @@
                 {
                  "gid":1,
                  "height":0,
-                 "name":"",
+                 "name":"GatherCube",
                  "properties":
                     {
 
                     },
-                 "type":"item",
+                 "type":"",
                  "visible":true,
                  "width":0,
                  "x":-150,
@@ -77,12 +77,12 @@
                 {
                  "gid":17,
                  "height":0,
-                 "name":"",
+                 "name":"HeroToolPortal",
                  "properties":
                     {
 
                     },
-                 "type":"tool",
+                 "type":"",
                  "visible":true,
                  "width":0,
                  "x":-150,
@@ -91,12 +91,12 @@
                 {
                  "gid":16,
                  "height":0,
-                 "name":"",
+                 "name":"HeroToolTrap",
                  "properties":
                     {
 
                     },
-                 "type":"tool",
+                 "type":"",
                  "visible":true,
                  "width":0,
                  "x":-150,
@@ -112,903 +112,7 @@
         {
          "height":10,
          "name":"TILED_TILE",
-         "objects":[
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":450
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":450
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":450
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":200
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":150
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":100
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":300
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":350
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":250
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":400
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":450
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":450
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":450
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":50,
-                 "y":450
-                }, 
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"tile",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":450
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1019,21 +123,7 @@
         {
          "height":10,
          "name":"TILED_ENTITY_HERO",
-         "objects":[
-                {
-                 "gid":2,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"hero",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":100
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1044,35 +134,7 @@
         {
          "height":10,
          "name":"TILED_ENTITY_ENEMY",
-         "objects":[
-                {
-                 "gid":3,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"enemy",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":450
-                }, 
-                {
-                 "gid":3,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"enemy",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":450
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1083,105 +145,7 @@
         {
          "height":10,
          "name":"TILED_TERRAIN",
-         "objects":[
-                {
-                 "gid":4,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"terrain",
-                 "visible":true,
-                 "width":0,
-                 "x":150,
-                 "y":250
-                }, 
-                {
-                 "gid":4,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"terrain",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":250
-                }, 
-                {
-                 "gid":4,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"terrain",
-                 "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":300
-                }, 
-                {
-                 "gid":4,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"terrain",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":300
-                }, 
-                {
-                 "gid":4,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"terrain",
-                 "visible":true,
-                 "width":0,
-                 "x":300,
-                 "y":300
-                }, 
-                {
-                 "gid":4,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"terrain",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":250
-                }, 
-                {
-                 "gid":4,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"terrain",
-                 "visible":true,
-                 "width":0,
-                 "x":350,
-                 "y":250
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1192,49 +156,7 @@
         {
          "height":10,
          "name":"TILED_ITEM_GATHERCUBE",
-         "objects":[
-                {
-                 "gid":1,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"item",
-                 "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":200
-                }, 
-                {
-                 "gid":1,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"item",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":200
-                }, 
-                {
-                 "gid":1,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"item",
-                 "visible":true,
-                 "width":0,
-                 "x":250,
-                 "y":200
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1273,7 +195,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/..\/..\/..\/tiled\/tileset.png",
+         "image":"..\/tiledData\/tileset.png",
          "imageheight":600,
          "imagewidth":600,
          "margin":0,
