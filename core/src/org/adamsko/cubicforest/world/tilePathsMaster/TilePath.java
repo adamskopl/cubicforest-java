@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 /**
@@ -7,7 +8,7 @@ import org.adamsko.cubicforest.world.tile.Tile;
  * 
  * @author adamsko
  */
-public interface TilePath {
+public interface TilePath extends Nullable {
 
 	/**
 	 * Adds {@link Tile} object to the list.

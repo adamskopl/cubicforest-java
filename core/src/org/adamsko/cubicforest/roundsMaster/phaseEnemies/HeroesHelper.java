@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
+import org.adamsko.cubicforest.world.tilePathsMaster.NullTilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearcher;
 import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
 /**
@@ -38,21 +40,32 @@ public class HeroesHelper {
 	 */
 	public TilePath searchPathShortestHero(final WorldObject enemy) {
 
-		TilePath shortestPath = null;
+		final TilePath shortestPathValid = searchPathThroughHeroes(enemy,
+				tilePathSearchersMaster.getTilePathSearcherValidPath());
+
+		return shortestPathValid;
+	}
+
+	/**
+	 * Search for the shortest path by using given searcher on every hero.
+	 */
+	private TilePath searchPathThroughHeroes(final WorldObject enemy,
+			final TilePathSearcher tilePathSearcher) {
+
+		TilePath shortestPath = NullTilePath.instance();
 		/*
 		 * For every hero: get adjacent tiles, search paths for every tile. Pick
-		 * shortest from all paths leading to adjacent tiles of every hero.
+		 * shortest from all paths leading to the hero.
 		 */
 		for (final WorldObject hero : heroes) {
 
-			final TilePath pathToHero = tilePathSearchersMaster
-					.getTilePathSearcherValidPath().search(enemy, hero);
+			final TilePath pathToHero = tilePathSearcher.search(enemy, hero);
 
-			if (pathToHero == null || pathToHero.length() == 0) {
+			if (pathToHero.isNull() || pathToHero.length() == 0) {
 				continue;
 			}
 
-			if (shortestPath == null) {
+			if (shortestPath.isNull()) {
 				shortestPath = pathToHero;
 			}
 			if (pathToHero.length() < shortestPath.length()) {
