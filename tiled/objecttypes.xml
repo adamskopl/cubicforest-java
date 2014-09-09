@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<objecttypes>
- <objecttype name="terrain" color="#55aa00"/>
- <objecttype name="enemy" color="#000000"/>
- <objecttype name="hero" color="#ff55ff"/>
- <objecttype name="tile" color="#ffffff"/>
- <objecttype name="item" color="#00aaff"/>
-</objecttypes>
