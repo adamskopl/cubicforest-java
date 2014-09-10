@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world.object;
 
-import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
@@ -23,7 +22,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  */
 public abstract class CubicObject extends RenderableObjectDefault implements
-		WorldObject, Nullable {
+		WorldObject {
 
 	private final WorldObjectType type;
 	private WorldObjectState state;
@@ -177,7 +176,7 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 	}
 
 	@Override
-	public void addLabel(final ROLabel type) throws Exception {
+	public void addLabel(final ROLabel type) {
 		switch (type) {
 		case LABEL_TILEPOS: {
 			labels.addLabel(tilesPos);
@@ -192,7 +191,7 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 			break;
 		}
 		default: {
-			throw new Exception("unsupported Label type");
+			Gdx.app.error("CubicObject::addLabel", "unsupported label");
 		}
 		}
 	}
@@ -211,7 +210,7 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 
 	@Override
 	public Vector2 getTilesPos() {
-		return new Vector2(this.tilesPos);
+		return this.tilesPos;
 	}
 
 	@Override

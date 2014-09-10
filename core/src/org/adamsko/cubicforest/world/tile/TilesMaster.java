@@ -9,7 +9,9 @@ import org.adamsko.cubicforest.world.object.collision.visitors.manager.Collision
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcher;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 
 /**
  * Interface for class managing {@link Tile} objects. Connects
@@ -34,6 +36,11 @@ public interface TilesMaster extends PickMasterClient, Nullable {
 	void initTilesEventsHandler(
 			final RoundsMaster roundsMaster,
 			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+
+	/**
+	 * Get map's size. The maximum horizontal/vertical dimension.
+	 */
+	int getMapSize();
 
 	/**
 	 * Get {@link TilesEventsHandler}
@@ -70,14 +77,31 @@ public interface TilesMaster extends PickMasterClient, Nullable {
 	List<Tile> getTilesAdjacent(final Tile tile);
 
 	/**
-	 * Get tiles that are in range of the given tile.
+	 * Get tiles that are in the range of the given tile. <br>
+	 * See
+	 * {@link TilesSearcher#getTilesInRange(Tile, int, TilesSearchParameter)}
 	 */
-	List<Tile> getTilesInRange(final WorldObject object, final int range,
+	List<Tile> getTilesInRange(final WorldObject worldObject, final int range,
+			TilesSearchParameter tilesSearchParameter);
+
+	/**
+	 * Get tiles, that are away from given distance. <br>
+	 * See {@link TilesSearcher#getTilesAway(Tile, int, TilesSearchParameter)}
+	 */
+	List<Tile> getTilesAway(final WorldObject worldObject, final int distance,
 			TilesSearchParameter tilesSearchParameter);
 
 	/**
 	 * Get {@link TilesLookController} which allows to change tiles look.
 	 */
 	TilesLookController getTilesLookController();
+
+	/**
+	 * Get {@link TilesSearchParameterFactory} which creates
+	 * {@link TilesSearchParameter} objects parameterizing search methods.
+	 * 
+	 * @return
+	 */
+	TilesSearchParameterFactory getTilesSearchParameterFactory();
 
 }

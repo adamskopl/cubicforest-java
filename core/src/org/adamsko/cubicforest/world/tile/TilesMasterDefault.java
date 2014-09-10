@@ -13,7 +13,9 @@ import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandlerDefault;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcher;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.TilesSearcherDefault;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TSPFactoryDefatult;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -63,6 +65,7 @@ public class TilesMasterDefault implements TilesMaster {
 	private TilesLookController tilesLookController;
 
 	private TilesEventsHandler tilesEventsHandler;
+	private TilesSearchParameterFactory tilesSearchParameterFactory;
 
 	/**
 	 * For NullTilesMaster
@@ -79,11 +82,17 @@ public class TilesMasterDefault implements TilesMaster {
 		tilesSearcher = new TilesSearcherDefault(this);
 		tilesLookController = new TilesLookControllerDefault(this,
 				getTilesContainer());
+		tilesSearchParameterFactory = new TSPFactoryDefatult();
 	}
 
 	@Override
 	public boolean isNull() {
 		return false;
+	}
+
+	@Override
+	public int getMapSize() {
+		return mapSize;
 	}
 
 	@Override
@@ -116,12 +125,20 @@ public class TilesMasterDefault implements TilesMaster {
 	}
 
 	@Override
-	public List<Tile> getTilesInRange(final WorldObject object,
+	public List<Tile> getTilesInRange(final WorldObject worldObject,
 			final int range, final TilesSearchParameter tilesSearchParameter) {
-		final Tile objectTile = tilesContainer.getTileOnPos(object
+		final Tile objectTile = tilesContainer.getTileOnPos(worldObject
 				.getTilesPos());
-
 		return tilesSearcher.getTilesInRange(objectTile, range,
+				tilesSearchParameter);
+	}
+
+	@Override
+	public List<Tile> getTilesAway(final WorldObject worldObject,
+			final int distance, final TilesSearchParameter tilesSearchParameter) {
+		final Tile objectTile = tilesContainer.getTileOnPos(worldObject
+				.getTilesPos());
+		return tilesSearcher.getTilesAway(objectTile, distance,
 				tilesSearchParameter);
 	}
 
@@ -160,6 +177,11 @@ public class TilesMasterDefault implements TilesMaster {
 	@Override
 	public TilesLookController getTilesLookController() {
 		return tilesLookController;
+	}
+
+	@Override
+	public TilesSearchParameterFactory getTilesSearchParameterFactory() {
+		return tilesSearchParameterFactory;
 	}
 
 	@Override

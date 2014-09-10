@@ -14,10 +14,12 @@ public class TilesSearcherDefault implements TilesSearcher {
 
 	private final TilesMaster tilesMaster;
 	private final AdjacentTilesSearcher adjacentTilesSearcher;
+	private final AwayTilesSearcher awayTilesSearcher;
 
 	public TilesSearcherDefault(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
 		adjacentTilesSearcher = new AdjacentTilesSearcherDefault(tilesMaster);
+		awayTilesSearcher = new AwayTilesSearcherDefault(tilesMaster);
 	}
 
 	@Override
@@ -47,6 +49,13 @@ public class TilesSearcherDefault implements TilesSearcher {
 	public List<Tile> getTilesInRange(final Tile tile, final int range,
 			final TilesSearchParameter tilesSearchParameter) {
 		return adjacentTilesSearcher.getTilesInRange(tile, range,
+				tilesSearchParameter);
+	}
+
+	@Override
+	public List<Tile> getTilesAway(final Tile tile, final int distance,
+			final TilesSearchParameter tilesSearchParameter) {
+		return awayTilesSearcher.getTilesAway(tile, distance,
 				tilesSearchParameter);
 	}
 }

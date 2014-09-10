@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.tilePathsMaster;
+package org.adamsko.cubicforest.world.tilePathsMaster.searcher.validPath;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,16 @@ import java.util.List;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesHelper;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathDefault;
 
-public class TilePathSearcherHelper {
+/**
+ * Helper class for {@link TilePathSearcherValidPath}
+ * 
+ * @author adamsko
+ * 
+ */
+public class SearchHelper {
 
 	private final TilesMaster tilesMaster;
 	/**
@@ -20,7 +28,7 @@ public class TilePathSearcherHelper {
 	private final List<List<Tile>> costTiles;
 	Tile source, destiny;
 
-	public TilePathSearcherHelper(final TilesMaster tilesMaster) {
+	public SearchHelper(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
 		costTiles = new ArrayList<List<Tile>>();
 	}

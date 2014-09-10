@@ -1,28 +1,31 @@
-package org.adamsko.cubicforest.world.tilePathsMaster;
-
-import java.util.List;
+package org.adamsko.cubicforest.world.tilePathsMaster.searcher.validPath;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
+import org.adamsko.cubicforest.world.tilePathsMaster.NullTilePath;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathDefault;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearcher;
 
 import com.badlogic.gdx.Gdx;
 
 /**
- * Generates {@link TilePathDefault} object from (...)
+ * Implementation of search method: look for the shortest valid path. Such path
+ * leads from starting tile to the ending tile and is uninterrupted.
  * 
  * @author adamsko
  * 
  */
-public class TilePathSearcherDefault implements TilePathSearcher {
+public class TilePathSearcherValidPath implements TilePathSearcher {
 
 	private TilesMaster tilesMaster = null;
-	private TilePathSearcherHelper helper;
+	private final SearchHelper helper;
 
-	@Override
-	public void setTilesMaster(final TilesMaster tilesMaster) {
+	public TilePathSearcherValidPath(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
-		helper = new TilePathSearcherHelper(tilesMaster);
+		helper = new SearchHelper(tilesMaster);
 	}
 
 	@Override
@@ -32,7 +35,7 @@ public class TilePathSearcherDefault implements TilePathSearcher {
 			return new TilePathDefault(from);
 		}
 
-		TilePath path = null;
+		TilePath path = NullTilePath.instance();
 
 		helper.searchCostTiles(from, to);
 
@@ -58,39 +61,14 @@ public class TilePathSearcherDefault implements TilePathSearcher {
 
 	@Override
 	public TilePath search(final WorldObject objectFrom,
-			final WorldObject objectTo) {
+			final WorldObject objectTo,
+			final TilesSearchParameter tilesSearchParameter) {
+
 		final Tile srcTile = tilesMaster.getTileWithObject(objectFrom);
 		final Tile destTile = tilesMaster.getTileWithObject(objectTo);
 
 		final TilePath searchedPath = search(srcTile, destTile);
 		return searchedPath;
-	}
-
-	@Override
-	public TilePath searchShortestPathAdjacentTiles(
-			final WorldObject objectFrom, final WorldObject objectTo) {
-		final Tile tileTo = tilesMaster.getTileWithObject(objectTo);
-		final List<Tile> adjacentTiles = tilesMaster.getTilesAdjacent(tileTo);
-
-		TilePath shortestPath = null;
-		for (final Tile adjacentTile : adjacentTiles) {
-
-			if (adjacentTile.hasOccupant()) {
-				continue;
-			}
-
-			final TilePath adjacentTilePath = search(objectFrom, adjacentTile);
-			if (shortestPath == null) {
-				shortestPath = adjacentTilePath;
-				continue;
-			}
-
-			if (adjacentTilePath.length() < shortestPath.length()
-					|| shortestPath.length() == 0) {
-				shortestPath = adjacentTilePath;
-			}
-		}
-		return shortestPath;
 	}
 
 }

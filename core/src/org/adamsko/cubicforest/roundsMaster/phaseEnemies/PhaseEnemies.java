@@ -9,7 +9,7 @@ import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePathSearcher;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
 public class PhaseEnemies extends PhaseOrderableObjects {
 
@@ -18,14 +18,14 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	public PhaseEnemies(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final OrdersMaster ordersMaster,
-			final TilePathSearcher tilePathSearcher,
+			final TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController) {
 		super(worldObjectsMastersContainer.getEnemiesMaster(), ordersMaster,
 				tilesLookController, "PhaseEnemies");
 
 		heroesHelper = new HeroesHelper(
 				worldObjectsMastersContainer.getHeroesMaster(),
-				tilePathSearcher);
+				tilePathSearchersMaster);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 		nextObject();
 		final WorldObject activeEnemy = currentObject();
 
-		if (activeEnemy == null) {
+		if (activeEnemy.isNull()) {
 			return;
 		}
 

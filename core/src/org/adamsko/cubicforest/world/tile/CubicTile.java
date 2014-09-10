@@ -37,9 +37,19 @@ public class CubicTile extends CubicObject implements Tile {
 	}
 
 	@Override
-	public boolean isPosInTile(final Vector2 tilePos) {
-		if (tilePos.x >= tilesPos.x && tilePos.x < tilesPos.x + 1) {
-			if (tilePos.y >= tilesPos.y && tilePos.y < tilesPos.y + 1) {
+	public boolean isPosInTile(final Vector2 checkedPos) {
+		if (checkedPos.x >= tilesPos.x && checkedPos.x < tilesPos.x + 1) {
+			if (checkedPos.y >= tilesPos.y && checkedPos.y < tilesPos.y + 1) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isPosInTile(final float x, final float y) {
+		if (x >= tilesPos.x && x < tilesPos.x + 1) {
+			if (y >= tilesPos.y && y < tilesPos.y + 1) {
 				return true;
 			}
 		}

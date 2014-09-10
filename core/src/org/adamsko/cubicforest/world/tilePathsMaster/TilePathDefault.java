@@ -29,6 +29,11 @@ public class TilePathDefault implements TilePath {
 	}
 
 	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	@Override
 	public void pushTile(final Tile newTile) {
 		tilesList.add(newTile);
 	}

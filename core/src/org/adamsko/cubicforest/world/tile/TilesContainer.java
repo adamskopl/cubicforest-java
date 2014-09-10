@@ -33,6 +33,23 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 		return NullCubicTile.instance();
 	}
 
+	/**
+	 * Search Tiles for one containing given tilePosition.
+	 * 
+	 * @param tilePos
+	 *            tilePosition of the searched Tile
+	 * @return Tile which contains tilePos position. null if Tile not found
+	 */
+	public Tile getTileOnPos(final float posX, final float posY) {
+		for (final WorldObject wo : getWorldObjects()) {
+			final Tile tile = (Tile) wo;
+			if (tile.isPosInTile(posX, posY)) {
+				return tile;
+			}
+		}
+		return NullCubicTile.instance();
+	}
+
 	public Tile getTileWithObject(final WorldObject object) {
 		for (final WorldObject wo : getWorldObjects()) {
 			final Tile tile = (Tile) wo;
@@ -49,7 +66,6 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects
 		newTile.setVerticalPos(-0.01f);
-
 		// FIXME: don't add newTile through addRenderableObject(), because it's
 		// a Tile. Is it ok?
 		super.getWorldObjects().add(newTile);

@@ -5,7 +5,7 @@ import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndi
 
 /**
  * Interface for classes describing what kind of tiles are searched with tile
- * search methods. E.g. tiles with enemies should be excluded from search.
+ * search methods. E.g. if tiles with enemies should be excluded from search.
  * 
  * @author adamsko
  * 
