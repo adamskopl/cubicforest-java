@@ -111,7 +111,8 @@ public class GameScreen implements Screen {
 
 		worldBuilder.initCollisionVisitorsManagerFactory(
 				worldObjectsMastersContainer.getGatherCubesMaster(),
-				worldObjectsMastersContainer.getHeroesToolsMaster());
+				worldObjectsMastersContainer.getHeroesToolsMaster(),
+				worldObjectsMastersContainer.getPortalsMaster());
 
 		worldBuilder.initMapsLoader(worldObjectsMastersContainer,
 				worldBuilder.getCollisionVisitorsManagerFactory());
@@ -130,8 +131,9 @@ public class GameScreen implements Screen {
 
 		worldBuilder.initRoundsMasterPhases(worldBuilder.getOrdersMaster(),
 				worldObjectsMastersContainer, worldBuilder
-						.getTilePathSearchersMaster(), worldObjectsMastersContainer
-						.getTilesMaster().getTilesLookController());
+						.getTilePathSearchersMaster(),
+				worldObjectsMastersContainer.getTilesMaster()
+						.getTilesLookController());
 
 		worldBuilder.initGuiMaster(worldRenderer, worldBuilder.getMapsLoader(),
 				worldObjectsMastersContainer.getGatherCubesMaster(),

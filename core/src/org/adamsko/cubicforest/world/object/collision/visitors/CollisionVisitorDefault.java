@@ -13,6 +13,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 
 import com.badlogic.gdx.Gdx;
 
@@ -114,6 +115,11 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 	@Override
 	public void visitToolTurret(final HeroToolTurret heroToolTurret) {
 		visitHeroTool(heroToolTurret);
+	}
+
+	@Override
+	public void visitPortal(final Portal portal) {
+
 	}
 
 }
