@@ -51,6 +51,14 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 	boolean isPosInTile(final Vector2 tilePos);
 
 	/**
+	 * Check if vector belongs to tile's area.
+	 * 
+	 * @param tilePos
+	 *            vector being checked for inclusion
+	 */
+	boolean isPosInTile(final float x, final float y);
+
+	/**
 	 * Removes given occupant from 'occupants' collection. Removed occupant is
 	 * no longer connected with this tile. If the passed object is not on the
 	 * tile, it's considered as an error.

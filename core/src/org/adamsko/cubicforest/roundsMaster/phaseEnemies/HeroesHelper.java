@@ -3,7 +3,9 @@ package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 import org.adamsko.cubicforest.world.tilePathsMaster.NullTilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearcher;
@@ -24,11 +26,14 @@ public class HeroesHelper {
 	private final List<WorldObject> heroes;
 
 	private final TilePathSearchersMaster tilePathSearchersMaster;
+	private final TilesSearchParameterFactory tilesSearchParameterFactory;
 
 	public HeroesHelper(final OrderableObjectsContainer heroesContainer,
 			final TilePathSearchersMaster tilePathSearchersMaster) {
 		heroes = heroesContainer.getOrderableObjects();
 		this.tilePathSearchersMaster = tilePathSearchersMaster;
+		this.tilesSearchParameterFactory = tilePathSearchersMaster
+				.getTilesSearchParameterFactory();
 	}
 
 	/**
@@ -42,6 +47,15 @@ public class HeroesHelper {
 
 		final TilePath shortestPathValid = searchPathThroughHeroes(enemy,
 				tilePathSearchersMaster.getTilePathSearcherValidPath());
+
+		// if there is no valid path
+		if (shortestPathValid.length() == 0) {
+			// search for the path reaching tile that is nearest to the hero
+			final TilePath shortestPathNearestTile = searchPathThroughHeroes(
+					enemy,
+					tilePathSearchersMaster.getTilePathSearcherNearestTile());
+			return shortestPathNearestTile;
+		}
 
 		return shortestPathValid;
 	}
@@ -59,7 +73,8 @@ public class HeroesHelper {
 		 */
 		for (final WorldObject hero : heroes) {
 
-			final TilePath pathToHero = tilePathSearcher.search(enemy, hero);
+			final TilePath pathToHero = tilePathSearcher.search(enemy, hero,
+					tilesSearchParameterFactory.create(WorldObjectType.ENEMY));
 
 			if (pathToHero.isNull() || pathToHero.length() == 0) {
 				continue;

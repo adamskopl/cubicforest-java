@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.tilePathsMaster.searcher;
 
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 
 /**
  * Interface for class managing {@link TilePathSearcher} implementations.
@@ -8,6 +9,8 @@ package org.adamsko.cubicforest.world.tilePathsMaster.searcher;
  * 
  */
 public interface TilePathSearchersMaster {
+
+	TilesSearchParameterFactory getTilesSearchParameterFactory();
 
 	TilePathSearcher getTilePathSearcherValidPath();
 

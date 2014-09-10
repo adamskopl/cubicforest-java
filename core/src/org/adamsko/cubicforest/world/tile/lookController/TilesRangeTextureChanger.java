@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
-import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TSPFactoryDefatult;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 
 import com.badlogic.gdx.math.Vector2;
@@ -34,10 +33,9 @@ public class TilesRangeTextureChanger {
 			final Vector2 texCoords1, final List<WorldObject> otherObjects,
 			final Vector2 texCoords2, final Vector2 commomTexCoords) {
 
-		tilesMaster.isNull();
-
 		// FIXME: pass as an argument from TilesMaster?
-		final TilesSearchParameterFactory tilesSearchParameterFactory = new TSPFactoryDefatult();
+		final TilesSearchParameterFactory tilesSearchParameterFactory = tilesMaster
+				.getTilesSearchParameterFactory();
 
 		groupTilesInRange.clear();
 		commonTilesInRange.clear();

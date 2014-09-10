@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
-import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 
 /**
  * Searches for specific tiles.
@@ -25,19 +24,19 @@ public interface TilesSearcher {
 	List<Tile> getTilesAdjacent(final Tile tile);
 
 	/**
-	 * Searches for all tiles that are in a range of given starting tile. It
-	 * means, that these tiles can be reached from starting tile with a valid
-	 * {@link TilePath}.
-	 * 
-	 * 
-	 * @param tile
-	 *            initial tile for which range tiles are searched
-	 * @param range
-	 *            how far search should be performed (tiles that are farther are
-	 *            excluded from the search)
-	 * @return list with found tiles
+	 * Get tiles that are in the range of the given tile. <br>
+	 * See
+	 * {@link AdjacentTilesSearcher#getTilesInRange(Tile, int, TilesSearchParameter)}
 	 */
 	List<Tile> getTilesInRange(final Tile tile, final int range,
+			TilesSearchParameter tilesSearchParameter);
+
+	/**
+	 * Get tiles, that are away from given distance. <br>
+	 * See
+	 * {@link AwayTilesSearcher#getTilesAway(Tile, int, TilesSearchParameter)}
+	 */
+	List<Tile> getTilesAway(final Tile tile, final int distance,
 			TilesSearchParameter tilesSearchParameter);
 
 }

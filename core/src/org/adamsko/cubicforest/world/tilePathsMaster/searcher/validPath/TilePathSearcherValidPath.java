@@ -1,10 +1,13 @@
-package org.adamsko.cubicforest.world.tilePathsMaster.searcher;
+package org.adamsko.cubicforest.world.tilePathsMaster.searcher.validPath;
 
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
+import org.adamsko.cubicforest.world.tilePathsMaster.NullTilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathDefault;
+import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearcher;
 
 import com.badlogic.gdx.Gdx;
 
@@ -18,12 +21,11 @@ import com.badlogic.gdx.Gdx;
 public class TilePathSearcherValidPath implements TilePathSearcher {
 
 	private TilesMaster tilesMaster = null;
-	private TilePathSearcherVPHelper helper;
+	private final SearchHelper helper;
 
-	@Override
-	public void setTilesMaster(final TilesMaster tilesMaster) {
+	public TilePathSearcherValidPath(final TilesMaster tilesMaster) {
 		this.tilesMaster = tilesMaster;
-		helper = new TilePathSearcherVPHelper(tilesMaster);
+		helper = new SearchHelper(tilesMaster);
 	}
 
 	@Override
@@ -33,7 +35,7 @@ public class TilePathSearcherValidPath implements TilePathSearcher {
 			return new TilePathDefault(from);
 		}
 
-		TilePath path = null;
+		TilePath path = NullTilePath.instance();
 
 		helper.searchCostTiles(from, to);
 
@@ -59,7 +61,9 @@ public class TilePathSearcherValidPath implements TilePathSearcher {
 
 	@Override
 	public TilePath search(final WorldObject objectFrom,
-			final WorldObject objectTo) {
+			final WorldObject objectTo,
+			final TilesSearchParameter tilesSearchParameter) {
+
 		final Tile srcTile = tilesMaster.getTileWithObject(objectFrom);
 		final Tile destTile = tilesMaster.getTileWithObject(objectTo);
 
