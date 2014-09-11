@@ -49,16 +49,14 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 		final TilePath shortestPathTileHero = heroesHelper
 				.searchPathShortestHero(activeEnemy);
 
-		if (shortestPathTileHero == null
-				|| shortestPathTileHero.length() == 0) {
+		if (shortestPathTileHero == null || shortestPathTileHero.length() == 0) {
 
 			onOrderFinished();
 
 		} else {
 			// shorten path to enemy's speed
 			shortestPathTileHero.shortenPath(activeEnemy.getSpeed());
-			ordersMaster.startOrder(activeEnemy, shortestPathTileHero,
-					this);
+			ordersMaster.startOrder(activeEnemy, shortestPathTileHero, this);
 		}
 	}
 

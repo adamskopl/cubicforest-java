@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
@@ -102,9 +103,10 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 	 */
 	protected WorldObject currentObject() {
 		if (phaseObjects.size() == 0) {
-			return null;
+			return NullCubicObject.instance();
 		}
-		final WorldObject currentObject = phaseObjects.get(currentObjectPointer);
+		final WorldObject currentObject = phaseObjects
+				.get(currentObjectPointer);
 		return currentObject;
 	}
 
