@@ -114,6 +114,10 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			return true;
 		}
 
+		if (pathToTile.length() == 0) {
+			return false;
+		}
+
 		if (!tile.isTilePathSearchValid()) {
 			return false;
 		}
