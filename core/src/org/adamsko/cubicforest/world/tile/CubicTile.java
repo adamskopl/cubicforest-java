@@ -9,6 +9,8 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.NullCubicPortal;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 
@@ -17,8 +19,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class CubicTile extends CubicObject implements Tile {
-
 	private final List<WorldObject> occupants;
+	private Portal portal;
 
 	/**
 	 * For NullTile constructor.
@@ -26,6 +28,7 @@ public class CubicTile extends CubicObject implements Tile {
 	CubicTile() {
 		super();
 		occupants = null;
+		portal = null;
 	}
 
 	public CubicTile(final Vector2 coords, final TextureRegion tr,
@@ -34,6 +37,7 @@ public class CubicTile extends CubicObject implements Tile {
 		this.tilesPos = coords;
 
 		occupants = new ArrayList<WorldObject>();
+		portal = NullCubicPortal.instance();
 	}
 
 	@Override
@@ -73,6 +77,13 @@ public class CubicTile extends CubicObject implements Tile {
 	}
 
 	@Override
+	public void addPortal(final Portal portal) {
+		occupants.add(portal);
+		this.portal = portal;
+		refreshTexture();
+	}
+
+	@Override
 	public void removeOccupant(final WorldObject occupantToRemove) {
 		if (!occupants.remove(occupantToRemove)) {
 			// if there was no 'removedOccupant' object in a collection
@@ -94,11 +105,6 @@ public class CubicTile extends CubicObject implements Tile {
 			}
 		}
 		refreshTexture();
-	}
-
-	@Override
-	public boolean hasOccupant() {
-		return !occupants.isEmpty();
 	}
 
 	@Override
@@ -147,5 +153,15 @@ public class CubicTile extends CubicObject implements Tile {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public boolean hasPortal() {
+		return (!portal.isNull());
+	}
+
+	@Override
+	public Portal getPortal() {
+		return portal;
 	}
 }

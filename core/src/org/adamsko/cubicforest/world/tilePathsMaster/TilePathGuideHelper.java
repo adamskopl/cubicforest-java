@@ -26,9 +26,10 @@ public class TilePathGuideHelper {
 	 */
 	private int tweenType;
 	/**
-	 * target value for current Tween
+	 * Target position for moved objects: when tweener is started, moved object
+	 * is heading on this position
 	 */
-	private float tweenTarget;
+	private final Vector2 tweenMoveTarget;
 	/**
 	 * Connection type between tileHeadingFrom and tileHeadingTo
 	 */
@@ -38,7 +39,8 @@ public class TilePathGuideHelper {
 		tileHeadingFrom = null;
 		tileHeadingTo = null;
 		tweenType = 0;
-		tweenTarget = 0.0f;
+		// tweenTarget = 0.0f;
+		tweenMoveTarget = new Vector2();
 		currentConn = TilesConnection_e.NONE;
 	}
 
@@ -77,13 +79,18 @@ public class TilePathGuideHelper {
 		final Vector2 edgePosition = TilesHelper.getPosBetween(tileHeadingFrom,
 				tileHeadingTo);
 
+		tweenType = WorldObjectAccessor.TILESPOS_XY;
 		// based on connection type between tiles, set Tween variables
 		if (currentConn == TilesConnection_e.HORIZONTAL) {
-			tweenType = WorldObjectAccessor.TILESPOS_X;
-			tweenTarget = edgePosition.x;
+			tweenMoveTarget.x = edgePosition.x;
+			tweenMoveTarget.y = edgePosition.y + 0.5f;
 		} else if (currentConn == TilesConnection_e.VERTICAL) {
-			tweenType = WorldObjectAccessor.TILESPOS_Y;
-			tweenTarget = edgePosition.y;
+			tweenMoveTarget.x = edgePosition.x + 0.5f;
+			tweenMoveTarget.y = edgePosition.y;
+		} else if (currentConn == TilesConnection_e.PORTAL) {
+			// temporary: first stage of moving, is to fly up
+			tweenMoveTarget.x = tileHeadingFrom.getTilesPosX() - 2.0f;
+			tweenMoveTarget.y = tileHeadingFrom.getTilesPosY() - 2.0f;
 		} else {
 			throw new Exception("unsupported connType "
 					+ TilesHelper.toString(currentConn));
@@ -100,11 +107,18 @@ public class TilePathGuideHelper {
 	private void recalculateHeadingCenter() throws Exception {
 		switch (currentConn) {
 		case HORIZONTAL: {
-			tweenTarget = tileHeadingTo.getTilesPosX() + 0.5f;
+			tweenMoveTarget.x = tileHeadingTo.getTilesPosX() + 0.5f;
+			tweenMoveTarget.y = tileHeadingTo.getTilesPosY() + 0.5f;
 			break;
 		}
 		case VERTICAL: {
-			tweenTarget = tileHeadingTo.getTilesPosY() + 0.5f;
+			tweenMoveTarget.x = tileHeadingTo.getTilesPosX() + 0.5f;
+			tweenMoveTarget.y = tileHeadingTo.getTilesPosY() + 0.5f;
+			break;
+		}
+		case PORTAL: {
+			tweenMoveTarget.y = tileHeadingTo.getTilesPosY() + 0.5f;
+			tweenMoveTarget.x = tileHeadingTo.getTilesPosX() + 0.5f;
 			break;
 		}
 		case NONE: {
@@ -132,8 +146,8 @@ public class TilePathGuideHelper {
 		tileHeadingFrom = tileHeadingTo;
 	}
 
-	protected float getTweenTarget() {
-		return tweenTarget;
+	protected Vector2 getTweenMoveTarget() {
+		return tweenMoveTarget;
 	}
 
 	protected int getTweenType() {

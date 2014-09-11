@@ -6,12 +6,13 @@ import java.util.List;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
 
-public abstract class WorldObjectsMasterDefault extends RenderableObjectsMasterDefault
-		implements WorldObjectsMaster {
+public abstract class WorldObjectsMasterDefault extends
+		RenderableObjectsMasterDefault implements WorldObjectsMaster {
 
 	private List<WorldObject> worldObjects;
 	private TilesMaster tilesMaster;
@@ -74,6 +75,14 @@ public abstract class WorldObjectsMasterDefault extends RenderableObjectsMasterD
 			removeObjectFromContainer(object);
 			removeObjectFromTile(object);
 		}
+	}
+
+	public void addObject(final Portal portal) {
+		worldObjects.add(portal);
+		addRenderableObject(portal);
+		// associate newObject with a tile (every WorldObject is associated with
+		// a tile)
+		tilesMaster.addWorldObject(portal);
 	}
 
 	public void addObject(final WorldObject worldObject) {

@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMast
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -42,5 +43,7 @@ public interface WorldObjectsMastersContainer {
 	GatherCubesMaster getGatherCubesMaster();
 
 	HeroesToolsMaster getHeroesToolsMaster();
+
+	PortalsMaster getPortalsMaster();
 
 }

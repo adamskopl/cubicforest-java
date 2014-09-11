@@ -16,6 +16,7 @@ import org.adamsko.cubicforest.world.object.collision.visitors.manager.Collision
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -183,10 +184,14 @@ public interface GameWorldBuilder {
 	 * @param heroesToolsMaster
 	 *            needed for some {@link WorldObjectVisitor} created by
 	 *            {@link CollisionVisitorsManagerFactory}
+	 * @param portalsMaster
+	 *            needed for some {@link WorldObjectVisitor} created by
+	 *            {@link CollisionVisitorsManagerFactory}
 	 */
 	void initCollisionVisitorsManagerFactory(
 			final GatherCubesMaster gatherCubesMaster,
-			final HeroesToolsMaster heroesToolsMaster);
+			final HeroesToolsMaster heroesToolsMaster,
+			final PortalsMaster portalsMaster);
 
 	/**
 	 * Get {@link WorldObjectsMastersContainer} needed for

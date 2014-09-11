@@ -86,12 +86,21 @@ public class SearchHelper {
 	 */
 	private void popCostsToSource(final TilePath path) throws Exception {
 		final List<Tile> currentCostTiles = currentCostTiles();
-		final Tile pathFirstTile = path.getFrontTile();
+		final Tile pathFrontTile = path.getFrontTile();
 		boolean tileAdded = false;
+		// for every tile from current cost: one of them should be adjacent to
+		// the front tile (directly or by a neighboring portal)
 		for (final Tile costTile : currentCostTiles) {
-			if (TilesHelper.areTilesAdjecant(pathFirstTile, costTile)) {
+
+			// check if current cost tile is adjacent to previously added
+			// tile
+			if (TilesHelper.areTilesAdjecant(pathFrontTile, costTile)
+					|| TilesHelper.areTilesPortalConnected(pathFrontTile,
+							costTile)) {
 				addTilePathFront(path, costTile);
 				tileAdded = true;
+			}
+			if (tileAdded) {
 				if (costTile == source) {
 					// source added to the front of the path
 					return;
@@ -101,12 +110,16 @@ public class SearchHelper {
 				if (costTiles.size() == 0) {
 					throw new Exception("popCostsToSource: cost 0 exceeded");
 				}
+				// tile added for current cost
 				break;
 			}
 		}
+		// no tile added for current cost
 		if (!tileAdded) {
 			throw new Exception("popCostsToSource: no tile added");
 		}
+
+		// resolve next lower cost
 		popCostsToSource(path);
 	}
 
