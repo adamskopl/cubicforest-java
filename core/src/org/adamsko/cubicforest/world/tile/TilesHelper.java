@@ -2,6 +2,9 @@ package org.adamsko.cubicforest.world.tile;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -31,6 +34,10 @@ public class TilesHelper {
 		 * the same X coordinates
 		 */
 		VERTICAL,
+		/**
+		 * tiles are connected by portal
+		 */
+		PORTAL,
 		/**
 		 * tiles are not connected
 		 */
@@ -79,7 +86,11 @@ public class TilesHelper {
 		return coords;
 	}
 
-	public static Boolean areTilesAdjecant(final Tile tileA, final Tile tileB) {
+	/**
+	 * Check if tiles adjacent, i.e. if moving {@link WorldObject} object can
+	 * move from one tile to another.
+	 */
+	public static boolean areTilesAdjecant(final Tile tileA, final Tile tileB) {
 		final float xDiff = Math.abs(tileA.getTilesPosX()
 				- tileB.getTilesPosX());
 		final float yDiff = Math.abs(tileA.getTilesPosY()
@@ -95,9 +106,31 @@ public class TilesHelper {
 		return false;
 	}
 
+	/**
+	 * Check if two tiles are connected by portal
+	 */
+	public static boolean areTilesPortalConnected(final Tile tileA,
+			final Tile tileB) {
+
+		if (tileA.hasPortal() && tileB.hasPortal()) {
+			final Portal portalA = tileA.getPortal();
+			if (portalA.getTwinPortal().getTile() == tileB) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static TilesConnection_e getConnectionType(final Tile tileA,
 			final Tile tileB) {
 		if (!areTilesAdjecant(tileA, tileB)) {
+			// check if tiles are connected by portal
+			if (tileA.hasPortal() && tileB.hasPortal()) {
+				final Portal portalA = tileA.getPortal();
+				if (portalA.getTwinPortal().getTile() == tileB) {
+					return TilesConnection_e.PORTAL;
+				}
+			}
 			return TilesConnection_e.NONE;
 		}
 		if (tileA.getTilesPosX() == tileB.getTilesPosX()) {
@@ -128,6 +161,9 @@ public class TilesHelper {
 			} else {
 				return tileA.getTilesPos();
 			}
+		}
+		case PORTAL: {
+			return new Vector2();
 		}
 		case NONE: {
 			throw new Exception("getPosBetween: connection: NONE");

@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
@@ -57,6 +58,8 @@ public interface TilesMaster extends PickMasterClient, Nullable {
 	 *            {@link Tile}.
 	 */
 	void addWorldObject(final WorldObject addObject);
+
+	void addWorldObject(final Portal portal);
 
 	/**
 	 * Removes {@link WorldObject} objects from the tile it is occupying.

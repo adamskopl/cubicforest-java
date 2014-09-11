@@ -6,6 +6,7 @@ import java.util.List;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookControllerDefault;
 import org.adamsko.cubicforest.world.tile.tilesEvents.NullTilesEventsHandler;
@@ -147,12 +148,16 @@ public class TilesMasterDefault implements TilesMaster {
 		final Tile parentTile = tilesContainer.getTileOnPos(addObject
 				.getTilesPos());
 		if (!parentTile.isNull()) {
-			try {
-				parentTile.addOccupant(addObject);
-			} catch (final Exception e) {
-				Gdx.app.error("TilesMasterDefault::addWorldObject()",
-						e.toString());
-			}
+			parentTile.addOccupant(addObject);
+		}
+	}
+
+	@Override
+	public void addWorldObject(final Portal portal) {
+		final Tile parentTile = tilesContainer.getTileOnPos(portal
+				.getTilesPos());
+		if (!parentTile.isNull()) {
+			parentTile.addPortal(portal);
 		}
 	}
 

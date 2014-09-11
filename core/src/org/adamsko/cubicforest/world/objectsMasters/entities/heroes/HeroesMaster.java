@@ -54,7 +54,7 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 			hero.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -5));
 
-			hero.setSpeed(3);
+			hero.setSpeed(5);
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			hero.setTilesPos(pos);

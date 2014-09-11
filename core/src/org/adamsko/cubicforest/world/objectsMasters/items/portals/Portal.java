@@ -1,30 +1,28 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.portals;
 
-import org.adamsko.cubicforest.world.object.CubicObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.tile.Tile;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+/**
+ * Interface for portal map object: object allowing for {@link WorldObject}
+ * objects to walk from tile containing portal to another tile containing twin
+ * portal.
+ * 
+ * @author adamsko
+ * 
+ */
+public interface Portal extends WorldObject {
 
-public class Portal extends CubicObject {
+	/**
+	 * Get portal's twin portal.
+	 */
+	Portal getTwinPortal();
 
-	public Portal(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container) {
-		super(tr, texNum, container, WorldObjectType.PORTAL);
-	}
+	void setTwinPortal(Portal twinPortal);
 
-	@Override
-	public void initTilePropertiesIndicator() {
-		super.initTilePropertiesIndicator();
-		getTilePropertiesIndicator().setTilePathSearchValid(true);
-		getTilePropertiesIndicator().setTileHeroesRangeValid(true);
-		getTilePropertiesIndicator().setTileHighlightedAsOccupied(true);
-	}
-
-	@Override
-	public void accept(final WorldObjectVisitor visitor) {
-		visitor.visitPortal(this);
-	}
+	/**
+	 * Get tile assigned to this portal.
+	 */
+	Tile getTile();
 
 }

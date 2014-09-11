@@ -33,7 +33,6 @@ public class TilesRangeTextureChanger {
 			final Vector2 texCoords1, final List<WorldObject> otherObjects,
 			final Vector2 texCoords2, final Vector2 commomTexCoords) {
 
-		// FIXME: pass as an argument from TilesMaster?
 		final TilesSearchParameterFactory tilesSearchParameterFactory = tilesMaster
 				.getTilesSearchParameterFactory();
 

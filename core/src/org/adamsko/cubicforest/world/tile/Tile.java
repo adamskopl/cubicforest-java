@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 
@@ -31,16 +32,19 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 	boolean isOccupied(final WorldObject object);
 
 	/**
-	 * Does tile have any occupant?
-	 */
-	boolean hasOccupant();
-
-	/**
 	 * Add new {@link WorldObject} object to this tile. From now on this object
 	 * is associated with this tile and 'tile driven' events will be also
 	 * associated with this object (e.g. collisions).
 	 */
 	void addOccupant(final WorldObject insertObject);
+
+	/**
+	 * Add new {@link Portal} object to this tile. From now on this objects is
+	 * associated with this tile.
+	 * 
+	 * @param portal
+	 */
+	void addPortal(Portal portal);
 
 	/**
 	 * Check if vector belongs to tile's area.
@@ -89,5 +93,12 @@ public interface Tile extends WorldObject, RenderableObject, Nullable {
 	 *         by {@link TilesSearchParameter}
 	 */
 	boolean isTileValidSearchParameter(TilesSearchParameter tilesSearchParameter);
+
+	/**
+	 * @return
+	 */
+	boolean hasPortal();
+
+	Portal getPortal();
 
 }

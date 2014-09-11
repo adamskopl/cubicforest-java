@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tile.tilesSearcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -41,6 +42,16 @@ public class TilesSearcherDefault implements TilesSearcher {
 			}
 
 			adjTiles.add(adjTile);
+
+		}
+		// check if given tile has portal to another tile
+		if (tile.hasPortal()) {
+			final Portal pairPortal = tile.getPortal().getTwinPortal();
+			final Tile portalTile = tilesContainer
+					.getTileWithObject(pairPortal);
+			if (!portalTile.isNull()) {
+				adjTiles.add(portalTile);
+			}
 		}
 		return adjTiles;
 	}

@@ -50,7 +50,7 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 			enemy.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -7));
 
-			enemy.setSpeed(3);
+			enemy.setSpeed(5);
 
 			pos.add(new Vector2(0.5f, 0.5f));
 			enemy.setTilesPos(pos);

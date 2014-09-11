@@ -46,18 +46,18 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 			return;
 		}
 
-		final TilePath shortestPathTileAdjacentHero = heroesHelper
+		final TilePath shortestPathTileHero = heroesHelper
 				.searchPathShortestHero(activeEnemy);
 
-		if (shortestPathTileAdjacentHero == null
-				|| shortestPathTileAdjacentHero.length() == 0) {
+		if (shortestPathTileHero == null
+				|| shortestPathTileHero.length() == 0) {
 
 			onOrderFinished();
 
 		} else {
 			// shorten path to enemy's speed
-			shortestPathTileAdjacentHero.shortenPath(activeEnemy.getSpeed());
-			ordersMaster.startOrder(activeEnemy, shortestPathTileAdjacentHero,
+			shortestPathTileHero.shortenPath(activeEnemy.getSpeed());
+			ordersMaster.startOrder(activeEnemy, shortestPathTileHero,
 					this);
 		}
 	}

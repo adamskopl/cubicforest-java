@@ -50,7 +50,7 @@ public class WorldObjectsMastersContainerDefault implements
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
 
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
-				45, 25);
+				45, 25, tilesMaster.getTilesContainer());
 
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles

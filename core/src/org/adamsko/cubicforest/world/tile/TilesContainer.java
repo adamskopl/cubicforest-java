@@ -2,12 +2,14 @@ package org.adamsko.cubicforest.world.tile;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsMasterDefault {
@@ -64,10 +66,13 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
-		// tiles are slightly lower than other objects
+		// tiles are slightly lower than other objects (should be rendered
+		// first)
 		newTile.setVerticalPos(-0.01f);
-		// FIXME: don't add newTile through addRenderableObject(), because it's
-		// a Tile. Is it ok?
+
+		// uncomment to add a position label to the tile
+		// addTilesPosLabel(newTile);
+
 		super.getWorldObjects().add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_ALL).add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_UNSERVED).add(newTile);
@@ -114,5 +119,10 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 				}
 			}
 		}
+	}
+
+	public void addTilesPosLabel(final Tile tile) {
+		tile.addLabel(ROLabel.LABEL_TILEPOS);
+		tile.altLabelLast(Color.RED, 0.7f, -17.0f, -20.0f);
 	}
 }
