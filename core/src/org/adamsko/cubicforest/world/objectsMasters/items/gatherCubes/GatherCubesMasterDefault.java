@@ -48,10 +48,8 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 				.getObjectTypeCoords(TiledObjectType.TILED_ITEM_GATHERCUBE);
 
 		GatherCube gatherCube;
-		int atlasIndex = 0;
 		for (final Vector2 pos : coords) {
-			gatherCube = new GatherCube(atlasRows.get(0)[atlasIndex],
-					atlasIndex, this);
+			gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
 			gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -2));
 
@@ -62,12 +60,6 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 			gatherCube.setTilesPos(pos);
 
 			addObject(gatherCube);
-
-			if (atlasIndex == 3) {
-				atlasIndex = 0;
-			} else {
-				atlasIndex++;
-			}
 		}
 
 	}
