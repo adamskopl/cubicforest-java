@@ -3,6 +3,8 @@ package org.adamsko.cubicforest.gui;
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 
 /**
@@ -19,6 +21,13 @@ public interface GuiMaster extends PickMasterClient, Nullable {
 	List<GuiElementsContainer> getGuiList();
 
 	/**
+	 * Initialize GuiMaster's {@link GuiElementsContainer} objects
+	 * 
+	 * @param mapsLoader
+	 */
+	void initializeContainers(final MapsLoader mapsLoader);
+
+	/**
 	 * Receives new GUI elements container. From now this container is managed
 	 * by {@link GuiMaster} (e.g. passes input).
 	 */
@@ -29,5 +38,7 @@ public interface GuiMaster extends PickMasterClient, Nullable {
 	 * {@link GuiElementsContainer} events.
 	 */
 	void addClient(final GuiMasterClient newClient);
+
+	void reload(CFMap cfMap);
 
 }

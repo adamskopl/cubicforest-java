@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.gui.debug;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -25,5 +26,9 @@ public class GuiDebug extends GuiElementsContainerDefault {
 
 		addGuiElement(elementDebug);
 
+	}
+
+	@Override
+	public void reload(final CFMap cfMap) {
 	}
 }

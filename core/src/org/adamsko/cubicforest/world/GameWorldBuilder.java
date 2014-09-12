@@ -78,8 +78,16 @@ public interface GameWorldBuilder {
 	void initOrdersMaster(final TilesMaster tilesMaster);
 
 	/**
+	 * Initialize {@link GuiMaster} object. Its elements are loaded in
+	 * {@link #initGuiMasterElements(GameRenderer, MapsLoader, GatherCubesMaster, RoundsMaster)}
+	 */
+	void initGuiMaster();
+
+	/**
 	 * Initialize {@link GuiMaster} object. Initialize its clients.
 	 * 
+	 * @param guiMaster
+	 *            {@link GuiMaster} object to be initialized
 	 * @param renderer
 	 *            {@link GuiMaster} is adding to it its
 	 *            {@link RenderableObjectsMaster}
@@ -92,8 +100,9 @@ public interface GameWorldBuilder {
 	 *            {@link RoundsMaster} is passing events from {@link GuiMaster}
 	 *            to {@link RoundPhase} objects
 	 */
-	void initGuiMaster(GameRenderer renderer, MapsLoader mapsLoader,
-			GatherCubesMaster gatherCubesMaster, RoundsMaster roundsMaster);
+	void initGuiMasterContainers(GuiMaster guiMaster, GameRenderer renderer,
+			MapsLoader mapsLoader, GatherCubesMaster gatherCubesMaster,
+			RoundsMaster roundsMaster);
 
 	/**
 	 * Initialize {@link PickMaster} object. Add clients.
@@ -123,6 +132,7 @@ public interface GameWorldBuilder {
 	 */
 	void initMapsLoader(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			GuiMaster guiMaster,
 			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
 	/**

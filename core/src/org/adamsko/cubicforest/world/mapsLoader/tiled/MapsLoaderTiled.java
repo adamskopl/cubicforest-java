@@ -3,6 +3,8 @@ package org.adamsko.cubicforest.world.mapsLoader.tiled;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.gui.GuiElementsContainer;
+import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
@@ -23,19 +25,23 @@ public class MapsLoaderTiled implements MapsLoader {
 	private FileHandle mapsFolder;
 
 	private final WorldObjectsMastersContainer worldObjectsMastersContainer;
+	private final GuiMaster guiMaster;
 	private final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
 
 	MapsLoaderTiled(final boolean nullConstructor) {
 		this.worldObjectsMastersContainer = null;
 		this.collisionVisitorsManagerFactory = null;
+		this.guiMaster = null;
 	}
 
 	public MapsLoaderTiled(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final GuiMaster guiMaster,
 			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
 
 		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
 		this.collisionVisitorsManagerFactory = collisionVisitorsManagerFactory;
+		this.guiMaster = guiMaster;
 
 		maps = new ArrayList<TiledMap>();
 	}
@@ -68,6 +74,7 @@ public class MapsLoaderTiled implements MapsLoader {
 			}
 			newMap.initConverter();
 			maps.add(newMap);
+
 			Gdx.app.error(entry.toString(), "OK");
 		}
 	}
@@ -78,6 +85,7 @@ public class MapsLoaderTiled implements MapsLoader {
 
 		final List<WorldObjectsMaster> worldObjectsMasters = worldObjectsMastersContainer
 				.getWorldObjectsMasters();
+		final List<GuiElementsContainer> guiContainers = guiMaster.getGuiList();
 
 		/*
 		 * Unloading has to be done in reverse order, because TilesMaster's
@@ -99,6 +107,10 @@ public class MapsLoaderTiled implements MapsLoader {
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
+		}
+
+		for (final GuiElementsContainer guiContainer : guiContainers) {
+			guiContainer.reload(getMapActive());
 		}
 
 		// uncomment to print tiles occupants

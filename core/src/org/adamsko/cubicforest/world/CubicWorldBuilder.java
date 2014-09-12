@@ -89,8 +89,13 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	}
 
 	@Override
-	public void initGuiMaster(final GameRenderer renderer,
-			final MapsLoader mapsLoader,
+	public void initGuiMaster() {
+		guiMaster = new GuiMasterDefault();
+	}
+
+	@Override
+	public void initGuiMasterContainers(final GuiMaster guiMaster,
+			final GameRenderer renderer, final MapsLoader mapsLoader,
 			final GatherCubesMaster gatherCubesMaster,
 			final RoundsMaster roundsMaster) {
 
@@ -104,13 +109,17 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			return;
 		}
 
-		guiMaster = new GuiMasterDefault(mapsLoader);
+		guiMaster.initializeContainers(mapsLoader);
+
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
 		guiMaster.addClient(roundsMaster);
 
 		for (final GuiElementsContainer GC : guiMaster.getGuiList()) {
 			renderer.addROMGui(GC);
 		}
+
+		guiMaster.reload(mapsLoader.getMapActive());
+
 	}
 
 	@Override
@@ -121,10 +130,11 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public void initMapsLoader(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final GuiMaster guiMaster,
 			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
 
 		mapsLoader = new MapsLoaderTiled(worldObjectsMastersContainer,
-				collisionVisitorsManagerFactory);
+				guiMaster, collisionVisitorsManagerFactory);
 		mapsLoader.loadMaps();
 		mapsLoader.setMapActive(0);
 	}

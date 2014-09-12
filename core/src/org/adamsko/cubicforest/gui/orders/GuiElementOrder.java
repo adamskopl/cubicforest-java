@@ -1,11 +1,11 @@
 package org.adamsko.cubicforest.gui.orders;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
-import org.adamsko.cubicforest.gui.GuiElement;
+import org.adamsko.cubicforest.gui.GuiElementDefault;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class GuiElementOrder extends GuiElement {
+public class GuiElementOrder extends GuiElementDefault {
 
 	GuiOrdersType_e orderType;
 	

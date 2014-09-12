@@ -1,8 +1,9 @@
 package org.adamsko.cubicforest.gui.levels;
 
-import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiElement;
+import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 
 import com.badlogic.gdx.Gdx;
@@ -70,5 +71,9 @@ public class GuiLevels extends GuiElementsContainerDefault {
 
 	private void higlightButton(final GuiElement element) {
 		element.setTextureRegion(atlasRows.get(1)[0]);
+	}
+
+	@Override
+	public void reload(final CFMap cfMap) {
 	}
 }

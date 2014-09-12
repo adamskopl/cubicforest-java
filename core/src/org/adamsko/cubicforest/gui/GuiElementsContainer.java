@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.gui;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -30,6 +31,11 @@ public interface GuiElementsContainer extends RenderableObjectsMaster {
 	void addGuiElement(final GuiElement guiElement);
 
 	/**
+	 * Remove all added {@link GuiElement} objects
+	 */
+	void clearGuiElements();
+
+	/**
 	 * Get screen position of the container. This position indicates screen
 	 * positions of contained {@link GuiElement} objects, which have relative
 	 * positions to their container.
@@ -46,5 +52,11 @@ public interface GuiElementsContainer extends RenderableObjectsMaster {
 	 * FIXME: replace with inheritance
 	 */
 	GuiType_e getType();
+
+	/**
+	 * Reload method. Some gui containers need to reload their
+	 * {@link GuiElement} elements, which depend on {@link CFMap}
+	 */
+	void reload(CFMap cfMap);
 
 }

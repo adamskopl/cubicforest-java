@@ -1,11 +1,11 @@
 package org.adamsko.cubicforest.gui.debug;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
-import org.adamsko.cubicforest.gui.GuiElement;
+import org.adamsko.cubicforest.gui.GuiElementDefault;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class GuiElementDebug extends GuiElement {
+public class GuiElementDebug extends GuiElementDefault {
 
 	GuiDebugType_e debugType;
 

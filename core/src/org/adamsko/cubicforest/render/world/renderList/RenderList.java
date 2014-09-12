@@ -52,4 +52,11 @@ public interface RenderList {
 	 */
 	void remove(List<RenderableObject> list);
 
+	/**
+	 * Get the amount of the {@link RenderableObject} objects on the render list
+	 */
+	int size();
+
+	String getName();
+
 }

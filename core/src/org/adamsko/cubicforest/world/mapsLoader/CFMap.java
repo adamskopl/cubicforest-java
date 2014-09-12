@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.mapsLoader;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledLayer;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObject;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
@@ -83,5 +84,9 @@ public interface CFMap {
 	List<TiledLayer> getLayers();
 
 	void setLayers(final List<TiledLayer> layers);
+
+	TiledMapProperties getProperties();
+
+	void setProperties(final TiledMapProperties tiledMapProperties);
 
 }

@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.gui.debug.GuiDebug;
 import org.adamsko.cubicforest.gui.heroTools.GuiHeroTools;
 import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 
 import com.badlogic.gdx.math.Vector2;
@@ -27,13 +28,19 @@ public class GuiMasterDefault implements GuiMaster {
 	private GuiDebug guiDebug;
 	private GuiLevels guiLevels;
 
-	GuiMasterDefault() {
+	/**
+	 * For {@link NullGuiMasterDefault}
+	 */
+	GuiMasterDefault(final boolean nullConstructor) {
 	}
 
-	public GuiMasterDefault(final MapsLoader mapsLoader) {
+	public GuiMasterDefault() {
 		guiList = new ArrayList<GuiElementsContainer>();
 		clients = new ArrayList<GuiMasterClient>();
+	}
 
+	@Override
+	public void initializeContainers(final MapsLoader mapsLoader) {
 		guiHeroTools = new GuiHeroTools("tools-atlas-medium", 40, 42, 25, -50);
 
 		guiOrders = new GuiOrders("orders-atlas-medium", 100, 100, 20, -340);
@@ -78,6 +85,13 @@ public class GuiMasterDefault implements GuiMaster {
 			}
 		}
 
+	}
+
+	@Override
+	public void reload(final CFMap cfMap) {
+		for (final GuiElementsContainer guiElementsContainer : guiList) {
+			guiElementsContainer.reload(cfMap);
+		}
 	}
 
 	private void clientsOnClicked(final GuiElementsContainer clickedContainer) {

@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.gui.orders;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -29,6 +30,10 @@ public class GuiOrders extends GuiElementsContainerDefault {
 
 		addGuiElement(elementOrder);
 
+	}
+
+	@Override
+	public void reload(final CFMap cfMap) {
 	}
 
 }

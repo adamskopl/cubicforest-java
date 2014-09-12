@@ -4,7 +4,7 @@ public class NullGuiMasterDefault extends GuiMasterDefault {
 	private static NullGuiMasterDefault instance = null;
 
 	private NullGuiMasterDefault() {
-		super();
+		super(false);
 	}
 
 	public static NullGuiMasterDefault instance() {

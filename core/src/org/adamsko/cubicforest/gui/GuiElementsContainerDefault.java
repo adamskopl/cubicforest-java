@@ -21,9 +21,9 @@ public abstract class GuiElementsContainerDefault extends
 	// holds currently clicked element
 	private GuiElement clickedElement = null;
 
-	public GuiElementsContainerDefault(final String name, final GuiType_e guiType,
-			final String textureName, final int tileW, final int tileH,
-			final float posX, final float posY) {
+	public GuiElementsContainerDefault(final String name,
+			final GuiType_e guiType, final String textureName, final int tileW,
+			final int tileH, final float posX, final float posY) {
 		super(name, textureName, tileW, tileH);
 
 		guiElements = new ArrayList<GuiElement>();
@@ -51,6 +51,14 @@ public abstract class GuiElementsContainerDefault extends
 	public void addGuiElement(final GuiElement guiElement) {
 		guiElements.add(guiElement);
 		addRenderableObject(guiElement);
+	}
+
+	@Override
+	public void clearGuiElements() {
+		for (final GuiElement guiElement : guiElements) {
+			removeRenderableObject(guiElement);
+		}
+		guiElements.clear();
 	}
 
 	/**

@@ -24,7 +24,7 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 		super("GatherCubesMaster", tilesMaster, textureName, tileW, tileH);
 		gatherCubesCounter = new GatherCubesCounterDefault(
 				"cubes-atlas-medium", 25, 25, 650, -50);
-		gatherCubesCounter.setStartingValue(22);
+		gatherCubesCounter.setStartingValue(0);
 	}
 
 	@Override
@@ -61,6 +61,9 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 
 			addObject(gatherCube);
 		}
+
+		gatherCubesCounter.setStartingValue(map.getProperties()
+				.getStartingCubes());
 
 	}
 

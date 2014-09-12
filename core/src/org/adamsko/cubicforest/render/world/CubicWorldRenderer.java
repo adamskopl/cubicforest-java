@@ -51,8 +51,8 @@ public class CubicWorldRenderer implements GameRenderer {
 	public CubicWorldRenderer() {
 		renderer = new ImmediateModeRenderer20(false, true, 0);
 
-		renderListMasterWorld = new RenderListDefault();
-		renderListMasterGui = new RenderListDefault();
+		renderListMasterWorld = new RenderListDefault("renderListWorld");
+		renderListMasterGui = new RenderListDefault("renderListGui");
 
 		this.cam = new OrthographicCamera(780, 460);
 		this.cam.position.set(390, -230, 0);
@@ -101,7 +101,7 @@ public class CubicWorldRenderer implements GameRenderer {
 	 */
 	private void updateList(
 			final List<RenderableObjectsMaster> renderableObjectsMasters,
-			final RenderList renderListMaster) {
+			final RenderList renderList) {
 		Boolean sortNeeded = false;
 		for (final RenderableObjectsMaster rOM : renderableObjectsMasters) {
 			final List<RenderableObject> objectsUnserved = rOM
@@ -112,8 +112,8 @@ public class CubicWorldRenderer implements GameRenderer {
 
 			if (objectsUnserved.size() != 0 || objectsToRemove.size() != 0) {
 				sortNeeded = true;
-				renderListMaster.add(objectsUnserved);
-				renderListMaster.remove(objectsToRemove);
+				renderList.add(objectsUnserved);
+				renderList.remove(objectsToRemove);
 			}
 
 			/*
@@ -124,8 +124,13 @@ public class CubicWorldRenderer implements GameRenderer {
 
 		if (sortNeeded) {
 			// renderListMaster has new objects added from ROMs: sort needed
-			renderListMaster.sort();
+			renderList.sort();
 		}
+
+		// uncomment to see if render list size. good to make sure, that list is
+		// managed correctly
+		// Gdx.app.debug(renderList.getName(),
+		// Integer.toString(renderList.size()));
 	}
 
 	private void renderObject(final RenderableObject rObj) {

@@ -22,6 +22,7 @@ public class TiledMap implements CFMap {
 	private int tileheight;
 	private int tilewidth;
 	private List<TiledLayer> layers;
+	private TiledMapProperties properties;
 
 	TiledCfConverter tiledCfConverter;
 
@@ -78,6 +79,17 @@ public class TiledMap implements CFMap {
 	@Override
 	public void setLayers(final List<TiledLayer> layers) {
 		this.layers = layers;
+	}
+
+	@Override
+	public TiledMapProperties getProperties() {
+		return properties;
+	}
+
+	@Override
+	public void setProperties(
+			final TiledMapProperties tiledMapProperties) {
+		this.properties = tiledMapProperties;
 	}
 
 	// GETTERS SETTERS >

@@ -1,8 +1,10 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import org.adamsko.cubicforest.gui.GuiElement;
+import org.adamsko.cubicforest.gui.GuiElementDefault;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 
@@ -58,10 +60,14 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 	private void createGui() {
 
 		GuiElement testObject;
-		testObject = new GuiElement(atlasRows.get(0)[3], 0, this, 0, 0);
+		testObject = new GuiElementDefault(atlasRows.get(0)[3], 0, this, 0, 0);
 		testObject.addLabel(counter);
 		testObject.altLabelLast(Color.WHITE, 1.0f, 30.0f, 20.0f);
 		addGuiElement(testObject);
+	}
+
+	@Override
+	public void reload(final CFMap cfMap) {
 	}
 
 }
