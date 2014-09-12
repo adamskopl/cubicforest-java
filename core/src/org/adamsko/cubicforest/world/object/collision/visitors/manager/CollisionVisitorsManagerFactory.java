@@ -112,10 +112,9 @@ public class CollisionVisitorsManagerFactory implements Nullable {
 				missingManager.setVisitorEnter(new HeroCollisionVisitorEnter(
 						collisionsHandler, gatherCubesMaster, portalsMaster,
 						prizesMaster));
-				missingManager
-						.setVisitorStop(new HeroCollisionVisitorStop(
-								collisionsHandler, gatherCubesMaster,
-								heroesToolsMaster));
+				missingManager.setVisitorStop(new HeroCollisionVisitorStop(
+						collisionsHandler, gatherCubesMaster,
+						heroesToolsMaster, prizesMaster));
 
 				missingManager.setVisitorLeave(new HeroCollisionVisitorLeave(
 						collisionsHandler, gatherCubesMaster, portalsMaster,

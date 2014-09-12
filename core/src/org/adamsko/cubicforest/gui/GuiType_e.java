@@ -5,5 +5,6 @@ public enum GuiType_e {
 	GUI_CUBES_COUNTER,
 	GUI_ORDERS,
 	GUI_DEBUG,
-	GUI_LEVELS
+	GUI_LEVELS,
+	GUI_PRIZES
 }

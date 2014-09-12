@@ -26,6 +26,21 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		createGui();
 	}
 
+	@Override
+	public void reload(final CFMap cfMap) {
+
+		clearGuiElements();
+
+		int seqNum = 0;
+		for (final GuiElementHeroTool guiElementHeroTool : availableGuiTools) {
+			if (guiElementHeroTool.mapValid(cfMap.getProperties())) {
+				guiElementHeroTool.setContainerPos(seqNum * 70, 0);
+				addGuiElement(guiElementHeroTool);
+				seqNum++;
+			}
+		}
+	}
+
 	private void createGui() {
 
 		availableGuiTools = new ArrayList<GuiElementHeroTool>();
@@ -52,21 +67,6 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 			availableGuiTools.add(guiElementHeroTool);
 
 			seqNum++;
-		}
-	}
-
-	@Override
-	public void reload(final CFMap cfMap) {
-
-		clearGuiElements();
-
-		int seqNum = 0;
-		for (final GuiElementHeroTool guiElementHeroTool : availableGuiTools) {
-			if (guiElementHeroTool.mapValid(cfMap.getProperties())) {
-				guiElementHeroTool.setContainerPos(seqNum * 70, 0);
-				addGuiElement(guiElementHeroTool);
-				seqNum++;
-			}
 		}
 	}
 }

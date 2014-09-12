@@ -12,6 +12,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.TilesMasterDefault;
@@ -54,8 +55,8 @@ public class WorldObjectsMastersContainerDefault implements
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
 
-		prizesMaster = new PrizesMaster(tilesMaster, "prizes-atlas-medium", 25,
-				35);
+		prizesMaster = new PrizesMasterDefault(tilesMaster,
+				"prizes-atlas-medium", 25, 35);
 
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles
@@ -78,6 +79,7 @@ public class WorldObjectsMastersContainerDefault implements
 		renderer.addROMWorld(prizesMaster);
 
 		renderer.addROMGui(gatherCubesMaster.getGatherCubesCounter());
+		renderer.addROMGui(prizesMaster.getGuiPrizes());
 	}
 
 	@Override

@@ -98,7 +98,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	public void initGuiMasterContainers(final GuiMaster guiMaster,
 			final GameRenderer renderer, final MapsLoader mapsLoader,
 			final GatherCubesMaster gatherCubesMaster,
-			final RoundsMaster roundsMaster) {
+			final PrizesMaster prizesMaster, final RoundsMaster roundsMaster) {
 
 		if (mapsLoader.isNull()) {
 			Gdx.app.error("initGuiMaster()", "mapsLoader.isNull()");
@@ -113,6 +113,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		guiMaster.initializeContainers(mapsLoader);
 
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
+		guiMaster.addGui(prizesMaster.getGuiPrizes());
 		guiMaster.addClient(roundsMaster);
 
 		for (final GuiElementsContainer GC : guiMaster.getGuiList()) {

@@ -97,13 +97,15 @@ public interface GameWorldBuilder {
 	 *            levels and other informations needed)
 	 * @param gatherCubesMaster
 	 *            needed for GUI showing informations about player's cubes
+	 * @param prizesMaster
+	 *            needed for GUI showint informations about collected prizes
 	 * @param roundsMaster
 	 *            {@link RoundsMaster} is passing events from {@link GuiMaster}
 	 *            to {@link RoundPhase} objects
 	 */
 	void initGuiMasterContainers(GuiMaster guiMaster, GameRenderer renderer,
 			MapsLoader mapsLoader, GatherCubesMaster gatherCubesMaster,
-			RoundsMaster roundsMaster);
+			PrizesMaster prizesMaster, RoundsMaster roundsMaster);
 
 	/**
 	 * Initialize {@link PickMaster} object. Add clients.
