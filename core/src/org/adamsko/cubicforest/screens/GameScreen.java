@@ -112,7 +112,8 @@ public class GameScreen implements Screen {
 		worldBuilder.initCollisionVisitorsManagerFactory(
 				worldObjectsMastersContainer.getGatherCubesMaster(),
 				worldObjectsMastersContainer.getHeroesToolsMaster(),
-				worldObjectsMastersContainer.getPortalsMaster());
+				worldObjectsMastersContainer.getPortalsMaster(),
+				worldObjectsMastersContainer.getPrizesMaster());
 
 		worldBuilder.initGuiMaster();
 

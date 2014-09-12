@@ -18,6 +18,7 @@ import org.adamsko.cubicforest.world.object.collision.visitors.concrete.HeroColl
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 
 import com.badlogic.gdx.Gdx;
 
@@ -35,6 +36,7 @@ public class CollisionVisitorsManagerFactory implements Nullable {
 	private GatherCubesMaster gatherCubesMaster;
 	private HeroesToolsMaster heroesToolsMaster;
 	private PortalsMaster portalsMaster;
+	private PrizesMaster prizesMaster;
 
 	/**
 	 * For NullCollisionVisitorsManagerFactory
@@ -45,7 +47,7 @@ public class CollisionVisitorsManagerFactory implements Nullable {
 	public CollisionVisitorsManagerFactory(
 			final GatherCubesMaster gatherCubesMaster,
 			final HeroesToolsMaster heroesToolsMaster,
-			final PortalsMaster portalsMaster) {
+			final PortalsMaster portalsMaster, final PrizesMaster prizesMaster) {
 
 		managers = new HashMap<WorldObjectType, CollisionVisitorsManager>();
 
@@ -53,6 +55,7 @@ public class CollisionVisitorsManagerFactory implements Nullable {
 		this.gatherCubesMaster = gatherCubesMaster;
 		this.heroesToolsMaster = heroesToolsMaster;
 		this.portalsMaster = portalsMaster;
+		this.prizesMaster = prizesMaster;
 
 		if (gatherCubesMaster.isNull()) {
 			Gdx.app.error("CollisionVisitorsManagerFactory()",
@@ -65,6 +68,10 @@ public class CollisionVisitorsManagerFactory implements Nullable {
 		if (portalsMaster.isNull()) {
 			Gdx.app.error("CollisionVisitorsManagerFactory()",
 					"portalsMaster.isNull()");
+		}
+		if (prizesMaster.isNull()) {
+			Gdx.app.error("CollisionVisitorsManagerFactory()",
+					"prizesMaster.isNull()");
 		}
 
 	}
@@ -103,14 +110,16 @@ public class CollisionVisitorsManagerFactory implements Nullable {
 			switch (managerType) {
 			case HERO:
 				missingManager.setVisitorEnter(new HeroCollisionVisitorEnter(
-						collisionsHandler, gatherCubesMaster, portalsMaster));
+						collisionsHandler, gatherCubesMaster, portalsMaster,
+						prizesMaster));
 				missingManager
 						.setVisitorStop(new HeroCollisionVisitorStop(
 								collisionsHandler, gatherCubesMaster,
 								heroesToolsMaster));
 
 				missingManager.setVisitorLeave(new HeroCollisionVisitorLeave(
-						collisionsHandler, gatherCubesMaster, portalsMaster));
+						collisionsHandler, gatherCubesMaster, portalsMaster,
+						prizesMaster));
 				break;
 
 			case ENEMY:

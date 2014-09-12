@@ -7,5 +7,5 @@ public enum WorldObjectType {
 	// OTHER
 	TREE, DEFAULT,
 	// MAP OBJECTS
-	PORTAL
+	PORTAL, PRIZE
 }

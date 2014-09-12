@@ -8,18 +8,22 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 
 public class HeroCollisionVisitorEnter extends CollisionVisitorDefault {
 
 	private final GatherCubesMaster gatherCubesMaster;
 	private final PortalsMaster portalsMaster;
+	private final PrizesMaster prizesMaster;
 
 	public HeroCollisionVisitorEnter(final CollisionsHandler collisionsHandler,
 			final GatherCubesMaster gatherCubesMaster,
-			final PortalsMaster portalsMaster) {
+			final PortalsMaster portalsMaster, final PrizesMaster prizesMaster) {
 		super(collisionsHandler);
 		this.gatherCubesMaster = gatherCubesMaster;
 		this.portalsMaster = portalsMaster;
+		this.prizesMaster = prizesMaster;
 	}
 
 	@Override
@@ -42,5 +46,11 @@ public class HeroCollisionVisitorEnter extends CollisionVisitorDefault {
 	public void visitPortal(final Portal portal) {
 		super.visitPortal(portal);
 		portalsMaster.portalHighlight(portal);
+	}
+
+	@Override
+	public void visitPrize(final Prize prize) {
+		super.visitPrize(prize);
+		prizesMaster.prizeHighlight(prize);
 	}
 }

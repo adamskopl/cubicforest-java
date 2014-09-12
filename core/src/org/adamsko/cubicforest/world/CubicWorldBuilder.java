@@ -23,6 +23,7 @@ import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 import org.adamsko.cubicforest.world.ordersMaster.NullOrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterDefault;
@@ -240,7 +241,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	public void initCollisionVisitorsManagerFactory(
 			final GatherCubesMaster gatherCubesMaster,
 			final HeroesToolsMaster heroesToolsMaster,
-			final PortalsMaster portalsMaster) {
+			final PortalsMaster portalsMaster, final PrizesMaster prizesMaster) {
 		if (gatherCubesMaster.isNull()) {
 			Gdx.app.error("initCollisionVisitorsManagerFactory",
 					"gatherCubesMaster.isNull()");
@@ -252,7 +253,8 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			return;
 		}
 		collisionVisitorsManagerFactory = new CollisionVisitorsManagerFactory(
-				gatherCubesMaster, heroesToolsMaster, portalsMaster);
+				gatherCubesMaster, heroesToolsMaster, portalsMaster,
+				prizesMaster);
 	}
 
 	@Override
