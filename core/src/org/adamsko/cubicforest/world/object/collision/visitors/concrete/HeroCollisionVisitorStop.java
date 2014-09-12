@@ -10,19 +10,24 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStat
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 
 public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 
 	private final HeroesToolsMaster heroesToolsMaster;
 	private final GatherCubesMaster gatherCubesMaster;
+	private final PrizesMaster prizesMaster;
 
 	public HeroCollisionVisitorStop(final CollisionsHandler collisionsHandler,
 			final GatherCubesMaster gatherCubesMaster,
-			final HeroesToolsMaster heroesToolsMaster) {
+			final HeroesToolsMaster heroesToolsMaster,
+			final PrizesMaster prizesMaster) {
 		super(collisionsHandler);
 
 		this.gatherCubesMaster = gatherCubesMaster;
 		this.heroesToolsMaster = heroesToolsMaster;
+		this.prizesMaster = prizesMaster;
 	}
 
 	@Override
@@ -55,6 +60,13 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 		super.visitGatherCube(gatherCube);
 		gatherCubesMaster.getGatherCubesCounter().addValue(1);
 		collision().wordlObjectOperation().remove(gatherCube);
+	}
+
+	@Override
+	public void visitPrize(final Prize prize) {
+		super.visitPrize(prize);
+		prizesMaster.prizeCollected();
+		collision().wordlObjectOperation().remove(prize);
 	}
 
 }

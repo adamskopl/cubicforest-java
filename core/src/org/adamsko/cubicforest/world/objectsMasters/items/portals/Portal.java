@@ -4,7 +4,7 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 /**
- * Interface for portal map object: object allowing for {@link WorldObject}
+ * Interface for portal map objects: object allowing for {@link WorldObject}
  * objects to walk from tile containing portal to another tile containing twin
  * portal.
  * 

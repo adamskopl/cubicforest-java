@@ -45,10 +45,10 @@ public class GuiMasterDefault implements GuiMaster {
 
 		guiOrders = new GuiOrders("orders-atlas-medium", 100, 100, 20, -340);
 
-		guiDebug = new GuiDebug("orders-atlas-medium", 50, 50, 680, -100);
+		guiDebug = new GuiDebug("orders-atlas-medium", 50, 50, 680, -120);
 
 		guiLevels = new GuiLevels(mapsLoader, "levels-atlas-medium", 30, 30,
-				600, -80);
+				600, -100);
 
 		addGui(guiHeroTools);
 		addGui(guiOrders);

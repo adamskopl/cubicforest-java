@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
 
 /**
  * 'Visitor' design pattern. 'With Default' variation. <br>
@@ -57,5 +58,7 @@ public interface WorldObjectVisitor {
 	void visitToolPortal(HeroToolPortal heroToolPortal);
 
 	void visitPortal(Portal portal);
+
+	void visitPrize(Prize prize);
 
 }
