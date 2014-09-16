@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.objectsMasters;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
@@ -32,6 +33,10 @@ public interface WorldObjectsMastersContainer {
 	boolean allMastersInitialized();
 
 	List<WorldObjectsMaster> getWorldObjectsMasters();
+
+	void setMemento(WMContainerMemento memento);
+
+	WMContainerMemento createMemento();
 
 	TilesMaster getTilesMaster();
 

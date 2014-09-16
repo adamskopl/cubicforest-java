@@ -193,7 +193,7 @@ public class TilePathGuideDefault implements TilePathGuide {
 	}
 
 	private void startTweener() {
-		Tween.to(wanderer, helper.getTweenType(), 0.1f)
+		Tween.to(wanderer, helper.getTweenType(), 0.0f)
 				.target(helper.getTweenMoveTarget().x,
 						helper.getTweenMoveTarget().y).ease(Linear.INOUT)
 				.setCallback(this).setCallbackTriggers(TweenCallback.COMPLETE)

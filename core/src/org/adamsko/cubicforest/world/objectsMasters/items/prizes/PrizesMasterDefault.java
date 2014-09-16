@@ -30,12 +30,9 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap cfMap) throws Exception {
-		final List<Vector2> coords = cfMap
-				.getObjectTypeCoords(TiledObjectType.TILED_PRIZE);
-
+	public void loadMapObjects(final List<Vector2> tilePositions) {
 		Prize prize;
-		for (final Vector2 pos : coords) {
+		for (final Vector2 pos : tilePositions) {
 
 			prize = new CubicPrize(atlasRows.get(0)[0], 0, this);
 			prize.setRenderVector(new Vector2(-atlasRows.get(0)[0]
@@ -47,11 +44,19 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 			prize.setName("prize");
 			addObject(prize);
 		}
+	}
+
+	@Override
+	public void loadMapObjects(final CFMap cfMap) throws Exception {
+		final List<Vector2> tilePositions = cfMap
+				.getObjectTypeCoords(TiledObjectType.TILED_PRIZE);
+
+		loadMapObjects(tilePositions);
 
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void unloadMapObjects() {
 		removeWorldObjects();
 	}
 

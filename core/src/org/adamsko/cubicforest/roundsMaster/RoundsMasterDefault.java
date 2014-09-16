@@ -4,27 +4,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
+import org.adamsko.cubicforest.mapsResolver.OrderDecision;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
+import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolver;
+import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoaderTiled;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainerDefault;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.Gdx;
 
 public class RoundsMasterDefault implements RoundsMaster {
 
-	private MapsLoader mapsLoader;
+	private final MapsLoader mapsLoader;
+	private PhaseHeroes phaseHeroes;
+	private PhaseEnemies phaseEnemies;
 	private final List<RoundPhase> phases;
 	int phasePointer = -1;
 	private GameResult gameResult;
+	private WorldObjectsMastersContainer worldObjectsMastersContainer;
+
+	private RoundsMasterMapsResolver roundsMasterMapsResolver;
 
 	// For NullRoundsMaster
 	RoundsMasterDefault() {
+		mapsLoader = null;
 		phases = null;
+		roundsMasterMapsResolver = null;
 	}
 
-	public RoundsMasterDefault(final MapsLoader mapsLoader) {
+	/**
+	 * Create RoundsMaster basing on {@link GametMemento}
+	 */
+	public RoundsMasterDefault(final GametMemento gameMemento) {
+		this.mapsLoader = NullMapsLoaderTiled.instance();
+		this.phases = new ArrayList<RoundPhase>();
+
+		this.worldObjectsMastersContainer = new WorldObjectsMastersContainerDefault();
+		final GameState gameState = gameMemento.getState();
+		this.worldObjectsMastersContainer.setMemento(gameState
+				.getWMContainerMemento());
+
+		this.phaseHeroes = new PhaseHeroes(this.worldObjectsMastersContainer);
+
+	}
+
+	public RoundsMasterDefault(final MapsLoader mapsLoader,
+			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
 		this.mapsLoader = mapsLoader;
 		phases = new ArrayList<RoundPhase>();
 		gameResult = GameResult.GAME_PLAY;
+		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
 	}
 
 	@Override
@@ -109,6 +143,28 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
+	public void addPhase(final PhaseHeroes phaseHeroes) {
+		this.phaseHeroes = phaseHeroes;
+		phases.add(phaseHeroes);
+	}
+
+	@Override
+	public void addPhase(final PhaseEnemies phaseEnemies) {
+		this.phaseEnemies = phaseEnemies;
+		phases.add(phaseEnemies);
+	}
+
+	@Override
+	public PhaseHeroes getPhaseHeroes() {
+		return phaseHeroes;
+	}
+
+	@Override
+	public PhaseEnemies getPhaseEnemies() {
+		return phaseEnemies;
+	}
+
+	@Override
 	public void setMapActive(final int activeMapIndex) {
 		mapsLoader.setMapActive(activeMapIndex);
 	}
@@ -144,6 +200,24 @@ public class RoundsMasterDefault implements RoundsMaster {
 		currentPhase().onGuiEvent(eventGui);
 	}
 
+	@Override
+	public GametMemento createMemento() {
+		return roundsMasterMapsResolver.createMemento();
+	}
+
+	@Override
+	public void setMemento(final GametMemento m) {
+		final GameState state = m.getState();
+		worldObjectsMastersContainer.setMemento(state.getWMContainerMemento());
+
+		// reload phase enemies with heroes from the container
+
+		// reload phase heroes with heroes from the container
+
+		// set current hero
+
+	};
+
 	/**
 	 * Check if all phases were skipped
 	 */
@@ -155,6 +229,11 @@ public class RoundsMasterDefault implements RoundsMaster {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void resolveDecision(final OrderDecision orderDecision) {
+		roundsMasterMapsResolver.resolveDecision(orderDecision);
 	}
 
 }

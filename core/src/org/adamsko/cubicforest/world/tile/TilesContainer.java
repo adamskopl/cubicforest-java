@@ -91,18 +91,24 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap map) {
-
-		final List<Vector2> coords = map
-				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
-
-		for (final Vector2 vec : coords) {
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+		for (final Vector2 vec : tilePositions) {
 			addTile(vec);
 		}
+
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void loadMapObjects(final CFMap map) {
+
+		final List<Vector2> tilePositions = map
+				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
+		loadMapObjects(tilePositions);
+
+	}
+
+	@Override
+	public void unloadMapObjects() {
 		while (getWorldObjects().size() != 0) {
 			final WorldObject tile = getWorldObjects().get(0);
 			getWorldObjects().remove(tile);

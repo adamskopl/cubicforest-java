@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
-public class NullHeroTool extends HeroTool {
+public class NullHeroTool extends CubicHeroTool {
 
 	private static NullHeroTool instance = null;
 

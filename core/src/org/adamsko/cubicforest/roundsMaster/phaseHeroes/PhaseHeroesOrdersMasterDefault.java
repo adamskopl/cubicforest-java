@@ -1,11 +1,17 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.adamsko.cubicforest.mapsResolver.OrderDecision;
 import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
+import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -20,6 +26,8 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 	private PhaseHeroesMode phaseHeroesMode;
 	private WorldObject currentHero;
 
+	private final TilesMaster tilesMaster;
+
 	/**
 	 * vectors containing textures coordinations (to use by
 	 * {@link TilesLookController}) used to not to create {@link Vector2}
@@ -30,10 +38,12 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 
 	PhaseHeroesOrdersMasterDefault(
 			final TilesLookController tilesLookController,
+			final TilesMaster tilesMaster,
 			final HeroesToolsMaster heroesToolsMaster,
 			final EnemiesHelper enemiesHelper) {
 		tilePickedOrder = null;
 		this.tilesLookController = tilesLookController;
+		this.tilesMaster = tilesMaster;
 		this.heroesToolsMaster = heroesToolsMaster;
 		this.enemiesHelper = enemiesHelper;
 		// default choice: movement order
@@ -187,4 +197,21 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 				textureTileMovementValid, textureCommonRanges);
 	}
 
+	@Override
+	public List<OrderDecision> getCurrentPossbileDecisions() {
+		final TilesSearchParameterFactory tilesSearchParameterFactory = tilesMaster
+				.getTilesSearchParameterFactory();
+
+		final List<Tile> tilesOrderValid = tilesMaster.getTilesInRange(
+				currentHero, currentHero.getSpeed(),
+				tilesSearchParameterFactory.create(WorldObjectType.HERO));
+
+		final List<OrderDecision> validOrderDecisions = new ArrayList<OrderDecision>();
+		for (final Tile tile : tilesOrderValid) {
+			final OrderDecision orderDecision = new OrderDecision(tile);
+			validOrderDecisions.add(orderDecision);
+		}
+
+		return validOrderDecisions;
+	}
 }

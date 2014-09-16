@@ -1,9 +1,12 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import java.util.List;
+
+import org.adamsko.cubicforest.mapsResolver.OrderDecision;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 /**
@@ -43,5 +46,11 @@ public interface PhaseHeroesOrdersMaster {
 	 *            current hero in {@link PhaseHeroes}
 	 */
 	void setCurrentHero(WorldObject currentHero);
+
+	/**
+	 * Returns {@link OrderDecision} objects defining what can be made in
+	 * current {@link PhaseHeroes} state for current hero.
+	 */
+	List<OrderDecision> getCurrentPossbileDecisions();
 
 }

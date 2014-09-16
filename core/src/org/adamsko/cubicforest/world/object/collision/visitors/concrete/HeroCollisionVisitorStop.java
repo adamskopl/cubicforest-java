@@ -1,13 +1,12 @@
 package org.adamsko.cubicforest.world.object.collision.visitors.concrete;
 
-import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
@@ -47,7 +46,9 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 			super.visitToolPortal(heroToolPortal);
 			return;
 		}
-		collision().gameResultOperation().setGameResult(GameResult.GAME_WON);
+		collision().wordlObjectOperation().remove(heroToolPortal);
+		collision().wordlObjectOperation().remove(getVisitingObject());
+		// collision().gameResultOperation().setGameResult(GameResult.GAME_WON);
 	}
 
 	@Override

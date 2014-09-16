@@ -3,10 +3,11 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public abstract class HeroTool extends CubicObject {
+public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 
 	final int buildCost;
 	HeroToolStates_e toolState;
@@ -14,12 +15,12 @@ public abstract class HeroTool extends CubicObject {
 	/**
 	 * For NullHeroTool
 	 */
-	HeroTool() {
+	CubicHeroTool() {
 		super();
 		buildCost = 0;
 	}
 
-	public HeroTool(final TextureRegion tr, final int texNum,
+	public CubicHeroTool(final TextureRegion tr, final int texNum,
 			final WorldObjectsMasterDefault container,
 			final WorldObjectType worldObjectType) {
 		super(tr, texNum, container, worldObjectType);
@@ -30,14 +31,17 @@ public abstract class HeroTool extends CubicObject {
 
 	}
 
+	@Override
 	public void setState(final HeroToolStates_e state) {
 		this.toolState = state;
 	}
 
+	@Override
 	public HeroToolStates_e getToolState() {
 		return toolState;
 	}
 
+	@Override
 	public int getBuildCost() {
 		return buildCost;
 	}
@@ -50,6 +54,7 @@ public abstract class HeroTool extends CubicObject {
 		getTilePropertiesIndicator().setTileHighlightedAsOccupied(false);
 	}
 
+	@Override
 	public void changeState(final HeroToolStates_e newState) {
 		switch (newState) {
 		case STATE_CONSTRUCTION:

@@ -38,14 +38,11 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap map) throws Exception {
-		final List<Vector2> coords = map
-				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_ENEMY);
-
+	public void loadMapObjects(final List<Vector2> tilePositions) {
 		Enemy enemy;
 		int nameIndex = 0;
 		int atlasIndex = 0;
-		for (final Vector2 pos : coords) {
+		for (final Vector2 pos : tilePositions) {
 			enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex, this);
 			enemy.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -7));
@@ -71,7 +68,16 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void loadMapObjects(final CFMap map) throws Exception {
+		final List<Vector2> tilePositions = map
+				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_ENEMY);
+
+		loadMapObjects(tilePositions);
+
+	}
+
+	@Override
+	public void unloadMapObjects() {
 		removeWorldObjects();
 	}
 

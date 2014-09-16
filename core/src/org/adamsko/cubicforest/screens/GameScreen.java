@@ -121,7 +121,8 @@ public class GameScreen implements Screen {
 				worldBuilder.getGuiMaster(),
 				worldBuilder.getCollisionVisitorsManagerFactory());
 
-		worldBuilder.initRoundsMaster(worldBuilder.getMapsLoader());
+		worldBuilder.initRoundsMaster(worldBuilder.getMapsLoader(),
+				worldObjectsMastersContainer);
 
 		worldBuilder.initTilesMasterRoundsMaster(
 				worldObjectsMastersContainer.getTilesMaster(),
@@ -134,7 +135,8 @@ public class GameScreen implements Screen {
 		worldBuilder.mapsLoaderReloadWorld();
 
 		worldBuilder.initRoundsMasterPhases(worldBuilder.getOrdersMaster(),
-				worldObjectsMastersContainer, worldBuilder
+				worldObjectsMastersContainer, worldObjectsMastersContainer
+						.getTilesMaster(), worldBuilder
 						.getTilePathSearchersMaster(),
 				worldObjectsMastersContainer.getTilesMaster()
 						.getTilesLookController());

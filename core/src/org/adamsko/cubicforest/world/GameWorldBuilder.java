@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world;
 
 import org.adamsko.cubicforest.gui.GuiMaster;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
@@ -149,8 +150,11 @@ public interface GameWorldBuilder {
 	 * @param mapsLoader
 	 *            used when reloading {@link RoundsMaster}. Before reloading
 	 *            phases, world objects should be reloaded first.
+	 * @param worldObjectsMastersContainer
+	 *            used for creating {@link GametMemento} by {@link RoundsMaster}
 	 */
-	void initRoundsMaster(MapsLoader mapsLoader);
+	void initRoundsMaster(MapsLoader mapsLoader,
+			WorldObjectsMastersContainer worldObjectsMastersContainer);
 
 	/**
 	 * Initialize {@link RoundsMaster} {@link RoundPhase} objects.
@@ -160,6 +164,8 @@ public interface GameWorldBuilder {
 	 * @param worldObjectsMastersContainer
 	 *            used in {@link RoundPhase} objects to access needed
 	 *            {@link WorldObject} objects.
+	 * @param tilesMaster
+	 *            used in some phases for tiles searching
 	 * @param tilePathSearchersMaster
 	 *            used in initialized phases for path searching
 	 * @param tilesLookController
@@ -167,6 +173,7 @@ public interface GameWorldBuilder {
 	 */
 	void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			TilesMaster tilesMaster,
 			TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController);
 

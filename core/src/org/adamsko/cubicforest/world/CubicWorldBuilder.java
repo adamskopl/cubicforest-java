@@ -189,13 +189,16 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	}
 
 	@Override
-	public void initRoundsMaster(final MapsLoader mapsLoader) {
-		roundsMaster = new RoundsMasterDefault(mapsLoader);
+	public void initRoundsMaster(final MapsLoader mapsLoader,
+			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
+		roundsMaster = new RoundsMasterDefault(mapsLoader,
+				worldObjectsMastersContainer);
 	}
 
 	@Override
 	public void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final TilesMaster tilesMaster,
 			final TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController) {
 
@@ -210,7 +213,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		}
 
 		final PhaseHeroes phaseHeroes = new PhaseHeroes(
-				worldObjectsMastersContainer, ordersMaster,
+				worldObjectsMastersContainer, tilesMaster, ordersMaster,
 				tilePathSearchersMaster, tilesLookController);
 		phaseHeroes.setRoundsMaster(roundsMaster);
 

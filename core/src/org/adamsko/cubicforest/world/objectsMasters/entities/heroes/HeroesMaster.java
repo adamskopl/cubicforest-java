@@ -42,14 +42,12 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap map) throws Exception {
-		final List<Vector2> coords = map
-				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_HERO);
+	public void loadMapObjects(final List<Vector2> tilePositions) {
 
 		Hero hero;
 		int nameIndex = 0;
 		int atlasIndex = 0;
-		for (final Vector2 pos : coords) {
+		for (final Vector2 pos : tilePositions) {
 			hero = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex, this);
 			hero.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -5));
@@ -76,7 +74,16 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void loadMapObjects(final CFMap map) throws Exception {
+		final List<Vector2> tilePositions = map
+				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_HERO);
+
+		loadMapObjects(tilePositions);
+
+	}
+
+	@Override
+	public void unloadMapObjects() {
 		removeWorldObjects();
 	}
 

@@ -3,6 +3,10 @@ package org.adamsko.cubicforest.world.objectsMasters;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoDefault;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoState;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
@@ -17,6 +21,8 @@ import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.TilesMasterDefault;
 
+import com.badlogic.gdx.Gdx;
+
 public class WorldObjectsMastersContainerDefault implements
 		WorldObjectsMastersContainer {
 
@@ -30,6 +36,10 @@ public class WorldObjectsMastersContainerDefault implements
 	private HeroesToolsMaster heroesToolsMaster;
 	private PortalsMaster portalsMaster;
 	private PrizesMaster prizesMaster;
+
+	public WorldObjectsMastersContainerDefault() {
+		worldObjectsMasters = null;
+	}
 
 	public WorldObjectsMastersContainerDefault(final GameRenderer renderer) {
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
@@ -95,6 +105,31 @@ public class WorldObjectsMastersContainerDefault implements
 	@Override
 	public List<WorldObjectsMaster> getWorldObjectsMasters() {
 		return worldObjectsMasters;
+	}
+
+	@Override
+	public void setMemento(final WMContainerMemento memento) {
+		final WMContainerMementoState state = memento.getState();
+
+		final List<WOMMemento> mementos = state.getWOMMementos();
+		if (mementos.size() != getWorldObjectsMasters().size()) {
+			Gdx.app.error("WorldObjectsMastersContainerDefault::setMemento()",
+					"mementos.size() != getWorldObjectsMasters().size()");
+		}
+
+		int mementoIndex = 0;
+		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
+			worldObjectsMaster.setMemento(mementos.get(mementoIndex));
+			mementoIndex++;
+		}
+	}
+
+	@Override
+	public WMContainerMemento createMemento() {
+		final WMContainerMementoState state = new WMContainerMementoState(this);
+		final WMContainerMemento memento = new WMContainerMementoDefault();
+		memento.setState(state);
+		return memento;
 	}
 
 	@Override

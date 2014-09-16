@@ -24,13 +24,11 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap map) {
-		final List<Vector2> coords = map
-				.getObjectTypeCoords(TiledObjectType.TILED_TERRAIN);
-
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+		// TODO Auto-generated method stub
 		Tree tree;
 		int atlasIndex = 0;
-		for (final Vector2 pos : coords) {
+		for (final Vector2 pos : tilePositions) {
 			tree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex, this);
 			tree.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -5));
@@ -50,7 +48,14 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void loadMapObjects(final CFMap map) {
+		final List<Vector2> tilePositions = map
+				.getObjectTypeCoords(TiledObjectType.TILED_TERRAIN);
+		loadMapObjects(tilePositions);
+	}
+
+	@Override
+	public void unloadMapObjects() {
 		removeWorldObjects();
 	}
 

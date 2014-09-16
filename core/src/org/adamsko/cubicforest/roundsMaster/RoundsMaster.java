@@ -2,6 +2,9 @@ package org.adamsko.cubicforest.roundsMaster;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
+import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
+import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoaderCoordinator;
 import org.adamsko.cubicforest.world.tile.TilePickClient;
 
@@ -14,9 +17,17 @@ import org.adamsko.cubicforest.world.tile.TilePickClient;
  * 
  */
 public interface RoundsMaster extends TilePickClient, GuiMasterClient,
-		MapsLoaderCoordinator, Nullable {
+		MapsLoaderCoordinator, MapsResolverClient, Nullable {
 
 	void addPhase(final RoundPhase newPhase);
+
+	void addPhase(PhaseHeroes phaseHeroes);
+
+	void addPhase(PhaseEnemies phaseEnemies);
+
+	PhaseHeroes getPhaseHeroes();
+
+	PhaseEnemies getPhaseEnemies();
 
 	/**
 	 * All phases ended, begin new round.

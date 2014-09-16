@@ -42,12 +42,10 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap map) {
-		final List<Vector2> coords = map
-				.getObjectTypeCoords(TiledObjectType.TILED_ITEM_GATHERCUBE);
-
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+		// TODO Auto-generated method stub
 		GatherCube gatherCube;
-		for (final Vector2 pos : coords) {
+		for (final Vector2 pos : tilePositions) {
 			gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
 			gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2, -2));
@@ -61,13 +59,23 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 			addObject(gatherCube);
 		}
 
+	}
+
+	@Override
+	public void loadMapObjects(final CFMap map) {
+
+		final List<Vector2> tilePositions = map
+				.getObjectTypeCoords(TiledObjectType.TILED_ITEM_GATHERCUBE);
+		loadMapObjects(tilePositions);
+
+		// FIXME: not included in loadMapObjects(List<Vector2>)
 		gatherCubesCounter.setStartingValue(map.getProperties()
 				.getStartingCubes());
 
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void unloadMapObjects() {
 		gatherCubesCounter.reset();
 		removeWorldObjects();
 	}

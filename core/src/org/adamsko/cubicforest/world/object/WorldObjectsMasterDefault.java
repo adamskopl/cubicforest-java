@@ -3,6 +3,10 @@ package org.adamsko.cubicforest.world.object;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
@@ -60,6 +64,21 @@ public abstract class WorldObjectsMasterDefault extends
 		}
 	}
 
+	@Override
+	public WOMMemento createMemento() {
+		final WOMMementoState state = new WOMMementoStateDefault(this);
+		final WOMMemento memento = new WOMMementoDefault();
+		memento.setState(state);
+		return memento;
+	}
+
+	@Override
+	public void setMemento(final WOMMemento memento) {
+		unloadMapObjects();
+		final WOMMementoState state = memento.getState();
+		loadMapObjects(state.getTilePositions());
+	}
+
 	public void removeObjectFromContainer(final WorldObject objectRemove) {
 		worldObjects.remove(objectRemove);
 		removeRenderableObject(objectRemove);
@@ -69,7 +88,7 @@ public abstract class WorldObjectsMasterDefault extends
 		tilesMaster.removeWorldObject(objectRemove);
 	}
 
-	protected void removeWorldObjects() throws Exception {
+	protected void removeWorldObjects() {
 		while (worldObjects.size() != 0) {
 			final WorldObject object = worldObjects.get(0);
 			removeObjectFromContainer(object);

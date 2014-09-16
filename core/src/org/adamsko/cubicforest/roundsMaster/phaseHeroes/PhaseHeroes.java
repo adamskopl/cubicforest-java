@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.gui.debug.GuiDebug;
 import org.adamsko.cubicforest.gui.debug.GuiElementDebug;
@@ -9,6 +11,7 @@ import org.adamsko.cubicforest.gui.levels.GuiElementLevel;
 import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
+import org.adamsko.cubicforest.mapsResolver.OrderDecision;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -17,10 +20,15 @@ import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
+/**
+ * @author adamsko
+ * 
+ */
 public class PhaseHeroes extends PhaseOrderableObjects {
 
 	private final PhaseHeroesOrdersMaster heroesOrdersMaster;
@@ -41,8 +49,24 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private Boolean orderInProgress = false;
 
 	public PhaseHeroes(
+			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
+		super(worldObjectsMastersContainer.getHeroesMaster(), null, null,
+				"PhaseHeroes");
+
+		heroesOrdersMaster = new PhaseHeroesOrdersMasterDefault(
+				tilesLookController,
+				worldObjectsMastersContainer.getTilesMaster(),
+				worldObjectsMastersContainer.getHeroesToolsMaster(), null);
+
+		gatherCubesMaster = null;
+		tilePathSearchersMaster = null;
+		enemiesHelper = null;
+
+	}
+
+	public PhaseHeroes(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final OrdersMaster ordersMaster,
+			final TilesMaster tilesMaster, final OrdersMaster ordersMaster,
 			final TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController) {
 		super(worldObjectsMastersContainer.getHeroesMaster(), ordersMaster,
@@ -56,7 +80,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 				worldObjectsMastersContainer.getEnemiesMaster());
 
 		heroesOrdersMaster = new PhaseHeroesOrdersMasterDefault(
-				tilesLookController,
+				tilesLookController, tilesMaster,
 				worldObjectsMastersContainer.getHeroesToolsMaster(),
 				enemiesHelper);
 
@@ -85,21 +109,71 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		}
 	}
 
-	private void startOrderClicked() {
-		if (!orderInProgress) {
-			if (activePath != null) {
-				orderInProgress = true;
-				try {
-					heroesOrdersMaster
-							.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);
-				} catch (final Exception e) {
-					e.printStackTrace();
-				}
+	@Override
+	public void startPhase() {
+		nextHero();
+		heroesOrdersMaster
+				.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 
-				ordersMaster.startOrder(currentObject(), activePath, this);
-				activePath = null;
+		// resolver step
+
+	}
+
+	@Override
+	public void onOrderFinished() {
+
+		orderInProgress = false;
+
+		removeDeadObjects();
+
+		if (roundsMaster.getGameResult() == GameResult.GAME_WON
+				|| victoryConditionsMet()) {
+			roundsMaster.reload();
+			roundsMaster.resetGameResult();
+			return;
+		}
+
+		if (isCurrentObjectLast()) {
+			try {
+				phaseIsOver(this);
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+			return;
+		} else {
+			// handle next object
+			nextHero();
+			try {
+				heroesOrdersMaster
+						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
+			} catch (final Exception e1) {
+				e1.printStackTrace();
 			}
 		}
+
+	}
+
+	@Override
+	public void onGuiEvent(final GuiElementsContainer eventGui) {
+		switch (eventGui.getType()) {
+		case GUI_ORDERS:
+			guiOrdersClicked((GuiOrders) eventGui);
+			break;
+		case GUI_HERO_TOOLS:
+			guiHeroToolsClicked((GuiHeroTools) eventGui);
+			break;
+		case GUI_DEBUG:
+			guiDebugClicked((GuiDebug) eventGui);
+			break;
+
+		case GUI_LEVELS:
+			guiLevelsClicked((GuiLevels) eventGui);
+			break;
+
+		default:
+			break;
+		}
+
 	}
 
 	/**
@@ -130,72 +204,28 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		return false;
 	}
 
-	@Override
-	public void startPhase() {
-		nextHero();
-		heroesOrdersMaster
-				.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-	}
+	private void startOrderClicked() {
+		if (!orderInProgress) {
+			if (activePath != null) {
+				orderInProgress = true;
+				try {
+					heroesOrdersMaster
+							.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);
+				} catch (final Exception e) {
+					e.printStackTrace();
+				}
 
-	@Override
-	public void onOrderFinished() {
-
-		orderInProgress = false;
-
-		removeDeadObjects();
-
-		if (roundsMaster.getGameResult() == GameResult.GAME_WON) {
-			roundsMaster.reload();
-			roundsMaster.resetGameResult();
-			return;
-		}
-
-		if (isCurrentObjectLast()) {
-			try {
-				phaseIsOver(this);
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-			return;
-		} else {
-			// handle next object
-			nextHero();
-			try {
-				heroesOrdersMaster
-						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-			} catch (final Exception e1) {
-				e1.printStackTrace();
+				ordersMaster.startOrder(currentObject(), activePath, this);
+				activePath = null;
 			}
 		}
-
 	}
 
 	private void nextHero() {
 		nextObject();
 		heroesOrdersMaster.setCurrentHero(currentObject());
-	}
 
-	@Override
-	public void onGuiEvent(final GuiElementsContainer eventGui) {
-		switch (eventGui.getType()) {
-		case GUI_ORDERS:
-			guiOrdersClicked((GuiOrders) eventGui);
-			break;
-		case GUI_HERO_TOOLS:
-			guiHeroToolsClicked((GuiHeroTools) eventGui);
-			break;
-		case GUI_DEBUG:
-			guiDebugClicked((GuiDebug) eventGui);
-			break;
-
-		case GUI_LEVELS:
-			guiLevelsClicked((GuiLevels) eventGui);
-			break;
-
-		default:
-			break;
-		}
-
+		// resolver step
 	}
 
 	private void guiLevelsClicked(final GuiLevels guiLevels) {
@@ -258,6 +288,21 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * Check if game is victorious. <br>
+	 * Victory conditions: there are no heroes in the heroes phase.
+	 */
+	private boolean victoryConditionsMet() {
+		return noPhaseObjects();
+	}
+
+	/**
+	 * {@link PhaseHeroesOrdersMaster#getCurrentPossbileDecisions()}
+	 */
+	public List<OrderDecision> getCurrentPossbileDecisions() {
+		return heroesOrdersMaster.getCurrentPossbileDecisions();
 	}
 
 }

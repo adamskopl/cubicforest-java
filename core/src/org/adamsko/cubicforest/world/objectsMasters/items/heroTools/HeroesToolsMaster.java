@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -125,6 +126,14 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 	public void update(final float deltaTime) {
 	}
 
+	// FIXME: task of creating loadMapObjects() interrupted because of loading
+	// multiple number of object types
+	@Override
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+		// TODO Auto-generated method stub
+
+	}
+
 	@Override
 	public void loadMapObjects(final CFMap map) {
 		final List<Vector2> coordsTraps = map
@@ -152,7 +161,7 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void unloadMapObjects() {
 		removeWorldObjects();
 	}
 

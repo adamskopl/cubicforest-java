@@ -59,6 +59,41 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 		reloadPhase();
 	}
 
+	@Override
+	public void phaseIsOver(final RoundPhase phaseOver) throws Exception {
+		removeDeadObjects();
+		roundsMaster.phaseIsOver(phaseOver);
+	}
+
+	@Override
+	public void setRoundsMaster(final RoundsMaster roundsMaster) {
+		this.roundsMaster = roundsMaster;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void reloadPhase() {
+		currentObjectPointer = -1;
+
+		if (objectsContainer.getOrderableObjects().size() == 0) {
+			Gdx.app.error("reloadPhase()", "0");
+		}
+
+		phaseObjects.clear();
+		for (final WorldObject wo : objectsContainer.getOrderableObjects()) {
+			phaseObjects.add(wo);
+		}
+	}
+
+	@Override
+	public boolean phaseSkippedLastTime() {
+		return phaseSkippedLastTime;
+	}
+
 	/**
 	 * Remove every object that has {@link WorldObjectState#DEAD} state
 	 */
@@ -101,7 +136,7 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 	/**
 	 * @return WorldObject pointed by currentObjectPointer.
 	 */
-	protected WorldObject currentObject() {
+	public WorldObject currentObject() {
 		if (phaseObjects.size() == 0) {
 			return NullCubicObject.instance();
 		}
@@ -110,39 +145,15 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 		return currentObject;
 	}
 
-	@Override
-	public void phaseIsOver(final RoundPhase phaseOver) throws Exception {
-		removeDeadObjects();
-		roundsMaster.phaseIsOver(phaseOver);
+	public int currentObjectIndex() {
+		return currentObjectPointer;
 	}
 
-	@Override
-	public void setRoundsMaster(final RoundsMaster roundsMaster) {
-		this.roundsMaster = roundsMaster;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void reloadPhase() {
-		currentObjectPointer = -1;
-
-		if (objectsContainer.getOrderableObjects().size() == 0) {
-			Gdx.app.error("reloadPhase()", "0");
-		}
-
-		phaseObjects.clear();
-		for (final WorldObject wo : objectsContainer.getOrderableObjects()) {
-			phaseObjects.add(wo);
-		}
-	}
-
-	@Override
-	public boolean phaseSkippedLastTime() {
-		return phaseSkippedLastTime;
+	/**
+	 * Return information if there are no phase objects.
+	 */
+	protected boolean noPhaseObjects() {
+		return (phaseObjects.size() == 0);
 	}
 
 	/**

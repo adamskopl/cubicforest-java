@@ -33,13 +33,10 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap cfMap) throws Exception {
-		final List<Vector2> coords = cfMap
-				.getObjectTypeCoords(TiledObjectType.TILED_PORTAL);
-
+	public void loadMapObjects(final List<Vector2> tilePositions) {
 		Portal portal;
 		int atlasIndex = 0;
-		for (final Vector2 pos : coords) {
+		for (final Vector2 pos : tilePositions) {
 			final Tile parentTile = tilesContainer.getTileOnPos(pos);
 			if (parentTile.isNull()) {
 				Gdx.app.error("PortalsMaster::loadMapObjects()",
@@ -67,7 +64,15 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void loadMapObjects(final CFMap cfMap) throws Exception {
+		final List<Vector2> tilePositions = cfMap
+				.getObjectTypeCoords(TiledObjectType.TILED_PORTAL);
+		loadMapObjects(tilePositions);
+
+	}
+
+	@Override
+	public void unloadMapObjects() {
 		removeWorldObjects();
 	}
 

@@ -1,6 +1,10 @@
 package org.adamsko.cubicforest.world.object;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+
+import com.badlogic.gdx.math.Vector2;
 
 public class NullWorldObjectsContainer extends WorldObjectsMasterDefault {
 
@@ -27,11 +31,16 @@ public class NullWorldObjectsContainer extends WorldObjectsMasterDefault {
 	}
 
 	@Override
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+
+	}
+
+	@Override
 	public void loadMapObjects(final CFMap map) throws Exception {
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void unloadMapObjects() {
 	}
 
 }
