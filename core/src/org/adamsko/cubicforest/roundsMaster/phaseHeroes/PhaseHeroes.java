@@ -17,7 +17,7 @@ import org.adamsko.cubicforest.mapsResolver.MapsResolver;
 import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
-import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;

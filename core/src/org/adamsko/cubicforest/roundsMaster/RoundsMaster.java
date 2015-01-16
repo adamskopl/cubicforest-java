@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.roundsMaster;
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoaderCoordinator;

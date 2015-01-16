@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.object.collision.handler.concrete;
 
-import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
 import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperationHandler;
 
 public class GameResultOperationHandlerDefault implements

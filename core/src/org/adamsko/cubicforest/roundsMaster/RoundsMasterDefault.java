@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.mapsResolver.MapsResolver;
 import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
 import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolver;
 import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolverDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;

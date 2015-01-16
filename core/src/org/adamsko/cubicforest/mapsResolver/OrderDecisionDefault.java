@@ -2,7 +2,6 @@ package org.adamsko.cubicforest.mapsResolver;
 
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.NullHeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
-import org.adamsko.cubicforest.world.tile.NullCubicTile;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.math.Vector2;
@@ -16,17 +15,14 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class OrderDecisionDefault implements OrderDecision {
 
-	private final Tile chosenTile;
 	private final Vector2 chosenTilePos;
 	private HeroTool chosenHeroTool;
 
 	public OrderDecisionDefault(final boolean nullConstructor) {
 		chosenTilePos = null;
-		chosenTile = NullCubicTile.instance();
 	}
 
 	public OrderDecisionDefault(final Tile chosenTile) {
-		this.chosenTile = chosenTile;
 		this.chosenTilePos = new Vector2(chosenTile.getTilesPosX(),
 				chosenTile.getTilesPosY());
 		chosenHeroTool = NullHeroTool.instance();

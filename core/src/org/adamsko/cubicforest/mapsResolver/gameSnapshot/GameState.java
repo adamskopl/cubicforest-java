@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.mapsResolver.gameSnapshot;
 
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
-import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
 
 public class GameState {
 

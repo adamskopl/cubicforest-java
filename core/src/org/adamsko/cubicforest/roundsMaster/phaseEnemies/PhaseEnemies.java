@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
-import org.adamsko.cubicforest.roundsMaster.GameResult;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
