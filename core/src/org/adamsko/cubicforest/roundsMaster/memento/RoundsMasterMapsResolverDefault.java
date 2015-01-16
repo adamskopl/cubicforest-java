@@ -1,13 +1,11 @@
 package org.adamsko.cubicforest.roundsMaster.memento;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.mapsResolver.MapsResolver;
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
+import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
+import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameSnapshotMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
-import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
@@ -20,45 +18,54 @@ public class RoundsMasterMapsResolverDefault implements
 	private final WorldObjectsMastersContainer worldObjectsMastersContainer;
 	PhaseHeroes resolvedPhase;
 
-	private final RoundDecisionsAggregate roundDecisionsAggregate;
-	private final RoundDecisionsIterator decisionsIterator;
+	private final MapsResolver mapsResolver;
 
-	public RoundsMasterMapsResolverDefault(final PhaseHeroes resolvedPhase,
+	private RoundDecisionsIterator decisionsIterator;
+
+	public RoundsMasterMapsResolverDefault(final MapsResolver mapsResolver,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
-		this.resolvedPhase = resolvedPhase;
+
 		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
 
-		roundDecisionsAggregate = new MapsResolver(createMemento());
-		decisionsIterator = roundDecisionsAggregate.createIterator();
+		this.mapsResolver = mapsResolver;
 
+		this.decisionsIterator = null;
+		this.resolvedPhase = null;
 	}
 
 	@Override
-	public void resolveDecision(final OrderDecision orderDecision) {
-
+	public void resolveDecision(final OrderDecisionDefault orderDecision) {
+		resolvedPhase.resolveDecision(orderDecision);
 	}
 
 	@Override
-	public void resolverIterate() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public GametMemento createMemento() {
+	public GameMemento createMemento() {
 		final WMContainerMemento wmContainerMemento = worldObjectsMastersContainer
 				.createMemento();
 		final int currentHeroIndex = resolvedPhase.currentObjectIndex();
-		final List<OrderDecision> possibleChoices = resolvedPhase
-				.getCurrentPossbileDecisions();
 
-		final GameState snapshot = new GameState(
-				wmContainerMemento, currentHeroIndex, possibleChoices);
+		final GameState snapshot = new GameState(wmContainerMemento,
+				currentHeroIndex);
 
-		final GametMemento memento = new GameSnapshotMementoDefault();
+		final GameMemento memento = new GameSnapshotMementoDefault();
 		memento.setState(snapshot);
 
 		return memento;
+	}
+
+	@Override
+	public void initializeResolveIterator(final MapsResolverClient client,
+			final PhaseHeroes resolvedPhase) {
+		this.resolvedPhase = resolvedPhase;
+		decisionsIterator = mapsResolver.createRoundDecisionsIterator(client);
+		this.resolvedPhase.setRoundDecisionsIterator(decisionsIterator,
+				mapsResolver);
+
+	}
+
+	@Override
+	public void victoryConditionsMet() {
+		mapsResolver.victoryConditionsMet();
 	}
 
 }

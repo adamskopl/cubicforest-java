@@ -1,12 +1,16 @@
 package org.adamsko.cubicforest.world;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMaster;
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
+import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.mapsResolver.MapsResolver;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
@@ -33,7 +37,7 @@ import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersM
  * @author adamsko
  * 
  */
-public interface GameWorldBuilder {
+public interface GameWorldBuilder extends Nullable {
 
 	/**
 	 * Standard 'update' function. Passes deltaTime for interested objects
@@ -61,6 +65,17 @@ public interface GameWorldBuilder {
 	 * objects should be ready for use.
 	 */
 	void initWorldObjectsMastersContainer(final GameRenderer renderer);
+
+	/**
+	 * When {@link CollisionVisitorsManagerFactory} is initialized, pass it to
+	 * the {@link WorldObjectsMastersContainer}
+	 * 
+	 * @param collisionVisitorsManagerFactory
+	 *            needed to initialize {@link CollisionVisitorsManager} of
+	 *            loaded {@link WorldObject} objects during map reload
+	 */
+	void setWorldObjectsMastersContainerCVMF(
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
 	/**
 	 * Initialize {@link TilePathSearchersMaster}
@@ -96,10 +111,13 @@ public interface GameWorldBuilder {
 	 * @param mapsLoader
 	 *            needed for GUI responsible for changing levels (number of
 	 *            levels and other informations needed)
+	 * @param mapsResolver
+	 *            needed to get {@link GuiResolver}, which is used to start
+	 *            resolving level and choose eventual victorious solutions
 	 * @param gatherCubesMaster
 	 *            needed for GUI showing informations about player's cubes
 	 * @param prizesMaster
-	 *            needed for GUI showint informations about collected prizes
+	 *            needed for GUI showing informations about collected prizes
 	 * @param roundsMaster
 	 *            {@link RoundsMaster} is passing events from {@link GuiMaster}
 	 *            to {@link RoundPhase} objects
@@ -130,14 +148,17 @@ public interface GameWorldBuilder {
 	 *            needed for {@link MapsLoader} to receive
 	 *            {@link WorldObjectsMaster} objects needed during maps reload
 	 *            (reading all {@link WorldObject}
-	 * @param collisionVisitorsManagerFactory
-	 *            needed to initialize {@link CollisionVisitorsManager} of
-	 *            loaded {@link WorldObject} objects during map reload
 	 */
 	void initMapsLoader(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			GuiMaster guiMaster,
-			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+			GuiMaster guiMaster);
+
+	/**
+	 * Initialize {@link MapsResolver} to solve {@link CFMap} maps.
+	 */
+	void initMapsResolver();
+
+	void initMapsResolverGui(GuiResolver guiResolver);
 
 	/**
 	 * Reload world objects with {@link MapsLoader} (invoking reloadWorld())
@@ -150,10 +171,12 @@ public interface GameWorldBuilder {
 	 * @param mapsLoader
 	 *            used when reloading {@link RoundsMaster}. Before reloading
 	 *            phases, world objects should be reloaded first.
+	 * @param mapsResolver
+	 *            used in {@link RoundsMaster} to solve levels
 	 * @param worldObjectsMastersContainer
-	 *            used for creating {@link GametMemento} by {@link RoundsMaster}
+	 *            used for creating {@link GameMemento} by {@link RoundsMaster}
 	 */
-	void initRoundsMaster(MapsLoader mapsLoader,
+	void initRoundsMaster(MapsLoader mapsLoader, MapsResolver mapsResolver,
 			WorldObjectsMastersContainer worldObjectsMastersContainer);
 
 	/**
@@ -236,6 +259,11 @@ public interface GameWorldBuilder {
 	 * Get {@link MapsLoader} needed for {@link GameWorldBuilder} functions.
 	 */
 	MapsLoader getMapsLoader();
+
+	/**
+	 * Get {@link MapsResolver} needed to solve levels.
+	 */
+	MapsResolver getMapsResolver();
 
 	/**
 	 * Get {@link RoundsMaster} needed for {@link GameWorldBuilder} functions.

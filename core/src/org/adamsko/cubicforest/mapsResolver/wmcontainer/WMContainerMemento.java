@@ -6,4 +6,6 @@ public interface WMContainerMemento {
 
 	void setState(WMContainerMementoState state);
 
+	boolean isEqual(WMContainerMemento wmContainerMemento);
+
 }

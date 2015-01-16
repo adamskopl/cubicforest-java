@@ -1,16 +1,15 @@
 package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.DecisionsComponent;
+import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
 import org.adamsko.cubicforest.mapsResolver.NullDecisionsComponent;
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
+import org.adamsko.cubicforest.mapsResolver.NullOrderDecision;
+import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.NullGameSnapshotMemento;
-import org.adamsko.cubicforest.roundsMaster.GameResult;
-import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
-import org.adamsko.cubicforest.roundsMaster.RoundsMasterDefault;
-import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.object.WorldObject;
 
 import com.badlogic.gdx.Gdx;
@@ -24,49 +23,63 @@ import com.badlogic.gdx.Gdx;
  */
 public class RoundDecisions implements DecisionsComponent {
 
-	// game snapshot right before performing tile choice
-	GametMemento previousSnapshot;
+	protected RoundDecisionsAggregate roundDecisionsAggregate;
 
-	// game snapshot after performing tile choice
-	GametMemento snapshotAfterDecision;
+	/**
+	 * Game snapshot for which resolving component is responsible
+	 */
+	private final GameMemento snapshot;
+
+	// // snapshot from which component is starting. his snapshot is not
+	// changed.
+	// final GameMemento snapshot;
+
+	// game snapshot changed after next making available decision. used to
+	// create eventual new components, which will resolve this snapshot
+	GameMemento snapshotAfterPreviousDecision;
 
 	// what hero can do with snapshotAfterChoice memento?
-	private final List<OrderDecision> possibleDecisions;
+	private final List<OrderDecisionDefault> possibleDecisions;
 
-	private final DecisionsComponent parent;
+	// Possible victorious decision.
+	private OrderDecisionDefault latestDecision;
+
+	protected DecisionsComponent parent;
+
+	protected MapsResolverClient client;
 
 	/**
 	 * One child is resolved for one {@link RoundDecisions}
 	 */
-	private DecisionsComponent child;
+	protected DecisionsComponent child;
 
 	// null constructor
 	public RoundDecisions(final boolean nullConstructor) {
-		this.possibleDecisions = null;
+		this.possibleDecisions = new ArrayList<OrderDecisionDefault>();
 		this.parent = null;
+		this.snapshot = NullGameSnapshotMemento.instance();
+		roundDecisionsAggregate = null;
 	}
 
-	public RoundDecisions(final DecisionsComponent parent,
-			final GametMemento startingSnapshot) {
+	public RoundDecisions(final MapsResolverClient mapsResolverClient,
+			final RoundDecisionsAggregate roundDecisionsAggregate,
+			final DecisionsComponent parent, final GameMemento startingSnapshot) {
 
+		this.roundDecisionsAggregate = roundDecisionsAggregate;
 		this.parent = parent;
-		this.previousSnapshot = startingSnapshot;
-		if (previousSnapshot.isNull()) {
-			Gdx.app.error("RoundDecisions()", "previousSnapshot.isNull()");
-		}
+		this.snapshot = startingSnapshot;
 
-		this.snapshotAfterDecision = NullGameSnapshotMemento.instance();
+		// if the component is created, it means that starting snapshot was not
+		// resolved
+		roundDecisionsAggregate.addResolvedState(startingSnapshot);
 
+		this.client = mapsResolverClient;
+		possibleDecisions = client.getCurrentPossbileDecisions();
+		latestDecision = NullOrderDecision.instance();
+
+		// child will be eventually added later (for snapshotAfterDecision)
 		child = NullDecisionsComponent.instance();
 
-		final RoundsMaster roundsMaster = new RoundsMasterDefault(
-				previousSnapshot);
-		final PhaseHeroes phaseHeroes = roundsMaster.getPhaseHeroes();
-		possibleDecisions = phaseHeroes.getCurrentPossbileDecisions();
-	}
-
-	public RoundDecisions(final DecisionsComponent parent) {
-		this(parent, parent.getSnapshotAfterChoice());
 	}
 
 	@Override
@@ -75,17 +88,39 @@ public class RoundDecisions implements DecisionsComponent {
 	}
 
 	@Override
-	public void makeDecision() {
+	public DecisionsComponent nextComponent() {
 
-		// take next decision, send it to the client
-		if (possibleDecisions.size() != 0) {
-			// error: if makeDecision() is invoked, it means there should be
-			// possible decisions available
-			Gdx.app.error("RoundDecisions::makeDecision()",
-					"possibleDecisions.size() != 0");
+		// check if memento was resolved
+		if (roundDecisionsAggregate
+				.isMementoResolved(snapshotAfterPreviousDecision)) {
+			// continue resolving current element
+			return this;
 		}
-		final OrderDecision nextDecision = possibleDecisions.remove(0);
 
+		return createChild(snapshotAfterPreviousDecision);
+
+	}
+
+	@Override
+	public void makeNextDecision() {
+
+		if (getPossibleDecisions().size() == 0
+				|| getHeight() >= roundDecisionsAggregate.getMaxDepth()) {
+			// next decision should be made by a parent
+			parent.makeNextDecision();
+			return;
+		}
+
+		// return to the snapshot for which this component is responsible
+		client.setMemento(snapshot);
+
+		/*
+		 * Possible victorious decision. When victory conditions will be met,
+		 * this decision will be remembered.
+		 */
+		latestDecision = possibleDecisions.remove(0);
+
+		client.resolveDecision(latestDecision);
 	}
 
 	@Override
@@ -99,56 +134,65 @@ public class RoundDecisions implements DecisionsComponent {
 
 	@Override
 	public void remove(final DecisionsComponent decisionsComponent) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public DecisionsComponent nextComponent() {
-		if (snapshotAfterDecision.isNull()) {
-			Gdx.app.error("RoundDecisions::nextComponent()",
-					"(snapshotAfterChoice.isNull()");
-			return NullDecisionsComponent.instance();
-		}
-
-		if (snapshotAfterDecision.getState().getGameResult() == GameResult.GAME_PLAY) {
-			final DecisionsComponent child = new RoundDecisions(this);
-			add(child);
-			return child;
-		}
-
-		if (isDone()) {
-			// no choices available, return to parent
-			return parent;
-		}
-
-		// children is handled, choices available. continue work by creating a
-		// new child
-		return this;
-	}
-
-	@Override
-	public GametMemento getSnapshotAfterChoice() {
-		return snapshotAfterDecision;
 	}
 
 	@Override
 	public DecisionsComponent getChild() {
-		// TODO Auto-generated method stub
-		return null;
+		return child;
 	}
 
 	@Override
 	public DecisionsComponent getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return parent;
+	}
+
+	@Override
+	public int getHeight() {
+		int height = 0;
+		DecisionsComponent root = this;
+		while (!root.getParent().isNull()) {
+			root = root.getParent();
+			height++;
+		}
+		return height;
 	}
 
 	@Override
 	public boolean isDone() {
 		// component is completely resolved, when all possible decisions are
 		// taken into account
-		return possibleDecisions.size() == 0;
+		if (possibleDecisions.size() == 0) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public void setSnapshotAfterDecision(
+			final GameMemento snapshotAfterPreviousDecision) {
+		this.snapshotAfterPreviousDecision = snapshotAfterPreviousDecision;
+	};
+
+	List<OrderDecisionDefault> getPossibleDecisions() {
+		return possibleDecisions;
+	}
+
+	protected DecisionsComponent createChild(final GameMemento childSnapshot) {
+		/*
+		 * game snapshot after previous decision was not resolved and should be
+		 * resolved by the next component
+		 */
+		final DecisionsComponent newChild = new RoundDecisions(client,
+				roundDecisionsAggregate, this, childSnapshot);
+		add(newChild);
+
+		return newChild;
+	}
+
+	@Override
+	public OrderDecisionDefault getLatestDecision() {
+		return latestDecision;
 	}
 
 }

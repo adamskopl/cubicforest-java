@@ -1,13 +1,24 @@
 package org.adamsko.cubicforest.mapsResolver;
 
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
+import java.util.List;
+
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroesOrdersMaster;
 
 public interface MapsResolverClient {
 
-	void setMemento(GametMemento m);
+	GameMemento createMemento();
 
-	GametMemento createMemento();
+	void setMemento(GameMemento memento);
 
-	void resolveDecision(OrderDecision orderDecision);
+	void resolveDecision(OrderDecisionDefault orderDecision);
+
+	void initializeResolveIterator(final PhaseHeroes resolvedPhase);
+
+	/**
+	 * {@link PhaseHeroesOrdersMaster#getCurrentPossbileDecisions()}
+	 */
+	List<OrderDecisionDefault> getCurrentPossbileDecisions();
 
 }

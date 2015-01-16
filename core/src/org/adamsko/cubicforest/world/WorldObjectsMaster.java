@@ -30,6 +30,8 @@ public interface WorldObjectsMaster extends Nullable {
 	 */
 	public List<WorldObject> getWorldObjects();
 
+	public String getName();
+
 	/**
 	 * Based on {@link CFMap} object informations, load objects. Usually: adding
 	 * objects to {@link TilesMaster} and to the {@link WorldObjectsMaster}

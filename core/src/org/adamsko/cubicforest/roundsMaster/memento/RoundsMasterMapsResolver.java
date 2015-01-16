@@ -1,15 +1,24 @@
 package org.adamsko.cubicforest.roundsMaster.memento;
 
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
+import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
+import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 
 public interface RoundsMasterMapsResolver {
 
 	// order was issued: iterate through next MapsResolver component
-	public void resolverIterate();
+	public void resolveDecision(OrderDecisionDefault orderDecision);
 
-	public void resolveDecision(OrderDecision orderDecision);
+	public GameMemento createMemento();
 
-	public GametMemento createMemento();
+	void initializeResolveIterator(final MapsResolverClient client,
+			final PhaseHeroes resolvedPhase);
+
+	/**
+	 * Victory conditions are met: resolver should remember victorious orders
+	 * sequence.
+	 */
+	void victoryConditionsMet();
 
 }

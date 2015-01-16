@@ -6,4 +6,6 @@ public interface WOMMemento {
 
 	void setState(WOMMementoState state);
 
+	boolean isEqual(WOMMemento womMemento);
+
 }

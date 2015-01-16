@@ -1,8 +1,5 @@
 package org.adamsko.cubicforest.mapsResolver.gameSnapshot;
 
-import java.util.List;
-
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 
@@ -23,8 +20,7 @@ public class GameState {
 	}
 
 	public GameState(final WMContainerMemento wmContainerMemento,
-			final int currentHeroIndex,
-			final List<OrderDecision> possibleChoices) {
+			final int currentHeroIndex) {
 
 		this.currentHeroIndex = currentHeroIndex;
 		this.wMCMemento = wmContainerMemento;
@@ -41,6 +37,19 @@ public class GameState {
 
 	public GameResult getGameResult() {
 		return this.gameResult;
+	}
+
+	public boolean isEqual(final GameState checkedState) {
+
+		if (currentHeroIndex != checkedState.getCurrentHeroIndex()) {
+			return false;
+		}
+
+		// compare WorldObjectsMaster mementos for this state with memento
+		// checkedState
+		return (getWMContainerMemento().isEqual(checkedState
+				.getWMContainerMemento()));
+
 	}
 
 }

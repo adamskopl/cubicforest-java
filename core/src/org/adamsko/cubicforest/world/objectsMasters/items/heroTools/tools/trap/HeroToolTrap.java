@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
+package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap;
 
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;

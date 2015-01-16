@@ -8,4 +8,8 @@ public interface WOMMementoState {
 
 	List<Vector2> getTilePositions();
 
+	boolean isEqual(WOMMementoState womMementoState);
+
+	String getName();
+
 }

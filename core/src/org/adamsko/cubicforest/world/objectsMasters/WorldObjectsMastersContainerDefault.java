@@ -9,6 +9,9 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.NullCollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
@@ -27,6 +30,8 @@ public class WorldObjectsMastersContainerDefault implements
 		WorldObjectsMastersContainer {
 
 	private final List<WorldObjectsMaster> worldObjectsMasters;
+
+	private CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
 
 	private TilesMaster tilesMaster;
 	private TerrainMaster terrainObjectsMaster;
@@ -49,6 +54,9 @@ public class WorldObjectsMastersContainerDefault implements
 	@Override
 	public void initMasters(final GameRenderer renderer) {
 		initTilesMaster();
+
+		this.collisionVisitorsManagerFactory = NullCollisionVisitorsManagerFactory
+				.instance();
 
 		terrainObjectsMaster = new TerrainMaster(tilesMaster,
 				"terrain-atlas-medium", 42, 50);
@@ -103,25 +111,68 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	@Override
+	public void setCollisionVisitorsManagerFactory(
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+		this.collisionVisitorsManagerFactory = collisionVisitorsManagerFactory;
+	}
+
+	@Override
 	public List<WorldObjectsMaster> getWorldObjectsMasters() {
 		return worldObjectsMasters;
 	}
 
 	@Override
-	public void setMemento(final WMContainerMemento memento) {
+	public void loadMasters(final CFMap cfMap) {
+
+		if (collisionVisitorsManagerFactory.isNull()) {
+			Gdx.app.error("WorldObjectsMastersContainerDefault::loadMasters()",
+					"collisionVisitorsManagerFactory.isNull()");
+			return;
+		}
+
+		for (final WorldObjectsMaster master : worldObjectsMasters) {
+			try {
+				master.loadMapObjects(cfMap);
+
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private void loadMasters(final WMContainerMemento memento) {
+
+		if (collisionVisitorsManagerFactory.isNull()) {
+			Gdx.app.error("WorldObjectsMastersContainerDefault::loadMasters()",
+					"collisionVisitorsManagerFactory.isNull()");
+			return;
+		}
+
 		final WMContainerMementoState state = memento.getState();
 
 		final List<WOMMemento> mementos = state.getWOMMementos();
+
 		if (mementos.size() != getWorldObjectsMasters().size()) {
 			Gdx.app.error("WorldObjectsMastersContainerDefault::setMemento()",
 					"mementos.size() != getWorldObjectsMasters().size()");
 		}
-
 		int mementoIndex = 0;
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster.setMemento(mementos.get(mementoIndex));
+			worldObjectsMaster
+					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 			mementoIndex++;
 		}
+	}
+
+	@Override
+	public void setMemento(final WMContainerMemento memento) {
+
+		unloadMasters();
+
+		loadMasters(memento);
+
 	}
 
 	@Override
@@ -174,6 +225,23 @@ public class WorldObjectsMastersContainerDefault implements
 
 	private void initTilesMaster() {
 		tilesMaster = new TilesMasterDefault(100);
+	}
+
+	@Override
+	public void unloadMasters() {
+		/*
+		 * Unloading has to be done in reverse order, because TilesMaster's
+		 * objects (tiles) should be unloaded in the end.
+		 */
+		for (int i = worldObjectsMasters.size() - 1; i >= 0; i--) {
+			final WorldObjectsMaster master = worldObjectsMasters.get(i);
+			try {
+				master.unloadMapObjects();
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }

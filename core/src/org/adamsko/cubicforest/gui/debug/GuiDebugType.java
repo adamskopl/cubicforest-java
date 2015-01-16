@@ -1,5 +1,5 @@
 package org.adamsko.cubicforest.gui.debug;
 
-public enum GuiDebugType_e {
+public enum GuiDebugType {
 	DEBUG_RELOAD
 }

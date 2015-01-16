@@ -10,6 +10,13 @@ public interface RoundDecisionsIterator {
 
 	boolean isDone();
 
+	boolean isLast();
+
 	DecisionsComponent currentItem();
+
+	/**
+	 * Set iterator to point on the passed element
+	 */
+	void set(DecisionsComponent decisionsComponent);
 
 }

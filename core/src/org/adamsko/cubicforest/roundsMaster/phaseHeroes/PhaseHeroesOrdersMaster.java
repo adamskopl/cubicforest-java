@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
+import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
@@ -48,9 +48,9 @@ public interface PhaseHeroesOrdersMaster {
 	void setCurrentHero(WorldObject currentHero);
 
 	/**
-	 * Returns {@link OrderDecision} objects defining what can be made in
+	 * Returns {@link OrderDecisionDefault} objects defining what can be made in
 	 * current {@link PhaseHeroes} state for current hero.
 	 */
-	List<OrderDecision> getCurrentPossbileDecisions();
+	List<OrderDecisionDefault> getCurrentPossbileDecisions();
 
 }

@@ -2,6 +2,10 @@ package org.adamsko.cubicforest.world.tile;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
@@ -130,5 +134,13 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 	public void addTilesPosLabel(final Tile tile) {
 		tile.addLabel(ROLabel.LABEL_TILEPOS);
 		tile.altLabelLast(Color.RED, 0.7f, -17.0f, -20.0f);
+	}
+
+	@Override
+	public WOMMemento createMemento() {
+		final WOMMementoState state = new WOMMementoStateDefault(this);
+		final WOMMemento memento = new WOMMementoDefault();
+		memento.setState(state);
+		return memento;
 	}
 }

@@ -1,24 +1,30 @@
 package org.adamsko.cubicforest.mapsResolver;
 
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
-import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisions;
-import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsAggregate;
+import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.gui.resolver.GuiResolver;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
-import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorDefault;
 
-public class MapsResolver implements RoundDecisionsAggregate {
+public interface MapsResolver extends Nullable {
 
-	DecisionsComponent root;
+	public RoundDecisionsIterator createRoundDecisionsIterator(
+			final MapsResolverClient client);
 
-	public MapsResolver(final GametMemento startingMemento) {
-		// create root decisions component with null parent
-		root = new RoundDecisions(NullDecisionsComponent.instance(),
-				startingMemento);
-	}
+	/**
+	 * Start new level resolving process.
+	 */
+	public void startNewResolve();
 
-	@Override
-	public RoundDecisionsIterator createIterator() {
-		return new RoundDecisionsIteratorDefault(root);
-	}
+	/**
+	 * Return information if resolver's work is in progress.
+	 */
+	boolean isResolverWorking();
+
+	/**
+	 * Victory conditions for current element are met. Remember victorious
+	 * decisions sequence.
+	 */
+	public void victoryConditionsMet();
+
+	public void initGui(GuiResolver guiResolver);
 
 }

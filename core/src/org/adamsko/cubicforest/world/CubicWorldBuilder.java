@@ -1,10 +1,13 @@
 package org.adamsko.cubicforest.world;
 
-import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.gui.GuiMasterDefault;
-import org.adamsko.cubicforest.gui.NullGuiMasterDefault;
+import org.adamsko.cubicforest.gui.NullGuiMaster;
+import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.mapsResolver.MapsResolver;
+import org.adamsko.cubicforest.mapsResolver.MapsResolverDefault;
+import org.adamsko.cubicforest.mapsResolver.NullMapsResolver;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalcDefault;
@@ -15,7 +18,7 @@ import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
-import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoaderTiled;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoader;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.NullCollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
@@ -36,7 +39,7 @@ import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersM
 
 import com.badlogic.gdx.Gdx;
 
-public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
+public class CubicWorldBuilder implements GameWorldBuilder {
 
 	private CoordCalc coordCalc;
 
@@ -52,6 +55,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	private GuiMaster guiMaster;
 	private MapsLoader mapsLoader;
+	private MapsResolver mapsResolver;
 
 	private CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
 
@@ -66,9 +70,10 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	private void initNullables() {
 		pickMaster = NullPickMaster.instance();
 		roundsMaster = NullRoundsMaster.instance();
-		guiMaster = NullGuiMasterDefault.instance();
+		guiMaster = NullGuiMaster.instance();
 		ordersMaster = NullOrdersMaster.instance();
-		mapsLoader = NullMapsLoaderTiled.instance();
+		mapsLoader = NullMapsLoader.instance();
+		mapsResolver = NullMapsResolver.instance();
 		collisionVisitorsManagerFactory = NullCollisionVisitorsManagerFactory
 				.instance();
 	}
@@ -80,8 +85,15 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initWorldObjectsMastersContainer(final GameRenderer renderer) {
-		worldObjectsMastersContainer = new WorldObjectsMastersContainerDefault(
+		this.worldObjectsMastersContainer = new WorldObjectsMastersContainerDefault(
 				renderer);
+	}
+
+	@Override
+	public void setWorldObjectsMastersContainerCVMF(
+			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+		this.worldObjectsMastersContainer
+				.setCollisionVisitorsManagerFactory(collisionVisitorsManagerFactory);
 	}
 
 	@Override
@@ -101,6 +113,11 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 			final PrizesMaster prizesMaster, final RoundsMaster roundsMaster) {
 
 		if (mapsLoader.isNull()) {
+			Gdx.app.error("initGuiMaster()", "mapsLoader.isNull()");
+			return;
+		}
+
+		if (mapsResolver.isNull()) {
 			Gdx.app.error("initGuiMaster()", "mapsLoader.isNull()");
 			return;
 		}
@@ -132,11 +149,10 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public void initMapsLoader(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final GuiMaster guiMaster,
-			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+			final GuiMaster guiMaster) {
 
 		mapsLoader = new MapsLoaderTiled(worldObjectsMastersContainer,
-				guiMaster, collisionVisitorsManagerFactory);
+				guiMaster);
 		mapsLoader.loadMaps();
 		mapsLoader.setMapActive(0);
 	}
@@ -144,6 +160,21 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 	@Override
 	public MapsLoader getMapsLoader() {
 		return mapsLoader;
+	}
+
+	@Override
+	public void initMapsResolver() {
+		this.mapsResolver = new MapsResolverDefault();
+	}
+
+	@Override
+	public void initMapsResolverGui(final GuiResolver guiResolver) {
+		this.mapsResolver.initGui(guiResolver);
+	}
+
+	@Override
+	public MapsResolver getMapsResolver() {
+		return mapsResolver;
 	}
 
 	@Override
@@ -190,8 +221,9 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 
 	@Override
 	public void initRoundsMaster(final MapsLoader mapsLoader,
+			final MapsResolver mapsResolver,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
-		roundsMaster = new RoundsMasterDefault(mapsLoader,
+		roundsMaster = new RoundsMasterDefault(mapsLoader, mapsResolver,
 				worldObjectsMastersContainer);
 	}
 
@@ -225,11 +257,7 @@ public class CubicWorldBuilder implements GameWorldBuilder, Nullable {
 		roundsMaster.addPhase(phaseHeroes);
 		roundsMaster.addPhase(phaseEnemies);
 
-		try {
-			roundsMaster.nextRound();
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
+		roundsMaster.initializeResolveIterator(phaseHeroes);
 
 	}
 

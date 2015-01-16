@@ -7,8 +7,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.portal.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 

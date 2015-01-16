@@ -14,4 +14,9 @@ public class WOMMementoDefault implements WOMMemento {
 		this.state = state;
 	}
 
+	@Override
+	public boolean isEqual(final WOMMemento womMemento) {
+		return womMemento.getState().isEqual(getState());
+	}
+
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
@@ -32,7 +34,14 @@ public interface WorldObjectsMastersContainer {
 	 */
 	boolean allMastersInitialized();
 
+	void setCollisionVisitorsManagerFactory(
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+
 	List<WorldObjectsMaster> getWorldObjectsMasters();
+
+	void unloadMasters();
+
+	void loadMasters(CFMap cfMap);
 
 	void setMemento(WMContainerMemento memento);
 

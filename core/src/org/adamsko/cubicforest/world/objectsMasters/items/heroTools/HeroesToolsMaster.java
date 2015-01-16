@@ -1,10 +1,12 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -32,6 +34,21 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 	private WorldObjectType heroToolMarkerType;
 	private HeroToolsFactory heroToolsFactory;
 
+	/**
+	 * {@link HeroesToolsMaster} in contrast to the other masters is managing
+	 * many types of WorldObjects. This vector is used to combine all positions
+	 * loaded from {@link CFMap}.
+	 */
+	private List<Vector2> heroToolsPositions;
+	private List<Vector2> mapCoordsTraps;
+	private List<Vector2> mapCoordsPortals;
+	private List<Vector2> currentCoordsPortals;
+	private List<Vector2> currentCoordsTraps;
+	// indicates borders between tools positions in heroToolsPositions vector
+	private Vector2 newToolSeparator;
+
+	WorldObjectType test;
+
 	public HeroesToolsMaster() {
 		super(0);
 	}
@@ -46,11 +63,20 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 		heroToolMarkerType = null;
 
 		heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
+		heroToolsPositions = new ArrayList<Vector2>();
+		currentCoordsPortals = new ArrayList<Vector2>();
+		currentCoordsTraps = new ArrayList<Vector2>();
+
+		newToolSeparator = new Vector2();
 	}
 
 	@Override
 	public boolean isNull() {
 		return false;
+	}
+
+	public Vector2 getNewToolSeparator() {
+		return newToolSeparator;
 	}
 
 	/**
@@ -126,37 +152,54 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 	public void update(final float deltaTime) {
 	}
 
-	// FIXME: task of creating loadMapObjects() interrupted because of loading
-	// multiple number of object types
 	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-		// TODO Auto-generated method stub
 
+		/**
+		 * In contrast to 'loadMapObjects' from other masters, this function
+		 * loads many types with a help of newToolSeperator which should
+		 * separate positions in passed tilePositions argument
+		 */
+
+		HeroTool heroTool = null;
+		int typeIndex = 0;
+		for (final Vector2 pos : heroToolsPositions) {
+			if (pos == newToolSeparator) {
+				typeIndex++;
+				continue;
+			}
+			heroTool = heroToolsFactory.createHeroTool(indexToType(typeIndex),
+					pos, this);
+			heroTool.setState(HeroToolStates_e.STATE_READY);
+			setToolTexture(heroTool, 0);
+			addObject(heroTool);
+		}
+	}
+
+	private WorldObjectType indexToType(final int index) {
+		switch (index) {
+		case 0:
+			return WorldObjectType.TOOLPORTAL;
+		case 1:
+			return WorldObjectType.TOOLTRAP;
+		default:
+			Gdx.app.error("HeroesToolsMaster::indexToType()", "invalid index");
+			return WorldObjectType.DEFAULT;
+		}
 	}
 
 	@Override
 	public void loadMapObjects(final CFMap map) {
-		final List<Vector2> coordsTraps = map
-				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_TRAP);
 
-		final List<Vector2> coordsPortals = map
+		mapCoordsPortals = map
 				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_PORTAL);
 
-		HeroTool heroTool = null;
-		for (final Vector2 pos : coordsTraps) {
-			heroTool = heroToolsFactory.createHeroTool(
-					WorldObjectType.TOOLTRAP, pos, this);
-			heroTool.setState(HeroToolStates_e.STATE_READY);
-			setToolTexture(heroTool, 0);
-			addObject(heroTool);
-		}
-		for (final Vector2 pos : coordsPortals) {
-			heroTool = heroToolsFactory.createHeroTool(
-					WorldObjectType.TOOLPORTAL, pos, this);
-			heroTool.setState(HeroToolStates_e.STATE_READY);
-			setToolTexture(heroTool, 0);
-			addObject(heroTool);
-		}
+		mapCoordsTraps = map
+				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_TRAP);
+
+		combinePositions();
+
+		loadMapObjects(heroToolsPositions);
 
 	}
 
@@ -165,4 +208,56 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 		removeWorldObjects();
 	}
 
+	/**
+	 * Combine all positions in one vector, which will be passed to loading
+	 * function.
+	 */
+	private void combinePositions() {
+		heroToolsPositions.clear();
+		// order of the loading is important
+		for (final Vector2 pos : mapCoordsPortals) {
+			heroToolsPositions.add(pos);
+		}
+		heroToolsPositions.add(newToolSeparator);
+		for (final Vector2 pos : mapCoordsTraps) {
+			heroToolsPositions.add(pos);
+		}
+		heroToolsPositions.add(newToolSeparator);
+	}
+
+	/**
+	 * Create list of positions of all the tools. Separate them with a
+	 * separator, so
+	 */
+	public List<Vector2> getToolsPositionsSeparated() {
+		currentCoordsPortals.clear();
+		currentCoordsTraps.clear();
+
+		for (final WorldObject tool : getWorldObjects()) {
+			final Vector2 pos = tool.getTilesPos();
+			switch (tool.getType()) {
+			case TOOLPORTAL:
+				currentCoordsPortals.add(tool.getTilesPos());
+				break;
+			case TOOLTRAP:
+				currentCoordsTraps.add(tool.getTilesPos());
+				break;
+			default:
+				Gdx.app.error(
+						"HeroesToolsMaster::getToolsPositionsSeparated()",
+						"unknown tool type");
+			}
+		}
+
+		heroToolsPositions.clear();
+		for (final Vector2 pos : currentCoordsPortals) {
+			heroToolsPositions.add(pos);
+		}
+		heroToolsPositions.add(newToolSeparator);
+		for (final Vector2 pos : currentCoordsTraps) {
+			heroToolsPositions.add(pos);
+		}
+		heroToolsPositions.add(newToolSeparator);
+		return heroToolsPositions;
+	}
 }

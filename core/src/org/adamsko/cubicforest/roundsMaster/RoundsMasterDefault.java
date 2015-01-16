@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
+import org.adamsko.cubicforest.mapsResolver.MapsResolver;
+import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
 import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolver;
+import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolverDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoaderTiled;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
-import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainerDefault;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.Gdx;
@@ -28,7 +28,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 	private GameResult gameResult;
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
-	private RoundsMasterMapsResolver roundsMasterMapsResolver;
+	private final RoundsMasterMapsResolver roundsMasterMapsResolver;
 
 	// For NullRoundsMaster
 	RoundsMasterDefault() {
@@ -37,28 +37,34 @@ public class RoundsMasterDefault implements RoundsMaster {
 		roundsMasterMapsResolver = null;
 	}
 
-	/**
-	 * Create RoundsMaster basing on {@link GametMemento}
-	 */
-	public RoundsMasterDefault(final GametMemento gameMemento) {
-		this.mapsLoader = NullMapsLoaderTiled.instance();
-		this.phases = new ArrayList<RoundPhase>();
-
-		this.worldObjectsMastersContainer = new WorldObjectsMastersContainerDefault();
-		final GameState gameState = gameMemento.getState();
-		this.worldObjectsMastersContainer.setMemento(gameState
-				.getWMContainerMemento());
-
-		this.phaseHeroes = new PhaseHeroes(this.worldObjectsMastersContainer);
-
-	}
-
 	public RoundsMasterDefault(final MapsLoader mapsLoader,
+			final MapsResolver mapsResolver,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
 		this.mapsLoader = mapsLoader;
 		phases = new ArrayList<RoundPhase>();
 		gameResult = GameResult.GAME_PLAY;
 		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
+
+		roundsMasterMapsResolver = new RoundsMasterMapsResolverDefault(
+				mapsResolver, this.worldObjectsMastersContainer);
+	}
+
+	@Override
+	public void setMemento(final GameMemento gameMemento) {
+		// this.worldObjectsMastersContainer = new
+		// WorldObjectsMastersContainerDefault();
+		final GameState gameState = gameMemento.getState();
+
+		this.worldObjectsMastersContainer.setMemento(gameState
+				.getWMContainerMemento());
+
+		phaseHeroes.reloadPhase(this.worldObjectsMastersContainer
+				.getHeroesMaster());
+		phaseHeroes.setCurrentObjectIndex(gameState.getCurrentHeroIndex());
+
+		phaseEnemies.reloadPhase(this.worldObjectsMastersContainer
+				.getEnemiesMaster());
+
 	}
 
 	@Override
@@ -201,22 +207,9 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
-	public GametMemento createMemento() {
+	public GameMemento createMemento() {
 		return roundsMasterMapsResolver.createMemento();
 	}
-
-	@Override
-	public void setMemento(final GametMemento m) {
-		final GameState state = m.getState();
-		worldObjectsMastersContainer.setMemento(state.getWMContainerMemento());
-
-		// reload phase enemies with heroes from the container
-
-		// reload phase heroes with heroes from the container
-
-		// set current hero
-
-	};
 
 	/**
 	 * Check if all phases were skipped
@@ -232,8 +225,18 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
-	public void resolveDecision(final OrderDecision orderDecision) {
+	public void resolveDecision(final OrderDecisionDefault orderDecision) {
 		roundsMasterMapsResolver.resolveDecision(orderDecision);
+	}
+
+	@Override
+	public void initializeResolveIterator(final PhaseHeroes resolvedPhase) {
+		roundsMasterMapsResolver.initializeResolveIterator(this, resolvedPhase);
+	}
+
+	@Override
+	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
+		return phaseHeroes.getCurrentPossbileDecisions();
 	}
 
 }

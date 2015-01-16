@@ -15,4 +15,9 @@ public class WMContainerMementoDefault implements WMContainerMemento {
 		this.state = state;
 	}
 
+	@Override
+	public boolean isEqual(final WMContainerMemento checkedMemento) {
+		return checkedMemento.getState().isEqual(getState());
+	}
+
 }

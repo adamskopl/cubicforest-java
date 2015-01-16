@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
+import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -198,7 +198,7 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 	}
 
 	@Override
-	public List<OrderDecision> getCurrentPossbileDecisions() {
+	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
 		final TilesSearchParameterFactory tilesSearchParameterFactory = tilesMaster
 				.getTilesSearchParameterFactory();
 
@@ -206,9 +206,9 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 				currentHero, currentHero.getSpeed(),
 				tilesSearchParameterFactory.create(WorldObjectType.HERO));
 
-		final List<OrderDecision> validOrderDecisions = new ArrayList<OrderDecision>();
+		final List<OrderDecisionDefault> validOrderDecisions = new ArrayList<OrderDecisionDefault>();
 		for (final Tile tile : tilesOrderValid) {
-			final OrderDecision orderDecision = new OrderDecision(tile);
+			final OrderDecisionDefault orderDecision = new OrderDecisionDefault(tile);
 			validOrderDecisions.add(orderDecision);
 		}
 

@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.mapsResolver;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 
 /**
  * Composite pattern
@@ -11,8 +11,7 @@ import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GametMemento;
  */
 public interface DecisionsComponent extends Nullable {
 
-	// take next possible decision and perform it
-	void makeDecision();
+	void makeNextDecision();
 
 	void add(DecisionsComponent decisionsComponent);
 
@@ -29,11 +28,26 @@ public interface DecisionsComponent extends Nullable {
 	boolean isDone();
 
 	/**
+	 * Get height of the element in the resolving tree
+	 */
+	int getHeight();
+
+	/**
 	 * Resolve which {@link DecisionsComponent} in resolve structure should be
 	 * resolved next.
+	 * 
+	 * @param client
+	 *            client is needed to set possible decisions for eventual new
+	 *            {@link DecisionsComponent}
 	 */
 	DecisionsComponent nextComponent();
 
-	GametMemento getSnapshotAfterChoice();
+	void setSnapshotAfterDecision(GameMemento snapshotAfterPreviousDecision);
+
+	/**
+	 * Return latest order decision. Needed to collect victorious order
+	 * decisions, when victory condition is met.
+	 */
+	OrderDecisionDefault getLatestDecision();
 
 }

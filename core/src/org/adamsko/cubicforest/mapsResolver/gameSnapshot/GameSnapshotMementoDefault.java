@@ -1,8 +1,8 @@
 package org.adamsko.cubicforest.mapsResolver.gameSnapshot;
 
-public class GameSnapshotMementoDefault implements GametMemento {
+public class GameSnapshotMementoDefault implements GameMemento {
 
-	private GameState state;
+	private GameState gameState;
 
 	@Override
 	public boolean isNull() {
@@ -11,12 +11,17 @@ public class GameSnapshotMementoDefault implements GametMemento {
 
 	@Override
 	public GameState getState() {
-		return state;
+		return gameState;
 	}
 
 	@Override
-	public void setState(final GameState s) {
-		this.state = state;
+	public void setState(final GameState gameState) {
+		this.gameState = gameState;
+	}
+
+	@Override
+	public boolean isEqual(final GameMemento checkedMemento) {
+		return checkedMemento.getState().isEqual(getState());
 	}
 
 }

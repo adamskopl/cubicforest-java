@@ -109,6 +109,14 @@ public class TilePathGuideDefault implements TilePathGuide {
 		}
 	}
 
+	private void onEvent2() {
+		try {
+			nextStage();
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void handleSingleTile() throws Exception {
 		handleCollision(TileCollisionType.OCCUPANT_STOPS,
 				helper.getTileHeadingTo(), wanderer);
@@ -193,6 +201,7 @@ public class TilePathGuideDefault implements TilePathGuide {
 	}
 
 	private void startTweener() {
+
 		Tween.to(wanderer, helper.getTweenType(), 0.0f)
 				.target(helper.getTweenMoveTarget().x,
 						helper.getTweenMoveTarget().y).ease(Linear.INOUT)

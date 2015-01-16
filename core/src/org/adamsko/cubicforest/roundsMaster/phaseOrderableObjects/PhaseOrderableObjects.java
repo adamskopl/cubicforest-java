@@ -25,7 +25,7 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 	protected TilesLookController tilesLookController;
 
 	private final List<WorldObject> phaseObjects;
-	private final OrderableObjectsContainer objectsContainer;
+	private OrderableObjectsContainer objectsContainer;
 
 	/**
 	 * Indicates if phase was skipped without doing anything
@@ -79,14 +79,17 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 	public void reloadPhase() {
 		currentObjectPointer = -1;
 
-		if (objectsContainer.getOrderableObjects().size() == 0) {
-			Gdx.app.error("reloadPhase()", "0");
-		}
-
 		phaseObjects.clear();
 		for (final WorldObject wo : objectsContainer.getOrderableObjects()) {
 			phaseObjects.add(wo);
 		}
+	}
+
+	public void reloadPhase(
+			final OrderableObjectsContainer newOrderableObjectsContainer) {
+
+		objectsContainer = newOrderableObjectsContainer;
+		reloadPhase();
 	}
 
 	@Override
@@ -149,6 +152,10 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 		return currentObjectPointer;
 	}
 
+	public void setCurrentObjectIndex(final int newIndex) {
+		this.currentObjectPointer = newIndex;
+	}
+
 	/**
 	 * Return information if there are no phase objects.
 	 */
@@ -162,4 +169,5 @@ public abstract class PhaseOrderableObjects implements RoundPhase,
 	private void setPhaseSkippedLastTime(final boolean phaseSkippedLastTime) {
 		this.phaseSkippedLastTime = phaseSkippedLastTime;
 	}
+
 }

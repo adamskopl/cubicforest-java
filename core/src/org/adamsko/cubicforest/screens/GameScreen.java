@@ -49,6 +49,12 @@ public class GameScreen implements Screen {
 
 		worldRenderer.setCoordCalc(worldBuilder.getCoordCalc());
 
+		try {
+			worldBuilder.getRoundsMaster().nextRound();
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
@@ -115,14 +121,18 @@ public class GameScreen implements Screen {
 				worldObjectsMastersContainer.getPortalsMaster(),
 				worldObjectsMastersContainer.getPrizesMaster());
 
+		worldBuilder.setWorldObjectsMastersContainerCVMF(worldBuilder
+				.getCollisionVisitorsManagerFactory());
+
 		worldBuilder.initGuiMaster();
 
 		worldBuilder.initMapsLoader(worldObjectsMastersContainer,
-				worldBuilder.getGuiMaster(),
-				worldBuilder.getCollisionVisitorsManagerFactory());
+				worldBuilder.getGuiMaster());
+
+		worldBuilder.initMapsResolver();
 
 		worldBuilder.initRoundsMaster(worldBuilder.getMapsLoader(),
-				worldObjectsMastersContainer);
+				worldBuilder.getMapsResolver(), worldObjectsMastersContainer);
 
 		worldBuilder.initTilesMasterRoundsMaster(
 				worldObjectsMastersContainer.getTilesMaster(),
@@ -146,6 +156,9 @@ public class GameScreen implements Screen {
 				worldObjectsMastersContainer.getGatherCubesMaster(),
 				worldObjectsMastersContainer.getPrizesMaster(),
 				worldBuilder.getRoundsMaster());
+
+		worldBuilder.initMapsResolverGui(worldBuilder.getGuiMaster()
+				.getGuiResolver());
 
 		worldBuilder.initPickMaster(worldBuilder.getGuiMaster(),
 				worldObjectsMastersContainer.getTilesMaster(),

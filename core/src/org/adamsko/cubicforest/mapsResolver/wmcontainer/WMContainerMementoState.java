@@ -6,6 +6,8 @@ import java.util.List;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * {@link WorldObjectsMastersContainer} memento state
  * 
@@ -28,11 +30,29 @@ public class WMContainerMementoState {
 				.getWorldObjectsMasters()) {
 			wOMMementos.add(worldObjectsMaster.createMemento());
 		}
-
 	}
 
 	public List<WOMMemento> getWOMMementos() {
 		return wOMMementos;
 	}
 
+	public boolean isEqual(final WMContainerMementoState checkedState) {
+
+		if (getWOMMementos().size() != checkedState.getWOMMementos().size()) {
+			Gdx.app.debug("WMContainerMementoState", "sizes diff");
+			return false;
+		}
+
+		final List<WOMMemento> checkedMementos = checkedState.getWOMMementos();
+
+		int i = 0;
+		for (final WOMMemento memento : getWOMMementos()) {
+			if (!memento.isEqual(checkedMementos.get(i))) {
+				return false;
+			}
+			i++;
+		}
+
+		return true;
+	}
 }

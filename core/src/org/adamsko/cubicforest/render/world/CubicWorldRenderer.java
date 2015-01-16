@@ -193,7 +193,6 @@ public class CubicWorldRenderer implements GameRenderer {
 		updateList(renderableObjectsMastersGui, renderListMasterGui);
 		renderList(renderListMasterWorld);
 		renderList(renderListMasterGui);
-
 	}
 
 	private void renderList(final RenderList renderListMaster) {

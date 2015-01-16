@@ -11,7 +11,12 @@ import org.adamsko.cubicforest.gui.levels.GuiElementLevel;
 import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
-import org.adamsko.cubicforest.mapsResolver.OrderDecision;
+import org.adamsko.cubicforest.gui.resolver.GuiElementResolver;
+import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.mapsResolver.MapsResolver;
+import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
 import org.adamsko.cubicforest.roundsMaster.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -25,6 +30,8 @@ import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * @author adamsko
  * 
@@ -35,6 +42,10 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private final GatherCubesMaster gatherCubesMaster;
 	private final TilePathSearchersMaster tilePathSearchersMaster;
 	private final EnemiesHelper enemiesHelper;
+	private final TilesMaster tilesMaster;
+
+	private RoundDecisionsIterator roundDecisionsIterator;
+	private MapsResolver mapsResolver;
 
 	/**
 	 * Active path created by picking order valid Tile.
@@ -49,22 +60,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private Boolean orderInProgress = false;
 
 	public PhaseHeroes(
-			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
-		super(worldObjectsMastersContainer.getHeroesMaster(), null, null,
-				"PhaseHeroes");
-
-		heroesOrdersMaster = new PhaseHeroesOrdersMasterDefault(
-				tilesLookController,
-				worldObjectsMastersContainer.getTilesMaster(),
-				worldObjectsMastersContainer.getHeroesToolsMaster(), null);
-
-		gatherCubesMaster = null;
-		tilePathSearchersMaster = null;
-		enemiesHelper = null;
-
-	}
-
-	public PhaseHeroes(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final TilesMaster tilesMaster, final OrdersMaster ordersMaster,
 			final TilePathSearchersMaster tilePathSearchersMaster,
@@ -75,6 +70,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		this.gatherCubesMaster = worldObjectsMastersContainer
 				.getGatherCubesMaster();
 		this.tilePathSearchersMaster = tilePathSearchersMaster;
+		this.tilesMaster = tilesMaster;
 
 		enemiesHelper = new EnemiesHelper(
 				worldObjectsMastersContainer.getEnemiesMaster());
@@ -93,6 +89,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		if (!orderInProgress) {
 			activeObject = currentObject();
+
 			final TilePath pathToTile = tilePathSearchersMaster
 					.getTilePathSearcherValidPath().search(activeObject, tile);
 
@@ -115,7 +112,9 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 		heroesOrdersMaster
 				.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 
-		// resolver step
+		if (mapsResolver.isResolverWorking()) {
+			roundDecisionsIteratorIter();
+		}
 
 	}
 
@@ -128,6 +127,7 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		if (roundsMaster.getGameResult() == GameResult.GAME_WON
 				|| victoryConditionsMet()) {
+			roundDecisionsIteratorWin();
 			roundsMaster.reload();
 			roundsMaster.resetGameResult();
 			return;
@@ -151,6 +151,10 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 			}
 		}
 
+		if (mapsResolver.isResolverWorking()) {
+			roundDecisionsIteratorIter();
+		}
+
 	}
 
 	@Override
@@ -168,6 +172,10 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		case GUI_LEVELS:
 			guiLevelsClicked((GuiLevels) eventGui);
+			break;
+
+		case GUI_RESOLVER:
+			guiResolverClicked((GuiResolver) eventGui);
 			break;
 
 		default:
@@ -224,8 +232,6 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	private void nextHero() {
 		nextObject();
 		heroesOrdersMaster.setCurrentHero(currentObject());
-
-		// resolver step
 	}
 
 	private void guiLevelsClicked(final GuiLevels guiLevels) {
@@ -234,6 +240,25 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 
 		roundsMaster.setMapActive(clickedElementLevel.getLevelIndex());
 		roundsMaster.reload();
+	}
+
+	private void guiResolverClicked(final GuiResolver eventGui) {
+		final GuiElementResolver clickedElementResolver = (GuiElementResolver) eventGui
+				.getClickedElement();
+
+		switch (clickedElementResolver.getGuiResolverType()) {
+		case RESOLVER_START:
+			mapsResolver.startNewResolve();
+			roundDecisionsIteratorIter();
+			break;
+
+		case RESOLVER_SOLUTION:
+			break;
+
+		default:
+			break;
+		}
+
 	}
 
 	private void guiDebugClicked(final GuiDebug guiDebug) {
@@ -301,8 +326,35 @@ public class PhaseHeroes extends PhaseOrderableObjects {
 	/**
 	 * {@link PhaseHeroesOrdersMaster#getCurrentPossbileDecisions()}
 	 */
-	public List<OrderDecision> getCurrentPossbileDecisions() {
+	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
 		return heroesOrdersMaster.getCurrentPossbileDecisions();
 	}
 
+	private void roundDecisionsIteratorWin() {
+		mapsResolver.victoryConditionsMet();
+	}
+
+	private void roundDecisionsIteratorIter() {
+		final GameMemento memento = roundsMaster.createMemento();
+
+		// inform current component about the results of the last decision
+		roundDecisionsIterator.currentItem().setSnapshotAfterDecision(memento);
+		// roundDecisionsIterator.currentItem().makeDecision();
+		roundDecisionsIterator.next().makeNextDecision();
+	}
+
+	public void setRoundDecisionsIterator(
+			final RoundDecisionsIterator roundDecisionsIterator,
+			final MapsResolver mapsResolver) {
+		this.roundDecisionsIterator = roundDecisionsIterator;
+		this.mapsResolver = mapsResolver;
+	}
+
+	public void resolveDecision(final OrderDecisionDefault orderDecision) {
+		final Vector2 decisionPos = orderDecision.getChosenTilePos();
+		final Tile chosenTile = tilesMaster.getTilesContainer().getTileOnPos(
+				decisionPos);
+		onTilePicked(chosenTile);
+		startOrderClicked();
+	}
 }

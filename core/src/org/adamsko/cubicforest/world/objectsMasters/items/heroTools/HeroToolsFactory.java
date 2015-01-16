@@ -7,10 +7,10 @@ import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.portal.HeroToolPortal;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.HeroToolTrap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
