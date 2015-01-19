@@ -16,6 +16,11 @@ public interface PhaseHeroes extends PhaseOrderableObjects,
 		RDIterSolvingCoordinator {
 
 	/**
+	 * Set next Hero as an active one.
+	 */
+	public void nextHero();
+
+	/**
 	 * Perform operations for passed {@link OrderDecisionDefault}.
 	 */
 	void resolveDecision(final OrderDecisionDefault orderDecision);
@@ -24,6 +29,11 @@ public interface PhaseHeroes extends PhaseOrderableObjects,
 	 * {@link PhaseHeroesOrdersMaster#getCurrentPossbileDecisions()}
 	 */
 	List<OrderDecisionDefault> getCurrentPossbileDecisions();
+
+	/**
+	 * Reaction on 'start order' button click.
+	 */
+	void startOrderClicked();
 
 	/**
 	 * Check if game is victorious. <br>
