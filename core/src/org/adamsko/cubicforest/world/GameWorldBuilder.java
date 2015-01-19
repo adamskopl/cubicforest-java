@@ -5,6 +5,7 @@ import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
 import org.adamsko.cubicforest.mapsResolver.MapsResolver;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.player.PlayersController;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
@@ -217,6 +218,12 @@ public interface GameWorldBuilder extends Nullable {
 	void initTilesMasterRoundsMaster(TilesMaster tilesMaster,
 			final RoundsMaster roundsMaster,
 			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+
+	/**
+	 * Initialize {@link PlayersController} object. Add user and others who can
+	 * decide about the course of the game.
+	 */
+	void initPlayers();
 
 	/**
 	 * Initialize {@link CollisionVisitorsManagerFactory}

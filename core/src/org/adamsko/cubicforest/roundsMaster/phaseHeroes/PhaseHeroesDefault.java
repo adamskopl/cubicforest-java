@@ -79,11 +79,8 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 
 	@Override
 	public void onTilePicked(final Tile tile) {
-
-		WorldObject activeObject = null;
-
 		if (!orderInProgress) {
-			activeObject = currentObject();
+			final WorldObject activeObject = currentObject();
 
 			final TilePath pathToTile = tilePathSearchersMaster
 					.getTilePathSearcherValidPath().search(activeObject, tile);
@@ -110,7 +107,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 		if (mapsResolver.isResolverWorking()) {
 			solverIter();
 		}
-
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.gui.resolver.GuiResolver;
 import org.adamsko.cubicforest.mapsResolver.MapsResolver;
 import org.adamsko.cubicforest.mapsResolver.MapsResolverDefault;
 import org.adamsko.cubicforest.mapsResolver.NullMapsResolver;
+import org.adamsko.cubicforest.player.PlayersController;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalcDefault;
@@ -53,6 +54,7 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 
 	private OrdersMaster ordersMaster;
 	private RoundsMaster roundsMaster;
+	private PlayersController playersController;
 
 	private GuiMaster guiMaster;
 	private MapsLoader mapsLoader;
@@ -259,6 +261,12 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 		roundsMaster.addPhase(phaseEnemies);
 
 		roundsMaster.initializeResolveIterator(phaseHeroes);
+
+	}
+
+	@Override
+	public void initPlayers() {
+		// TODO Auto-generated method stub
 
 	}
 

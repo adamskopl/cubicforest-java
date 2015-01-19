@@ -26,7 +26,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 	private PhaseHeroes phaseHeroes;
 	private PhaseEnemies phaseEnemies;
 	private final List<RoundPhase> phases;
-	int phasePointer = -1;
+	private int phasePointer = -1;
 	private GameResultMaster gameResultMaster;
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
@@ -89,13 +89,6 @@ public class RoundsMasterDefault implements RoundsMaster {
 			return;
 		}
 		startNextPhase();
-	}
-
-	private RoundPhase currentPhase() {
-		if (phases.size() == 0) {
-			return null;
-		}
-		return phases.get(phasePointer);
 	}
 
 	@Override
@@ -184,12 +177,6 @@ public class RoundsMasterDefault implements RoundsMaster {
 		}
 	}
 
-	private void reloadPhases() {
-		for (final RoundPhase phase : phases) {
-			phase.reloadPhase();
-		}
-	}
-
 	@Override
 	public void onGuiEvent(final GuiElementsContainer eventGui) {
 		currentPhase().onGuiEvent(eventGui);
@@ -198,19 +185,6 @@ public class RoundsMasterDefault implements RoundsMaster {
 	@Override
 	public GameMemento createMemento() {
 		return roundsMasterMapsResolver.createMemento();
-	}
-
-	/**
-	 * Check if all phases were skipped
-	 */
-	private boolean allPhasesSkipped() {
-		for (final RoundPhase roundPhase : phases) {
-			if (!roundPhase.phaseSkippedLastTime()) {
-				// at least one phase was not skipped
-				return false;
-			}
-		}
-		return true;
 	}
 
 	@Override
@@ -226,6 +200,32 @@ public class RoundsMasterDefault implements RoundsMaster {
 	@Override
 	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
 		return phaseHeroes.getCurrentPossbileDecisions();
+	}
+
+	private void reloadPhases() {
+		for (final RoundPhase phase : phases) {
+			phase.reloadPhase();
+		}
+	}
+
+	/**
+	 * Check if all phases were skipped
+	 */
+	private boolean allPhasesSkipped() {
+		for (final RoundPhase roundPhase : phases) {
+			if (!roundPhase.phaseSkippedLastTime()) {
+				// at least one phase was not skipped
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private RoundPhase currentPhase() {
+		if (phases.size() == 0) {
+			return null;
+		}
+		return phases.get(phasePointer);
 	}
 
 }

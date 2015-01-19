@@ -139,13 +139,9 @@ public class PhaseHeroesGuiCoordinator implements GuiMasterClient {
 			phaseHeroes.startOrderClicked();
 			break;
 		case ORDER_CANCEL:
-			try {
-				// cancel tool adding
-				phaseHeroesOrdersMaster
-						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
+			// cancel tool adding
+			phaseHeroesOrdersMaster
+					.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 			break;
 		default:
 			break;
