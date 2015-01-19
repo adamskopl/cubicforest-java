@@ -19,6 +19,6 @@ public interface RDIterSolvingCoordinator {
 	/**
 	 * Iterate through Iterator's one element.
 	 */
-	void solveIter();
+	void solverIter();
 
 }
