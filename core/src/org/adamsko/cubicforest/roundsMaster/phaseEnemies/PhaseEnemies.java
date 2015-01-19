@@ -1,7 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
-import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
@@ -63,9 +62,9 @@ public class PhaseEnemies extends PhaseOrderableObjects {
 	@Override
 	public void onOrderFinished() {
 
-		if (roundsMaster.getGameResult() == GameResult.GAME_LOST) {
+		if (roundsMaster.getGameResultMaster().isGameLost()) {
 			roundsMaster.reload();
-			roundsMaster.resetGameResult();
+			roundsMaster.getGameResultMaster().resetGameResult();
 			return;
 		}
 

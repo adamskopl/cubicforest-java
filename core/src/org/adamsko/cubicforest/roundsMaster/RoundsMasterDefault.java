@@ -8,7 +8,8 @@ import org.adamsko.cubicforest.mapsResolver.MapsResolver;
 import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
-import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMasterDefault;
 import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolver;
 import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolverDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
@@ -26,7 +27,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 	private PhaseEnemies phaseEnemies;
 	private final List<RoundPhase> phases;
 	int phasePointer = -1;
-	private GameResult gameResult;
+	private GameResultMaster gameResultMaster;
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
 	private final RoundsMasterMapsResolver roundsMasterMapsResolver;
@@ -43,7 +44,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
 		this.mapsLoader = mapsLoader;
 		phases = new ArrayList<RoundPhase>();
-		gameResult = GameResult.GAME_PLAY;
+		this.gameResultMaster = new GameResultMasterDefault();
 		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
 
 		roundsMasterMapsResolver = new RoundsMasterMapsResolverDefault(
@@ -74,21 +75,8 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
-	public GameResult getGameResult() {
-		return gameResult;
-	}
-
-	@Override
-	public void setGameResultSingle(final GameResult gameResult) {
-		if (gameResult != GameResult.GAME_PLAY
-				&& this.gameResult == GameResult.GAME_PLAY) {
-			this.gameResult = gameResult;
-		}
-	}
-
-	@Override
-	public void resetGameResult() {
-		this.gameResult = GameResult.GAME_PLAY;
+	public GameResultMaster getGameResultMaster() {
+		return gameResultMaster;
 	}
 
 	@Override

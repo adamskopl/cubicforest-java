@@ -10,12 +10,12 @@ import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
-import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperationHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
@@ -208,7 +208,7 @@ public interface GameWorldBuilder extends Nullable {
 	 *            initialized {@link TilesMaster}
 	 * @param roundsMaster
 	 *            {@link RoundsMaster} needed for complete {@link TilesMaster}
-	 *            initialization ( {@link GameResultOperationHandler} object)
+	 *            initialization ( {@link GameResultMaster} object)
 	 * @param collisionVisitorsManagerFactory
 	 *            needs {@link CollisionsHandler} to being set, and its
 	 *            initialization is in {@link TilesEventsHandler}, that belongs

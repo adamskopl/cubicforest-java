@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.roundsMaster;
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMasterClient;
 import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
-import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoaderCoordinator;
@@ -55,22 +55,6 @@ public interface RoundsMaster extends TilePickClient, GuiMasterClient,
 	 */
 	void reload();
 
-	/**
-	 * Rounds master holds informations about game result as a
-	 * {@link GameResult} object.
-	 */
-	GameResult getGameResult();
-
-	/**
-	 * Changes game result. It can be changed from 'PLAY' only once until
-	 * 'resetGameResult()' is not invoked. The assumption is, that game result
-	 * can be changed only once, which prevents overwriting.
-	 */
-	void setGameResultSingle(final GameResult gameResult);
-
-	/**
-	 * Invoked when game result is read. From now game result can be changed.
-	 */
-	void resetGameResult();
+	public GameResultMaster getGameResultMaster();
 
 }

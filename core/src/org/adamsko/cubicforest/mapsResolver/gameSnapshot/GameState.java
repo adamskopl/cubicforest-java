@@ -1,7 +1,8 @@
 package org.adamsko.cubicforest.mapsResolver.gameSnapshot;
 
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
-import org.adamsko.cubicforest.roundsMaster.gameResult.GameResult;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMasterDefault;
 
 public class GameState {
 
@@ -9,11 +10,14 @@ public class GameState {
 	private final int currentHeroIndex;
 	private final WMContainerMemento wMCMemento;
 
-	private final GameResult gameResult;
+	/**
+	 * GameState has its own {@link GameResultMaster}.
+	 */
+	private final GameResultMaster gameResultMaster;
 
 	// if the game is lost/won no other data is necessary
-	public GameState(final GameResult gameResult) {
-		this.gameResult = gameResult;
+	public GameState(final GameResultMaster gameResultMaster) {
+		this.gameResultMaster = new GameResultMasterDefault(gameResultMaster);
 
 		this.currentHeroIndex = 0;
 		this.wMCMemento = null;
@@ -24,7 +28,7 @@ public class GameState {
 
 		this.currentHeroIndex = currentHeroIndex;
 		this.wMCMemento = wmContainerMemento;
-		this.gameResult = GameResult.GAME_PLAY;
+		this.gameResultMaster = new GameResultMasterDefault();
 	}
 
 	public int getCurrentHeroIndex() {
@@ -35,8 +39,8 @@ public class GameState {
 		return wMCMemento;
 	}
 
-	public GameResult getGameResult() {
-		return this.gameResult;
+	public GameResultMaster getGameResultMaster() {
+		return this.gameResultMaster;
 	}
 
 	public boolean isEqual(final GameState checkedState) {

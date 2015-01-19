@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.world.object.collision.handler;
 
 import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMasterDefault.TileCollisionType;
@@ -33,5 +34,5 @@ public interface CollisionsHandler extends Nullable {
 	 * Exposing handler connected with game result modifications (e.g.
 	 * indicating that game is lost).
 	 */
-	GameResultOperationHandler gameResultOperation();
+	GameResultMaster gameResultOperation();
 }
