@@ -16,6 +16,7 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.RoundsMasterDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroesDefault;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.MapsLoaderTiled;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoader;
@@ -244,7 +245,7 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 					"!worldObjectsMastersContainer.allMastersInitialized()");
 		}
 
-		final PhaseHeroes phaseHeroes = new PhaseHeroes(
+		final PhaseHeroes phaseHeroes = new PhaseHeroesDefault(
 				worldObjectsMastersContainer, tilesMaster, ordersMaster,
 				tilePathSearchersMaster, tilesLookController);
 		phaseHeroes.setRoundsMaster(roundsMaster);

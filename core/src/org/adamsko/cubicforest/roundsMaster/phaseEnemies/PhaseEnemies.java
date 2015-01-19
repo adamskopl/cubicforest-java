@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
-import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
+import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjectsDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
@@ -10,7 +10,7 @@ import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
-public class PhaseEnemies extends PhaseOrderableObjects {
+public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 
 	private final HeroesHelper heroesHelper;
 
