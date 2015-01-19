@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.player;
+package org.adamsko.cubicforest.players;
 
 import java.util.ArrayList;
 import java.util.List;

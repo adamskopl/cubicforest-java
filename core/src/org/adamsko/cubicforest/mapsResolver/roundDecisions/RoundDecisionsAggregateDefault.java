@@ -3,9 +3,9 @@ package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.mapsResolver.DecisionsComponent;
-import org.adamsko.cubicforest.mapsResolver.NullDecisionsComponent;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
+import org.adamsko.cubicforest.players.resolver.NullDecisionsComponent;
 
 import com.badlogic.gdx.Gdx;
 

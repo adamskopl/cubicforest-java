@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.mapsResolver;
+package org.adamsko.cubicforest.players.resolver;
 
 public class NullOrderDecision extends OrderDecisionDefault {
 	private static NullOrderDecision instance = null;

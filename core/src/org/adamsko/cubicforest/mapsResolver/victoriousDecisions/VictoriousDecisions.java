@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.mapsResolver.victoriousDecisions;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 
 /**
  * Interface for class representing the sequence of decisions giving victory

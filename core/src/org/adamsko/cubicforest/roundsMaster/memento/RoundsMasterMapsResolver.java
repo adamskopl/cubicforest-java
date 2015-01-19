@@ -1,8 +1,8 @@
 package org.adamsko.cubicforest.roundsMaster.memento;
 
-import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
-import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
+import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 
 public interface RoundsMasterMapsResolver {

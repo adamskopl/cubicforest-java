@@ -2,8 +2,8 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RDIterSolvingCoordinator;
+import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 
 /**

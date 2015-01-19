@@ -1,13 +1,13 @@
 package org.adamsko.cubicforest.roundsMaster.memento;
 
-import org.adamsko.cubicforest.mapsResolver.MapsResolver;
-import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
-import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameSnapshotMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
+import org.adamsko.cubicforest.players.resolver.MapsResolver;
+import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
+import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 

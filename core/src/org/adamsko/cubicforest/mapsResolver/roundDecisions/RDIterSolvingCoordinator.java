@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 
-import org.adamsko.cubicforest.mapsResolver.MapsResolver;
+import org.adamsko.cubicforest.players.resolver.MapsResolver;
 
 /**
  * Round Decisions Iterator Solving Coordinator. Interface for classes using

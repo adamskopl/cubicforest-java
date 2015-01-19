@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.mapsResolver;
+package org.adamsko.cubicforest.players.resolver;
 
 import java.util.ArrayList;
 import java.util.List;

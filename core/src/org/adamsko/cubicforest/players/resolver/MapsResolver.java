@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.mapsResolver;
+package org.adamsko.cubicforest.players.resolver;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;

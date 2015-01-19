@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
-import org.adamsko.cubicforest.mapsResolver.MapsResolver;
-import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
+import org.adamsko.cubicforest.players.resolver.MapsResolver;
+import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
 import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMasterDefault;
 import org.adamsko.cubicforest.roundsMaster.memento.RoundsMasterMapsResolver;

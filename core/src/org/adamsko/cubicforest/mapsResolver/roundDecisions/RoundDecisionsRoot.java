@@ -1,10 +1,10 @@
 package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 
-import org.adamsko.cubicforest.mapsResolver.DecisionsComponent;
-import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
-import org.adamsko.cubicforest.mapsResolver.NullDecisionsComponent;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.NullGameSnapshotMemento;
+import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
+import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
+import org.adamsko.cubicforest.players.resolver.NullDecisionsComponent;
 
 import com.badlogic.gdx.Gdx;
 

@@ -3,10 +3,10 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
-import org.adamsko.cubicforest.mapsResolver.MapsResolver;
-import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
+import org.adamsko.cubicforest.players.resolver.MapsResolver;
+import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.gui.PhaseHeroesGuiCoordinator;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjectsDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;

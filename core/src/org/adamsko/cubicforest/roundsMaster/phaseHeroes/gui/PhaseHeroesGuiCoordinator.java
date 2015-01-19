@@ -12,7 +12,7 @@ import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.gui.resolver.GuiElementResolver;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
-import org.adamsko.cubicforest.mapsResolver.MapsResolver;
+import org.adamsko.cubicforest.players.resolver.MapsResolver;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroesMode;

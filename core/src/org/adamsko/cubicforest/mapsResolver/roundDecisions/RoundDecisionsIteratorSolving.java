@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 
-import org.adamsko.cubicforest.mapsResolver.DecisionsComponent;
-import org.adamsko.cubicforest.mapsResolver.MapsResolverClient;
+import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
+import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
 
 /**
  * Iterator used to iterate through elements during resolving level. Iterator

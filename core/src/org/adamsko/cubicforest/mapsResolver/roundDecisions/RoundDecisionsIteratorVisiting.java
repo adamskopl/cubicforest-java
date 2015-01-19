@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 
-import org.adamsko.cubicforest.mapsResolver.DecisionsComponent;
 import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.VictoriousDecisions;
+import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
 
 /**
  * Iterator used to iterate through ready {@link DecisionsComponent} structure.

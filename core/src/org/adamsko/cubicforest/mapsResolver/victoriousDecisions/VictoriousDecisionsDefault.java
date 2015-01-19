@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.mapsResolver.victoriousDecisions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.mapsResolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 
 public class VictoriousDecisionsDefault implements VictoriousDecisions {
 

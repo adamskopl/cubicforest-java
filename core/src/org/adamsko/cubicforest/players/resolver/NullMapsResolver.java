@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.mapsResolver;
+package org.adamsko.cubicforest.players.resolver;
 
 public class NullMapsResolver extends MapsResolverDefault {
 	private static NullMapsResolver instance = null;
