@@ -9,7 +9,7 @@ import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
  * condition.
  * 
  */
-public interface VictoriousDecisions {
+public interface OrderDecisions {
 
 	/**
 	 * Add next decision belonging to the game solution.

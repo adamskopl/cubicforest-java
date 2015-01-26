@@ -9,8 +9,8 @@ import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsAggrega
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorSolving;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorVisiting;
-import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.VictoriousDecisions;
-import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.VictoriousDecisionsDefault;
+import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.OrderDecisions;
+import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.OrderDecisionsDefault;
 
 public class MapsResolverDefault implements MapsResolver {
 
@@ -19,12 +19,12 @@ public class MapsResolverDefault implements MapsResolver {
 	// iterator iterating through elements to find victorious
 	RoundDecisionsIterator victoriousIterator;
 
-	private final List<VictoriousDecisions> solutions;
+	private final List<OrderDecisions> solutions;
 
 	private GuiResolver guiResolver;
 
 	/**
-	 * If true, resolver is
+	 * If true, resolver is searching for solutions.
 	 */
 	private boolean resolverIsWorking;
 
@@ -36,7 +36,7 @@ public class MapsResolverDefault implements MapsResolver {
 	public MapsResolverDefault() {
 		roundDecisionsAggregate = new RoundDecisionsAggregateDefault(12);
 
-		solutions = new ArrayList<VictoriousDecisions>();
+		solutions = new ArrayList<OrderDecisions>();
 
 		victoriousIterator = new RoundDecisionsIteratorVisiting(
 				NullDecisionsComponent.instance());
@@ -76,7 +76,7 @@ public class MapsResolverDefault implements MapsResolver {
 		// use dedicated iterator
 		victoriousIterator.set(first);
 
-		final VictoriousDecisions victoriousDecisions = new VictoriousDecisionsDefault();
+		final OrderDecisions victoriousDecisions = new OrderDecisionsDefault();
 
 		do {
 			victoriousIterator.next();

@@ -1,5 +1,5 @@
 package org.adamsko.cubicforest.mapsResolver.victoriousDecisions;
 
-public interface VictoriousDecisionsIterator {
+public interface OrderDecisionsIterator {
 
 }

@@ -53,7 +53,6 @@ public class RoundDecisionsRoot extends RoundDecisions {
 
 	@Override
 	public void makeNextDecision() {
-		Gdx.app.debug(
-				"end of resolving? RoundDecisionsRoot::makeNextDecision()", "");
+		// root is not making decisions, making decisions has end
 	}
 }

@@ -28,11 +28,6 @@ public class PlayerMapsResolver extends PlayerBase implements
 	}
 
 	@Override
-	public boolean isNull() {
-		return false;
-	}
-
-	@Override
 	public void initializeRoundsMaster(final RoundsMaster roundsMaster) {
 		super.initializeRoundsMaster(roundsMaster);
 		initializeResolveIterator(roundsMaster.getPhaseHeroes());

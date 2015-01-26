@@ -23,11 +23,6 @@ public class PlayerUser extends PlayerBase {
 	}
 
 	@Override
-	public boolean isNull() {
-		return false;
-	}
-
-	@Override
 	public void startControl() {
 		roundsMaster.getCurrentPhase().setActivePlayer(this);
 	}

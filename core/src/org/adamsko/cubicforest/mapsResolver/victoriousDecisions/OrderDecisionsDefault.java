@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 
-public class VictoriousDecisionsDefault implements VictoriousDecisions {
+public class OrderDecisionsDefault implements OrderDecisions {
 
 	/**
 	 * Decisions (in increasing order), which issued one after another to the
@@ -13,7 +13,7 @@ public class VictoriousDecisionsDefault implements VictoriousDecisions {
 	 */
 	List<OrderDecisionDefault> solvingDecisions;
 
-	public VictoriousDecisionsDefault() {
+	public OrderDecisionsDefault() {
 		solvingDecisions = new ArrayList<OrderDecisionDefault>();
 	}
 
