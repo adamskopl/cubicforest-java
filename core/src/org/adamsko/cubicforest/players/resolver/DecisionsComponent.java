@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.players.resolver;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 
 /**
  * Composite pattern

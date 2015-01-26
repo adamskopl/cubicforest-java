@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.players.resolver;
+package org.adamsko.cubicforest.mapsResolver.orderDecisions;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;

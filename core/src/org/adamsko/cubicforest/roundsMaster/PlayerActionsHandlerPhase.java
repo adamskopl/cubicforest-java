@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.roundsMaster;
 
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.players.PlayerActionsHandler;
-import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
 

@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 
-import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.OrderDecisions;
 import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
 
 /**

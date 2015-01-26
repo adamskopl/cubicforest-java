@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.NullGameSnapshotMemento;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
 import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
 import org.adamsko.cubicforest.players.resolver.NullDecisionsComponent;
 import org.adamsko.cubicforest.players.resolver.NullOrderDecision;
-import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 
 import com.badlogic.gdx.Gdx;
