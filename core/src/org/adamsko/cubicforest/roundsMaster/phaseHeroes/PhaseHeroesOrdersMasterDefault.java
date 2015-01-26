@@ -88,14 +88,23 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 	}
 
 	@Override
-	public void tilePicked(final Tile tilePickedOrder,
+	public PhaseHeroesMode getPhaseHeroesMode() {
+		return phaseHeroesMode;
+	}
+
+	@Override
+	public void highlightTilesOrder(final Tile tilePickedOrder,
 			final Boolean tileOrderValid) {
 
 		this.tilePickedOrder = tilePickedOrder;
-
 		tilesLookController.resetTilesTextures();
 		highlightHeroEnemiesRanges();
 		highlightPickedTile(tilePickedOrder, tileOrderValid);
+	}
+
+	@Override
+	public void tilePicked(final Tile tilePickedOrder,
+			final Boolean tileOrderValid) {
 
 		switch (phaseHeroesMode) {
 		case MODE_CHOICE_MOVEMENT:
@@ -108,11 +117,31 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 		default:
 			break;
 		}
+
 	}
 
 	@Override
 	public void setCurrentHero(final WorldObject currentHero) {
 		this.currentHero = currentHero;
+	}
+
+	@Override
+	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
+		final TilesSearchParameterFactory tilesSearchParameterFactory = tilesMaster
+				.getTilesSearchParameterFactory();
+
+		final List<Tile> tilesOrderValid = tilesMaster.getTilesInRange(
+				currentHero, currentHero.getSpeed(),
+				tilesSearchParameterFactory.create(WorldObjectType.HERO));
+
+		final List<OrderDecisionDefault> validOrderDecisions = new ArrayList<OrderDecisionDefault>();
+		for (final Tile tile : tilesOrderValid) {
+			final OrderDecisionDefault orderDecision = new OrderDecisionDefault(
+					tile);
+			validOrderDecisions.add(orderDecision);
+		}
+
+		return validOrderDecisions;
 	}
 
 	private void initTextures() {
@@ -166,7 +195,8 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 		}
 	}
 
-	private void addHeroToolMarker(final Tile tilePickedOrder,
+	@Override
+	public void addHeroToolMarker(final Tile tilePickedOrder,
 			final Boolean tileOrderValid) {
 
 		heroesToolsMaster.heroToolMarkerRemove();
@@ -174,6 +204,17 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 		if (tileOrderValid) {
 			heroesToolsMaster.heroToolMarkerAdd(tilePickedOrder);
 		}
+
+		highlightPickedTile(tilePickedOrder, tileOrderValid);
+
+	}
+
+	@Override
+	public void removeHeroToolMarker() {
+		tilesLookController.resetTilesTextures();
+		highlightHeroEnemiesRanges();
+		heroesToolsMaster.heroToolMarkerRemove();
+		this.phaseHeroesMode = PhaseHeroesMode.MODE_CHOICE_MOVEMENT;
 	}
 
 	private void highlightPickedTile(final Tile tilePickedOrder,
@@ -195,23 +236,5 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 		tilesLookController.highlightTilesObjectsRange(currentHero,
 				textureTileMovementValid, enemiesHelper.getEnemies(),
 				textureTileMovementValid, textureCommonRanges);
-	}
-
-	@Override
-	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
-		final TilesSearchParameterFactory tilesSearchParameterFactory = tilesMaster
-				.getTilesSearchParameterFactory();
-
-		final List<Tile> tilesOrderValid = tilesMaster.getTilesInRange(
-				currentHero, currentHero.getSpeed(),
-				tilesSearchParameterFactory.create(WorldObjectType.HERO));
-
-		final List<OrderDecisionDefault> validOrderDecisions = new ArrayList<OrderDecisionDefault>();
-		for (final Tile tile : tilesOrderValid) {
-			final OrderDecisionDefault orderDecision = new OrderDecisionDefault(tile);
-			validOrderDecisions.add(orderDecision);
-		}
-
-		return validOrderDecisions;
 	}
 }

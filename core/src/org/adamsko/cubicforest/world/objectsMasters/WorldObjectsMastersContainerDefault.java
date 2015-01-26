@@ -117,6 +117,14 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	@Override
+	public void initCollisionVisitorsManagers() {
+		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
+			worldObjectsMaster
+					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+		}
+	}
+
+	@Override
 	public List<WorldObjectsMaster> getWorldObjectsMasters() {
 		return worldObjectsMasters;
 	}
@@ -138,6 +146,8 @@ public class WorldObjectsMastersContainerDefault implements
 				e.printStackTrace();
 			}
 		}
+
+		initCollisionVisitorsManagers();
 
 	}
 

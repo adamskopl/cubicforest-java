@@ -17,6 +17,8 @@ public interface PhaseHeroesOrdersMaster {
 
 	void changePhaseHeroesMode(final PhaseHeroesMode newMode);
 
+	PhaseHeroesMode getPhaseHeroesMode();
+
 	/**
 	 * Same as {@link #changePhaseHeroesMode(PhaseHeroesMode)}, but also set
 	 * {@link HeroTool} marker type
@@ -40,6 +42,17 @@ public interface PhaseHeroesOrdersMaster {
 	void tilePicked(final Tile tilePickedOrder, final Boolean tileOrderValid);
 
 	/**
+	 * Highlight tiles for given order.
+	 * 
+	 * @param tilePickedOrder
+	 *            tile picked for an order
+	 * @param tileOrderValid
+	 *            is the picked tile valid for an order?
+	 */
+	void highlightTilesOrder(final Tile tilePickedOrder,
+			final Boolean tileOrderValid);
+
+	/**
 	 * Helper needs to know which hero is active right now.
 	 * 
 	 * @param currentHero
@@ -52,5 +65,16 @@ public interface PhaseHeroesOrdersMaster {
 	 * current {@link PhaseHeroes} state for current hero.
 	 */
 	List<OrderDecisionDefault> getCurrentPossbileDecisions();
+
+	/**
+	 * Insert HeroTool marker (tool building intention marker).
+	 */
+	void addHeroToolMarker(final Tile tilePickedOrder,
+			final Boolean tileOrderValid);
+
+	/**
+	 * Remove HeroTool marker (tool building intention marker).
+	 */
+	void removeHeroToolMarker();
 
 }

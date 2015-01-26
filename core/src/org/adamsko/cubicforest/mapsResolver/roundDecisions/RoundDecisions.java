@@ -103,7 +103,6 @@ public class RoundDecisions implements DecisionsComponent {
 
 	@Override
 	public void makeNextDecision() {
-
 		if (getPossibleDecisions().size() == 0
 				|| getHeight() >= roundDecisionsAggregate.getMaxDepth()) {
 			// next decision should be made by a parent

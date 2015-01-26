@@ -12,6 +12,7 @@ import org.adamsko.cubicforest.gui.resolver.GuiResolverDefault;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiMasterDefault implements GuiMaster {
@@ -77,6 +78,9 @@ public class GuiMasterDefault implements GuiMaster {
 
 	@Override
 	public void addClient(final GuiMasterClient newClient) {
+		if (newClient.isNull()) {
+			Gdx.app.error("GuiMasterClient::addClient", "newClient.isNull()");
+		}
 		clients.add(newClient);
 	}
 

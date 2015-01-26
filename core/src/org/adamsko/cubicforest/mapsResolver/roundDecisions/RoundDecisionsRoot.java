@@ -12,9 +12,6 @@ import com.badlogic.gdx.Gdx;
  * Root component: used to start resolving structure. Root is not keeping a
  * snapshot. When resolving starts, it creates first resolving component with a
  * starting snapshot.
- * 
- * @author adamsko
- * 
  */
 public class RoundDecisionsRoot extends RoundDecisions {
 
@@ -56,6 +53,7 @@ public class RoundDecisionsRoot extends RoundDecisions {
 
 	@Override
 	public void makeNextDecision() {
-		Gdx.app.debug("RoundDecisionsRoot::makeNextDecision()", "");
+		Gdx.app.debug(
+				"end of resolving? RoundDecisionsRoot::makeNextDecision()", "");
 	}
 }

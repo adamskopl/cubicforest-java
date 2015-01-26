@@ -134,10 +134,14 @@ public class GameScreen implements Screen {
 		worldBuilder.initRoundsMaster(worldBuilder.getMapsLoader(),
 				worldBuilder.getMapsResolver(), worldObjectsMastersContainer);
 
-		worldBuilder.initTilesMasterRoundsMaster(
+		worldBuilder.initPlayersController(worldBuilder.getMapsResolver(),
+				worldObjectsMastersContainer.getTilesMaster());
+
+		worldBuilder.initTilesMaster(
 				worldObjectsMastersContainer.getTilesMaster(),
 				worldBuilder.getRoundsMaster(),
-				worldBuilder.getCollisionVisitorsManagerFactory());
+				worldBuilder.getCollisionVisitorsManagerFactory(),
+				worldBuilder.getPlayersController());
 
 		worldBuilder.initOrdersMaster(worldObjectsMastersContainer
 				.getTilesMaster());
@@ -150,6 +154,9 @@ public class GameScreen implements Screen {
 						.getTilePathSearchersMaster(),
 				worldObjectsMastersContainer.getTilesMaster()
 						.getTilesLookController());
+
+		worldBuilder.initPlayersControllerRoundsMaster(worldBuilder
+				.getRoundsMaster());
 
 		worldBuilder.initGuiMasterContainers(worldBuilder.getGuiMaster(),
 				worldRenderer, worldBuilder.getMapsLoader(),

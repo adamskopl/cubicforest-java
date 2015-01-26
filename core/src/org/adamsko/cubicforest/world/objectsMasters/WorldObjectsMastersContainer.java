@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
@@ -25,6 +26,12 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 public interface WorldObjectsMastersContainer {
 
 	void initMasters(GameRenderer gameRenderer);
+
+	/**
+	 * For every {@link WorldObjectsMaster} initialize their
+	 * {@link CollisionVisitorsManager} objects.
+	 */
+	void initCollisionVisitorsManagers();
 
 	/**
 	 * Check if all contained {@link WorldObjectsMaster} objects are initialized

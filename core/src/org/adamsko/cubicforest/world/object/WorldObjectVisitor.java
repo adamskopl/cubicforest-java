@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.object;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
@@ -21,7 +22,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
  * @author adamsko
  * 
  */
-public interface WorldObjectVisitor {
+public interface WorldObjectVisitor extends Nullable {
 
 	/**
 	 * Visitor should has access to visiting object, to perform operations on

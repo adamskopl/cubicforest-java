@@ -4,8 +4,10 @@ import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.players.Player;
 import org.adamsko.cubicforest.players.PlayersController;
 import org.adamsko.cubicforest.players.resolver.MapsResolver;
+import org.adamsko.cubicforest.players.resolver.PlayerMapsResolver;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
@@ -26,6 +28,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
+import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
+import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
@@ -202,8 +206,7 @@ public interface GameWorldBuilder extends Nullable {
 			final TilesLookController tilesLookController);
 
 	/**
-	 * Initialize {@link TilesMaster} parts that are needing
-	 * {@link RoundsMaster}.
+	 * Initialize {@link TilesMaster}.
 	 * 
 	 * @param tilesMaster
 	 *            initialized {@link TilesMaster}
@@ -214,16 +217,36 @@ public interface GameWorldBuilder extends Nullable {
 	 *            needs {@link CollisionsHandler} to being set, and its
 	 *            initialization is in {@link TilesEventsHandler}, that belongs
 	 *            to {@link TilesMaster}
+	 * @param playersController
+	 *            {@link PlayersController} is added as a
+	 *            {@link PickMasterClient}.
 	 */
-	void initTilesMasterRoundsMaster(TilesMaster tilesMaster,
+	void initTilesMaster(TilesMaster tilesMaster,
 			final RoundsMaster roundsMaster,
-			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory,
+			PlayersController playersController);
 
 	/**
 	 * Initialize {@link PlayersController} object. Add user and others who can
 	 * decide about the course of the game.
+	 * 
+	 * @param mapsResolver
+	 *            needed to create {@link PlayerMapsResolver} in
+	 *            {@link PlayersController}
+	 * 
+	 * @param tilesMaster
+	 *            some of the {@link Player} in {@link PlayersController} uses
+	 *            {@link TilesMaster} to find {@link Tile} objects.
 	 */
-	void initPlayers();
+	void initPlayersController(final MapsResolver mapsResolver,
+			final TilesMaster tilesMaster);
+
+	/**
+	 * Initialize {@link RoundsMaster} in {@link PlayersController}.
+	 * 
+	 * @param roundsMaster
+	 */
+	void initPlayersControllerRoundsMaster(RoundsMaster roundsMaster);
 
 	/**
 	 * Initialize {@link CollisionVisitorsManagerFactory}
@@ -276,6 +299,12 @@ public interface GameWorldBuilder extends Nullable {
 	 * Get {@link RoundsMaster} needed for {@link GameWorldBuilder} functions.
 	 */
 	RoundsMaster getRoundsMaster();
+
+	/**
+	 * Get {@link PlayersController} needed for {@link GameWorldBuilder}
+	 * functions.
+	 */
+	PlayersController getPlayersController();
 
 	/**
 	 * Get {@link CollisionVisitorsManagerFactory} needed for

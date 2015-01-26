@@ -2,29 +2,20 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.gui.GuiElementsContainer;
-import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
-import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
-import org.adamsko.cubicforest.players.resolver.MapsResolver;
 import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
-import org.adamsko.cubicforest.roundsMaster.phaseHeroes.gui.PhaseHeroesGuiCoordinator;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjectsDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
+import org.adamsko.cubicforest.world.tilePathsMaster.NullTilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
-import com.badlogic.gdx.math.Vector2;
-
-/**
- * @author adamsko
- * 
- */
 public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 		PhaseHeroes {
 
@@ -32,23 +23,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	private final TilePathSearchersMaster tilePathSearchersMaster;
 	private final EnemiesHelper enemiesHelper;
 	private final GatherCubesMaster gatherCubesMaster;
-	private final TilesMaster tilesMaster;
-	private PhaseHeroesGuiCoordinator phaseHeroesGuiCoordinator;
-
-	private RoundDecisionsIterator roundDecisionsIterator;
-	private MapsResolver mapsResolver;
-
-	/**
-	 * Active path created by picking order valid Tile.
-	 */
-	private TilePath activePath = null;
-
-	/**
-	 * Is any of the phaseObjects objects executing an order?
-	 * 
-	 * TODO: common variable and mechanism for PhaseOrderableObjects phase?
-	 */
-	private Boolean orderInProgress = false;
 
 	public PhaseHeroesDefault(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
@@ -59,7 +33,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 				tilesLookController, "PhaseHeroes");
 
 		this.tilePathSearchersMaster = tilePathSearchersMaster;
-		this.tilesMaster = tilesMaster;
 
 		enemiesHelper = new EnemiesHelper(
 				worldObjectsMastersContainer.getEnemiesMaster());
@@ -72,30 +45,12 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 		this.gatherCubesMaster = worldObjectsMastersContainer
 				.getGatherCubesMaster();
 
-		// phaseHeroesGuiCoordinator is set in setRoundDecisionsIterator()
-		this.phaseHeroesGuiCoordinator = null;
-
+		initPlayerActionsHandler();
 	}
 
 	@Override
-	public void onTilePicked(final Tile tile) {
-		if (!orderInProgress) {
-			final WorldObject activeObject = currentObject();
-
-			final TilePath pathToTile = tilePathSearchersMaster
-					.getTilePathSearcherValidPath().search(activeObject, tile);
-
-			final boolean startOrderValid = startOrderValid(activeObject, tile,
-					pathToTile);
-
-			heroesOrdersMaster.tilePicked(tile, startOrderValid);
-
-			if (startOrderValid) {
-				activePath = pathToTile;
-			} else {
-				activePath = null;
-			}
-		}
+	public void initPlayerActionsHandler() {
+		playerActionsHandler = new PlayerActionsHandlerPhaseHeroes(this);
 	}
 
 	@Override
@@ -104,77 +59,54 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 		heroesOrdersMaster
 				.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 
-		if (mapsResolver.isResolverWorking()) {
-			solverIter();
-		}
+		getActivePlayer().makeNextDecision();
 	}
 
 	@Override
 	public void onOrderFinished() {
-
-		orderInProgress = false;
-
+		orderFinished();
 		removeDeadObjects();
 
 		if (roundsMaster.getGameResultMaster().isGameWon()
 				|| victoryConditionsMet()) {
-			roundDecisionsIteratorWin();
+			getActivePlayer().onVictoryConditionsMet();
 			roundsMaster.reload();
 			roundsMaster.getGameResultMaster().resetGameResult();
 			return;
 		}
 
 		if (isCurrentObjectLast()) {
-			try {
-				phaseIsOver(this);
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
+			phaseIsOver(this);
 			return;
 		} else {
 			// handle next object
 			nextHero();
-			try {
-				heroesOrdersMaster
-						.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-			} catch (final Exception e1) {
-				e1.printStackTrace();
-			}
+			heroesOrdersMaster
+					.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 		}
 
-		if (mapsResolver.isResolverWorking()) {
-			solverIter();
-		}
-
+		// player can make next decision
+		getActivePlayer().makeNextDecision();
 	}
 
 	@Override
-	public void onGuiEvent(final GuiElementsContainer eventGui) {
-		phaseHeroesGuiCoordinator.onGuiEvent(eventGui);
+	public void orderStarted() {
+		super.orderStarted();
+		heroesOrdersMaster
+				.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);
 	}
 
 	@Override
-	public void startOrderClicked() {
-		if (!orderInProgress) {
-			if (activePath != null) {
-				orderInProgress = true;
-				try {
-					heroesOrdersMaster
-							.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);
-				} catch (final Exception e) {
-					e.printStackTrace();
-				}
-
-				ordersMaster.startOrder(currentObject(), activePath, this);
-				activePath = null;
-			}
-		}
+	public void issueOrder(final WorldObject phaseObject,
+			final TilePath tilePath) {
+		ordersMaster.startOrder(getCurrentObject(), tilePath, this);
+		setTilePathActive(NullTilePath.instance());
 	}
 
 	@Override
 	public void nextHero() {
 		nextObject();
-		heroesOrdersMaster.setCurrentHero(currentObject());
+		heroesOrdersMaster.setCurrentHero(getCurrentObject());
 	}
 
 	@Override
@@ -188,49 +120,9 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	}
 
 	@Override
-	public void solverIter() {
-		final GameMemento memento = roundsMaster.createMemento();
-
-		// inform current component about the results of the last decision
-		roundDecisionsIterator.currentItem().setSnapshotAfterDecision(memento);
-		// roundDecisionsIterator.currentItem().makeDecision();
-		roundDecisionsIterator.next().makeNextDecision();
-	}
-
-	@Override
-	public void setRoundDecisionsIterator(
-			final RoundDecisionsIterator roundDecisionsIterator,
-			final MapsResolver mapsResolver) {
-		this.roundDecisionsIterator = roundDecisionsIterator;
-		this.mapsResolver = mapsResolver;
-
-		this.phaseHeroesGuiCoordinator = new PhaseHeroesGuiCoordinator(this,
-				roundsMaster, mapsResolver, gatherCubesMaster,
-				heroesOrdersMaster);
-	}
-
-	@Override
-	public void resolveDecision(final OrderDecisionDefault orderDecision) {
-		final Vector2 decisionPos = orderDecision.getChosenTilePos();
-		final Tile chosenTile = tilesMaster.getTilesContainer().getTileOnPos(
-				decisionPos);
-		onTilePicked(chosenTile);
-		startOrderClicked();
-	}
-
-	private void roundDecisionsIteratorWin() {
-		mapsResolver.victoryConditionsMet();
-	}
-
-	/**
-	 * Check if given order can be started.
-	 * 
-	 * @return can given order be started?
-	 */
-	private Boolean startOrderValid(final WorldObject activeObject,
+	public boolean isPathOrderValidObject(final WorldObject phaseObject,
 			final Tile tile, final TilePath pathToTile) {
-
-		if (tile.isOccupied(activeObject)) {
+		if (tile.isOccupied(phaseObject)) {
 			return true;
 		}
 
@@ -242,11 +134,53 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 			return false;
 		}
 
-		if (!orderInProgress
-				&& pathToTile.length() - 1 <= activeObject.getSpeed()) {
+		if (!isOrderInProgress()
+				&& pathToTile.length() - 1 <= phaseObject.getSpeed()) {
 			return true;
 		}
 
 		return false;
 	}
+
+	@Override
+	public boolean isHeroToolAffordable(final WorldObjectType heroToolType) {
+		return gatherCubesMaster.getGatherCubesCounter().isToolAffordable(
+				heroToolType);
+	}
+
+	@Override
+	public void chooseHeroTool(final WorldObjectType heroToolType) {
+		// change mode and also set marker's type
+		heroesOrdersMaster.changePhaseHeroesMode(
+				PhaseHeroesMode.MODE_CHOICE_TOOL, heroToolType);
+	}
+
+	@Override
+	public boolean isHeroToolChosen() {
+		return heroesOrdersMaster.getPhaseHeroesMode() == PhaseHeroesMode.MODE_CHOICE_TOOL;
+	}
+
+	@Override
+	public TilePath searchTilePath(final WorldObject phaseObject,
+			final Tile tile) {
+		return tilePathSearchersMaster.getTilePathSearcherValidPath().search(
+				getCurrentObject(), tile);
+	}
+
+	@Override
+	public void highlightTilesOrder(final Tile tilePickedOrder,
+			final Boolean tileOrderValid) {
+		heroesOrdersMaster.highlightTilesOrder(tilePickedOrder, tileOrderValid);
+	}
+
+	@Override
+	public void addHeroToolMarker(final Tile tileTool) {
+		heroesOrdersMaster.tilePicked(tileTool, true);
+	}
+
+	@Override
+	public void removeHeroToolMarker() {
+		heroesOrdersMaster.removeHeroToolMarker();
+	}
+
 }

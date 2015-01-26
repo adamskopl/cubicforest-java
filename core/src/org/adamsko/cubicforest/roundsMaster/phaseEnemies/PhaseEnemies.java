@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.roundsMaster.phaseEnemies;
 
-import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjectsDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
@@ -28,7 +27,8 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 	}
 
 	@Override
-	public void onTilePicked(final Tile tile) {
+	public void initPlayerActionsHandler() {
+		playerActionsHandler = new PlayerActionsHandlerPhaseEnemies(this);
 	}
 
 	@Override
@@ -36,10 +36,15 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 		moveNextEnemy();
 	}
 
+	/**
+	 * TODO: break method for smaller ones and use them in
+	 * {@link PlayerActionsHandlerPhaseEnemies} like in
+	 * {@link PlayerActionsHandlerPhaseEnemies}.
+	 */
 	private void moveNextEnemy() {
 
 		nextObject();
-		final WorldObject activeEnemy = currentObject();
+		final WorldObject activeEnemy = getCurrentObject();
 
 		if (activeEnemy.isNull()) {
 			return;
@@ -82,7 +87,26 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 	}
 
 	@Override
-	public void onGuiEvent(final GuiElementsContainer eventGui) {
+	public TilePath searchTilePath(final WorldObject phaseObject,
+			final Tile tile) {
+		return null;
+	}
+
+	@Override
+	public boolean isPathOrderValidObject(final WorldObject phaseObject,
+			final Tile tile, final TilePath pathToTile) {
+		return false;
+	}
+
+	@Override
+	public void highlightTilesOrder(final Tile tilePickedOrder,
+			final Boolean tileOrderValid) {
+	}
+
+	@Override
+	public void issueOrder(final WorldObject phaseObject,
+			final TilePath tilePath) {
+		// TODO Auto-generated method stub
 	}
 
 }

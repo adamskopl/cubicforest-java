@@ -5,7 +5,6 @@ import java.util.List;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
-import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 import org.adamsko.cubicforest.world.tilePathsMaster.NullTilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
@@ -25,14 +24,12 @@ import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearcher;
 public class TilePathSearcherNearestTile implements TilePathSearcher {
 
 	private final TilesMaster tilesMaster;
-	private final TilesLookController tilesLookController;
 	// used as a stage of searching
 	private final TilePathSearcher tilePathSearcherValidTile;
 
 	public TilePathSearcherNearestTile(final TilesMaster tilesMaster,
 			final TilePathSearcher tilePathSearcherValidTile) {
 		this.tilesMaster = tilesMaster;
-		this.tilesLookController = tilesMaster.getTilesLookController();
 		this.tilePathSearcherValidTile = tilePathSearcherValidTile;
 	}
 
