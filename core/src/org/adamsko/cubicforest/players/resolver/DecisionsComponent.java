@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.players.resolver;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
@@ -22,11 +24,11 @@ public interface DecisionsComponent extends Nullable {
 
 	void remove(DecisionsComponent decisionsComponent);
 
-	/**
-	 * Check if {@link DecisionsComponent} is completely resolved and can be
-	 * abandoned
-	 */
-	boolean isDone();
+	// /**
+	// * Check if {@link DecisionsComponent} is completely resolved and can be
+	// * abandoned
+	// */
+	// boolean isDone();
 
 	/**
 	 * Get height of the element in the resolving tree
@@ -44,6 +46,12 @@ public interface DecisionsComponent extends Nullable {
 	DecisionsComponent nextComponent();
 
 	void setSnapshotAfterDecision(GameMemento snapshotAfterPreviousDecision);
+
+	/**
+	 * Get possible {@link OrderDecisionDefault} decisions for this component
+	 * (they should be initialized in a constructor)
+	 */
+	List<OrderDecisionDefault> getPossibleDecisions();
 
 	/**
 	 * Return latest order decision. Needed to collect victorious order

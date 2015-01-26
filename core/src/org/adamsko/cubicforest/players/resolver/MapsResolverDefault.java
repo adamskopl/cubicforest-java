@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregateDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsAggregate;
@@ -100,5 +101,23 @@ public class MapsResolverDefault implements MapsResolver {
 	public boolean isResolverWorking() {
 		return resolverIsWorking;
 	}
+
+	@Override
+	public void workIsDone() {
+		resolverIsWorking = false;
+	}
+
+	@Override
+	public int countSolutions() {
+		return solutions.size();
+	}
+
+	@Override
+	public OrderDecisionsAggregate getSolution(final int index) {
+		if (index + 1 > solutions.size()) {
+			return NullOrderDecisionsAggregate.instance();
+		}
+		return solutions.get(index);
+	};
 
 }

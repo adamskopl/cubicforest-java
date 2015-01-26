@@ -157,23 +157,13 @@ public class RoundDecisions implements DecisionsComponent {
 	}
 
 	@Override
-	public boolean isDone() {
-		// component is completely resolved, when all possible decisions are
-		// taken into account
-		if (possibleDecisions.size() == 0) {
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
 	public void setSnapshotAfterDecision(
 			final GameMemento snapshotAfterPreviousDecision) {
 		this.snapshotAfterPreviousDecision = snapshotAfterPreviousDecision;
 	};
 
-	List<OrderDecisionDefault> getPossibleDecisions() {
+	@Override
+	public List<OrderDecisionDefault> getPossibleDecisions() {
 		return possibleDecisions;
 	}
 

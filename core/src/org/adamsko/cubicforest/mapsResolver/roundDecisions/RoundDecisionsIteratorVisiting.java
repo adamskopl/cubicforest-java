@@ -38,7 +38,8 @@ public class RoundDecisionsIteratorVisiting implements RoundDecisionsIterator {
 	public boolean isDone() {
 		// whole structure is resolved, when all decisions from root are
 		// resolved
-		return first().isDone();
+		// return first().isDone();
+		return false;
 	}
 
 	@Override

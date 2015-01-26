@@ -13,6 +13,7 @@ import org.adamsko.cubicforest.world.tile.Tile;
  */
 public abstract class PlayerBase implements Player {
 
+	private final PlayersController playersController;
 	protected RoundsMaster roundsMaster;
 
 	@Override
@@ -20,8 +21,14 @@ public abstract class PlayerBase implements Player {
 		return false;
 	}
 
-	public PlayerBase() {
+	public PlayerBase(final PlayersController playersController) {
+		this.playersController = playersController;
 		this.roundsMaster = NullRoundsMaster.instance();
+	}
+
+	@Override
+	public PlayersController getPlayersController() {
+		return playersController;
 	}
 
 	@Override

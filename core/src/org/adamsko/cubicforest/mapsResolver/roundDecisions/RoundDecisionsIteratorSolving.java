@@ -42,9 +42,14 @@ public class RoundDecisionsIteratorSolving implements RoundDecisionsIterator {
 
 	@Override
 	public boolean isDone() {
-		// whole structure is resolved, when all decisions from root are
-		// resolved
-		return first().isDone();
+		// whole structure is resolved, when root's child has no decisions to
+		// make (root is creating first child with starting decisions. all
+		// decisions solved: whole structure solved)
+		if (!first().getChild().isNull()
+				&& first().getChild().getPossibleDecisions().size() == 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

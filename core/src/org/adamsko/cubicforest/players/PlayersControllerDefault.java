@@ -11,6 +11,7 @@ import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.gui.resolver.GuiElementResolver;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.players.decisionOrdersReplay.PlayerDecisionOrdersReplay;
 import org.adamsko.cubicforest.players.resolver.MapsResolver;
 import org.adamsko.cubicforest.players.resolver.PlayerMapsResolver;
 import org.adamsko.cubicforest.players.user.PlayerUser;
@@ -26,11 +27,14 @@ public class PlayersControllerDefault implements PlayersController {
 	private Player activePlayer;
 	private final Player playerUser;
 	private final Player playerMapsResolver;
+	private final Player playerDecisionOrdersReplay;
 
 	public PlayersControllerDefault(final MapsResolver mapsResolver,
 			final TilesMaster tilesMaster) {
-		playerUser = new PlayerUser();
-		playerMapsResolver = new PlayerMapsResolver(mapsResolver, tilesMaster);
+		playerUser = new PlayerUser(this);
+		playerMapsResolver = new PlayerMapsResolver(this, mapsResolver,
+				tilesMaster);
+		playerDecisionOrdersReplay = new PlayerDecisionOrdersReplay(this);
 		activePlayer = playerUser;
 		this.roundsMaster = NullRoundsMaster.instance();
 	}
@@ -45,6 +49,7 @@ public class PlayersControllerDefault implements PlayersController {
 		this.roundsMaster = roundsMaster;
 		playerUser.initializeRoundsMaster(roundsMaster);
 		playerMapsResolver.initializeRoundsMaster(roundsMaster);
+		playerDecisionOrdersReplay.initializeRoundsMaster(roundsMaster);
 	}
 
 	@Override

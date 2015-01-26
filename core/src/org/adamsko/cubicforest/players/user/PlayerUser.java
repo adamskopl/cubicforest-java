@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.players.user;
 
 import org.adamsko.cubicforest.players.PlayerBase;
+import org.adamsko.cubicforest.players.PlayersController;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
@@ -13,8 +14,8 @@ import org.adamsko.cubicforest.world.tile.Tile;
  */
 public class PlayerUser extends PlayerBase {
 
-	public PlayerUser() {
-		super();
+	public PlayerUser(final PlayersController playersController) {
+		super(playersController);
 	}
 
 	@Override
