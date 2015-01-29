@@ -19,7 +19,7 @@ import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterato
  */
 public interface DecisionsComponent extends Nullable {
 
-	void makeNextDecision();
+	void makeNextDecision(RoundDecisionsIterator roundDecisionsIterator);
 
 	void add(DecisionsComponent decisionsComponent);
 

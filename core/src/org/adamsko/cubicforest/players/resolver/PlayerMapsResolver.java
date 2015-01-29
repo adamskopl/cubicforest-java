@@ -39,7 +39,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void startControl() {
-		TilePathGuideDefault.setTweenSpeedHigh();
+		TilePathGuideDefault.setTweenSpeedVeryLow();
 		resolvedPhase.setActivePlayer(this);
 		mapsResolver.startNewResolve();
 		makeNextDecision();
@@ -64,7 +64,8 @@ public class PlayerMapsResolver extends PlayerBase implements
 			Gdx.app.debug("pmr", "iterator is done");
 			getPlayersController().switchPlayerUser();
 		} else {
-			roundDecisionsIterator.next().makeNextDecision();
+			roundDecisionsIterator.next().makeNextDecision(
+					roundDecisionsIterator);
 		}
 	}
 

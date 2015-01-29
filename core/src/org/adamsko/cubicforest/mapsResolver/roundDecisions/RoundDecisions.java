@@ -140,7 +140,8 @@ public class RoundDecisions implements DecisionsComponent {
 	}
 
 	@Override
-	public void makeNextDecision() {
+	public void makeNextDecision(
+			final RoundDecisionsIterator roundDecisionsIterator) {
 		if (getPossibleDecisions().size() == 0
 				|| getHeight() >= roundDecisionsAggregate.getMaxDepth()) {
 			Gdx.app.debug("rd " + Integer.toString(tempId), "{0}");
@@ -150,8 +151,9 @@ public class RoundDecisions implements DecisionsComponent {
 			if (!parent.getChild().isNull()) {
 				parent.remove(this);
 			}
+			roundDecisionsIterator.set(parent);
 			// Next decision should be made by a parent.
-			parent.makeNextDecision();
+			parent.makeNextDecision(roundDecisionsIterator);
 			return;
 		}
 
@@ -214,7 +216,14 @@ public class RoundDecisions implements DecisionsComponent {
 	@Override
 	public void setSnapshotAfterDecision(
 			final GameMemento snapshotAfterPreviousDecision) {
-		Gdx.app.debug("rd " + Integer.toString(tempId), "set snapshot");
+
+		if (parent.getChild() != this) {
+			parent.setSnapshotAfterDecision(snapshotAfterPreviousDecision);
+			return;
+		}
+		Gdx.app.debug("rd " + Integer.toString(tempId), "set snapshot "
+				+ Integer.toString(snapshotAfterPreviousDecision.getTempId()));
+
 		this.snapshotAfterPreviousDecision = snapshotAfterPreviousDecision;
 	}
 

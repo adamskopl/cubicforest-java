@@ -54,7 +54,7 @@ public class RoundDecisionsRoot extends RoundDecisions {
 	}
 
 	@Override
-	public void makeNextDecision() {
+	public void makeNextDecision(final RoundDecisionsIterator decisionsIteratorD) {
 		// if invoked, it means that child has 0 possible decisions (searching
 		// for solutions has finished)
 		Gdx.app.debug("ROOT MAKE DECISION", "");
