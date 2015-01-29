@@ -3,6 +3,8 @@ package org.adamsko.cubicforest.mapsResolver.orderDecisions;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+
 public class OrderDecisionsAggregateDefault implements OrderDecisionsAggregate {
 
 	List<OrderDecision> orderDecisions;
@@ -36,4 +38,11 @@ public class OrderDecisionsAggregateDefault implements OrderDecisionsAggregate {
 		return orderDecisions.get(index);
 	}
 
+	@Override
+	public void debugPrint() {
+		Gdx.app.debug("-------", "");
+		for (final OrderDecision orderDecision : orderDecisions) {
+			Gdx.app.debug("od", orderDecision.getChosenTilePos().toString());
+		}
+	}
 }

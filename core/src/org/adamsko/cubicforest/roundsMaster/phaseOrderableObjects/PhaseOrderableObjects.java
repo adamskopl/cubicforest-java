@@ -16,6 +16,8 @@ public interface PhaseOrderableObjects extends RoundPhase {
 
 	WorldObject getCurrentObject();
 
+	int getObjectsNumber();
+
 	int getCurrentObjectIndex();
 
 	void setCurrentObjectIndex(final int newIndex);

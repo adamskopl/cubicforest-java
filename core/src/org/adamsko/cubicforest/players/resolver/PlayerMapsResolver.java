@@ -11,7 +11,9 @@ import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuideDefault;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class PlayerMapsResolver extends PlayerBase implements
@@ -37,6 +39,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void startControl() {
+		TilePathGuideDefault.setTweenSpeedHigh();
 		resolvedPhase.setActivePlayer(this);
 		mapsResolver.startNewResolve();
 		makeNextDecision();
@@ -49,14 +52,18 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void makeNextDecision() {
+
+		final GameMemento memento = createMemento();
+		Gdx.app.debug("pmr",
+				"create memento " + Integer.toString(memento.getTempId()));
+		// inform current component about the results of the last decision
+		roundDecisionsIterator.currentItem().setSnapshotAfterDecision(memento);
+
 		if (roundDecisionsIterator.isDone()) {
 			// resolver is done
+			Gdx.app.debug("pmr", "iterator is done");
 			getPlayersController().switchPlayerUser();
 		} else {
-			final GameMemento memento = createMemento();
-			// inform current component about the results of the last decision
-			roundDecisionsIterator.currentItem().setSnapshotAfterDecision(
-					memento);
 			roundDecisionsIterator.next().makeNextDecision();
 		}
 	}
@@ -92,6 +99,16 @@ public class PlayerMapsResolver extends PlayerBase implements
 	@Override
 	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
 		return resolvedPhase.getCurrentPossbileDecisions();
+	}
+
+	@Override
+	public int getObjectsNumber() {
+		return resolvedPhase.getObjectsNumber();
+	}
+
+	@Override
+	public int getCurrentObjectIndex() {
+		return resolvedPhase.getCurrentObjectIndex();
 	}
 
 }

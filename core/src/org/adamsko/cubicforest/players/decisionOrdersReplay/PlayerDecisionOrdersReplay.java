@@ -1,12 +1,14 @@
 package org.adamsko.cubicforest.players.decisionOrdersReplay;
 
-import org.adamsko.cubicforest.players.PlayerBase;
-import org.adamsko.cubicforest.players.PlayersController;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregate;
+import org.adamsko.cubicforest.players.Player;
 
-public class PlayerDecisionOrdersReplay extends PlayerBase {
+public interface PlayerDecisionOrdersReplay extends Player {
 
-	public PlayerDecisionOrdersReplay(final PlayersController playersController) {
-		super(playersController);
-	}
+	/**
+	 * Set {@link OrderDecisionsAggregate} from which replay will be performed.
+	 * Should be used before player starts replay.
+	 */
+	void setDecisionOrdersAggregate(OrderDecisionsAggregate replayedAggregate);
 
 }

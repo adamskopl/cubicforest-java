@@ -42,6 +42,12 @@ public class RoundDecisionsAggregateDefault implements RoundDecisionsAggregate {
 
 	@Override
 	public boolean isMementoResolved(final GameMemento checkedMemento) {
+		if (checkedMemento.isNull()) {
+			Gdx.app.error(
+					"RoundDecisionsAggregateDefault::isMementoResolved()",
+					"checkedMemento.isNull())");
+			return true;
+		}
 		for (final GameMemento resolvedMemento : resolvedStates) {
 			if (checkedMemento.isEqual(resolvedMemento)) {
 				return true;

@@ -5,6 +5,7 @@ import org.adamsko.cubicforest.players.PlayersController;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuideDefault;
 
 /**
  * Player: user of the application. Issuing decisions by input.
@@ -25,6 +26,7 @@ public class PlayerUser extends PlayerBase {
 
 	@Override
 	public void startControl() {
+		TilePathGuideDefault.setTweenSpeedLow();
 		roundsMaster.getCurrentPhase().setActivePlayer(this);
 	}
 
@@ -52,6 +54,10 @@ public class PlayerUser extends PlayerBase {
 	@Override
 	public void onGuiOrderCancel() {
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler().onCancel();
+	}
+
+	@Override
+	public void onVictoryConditionsMet() {
 	}
 
 }

@@ -30,10 +30,6 @@ public class RoundDecisions implements DecisionsComponent {
 	 */
 	private final GameMemento snapshot;
 
-	// // snapshot from which component is starting. his snapshot is not
-	// changed.
-	// final GameMemento snapshot;
-
 	// game snapshot changed after next making available decision. used to
 	// create eventual new components, which will resolve this snapshot
 	GameMemento snapshotAfterPreviousDecision;
@@ -53,11 +49,15 @@ public class RoundDecisions implements DecisionsComponent {
 	 */
 	protected DecisionsComponent child;
 
+	public static int tempIdCounter = 0;
+	public int tempId;
+
 	// null constructor
 	public RoundDecisions(final boolean nullConstructor) {
 		this.possibleDecisions = new ArrayList<OrderDecisionDefault>();
 		this.parent = null;
 		this.snapshot = NullGameSnapshotMemento.instance();
+		this.snapshotAfterPreviousDecision = NullGameSnapshotMemento.instance();
 		roundDecisionsAggregate = null;
 	}
 
@@ -68,6 +68,7 @@ public class RoundDecisions implements DecisionsComponent {
 		this.roundDecisionsAggregate = roundDecisionsAggregate;
 		this.parent = parent;
 		this.snapshot = startingSnapshot;
+		this.snapshotAfterPreviousDecision = NullGameSnapshotMemento.instance();
 
 		// if the component is created, it means that starting snapshot was not
 		// resolved
@@ -80,6 +81,27 @@ public class RoundDecisions implements DecisionsComponent {
 		// child will be eventually added later (for snapshotAfterDecision)
 		child = NullDecisionsComponent.instance();
 
+		tempId = tempIdCounter;
+		tempIdCounter++;
+
+		String decisionsString = new String();
+		for (final OrderDecisionDefault decision : possibleDecisions) {
+			final String dString = new String(decision.getChosenTilePos()
+					.toString());
+			decisionsString = decisionsString.concat(dString + ",");
+		}
+
+		Gdx.app.debug("rd " + Integer.toString(tempId),
+				Integer.toString(possibleDecisions.size()) + " decisions (H"
+						+ client.getCurrentObjectIndex() + ") objects: "
+						+ Integer.toString(client.getObjectsNumber()) + " "
+						+ decisionsString);
+
+	}
+
+	@Override
+	public int getTempId() {
+		return tempId;
 	}
 
 	@Override
@@ -89,11 +111,16 @@ public class RoundDecisions implements DecisionsComponent {
 
 	@Override
 	public DecisionsComponent nextComponent() {
-
 		// check if memento was resolved
 		if (roundDecisionsAggregate
 				.isMementoResolved(snapshotAfterPreviousDecision)) {
+
 			// continue resolving current element
+			Gdx.app.debug(
+					"rd " + Integer.toString(tempId),
+					"nextComponent memento solved "
+							+ Integer.toString(snapshotAfterPreviousDecision
+									.getTempId()));
 			return this;
 		}
 
@@ -102,10 +129,28 @@ public class RoundDecisions implements DecisionsComponent {
 	}
 
 	@Override
+	public boolean isDone() {
+		if (possibleDecisions.size() == 0
+				&& roundDecisionsAggregate
+						.isMementoResolved(snapshotAfterPreviousDecision)
+				&& child.isNull()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public void makeNextDecision() {
 		if (getPossibleDecisions().size() == 0
 				|| getHeight() >= roundDecisionsAggregate.getMaxDepth()) {
-			// next decision should be made by a parent
+			Gdx.app.debug("rd " + Integer.toString(tempId), "{0}");
+			// Detach from parent (this component will not be part of the
+			// soulution). Right now parent should have this component as a
+			// child.
+			if (!parent.getChild().isNull()) {
+				parent.remove(this);
+			}
+			// Next decision should be made by a parent.
 			parent.makeNextDecision();
 			return;
 		}
@@ -118,6 +163,10 @@ public class RoundDecisions implements DecisionsComponent {
 		 * this decision will be remembered.
 		 */
 		latestDecision = possibleDecisions.remove(0);
+
+		Gdx.app.debug("rd " + Integer.toString(tempId), "issuing "
+				+ latestDecision.getChosenTilePos().toString() + " remained "
+				+ Integer.toString(possibleDecisions.size()));
 
 		client.resolveDecision(latestDecision);
 	}
@@ -133,6 +182,12 @@ public class RoundDecisions implements DecisionsComponent {
 
 	@Override
 	public void remove(final DecisionsComponent decisionsComponent) {
+		if (child != decisionsComponent) {
+			Gdx.app.error("RoundDecisions::remove()",
+					"child != decisionsComponent");
+			return;
+		}
+		this.child = NullDecisionsComponent.instance();
 	}
 
 	@Override
@@ -159,8 +214,9 @@ public class RoundDecisions implements DecisionsComponent {
 	@Override
 	public void setSnapshotAfterDecision(
 			final GameMemento snapshotAfterPreviousDecision) {
+		Gdx.app.debug("rd " + Integer.toString(tempId), "set snapshot");
 		this.snapshotAfterPreviousDecision = snapshotAfterPreviousDecision;
-	};
+	}
 
 	@Override
 	public List<OrderDecisionDefault> getPossibleDecisions() {

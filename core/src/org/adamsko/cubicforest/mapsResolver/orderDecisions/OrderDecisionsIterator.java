@@ -1,9 +1,11 @@
 package org.adamsko.cubicforest.mapsResolver.orderDecisions;
 
+import org.adamsko.cubicforest.Nullable;
+
 /**
  * Interface for classes iterating through {@link OrderDecisionsAggregate}
  */
-public interface OrderDecisionsIterator {
+public interface OrderDecisionsIterator extends Nullable {
 
 	OrderDecision first();
 

@@ -4,6 +4,19 @@ public class GameSnapshotMementoDefault implements GameMemento {
 
 	private GameState gameState;
 
+	public static int tempIdCounter = 0;
+	public int tempId;
+
+	public GameSnapshotMementoDefault() {
+		tempId = tempIdCounter;
+		tempIdCounter++;
+	}
+
+	@Override
+	public int getTempId() {
+		return tempId;
+	}
+
 	@Override
 	public boolean isNull() {
 		return false;

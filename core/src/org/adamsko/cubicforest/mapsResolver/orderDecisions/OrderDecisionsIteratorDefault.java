@@ -13,6 +13,11 @@ public class OrderDecisionsIteratorDefault implements OrderDecisionsIterator {
 	}
 
 	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	@Override
 	public OrderDecision first() {
 		return aggregate.get(0);
 	}
@@ -33,7 +38,7 @@ public class OrderDecisionsIteratorDefault implements OrderDecisionsIterator {
 
 	@Override
 	public boolean isDone() {
-		return index + 1 > aggregate.count();
+		return index + 1 == aggregate.count();
 	}
 
 }

@@ -13,6 +13,8 @@ import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterato
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorSolving;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorVisiting;
 
+import com.badlogic.gdx.Gdx;
+
 public class MapsResolverDefault implements MapsResolver {
 
 	RoundDecisionsAggregate roundDecisionsAggregate;
@@ -58,7 +60,7 @@ public class MapsResolverDefault implements MapsResolver {
 	@Override
 	public RoundDecisionsIterator createRoundDecisionsIterator(
 			final MapsResolverClient client) {
-		roundDecisionsIterator = new RoundDecisionsIteratorSolving(client,
+		this.roundDecisionsIterator = new RoundDecisionsIteratorSolving(client,
 				roundDecisionsAggregate);
 		return roundDecisionsIterator;
 	}
@@ -78,12 +80,21 @@ public class MapsResolverDefault implements MapsResolver {
 		victoriousIterator.set(first);
 
 		final OrderDecisionsAggregate victoriousOrderDecisionsAggregate = new OrderDecisionsAggregateDefault();
-
+		Gdx.app.debug("<++++++++++", "");
 		do {
 			victoriousIterator.next();
+			Gdx.app.debug(
+					"appending",
+					Integer.toString(victoriousIterator.currentItem()
+							.getTempId())
+							+ " "
+							+ victoriousIterator.currentItem()
+									.getLatestDecision().getChosenTilePos()
+									.toString());
 			victoriousOrderDecisionsAggregate.append(victoriousIterator
 					.currentItem().getLatestDecision());
 		} while (!victoriousIterator.isLast());
+		Gdx.app.debug("++++++++++>", "");
 
 		solutions.add(victoriousOrderDecisionsAggregate);
 
@@ -108,12 +119,12 @@ public class MapsResolverDefault implements MapsResolver {
 	}
 
 	@Override
-	public int countSolutions() {
+	public int countAggregates() {
 		return solutions.size();
 	}
 
 	@Override
-	public OrderDecisionsAggregate getSolution(final int index) {
+	public OrderDecisionsAggregate getAggregate(final int index) {
 		if (index + 1 > solutions.size()) {
 			return NullOrderDecisionsAggregate.instance();
 		}

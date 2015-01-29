@@ -99,6 +99,11 @@ public abstract class PhaseOrderableObjectsDefault implements
 	}
 
 	@Override
+	public Player getActivePlayer() {
+		return this.activePlayer;
+	}
+
+	@Override
 	public void nextObject() {
 		if (phaseObjects.size() == 0) {
 			try {
@@ -129,6 +134,11 @@ public abstract class PhaseOrderableObjectsDefault implements
 		final WorldObject currentObject = phaseObjects
 				.get(currentObjectPointer);
 		return currentObject;
+	}
+
+	@Override
+	public int getObjectsNumber() {
+		return phaseObjects.size();
 	}
 
 	@Override
@@ -196,10 +206,6 @@ public abstract class PhaseOrderableObjectsDefault implements
 	 */
 	protected boolean noPhaseObjects() {
 		return (phaseObjects.size() == 0);
-	}
-
-	protected Player getActivePlayer() {
-		return activePlayer;
 	}
 
 	/**

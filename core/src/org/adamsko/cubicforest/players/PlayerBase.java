@@ -37,14 +37,6 @@ public abstract class PlayerBase implements Player {
 	}
 
 	@Override
-	public void onVictoryConditionsMet() {
-	}
-
-	@Override
-	public void startControl() {
-	}
-
-	@Override
 	public void makeNextDecision() {
 	}
 

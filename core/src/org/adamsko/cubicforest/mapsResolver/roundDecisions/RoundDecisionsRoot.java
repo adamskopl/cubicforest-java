@@ -30,6 +30,7 @@ public class RoundDecisionsRoot extends RoundDecisions {
 		this.parent = NullDecisionsComponent.instance();
 		this.client = client;
 		this.child = NullDecisionsComponent.instance();
+		this.tempId = -1;
 	}
 
 	@Override
@@ -56,5 +57,7 @@ public class RoundDecisionsRoot extends RoundDecisions {
 	public void makeNextDecision() {
 		// if invoked, it means that child has 0 possible decisions (searching
 		// for solutions has finished)
+		Gdx.app.debug("ROOT MAKE DECISION", "");
 	}
+
 }

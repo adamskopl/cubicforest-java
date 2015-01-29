@@ -40,4 +40,8 @@ public class NullOrderDecisionsAggregate implements OrderDecisionsAggregate {
 		return NullOrderDecision.instance();
 	}
 
+	@Override
+	public void debugPrint() {
+	}
+
 }

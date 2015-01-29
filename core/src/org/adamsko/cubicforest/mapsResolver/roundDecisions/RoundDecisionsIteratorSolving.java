@@ -3,6 +3,8 @@ package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
 import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Iterator used to iterate through elements during resolving level. Iterator
  * functions are partially implemented by its elements (e.g. component is
@@ -26,9 +28,15 @@ public class RoundDecisionsIteratorSolving implements RoundDecisionsIterator {
 	}
 
 	@Override
+	public DecisionsComponent currentItem() {
+		return current;
+	}
+
+	@Override
 	public DecisionsComponent next() {
 		current = currentItem().nextComponent();
-		return currentItem();
+		Gdx.app.debug("dc", "next: " + Integer.toString(current.getTempId()));
+		return current;
 	}
 
 	@Override
@@ -45,8 +53,7 @@ public class RoundDecisionsIteratorSolving implements RoundDecisionsIterator {
 		// whole structure is resolved, when root's child has no decisions to
 		// make (root is creating first child with starting decisions. all
 		// decisions solved: whole structure solved)
-		if (!first().getChild().isNull()
-				&& first().getChild().getPossibleDecisions().size() == 0) {
+		if (!first().getChild().isNull() && first().getChild().isDone()) {
 			return true;
 		}
 		return false;
@@ -55,11 +62,6 @@ public class RoundDecisionsIteratorSolving implements RoundDecisionsIterator {
 	@Override
 	public boolean isLast() {
 		return currentItem().getChild().isNull();
-	}
-
-	@Override
-	public DecisionsComponent currentItem() {
-		return current;
 	}
 
 	@Override

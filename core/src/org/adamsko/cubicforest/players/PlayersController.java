@@ -1,6 +1,7 @@
 package org.adamsko.cubicforest.players;
 
 import org.adamsko.cubicforest.gui.GuiMasterClient;
+import org.adamsko.cubicforest.players.decisionOrdersReplay.PlayerDecisionOrdersReplay;
 import org.adamsko.cubicforest.players.resolver.MapsResolver;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
@@ -28,6 +29,11 @@ public interface PlayersController extends GuiMasterClient, TilePickClient {
 	 * Choose {@link MapsResolver} as a player;
 	 */
 	void switchPlayerResolver();
+
+	/**
+	 * Choose {@link PlayerDecisionOrdersReplay} as a player.
+	 */
+	void switchPlayerOrderDecisionsReplay();
 
 	/**
 	 * {@link PlayersController} is using {@link RoundPhase} phases, they should

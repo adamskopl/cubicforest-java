@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.players;
 
+import com.badlogic.gdx.Gdx;
+
 public class NullPlayer extends PlayerBase {
 
 	private static NullPlayer instance = null;
@@ -20,4 +22,13 @@ public class NullPlayer extends PlayerBase {
 		return true;
 	}
 
+	@Override
+	public void startControl() {
+		Gdx.app.error("NullPlayer::startControl()", "");
+	}
+
+	@Override
+	public void onVictoryConditionsMet() {
+		Gdx.app.error("NullPlayer::onVictoryConditionsMet()", "");
+	}
 }

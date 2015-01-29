@@ -10,8 +10,11 @@ import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiElementOrder;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.gui.resolver.GuiElementResolver;
+import org.adamsko.cubicforest.gui.resolver.GuiElementResolverSolution;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregateContainer;
 import org.adamsko.cubicforest.players.decisionOrdersReplay.PlayerDecisionOrdersReplay;
+import org.adamsko.cubicforest.players.decisionOrdersReplay.PlayerDecisionOrdersReplayDefault;
 import org.adamsko.cubicforest.players.resolver.MapsResolver;
 import org.adamsko.cubicforest.players.resolver.PlayerMapsResolver;
 import org.adamsko.cubicforest.players.user.PlayerUser;
@@ -23,18 +26,21 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 public class PlayersControllerDefault implements PlayersController {
 
+	private final OrderDecisionsAggregateContainer orderDecisionsAggregateContainer;
 	private RoundsMaster roundsMaster;
 	private Player activePlayer;
 	private final Player playerUser;
 	private final Player playerMapsResolver;
-	private final Player playerDecisionOrdersReplay;
+	private final PlayerDecisionOrdersReplay playerDecisionOrdersReplay;
 
 	public PlayersControllerDefault(final MapsResolver mapsResolver,
 			final TilesMaster tilesMaster) {
+		this.orderDecisionsAggregateContainer = mapsResolver;
 		playerUser = new PlayerUser(this);
 		playerMapsResolver = new PlayerMapsResolver(this, mapsResolver,
 				tilesMaster);
-		playerDecisionOrdersReplay = new PlayerDecisionOrdersReplay(this);
+		playerDecisionOrdersReplay = new PlayerDecisionOrdersReplayDefault(
+				this, tilesMaster);
 		activePlayer = playerUser;
 		this.roundsMaster = NullRoundsMaster.instance();
 	}
@@ -50,6 +56,7 @@ public class PlayersControllerDefault implements PlayersController {
 		playerUser.initializeRoundsMaster(roundsMaster);
 		playerMapsResolver.initializeRoundsMaster(roundsMaster);
 		playerDecisionOrdersReplay.initializeRoundsMaster(roundsMaster);
+		switchPlayerUser();
 	}
 
 	@Override
@@ -66,6 +73,12 @@ public class PlayersControllerDefault implements PlayersController {
 	@Override
 	public void switchPlayerResolver() {
 		activePlayer = playerMapsResolver;
+		activePlayer.startControl();
+	}
+
+	@Override
+	public void switchPlayerOrderDecisionsReplay() {
+		activePlayer = playerDecisionOrdersReplay;
 		activePlayer.startControl();
 	}
 
@@ -155,6 +168,13 @@ public class PlayersControllerDefault implements PlayersController {
 			break;
 
 		case RESOLVER_SOLUTION:
+			final GuiElementResolverSolution guiElementResolverSolution = (GuiElementResolverSolution) clickedElementResolver;
+			final int solutionIndex = guiElementResolverSolution
+					.getSolutionIndex();
+			playerDecisionOrdersReplay
+					.setDecisionOrdersAggregate(orderDecisionsAggregateContainer
+							.getAggregate(solutionIndex));
+			switchPlayerOrderDecisionsReplay();
 			break;
 
 		default:

@@ -22,4 +22,14 @@ public interface MapsResolverClient {
 	 */
 	List<OrderDecisionDefault> getCurrentPossbileDecisions();
 
+	/**
+	 * Get number of the orderable objects.
+	 */
+	int getObjectsNumber();
+
+	/**
+	 * Get current orderable object index.
+	 */
+	int getCurrentObjectIndex();
+
 }

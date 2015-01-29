@@ -15,4 +15,6 @@ public interface OrderDecisionsAggregate extends Nullable {
 
 	void append(OrderDecision orderDecision);
 
+	void debugPrint();
+
 }

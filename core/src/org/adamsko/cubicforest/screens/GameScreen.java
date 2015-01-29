@@ -49,11 +49,7 @@ public class GameScreen implements Screen {
 
 		worldRenderer.setCoordCalc(worldBuilder.getCoordCalc());
 
-		try {
-			worldBuilder.getRoundsMaster().nextRound();
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
+		worldBuilder.getRoundsMaster().startNextRound();
 
 	}
 

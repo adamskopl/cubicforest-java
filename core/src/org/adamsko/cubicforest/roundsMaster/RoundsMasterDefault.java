@@ -31,7 +31,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 	private PhaseHeroes phaseHeroes;
 	private PhaseEnemies phaseEnemies;
 	private final List<RoundPhase> phases;
-	private int phasePointer = -1;
+	private int phasePointer = 0;
 	private GameResultMaster gameResultMaster;
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
@@ -61,7 +61,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
-	public void nextRound() {
+	public void startNextRound() {
 		phasePointer = -1;
 		if (allPhasesSkipped()) {
 			// all phases were skipped: stop program
@@ -81,7 +81,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 		phasePointer++;
 		// check if previous phase was the last one
 		if (phasePointer == phases.size()) {
-			nextRound();
+			startNextRound();
 		} else {
 			final RoundPhase nextPhase = phases.get(phasePointer);
 			nextPhase.startPhase();
@@ -143,7 +143,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 		reloadPhases();
 
 		try {
-			nextRound();
+			startNextRound();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -179,7 +179,6 @@ public class RoundsMasterDefault implements RoundsMaster {
 		memento.setState(snapshot);
 
 		return memento;
-		// return roundsMasterMapsResolver.createMemento();
 	}
 
 	private void reloadPhases() {
