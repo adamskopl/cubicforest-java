@@ -8,7 +8,7 @@ public class TiledMapProperties {
 
 	private int startingCubes;
 	private boolean toolOrange;
-	private boolean toolPortal;
+	private boolean toolExit;
 	private boolean toolRed;
 	private boolean toolTrap;
 	private boolean toolTurret;
@@ -29,12 +29,12 @@ public class TiledMapProperties {
 		this.toolOrange = Boolean.parseBoolean(toolOrange);
 	}
 
-	public boolean getToolPortal() {
-		return toolPortal;
+	public boolean getToolExit() {
+		return toolExit;
 	}
 
-	public void setToolPortal(final String toolPortal) {
-		this.toolPortal = Boolean.parseBoolean(toolPortal);
+	public void setToolExit(final String toolExit) {
+		this.toolExit = Boolean.parseBoolean(toolExit);
 	}
 
 	public boolean getToolRed() {

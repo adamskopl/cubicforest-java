@@ -42,7 +42,7 @@ public class WorldObjectsMastersContainerDefault implements
 	private GatherCubesMaster gatherCubesMaster;
 	private HeroesToolsMaster heroesToolsMaster;
 	private ToolTrapsMaster toolTrapsMaster;
-	private ToolExitsMaster toolPortalsMaster;
+	private ToolExitsMaster toolExitsMaster;
 	private PortalsMaster portalsMaster;
 	private PrizesMaster prizesMaster;
 
@@ -74,6 +74,12 @@ public class WorldObjectsMastersContainerDefault implements
 		heroesToolsMaster = new HeroesToolsMaster(tilesMaster,
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
 
+		toolTrapsMaster = new ToolTrapsMaster(tilesMaster,
+				"traps-atlas-medium", 40, 45);
+
+		toolExitsMaster = new ToolExitsMaster(tilesMaster,
+				"exits-atlas-medium", 40, 45);
+
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
 
@@ -93,8 +99,15 @@ public class WorldObjectsMastersContainerDefault implements
 		renderer.addROMWorld(enemiesMaster);
 		worldObjectsMasters.add(gatherCubesMaster);
 		renderer.addROMWorld(gatherCubesMaster);
+
 		worldObjectsMasters.add(heroesToolsMaster);
 		renderer.addROMWorld(heroesToolsMaster);
+
+		worldObjectsMasters.add(toolTrapsMaster);
+		renderer.addROMWorld(toolTrapsMaster);
+		worldObjectsMasters.add(toolExitsMaster);
+		renderer.addROMWorld(toolExitsMaster);
+
 		worldObjectsMasters.add(portalsMaster);
 		renderer.addROMWorld(portalsMaster);
 		worldObjectsMasters.add(prizesMaster);

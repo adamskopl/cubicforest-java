@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
-import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.CubicHeroTool;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,9 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class HeroToolExit extends CubicHeroTool {
 
 	public HeroToolExit(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container,
-			final HeroesMaster heroesMaster) {
-		super(tr, texNum, container, WorldObjectType.TOOLPORTAL);
+			final WorldObjectsMasterDefault container) {
+		super(tr, texNum, container, WorldObjectType.TOOLEXIT);
 	}
 
 	@Override

@@ -136,7 +136,7 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 			return 3;
 		case TOOLTRAP:
 			return 5;
-		case TOOLPORTAL:
+		case TOOLEXIT:
 			return 10;
 		default:
 			Gdx.app.error("heroTooltypeToCost", "unknown type");
@@ -154,32 +154,33 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 
 	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
+		if (false) {
+			/**
+			 * In contrast to 'loadMapObjects' from other masters, this function
+			 * loads many types with a help of newToolSeperator which should
+			 * separate positions in passed tilePositions argument
+			 */
 
-		/**
-		 * In contrast to 'loadMapObjects' from other masters, this function
-		 * loads many types with a help of newToolSeperator which should
-		 * separate positions in passed tilePositions argument
-		 */
-
-		HeroTool heroTool = null;
-		int typeIndex = 0;
-		for (final Vector2 pos : heroToolsPositions) {
-			if (pos == newToolSeparator) {
-				typeIndex++;
-				continue;
+			HeroTool heroTool = null;
+			int typeIndex = 0;
+			for (final Vector2 pos : heroToolsPositions) {
+				if (pos == newToolSeparator) {
+					typeIndex++;
+					continue;
+				}
+				heroTool = heroToolsFactory.createHeroTool(
+						indexToType(typeIndex), pos, this);
+				heroTool.setState(HeroToolStates_e.STATE_READY);
+				setToolTexture(heroTool, 0);
+				addObject(heroTool);
 			}
-			heroTool = heroToolsFactory.createHeroTool(indexToType(typeIndex),
-					pos, this);
-			heroTool.setState(HeroToolStates_e.STATE_READY);
-			setToolTexture(heroTool, 0);
-			addObject(heroTool);
 		}
 	}
 
 	private WorldObjectType indexToType(final int index) {
 		switch (index) {
 		case 0:
-			return WorldObjectType.TOOLPORTAL;
+			return WorldObjectType.TOOLEXIT;
 		case 1:
 			return WorldObjectType.TOOLTRAP;
 		default:
@@ -190,22 +191,22 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 
 	@Override
 	public void loadMapObjects(final CFMap map) {
+		if (false) {
+			mapCoordsPortals = map
+					.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_EXIT);
 
-		mapCoordsPortals = map
-				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_PORTAL);
+			mapCoordsTraps = map
+					.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_TRAP);
 
-		mapCoordsTraps = map
-				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_TRAP);
+			combinePositions();
 
-		combinePositions();
-
-		loadMapObjects(heroToolsPositions);
-
+			loadMapObjects(heroToolsPositions);
+		}
 	}
 
 	@Override
 	public void unloadMapObjects() {
-		removeWorldObjects();
+		// removeWorldObjects();
 	}
 
 	/**
@@ -236,7 +237,7 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 		for (final WorldObject tool : getWorldObjects()) {
 			final Vector2 pos = tool.getTilesPos();
 			switch (tool.getType()) {
-			case TOOLPORTAL:
+			case TOOLEXIT:
 				currentCoordsPortals.add(tool.getTilesPos());
 				break;
 			case TOOLTRAP:
