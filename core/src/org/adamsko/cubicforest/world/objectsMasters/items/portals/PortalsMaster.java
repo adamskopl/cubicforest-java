@@ -28,8 +28,6 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 
 	@Override
 	public void update(final float deltaTime) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.ToolExitsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.ToolTrapsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMasterDefault;
@@ -39,6 +41,8 @@ public class WorldObjectsMastersContainerDefault implements
 	private EnemiesMaster enemiesMaster;
 	private GatherCubesMaster gatherCubesMaster;
 	private HeroesToolsMaster heroesToolsMaster;
+	private ToolTrapsMaster toolTrapsMaster;
+	private ToolExitsMaster toolPortalsMaster;
 	private PortalsMaster portalsMaster;
 	private PrizesMaster prizesMaster;
 

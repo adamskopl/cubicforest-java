@@ -67,7 +67,7 @@ public class TilePathGuideDefault implements TilePathGuide {
 	}
 
 	public static void setTweenSpeedVeryLow() {
-		tweenSpeed = 0.2f;
+		tweenSpeed = 5.0f;
 	}
 
 	/**

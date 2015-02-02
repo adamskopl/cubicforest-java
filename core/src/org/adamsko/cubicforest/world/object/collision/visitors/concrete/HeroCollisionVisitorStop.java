@@ -8,7 +8,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStat
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.portal.HeroToolPortal;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.HeroToolExit;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 
@@ -41,7 +41,7 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	}
 
 	@Override
-	public void visitToolPortal(final HeroToolPortal heroToolPortal) {
+	public void visitToolPortal(final HeroToolExit heroToolPortal) {
 		if (heroToolPortal.getToolState() == HeroToolStates_e.STATE_CONSTRUCTION) {
 			super.visitToolPortal(heroToolPortal);
 			return;

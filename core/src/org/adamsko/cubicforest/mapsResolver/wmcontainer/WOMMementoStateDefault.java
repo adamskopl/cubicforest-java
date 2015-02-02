@@ -23,7 +23,8 @@ public class WOMMementoStateDefault implements WOMMementoState {
 
 	/**
 	 * Positions remembered for {@link HeroesToolsMaster} should be separated
-	 * with a newToolSeparator
+	 * with a newToolSeparator (multiple types of tools in one master design
+	 * flaw).
 	 */
 	public WOMMementoStateDefault(final HeroesToolsMaster heroesToolsMaster) {
 		this.worldObjectsMasterName = heroesToolsMaster.getName();

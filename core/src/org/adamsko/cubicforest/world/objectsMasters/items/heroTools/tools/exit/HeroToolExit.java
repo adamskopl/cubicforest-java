@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.portal;
+package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit;
 
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
@@ -8,9 +8,9 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.CubicHeroToo
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class HeroToolPortal extends CubicHeroTool {
+public class HeroToolExit extends CubicHeroTool {
 
-	public HeroToolPortal(final TextureRegion tr, final int texNum,
+	public HeroToolExit(final TextureRegion tr, final int texNum,
 			final WorldObjectsMasterDefault container,
 			final HeroesMaster heroesMaster) {
 		super(tr, texNum, container, WorldObjectType.TOOLPORTAL);

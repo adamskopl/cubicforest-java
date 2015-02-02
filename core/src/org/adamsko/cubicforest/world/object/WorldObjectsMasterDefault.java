@@ -80,7 +80,6 @@ public abstract class WorldObjectsMasterDefault extends
 	}
 
 	public void removeObjectFromContainer(final WorldObject objectRemove) {
-		Gdx.app.debug("rempove", getName());
 		worldObjects.remove(objectRemove);
 		removeRenderableObject(objectRemove);
 	}

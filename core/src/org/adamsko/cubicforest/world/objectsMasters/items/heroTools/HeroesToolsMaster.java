@@ -227,7 +227,7 @@ public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
 
 	/**
 	 * Create list of positions of all the tools. Separate them with a
-	 * separator, so
+	 * separator, because there are different types of tools.
 	 */
 	public List<Vector2> getToolsPositionsSeparated() {
 		currentCoordsPortals.clear();
