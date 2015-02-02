@@ -41,9 +41,9 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	}
 
 	@Override
-	public void visitToolPortal(final HeroToolExit heroToolPortal) {
+	public void visitToolExit(final HeroToolExit heroToolPortal) {
 		if (heroToolPortal.getToolState() == HeroToolStates_e.STATE_CONSTRUCTION) {
-			super.visitToolPortal(heroToolPortal);
+			super.visitToolExit(heroToolPortal);
 			return;
 		}
 		collision().wordlObjectOperation().remove(heroToolPortal);

@@ -18,7 +18,7 @@ public class HeroToolExit extends CubicHeroTool {
 
 	@Override
 	public void accept(final WorldObjectVisitor visitor) {
-		visitor.visitToolPortal(this);
+		visitor.visitToolExit(this);
 	}
 
 }

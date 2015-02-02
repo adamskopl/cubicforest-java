@@ -56,7 +56,7 @@ public interface WorldObjectVisitor extends Nullable {
 
 	void visitToolTurret(HeroToolTurret heroToolTurret);
 
-	void visitToolPortal(HeroToolExit heroToolPortal);
+	void visitToolExit(HeroToolExit heroToolExit);
 
 	void visitPortal(Portal portal);
 
