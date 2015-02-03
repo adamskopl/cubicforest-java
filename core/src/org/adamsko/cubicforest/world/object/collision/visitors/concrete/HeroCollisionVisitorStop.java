@@ -41,12 +41,12 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	}
 
 	@Override
-	public void visitToolExit(final HeroToolExit heroToolPortal) {
-		if (heroToolPortal.getToolState() == HeroToolStates_e.STATE_CONSTRUCTION) {
-			super.visitToolExit(heroToolPortal);
+	public void visitToolExit(final HeroToolExit heroToolExit) {
+		if (heroToolExit.getToolState() == HeroToolStates_e.STATE_CONSTRUCTION) {
+			super.visitToolExit(heroToolExit);
 			return;
 		}
-		collision().wordlObjectOperation().remove(heroToolPortal);
+		collision().wordlObjectOperation().remove(heroToolExit);
 		collision().wordlObjectOperation().remove(getVisitingObject());
 		// collision().gameResultOperation().setGameResult(GameResult.GAME_WON);
 	}

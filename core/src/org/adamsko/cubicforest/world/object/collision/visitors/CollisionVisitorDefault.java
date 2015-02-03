@@ -109,8 +109,8 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 	}
 
 	@Override
-	public void visitToolExit(final HeroToolExit heroToolPortal) {
-		visitHeroTool(heroToolPortal);
+	public void visitToolExit(final HeroToolExit heroToolExit) {
+		visitHeroTool(heroToolExit);
 	}
 
 	@Override
