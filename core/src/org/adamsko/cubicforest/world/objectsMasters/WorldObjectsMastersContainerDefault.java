@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoDefaul
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
@@ -18,8 +19,6 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMasterDefault;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.ToolExitsMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.ToolTrapsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMasterDefault;
@@ -36,14 +35,14 @@ public class WorldObjectsMastersContainerDefault implements
 
 	private CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
 
+	private GameRenderer gameRenderer;
+
 	private TilesMaster tilesMaster;
 	private TerrainMaster terrainObjectsMaster;
 	private HeroesMaster heroesMaster;
 	private EnemiesMaster enemiesMaster;
 	private GatherCubesMaster gatherCubesMaster;
 	private HeroesToolsMaster heroesToolsMaster;
-	private ToolTrapsMaster toolTrapsMaster;
-	private ToolExitsMaster toolExitsMaster;
 	private PortalsMaster portalsMaster;
 	private PrizesMaster prizesMaster;
 
@@ -53,11 +52,12 @@ public class WorldObjectsMastersContainerDefault implements
 
 	public WorldObjectsMastersContainerDefault(final GameRenderer renderer) {
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
-		initMasters(renderer);
+		this.gameRenderer = renderer;
+		initMasters();
 	}
 
 	@Override
-	public void initMasters(final GameRenderer renderer) {
+	public void initMasters() {
 		initTilesMaster();
 
 		this.collisionVisitorsManagerFactory = NullCollisionVisitorsManagerFactory
@@ -75,12 +75,6 @@ public class WorldObjectsMastersContainerDefault implements
 		heroesToolsMaster = new HeroesToolsMasterDefault(tilesMaster,
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
 
-		toolTrapsMaster = new ToolTrapsMaster(tilesMaster,
-				"traps-atlas-medium", 40, 45);
-
-		toolExitsMaster = new ToolExitsMaster(tilesMaster,
-				"exits-atlas-medium", 40, 45);
-
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
 
@@ -91,32 +85,40 @@ public class WorldObjectsMastersContainerDefault implements
 		// removed/added to tiles
 		worldObjectsMasters.add(tilesMaster.getTilesContainer());
 
-		renderer.addROMWorld(tilesMaster.getTilesContainer());
+		gameRenderer.addROMWorld(tilesMaster.getTilesContainer());
 		worldObjectsMasters.add(terrainObjectsMaster);
-		renderer.addROMWorld(terrainObjectsMaster);
+		gameRenderer.addROMWorld(terrainObjectsMaster);
 		worldObjectsMasters.add(heroesMaster);
-		renderer.addROMWorld(heroesMaster);
+		gameRenderer.addROMWorld(heroesMaster);
 		worldObjectsMasters.add(enemiesMaster);
-		renderer.addROMWorld(enemiesMaster);
+		gameRenderer.addROMWorld(enemiesMaster);
 		worldObjectsMasters.add(gatherCubesMaster);
-		renderer.addROMWorld(gatherCubesMaster);
+		gameRenderer.addROMWorld(gatherCubesMaster);
 
 		worldObjectsMasters.add(heroesToolsMaster);
-		renderer.addROMWorld(heroesToolsMaster);
-
-		worldObjectsMasters.add(toolTrapsMaster);
-		renderer.addROMWorld(toolTrapsMaster);
-		worldObjectsMasters.add(toolExitsMaster);
-		renderer.addROMWorld(toolExitsMaster);
+		gameRenderer.addROMWorld(heroesToolsMaster);
+		heroesToolsMaster.initToolsMasters(this, tilesMaster);
 
 		worldObjectsMasters.add(portalsMaster);
-		renderer.addROMWorld(portalsMaster);
+		gameRenderer.addROMWorld(portalsMaster);
 		worldObjectsMasters.add(prizesMaster);
-		renderer.addROMWorld(prizesMaster);
+		gameRenderer.addROMWorld(prizesMaster);
 
-		renderer.addROMGui(gatherCubesMaster.getGatherCubesCounter());
-		renderer.addROMGui(prizesMaster.getGuiPrizes());
+		gameRenderer.addROMGui(gatherCubesMaster.getGatherCubesCounter());
+		gameRenderer.addROMGui(prizesMaster.getGuiPrizes());
 	}
+
+	@Override
+	public void addWorldObjectsMaster(
+			final WorldObjectsMaster worldObjectsMaster) {
+		worldObjectsMasters.add(worldObjectsMaster);
+	}
+
+	@Override
+	public void addRenderableObjectsMaster(
+			final RenderableObjectsMaster renderableObjectsMaster) {
+		gameRenderer.addROMWorld(renderableObjectsMaster);
+	};
 
 	@Override
 	public boolean allMastersInitialized() {

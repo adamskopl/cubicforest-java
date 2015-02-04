@@ -5,9 +5,12 @@ import java.util.List;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.ToolExitsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.ToolTrapsMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -28,6 +31,10 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	private WorldObjectType heroToolMarkerType;
 	private HeroToolsFactory heroToolsFactory;
 	private GatherCubesMaster gatherCubesMaster;
+
+	// specific tools masters
+	private ToolTrapsMaster toolTrapsMaster;
+	private ToolExitsMaster toolExitsMaster;
 
 	// indicates borders between tools positions in heroToolsPositions vector
 	private Vector2 newToolSeparator;
@@ -51,6 +58,23 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
 
 		newToolSeparator = new Vector2();
+	}
+
+	@Override
+	public void initToolsMasters(
+			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			final TilesMaster tilesMaster) {
+		toolTrapsMaster = new ToolTrapsMaster(tilesMaster,
+				"traps-atlas-medium", 40, 45);
+		worldObjectsMastersContainer.addWorldObjectsMaster(toolTrapsMaster);
+		worldObjectsMastersContainer
+				.addRenderableObjectsMaster(toolTrapsMaster);
+
+		toolExitsMaster = new ToolExitsMaster(tilesMaster,
+				"exits-atlas-medium", 40, 45);
+		worldObjectsMastersContainer.addWorldObjectsMaster(toolExitsMaster);
+		worldObjectsMastersContainer
+				.addRenderableObjectsMaster(toolExitsMaster);
 	}
 
 	@Override
@@ -115,6 +139,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		}
 	}
 
+	@Override
 	public void setHeroToolMarkerType(final WorldObjectType heroToolMarkerType) {
 		this.heroToolMarkerType = heroToolMarkerType;
 	}

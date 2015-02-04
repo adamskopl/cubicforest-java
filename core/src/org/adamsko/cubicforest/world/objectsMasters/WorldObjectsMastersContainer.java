@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters;
 import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
-import org.adamsko.cubicforest.render.world.GameRenderer;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
@@ -25,7 +25,12 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
  */
 public interface WorldObjectsMastersContainer {
 
-	void initMasters(GameRenderer gameRenderer);
+	void initMasters();
+
+	void addWorldObjectsMaster(WorldObjectsMaster worldObjectsMaster);
+
+	void addRenderableObjectsMaster(
+			RenderableObjectsMaster renderableObjectsMaster);
 
 	/**
 	 * For every {@link WorldObjectsMaster} initialize their
