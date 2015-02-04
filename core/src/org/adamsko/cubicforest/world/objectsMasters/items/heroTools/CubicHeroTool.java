@@ -25,7 +25,8 @@ public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 			final WorldObjectType worldObjectType) {
 		super(tr, texNum, container, worldObjectType);
 
-		this.buildCost = HeroesToolsMaster.heroTooltypeToCost(worldObjectType);
+		this.buildCost = HeroesToolsMasterDefault
+				.heroTooltypeToCost(worldObjectType);
 
 		toolState = HeroToolStates_e.STATE_CONSTRUCTION;
 

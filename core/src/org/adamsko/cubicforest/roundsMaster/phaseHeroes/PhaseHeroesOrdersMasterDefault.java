@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.NullHeroTool;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
@@ -137,7 +138,8 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 		final List<OrderDecisionDefault> validOrderDecisions = new ArrayList<OrderDecisionDefault>();
 		for (final Tile tile : tilesOrderValid) {
 			final OrderDecisionDefault orderDecision = new OrderDecisionDefault(
-					tile);
+					tile, NullHeroTool.instance());
+			// add order choice with no tool
 			validOrderDecisions.add(orderDecision);
 		}
 

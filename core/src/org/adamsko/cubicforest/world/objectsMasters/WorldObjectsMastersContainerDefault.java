@@ -17,6 +17,7 @@ import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.ToolExitsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.ToolTrapsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
@@ -71,7 +72,7 @@ public class WorldObjectsMastersContainerDefault implements
 		gatherCubesMaster = new GatherCubesMasterDefault(tilesMaster,
 				"cubes-atlas-medium", 25, 40);
 
-		heroesToolsMaster = new HeroesToolsMaster(tilesMaster,
+		heroesToolsMaster = new HeroesToolsMasterDefault(tilesMaster,
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
 
 		toolTrapsMaster = new ToolTrapsMaster(tilesMaster,

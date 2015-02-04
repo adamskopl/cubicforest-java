@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMasterDefault;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -50,7 +50,8 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 
 	@Override
 	public Boolean isToolAffordable(final WorldObjectType heroToolType) {
-		final int toolCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
+		final int toolCost = HeroesToolsMasterDefault
+				.heroTooltypeToCost(heroToolType);
 		if (toolCost <= getCounter()) {
 			return true;
 		}

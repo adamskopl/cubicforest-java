@@ -22,10 +22,18 @@ public class OrderDecisionDefault implements OrderDecision {
 		chosenTilePos = null;
 	}
 
-	public OrderDecisionDefault(final Tile chosenTile) {
+	/**
+	 * @param chosenTile
+	 *            chosen order tile
+	 * @param chosenHeroTool
+	 *            chosen order hero tool. {@link NullHeroTool} if no tool
+	 *            choice.
+	 */
+	public OrderDecisionDefault(final Tile chosenTile,
+			final HeroTool chosenHeroTool) {
 		this.chosenTilePos = new Vector2(chosenTile.getTilesPosX(),
 				chosenTile.getTilesPosY());
-		chosenHeroTool = NullHeroTool.instance();
+		this.chosenHeroTool = chosenHeroTool;
 	}
 
 	@Override

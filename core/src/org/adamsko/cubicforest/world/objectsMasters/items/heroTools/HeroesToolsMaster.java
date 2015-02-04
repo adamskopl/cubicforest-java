@@ -1,142 +1,33 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
-import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.TilesMaster;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * Manages tools built by heroes.
- * 
- * @author adamsko
- * 
- */
-public class HeroesToolsMaster extends WorldObjectsMasterDefault implements
-		Nullable {
+public interface HeroesToolsMaster extends WorldObjectsMaster,
+		RenderableObjectsMaster, Nullable {
 
-	private HeroTool heroToolMarker;
-	// indicates a type of the heroToolMarker
-	private WorldObjectType heroToolMarkerType;
-	private HeroToolsFactory heroToolsFactory;
-
-	// indicates borders between tools positions in heroToolsPositions vector
-	private Vector2 newToolSeparator;
-
-	WorldObjectType test;
-
-	public HeroesToolsMaster() {
-		super(0);
-	}
-
-	public HeroesToolsMaster(final TilesMaster TM,
-			final GatherCubesMaster gatherCubesMaster,
-			final HeroesMaster heroesMaster, final String textureName,
-			final int tileW, final int tileH) {
-		super("HeroesToolsMaster", TM, textureName, tileW, tileH);
-
-		heroToolMarker = null;
-		heroToolMarkerType = null;
-
-		heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
-
-		newToolSeparator = new Vector2();
-	}
-
-	@Override
-	public boolean isNull() {
-		return false;
-	}
-
-	public Vector2 getNewToolSeparator() {
-		return newToolSeparator;
-	}
+	Vector2 getNewToolSeparator();
 
 	/**
 	 * Add hero tool in 'construction' state for marking purpose.
 	 */
-	public void heroToolMarkerAdd(final Tile heroToolTile) {
-		if (heroToolTile.isNull()) {
-			Gdx.app.error("addHeroToolMarker", "heroToolTile == null");
-			return;
-		}
+	void heroToolMarkerAdd(final Tile heroToolTile);
 
-		final Vector2 heroToolTilePos = heroToolTile.getTilesPos();
-
-		heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
-				heroToolTilePos, this);
-
-		addObject(heroToolMarker);
-	}
-
-	/**
-	 * @throws Exception
-	 * 
-	 */
-	public void heroToolMarkerRemove() {
-		if (heroToolMarker != null) {
-			removeObjectFromContainer(heroToolMarker);
-			heroToolMarker = null;
-		}
-	}
+	void heroToolMarkerRemove();
 
 	/**
 	 * HeroToolMarker is accepted: add it to standard HeroTool collection.
 	 */
-	public void heroToolMarkerAccept() {
-		// heroToolMarker just stays in master's collection
-		heroToolMarker = null;
-	}
+	void heroToolMarkerAccept();
 
-	public void setToolTexture(final HeroTool tool, final int index) {
-		tool.setTextureRegion(atlasRows.get(index)[tool.getTexNum()]);
-	}
+	void setToolTexture(final HeroTool tool, final int index);
 
-	public static int heroTooltypeToCost(final WorldObjectType worldObjectType) {
-		switch (worldObjectType) {
-		case TOOLORANGE:
-			return 0;
-		case TOOLRED:
-			return 1;
-		case TOOLTURRET:
-			return 3;
-		case TOOLTRAP:
-			return 5;
-		case TOOLEXIT:
-			return 10;
-		default:
-			Gdx.app.error("heroTooltypeToCost", "unknown type");
-			return 0;
-		}
-	}
-
-	public void setHeroToolMarkerType(final WorldObjectType heroToolMarkerType) {
-		this.heroToolMarkerType = heroToolMarkerType;
-	}
-
-	@Override
-	public void update(final float deltaTime) {
-	}
-
-	@Override
-	public void loadMapObjects(final List<Vector2> tilePositions) {
-	}
-
-	@Override
-	public void loadMapObjects(final CFMap map) {
-	}
-
-	@Override
-	public void unloadMapObjects() {
-	}
+	void setHeroToolMarkerType(final WorldObjectType heroToolMarkerType);
 
 }
