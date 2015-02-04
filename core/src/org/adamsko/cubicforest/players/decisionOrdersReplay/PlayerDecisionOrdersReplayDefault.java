@@ -54,7 +54,6 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 			return;
 		}
 
-		this.aggregateReplayed.debugPrint();
 		roundsMaster.reload();
 
 		this.orderDecisionsIterator = this.aggregateReplayed.createIterator();

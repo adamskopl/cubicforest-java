@@ -91,12 +91,6 @@ public class RoundDecisions implements DecisionsComponent {
 			decisionsString = decisionsString.concat(dString + ",");
 		}
 
-		Gdx.app.debug("rd " + Integer.toString(tempId),
-				Integer.toString(possibleDecisions.size()) + " decisions (H"
-						+ client.getCurrentObjectIndex() + ") objects: "
-						+ Integer.toString(client.getObjectsNumber()) + " "
-						+ decisionsString);
-
 	}
 
 	@Override
@@ -114,27 +108,25 @@ public class RoundDecisions implements DecisionsComponent {
 		// check if memento was resolved
 		if (roundDecisionsAggregate
 				.isMementoResolved(snapshotAfterPreviousDecision)) {
-
 			// continue resolving current element
-			Gdx.app.debug(
-					"rd " + Integer.toString(tempId),
-					"nextComponent memento solved "
-							+ Integer.toString(snapshotAfterPreviousDecision
-									.getTempId()));
 			return this;
 		}
-
 		return createChild(snapshotAfterPreviousDecision);
-
 	}
 
 	@Override
 	public boolean isDone() {
 		if (possibleDecisions.size() == 0
 				&& roundDecisionsAggregate
-						.isMementoResolved(snapshotAfterPreviousDecision)
-				&& child.isNull()) {
-			return true;
+						.isMementoResolved(snapshotAfterPreviousDecision)) {
+			// if there are no decisions to make, and snapshot from previous
+			// decision is solved
+			if (child.isNull() || child.isDone()) {
+				// if there is a child, check if it's done. situation: when
+				// there is a tree root->child0->child1 and child0 and child1
+				// are done.
+				return true;
+			}
 		}
 		return false;
 	}
@@ -144,7 +136,6 @@ public class RoundDecisions implements DecisionsComponent {
 			final RoundDecisionsIterator roundDecisionsIterator) {
 		if (getPossibleDecisions().size() == 0
 				|| getHeight() >= roundDecisionsAggregate.getMaxDepth()) {
-			Gdx.app.debug("rd " + Integer.toString(tempId), "{0}");
 			// Detach from parent (this component will not be part of the
 			// soulution). Right now parent should have this component as a
 			// child.
@@ -165,10 +156,6 @@ public class RoundDecisions implements DecisionsComponent {
 		 * this decision will be remembered.
 		 */
 		latestDecision = possibleDecisions.remove(0);
-
-		Gdx.app.debug("rd " + Integer.toString(tempId), "issuing "
-				+ latestDecision.getChosenTilePos().toString() + " remained "
-				+ Integer.toString(possibleDecisions.size()));
 
 		client.resolveDecision(latestDecision);
 	}
@@ -221,8 +208,6 @@ public class RoundDecisions implements DecisionsComponent {
 			parent.setSnapshotAfterDecision(snapshotAfterPreviousDecision);
 			return;
 		}
-		Gdx.app.debug("rd " + Integer.toString(tempId), "set snapshot "
-				+ Integer.toString(snapshotAfterPreviousDecision.getTempId()));
 
 		this.snapshotAfterPreviousDecision = snapshotAfterPreviousDecision;
 	}

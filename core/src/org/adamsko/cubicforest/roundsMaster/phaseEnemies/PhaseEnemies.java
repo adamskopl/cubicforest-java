@@ -42,8 +42,10 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 	 * {@link PlayerActionsHandlerPhaseEnemies}.
 	 */
 	private void moveNextEnemy() {
-
 		nextObject();
+		if (phaseSkippedLastTime()) {
+			return;
+		}
 		final WorldObject activeEnemy = getCurrentObject();
 
 		if (activeEnemy.isNull()) {
@@ -52,7 +54,6 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 
 		final TilePath shortestPathTileHero = heroesHelper
 				.searchPathShortestHero(activeEnemy);
-
 		if (shortestPathTileHero == null || shortestPathTileHero.length() == 0) {
 
 			onOrderFinished();
@@ -66,7 +67,6 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 
 	@Override
 	public void onOrderFinished() {
-
 		if (roundsMaster.getGameResultMaster().isGameLost()) {
 			roundsMaster.reload();
 			roundsMaster.getGameResultMaster().resetGameResult();
@@ -83,7 +83,6 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 		}
 		removeDeadObjects();
 		moveNextEnemy();
-
 	}
 
 	@Override

@@ -41,7 +41,9 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 			exit = new HeroToolExit(atlasRows.get(0)[0], 0, this);
 			exit.setState(HeroToolStates_e.STATE_READY);
 			exit.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2 + 2, -30));
+					.getRegionWidth() / 2 + 2, -11));
+
+			pos.add(new Vector2(0.5f, 0.5f));
 
 			exit.setTilesPos(pos);
 			exit.setVerticalPos(0.1f);

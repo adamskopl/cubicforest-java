@@ -3,8 +3,6 @@ package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
 import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
 
-import com.badlogic.gdx.Gdx;
-
 /**
  * Iterator used to iterate through elements during resolving level. Iterator
  * functions are partially implemented by its elements (e.g. component is
@@ -35,7 +33,6 @@ public class RoundDecisionsIteratorSolving implements RoundDecisionsIterator {
 	@Override
 	public DecisionsComponent next() {
 		current = currentItem().nextComponent();
-		Gdx.app.debug("dc", "next: " + Integer.toString(current.getTempId()));
 		return current;
 	}
 

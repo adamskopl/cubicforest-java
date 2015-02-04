@@ -35,7 +35,9 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 			trap = new HeroToolTrap(atlasRows.get(0)[0], 0, this);
 			trap.setState(HeroToolStates_e.STATE_READY);
 			trap.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2 + 2, -30));
+					.getRegionWidth() / 2 + 2, -11));
+
+			pos.add(new Vector2(0.5f, 0.5f));
 
 			trap.setTilesPos(pos);
 			trap.setVerticalPos(0.1f);

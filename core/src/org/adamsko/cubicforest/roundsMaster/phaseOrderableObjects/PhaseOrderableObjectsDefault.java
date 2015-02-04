@@ -105,7 +105,8 @@ public abstract class PhaseOrderableObjectsDefault implements
 
 	@Override
 	public void nextObject() {
-		if (phaseObjects.size() == 0) {
+		setPhaseSkippedLastTime(false);
+		if (noObjects()) {
 			try {
 				// phase is over, indicate that nothing happened during this
 				// phase
@@ -139,6 +140,14 @@ public abstract class PhaseOrderableObjectsDefault implements
 	@Override
 	public int getObjectsNumber() {
 		return phaseObjects.size();
+	}
+
+	@Override
+	public boolean noObjects() {
+		if (getObjectsNumber() == 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

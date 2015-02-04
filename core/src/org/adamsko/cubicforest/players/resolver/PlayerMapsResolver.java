@@ -13,7 +13,6 @@ import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuideDefault;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class PlayerMapsResolver extends PlayerBase implements
@@ -39,7 +38,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void startControl() {
-		TilePathGuideDefault.setTweenSpeedVeryLow();
+		TilePathGuideDefault.setTweenSpeedHigh();
 		resolvedPhase.setActivePlayer(this);
 		mapsResolver.startNewResolve();
 		makeNextDecision();
@@ -54,14 +53,11 @@ public class PlayerMapsResolver extends PlayerBase implements
 	public void makeNextDecision() {
 
 		final GameMemento memento = createMemento();
-		Gdx.app.debug("pmr",
-				"create memento " + Integer.toString(memento.getTempId()));
 		// inform current component about the results of the last decision
 		roundDecisionsIterator.currentItem().setSnapshotAfterDecision(memento);
 
 		if (roundDecisionsIterator.isDone()) {
 			// resolver is done
-			Gdx.app.debug("pmr", "iterator is done");
 			getPlayersController().switchPlayerUser();
 		} else {
 			roundDecisionsIterator.next().makeNextDecision(
