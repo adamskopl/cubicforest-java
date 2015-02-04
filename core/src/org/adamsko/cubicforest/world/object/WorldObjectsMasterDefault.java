@@ -104,6 +104,7 @@ public abstract class WorldObjectsMasterDefault extends
 		tilesMaster.addWorldObject(portal);
 	}
 
+	@Override
 	public void addObject(final WorldObject worldObject) {
 		worldObjects.add(worldObject);
 		addRenderableObject(worldObject);

@@ -2,7 +2,9 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.NullWorldObjectsContainer;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
@@ -97,15 +99,17 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		final Vector2 heroToolTilePos = heroToolTile.getTilesPos();
 
 		heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
-				heroToolTilePos, this);
-
-		addObject(heroToolMarker);
+				heroToolTilePos, getToolMaster(heroToolMarkerType));
+		getToolMaster(heroToolMarker.getType()).addObject(heroToolMarker);
+		// addObject(heroToolMarker);
 	}
 
 	@Override
 	public void heroToolMarkerRemove() {
 		if (heroToolMarker != null) {
-			removeObjectFromContainer(heroToolMarker);
+			// removeObjectFromContainer(heroToolMarker);
+			getToolMaster(heroToolMarker.getType()).removeObjectFromContainer(
+					heroToolMarker);
 			heroToolMarker = null;
 		}
 	}
@@ -119,24 +123,6 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public void setToolTexture(final HeroTool tool, final int index) {
 		tool.setTextureRegion(atlasRows.get(index)[tool.getTexNum()]);
-	}
-
-	public static int heroTooltypeToCost(final WorldObjectType worldObjectType) {
-		switch (worldObjectType) {
-		case TOOLORANGE:
-			return 0;
-		case TOOLRED:
-			return 1;
-		case TOOLTURRET:
-			return 3;
-		case TOOLTRAP:
-			return 5;
-		case TOOLEXIT:
-			return 10;
-		default:
-			Gdx.app.error("heroTooltypeToCost", "unknown type");
-			return 0;
-		}
 	}
 
 	@Override
@@ -160,4 +146,40 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	public void unloadMapObjects() {
 	}
 
+	public static int heroTooltypeToCost(final WorldObjectType worldObjectType) {
+		switch (worldObjectType) {
+		case TOOLORANGE:
+			return 0;
+		case TOOLRED:
+			return 1;
+		case TOOLTURRET:
+			return 3;
+		case TOOLTRAP:
+			return 5;
+		case TOOLEXIT:
+			return 10;
+		default:
+			Gdx.app.error("heroTooltypeToCost", "unknown type");
+			return 0;
+		}
+	}
+
+	/**
+	 * Get {@link WorldObjectsMaster} for specific {@link HeroTool}.
+	 * 
+	 * @return
+	 */
+	private WorldObjectsMaster getToolMaster(
+			final WorldObjectType worldObjectType) {
+		switch (worldObjectType) {
+		case TOOLTRAP:
+			return toolTrapsMaster;
+		case TOOLEXIT:
+			return toolExitsMaster;
+		default:
+			Gdx.app.error("HeroesToolsMaster::getToolMaster()",
+					"unhandled world object type");
+			return NullWorldObjectsContainer.instance();
+		}
+	}
 }

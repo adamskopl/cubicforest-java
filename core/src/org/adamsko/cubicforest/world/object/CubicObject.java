@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.object;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.NullCollisionVisitorsManagerDefault;
@@ -32,7 +33,7 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 	/**
 	 * Container holding this WorldObject.
 	 */
-	private final WorldObjectsMasterDefault parentContainer;
+	private final WorldObjectsMaster parentContainer;
 
 	private CollisionVisitorsManager collisionVisitorsManager;
 
@@ -71,8 +72,7 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 	}
 
 	public CubicObject(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container,
-			final WorldObjectType type) {
+			final WorldObjectsMaster container, final WorldObjectType type) {
 		super(tr, texNum);
 
 		this.parentContainer = container;
@@ -102,7 +102,7 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 	}
 
 	@Override
-	public WorldObjectsMasterDefault getParentContainer() {
+	public WorldObjectsMaster getParentContainer() {
 		return parentContainer;
 	}
 

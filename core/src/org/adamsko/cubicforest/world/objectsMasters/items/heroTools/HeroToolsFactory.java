@@ -2,8 +2,8 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
@@ -29,7 +29,7 @@ public class HeroToolsFactory {
 	}
 
 	public HeroTool createHeroTool(final WorldObjectType heroToolType,
-			final Vector2 tilePos, final WorldObjectsMasterDefault container) {
+			final Vector2 tilePos, final WorldObjectsMaster container) {
 		HeroTool newTool = NullHeroTool.instance();
 
 		switch (heroToolType) {

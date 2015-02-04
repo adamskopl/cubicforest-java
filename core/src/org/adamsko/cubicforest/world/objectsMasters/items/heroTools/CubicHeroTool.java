@@ -1,8 +1,8 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,7 +21,7 @@ public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 	}
 
 	public CubicHeroTool(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container,
+			final WorldObjectsMaster container,
 			final WorldObjectType worldObjectType) {
 		super(tr, texNum, container, worldObjectType);
 
