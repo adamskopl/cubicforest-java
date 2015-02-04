@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * WorldObjectsMaster state.
+ */
 public interface WOMMementoState {
 
 	List<Vector2> getTilePositions();

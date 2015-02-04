@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.players.resolver;
 import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroesOrdersMaster;
 
@@ -20,5 +21,15 @@ public interface MapsResolverClient {
 	 * {@link PhaseHeroesOrdersMaster#getCurrentPossbileDecisions()}
 	 */
 	List<OrderDecisionDefault> getCurrentPossbileDecisions();
+
+	/**
+	 * Get number of the orderable objects.
+	 */
+	int getObjectsNumber();
+
+	/**
+	 * Get current orderable object index.
+	 */
+	int getCurrentObjectIndex();
 
 }

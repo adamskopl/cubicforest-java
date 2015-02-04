@@ -11,7 +11,8 @@ import com.badlogic.gdx.Gdx;
 /**
  * Root component: used to start resolving structure. Root is not keeping a
  * snapshot. When resolving starts, it creates first resolving component with a
- * starting snapshot.
+ * starting snapshot. When {@link #makeNextDecision()} is invoked, it means that
+ * children have done their work, resolving structure is complete.
  */
 public class RoundDecisionsRoot extends RoundDecisions {
 
@@ -29,6 +30,7 @@ public class RoundDecisionsRoot extends RoundDecisions {
 		this.parent = NullDecisionsComponent.instance();
 		this.client = client;
 		this.child = NullDecisionsComponent.instance();
+		this.tempId = -1;
 	}
 
 	@Override
@@ -52,8 +54,10 @@ public class RoundDecisionsRoot extends RoundDecisions {
 	}
 
 	@Override
-	public void makeNextDecision() {
-		Gdx.app.debug(
-				"end of resolving? RoundDecisionsRoot::makeNextDecision()", "");
+	public void makeNextDecision(final RoundDecisionsIterator decisionsIteratorD) {
+		// if invoked, it means that child has 0 possible decisions (searching
+		// for solutions has finished)
+		Gdx.app.debug("ROOT MAKE DECISION", "");
 	}
+
 }

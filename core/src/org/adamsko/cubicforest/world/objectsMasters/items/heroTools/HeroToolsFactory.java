@@ -9,7 +9,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.portal.HeroToolPortal;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.HeroToolExit;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.HeroToolTrap;
 
 import com.badlogic.gdx.Gdx;
@@ -45,9 +45,8 @@ public class HeroToolsFactory {
 		case TOOLTRAP:
 			newTool = new HeroToolTrap(textureRegions.get(1)[3], 3, container);
 			break;
-		case TOOLPORTAL:
-			newTool = new HeroToolPortal(textureRegions.get(1)[4], 4,
-					container, heroesMaster);
+		case TOOLEXIT:
+			newTool = new HeroToolExit(textureRegions.get(1)[4], 4, container);
 			break;
 		default:
 			Gdx.app.error("createHeroTool", "unknown heroToolType");

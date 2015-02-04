@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsAggregate;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregate;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregateDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsAggregateDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorSolving;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorVisiting;
-import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.VictoriousDecisions;
-import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.VictoriousDecisionsDefault;
 
 public class MapsResolverDefault implements MapsResolver {
 
@@ -19,12 +20,12 @@ public class MapsResolverDefault implements MapsResolver {
 	// iterator iterating through elements to find victorious
 	RoundDecisionsIterator victoriousIterator;
 
-	private final List<VictoriousDecisions> solutions;
+	private final List<OrderDecisionsAggregate> solutions;
 
 	private GuiResolver guiResolver;
 
 	/**
-	 * If true, resolver is
+	 * If true, resolver is searching for solutions.
 	 */
 	private boolean resolverIsWorking;
 
@@ -36,7 +37,7 @@ public class MapsResolverDefault implements MapsResolver {
 	public MapsResolverDefault() {
 		roundDecisionsAggregate = new RoundDecisionsAggregateDefault(12);
 
-		solutions = new ArrayList<VictoriousDecisions>();
+		solutions = new ArrayList<OrderDecisionsAggregate>();
 
 		victoriousIterator = new RoundDecisionsIteratorVisiting(
 				NullDecisionsComponent.instance());
@@ -57,7 +58,7 @@ public class MapsResolverDefault implements MapsResolver {
 	@Override
 	public RoundDecisionsIterator createRoundDecisionsIterator(
 			final MapsResolverClient client) {
-		roundDecisionsIterator = new RoundDecisionsIteratorSolving(client,
+		this.roundDecisionsIterator = new RoundDecisionsIteratorSolving(client,
 				roundDecisionsAggregate);
 		return roundDecisionsIterator;
 	}
@@ -76,16 +77,14 @@ public class MapsResolverDefault implements MapsResolver {
 		// use dedicated iterator
 		victoriousIterator.set(first);
 
-		final VictoriousDecisions victoriousDecisions = new VictoriousDecisionsDefault();
-
+		final OrderDecisionsAggregate victoriousOrderDecisionsAggregate = new OrderDecisionsAggregateDefault();
 		do {
 			victoriousIterator.next();
-			victoriousDecisions.pushDecision(victoriousIterator.currentItem()
-					.getLatestDecision());
+			victoriousOrderDecisionsAggregate.append(victoriousIterator
+					.currentItem().getLatestDecision());
 		} while (!victoriousIterator.isLast());
 
-		solutions.add(victoriousDecisions);
-
+		solutions.add(victoriousOrderDecisionsAggregate);
 		guiResolver.addNewSolution();
 	}
 
@@ -100,5 +99,23 @@ public class MapsResolverDefault implements MapsResolver {
 	public boolean isResolverWorking() {
 		return resolverIsWorking;
 	}
+
+	@Override
+	public void workIsDone() {
+		resolverIsWorking = false;
+	}
+
+	@Override
+	public int countAggregates() {
+		return solutions.size();
+	}
+
+	@Override
+	public OrderDecisionsAggregate getAggregate(final int index) {
+		if (index + 1 > solutions.size()) {
+			return NullOrderDecisionsAggregate.instance();
+		}
+		return solutions.get(index);
+	};
 
 }

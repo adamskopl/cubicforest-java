@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap;
+package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit;
 
 import java.util.List;
 
@@ -10,13 +10,11 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class ToolTrapsMaster extends WorldObjectsMasterDefault {
+public class ToolExitsMaster extends WorldObjectsMasterDefault {
 
-	public ToolTrapsMaster(final TilesMaster tilesMaster,
+	public ToolExitsMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("ToolTrapsMaster", tilesMaster, textureName, tileW, tileH);
-
-		// heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
+		super("ToolExitsMaster", tilesMaster, textureName, tileW, tileH);
 	}
 
 	@Override
@@ -29,32 +27,31 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
+	public void loadMapObjects(final CFMap cfMap) throws Exception {
+		final List<Vector2> tilePositions = cfMap
+				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_EXIT);
+
+		loadMapObjects(tilePositions);
+	}
+
+	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-		HeroToolTrap trap;
+		HeroToolExit exit;
 		for (final Vector2 pos : tilePositions) {
-			trap = new HeroToolTrap(atlasRows.get(0)[0], 0, this);
-			trap.setState(HeroToolStates_e.STATE_READY);
-			trap.setRenderVector(new Vector2(-atlasRows.get(0)[0]
+			exit = new HeroToolExit(atlasRows.get(0)[0], 0, this);
+			exit.setState(HeroToolStates_e.STATE_READY);
+			exit.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 					.getRegionWidth() / 2 + 2, -11));
 
 			pos.add(new Vector2(0.5f, 0.5f));
 
-			trap.setTilesPos(pos);
-			trap.setVerticalPos(0.1f);
+			exit.setTilesPos(pos);
+			exit.setVerticalPos(0.1f);
 
-			trap.setName("trap");
+			exit.setName("exit");
 
-			addObject(trap);
+			addObject(exit);
 		}
-	}
-
-	@Override
-	public void loadMapObjects(final CFMap map) throws Exception {
-		final List<Vector2> tilePositions = map
-				.getObjectTypeCoords(TiledObjectType.TILED_HERO_TOOL_TRAP);
-
-		loadMapObjects(tilePositions);
-
 	}
 
 	@Override

@@ -26,9 +26,14 @@ public class RoundDecisionsIteratorSolving implements RoundDecisionsIterator {
 	}
 
 	@Override
+	public DecisionsComponent currentItem() {
+		return current;
+	}
+
+	@Override
 	public DecisionsComponent next() {
 		current = currentItem().nextComponent();
-		return currentItem();
+		return current;
 	}
 
 	@Override
@@ -42,19 +47,18 @@ public class RoundDecisionsIteratorSolving implements RoundDecisionsIterator {
 
 	@Override
 	public boolean isDone() {
-		// whole structure is resolved, when all decisions from root are
-		// resolved
-		return first().isDone();
+		// whole structure is resolved, when root's child has no decisions to
+		// make (root is creating first child with starting decisions. all
+		// decisions solved: whole structure solved)
+		if (!first().getChild().isNull() && first().getChild().isDone()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isLast() {
 		return currentItem().getChild().isNull();
-	}
-
-	@Override
-	public DecisionsComponent currentItem() {
-		return current;
 	}
 
 	@Override

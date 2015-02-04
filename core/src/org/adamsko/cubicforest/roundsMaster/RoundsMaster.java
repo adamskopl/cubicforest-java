@@ -30,7 +30,7 @@ public interface RoundsMaster extends MapsLoaderCoordinator, Nullable {
 	/**
 	 * All phases ended, begin new round.
 	 */
-	void nextRound();
+	void startNextRound();
 
 	RoundPhase getCurrentPhase();
 
@@ -46,8 +46,11 @@ public interface RoundsMaster extends MapsLoaderCoordinator, Nullable {
 
 	/**
 	 * Start the next phase.
+	 * 
+	 * @param newRound
+	 *            true if new round is
 	 */
-	void startNextPhase() throws Exception;
+	void startNextPhase();
 
 	/**
 	 * Reload: reload all phases, reload all World objects.

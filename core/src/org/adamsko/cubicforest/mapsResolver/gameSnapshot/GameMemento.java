@@ -10,4 +10,6 @@ public interface GameMemento extends Nullable {
 
 	boolean isEqual(GameMemento m);
 
+	int getTempId();
+
 }

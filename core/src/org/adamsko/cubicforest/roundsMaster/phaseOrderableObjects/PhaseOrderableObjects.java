@@ -16,6 +16,15 @@ public interface PhaseOrderableObjects extends RoundPhase {
 
 	WorldObject getCurrentObject();
 
+	int getObjectsNumber();
+
+	/**
+	 * Check if there are any phase objects.
+	 * 
+	 * @return true if there is at least one object
+	 */
+	boolean noObjects();
+
 	int getCurrentObjectIndex();
 
 	void setCurrentObjectIndex(final int newIndex);

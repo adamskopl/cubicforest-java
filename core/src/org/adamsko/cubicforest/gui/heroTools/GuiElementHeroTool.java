@@ -30,8 +30,8 @@ public class GuiElementHeroTool extends GuiElementDefault {
 		switch (type) {
 		case TOOLORANGE:
 			return tiledMapProperties.getToolOrange();
-		case TOOLPORTAL:
-			return tiledMapProperties.getToolPortal();
+		case TOOLEXIT:
+			return tiledMapProperties.getToolExit();
 		case TOOLRED:
 			return tiledMapProperties.getToolRed();
 		case TOOLTRAP:

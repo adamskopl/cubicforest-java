@@ -36,6 +36,10 @@ public class NullPlayersController implements PlayersController {
 	}
 
 	@Override
+	public void initializeRoundsMaster(final RoundsMaster roundsMaster) {
+	}
+
+	@Override
 	public void switchPlayerUser() {
 	}
 
@@ -44,6 +48,7 @@ public class NullPlayersController implements PlayersController {
 	}
 
 	@Override
-	public void initializeRoundsMaster(final RoundsMaster roundsMaster) {
+	public void switchPlayerOrderDecisionsReplay() {
 	}
+
 }

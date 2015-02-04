@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjects;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;

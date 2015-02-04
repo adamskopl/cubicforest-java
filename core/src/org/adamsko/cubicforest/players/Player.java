@@ -16,6 +16,8 @@ import org.adamsko.cubicforest.world.tile.Tile;
  */
 public interface Player extends Nullable {
 
+	PlayersController getPlayersController();
+
 	/**
 	 * Start control.
 	 */

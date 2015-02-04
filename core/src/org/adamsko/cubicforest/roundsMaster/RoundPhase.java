@@ -35,9 +35,14 @@ public interface RoundPhase {
 	String getName();
 
 	/**
-	 * Set player, which is controlling game.
+	 * Set player, which is controlling the game.
 	 */
 	void setActivePlayer(Player activePlayer);
+
+	/**
+	 * Get player, which is controlling the game.
+	 */
+	Player getActivePlayer();
 
 	/**
 	 * Phase should handle player's actions by giving it's

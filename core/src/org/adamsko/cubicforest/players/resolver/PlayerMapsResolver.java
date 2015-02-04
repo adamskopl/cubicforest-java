@@ -3,12 +3,15 @@ package org.adamsko.cubicforest.players.resolver;
 import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
 import org.adamsko.cubicforest.players.PlayerBase;
+import org.adamsko.cubicforest.players.PlayersController;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
+import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuideDefault;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -20,16 +23,11 @@ public class PlayerMapsResolver extends PlayerBase implements
 	private final MapsResolver mapsResolver;
 	private final TilesMaster tilesMaster;
 
-	public PlayerMapsResolver(final MapsResolver mapsResolver,
-			final TilesMaster tilesMaster) {
-		super();
+	public PlayerMapsResolver(final PlayersController playersController,
+			final MapsResolver mapsResolver, final TilesMaster tilesMaster) {
+		super(playersController);
 		this.mapsResolver = mapsResolver;
 		this.tilesMaster = tilesMaster;
-	}
-
-	@Override
-	public boolean isNull() {
-		return false;
 	}
 
 	@Override
@@ -40,6 +38,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void startControl() {
+		TilePathGuideDefault.setTweenSpeedHigh();
 		resolvedPhase.setActivePlayer(this);
 		mapsResolver.startNewResolve();
 		makeNextDecision();
@@ -52,11 +51,18 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void makeNextDecision() {
+
 		final GameMemento memento = createMemento();
 		// inform current component about the results of the last decision
 		roundDecisionsIterator.currentItem().setSnapshotAfterDecision(memento);
-		// roundDecisionsIterator.currentItem().makeDecision();
-		roundDecisionsIterator.next().makeNextDecision();
+
+		if (roundDecisionsIterator.isDone()) {
+			// resolver is done
+			getPlayersController().switchPlayerUser();
+		} else {
+			roundDecisionsIterator.next().makeNextDecision(
+					roundDecisionsIterator);
+		}
 	}
 
 	@Override
@@ -90,6 +96,16 @@ public class PlayerMapsResolver extends PlayerBase implements
 	@Override
 	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
 		return resolvedPhase.getCurrentPossbileDecisions();
+	}
+
+	@Override
+	public int getObjectsNumber() {
+		return resolvedPhase.getObjectsNumber();
+	}
+
+	@Override
+	public int getCurrentObjectIndex() {
+		return resolvedPhase.getCurrentObjectIndex();
 	}
 
 }

@@ -11,7 +11,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.portal.HeroToolPortal;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.HeroToolExit;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
@@ -109,8 +109,8 @@ public abstract class CollisionVisitorDefault implements WorldObjectVisitor,
 	}
 
 	@Override
-	public void visitToolPortal(final HeroToolPortal heroToolPortal) {
-		visitHeroTool(heroToolPortal);
+	public void visitToolExit(final HeroToolExit heroToolExit) {
+		visitHeroTool(heroToolExit);
 	}
 
 	@Override

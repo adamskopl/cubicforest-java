@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.players;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
 

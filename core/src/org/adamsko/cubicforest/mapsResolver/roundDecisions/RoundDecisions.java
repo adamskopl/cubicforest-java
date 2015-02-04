@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.NullGameSnapshotMemento;
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
 import org.adamsko.cubicforest.players.resolver.MapsResolverClient;
 import org.adamsko.cubicforest.players.resolver.NullDecisionsComponent;
 import org.adamsko.cubicforest.players.resolver.NullOrderDecision;
-import org.adamsko.cubicforest.players.resolver.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 
 import com.badlogic.gdx.Gdx;
@@ -30,10 +30,6 @@ public class RoundDecisions implements DecisionsComponent {
 	 */
 	private final GameMemento snapshot;
 
-	// // snapshot from which component is starting. his snapshot is not
-	// changed.
-	// final GameMemento snapshot;
-
 	// game snapshot changed after next making available decision. used to
 	// create eventual new components, which will resolve this snapshot
 	GameMemento snapshotAfterPreviousDecision;
@@ -53,11 +49,15 @@ public class RoundDecisions implements DecisionsComponent {
 	 */
 	protected DecisionsComponent child;
 
+	public static int tempIdCounter = 0;
+	public int tempId;
+
 	// null constructor
 	public RoundDecisions(final boolean nullConstructor) {
 		this.possibleDecisions = new ArrayList<OrderDecisionDefault>();
 		this.parent = null;
 		this.snapshot = NullGameSnapshotMemento.instance();
+		this.snapshotAfterPreviousDecision = NullGameSnapshotMemento.instance();
 		roundDecisionsAggregate = null;
 	}
 
@@ -68,6 +68,7 @@ public class RoundDecisions implements DecisionsComponent {
 		this.roundDecisionsAggregate = roundDecisionsAggregate;
 		this.parent = parent;
 		this.snapshot = startingSnapshot;
+		this.snapshotAfterPreviousDecision = NullGameSnapshotMemento.instance();
 
 		// if the component is created, it means that starting snapshot was not
 		// resolved
@@ -80,6 +81,21 @@ public class RoundDecisions implements DecisionsComponent {
 		// child will be eventually added later (for snapshotAfterDecision)
 		child = NullDecisionsComponent.instance();
 
+		tempId = tempIdCounter;
+		tempIdCounter++;
+
+		String decisionsString = new String();
+		for (final OrderDecisionDefault decision : possibleDecisions) {
+			final String dString = new String(decision.getChosenTilePos()
+					.toString());
+			decisionsString = decisionsString.concat(dString + ",");
+		}
+
+	}
+
+	@Override
+	public int getTempId() {
+		return tempId;
 	}
 
 	@Override
@@ -89,24 +105,46 @@ public class RoundDecisions implements DecisionsComponent {
 
 	@Override
 	public DecisionsComponent nextComponent() {
-
 		// check if memento was resolved
 		if (roundDecisionsAggregate
 				.isMementoResolved(snapshotAfterPreviousDecision)) {
 			// continue resolving current element
 			return this;
 		}
-
 		return createChild(snapshotAfterPreviousDecision);
-
 	}
 
 	@Override
-	public void makeNextDecision() {
+	public boolean isDone() {
+		if (possibleDecisions.size() == 0
+				&& roundDecisionsAggregate
+						.isMementoResolved(snapshotAfterPreviousDecision)) {
+			// if there are no decisions to make, and snapshot from previous
+			// decision is solved
+			if (child.isNull() || child.isDone()) {
+				// if there is a child, check if it's done. situation: when
+				// there is a tree root->child0->child1 and child0 and child1
+				// are done.
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void makeNextDecision(
+			final RoundDecisionsIterator roundDecisionsIterator) {
 		if (getPossibleDecisions().size() == 0
 				|| getHeight() >= roundDecisionsAggregate.getMaxDepth()) {
-			// next decision should be made by a parent
-			parent.makeNextDecision();
+			// Detach from parent (this component will not be part of the
+			// soulution). Right now parent should have this component as a
+			// child.
+			if (!parent.getChild().isNull()) {
+				parent.remove(this);
+			}
+			roundDecisionsIterator.set(parent);
+			// Next decision should be made by a parent.
+			parent.makeNextDecision(roundDecisionsIterator);
 			return;
 		}
 
@@ -133,6 +171,12 @@ public class RoundDecisions implements DecisionsComponent {
 
 	@Override
 	public void remove(final DecisionsComponent decisionsComponent) {
+		if (child != decisionsComponent) {
+			Gdx.app.error("RoundDecisions::remove()",
+					"child != decisionsComponent");
+			return;
+		}
+		this.child = NullDecisionsComponent.instance();
 	}
 
 	@Override
@@ -157,23 +201,19 @@ public class RoundDecisions implements DecisionsComponent {
 	}
 
 	@Override
-	public boolean isDone() {
-		// component is completely resolved, when all possible decisions are
-		// taken into account
-		if (possibleDecisions.size() == 0) {
-			return true;
+	public void setSnapshotAfterDecision(
+			final GameMemento snapshotAfterPreviousDecision) {
+
+		if (parent.getChild() != this) {
+			parent.setSnapshotAfterDecision(snapshotAfterPreviousDecision);
+			return;
 		}
 
-		return false;
+		this.snapshotAfterPreviousDecision = snapshotAfterPreviousDecision;
 	}
 
 	@Override
-	public void setSnapshotAfterDecision(
-			final GameMemento snapshotAfterPreviousDecision) {
-		this.snapshotAfterPreviousDecision = snapshotAfterPreviousDecision;
-	};
-
-	List<OrderDecisionDefault> getPossibleDecisions() {
+	public List<OrderDecisionDefault> getPossibleDecisions() {
 		return possibleDecisions;
 	}
 

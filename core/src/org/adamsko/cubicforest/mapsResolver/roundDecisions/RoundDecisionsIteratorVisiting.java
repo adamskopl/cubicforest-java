@@ -1,12 +1,11 @@
 package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 
-import org.adamsko.cubicforest.mapsResolver.victoriousDecisions.VictoriousDecisions;
 import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
 
 /**
  * Iterator used to iterate through ready {@link DecisionsComponent} structure.
  * E.g used to collect all decisions from the structure, to create
- * {@link VictoriousDecisions}.
+ * {@link OrderDecisions}.
  */
 public class RoundDecisionsIteratorVisiting implements RoundDecisionsIterator {
 
@@ -39,7 +38,8 @@ public class RoundDecisionsIteratorVisiting implements RoundDecisionsIterator {
 	public boolean isDone() {
 		// whole structure is resolved, when all decisions from root are
 		// resolved
-		return first().isDone();
+		// return first().isDone();
+		return false;
 	}
 
 	@Override

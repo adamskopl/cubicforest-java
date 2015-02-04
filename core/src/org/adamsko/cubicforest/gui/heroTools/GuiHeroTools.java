@@ -50,7 +50,7 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		types.add(WorldObjectType.TOOLRED);
 		types.add(WorldObjectType.TOOLTURRET);
 		types.add(WorldObjectType.TOOLTRAP);
-		types.add(WorldObjectType.TOOLPORTAL);
+		types.add(WorldObjectType.TOOLEXIT);
 
 		int seqNum = 0;
 		for (final WorldObjectType type : types) {

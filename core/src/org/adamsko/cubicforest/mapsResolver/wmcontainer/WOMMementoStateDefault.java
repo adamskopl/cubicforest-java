@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
 
 import com.badlogic.gdx.math.Vector2;
@@ -19,20 +18,6 @@ public class WOMMementoStateDefault implements WOMMementoState {
 	@Override
 	public String getName() {
 		return worldObjectsMasterName;
-	}
-
-	/**
-	 * Positions remembered for {@link HeroesToolsMaster} should be separated
-	 * with a newToolSeparator
-	 */
-	public WOMMementoStateDefault(final HeroesToolsMaster heroesToolsMaster) {
-		this.worldObjectsMasterName = heroesToolsMaster.getName();
-		this.tilePositions = new ArrayList<Vector2>();
-		for (final Vector2 toolPos : heroesToolsMaster
-				.getToolsPositionsSeparated()) {
-			final Vector2 pos = new Vector2(toolPos);
-			tilePositions.add(pos);
-		}
 	}
 
 	public WOMMementoStateDefault(final TilesContainer tilesContainer) {
