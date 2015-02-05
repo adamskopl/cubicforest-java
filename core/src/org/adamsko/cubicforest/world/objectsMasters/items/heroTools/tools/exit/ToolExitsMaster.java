@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class ToolExitsMaster extends WorldObjectsMasterDefault {
@@ -49,15 +50,15 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 		exit.setTilesPos(pos);
 		exit.setVerticalPos(0.1f);
 
-		exit.setName("exit");
+		exit.addLabel(exit.getType().toString());
+		exit.altLabelLast(Color.YELLOW, 0.8f, -40.0f, -10.0f);
+
 		return exit;
 	}
 
 	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-
 		for (final Vector2 pos : tilePositions) {
-
 			addObject(factoryMethod(pos));
 		}
 	}

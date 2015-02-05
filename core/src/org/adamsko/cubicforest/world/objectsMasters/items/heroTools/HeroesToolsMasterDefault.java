@@ -34,7 +34,6 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker
 	private WorldObjectType heroToolMarkerType;
-	private HeroToolsFactory heroToolsFactory;
 	private GatherCubesMaster gatherCubesMaster;
 
 	// specific tools masters
@@ -61,8 +60,6 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		this.gatherCubesMaster = gatherCubesMaster;
 		heroToolMarker = null;
 		heroToolMarkerType = null;
-
-		heroToolsFactory = new HeroToolsFactory(atlasRows);
 
 		newToolSeparator = new Vector2();
 
@@ -108,8 +105,11 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 		final Vector2 heroToolTilePos = heroToolTile.getTilesPos();
 
-		heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
-				heroToolTilePos, getToolMaster(heroToolMarkerType));
+		heroToolMarker = (HeroTool) getToolMaster(heroToolMarkerType)
+				.factoryMethod(heroToolTilePos);
+
+		// heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
+		// heroToolTilePos, getToolMaster(heroToolMarkerType));
 		getToolMaster(heroToolMarker.getType()).addObject(heroToolMarker);
 	}
 

@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class ToolTrapsMaster extends WorldObjectsMasterDefault {
@@ -42,6 +43,9 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 
 		trap.setTilesPos(pos);
 		trap.setVerticalPos(0.1f);
+
+		trap.addLabel(trap.getType().toString());
+		trap.altLabelLast(Color.YELLOW, 0.8f, -40.0f, -10.0f);
 
 		trap.setName("trap");
 		return trap;
