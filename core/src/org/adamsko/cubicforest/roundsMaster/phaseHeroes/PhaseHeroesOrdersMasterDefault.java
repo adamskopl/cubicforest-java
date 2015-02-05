@@ -8,7 +8,7 @@ import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.NullHeroTool;
+import org.adamsko.cubicforest.world.tile.NullCubicTile;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
@@ -42,7 +42,7 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 			final TilesMaster tilesMaster,
 			final HeroesToolsMaster heroesToolsMaster,
 			final EnemiesHelper enemiesHelper) {
-		tilePickedOrder = null;
+		tilePickedOrder = NullCubicTile.instance();
 		this.tilesLookController = tilesLookController;
 		this.tilesMaster = tilesMaster;
 		this.heroesToolsMaster = heroesToolsMaster;
@@ -137,12 +137,17 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 
 		final List<OrderDecisionDefault> validOrderDecisions = new ArrayList<OrderDecisionDefault>();
 		for (final Tile tile : tilesOrderValid) {
-			final OrderDecisionDefault orderDecision = new OrderDecisionDefault(
-					tile, NullHeroTool.instance());
-			// add order choice with no tool
+			OrderDecisionDefault orderDecision = new OrderDecisionDefault(tile,
+					WorldObjectType.NULL);
+			// add an order choice with no tool
 			validOrderDecisions.add(orderDecision);
+			for (final WorldObjectType possibleTool : heroesToolsMaster
+					.getPossibleToolChoices()) {
+				orderDecision = new OrderDecisionDefault(tile, possibleTool);
+				// add an order with a tool choice
+				validOrderDecisions.add(orderDecision);
+			}
 		}
-
 		return validOrderDecisions;
 	}
 

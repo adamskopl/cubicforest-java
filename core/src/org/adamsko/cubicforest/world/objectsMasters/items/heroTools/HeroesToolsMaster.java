@@ -1,5 +1,7 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import java.util.List;
+
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
@@ -35,5 +37,10 @@ public interface HeroesToolsMaster extends WorldObjectsMaster,
 	void setToolTexture(final HeroTool tool, final int index);
 
 	void setHeroToolMarkerType(final WorldObjectType heroToolMarkerType);
+
+	/**
+	 * Get list of {@link HeroTool} objects that can be chosen by a player.
+	 */
+	List<WorldObjectType> getPossibleToolChoices();
 
 }

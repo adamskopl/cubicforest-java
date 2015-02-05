@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.players.resolver;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
@@ -28,6 +29,9 @@ public class PlayerMapsResolver extends PlayerBase implements
 		super(playersController);
 		this.mapsResolver = mapsResolver;
 		this.tilesMaster = tilesMaster;
+
+		ConditionalLog.addObject(this, "PlayerMapsResolver");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	@Override
@@ -38,7 +42,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void startControl() {
-		TilePathGuideDefault.setTweenSpeedHigh();
+		TilePathGuideDefault.setTweenSpeedVeryLow();
 		resolvedPhase.setActivePlayer(this);
 		mapsResolver.startNewResolve();
 		makeNextDecision();
@@ -58,6 +62,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 		if (roundDecisionsIterator.isDone()) {
 			// resolver is done
+			ConditionalLog.debug(this, "iterator is done");
 			getPlayersController().switchPlayerUser();
 		} else {
 			roundDecisionsIterator.next().makeNextDecision(
@@ -83,6 +88,11 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler()
 				.onTileChoice(chosenTile);
+		if (orderDecision.heroToolChosen()) {
+			roundsMaster.getCurrentPhase().getPlayerActionsHandler()
+					.onHeroToolChoice(orderDecision.getChosenHeroTool());
+		}
+
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler().onConfirm();
 	}
 

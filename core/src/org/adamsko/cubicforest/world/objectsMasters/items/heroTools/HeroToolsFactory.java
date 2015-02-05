@@ -2,9 +2,9 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;
@@ -20,12 +20,11 @@ import com.badlogic.gdx.math.Vector2;
 public class HeroToolsFactory {
 
 	private final List<TextureRegion[]> textureRegions;
-	private final HeroesMaster heroesMaster;
 
-	public HeroToolsFactory(final List<TextureRegion[]> textureRegions,
-			final HeroesMaster heroesMaster) {
+	public HeroToolsFactory(final List<TextureRegion[]> textureRegions) {
 		this.textureRegions = textureRegions;
-		this.heroesMaster = heroesMaster;
+		ConditionalLog.addObject(this, "HeroToolsFactory");
+		ConditionalLog.setUsage(this, false);
 	}
 
 	public HeroTool createHeroTool(final WorldObjectType heroToolType,
@@ -44,6 +43,7 @@ public class HeroToolsFactory {
 			break;
 		case TOOLTRAP:
 			newTool = new HeroToolTrap(textureRegions.get(1)[3], 3, container);
+			ConditionalLog.debug(this, "newTrap " + tilePos.toString());
 			break;
 		case TOOLEXIT:
 			newTool = new HeroToolExit(textureRegions.get(1)[4], 4, container);

@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.WorldObjectsMaster;
@@ -41,6 +42,8 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	// indicates borders between tools positions in heroToolsPositions vector
 	private Vector2 newToolSeparator;
 
+	private List<WorldObjectType> toolTypes;
+
 	WorldObjectType test;
 
 	public HeroesToolsMasterDefault() {
@@ -57,9 +60,13 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		heroToolMarker = null;
 		heroToolMarkerType = null;
 
-		heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
+		heroToolsFactory = new HeroToolsFactory(atlasRows);
 
 		newToolSeparator = new Vector2();
+
+		toolTypes = new ArrayList<WorldObjectType>();
+		toolTypes.add(WorldObjectType.TOOLTRAP);
+		toolTypes.add(WorldObjectType.TOOLEXIT);
 	}
 
 	@Override
@@ -92,7 +99,8 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public void heroToolMarkerAdd(final Tile heroToolTile) {
 		if (heroToolTile.isNull()) {
-			Gdx.app.error("addHeroToolMarker", "heroToolTile == null");
+			Gdx.app.error("HeroesToolsMasterDefault::addHeroToolMarker()",
+					"heroToolTile.isNull()");
 			return;
 		}
 
@@ -101,13 +109,11 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
 				heroToolTilePos, getToolMaster(heroToolMarkerType));
 		getToolMaster(heroToolMarker.getType()).addObject(heroToolMarker);
-		// addObject(heroToolMarker);
 	}
 
 	@Override
 	public void heroToolMarkerRemove() {
 		if (heroToolMarker != null) {
-			// removeObjectFromContainer(heroToolMarker);
 			getToolMaster(heroToolMarker.getType()).removeObjectFromContainer(
 					heroToolMarker);
 			heroToolMarker = null;
@@ -181,5 +187,17 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 					"unhandled world object type");
 			return NullWorldObjectsContainer.instance();
 		}
+	}
+
+	@Override
+	public List<WorldObjectType> getPossibleToolChoices() {
+		final List<WorldObjectType> possibleTools = new ArrayList<WorldObjectType>();
+		for (final WorldObjectType toolType : toolTypes) {
+			if (gatherCubesMaster.getGatherCubesCounter().isToolAffordable(
+					toolType)) {
+				possibleTools.add(toolType);
+			}
+		}
+		return possibleTools;
 	}
 }
