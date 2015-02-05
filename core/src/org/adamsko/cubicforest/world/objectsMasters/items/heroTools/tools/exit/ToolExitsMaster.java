@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -35,22 +36,29 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		final HeroToolExit exit;
+		exit = new HeroToolExit(atlasRows.get(0)[0], 0, this);
+		exit.setState(HeroToolStates_e.STATE_READY);
+		exit.setRenderVector(new Vector2(
+				-atlasRows.get(0)[0].getRegionWidth() / 2 + 2, -11));
+
+		final Vector2 pos = new Vector2(tilePos);
+		pos.add(new Vector2(0.5f, 0.5f));
+
+		exit.setTilesPos(pos);
+		exit.setVerticalPos(0.1f);
+
+		exit.setName("exit");
+		return exit;
+	}
+
+	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-		HeroToolExit exit;
+
 		for (final Vector2 pos : tilePositions) {
-			exit = new HeroToolExit(atlasRows.get(0)[0], 0, this);
-			exit.setState(HeroToolStates_e.STATE_READY);
-			exit.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2 + 2, -11));
 
-			pos.add(new Vector2(0.5f, 0.5f));
-
-			exit.setTilesPos(pos);
-			exit.setVerticalPos(0.1f);
-
-			exit.setName("exit");
-
-			addObject(exit);
+			addObject(factoryMethod(pos));
 		}
 	}
 

@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.gui.prizes.GuiPrizes;
 import org.adamsko.cubicforest.gui.prizes.GuiPrizesDefault;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -30,19 +31,23 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		final Prize prize = new CubicPrize(atlasRows.get(0)[0], 0, this);
+		prize.setRenderVector(new Vector2(
+				-atlasRows.get(0)[0].getRegionWidth() / 2 - 3, -5));
+		final Vector2 pos = new Vector2(tilePos);
+		pos.add(new Vector2(0.5f, 0.5f));
+		prize.setTilesPos(pos);
+		prize.setVerticalPos(0.2f);
+
+		prize.setName("prize");
+		return prize;
+	}
+
+	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-		Prize prize;
 		for (final Vector2 pos : tilePositions) {
-
-			prize = new CubicPrize(atlasRows.get(0)[0], 0, this);
-			prize.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2 - 3, -5));
-			pos.add(new Vector2(0.5f, 0.5f));
-			prize.setTilesPos(pos);
-			prize.setVerticalPos(0.2f);
-
-			prize.setName("prize");
-			addObject(prize);
+			addObject(factoryMethod(pos));
 		}
 	}
 

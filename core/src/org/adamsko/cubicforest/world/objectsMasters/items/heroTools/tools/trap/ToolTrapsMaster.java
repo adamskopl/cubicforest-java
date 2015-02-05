@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -29,22 +30,27 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		final HeroToolTrap trap;
+		trap = new HeroToolTrap(atlasRows.get(0)[0], 0, this);
+		trap.setState(HeroToolStates_e.STATE_READY);
+		trap.setRenderVector(new Vector2(
+				-atlasRows.get(0)[0].getRegionWidth() / 2 + 2, -11));
+
+		final Vector2 pos = new Vector2(tilePos);
+		pos.add(new Vector2(0.5f, 0.5f));
+
+		trap.setTilesPos(pos);
+		trap.setVerticalPos(0.1f);
+
+		trap.setName("trap");
+		return trap;
+	}
+
+	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-		HeroToolTrap trap;
 		for (final Vector2 pos : tilePositions) {
-			trap = new HeroToolTrap(atlasRows.get(0)[0], 0, this);
-			trap.setState(HeroToolStates_e.STATE_READY);
-			trap.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2 + 2, -11));
-
-			pos.add(new Vector2(0.5f, 0.5f));
-
-			trap.setTilesPos(pos);
-			trap.setVerticalPos(0.1f);
-
-			trap.setName("trap");
-
-			addObject(trap);
+			addObject(factoryMethod(pos));
 		}
 	}
 

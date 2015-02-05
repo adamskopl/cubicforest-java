@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.NullCubicObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.NullWorldObjectsContainer;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
@@ -138,6 +140,11 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 	@Override
 	public void update(final float deltaTime) {
+	}
+
+	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		return NullCubicObject.instance();
 	}
 
 	@Override

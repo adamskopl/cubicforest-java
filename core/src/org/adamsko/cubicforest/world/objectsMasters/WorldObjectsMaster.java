@@ -23,7 +23,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  * 
  */
-public interface WorldObjectsMaster extends Nullable {
+public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	public void update(float deltaTime);
 
 	/**

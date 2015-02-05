@@ -16,6 +16,9 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemiesMaster extends WorldObjectsMasterDefault implements
 		OrderableObjectsContainer {
 
+	private int nameIndex;
+	private int atlasIndex;
+
 	public EnemiesMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
 		super("enemiesMaster", tilesMaster, textureName, tileW, tileH);
@@ -38,25 +41,31 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		final Enemy enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex,
+				this);
+		enemy.setRenderVector(new Vector2(
+				-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
+
+		enemy.setSpeed(5);
+
+		final Vector2 pos = new Vector2(tilePos);
+		pos.add(new Vector2(0.5f, 0.5f));
+		enemy.setTilesPos(pos);
+		enemy.setName("E" + nameIndex);
+		enemy.setVerticalPos(0.3f);
+		enemy.addLabel(ROLabel.LABEL_NAME);
+		enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
+		return enemy;
+	}
+
+	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-		Enemy enemy;
-		int nameIndex = 0;
-		int atlasIndex = 0;
+		nameIndex = 0;
+		atlasIndex = 0;
 		for (final Vector2 pos : tilePositions) {
-			enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex, this);
-			enemy.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2, -7));
 
-			enemy.setSpeed(5);
-
-			pos.add(new Vector2(0.5f, 0.5f));
-			enemy.setTilesPos(pos);
-			enemy.setName("E" + nameIndex);
-			enemy.setVerticalPos(0.3f);
-			enemy.addLabel(ROLabel.LABEL_NAME);
-			enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
-
-			addObject(enemy);
+			addObject(factoryMethod(pos));
 
 			nameIndex++;
 			if (atlasIndex == 2) {
