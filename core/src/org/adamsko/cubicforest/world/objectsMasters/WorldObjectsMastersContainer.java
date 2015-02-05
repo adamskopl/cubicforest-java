@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;

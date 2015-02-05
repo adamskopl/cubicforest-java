@@ -10,7 +10,7 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

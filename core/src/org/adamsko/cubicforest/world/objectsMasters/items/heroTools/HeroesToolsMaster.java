@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.tile.Tile;

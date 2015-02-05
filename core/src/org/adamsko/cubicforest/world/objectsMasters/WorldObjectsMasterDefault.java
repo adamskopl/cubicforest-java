@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.object;
+package org.adamsko.cubicforest.world.objectsMasters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -79,6 +79,7 @@ public abstract class WorldObjectsMasterDefault extends
 		loadMapObjects(state.getTilePositions());
 	}
 
+	@Override
 	public void removeObjectFromContainer(final WorldObject objectRemove) {
 		worldObjects.remove(objectRemove);
 		removeRenderableObject(objectRemove);

@@ -3,11 +3,11 @@ package org.adamsko.cubicforest.world.object;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.RenderableObjectType;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.NullCollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicatorDefault;
 

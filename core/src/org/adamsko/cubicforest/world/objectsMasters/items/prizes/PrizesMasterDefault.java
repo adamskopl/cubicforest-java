@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.gui.prizes.GuiPrizes;
 import org.adamsko.cubicforest.gui.prizes.GuiPrizesDefault;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;

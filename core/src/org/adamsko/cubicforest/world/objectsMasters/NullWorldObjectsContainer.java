@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.world.object;
+package org.adamsko.cubicforest.world.objectsMasters;
 
 import java.util.List;
 

@@ -3,11 +3,11 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
-import org.adamsko.cubicforest.world.object.NullWorldObjectsContainer;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.NullWorldObjectsContainer;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.HeroesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;

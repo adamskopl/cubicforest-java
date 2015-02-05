@@ -1,9 +1,9 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap;
 
 import org.adamsko.cubicforest.helpTools.ConditionalLog;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.CubicHeroTool;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

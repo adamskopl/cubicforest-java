@@ -9,7 +9,6 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.NullCollisionVisitorsManagerFactory;

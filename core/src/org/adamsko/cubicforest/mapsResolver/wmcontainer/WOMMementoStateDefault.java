@@ -3,8 +3,8 @@ package org.adamsko.cubicforest.mapsResolver.wmcontainer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
 
 import com.badlogic.gdx.math.Vector2;

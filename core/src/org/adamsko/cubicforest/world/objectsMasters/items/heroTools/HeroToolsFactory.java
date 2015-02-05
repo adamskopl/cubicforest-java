@@ -3,8 +3,8 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import java.util.List;
 
 import org.adamsko.cubicforest.helpTools.ConditionalLog;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolRed;

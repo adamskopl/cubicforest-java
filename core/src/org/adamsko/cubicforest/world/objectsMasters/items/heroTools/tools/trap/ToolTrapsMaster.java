@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
