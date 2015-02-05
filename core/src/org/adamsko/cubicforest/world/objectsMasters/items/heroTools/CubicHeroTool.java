@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 
 	final int buildCost;
-	HeroToolStates_e toolState;
+	HeroToolStates toolState;
 
 	/**
 	 * For NullHeroTool
@@ -28,17 +28,17 @@ public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 		this.buildCost = HeroesToolsMasterDefault
 				.heroTooltypeToCost(worldObjectType);
 
-		toolState = HeroToolStates_e.STATE_CONSTRUCTION;
+		toolState = HeroToolStates.STATE_CONSTRUCTION;
 
 	}
 
 	@Override
-	public void setState(final HeroToolStates_e state) {
+	public void setState(final HeroToolStates state) {
 		this.toolState = state;
 	}
 
 	@Override
-	public HeroToolStates_e getToolState() {
+	public HeroToolStates getToolState() {
 		return toolState;
 	}
 
@@ -56,7 +56,7 @@ public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 	}
 
 	@Override
-	public void changeState(final HeroToolStates_e newState) {
+	public void changeState(final HeroToolStates newState) {
 		switch (newState) {
 		case STATE_CONSTRUCTION:
 			newStateConstruction();

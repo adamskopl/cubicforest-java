@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -107,6 +108,9 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 		heroToolMarker = (HeroTool) getToolMaster(heroToolMarkerType)
 				.factoryMethod(heroToolTilePos);
+		heroToolMarker.setState(HeroToolStates.STATE_CONSTRUCTION);
+		((RenderableObjectsMaster) getToolMaster(heroToolMarkerType))
+				.changeTexture(heroToolMarker, new Vector2(1, 0));
 
 		// heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
 		// heroToolTilePos, getToolMaster(heroToolMarkerType));
@@ -130,7 +134,9 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 	@Override
 	public void setToolTexture(final HeroTool tool, final int index) {
-		tool.setTextureRegion(atlasRows.get(index)[tool.getTexNum()]);
+		final RenderableObjectsMaster master = (RenderableObjectsMaster) getToolMaster(tool
+				.getType());
+		master.changeTexture(tool, new Vector2(0, 0));
 	}
 
 	@Override

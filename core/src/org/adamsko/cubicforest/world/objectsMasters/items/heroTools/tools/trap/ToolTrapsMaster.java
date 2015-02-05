@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
@@ -34,7 +34,7 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final HeroToolTrap trap;
 		trap = new HeroToolTrap(atlasRows.get(0)[0], 0, this);
-		trap.setState(HeroToolStates_e.STATE_READY);
+		trap.setState(HeroToolStates.STATE_READY);
 		trap.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2 + 2, -11));
 

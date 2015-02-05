@@ -2,6 +2,8 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -92,6 +94,24 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public void cubeUnHighlight(final GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
+	}
+
+	@Override
+	public WOMMemento createMemento() {
+		final GatherCubesMementoState gatherCubesMementoState = new GatherCubesMementoState(
+				this);
+		final WOMMemento memento = new WOMMementoDefault();
+		memento.setState(gatherCubesMementoState);
+		return memento;
+	}
+
+	@Override
+	public void setMemento(final WOMMemento memento) {
+		final GatherCubesMementoState gatherCubesMementoState = (GatherCubesMementoState) memento
+				.getState();
+		gatherCubesCounter.setCounter((int) gatherCubesMementoState
+				.getCounter().x);
+		super.setMemento(memento);
 	}
 
 }

@@ -49,6 +49,11 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 	}
 
 	@Override
+	public void setCounter(final int counter) {
+		this.counter.set(counter, 0);
+	}
+
+	@Override
 	public Boolean isToolAffordable(final WorldObjectType heroToolType) {
 		final int toolCost = HeroesToolsMasterDefault
 				.heroTooltypeToCost(heroToolType);

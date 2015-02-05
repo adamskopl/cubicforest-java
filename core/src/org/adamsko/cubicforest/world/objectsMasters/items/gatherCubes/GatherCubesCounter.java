@@ -28,6 +28,8 @@ public interface GatherCubesCounter extends RenderableObjectsMaster,
 	 */
 	int getCounter();
 
+	void setCounter(int counter);
+
 	/**
 	 * Increase gathered cubes number by given value
 	 */
