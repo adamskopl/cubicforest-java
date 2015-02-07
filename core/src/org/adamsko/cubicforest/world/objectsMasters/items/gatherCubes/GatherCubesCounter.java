@@ -40,4 +40,7 @@ public interface GatherCubesCounter extends RenderableObjectsMaster,
 	 */
 	Boolean isToolAffordable(final WorldObjectType heroToolType);
 
+	@Override
+	String toString();
+
 }

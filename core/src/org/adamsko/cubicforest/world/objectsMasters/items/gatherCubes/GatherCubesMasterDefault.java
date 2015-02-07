@@ -82,7 +82,6 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 
 	@Override
 	public void unloadMapObjects() {
-		gatherCubesCounter.reset();
 		removeWorldObjects();
 	}
 

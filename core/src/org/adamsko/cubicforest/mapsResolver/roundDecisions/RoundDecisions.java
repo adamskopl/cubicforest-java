@@ -93,8 +93,9 @@ public class RoundDecisions implements DecisionsComponent {
 		}
 
 		ConditionalLog.addObject(this,
-				"RoundDecisions " + Integer.toString(getHeight()));
-		ConditionalLog.setUsage(this, false);
+				"RoundDecisions " + Integer.toString(getHeight()) + ","
+						+ Integer.toString(startingSnapshot.getTempId()));
+		ConditionalLog.setUsage(this, true);
 		ConditionalLog.debug(this, toString());
 
 	}
@@ -177,7 +178,8 @@ public class RoundDecisions implements DecisionsComponent {
 		 */
 		latestDecision = possibleDecisions.remove(0);
 
-		ConditionalLog.debug(this, "issuing " + latestDecision.toString());
+		ConditionalLog.debug(this, "issuing " + latestDecision.toString()
+				+ " remained " + Integer.toString(possibleDecisions.size()));
 
 		client.resolveDecision(latestDecision);
 	}

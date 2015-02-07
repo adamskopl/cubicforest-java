@@ -4,6 +4,7 @@ import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.gui.GuiElementDefault;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMasterDefault;
@@ -25,6 +26,14 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 		counter = new Vector2(0, 0);
 
 		createGui();
+
+		ConditionalLog.addObject(this, "GatherCubesCounterDefault");
+		ConditionalLog.setUsage(this, false);
+	}
+
+	@Override
+	public String toString() {
+		return new String(counter.toString());
 	}
 
 	@Override

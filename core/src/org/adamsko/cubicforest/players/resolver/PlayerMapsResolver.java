@@ -42,7 +42,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public void startControl() {
-		TilePathGuideDefault.setTweenSpeedVeryLow();
+		TilePathGuideDefault.setTweenSpeedHigh();
 		resolvedPhase.setActivePlayer(this);
 		mapsResolver.startNewResolve();
 		makeNextDecision();

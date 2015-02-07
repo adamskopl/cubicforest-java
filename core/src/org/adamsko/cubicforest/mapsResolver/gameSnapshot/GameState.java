@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.mapsResolver.gameSnapshot;
 
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
 import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMasterDefault;
@@ -21,6 +22,8 @@ public class GameState {
 
 		this.currentHeroIndex = 0;
 		this.wMCMemento = null;
+		ConditionalLog.addObject(this, "GameState");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	public GameState(final WMContainerMemento wmContainerMemento,
@@ -29,6 +32,8 @@ public class GameState {
 		this.currentHeroIndex = currentHeroIndex;
 		this.wMCMemento = wmContainerMemento;
 		this.gameResultMaster = new GameResultMasterDefault();
+		ConditionalLog.addObject(this, "GameState");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	public int getCurrentHeroIndex() {
