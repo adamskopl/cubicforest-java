@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
 import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -44,7 +45,10 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	// indicates borders between tools positions in heroToolsPositions vector
 	private Vector2 newToolSeparator;
 
-	private List<WorldObjectType> toolTypes;
+	/**
+	 * Tool types available for current level. Set after map reload.
+	 */
+	private List<WorldObjectType> mapAvailableTools;
 
 	WorldObjectType test;
 
@@ -64,9 +68,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 		newToolSeparator = new Vector2();
 
-		toolTypes = new ArrayList<WorldObjectType>();
-		toolTypes.add(WorldObjectType.TOOLTRAP);
-		toolTypes.add(WorldObjectType.TOOLEXIT);
+		mapAvailableTools = new ArrayList<WorldObjectType>();
 	}
 
 	@Override
@@ -159,6 +161,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 	@Override
 	public void loadMapObjects(final CFMap map) {
+		setMapAvailableTools(map);
 	}
 
 	@Override
@@ -205,12 +208,27 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public List<WorldObjectType> getPossibleToolChoices() {
 		final List<WorldObjectType> possibleTools = new ArrayList<WorldObjectType>();
-		for (final WorldObjectType toolType : toolTypes) {
+		for (final WorldObjectType availableToolType : mapAvailableTools) {
 			if (gatherCubesMaster.getGatherCubesCounter().isToolAffordable(
-					toolType)) {
-				possibleTools.add(toolType);
+					availableToolType)) {
+				possibleTools.add(availableToolType);
 			}
 		}
 		return possibleTools;
+	}
+
+	/**
+	 * Set the list of available {@link HeroTool} on the map from the Tiled
+	 * properties.
+	 */
+	private void setMapAvailableTools(final CFMap cfMap) {
+		mapAvailableTools.clear();
+		final TiledMapProperties tiledMapProperties = cfMap.getProperties();
+		if (tiledMapProperties.getToolExit()) {
+			mapAvailableTools.add(WorldObjectType.TOOLEXIT);
+		}
+		if (tiledMapProperties.getToolTrap()) {
+			mapAvailableTools.add(WorldObjectType.TOOLTRAP);
+		}
 	}
 }
