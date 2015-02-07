@@ -95,7 +95,7 @@ public class RoundDecisions implements DecisionsComponent {
 		ConditionalLog.addObject(this,
 				"RoundDecisions " + Integer.toString(getHeight()) + ","
 						+ Integer.toString(startingSnapshot.getTempId()));
-		ConditionalLog.setUsage(this, true);
+		ConditionalLog.setUsage(this, false);
 		ConditionalLog.debug(this, toString());
 
 	}

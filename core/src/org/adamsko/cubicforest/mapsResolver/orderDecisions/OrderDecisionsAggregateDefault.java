@@ -42,7 +42,7 @@ public class OrderDecisionsAggregateDefault implements OrderDecisionsAggregate {
 	public void debugPrint() {
 		Gdx.app.debug("-------", "");
 		for (final OrderDecision orderDecision : orderDecisions) {
-			Gdx.app.debug("od", orderDecision.getChosenTilePos().toString());
+			Gdx.app.debug("od", orderDecision.toString());
 		}
 	}
 }
