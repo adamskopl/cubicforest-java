@@ -1,7 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects;
 
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
-import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroesOrdersMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.Tile;
@@ -48,12 +47,6 @@ public interface PhaseOrderableObjects extends RoundPhase {
 	 */
 	boolean isPathOrderValidObject(final WorldObject phaseObject,
 			final Tile tile, final TilePath pathToTile);
-
-	/**
-	 * {@link PhaseHeroesOrdersMaster#highlightTilesOrder(Tile, Boolean)}
-	 */
-	void highlightTilesOrder(final Tile tilePickedOrder,
-			final Boolean tileOrderValid);
 
 	/**
 	 * If a valid {@link TilePath} is chosen, set it as an active on. Object

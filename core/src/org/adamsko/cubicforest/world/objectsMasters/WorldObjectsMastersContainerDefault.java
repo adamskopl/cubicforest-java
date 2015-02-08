@@ -233,11 +233,6 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	@Override
-	public TerrainMaster getTerrainMaster() {
-		return terrainObjectsMaster;
-	}
-
-	@Override
 	public TilesMaster getTilesMaster() {
 		return tilesMaster;
 	}

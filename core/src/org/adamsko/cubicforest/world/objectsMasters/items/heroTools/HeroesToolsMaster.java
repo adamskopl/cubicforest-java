@@ -11,12 +11,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTo
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
-import com.badlogic.gdx.math.Vector2;
-
 public interface HeroesToolsMaster extends WorldObjectsMaster,
 		RenderableObjectsMaster, Nullable {
-
-	Vector2 getNewToolSeparator();
 
 	void initToolsMasters(
 			WorldObjectsMastersContainer worldObjectsMastersContainer,
@@ -25,9 +21,9 @@ public interface HeroesToolsMaster extends WorldObjectsMaster,
 	/**
 	 * Add hero tool in 'construction' state for marking purpose.
 	 */
-	void heroToolMarkerAdd(final Tile heroToolTile);
+	void addHeroToolMarker(final Tile heroToolTile);
 
-	void heroToolMarkerRemove();
+	void removeHeroToolMarker();
 
 	/**
 	 * HeroToolMarker is accepted: add it to standard HeroTool collection.
@@ -42,5 +38,14 @@ public interface HeroesToolsMaster extends WorldObjectsMaster,
 	 * Get list of {@link HeroTool} objects that can be chosen by a player.
 	 */
 	List<WorldObjectType> getPossibleToolChoices();
+
+	/**
+	 * Check if given tile has a {@link HeroTool}.
+	 * 
+	 * @param tile
+	 *            check tile
+	 * @return true, if tile contains a hero tool
+	 */
+	boolean tileContainsTool(Tile tile);
 
 }

@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 
-	final int buildCost;
-	HeroToolStates toolState;
+	private final int buildCost;
+	private HeroToolStates toolState;
 
 	/**
 	 * For NullHeroTool

@@ -98,11 +98,6 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 	}
 
 	@Override
-	public void highlightTilesOrder(final Tile tilePickedOrder,
-			final Boolean tileOrderValid) {
-	}
-
-	@Override
 	public void issueOrder(final WorldObject phaseObject,
 			final TilePath tilePath) {
 		// TODO Auto-generated method stub

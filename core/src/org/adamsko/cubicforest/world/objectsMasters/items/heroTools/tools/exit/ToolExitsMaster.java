@@ -68,4 +68,10 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 		removeWorldObjects();
 	}
 
+	@Override
+	public void removeObjectFromContainer(final WorldObject objectRemove) {
+		// TODO Auto-generated method stub
+		super.removeObjectFromContainer(objectRemove);
+	}
+
 }

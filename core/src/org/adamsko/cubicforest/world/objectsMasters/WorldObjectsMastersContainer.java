@@ -13,7 +13,6 @@ import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.terrain.TerrainMaster;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 /**
@@ -59,8 +58,6 @@ public interface WorldObjectsMastersContainer {
 	WMContainerMemento createMemento();
 
 	TilesMaster getTilesMaster();
-
-	TerrainMaster getTerrainMaster();
 
 	HeroesMaster getHeroesMaster();
 

@@ -19,7 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 public class PlayerMapsResolver extends PlayerBase implements
 		MapsResolverClient {
 
-	PhaseHeroes resolvedPhase;
+	private PhaseHeroes resolvedPhase;
 	private RoundDecisionsIterator roundDecisionsIterator;
 	private final MapsResolver mapsResolver;
 	private final TilesMaster tilesMaster;
@@ -105,17 +105,6 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
-		return resolvedPhase.getCurrentPossbileDecisions();
+		return resolvedPhase.getOrdersMaster().getCurrentPossbileDecisions();
 	}
-
-	@Override
-	public int getObjectsNumber() {
-		return resolvedPhase.getObjectsNumber();
-	}
-
-	@Override
-	public int getCurrentObjectIndex() {
-		return resolvedPhase.getCurrentObjectIndex();
-	}
-
 }

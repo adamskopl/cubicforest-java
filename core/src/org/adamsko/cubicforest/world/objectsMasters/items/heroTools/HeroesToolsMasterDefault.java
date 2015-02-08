@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
@@ -42,9 +43,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	private ToolTrapsMaster toolTrapsMaster;
 	private ToolExitsMaster toolExitsMaster;
 
-	// indicates borders between tools positions in heroToolsPositions vector
-	private Vector2 newToolSeparator;
-
+	private List<WorldObjectType> toolTypes;
 	/**
 	 * Tool types available for current level. Set after map reload.
 	 */
@@ -63,12 +62,15 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		super("HeroesToolsMaster", TM, textureName, tileW, tileH);
 
 		this.gatherCubesMaster = gatherCubesMaster;
-		heroToolMarker = null;
+		heroToolMarker = NullHeroTool.instance();
 		heroToolMarkerType = null;
 
-		newToolSeparator = new Vector2();
-
+		toolTypes = new ArrayList<WorldObjectType>();
+		setToolTypes();
 		mapAvailableTools = new ArrayList<WorldObjectType>();
+
+		ConditionalLog.addObject(this, "HeroesToolsMasterDefault");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	@Override
@@ -94,12 +96,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	}
 
 	@Override
-	public Vector2 getNewToolSeparator() {
-		return newToolSeparator;
-	}
-
-	@Override
-	public void heroToolMarkerAdd(final Tile heroToolTile) {
+	public void addHeroToolMarker(final Tile heroToolTile) {
 		if (heroToolTile.isNull()) {
 			Gdx.app.error("HeroesToolsMasterDefault::addHeroToolMarker()",
 					"heroToolTile.isNull()");
@@ -114,24 +111,24 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		((RenderableObjectsMaster) getToolMaster(heroToolMarkerType))
 				.changeTexture(heroToolMarker, new Vector2(1, 0));
 
-		// heroToolMarker = heroToolsFactory.createHeroTool(heroToolMarkerType,
-		// heroToolTilePos, getToolMaster(heroToolMarkerType));
 		getToolMaster(heroToolMarker.getType()).addObject(heroToolMarker);
 	}
 
 	@Override
-	public void heroToolMarkerRemove() {
-		if (heroToolMarker != null) {
+	public void removeHeroToolMarker() {
+		if (!heroToolMarker.isNull()) {
+			getToolMaster(heroToolMarker.getType()).removeObjectFromTile(
+					heroToolMarker);
 			getToolMaster(heroToolMarker.getType()).removeObjectFromContainer(
 					heroToolMarker);
-			heroToolMarker = null;
+			heroToolMarker = NullHeroTool.instance();
 		}
 	}
 
 	@Override
 	public void heroToolMarkerAccept() {
 		// heroToolMarker just stays in master's collection
-		heroToolMarker = null;
+		heroToolMarker = NullHeroTool.instance();
 	}
 
 	@Override
@@ -186,6 +183,16 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		}
 	}
 
+	@Override
+	public boolean tileContainsTool(final Tile tile) {
+		for (final WorldObject worldObject : tile.getOccupants()) {
+			if (toolTypes.contains(worldObject.getType())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Get {@link WorldObjectsMaster} for specific {@link HeroTool}.
 	 * 
@@ -230,5 +237,10 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		if (tiledMapProperties.getToolTrap()) {
 			mapAvailableTools.add(WorldObjectType.TOOLTRAP);
 		}
+	}
+
+	private void setToolTypes() {
+		toolTypes.add(WorldObjectType.TOOLEXIT);
+		toolTypes.add(WorldObjectType.TOOLTRAP);
 	}
 }

@@ -36,6 +36,8 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 
 	void removeObjectFromContainer(final WorldObject objectRemove);
 
+	void removeObjectFromTile(final WorldObject objectRemove);
+
 	public String getName();
 
 	/**

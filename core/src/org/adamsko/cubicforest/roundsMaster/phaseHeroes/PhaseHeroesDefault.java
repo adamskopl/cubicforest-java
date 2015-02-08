@@ -1,13 +1,11 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
-import java.util.List;
-
-import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.roundsMaster.phaseOrderableObjects.PhaseOrderableObjectsDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -54,11 +52,19 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	}
 
 	@Override
+	public PhaseHeroesOrdersMaster getOrdersMaster() {
+		return heroesOrdersMaster;
+	}
+
+	@Override
+	public HeroesToolsMaster getToolsMaster() {
+		return heroesOrdersMaster.getHeroesToolsMaster();
+	}
+
+	@Override
 	public void startPhase() {
 		nextHero();
-		heroesOrdersMaster
-				.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
-
+		getOrdersMaster().highlightTilesOrder();
 		getActivePlayer().makeNextDecision();
 	}
 
@@ -81,8 +87,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 		} else {
 			// handle next object
 			nextHero();
-			heroesOrdersMaster
-					.changePhaseHeroesMode(PhaseHeroesMode.MODE_CHOICE_MOVEMENT);
 		}
 
 		// player can make next decision
@@ -92,8 +96,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	@Override
 	public void orderStarted() {
 		super.orderStarted();
-		heroesOrdersMaster
-				.changePhaseHeroesMode(PhaseHeroesMode.MODE_ORDER_EXECUTION);
 	}
 
 	@Override
@@ -101,6 +103,7 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 			final TilePath tilePath) {
 		ordersMaster.startOrder(getCurrentObject(), tilePath, this);
 		setTilePathActive(NullTilePath.instance());
+		getOrdersMaster().resetHighlight();
 	}
 
 	@Override
@@ -112,11 +115,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	@Override
 	public boolean victoryConditionsMet() {
 		return noPhaseObjects();
-	}
-
-	@Override
-	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
-		return heroesOrdersMaster.getCurrentPossbileDecisions();
 	}
 
 	@Override
@@ -143,24 +141,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	}
 
 	@Override
-	public boolean isHeroToolAffordable(final WorldObjectType heroToolType) {
-		return gatherCubesMaster.getGatherCubesCounter().isToolAffordable(
-				heroToolType);
-	}
-
-	@Override
-	public void chooseHeroTool(final WorldObjectType heroToolType) {
-		// change mode and also set marker's type
-		heroesOrdersMaster.changePhaseHeroesMode(
-				PhaseHeroesMode.MODE_CHOICE_TOOL, heroToolType);
-	}
-
-	@Override
-	public boolean isHeroToolChosen() {
-		return heroesOrdersMaster.getPhaseHeroesMode() == PhaseHeroesMode.MODE_CHOICE_TOOL;
-	}
-
-	@Override
 	public TilePath searchTilePath(final WorldObject phaseObject,
 			final Tile tile) {
 		return tilePathSearchersMaster.getTilePathSearcherValidPath().search(
@@ -168,19 +148,9 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	}
 
 	@Override
-	public void highlightTilesOrder(final Tile tilePickedOrder,
-			final Boolean tileOrderValid) {
-		heroesOrdersMaster.highlightTilesOrder(tilePickedOrder, tileOrderValid);
-	}
-
-	@Override
-	public void addHeroToolMarker(final Tile tileTool) {
-		heroesOrdersMaster.tilePicked(tileTool, true);
-	}
-
-	@Override
-	public void removeHeroToolMarker() {
-		heroesOrdersMaster.removeHeroToolMarker();
+	public boolean isHeroToolAffordable(final WorldObjectType heroToolType) {
+		return gatherCubesMaster.getGatherCubesCounter().isToolAffordable(
+				heroToolType);
 	}
 
 }

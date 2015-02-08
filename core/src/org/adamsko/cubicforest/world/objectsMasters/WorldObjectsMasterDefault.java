@@ -85,6 +85,7 @@ public abstract class WorldObjectsMasterDefault extends
 		removeRenderableObject(objectRemove);
 	}
 
+	@Override
 	public void removeObjectFromTile(final WorldObject objectRemove) {
 		tilesMaster.removeWorldObject(objectRemove);
 	}

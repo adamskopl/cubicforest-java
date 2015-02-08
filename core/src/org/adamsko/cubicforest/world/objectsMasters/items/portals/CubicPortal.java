@@ -9,7 +9,7 @@ import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class CubicPortal extends CubicObject implements Portal {
+class CubicPortal extends CubicObject implements Portal {
 
 	private Portal twinPortal;
 	private final Tile parentTile;
@@ -19,7 +19,7 @@ public class CubicPortal extends CubicObject implements Portal {
 		parentTile = NullCubicTile.instance();
 	}
 
-	public CubicPortal(final TextureRegion tr, final int texNum,
+	CubicPortal(final TextureRegion tr, final int texNum,
 			final WorldObjectsMasterDefault container, final Tile parentTile) {
 		super(tr, texNum, container, WorldObjectType.PORTAL);
 		this.parentTile = parentTile;
