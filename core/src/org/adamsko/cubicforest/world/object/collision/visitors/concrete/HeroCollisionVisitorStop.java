@@ -4,7 +4,7 @@ import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates_e;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
@@ -31,9 +31,9 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 
 	@Override
 	public void visitHeroTool(final HeroTool heroTool) {
-		final HeroToolStates_e toolState = heroTool.getToolState();
-		if (toolState == HeroToolStates_e.STATE_CONSTRUCTION) {
-			heroTool.setState(HeroToolStates_e.STATE_READY);
+		final HeroToolStates toolState = heroTool.getToolState();
+		if (toolState == HeroToolStates.STATE_CONSTRUCTION) {
+			heroTool.setState(HeroToolStates.STATE_READY);
 			heroesToolsMaster.setToolTexture(heroTool, 0);
 			gatherCubesMaster.getGatherCubesCounter().addValue(
 					-heroTool.getBuildCost());
@@ -42,7 +42,7 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 
 	@Override
 	public void visitToolExit(final HeroToolExit heroToolExit) {
-		if (heroToolExit.getToolState() == HeroToolStates_e.STATE_CONSTRUCTION) {
+		if (heroToolExit.getToolState() == HeroToolStates.STATE_CONSTRUCTION) {
 			super.visitToolExit(heroToolExit);
 			return;
 		}

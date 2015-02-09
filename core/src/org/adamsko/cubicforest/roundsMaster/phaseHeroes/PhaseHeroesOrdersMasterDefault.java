@@ -3,27 +3,35 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.tile.NullCubicTile;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameterFactory;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
+class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 
 	private final HeroesToolsMaster heroesToolsMaster;
 	private final TilesLookController tilesLookController;
 	private final EnemiesHelper enemiesHelper;
 
+	/**
+	 * Tile picked for an order.
+	 */
 	private Tile tilePickedOrder;
-	private PhaseHeroesMode phaseHeroesMode;
+	/**
+	 * Is picked tile order valid.
+	 */
+	private boolean tileOrderValid;
+
 	private WorldObject currentHero;
 
 	private final TilesMaster tilesMaster;
@@ -41,83 +49,59 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 			final TilesMaster tilesMaster,
 			final HeroesToolsMaster heroesToolsMaster,
 			final EnemiesHelper enemiesHelper) {
-		tilePickedOrder = null;
+		tilePickedOrder = NullCubicTile.instance();
+		tileOrderValid = false;
 		this.tilesLookController = tilesLookController;
 		this.tilesMaster = tilesMaster;
 		this.heroesToolsMaster = heroesToolsMaster;
 		this.enemiesHelper = enemiesHelper;
 		// default choice: movement order
-		this.phaseHeroesMode = PhaseHeroesMode.MODE_CHOICE_MOVEMENT;
 		this.currentHero = NullCubicObject.instance();
 
 		initTextures();
 
+		ConditionalLog.addObject(this, "PhaseHeroesOrdersMasterDefault");
+		ConditionalLog.setUsage(this, true);
+
 	}
 
 	@Override
-	public void changePhaseHeroesMode(final PhaseHeroesMode newMode,
-			final WorldObjectType heroToolType) {
-		heroesToolsMaster.setHeroToolMarkerType(heroToolType);
-		changePhaseHeroesMode(newMode);
+	public HeroesToolsMaster getHeroesToolsMaster() {
+		return heroesToolsMaster;
 	}
 
 	@Override
-	public void changePhaseHeroesMode(final PhaseHeroesMode newMode) {
-
+	public void resetHighlight() {
 		tilesLookController.resetTilesTextures();
-
-		switch (newMode) {
-		case MODE_CHOICE_MOVEMENT:
-			highlightHeroEnemiesRanges();
-			newModeChoiceMovement();
-			break;
-		case MODE_ORDER_EXECUTION:
-			newModeOrderExecution();
-			break;
-		case MODE_CHOICE_TOOL:
-			highlightHeroEnemiesRanges();
-			newModeChoiceTool();
-			break;
-
-		default:
-			Gdx.app.error("changePhaseHeroesMode", "unknown new mode");
-			break;
-		}
-
-		this.phaseHeroesMode = newMode;
 	}
 
 	@Override
-	public PhaseHeroesMode getPhaseHeroesMode() {
-		return phaseHeroesMode;
-	}
-
-	@Override
-	public void highlightTilesOrder(final Tile tilePickedOrder,
-			final Boolean tileOrderValid) {
-
-		this.tilePickedOrder = tilePickedOrder;
-		tilesLookController.resetTilesTextures();
+	public void highlightTilesOrder() {
+		resetHighlight();
 		highlightHeroEnemiesRanges();
-		highlightPickedTile(tilePickedOrder, tileOrderValid);
+		highlightPickedTile();
 	}
 
 	@Override
 	public void tilePicked(final Tile tilePickedOrder,
-			final Boolean tileOrderValid) {
+			final boolean tileOrderValid) {
+		this.tilePickedOrder = tilePickedOrder;
+		this.tileOrderValid = tileOrderValid;
+	}
 
-		switch (phaseHeroesMode) {
-		case MODE_CHOICE_MOVEMENT:
-			break;
-
-		case MODE_CHOICE_TOOL:
-			addHeroToolMarker(tilePickedOrder, tileOrderValid);
-			highlightPickedTile(tilePickedOrder, tileOrderValid);
-			break;
-		default:
-			break;
+	@Override
+	public void toolPicked(final WorldObjectType heroToolType) {
+		if (tilePickedOrder.isNull() || tileOrderValid == false) {
+			return;
 		}
+		if (heroesToolsMaster.tileContainsTool(tilePickedOrder)) {
+			return;
+		}
+		heroesToolsMaster.setHeroToolMarkerType(heroToolType);
+		heroesToolsMaster.removeHeroToolMarker();
+		heroesToolsMaster.addHeroToolMarker(this.tilePickedOrder);
 
+		highlightTilesOrder();
 	}
 
 	@Override
@@ -136,11 +120,20 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 
 		final List<OrderDecisionDefault> validOrderDecisions = new ArrayList<OrderDecisionDefault>();
 		for (final Tile tile : tilesOrderValid) {
-			final OrderDecisionDefault orderDecision = new OrderDecisionDefault(
-					tile);
+			OrderDecisionDefault orderDecision = new OrderDecisionDefault(tile,
+					WorldObjectType.NULL);
+			// add an order choice with no tool
 			validOrderDecisions.add(orderDecision);
-		}
 
+			if (!heroesToolsMaster.tileContainsTool(tile)) {
+				for (final WorldObjectType possibleTool : heroesToolsMaster
+						.getPossibleToolChoices()) {
+					orderDecision = new OrderDecisionDefault(tile, possibleTool);
+					// add an order with a tool choice
+					validOrderDecisions.add(orderDecision);
+				}
+			}
+		}
 		return validOrderDecisions;
 	}
 
@@ -151,74 +144,10 @@ public class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 		textureCommonRanges = new Vector2(2, 0);
 	}
 
-	private void newModeChoiceTool() {
-		switch (phaseHeroesMode) {
-		case MODE_CHOICE_MOVEMENT:
-			heroesToolsMaster.heroToolMarkerAdd(tilePickedOrder);
-			break;
-		case MODE_CHOICE_TOOL:
-			heroesToolsMaster.heroToolMarkerRemove();
-			heroesToolsMaster.heroToolMarkerAdd(tilePickedOrder);
-			break;
-		default:
-			break;
+	private void highlightPickedTile() {
+		if (tilePickedOrder.isNull()) {
+			return;
 		}
-	}
-
-	private void newModeChoiceMovement() {
-		switch (phaseHeroesMode) {
-		case MODE_CHOICE_TOOL:
-			heroesToolsMaster.heroToolMarkerRemove();
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	private void newModeOrderExecution() {
-		switch (phaseHeroesMode) {
-		case MODE_CHOICE_MOVEMENT:
-			heroesToolsMaster.heroToolMarkerRemove();
-			break;
-
-		case MODE_CHOICE_TOOL:
-			heroesToolsMaster.heroToolMarkerAccept();
-			break;
-		case MODE_ORDER_EXECUTION:
-			Gdx.app.error("newModeOrderExecution",
-					"MODE_ORDER_EXECUTION->MODE_ORDER_EXECUTION");
-			break;
-		default:
-
-			break;
-		}
-	}
-
-	@Override
-	public void addHeroToolMarker(final Tile tilePickedOrder,
-			final Boolean tileOrderValid) {
-
-		heroesToolsMaster.heroToolMarkerRemove();
-
-		if (tileOrderValid) {
-			heroesToolsMaster.heroToolMarkerAdd(tilePickedOrder);
-		}
-
-		highlightPickedTile(tilePickedOrder, tileOrderValid);
-
-	}
-
-	@Override
-	public void removeHeroToolMarker() {
-		tilesLookController.resetTilesTextures();
-		highlightHeroEnemiesRanges();
-		heroesToolsMaster.heroToolMarkerRemove();
-		this.phaseHeroesMode = PhaseHeroesMode.MODE_CHOICE_MOVEMENT;
-	}
-
-	private void highlightPickedTile(final Tile tilePickedOrder,
-			final Boolean tileOrderValid) {
 		if (tileOrderValid) {
 			tilesLookController.changeTileTexture(tilePickedOrder,
 					textureTileMovementValidChoice);

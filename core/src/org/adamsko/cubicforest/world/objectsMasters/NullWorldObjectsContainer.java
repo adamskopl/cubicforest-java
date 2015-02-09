@@ -1,8 +1,10 @@
-package org.adamsko.cubicforest.world.object;
+package org.adamsko.cubicforest.world.objectsMasters;
 
 import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.NullCubicObject;
+import org.adamsko.cubicforest.world.object.WorldObject;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -41,6 +43,11 @@ public class NullWorldObjectsContainer extends WorldObjectsMasterDefault {
 
 	@Override
 	public void unloadMapObjects() {
+	}
+
+	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		return NullCubicObject.instance();
 	}
 
 }

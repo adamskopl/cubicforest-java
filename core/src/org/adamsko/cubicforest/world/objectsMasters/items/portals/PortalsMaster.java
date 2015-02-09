@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class PortalsMaster extends WorldObjectsMasterDefault {
 
+	private int atlasIndex;
 	private final List<Portal> portals;
 	private final TilesContainer tilesContainer;
 
@@ -31,34 +33,36 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 	}
 
 	@Override
-	public void loadMapObjects(final List<Vector2> tilePositions) {
-		Portal portal;
-		int atlasIndex = 0;
-		for (final Vector2 pos : tilePositions) {
-			final Tile parentTile = tilesContainer.getTileOnPos(pos);
-			if (parentTile.isNull()) {
-				Gdx.app.error("PortalsMaster::loadMapObjects()",
-						"tile.isNull()");
-				continue;
-			}
-
-			portal = new CubicPortal(atlasRows.get(0)[atlasIndex / 2],
-					atlasIndex / 2, this, parentTile);
-			portal.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2, -11));
-			pos.add(new Vector2(0.5f, 0.5f));
-			portal.setTilesPos(pos);
-			portal.setVerticalPos(0.2f);
-
-			portal.setName("portal");
-
-			addObject(portal);
-			portals.add(portal);
-			atlasIndex++;
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		final Tile parentTile = tilesContainer.getTileOnPos(tilePos);
+		if (parentTile.isNull()) {
+			Gdx.app.error("PortalsMaster::loadMapObjects()", "tile.isNull()");
+			return NullCubicPortal.instance();
 		}
 
-		setTwinPortals();
+		final Portal portal = new CubicPortal(atlasRows.get(0)[atlasIndex / 2],
+				atlasIndex / 2, this, parentTile);
+		portal.setRenderVector(new Vector2(-atlasRows.get(0)[0]
+				.getRegionWidth() / 2, -11));
+		final Vector2 pos = new Vector2(tilePos);
+		pos.add(new Vector2(0.5f, 0.5f));
+		portal.setTilesPos(pos);
+		portal.setVerticalPos(0.2f);
 
+		portal.setName("portal");
+		return portal;
+	}
+
+	@Override
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+		atlasIndex = 0;
+		for (final Vector2 pos : tilePositions) {
+			final WorldObject newPortal = factoryMethod(pos);
+			addObject((Portal) newPortal);
+			portals.add((Portal) newPortal);
+			atlasIndex++;
+		}
+		setTwinPortals();
 	}
 
 	@Override

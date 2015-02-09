@@ -2,9 +2,12 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
@@ -42,21 +45,25 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	}
 
 	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		final GatherCube gatherCube;
+		gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
+		gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
+				.getRegionWidth() / 2, -2));
+
+		gatherCube.setSpeed(2);
+		gatherCube.setVerticalPos(0.5f);
+
+		final Vector2 pos = new Vector2(tilePos);
+		pos.add(new Vector2(0.5f, 0.5f));
+		gatherCube.setTilesPos(pos);
+		return gatherCube;
+	}
+
+	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
-		// TODO Auto-generated method stub
-		GatherCube gatherCube;
 		for (final Vector2 pos : tilePositions) {
-			gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
-			gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2, -2));
-
-			gatherCube.setSpeed(2);
-			gatherCube.setVerticalPos(0.5f);
-
-			pos.add(new Vector2(0.5f, 0.5f));
-			gatherCube.setTilesPos(pos);
-
-			addObject(gatherCube);
+			addObject(factoryMethod(pos));
 		}
 
 	}
@@ -68,7 +75,6 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 				.getObjectTypeCoords(TiledObjectType.TILED_ITEM_GATHERCUBE);
 		loadMapObjects(tilePositions);
 
-		// FIXME: not included in loadMapObjects(List<Vector2>)
 		gatherCubesCounter.setStartingValue(map.getProperties()
 				.getStartingCubes());
 
@@ -76,7 +82,6 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 
 	@Override
 	public void unloadMapObjects() {
-		gatherCubesCounter.reset();
 		removeWorldObjects();
 	}
 
@@ -88,6 +93,24 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public void cubeUnHighlight(final GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
+	}
+
+	@Override
+	public WOMMemento createMemento() {
+		final GatherCubesMementoState gatherCubesMementoState = new GatherCubesMementoState(
+				this);
+		final WOMMemento memento = new WOMMementoDefault();
+		memento.setState(gatherCubesMementoState);
+		return memento;
+	}
+
+	@Override
+	public void setMemento(final WOMMemento memento) {
+		final GatherCubesMementoState gatherCubesMementoState = (GatherCubesMementoState) memento
+				.getState();
+		gatherCubesCounter.setCounter((int) gatherCubesMementoState
+				.getCounter().x);
+		super.setMemento(memento);
 	}
 
 }

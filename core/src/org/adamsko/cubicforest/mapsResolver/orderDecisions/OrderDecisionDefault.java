@@ -1,7 +1,6 @@
 package org.adamsko.cubicforest.mapsResolver.orderDecisions;
 
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.NullHeroTool;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.math.Vector2;
@@ -16,16 +15,43 @@ import com.badlogic.gdx.math.Vector2;
 public class OrderDecisionDefault implements OrderDecision {
 
 	private final Vector2 chosenTilePos;
-	private HeroTool chosenHeroTool;
+	private WorldObjectType chosenHeroTool;
 
 	public OrderDecisionDefault(final boolean nullConstructor) {
 		chosenTilePos = null;
 	}
 
-	public OrderDecisionDefault(final Tile chosenTile) {
+	/**
+	 * @param chosenTile
+	 *            chosen order tile
+	 * @param chosenHeroTool
+	 *            chosen order hero tool. {@link WorldObjectType} NULL if no
+	 *            tool choice.
+	 */
+	public OrderDecisionDefault(final Tile chosenTile,
+			final WorldObjectType chosenHeroTool) {
 		this.chosenTilePos = new Vector2(chosenTile.getTilesPosX(),
 				chosenTile.getTilesPosY());
-		chosenHeroTool = NullHeroTool.instance();
+		this.chosenHeroTool = chosenHeroTool;
+	}
+
+	@Override
+	public String toString() {
+		String string = new String(chosenTilePos.toString());
+		if (chosenHeroTool != WorldObjectType.NULL) {
+			switch (chosenHeroTool) {
+			case TOOLEXIT:
+				string = string.concat("<Exit>");
+				break;
+			case TOOLTRAP:
+				string = string.concat("<Trap>");
+				break;
+			default:
+				string = string.concat("<UnknownTool>");
+				break;
+			}
+		}
+		return string;
 	}
 
 	@Override
@@ -34,13 +60,18 @@ public class OrderDecisionDefault implements OrderDecision {
 	}
 
 	@Override
-	public void setChosenHeroTool(final HeroTool heroTool) {
-		this.chosenHeroTool = heroTool;
+	public void setChosenHeroTool(final WorldObjectType chosenHeroTool) {
+		this.chosenHeroTool = chosenHeroTool;
 	}
 
 	@Override
-	public HeroTool getChosenHeroTool() {
-		return chosenHeroTool;
+	public WorldObjectType getChosenHeroTool() {
+		return this.chosenHeroTool;
+	}
+
+	@Override
+	public boolean heroToolChosen() {
+		return !(chosenHeroTool == WorldObjectType.NULL);
 	}
 
 	@Override

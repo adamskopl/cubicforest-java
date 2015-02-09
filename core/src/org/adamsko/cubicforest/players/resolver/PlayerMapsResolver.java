@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.players.resolver;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
@@ -18,7 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 public class PlayerMapsResolver extends PlayerBase implements
 		MapsResolverClient {
 
-	PhaseHeroes resolvedPhase;
+	private PhaseHeroes resolvedPhase;
 	private RoundDecisionsIterator roundDecisionsIterator;
 	private final MapsResolver mapsResolver;
 	private final TilesMaster tilesMaster;
@@ -28,6 +29,9 @@ public class PlayerMapsResolver extends PlayerBase implements
 		super(playersController);
 		this.mapsResolver = mapsResolver;
 		this.tilesMaster = tilesMaster;
+
+		ConditionalLog.addObject(this, "PlayerMapsResolver");
+		ConditionalLog.setUsage(this, false);
 	}
 
 	@Override
@@ -58,6 +62,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 		if (roundDecisionsIterator.isDone()) {
 			// resolver is done
+			ConditionalLog.debug(this, "iterator is done");
 			getPlayersController().switchPlayerUser();
 		} else {
 			roundDecisionsIterator.next().makeNextDecision(
@@ -83,6 +88,11 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler()
 				.onTileChoice(chosenTile);
+		if (orderDecision.heroToolChosen()) {
+			roundsMaster.getCurrentPhase().getPlayerActionsHandler()
+					.onHeroToolChoice(orderDecision.getChosenHeroTool());
+		}
+
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler().onConfirm();
 	}
 
@@ -95,17 +105,6 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 	@Override
 	public List<OrderDecisionDefault> getCurrentPossbileDecisions() {
-		return resolvedPhase.getCurrentPossbileDecisions();
+		return resolvedPhase.getOrdersMaster().getCurrentPossbileDecisions();
 	}
-
-	@Override
-	public int getObjectsNumber() {
-		return resolvedPhase.getObjectsNumber();
-	}
-
-	@Override
-	public int getCurrentObjectIndex() {
-		return resolvedPhase.getCurrentObjectIndex();
-	}
-
 }

@@ -10,7 +10,7 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -66,17 +66,21 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 		return NullCubicTile.instance();
 	}
 
-	public void addTile(final Vector2 tilePos) {
+	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects (should be rendered
 		// first)
 		newTile.setVerticalPos(-0.01f);
-
 		// uncomment to add a position label to the tile
 		addTilesPosLabel(newTile);
+		return newTile;
+	}
 
+	public void addTile(final Vector2 tilePos) {
+		final WorldObject newTile = factoryMethod(tilePos);
 		super.getWorldObjects().add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_ALL).add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_UNSERVED).add(newTile);
@@ -84,7 +88,6 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 
 	@Override
 	public void update(final float deltaTime) {
-		// TODO Auto-generated method stub
 	}
 
 	public void clearTilesLabels() {
@@ -99,16 +102,13 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 		for (final Vector2 vec : tilePositions) {
 			addTile(vec);
 		}
-
 	}
 
 	@Override
 	public void loadMapObjects(final CFMap map) {
-
 		final List<Vector2> tilePositions = map
 				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
 		loadMapObjects(tilePositions);
-
 	}
 
 	@Override

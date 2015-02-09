@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.players.decisionOrdersReplay;
 
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsIterator;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecision;
@@ -32,6 +33,9 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 		this.aggregateReplayed = NullOrderDecisionsAggregate.instance();
 		this.orderDecisionsIterator = NullOrderDecisionsIterator.instance();
 		this.tilesMaster = tilesMaster;
+
+		ConditionalLog.addObject(this, "PlayerDecisionOrdersReplayDefault");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	@Override
@@ -61,6 +65,10 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 
 		final OrderDecision orderDecision = this.orderDecisionsIterator
 				.currentItem();
+		if (ConditionalLog.checkUsage(this)) {
+			this.aggregateReplayed.debugPrint();
+		}
+
 		issueOrderDecision(orderDecision);
 	}
 
@@ -86,8 +94,15 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 		final Vector2 decisionPos = orderDecision.getChosenTilePos();
 		final Tile chosenTile = tilesMaster.getTilesContainer().getTileOnPos(
 				decisionPos);
+
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler()
 				.onTileChoice(chosenTile);
+
+		if (orderDecision.heroToolChosen()) {
+			roundsMaster.getCurrentPhase().getPlayerActionsHandler()
+					.onHeroToolChoice(orderDecision.getChosenHeroTool());
+		}
+
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler().onConfirm();
 	}
 

@@ -28,6 +28,8 @@ public interface GatherCubesCounter extends RenderableObjectsMaster,
 	 */
 	int getCounter();
 
+	void setCounter(int counter);
+
 	/**
 	 * Increase gathered cubes number by given value
 	 */
@@ -37,5 +39,8 @@ public interface GatherCubesCounter extends RenderableObjectsMaster,
 	 * Check if counter allows heroTool to be build (if player can afford it).
 	 */
 	Boolean isToolAffordable(final WorldObjectType heroToolType);
+
+	@Override
+	String toString();
 
 }

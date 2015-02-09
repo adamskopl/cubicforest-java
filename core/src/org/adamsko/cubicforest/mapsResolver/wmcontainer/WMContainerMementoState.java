@@ -3,7 +3,8 @@ package org.adamsko.cubicforest.mapsResolver.wmcontainer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 
 import com.badlogic.gdx.Gdx;
@@ -30,6 +31,8 @@ public class WMContainerMementoState {
 				.getWorldObjectsMasters()) {
 			wOMMementos.add(worldObjectsMaster.createMemento());
 		}
+		ConditionalLog.addObject(this, "WMContainerMementoState");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	public List<WOMMemento> getWOMMementos() {

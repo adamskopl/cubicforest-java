@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
 

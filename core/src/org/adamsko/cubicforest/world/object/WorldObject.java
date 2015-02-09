@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.render.world.RenderableObject;
 import org.adamsko.cubicforest.world.object.accessor.WorldObjectAccessorClient;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicator;
@@ -28,7 +29,7 @@ public interface WorldObject extends RenderableObject,
 	 * FIXME: design flaw (?) Every class having contact with WorldObject can
 	 * remove it.
 	 */
-	WorldObjectsMasterDefault getParentContainer();
+	WorldObjectsMaster getParentContainer();
 
 	/**
 	 * Returns {@link TilePropertiesIndicator} to check how this object affects

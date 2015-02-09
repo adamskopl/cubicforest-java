@@ -1,9 +1,11 @@
-package org.adamsko.cubicforest.world;
+package org.adamsko.cubicforest.world.objectsMasters;
 
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
+import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -21,7 +23,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author adamsko
  * 
  */
-public interface WorldObjectsMaster extends Nullable {
+public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	public void update(float deltaTime);
 
 	/**
@@ -29,6 +31,12 @@ public interface WorldObjectsMaster extends Nullable {
 	 * {@link WorldObjectsMaster}
 	 */
 	public List<WorldObject> getWorldObjects();
+
+	void addObject(final WorldObject worldObject);
+
+	void removeObjectFromContainer(final WorldObject objectRemove);
+
+	void removeObjectFromTile(final WorldObject objectRemove);
 
 	public String getName();
 
@@ -76,5 +84,17 @@ public interface WorldObjectsMaster extends Nullable {
 	void setMemento(WOMMemento memento);
 
 	WOMMemento createMemento();
+
+	/**
+	 * Design flaw: this should be only in {@link RenderableObjectsMaster}
+	 */
+	void changeTexture(final RenderableObject object,
+			final Vector2 textureCoordinates);
+
+	/**
+	 * Design flaw: this should be only in {@link RenderableObjectsMaster}
+	 */
+	void changeTexture(final RenderableObject object, final int atlasRow,
+			final int atlasCol);
 
 }
