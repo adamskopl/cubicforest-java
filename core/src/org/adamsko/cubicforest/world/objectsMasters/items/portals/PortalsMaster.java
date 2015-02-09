@@ -50,7 +50,7 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 		portal.setVerticalPos(0.2f);
 
 		portal.setName("portal");
-		return null;
+		return portal;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 		atlasIndex = 0;
 		for (final Vector2 pos : tilePositions) {
 			final WorldObject newPortal = factoryMethod(pos);
-			addObject(newPortal);
+			addObject((Portal) newPortal);
 			portals.add((Portal) newPortal);
 			atlasIndex++;
 		}

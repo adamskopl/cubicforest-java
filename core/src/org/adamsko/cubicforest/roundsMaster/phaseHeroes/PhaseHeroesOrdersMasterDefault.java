@@ -124,11 +124,14 @@ class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 					WorldObjectType.NULL);
 			// add an order choice with no tool
 			validOrderDecisions.add(orderDecision);
-			for (final WorldObjectType possibleTool : heroesToolsMaster
-					.getPossibleToolChoices()) {
-				orderDecision = new OrderDecisionDefault(tile, possibleTool);
-				// add an order with a tool choice
-				validOrderDecisions.add(orderDecision);
+
+			if (!heroesToolsMaster.tileContainsTool(tile)) {
+				for (final WorldObjectType possibleTool : heroesToolsMaster
+						.getPossibleToolChoices()) {
+					orderDecision = new OrderDecisionDefault(tile, possibleTool);
+					// add an order with a tool choice
+					validOrderDecisions.add(orderDecision);
+				}
 			}
 		}
 		return validOrderDecisions;

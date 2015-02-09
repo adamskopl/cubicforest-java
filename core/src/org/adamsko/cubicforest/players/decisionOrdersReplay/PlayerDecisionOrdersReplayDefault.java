@@ -65,7 +65,9 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 
 		final OrderDecision orderDecision = this.orderDecisionsIterator
 				.currentItem();
-		this.aggregateReplayed.debugPrint();
+		if (ConditionalLog.checkUsage(this)) {
+			this.aggregateReplayed.debugPrint();
+		}
 
 		issueOrderDecision(orderDecision);
 	}
@@ -93,13 +95,14 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 		final Tile chosenTile = tilesMaster.getTilesContainer().getTileOnPos(
 				decisionPos);
 
+		roundsMaster.getCurrentPhase().getPlayerActionsHandler()
+				.onTileChoice(chosenTile);
+
 		if (orderDecision.heroToolChosen()) {
 			roundsMaster.getCurrentPhase().getPlayerActionsHandler()
 					.onHeroToolChoice(orderDecision.getChosenHeroTool());
 		}
 
-		roundsMaster.getCurrentPhase().getPlayerActionsHandler()
-				.onTileChoice(chosenTile);
 		roundsMaster.getCurrentPhase().getPlayerActionsHandler().onConfirm();
 	}
 

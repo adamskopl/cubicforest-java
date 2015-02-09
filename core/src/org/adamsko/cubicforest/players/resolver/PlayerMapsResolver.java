@@ -31,7 +31,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 		this.tilesMaster = tilesMaster;
 
 		ConditionalLog.addObject(this, "PlayerMapsResolver");
-		ConditionalLog.setUsage(this, true);
+		ConditionalLog.setUsage(this, false);
 	}
 
 	@Override

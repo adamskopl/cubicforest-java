@@ -45,6 +45,23 @@ public class ConditionalLog {
 		searchedObject.setLogUsage(use);
 	}
 
+	/**
+	 * Check if given object is set to be used.
+	 * 
+	 * @param switchedObject
+	 *            checked object
+	 * @return true if given object is using conditional log
+	 */
+	public static boolean checkUsage(final Object switchedObject) {
+		if (!contains(switchedObject)) {
+			Gdx.app.error("ConditionalLog::checkUsage",
+					"switchedObject not on the list");
+			return false;
+		}
+		final LogObject searchedObject = getLogObject(switchedObject);
+		return searchedObject.isLogged();
+	}
+
 	public static void debug(final Object loggedObject, final String message) {
 		logMessage(loggedObject, false, message);
 	}
