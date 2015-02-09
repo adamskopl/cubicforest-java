@@ -35,6 +35,9 @@ public class PickMaster implements Nullable {
 	}
 
 	public void addClient(final PickMasterClient client) {
+		if (client.isNull()) {
+			Gdx.app.error("PickMaster::addClient()", "client.isNull()");
+		}
 		clients.add(client);
 	}
 

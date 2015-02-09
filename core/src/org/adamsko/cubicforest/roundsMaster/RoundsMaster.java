@@ -1,9 +1,11 @@
 package org.adamsko.cubicforest.roundsMaster;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.gui.GuiMasterClient;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
+import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoaderCoordinator;
-import org.adamsko.cubicforest.world.tile.TilePickClient;
 
 /**
  * A round is a manager of {@link RoundPhase} objects. The round consists of
@@ -13,15 +15,24 @@ import org.adamsko.cubicforest.world.tile.TilePickClient;
  * @author adamsko
  * 
  */
-public interface RoundsMaster extends TilePickClient, GuiMasterClient,
-		MapsLoaderCoordinator, Nullable {
+public interface RoundsMaster extends MapsLoaderCoordinator, Nullable {
 
 	void addPhase(final RoundPhase newPhase);
+
+	void addPhase(PhaseHeroes phaseHeroes);
+
+	void addPhase(PhaseEnemies phaseEnemies);
+
+	PhaseHeroes getPhaseHeroes();
+
+	PhaseEnemies getPhaseEnemies();
 
 	/**
 	 * All phases ended, begin new round.
 	 */
-	void nextRound() throws Exception;
+	void startNextRound();
+
+	RoundPhase getCurrentPhase();
 
 	/**
 	 * Invoked by one of the phases: information, that phase is over, has ended
@@ -31,34 +42,25 @@ public interface RoundsMaster extends TilePickClient, GuiMasterClient,
 	 *            phase which has ended right now
 	 * @throws Exception
 	 */
-	void phaseIsOver(final RoundPhase phaseEnded) throws Exception;
+	void phaseIsOver(final RoundPhase phaseEnded);
 
 	/**
 	 * Start the next phase.
+	 * 
+	 * @param newRound
+	 *            true if new round is
 	 */
-	void startNextPhase() throws Exception;
+	void startNextPhase();
 
 	/**
 	 * Reload: reload all phases, reload all World objects.
 	 */
 	void reload();
 
-	/**
-	 * Rounds master holds informations about game result as a
-	 * {@link GameResult} object.
-	 */
-	GameResult getGameResult();
+	public GameResultMaster getGameResultMaster();
 
-	/**
-	 * Changes game result. It can be changed from 'PLAY' only once until
-	 * 'resetGameResult()' is not invoked. The assumption is, that game result
-	 * can be changed only once, which prevents overwriting.
-	 */
-	void setGameResultSingle(final GameResult gameResult);
+	public GameMemento createMemento();
 
-	/**
-	 * Invoked when game result is read. From now game result can be changed.
-	 */
-	void resetGameResult();
+	void setMemento(final GameMemento gameMemento);
 
 }

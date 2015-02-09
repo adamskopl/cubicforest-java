@@ -2,11 +2,15 @@ package org.adamsko.cubicforest.world.tile;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -62,17 +66,21 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 		return NullCubicTile.instance();
 	}
 
-	public void addTile(final Vector2 tilePos) {
+	@Override
+	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects (should be rendered
 		// first)
 		newTile.setVerticalPos(-0.01f);
-
 		// uncomment to add a position label to the tile
-		// addTilesPosLabel(newTile);
+		addTilesPosLabel(newTile);
+		return newTile;
+	}
 
+	public void addTile(final Vector2 tilePos) {
+		final WorldObject newTile = factoryMethod(tilePos);
 		super.getWorldObjects().add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_ALL).add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_UNSERVED).add(newTile);
@@ -80,7 +88,6 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 
 	@Override
 	public void update(final float deltaTime) {
-		// TODO Auto-generated method stub
 	}
 
 	public void clearTilesLabels() {
@@ -91,18 +98,21 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap map) {
-
-		final List<Vector2> coords = map
-				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
-
-		for (final Vector2 vec : coords) {
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+		for (final Vector2 vec : tilePositions) {
 			addTile(vec);
 		}
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void loadMapObjects(final CFMap map) {
+		final List<Vector2> tilePositions = map
+				.getObjectTypeCoords(TiledObjectType.TILED_TILE);
+		loadMapObjects(tilePositions);
+	}
+
+	@Override
+	public void unloadMapObjects() {
 		while (getWorldObjects().size() != 0) {
 			final WorldObject tile = getWorldObjects().get(0);
 			getWorldObjects().remove(tile);
@@ -124,5 +134,13 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 	public void addTilesPosLabel(final Tile tile) {
 		tile.addLabel(ROLabel.LABEL_TILEPOS);
 		tile.altLabelLast(Color.RED, 0.7f, -17.0f, -20.0f);
+	}
+
+	@Override
+	public WOMMemento createMemento() {
+		final WOMMementoState state = new WOMMementoStateDefault(this);
+		final WOMMemento memento = new WOMMementoDefault();
+		memento.setState(state);
+		return memento;
 	}
 }

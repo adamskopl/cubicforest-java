@@ -49,6 +49,8 @@ public class GameScreen implements Screen {
 
 		worldRenderer.setCoordCalc(worldBuilder.getCoordCalc());
 
+		worldBuilder.getRoundsMaster().startNextRound();
+
 	}
 
 	@Override
@@ -115,18 +117,27 @@ public class GameScreen implements Screen {
 				worldObjectsMastersContainer.getPortalsMaster(),
 				worldObjectsMastersContainer.getPrizesMaster());
 
+		worldBuilder.setWorldObjectsMastersContainerCVMF(worldBuilder
+				.getCollisionVisitorsManagerFactory());
+
 		worldBuilder.initGuiMaster();
 
 		worldBuilder.initMapsLoader(worldObjectsMastersContainer,
-				worldBuilder.getGuiMaster(),
-				worldBuilder.getCollisionVisitorsManagerFactory());
+				worldBuilder.getGuiMaster());
 
-		worldBuilder.initRoundsMaster(worldBuilder.getMapsLoader());
+		worldBuilder.initMapsResolver();
 
-		worldBuilder.initTilesMasterRoundsMaster(
+		worldBuilder.initRoundsMaster(worldBuilder.getMapsLoader(),
+				worldBuilder.getMapsResolver(), worldObjectsMastersContainer);
+
+		worldBuilder.initPlayersController(worldBuilder.getMapsResolver(),
+				worldObjectsMastersContainer.getTilesMaster());
+
+		worldBuilder.initTilesMaster(
 				worldObjectsMastersContainer.getTilesMaster(),
 				worldBuilder.getRoundsMaster(),
-				worldBuilder.getCollisionVisitorsManagerFactory());
+				worldBuilder.getCollisionVisitorsManagerFactory(),
+				worldBuilder.getPlayersController());
 
 		worldBuilder.initOrdersMaster(worldObjectsMastersContainer
 				.getTilesMaster());
@@ -134,16 +145,23 @@ public class GameScreen implements Screen {
 		worldBuilder.mapsLoaderReloadWorld();
 
 		worldBuilder.initRoundsMasterPhases(worldBuilder.getOrdersMaster(),
-				worldObjectsMastersContainer, worldBuilder
+				worldObjectsMastersContainer, worldObjectsMastersContainer
+						.getTilesMaster(), worldBuilder
 						.getTilePathSearchersMaster(),
 				worldObjectsMastersContainer.getTilesMaster()
 						.getTilesLookController());
+
+		worldBuilder.initPlayersControllerRoundsMaster(worldBuilder
+				.getRoundsMaster());
 
 		worldBuilder.initGuiMasterContainers(worldBuilder.getGuiMaster(),
 				worldRenderer, worldBuilder.getMapsLoader(),
 				worldObjectsMastersContainer.getGatherCubesMaster(),
 				worldObjectsMastersContainer.getPrizesMaster(),
 				worldBuilder.getRoundsMaster());
+
+		worldBuilder.initMapsResolverGui(worldBuilder.getGuiMaster()
+				.getGuiResolver());
 
 		worldBuilder.initPickMaster(worldBuilder.getGuiMaster(),
 				worldObjectsMastersContainer.getTilesMaster(),

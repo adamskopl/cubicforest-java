@@ -6,5 +6,6 @@ public enum GuiType_e {
 	GUI_ORDERS,
 	GUI_DEBUG,
 	GUI_LEVELS,
-	GUI_PRIZES
+	GUI_PRIZES,
+	GUI_RESOLVER
 }

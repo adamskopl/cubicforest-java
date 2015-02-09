@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElementsContainer;
 import org.adamsko.cubicforest.gui.GuiMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
 
@@ -26,21 +25,17 @@ public class MapsLoaderTiled implements MapsLoader {
 
 	private final WorldObjectsMastersContainer worldObjectsMastersContainer;
 	private final GuiMaster guiMaster;
-	private final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
 
 	MapsLoaderTiled(final boolean nullConstructor) {
 		this.worldObjectsMastersContainer = null;
-		this.collisionVisitorsManagerFactory = null;
 		this.guiMaster = null;
 	}
 
 	public MapsLoaderTiled(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final GuiMaster guiMaster,
-			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
+			final GuiMaster guiMaster) {
 
 		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
-		this.collisionVisitorsManagerFactory = collisionVisitorsManagerFactory;
 		this.guiMaster = guiMaster;
 
 		maps = new ArrayList<TiledMap>();
@@ -75,7 +70,8 @@ public class MapsLoaderTiled implements MapsLoader {
 			newMap.initConverter();
 			maps.add(newMap);
 
-			Gdx.app.error(entry.toString(), "OK");
+			// uncomment to display information about loaded maps
+			// Gdx.app.debug(entry.toString(), "OK");
 		}
 	}
 
@@ -87,27 +83,9 @@ public class MapsLoaderTiled implements MapsLoader {
 				.getWorldObjectsMasters();
 		final List<GuiElementsContainer> guiContainers = guiMaster.getGuiList();
 
-		/*
-		 * Unloading has to be done in reverse order, because TilesMaster's
-		 * objects (tiles) should be unloaded in the end.
-		 */
-		for (int i = worldObjectsMasters.size() - 1; i >= 0; i--) {
-			final WorldObjectsMaster master = worldObjectsMasters.get(i);
-			try {
-				master.unloadMapObjects();
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-		}
+		worldObjectsMastersContainer.unloadMasters();
 
-		for (final WorldObjectsMaster master : worldObjectsMasters) {
-			try {
-				master.loadMapObjects(getMapActive());
-				master.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-		}
+		worldObjectsMastersContainer.loadMasters(getMapActive());
 
 		for (final GuiElementsContainer guiContainer : guiContainers) {
 			guiContainer.reload(getMapActive());

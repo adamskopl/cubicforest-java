@@ -1,9 +1,12 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
+import java.util.List;
+
+import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 /**
@@ -12,18 +15,7 @@ import org.adamsko.cubicforest.world.tile.Tile;
  */
 public interface PhaseHeroesOrdersMaster {
 
-	void changePhaseHeroesMode(final PhaseHeroesMode newMode);
-
-	/**
-	 * Same as {@link #changePhaseHeroesMode(PhaseHeroesMode)}, but also set
-	 * {@link HeroTool} marker type
-	 * 
-	 * @param newMode
-	 * @param heroToolType
-	 * @throws Exception
-	 */
-	void changePhaseHeroesMode(final PhaseHeroesMode newMode,
-			final WorldObjectType heroToolType);
+	HeroesToolsMaster getHeroesToolsMaster();
 
 	/**
 	 * Handle tile picked in {@link PhaseHeroes} phase.
@@ -34,7 +26,16 @@ public interface PhaseHeroesOrdersMaster {
 	 * @param tileOrderValid
 	 *            is picked tile is valid for an order issue
 	 */
-	void tilePicked(final Tile tilePickedOrder, final Boolean tileOrderValid);
+	void tilePicked(final Tile tilePickedOrder, final boolean tileOrderValid);
+
+	/**
+	 * Player has chosen a new tool.
+	 */
+	void toolPicked(final WorldObjectType heroToolType);
+
+	void highlightTilesOrder();
+
+	void resetHighlight();
 
 	/**
 	 * Helper needs to know which hero is active right now.
@@ -43,5 +44,11 @@ public interface PhaseHeroesOrdersMaster {
 	 *            current hero in {@link PhaseHeroes}
 	 */
 	void setCurrentHero(WorldObject currentHero);
+
+	/**
+	 * Returns {@link OrderDecisionDefault} objects defining what can be made in
+	 * current {@link PhaseHeroes} state for current hero.
+	 */
+	List<OrderDecisionDefault> getCurrentPossbileDecisions();
 
 }

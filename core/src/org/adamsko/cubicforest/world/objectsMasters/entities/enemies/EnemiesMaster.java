@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
@@ -15,6 +15,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class EnemiesMaster extends WorldObjectsMasterDefault implements
 		OrderableObjectsContainer {
+
+	private int nameIndex;
+	private int atlasIndex;
 
 	public EnemiesMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
@@ -38,28 +41,31 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void loadMapObjects(final CFMap map) throws Exception {
-		final List<Vector2> coords = map
-				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_ENEMY);
+	public WorldObject factoryMethod(final Vector2 tilePos) {
+		final Enemy enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex,
+				this);
+		enemy.setRenderVector(new Vector2(
+				-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 
-		Enemy enemy;
-		int nameIndex = 0;
-		int atlasIndex = 0;
-		for (final Vector2 pos : coords) {
-			enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex, this);
-			enemy.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-					.getRegionWidth() / 2, -7));
+		enemy.setSpeed(5);
 
-			enemy.setSpeed(5);
+		final Vector2 pos = new Vector2(tilePos);
+		pos.add(new Vector2(0.5f, 0.5f));
+		enemy.setTilesPos(pos);
+		enemy.setName("E" + nameIndex);
+		enemy.setVerticalPos(0.3f);
+		enemy.addLabel(ROLabel.LABEL_NAME);
+		enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
+		return enemy;
+	}
 
-			pos.add(new Vector2(0.5f, 0.5f));
-			enemy.setTilesPos(pos);
-			enemy.setName("E" + nameIndex);
-			enemy.setVerticalPos(0.3f);
-			enemy.addLabel(ROLabel.LABEL_NAME);
-			enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
+	@Override
+	public void loadMapObjects(final List<Vector2> tilePositions) {
+		nameIndex = 0;
+		atlasIndex = 0;
+		for (final Vector2 pos : tilePositions) {
 
-			addObject(enemy);
+			addObject(factoryMethod(pos));
 
 			nameIndex++;
 			if (atlasIndex == 2) {
@@ -71,7 +77,16 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 	}
 
 	@Override
-	public void unloadMapObjects() throws Exception {
+	public void loadMapObjects(final CFMap map) throws Exception {
+		final List<Vector2> tilePositions = map
+				.getObjectTypeCoords(TiledObjectType.TILED_ENTITY_ENEMY);
+
+		loadMapObjects(tilePositions);
+
+	}
+
+	@Override
+	public void unloadMapObjects() {
 		removeWorldObjects();
 	}
 

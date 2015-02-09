@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.world.mapsLoader;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 
 /**
  * Responsible for loading and managing {@link CFMap} levels in the game.

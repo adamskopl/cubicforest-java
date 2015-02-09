@@ -3,28 +3,51 @@ package org.adamsko.cubicforest.roundsMaster;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.gui.GuiElementsContainer;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameSnapshotMementoDefault;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameState;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
+import org.adamsko.cubicforest.players.resolver.MapsResolver;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMasterDefault;
+import org.adamsko.cubicforest.roundsMaster.phaseEnemies.PhaseEnemies;
+import org.adamsko.cubicforest.roundsMaster.phaseHeroes.PhaseHeroes;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
-import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * @author adamsko
+ * 
+ */
+/**
+ * @author adamsko
+ * 
+ */
 public class RoundsMasterDefault implements RoundsMaster {
 
-	private MapsLoader mapsLoader;
+	private final MapsLoader mapsLoader;
+	private PhaseHeroes phaseHeroes;
+	private PhaseEnemies phaseEnemies;
 	private final List<RoundPhase> phases;
-	int phasePointer = -1;
-	private GameResult gameResult;
+	private int phasePointer = 0;
+	private GameResultMaster gameResultMaster;
+	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
 	// For NullRoundsMaster
 	RoundsMasterDefault() {
+		mapsLoader = null;
 		phases = null;
 	}
 
-	public RoundsMasterDefault(final MapsLoader mapsLoader) {
+	public RoundsMasterDefault(final MapsLoader mapsLoader,
+			final MapsResolver mapsResolver,
+			final WorldObjectsMastersContainer worldObjectsMastersContainer) {
 		this.mapsLoader = mapsLoader;
 		phases = new ArrayList<RoundPhase>();
-		gameResult = GameResult.GAME_PLAY;
+		this.gameResultMaster = new GameResultMasterDefault();
+		this.worldObjectsMastersContainer = worldObjectsMastersContainer;
 	}
 
 	@Override
@@ -33,25 +56,12 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
-	public GameResult getGameResult() {
-		return gameResult;
+	public GameResultMaster getGameResultMaster() {
+		return gameResultMaster;
 	}
 
 	@Override
-	public void setGameResultSingle(final GameResult gameResult) {
-		if (gameResult != GameResult.GAME_PLAY
-				&& this.gameResult == GameResult.GAME_PLAY) {
-			this.gameResult = gameResult;
-		}
-	}
-
-	@Override
-	public void resetGameResult() {
-		this.gameResult = GameResult.GAME_PLAY;
-	}
-
-	@Override
-	public void nextRound() throws Exception {
+	public void startNextRound() {
 		phasePointer = -1;
 		if (allPhasesSkipped()) {
 			// all phases were skipped: stop program
@@ -62,15 +72,8 @@ public class RoundsMasterDefault implements RoundsMaster {
 		startNextPhase();
 	}
 
-	private RoundPhase currentPhase() {
-		if (phases.size() == 0) {
-			return null;
-		}
-		return phases.get(phasePointer);
-	}
-
 	@Override
-	public void startNextPhase() throws Exception {
+	public void startNextPhase() {
 		if (phases.size() == 0) {
 			return;
 		}
@@ -78,7 +81,7 @@ public class RoundsMasterDefault implements RoundsMaster {
 		phasePointer++;
 		// check if previous phase was the last one
 		if (phasePointer == phases.size()) {
-			nextRound();
+			startNextRound();
 		} else {
 			final RoundPhase nextPhase = phases.get(phasePointer);
 			nextPhase.startPhase();
@@ -86,26 +89,39 @@ public class RoundsMasterDefault implements RoundsMaster {
 	}
 
 	@Override
-	public void phaseIsOver(final RoundPhase phaseEnded) throws Exception {
+	public void phaseIsOver(final RoundPhase phaseEnded) {
 		if (phases.get(phasePointer) != phaseEnded) {
-			throw new Exception("phaseIsOver: phasePointer error");
+			Gdx.app.error("RoundsMasterDefault",
+					"phaseIsOver: phasePointer error");
 		}
 		startNextPhase();
 	}
 
 	@Override
-	public void onTilePicked(final Tile tile) {
-		final RoundPhase currentPhase = currentPhase();
-
-		if (currentPhase != null) {
-			currentPhase.onTilePicked(tile);
-		}
-
+	public void addPhase(final RoundPhase newPhase) {
+		phases.add(newPhase);
 	}
 
 	@Override
-	public void addPhase(final RoundPhase newPhase) {
-		phases.add(newPhase);
+	public void addPhase(final PhaseHeroes phaseHeroes) {
+		this.phaseHeroes = phaseHeroes;
+		phases.add(phaseHeroes);
+	}
+
+	@Override
+	public void addPhase(final PhaseEnemies phaseEnemies) {
+		this.phaseEnemies = phaseEnemies;
+		phases.add(phaseEnemies);
+	}
+
+	@Override
+	public PhaseHeroes getPhaseHeroes() {
+		return phaseHeroes;
+	}
+
+	@Override
+	public PhaseEnemies getPhaseEnemies() {
+		return phaseEnemies;
 	}
 
 	@Override
@@ -127,21 +143,48 @@ public class RoundsMasterDefault implements RoundsMaster {
 		reloadPhases();
 
 		try {
-			nextRound();
+			startNextRound();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void setMemento(final GameMemento gameMemento) {
+		// this.worldObjectsMastersContainer = new
+		// WorldObjectsMastersContainerDefault();
+		final GameState gameState = gameMemento.getState();
+
+		this.worldObjectsMastersContainer.setMemento(gameState
+				.getWMContainerMemento());
+
+		phaseHeroes.reloadPhase(this.worldObjectsMastersContainer
+				.getHeroesMaster());
+		phaseHeroes.setCurrentObjectIndex(gameState.getCurrentHeroIndex());
+
+		phaseEnemies.reloadPhase(this.worldObjectsMastersContainer
+				.getEnemiesMaster());
+	}
+
+	@Override
+	public GameMemento createMemento() {
+		final WMContainerMemento wmContainerMemento = this.worldObjectsMastersContainer
+				.createMemento();
+		final int currentHeroIndex = phaseHeroes.getCurrentObjectIndex();
+
+		final GameState snapshot = new GameState(wmContainerMemento,
+				currentHeroIndex);
+
+		final GameMemento memento = new GameSnapshotMementoDefault();
+		memento.setState(snapshot);
+
+		return memento;
 	}
 
 	private void reloadPhases() {
 		for (final RoundPhase phase : phases) {
 			phase.reloadPhase();
 		}
-	}
-
-	@Override
-	public void onGuiEvent(final GuiElementsContainer eventGui) {
-		currentPhase().onGuiEvent(eventGui);
 	}
 
 	/**
@@ -155,6 +198,14 @@ public class RoundsMasterDefault implements RoundsMaster {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public RoundPhase getCurrentPhase() {
+		if (phases.size() == 0) {
+			return null;
+		}
+		return phases.get(phasePointer);
 	}
 
 }

@@ -1,18 +1,27 @@
 package org.adamsko.cubicforest.world;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMaster;
+import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
+import org.adamsko.cubicforest.players.Player;
+import org.adamsko.cubicforest.players.PlayersController;
+import org.adamsko.cubicforest.players.resolver.MapsResolver;
+import org.adamsko.cubicforest.players.resolver.PlayerMapsResolver;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.roundsMaster.RoundPhase;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
+import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
-import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperationHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
@@ -20,6 +29,8 @@ import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.pickmaster.PickMaster;
+import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
+import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
@@ -32,7 +43,7 @@ import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersM
  * @author adamsko
  * 
  */
-public interface GameWorldBuilder {
+public interface GameWorldBuilder extends Nullable {
 
 	/**
 	 * Standard 'update' function. Passes deltaTime for interested objects
@@ -60,6 +71,17 @@ public interface GameWorldBuilder {
 	 * objects should be ready for use.
 	 */
 	void initWorldObjectsMastersContainer(final GameRenderer renderer);
+
+	/**
+	 * When {@link CollisionVisitorsManagerFactory} is initialized, pass it to
+	 * the {@link WorldObjectsMastersContainer}
+	 * 
+	 * @param collisionVisitorsManagerFactory
+	 *            needed to initialize {@link CollisionVisitorsManager} of
+	 *            loaded {@link WorldObject} objects during map reload
+	 */
+	void setWorldObjectsMastersContainerCVMF(
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
 
 	/**
 	 * Initialize {@link TilePathSearchersMaster}
@@ -95,10 +117,13 @@ public interface GameWorldBuilder {
 	 * @param mapsLoader
 	 *            needed for GUI responsible for changing levels (number of
 	 *            levels and other informations needed)
+	 * @param mapsResolver
+	 *            needed to get {@link GuiResolver}, which is used to start
+	 *            resolving level and choose eventual victorious solutions
 	 * @param gatherCubesMaster
 	 *            needed for GUI showing informations about player's cubes
 	 * @param prizesMaster
-	 *            needed for GUI showint informations about collected prizes
+	 *            needed for GUI showing informations about collected prizes
 	 * @param roundsMaster
 	 *            {@link RoundsMaster} is passing events from {@link GuiMaster}
 	 *            to {@link RoundPhase} objects
@@ -129,14 +154,17 @@ public interface GameWorldBuilder {
 	 *            needed for {@link MapsLoader} to receive
 	 *            {@link WorldObjectsMaster} objects needed during maps reload
 	 *            (reading all {@link WorldObject}
-	 * @param collisionVisitorsManagerFactory
-	 *            needed to initialize {@link CollisionVisitorsManager} of
-	 *            loaded {@link WorldObject} objects during map reload
 	 */
 	void initMapsLoader(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			GuiMaster guiMaster,
-			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+			GuiMaster guiMaster);
+
+	/**
+	 * Initialize {@link MapsResolver} to solve {@link CFMap} maps.
+	 */
+	void initMapsResolver();
+
+	void initMapsResolverGui(GuiResolver guiResolver);
 
 	/**
 	 * Reload world objects with {@link MapsLoader} (invoking reloadWorld())
@@ -149,8 +177,13 @@ public interface GameWorldBuilder {
 	 * @param mapsLoader
 	 *            used when reloading {@link RoundsMaster}. Before reloading
 	 *            phases, world objects should be reloaded first.
+	 * @param mapsResolver
+	 *            used in {@link RoundsMaster} to solve levels
+	 * @param worldObjectsMastersContainer
+	 *            used for creating {@link GameMemento} by {@link RoundsMaster}
 	 */
-	void initRoundsMaster(MapsLoader mapsLoader);
+	void initRoundsMaster(MapsLoader mapsLoader, MapsResolver mapsResolver,
+			WorldObjectsMastersContainer worldObjectsMastersContainer);
 
 	/**
 	 * Initialize {@link RoundsMaster} {@link RoundPhase} objects.
@@ -160,6 +193,8 @@ public interface GameWorldBuilder {
 	 * @param worldObjectsMastersContainer
 	 *            used in {@link RoundPhase} objects to access needed
 	 *            {@link WorldObject} objects.
+	 * @param tilesMaster
+	 *            used in some phases for tiles searching
 	 * @param tilePathSearchersMaster
 	 *            used in initialized phases for path searching
 	 * @param tilesLookController
@@ -167,26 +202,52 @@ public interface GameWorldBuilder {
 	 */
 	void initRoundsMasterPhases(final OrdersMaster ordersMaster,
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
+			TilesMaster tilesMaster,
 			TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController);
 
 	/**
-	 * Initialize {@link TilesMaster} parts that are needing
-	 * {@link RoundsMaster}.
+	 * Initialize {@link TilesMaster}.
 	 * 
 	 * @param tilesMaster
 	 *            initialized {@link TilesMaster}
 	 * @param roundsMaster
 	 *            {@link RoundsMaster} needed for complete {@link TilesMaster}
-	 *            initialization ( {@link GameResultOperationHandler} object)
+	 *            initialization ( {@link GameResultMaster} object)
 	 * @param collisionVisitorsManagerFactory
 	 *            needs {@link CollisionsHandler} to being set, and its
 	 *            initialization is in {@link TilesEventsHandler}, that belongs
 	 *            to {@link TilesMaster}
+	 * @param playersController
+	 *            {@link PlayersController} is added as a
+	 *            {@link PickMasterClient}.
 	 */
-	void initTilesMasterRoundsMaster(TilesMaster tilesMaster,
+	void initTilesMaster(TilesMaster tilesMaster,
 			final RoundsMaster roundsMaster,
-			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory);
+			CollisionVisitorsManagerFactory collisionVisitorsManagerFactory,
+			PlayersController playersController);
+
+	/**
+	 * Initialize {@link PlayersController} object. Add user and others who can
+	 * decide about the course of the game.
+	 * 
+	 * @param mapsResolver
+	 *            needed to create {@link PlayerMapsResolver} in
+	 *            {@link PlayersController}
+	 * 
+	 * @param tilesMaster
+	 *            some of the {@link Player} in {@link PlayersController} uses
+	 *            {@link TilesMaster} to find {@link Tile} objects.
+	 */
+	void initPlayersController(final MapsResolver mapsResolver,
+			final TilesMaster tilesMaster);
+
+	/**
+	 * Initialize {@link RoundsMaster} in {@link PlayersController}.
+	 * 
+	 * @param roundsMaster
+	 */
+	void initPlayersControllerRoundsMaster(RoundsMaster roundsMaster);
 
 	/**
 	 * Initialize {@link CollisionVisitorsManagerFactory}
@@ -231,9 +292,20 @@ public interface GameWorldBuilder {
 	MapsLoader getMapsLoader();
 
 	/**
+	 * Get {@link MapsResolver} needed to solve levels.
+	 */
+	MapsResolver getMapsResolver();
+
+	/**
 	 * Get {@link RoundsMaster} needed for {@link GameWorldBuilder} functions.
 	 */
 	RoundsMaster getRoundsMaster();
+
+	/**
+	 * Get {@link PlayersController} needed for {@link GameWorldBuilder}
+	 * functions.
+	 */
+	PlayersController getPlayersController();
 
 	/**
 	 * Get {@link CollisionVisitorsManagerFactory} needed for

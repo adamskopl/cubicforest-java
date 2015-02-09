@@ -4,9 +4,10 @@ import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.gui.GuiElementDefault;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMasterDefault;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -25,6 +26,14 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 		counter = new Vector2(0, 0);
 
 		createGui();
+
+		ConditionalLog.addObject(this, "GatherCubesCounterDefault");
+		ConditionalLog.setUsage(this, false);
+	}
+
+	@Override
+	public String toString() {
+		return new String(counter.toString());
 	}
 
 	@Override
@@ -49,8 +58,14 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 	}
 
 	@Override
+	public void setCounter(final int counter) {
+		this.counter.set(counter, 0);
+	}
+
+	@Override
 	public Boolean isToolAffordable(final WorldObjectType heroToolType) {
-		final int toolCost = HeroesToolsMaster.heroTooltypeToCost(heroToolType);
+		final int toolCost = HeroesToolsMasterDefault
+				.heroTooltypeToCost(heroToolType);
 		if (toolCost <= getCounter()) {
 			return true;
 		}

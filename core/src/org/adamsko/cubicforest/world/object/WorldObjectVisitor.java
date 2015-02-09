@@ -1,13 +1,14 @@
 package org.adamsko.cubicforest.world.object;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.Enemy;
 import org.adamsko.cubicforest.world.objectsMasters.entities.heroes.Hero;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroTool;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroTool;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolPortal;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTurret;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.HeroToolExit;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.HeroToolTrap;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
 
@@ -21,7 +22,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
  * @author adamsko
  * 
  */
-public interface WorldObjectVisitor {
+public interface WorldObjectVisitor extends Nullable {
 
 	/**
 	 * Visitor should has access to visiting object, to perform operations on
@@ -55,7 +56,7 @@ public interface WorldObjectVisitor {
 
 	void visitToolTurret(HeroToolTurret heroToolTurret);
 
-	void visitToolPortal(HeroToolPortal heroToolPortal);
+	void visitToolExit(HeroToolExit heroToolExit);
 
 	void visitPortal(Portal portal);
 

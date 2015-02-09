@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
-import org.adamsko.cubicforest.world.WorldObjectsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 
 /**
  * {@link GatherCube} objects manager.

@@ -1,9 +1,13 @@
 package org.adamsko.cubicforest.roundsMaster;
 
-import org.adamsko.cubicforest.gui.GuiMasterClient;
-import org.adamsko.cubicforest.world.tile.TilePickClient;
+import org.adamsko.cubicforest.players.Player;
+import org.adamsko.cubicforest.players.PlayerActionsHandler;
 
-public interface RoundPhase extends TilePickClient, GuiMasterClient {
+/**
+ * Component of {@link RoundsMaster}. Concrete phases should provide methods
+ * needed by concrete {@link PlayerActionsHandlerPhase} classes.
+ */
+public interface RoundPhase {
 
 	/**
 	 * Function to invoke, when phase is over. Phase should invoke 'phaseIsOver'
@@ -29,5 +33,27 @@ public interface RoundPhase extends TilePickClient, GuiMasterClient {
 	boolean phaseSkippedLastTime();
 
 	String getName();
+
+	/**
+	 * Set player, which is controlling the game.
+	 */
+	void setActivePlayer(Player activePlayer);
+
+	/**
+	 * Get player, which is controlling the game.
+	 */
+	Player getActivePlayer();
+
+	/**
+	 * Phase should handle player's actions by giving it's
+	 * {@link PlayerActionsHandler}.
+	 */
+	PlayerActionsHandler getPlayerActionsHandler();
+
+	/**
+	 * Initialize {@link PlayerActionsHandler} exposed by
+	 * {@link #getPlayerActionsHandler()}.
+	 */
+	void initPlayerActionsHandler();
 
 }

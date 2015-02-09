@@ -15,6 +15,9 @@ import aurelienribon.tweenengine.equations.Linear;
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * 
+ */
 public class TilePathGuideDefault implements TilePathGuide {
 
 	/**
@@ -47,10 +50,24 @@ public class TilePathGuideDefault implements TilePathGuide {
 
 	private GuideStage_e guideStage;
 
+	private static float tweenSpeed = 0.0f;
+
 	public TilePathGuideDefault() {
 		helper = new TilePathGuideHelper();
 		// set HEADING_CENTER state, for proper nextStage() invocation
 		this.guideStage = GuideStage_e.HEADING_CENTER;
+	}
+
+	public static void setTweenSpeedHigh() {
+		tweenSpeed = 0.0f;
+	}
+
+	public static void setTweenSpeedLow() {
+		tweenSpeed = 0.1f;
+	}
+
+	public static void setTweenSpeedVeryLow() {
+		tweenSpeed = 1.0f;
 	}
 
 	/**
@@ -193,7 +210,8 @@ public class TilePathGuideDefault implements TilePathGuide {
 	}
 
 	private void startTweener() {
-		Tween.to(wanderer, helper.getTweenType(), 0.1f)
+
+		Tween.to(wanderer, helper.getTweenType(), tweenSpeed)
 				.target(helper.getTweenMoveTarget().x,
 						helper.getTweenMoveTarget().y).ease(Linear.INOUT)
 				.setCallback(this).setCallbackTriggers(TweenCallback.COMPLETE)

@@ -7,16 +7,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class GuiElementDebug extends GuiElementDefault {
 
-	GuiDebugType_e debugType;
+	GuiDebugType debugType;
 
-	public GuiElementDebug(GuiDebugType_e debugType, TextureRegion tr, int texNum,
+	public GuiElementDebug(GuiDebugType debugType, TextureRegion tr, int texNum,
 			GuiElementsContainerDefault pareContainer, float posX, float posY) {
 		super(tr, texNum, pareContainer, posX, posY);
 		
 		this.debugType = debugType;
 	}
 	
-	public GuiDebugType_e getDebugType() {
+	public GuiDebugType getDebugType() {
 		return debugType;
 	}
 

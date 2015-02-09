@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.object.collision.visitors.concrete;
 
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolTrap;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.HeroToolTrap;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
 
 public class EnemyCollisionVisitorPass extends CollisionVisitorDefault {

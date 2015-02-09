@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.gui;
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.gui.resolver.GuiResolver;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
@@ -40,5 +41,7 @@ public interface GuiMaster extends PickMasterClient, Nullable {
 	void addClient(final GuiMasterClient newClient);
 
 	void reload(CFMap cfMap);
+
+	GuiResolver getGuiResolver();
 
 }

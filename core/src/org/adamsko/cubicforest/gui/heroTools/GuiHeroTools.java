@@ -7,7 +7,7 @@ import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMasterDefault;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -50,7 +50,7 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		types.add(WorldObjectType.TOOLRED);
 		types.add(WorldObjectType.TOOLTURRET);
 		types.add(WorldObjectType.TOOLTRAP);
-		types.add(WorldObjectType.TOOLPORTAL);
+		types.add(WorldObjectType.TOOLEXIT);
 
 		int seqNum = 0;
 		for (final WorldObjectType type : types) {
@@ -58,7 +58,7 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 			final GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
 					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 70, 0);
 
-			guiElementHeroTool.addLabel(HeroesToolsMaster
+			guiElementHeroTool.addLabel(HeroesToolsMasterDefault
 					.heroTooltypeToCost(type));
 			guiElementHeroTool.altLabelLast(Color.WHITE, 1.0f, 15.0f, 0.0f);
 			guiElementHeroTool.addLabel(type.toString());

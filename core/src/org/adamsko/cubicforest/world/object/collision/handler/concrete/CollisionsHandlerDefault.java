@@ -1,9 +1,9 @@
 package org.adamsko.cubicforest.world.object.collision.handler.concrete;
 
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
+import org.adamsko.cubicforest.roundsMaster.gameResult.GameResultMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
-import org.adamsko.cubicforest.world.object.collision.handler.GameResultOperationHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
 import org.adamsko.cubicforest.world.object.collision.handler.WorldObjectOperationHandler;
 import org.adamsko.cubicforest.world.tile.Tile;
@@ -13,7 +13,7 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 
 	OrderOperationHandler orderOperationHandler;
 	WorldObjectOperationHandler worldObjectOperationHandler;
-	GameResultOperationHandler gameResultOperationHandler;
+	GameResultMaster gameResultMaster;
 
 	/**
 	 * For NullCollisionsHandlerDefault
@@ -22,10 +22,9 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 	}
 
 	public CollisionsHandlerDefault(final RoundsMaster roundsMaster) {
-		orderOperationHandler = new OrderOperationHandlerDefault();
-		worldObjectOperationHandler = new WorldObjectOperationHandlerDefault();
-		gameResultOperationHandler = new GameResultOperationHandlerDefault(
-				roundsMaster);
+		this.orderOperationHandler = new OrderOperationHandlerDefault();
+		this.worldObjectOperationHandler = new WorldObjectOperationHandlerDefault();
+		this.gameResultMaster = roundsMaster.getGameResultMaster();
 	}
 
 	@Override
@@ -73,8 +72,8 @@ public class CollisionsHandlerDefault implements CollisionsHandler {
 	}
 
 	@Override
-	public GameResultOperationHandler gameResultOperation() {
-		return gameResultOperationHandler;
+	public GameResultMaster gameResultOperation() {
+		return gameResultMaster;
 	}
 
 	private void removeDeadObjects(final Tile collidingTile) {
