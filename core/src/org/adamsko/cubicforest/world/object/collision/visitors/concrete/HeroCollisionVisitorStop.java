@@ -66,7 +66,7 @@ public class HeroCollisionVisitorStop extends CollisionVisitorDefault {
 	@Override
 	public void visitPrize(final Prize prize) {
 		super.visitPrize(prize);
-		prizesMaster.prizeCollected();
+		prizesMaster.onPrizeCollected();
 		collision().wordlObjectOperation().remove(prize);
 	}
 

@@ -29,7 +29,6 @@ public class GuiPrizesDefault extends GuiElementsContainerDefault implements
 	public void reload(final CFMap cfMap) {
 		prizesCollected = 0;
 		clearGuiElements();
-
 	}
 
 	@Override
@@ -44,6 +43,15 @@ public class GuiPrizesDefault extends GuiElementsContainerDefault implements
 		addGuiElement(availablePrizes.get(prizesCollected - 1));
 
 	}
+
+	@Override
+	public void setCollectedPrizesNumber(final int prizesCollected) {
+		this.prizesCollected = 0;
+		clearGuiElements();
+		for (int i = 0; i < prizesCollected; i++) {
+			prizeCollected();
+		}
+	};
 
 	private void createGui() {
 

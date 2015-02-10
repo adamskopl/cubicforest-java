@@ -107,7 +107,7 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 	}
 
 	@Override
-	public void onVictoryConditionsMet() {
+	public void onVictoryConditionsMet(final boolean prizesCollected) {
 		roundsMaster.reload();
 		getPlayersController().switchPlayerUser();
 	}

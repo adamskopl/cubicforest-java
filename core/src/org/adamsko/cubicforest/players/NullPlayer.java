@@ -28,7 +28,7 @@ public class NullPlayer extends PlayerBase {
 	}
 
 	@Override
-	public void onVictoryConditionsMet() {
+	public void onVictoryConditionsMet(final boolean prizesCollected) {
 		Gdx.app.error("NullPlayer::onVictoryConditionsMet()", "");
 	}
 }

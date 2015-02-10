@@ -29,8 +29,11 @@ public interface MapsResolver extends OrderDecisionsAggregateContainer,
 	/**
 	 * Victory conditions for current element are met. Remember victorious
 	 * decisions sequence.
+	 * 
+	 * @param prizesCollected
+	 *            true, if player has collected all the prizes
 	 */
-	public void victoryConditionsMet();
+	public void victoryConditionsMet(boolean prizesCollected);
 
 	public void initGui(GuiResolver guiResolver);
 

@@ -6,7 +6,9 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.prizes.PrizesMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
+import org.adamsko.cubicforest.world.tile.NullCubicTile;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
@@ -21,6 +23,7 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	private final TilePathSearchersMaster tilePathSearchersMaster;
 	private final EnemiesHelper enemiesHelper;
 	private final GatherCubesMaster gatherCubesMaster;
+	private final PrizesMaster prizesMaster;
 
 	public PhaseHeroesDefault(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
@@ -42,6 +45,7 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 
 		this.gatherCubesMaster = worldObjectsMastersContainer
 				.getGatherCubesMaster();
+		this.prizesMaster = worldObjectsMastersContainer.getPrizesMaster();
 
 		initPlayerActionsHandler();
 	}
@@ -64,7 +68,6 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	@Override
 	public void startPhase() {
 		nextHero();
-		getOrdersMaster().highlightTilesOrder();
 		getActivePlayer().makeNextDecision();
 	}
 
@@ -75,7 +78,8 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 
 		if (roundsMaster.getGameResultMaster().isGameWon()
 				|| victoryConditionsMet()) {
-			getActivePlayer().onVictoryConditionsMet();
+			getActivePlayer().onVictoryConditionsMet(
+					prizesMaster.allPrizesCollected());
 			roundsMaster.reload();
 			roundsMaster.getGameResultMaster().resetGameResult();
 			return;
@@ -110,6 +114,8 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	public void nextHero() {
 		nextObject();
 		heroesOrdersMaster.setCurrentHero(getCurrentObject());
+		heroesOrdersMaster.tilePicked(NullCubicTile.instance(), false);
+		getOrdersMaster().highlightTilesOrder();
 	}
 
 	@Override

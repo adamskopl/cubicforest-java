@@ -9,6 +9,15 @@ public interface OrderDecisionsAggregateContainer {
 
 	public int countAggregates();
 
-	OrderDecisionsAggregate getAggregate(int index);
+	/**
+	 * Get aggregate with given index.
+	 * 
+	 * @param index
+	 *            index of the aggregate
+	 * @param prizesCollected
+	 *            true if aggregate should be taken from the list defining order
+	 *            decisions collecting all prizes on the map
+	 */
+	OrderDecisionsAggregate getAggregate(int index, boolean prizesCollected);
 
 }

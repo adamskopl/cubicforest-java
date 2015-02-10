@@ -4,30 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
-import org.adamsko.cubicforest.players.resolver.DecisionsComponent;
-import org.adamsko.cubicforest.players.resolver.NullDecisionsComponent;
 
 import com.badlogic.gdx.Gdx;
 
 public class RoundDecisionsAggregateDefault implements RoundDecisionsAggregate {
 
-	DecisionsComponent root;
-
 	private final List<GameMemento> resolvedStates;
-
 	private final int maxDepth;
-
-	RoundDecisionsIterator roundDecisionsIterator;
-	// iterator iterating through elements to find victorious
-	RoundDecisionsIterator victoriousIterator;
 
 	public RoundDecisionsAggregateDefault(final int maxDepth) {
 		resolvedStates = new ArrayList<GameMemento>();
 		// solutions = new ArrayList<VictoriousDecisions>();
 		this.maxDepth = maxDepth;
-
-		victoriousIterator = new RoundDecisionsIteratorVisiting(
-				NullDecisionsComponent.instance());
 	}
 
 	@Override

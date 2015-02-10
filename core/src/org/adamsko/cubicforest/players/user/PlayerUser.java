@@ -7,6 +7,8 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuideDefault;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Player: user of the application. Issuing decisions by input.
  * 
@@ -57,7 +59,7 @@ public class PlayerUser extends PlayerBase {
 	}
 
 	@Override
-	public void onVictoryConditionsMet() {
+	public void onVictoryConditionsMet(final boolean prizesCollected) {
+		Gdx.app.debug("victory", Boolean.toString(prizesCollected));
 	}
-
 }

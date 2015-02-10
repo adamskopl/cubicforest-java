@@ -4,30 +4,44 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.prizes.GuiPrizes;
 import org.adamsko.cubicforest.gui.prizes.GuiPrizesDefault;
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 		PrizesMaster {
 
 	private final GuiPrizes guiPrizes;
+	/**
+	 * Starting number of prizes.
+	 */
+	private int prizesStartNumber;
+	/**
+	 * Number of collected prizes.
+	 */
+	private int prizesCollected;
 
 	public PrizesMasterDefault(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
 		super("PrizesMaster", tilesMaster, textureName, tileW, tileH);
 		guiPrizes = new GuiPrizesDefault("prizes-atlas-medium", 25, 35, 550,
 				-50);
+		this.prizesStartNumber = 0;
+		this.prizesCollected = 0;
+
+		ConditionalLog.addObject(this, "PrizesMasterDefault");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	@Override
 	public void update(final float deltaTime) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -46,6 +60,7 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 
 	@Override
 	public void loadMapObjects(final List<Vector2> tilePositions) {
+		prizesCollected = 0;
 		for (final Vector2 pos : tilePositions) {
 			addObject(factoryMethod(pos));
 		}
@@ -57,7 +72,7 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 				.getObjectTypeCoords(TiledObjectType.TILED_PRIZE);
 
 		loadMapObjects(tilePositions);
-
+		prizesStartNumber = getWorldObjects().size();
 	}
 
 	@Override
@@ -77,12 +92,37 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 
 	@Override
 	public GuiPrizes getGuiPrizes() {
-		return guiPrizes;
+		return this.guiPrizes;
 	}
 
 	@Override
-	public void prizeCollected() {
-		guiPrizes.prizeCollected();
+	public void onPrizeCollected() {
+		this.prizesCollected++;
+		this.guiPrizes.prizeCollected();
 	}
 
+	@Override
+	public int prizesCollected() {
+		return this.prizesCollected;
+	}
+
+	@Override
+	public boolean allPrizesCollected() {
+		return this.prizesCollected == this.prizesStartNumber;
+	}
+
+	@Override
+	public void setMemento(final WOMMemento memento) {
+		super.setMemento(memento);
+		this.prizesCollected = prizesStartNumber - getWorldObjects().size();
+		guiPrizes.setCollectedPrizesNumber(this.prizesCollected);
+		if (this.prizesCollected < 0) {
+			Gdx.app.error("PrizesMasterDefault::setMemento()",
+					"prizesCollected < 0");
+		}
+		ConditionalLog.debug(
+				this,
+				"setMemento, collected:"
+						+ Integer.toString(this.prizesCollected));
+	}
 }

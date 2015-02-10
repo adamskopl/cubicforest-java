@@ -49,8 +49,8 @@ public class PlayerMapsResolver extends PlayerBase implements
 	}
 
 	@Override
-	public void onVictoryConditionsMet() {
-		mapsResolver.victoryConditionsMet();
+	public void onVictoryConditionsMet(final boolean prizesCollected) {
+		mapsResolver.victoryConditionsMet(prizesCollected);
 	}
 
 	@Override

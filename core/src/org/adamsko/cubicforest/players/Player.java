@@ -37,8 +37,11 @@ public interface Player extends Nullable {
 
 	/**
 	 * Invoked when game's victory conditions are met.
+	 * 
+	 * @param prizesCollected
+	 *            true if player has collected all prizes
 	 */
-	void onVictoryConditionsMet();
+	void onVictoryConditionsMet(boolean prizesCollected);
 
 	/**
 	 * Reaction on player's tile choice.

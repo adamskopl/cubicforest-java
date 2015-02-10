@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregateDefault;
@@ -13,14 +14,23 @@ import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterato
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorSolving;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIteratorVisiting;
 
+import com.badlogic.gdx.Gdx;
+
 public class MapsResolverDefault implements MapsResolver {
 
-	RoundDecisionsAggregate roundDecisionsAggregate;
-	RoundDecisionsIterator roundDecisionsIterator;
+	private RoundDecisionsAggregate roundDecisionsAggregate;
+	private RoundDecisionsIterator roundDecisionsIterator;
 	// iterator iterating through elements to find victorious
-	RoundDecisionsIterator victoriousIterator;
+	private RoundDecisionsIterator victoriousIterator;
 
-	private final List<OrderDecisionsAggregate> solutions;
+	/**
+	 * Level solutions without all prizes collected;
+	 */
+	private final List<OrderDecisionsAggregate> solutionsNoPrizes;
+	/**
+	 * Level solutions with all prizes collected;
+	 */
+	private final List<OrderDecisionsAggregate> solutionsPrizes;
 
 	private GuiResolver guiResolver;
 
@@ -29,20 +39,26 @@ public class MapsResolverDefault implements MapsResolver {
 	 */
 	private boolean resolverIsWorking;
 
-	public MapsResolverDefault(final boolean nullConstructor) {
-		solutions = null;
+	MapsResolverDefault(final boolean nullConstructor) {
+		solutionsNoPrizes = null;
+		solutionsPrizes = null;
 		guiResolver = null;
 	}
 
 	public MapsResolverDefault() {
 		roundDecisionsAggregate = new RoundDecisionsAggregateDefault(12);
 
-		solutions = new ArrayList<OrderDecisionsAggregate>();
+		solutionsNoPrizes = new ArrayList<OrderDecisionsAggregate>();
+
+		solutionsPrizes = new ArrayList<OrderDecisionsAggregate>();
 
 		victoriousIterator = new RoundDecisionsIteratorVisiting(
 				NullDecisionsComponent.instance());
 
 		resolverIsWorking = false;
+
+		ConditionalLog.addObject(this, "MapsResolverDefault");
+		ConditionalLog.setUsage(this, true);
 	}
 
 	@Override
@@ -64,7 +80,7 @@ public class MapsResolverDefault implements MapsResolver {
 	}
 
 	@Override
-	public void victoryConditionsMet() {
+	public void victoryConditionsMet(final boolean prizesCollected) {
 		/*
 		 * Invoked in the moment when victory conditions are met: it means that
 		 * going from the first component to the last and by collecting latest
@@ -84,13 +100,23 @@ public class MapsResolverDefault implements MapsResolver {
 					.currentItem().getLatestDecision());
 		} while (!victoriousIterator.isLast());
 
-		solutions.add(victoriousOrderDecisionsAggregate);
-		guiResolver.addNewSolution();
+		ConditionalLog.debug(this,
+				"victoryConditionsMet " + Boolean.toString(prizesCollected));
+		if (ConditionalLog.checkUsage(this)) {
+			victoriousOrderDecisionsAggregate.debugPrint();
+		}
+
+		solutionsNoPrizes.add(victoriousOrderDecisionsAggregate);
+		if (prizesCollected) {
+			solutionsPrizes.add(victoriousOrderDecisionsAggregate);
+			guiResolver.addNewSolution();
+		}
 	}
 
 	@Override
 	public void startNewResolve() {
-		solutions.clear();
+		solutionsNoPrizes.clear();
+		solutionsPrizes.clear();
 		guiResolver.newResolveStarted();
 		resolverIsWorking = true;
 	}
@@ -107,15 +133,26 @@ public class MapsResolverDefault implements MapsResolver {
 
 	@Override
 	public int countAggregates() {
-		return solutions.size();
+		return solutionsNoPrizes.size();
 	}
 
 	@Override
-	public OrderDecisionsAggregate getAggregate(final int index) {
-		if (index + 1 > solutions.size()) {
+	public OrderDecisionsAggregate getAggregate(final int index,
+			final boolean prizesCollected) {
+
+		final List<OrderDecisionsAggregate> targetSolutions;
+		if (prizesCollected) {
+			targetSolutions = solutionsPrizes;
+		} else {
+			targetSolutions = solutionsPrizes;
+		}
+
+		if (index + 1 > targetSolutions.size()) {
+			Gdx.app.error("MapsResolverDefault::getAggregate()",
+					"targetSolutions.size() error");
 			return NullOrderDecisionsAggregate.instance();
 		}
-		return solutions.get(index);
-	};
+		return targetSolutions.get(index);
+	}
 
-}
+};

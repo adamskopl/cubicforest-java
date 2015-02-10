@@ -173,7 +173,7 @@ public class PlayersControllerDefault implements PlayersController {
 					.getSolutionIndex();
 			playerDecisionOrdersReplay
 					.setDecisionOrdersAggregate(orderDecisionsAggregateContainer
-							.getAggregate(solutionIndex));
+							.getAggregate(solutionIndex, true));
 			switchPlayerOrderDecisionsReplay();
 			break;
 

@@ -33,6 +33,18 @@ public interface PrizesMaster extends Nullable, WorldObjectsMaster,
 	/**
 	 * Invoked when hero has collected prize. Update: add new gui element.
 	 */
-	void prizeCollected();
+	void onPrizeCollected();
+
+	/**
+	 * How many prizes player has collected?
+	 */
+	int prizesCollected();
+
+	/**
+	 * Check if all prizes are collected;
+	 * 
+	 * @return true if all prizes are collected
+	 */
+	boolean allPrizesCollected();
 
 }

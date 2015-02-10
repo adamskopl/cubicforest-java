@@ -9,4 +9,9 @@ public interface GuiPrizes extends GuiElementsContainer {
 	 */
 	void prizeCollected();
 
+	/**
+	 * Set prizes gui elements number.
+	 */
+	void setCollectedPrizesNumber(int prizesCollected);
+
 }
