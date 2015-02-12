@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.objectsMasters.terrain;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.render.cubicModel.CubicModelsBuilder;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
@@ -14,8 +15,8 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 	private int atlasIndex;
 
 	public TerrainMaster(final TilesMaster tilesMaster,
-			final String textureName, final int tileW, final int tileH) {
-		super("TerrainObjectsMaster", tilesMaster, textureName, tileW, tileH);
+			final CubicModelsBuilder cubicModelsBuilder) {
+		super("TerrainObjectsMaster", tilesMaster, cubicModelsBuilder);
 
 	}
 
@@ -26,10 +27,8 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 	@Override
 	public org.adamsko.cubicforest.world.object.WorldObject factoryMethod(
 			final Vector2 tilePos) {
-		final Tree tree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex,
-				this);
-		tree.setRenderVector(new Vector2(
-				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
+		final Tree tree = new Tree(this);
+		tree.setRenderVector(new Vector2(0, 0));
 		final Vector2 pos = new Vector2(tilePos);
 		pos.add(new Vector2(0.5f, 0.5f));
 		tree.setTilesPos(pos);

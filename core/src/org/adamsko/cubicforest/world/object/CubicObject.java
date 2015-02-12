@@ -74,14 +74,29 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 	public CubicObject(final TextureRegion tr, final int texNum,
 			final WorldObjectsMaster container, final WorldObjectType type) {
 		super(tr, texNum);
-
 		this.parentContainer = container;
-
 		collisionVisitorsManager = NullCollisionVisitorsManagerDefault
 				.instance();
-
 		initTilePropertiesIndicator();
+		tilesPos = new Vector2(0.0f, 0.0f);
+		verticalPos = new Float(0.0f);
+		name = new String("WorldObject");
+		speed = 0;
+		this.type = type;
+		this.renderType = RenderableObjectType.TYPE_WORLD;
+		this.state = WorldObjectState.ALIVE;
+	}
 
+	/**
+	 * Constructor for object with default texture.
+	 */
+	public CubicObject(final WorldObjectsMaster container,
+			final WorldObjectType type) {
+		super();
+		this.parentContainer = container;
+		collisionVisitorsManager = NullCollisionVisitorsManagerDefault
+				.instance();
+		initTilePropertiesIndicator();
 		tilesPos = new Vector2(0.0f, 0.0f);
 		verticalPos = new Float(0.0f);
 		name = new String("WorldObject");

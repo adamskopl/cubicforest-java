@@ -7,6 +7,8 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
+import org.adamsko.cubicforest.render.cubicModel.CubicModelsBuilder;
+import org.adamsko.cubicforest.render.cubicModel.CubicModelsBuilderDefault;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
@@ -36,6 +38,8 @@ public class WorldObjectsMastersContainerDefault implements
 
 	private GameRenderer gameRenderer;
 
+	private CubicModelsBuilder cubicModelsBuilder;
+
 	private TilesMaster tilesMaster;
 	private TerrainMaster terrainObjectsMaster;
 	private HeroesMaster heroesMaster;
@@ -52,6 +56,7 @@ public class WorldObjectsMastersContainerDefault implements
 	public WorldObjectsMastersContainerDefault(final GameRenderer renderer) {
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		this.gameRenderer = renderer;
+		this.cubicModelsBuilder = new CubicModelsBuilderDefault();
 		initMasters();
 	}
 
@@ -63,7 +68,7 @@ public class WorldObjectsMastersContainerDefault implements
 				.instance();
 
 		terrainObjectsMaster = new TerrainMaster(tilesMaster,
-				"terrain-atlas-medium", 42, 50);
+				cubicModelsBuilder);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30,
 				35);
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",

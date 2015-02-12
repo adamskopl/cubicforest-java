@@ -48,4 +48,6 @@ public interface RenderableObject extends LabelsMaster {
 	 */
 	int getTexHeight();
 
+	boolean tempIsCubic();
+
 }
