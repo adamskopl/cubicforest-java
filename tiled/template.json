@@ -77,7 +77,7 @@
                 {
                  "gid":17,
                  "height":0,
-                 "name":"HeroToolPortal",
+                 "name":"HeroToolExit",
                  "properties":
                     {
 
@@ -105,7 +105,7 @@
                 {
                  "gid":25,
                  "height":0,
-                 "name":"Portal",
+                 "name":"Portal0",
                  "properties":
                     {
 
@@ -115,6 +115,90 @@
                  "width":0,
                  "x":-150,
                  "y":400
+                }, 
+                {
+                 "gid":26,
+                 "height":0,
+                 "name":"Portal1",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-200,
+                 "y":400
+                }, 
+                {
+                 "gid":27,
+                 "height":0,
+                 "name":"Portal2",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-250,
+                 "y":400
+                }, 
+                {
+                 "gid":28,
+                 "height":0,
+                 "name":"Portal3",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-300,
+                 "y":400
+                }, 
+                {
+                 "gid":29,
+                 "height":0,
+                 "name":"Portal4",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-350,
+                 "y":400
+                }, 
+                {
+                 "gid":37,
+                 "height":0,
+                 "name":"Prize",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-150,
+                 "y":450
+                }, 
+                {
+                 "gid":37,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-150,
+                 "y":450
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -191,7 +275,7 @@
         }, 
         {
          "height":10,
-         "name":"TILED_HERO_TOOL_PORTAL",
+         "name":"TILED_HERO_TOOL_EXIT",
          "objects":[],
          "opacity":1,
          "type":"objectgroup",
@@ -210,11 +294,24 @@
          "width":10,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":10,
+         "name":"TILED_PRIZE",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":
     {
-     "startCubes":"10"
+     "startingCubes":"20",
+     "toolExit":"true",
+     "toolTrap":"true"
     },
  "tileheight":50,
  "tilesets":[
