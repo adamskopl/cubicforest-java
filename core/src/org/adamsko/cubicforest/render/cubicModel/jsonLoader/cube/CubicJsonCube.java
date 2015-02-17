@@ -1,24 +1,42 @@
 package org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube;
 
-/**
- * Interface for class describing one cube of the Blender model.
- */
-public interface CubicJsonCube {
+public class CubicJsonCube {
 
-	String getName();
+	private String name;
+	private CubePosition pos;
+	private CubeRotation rot;
+	private CubeColor col;
 
-	void setName(String name);
+	public String getName() {
+		return name;
+	}
 
-	CubePosition getPos();
+	public void setName(final String name) {
+		this.name = name;
+	}
 
-	void setPos(CubePosition cubePosition);
+	public CubePosition getPos() {
+		return pos;
+	}
 
-	CubeRotation getRot();
+	public void setPos(final CubePosition cubePosition) {
+		this.pos = cubePosition;
+	}
 
-	void setRot(CubeRotation cubeRotation);
+	public CubeRotation getRot() {
+		return rot;
+	}
 
-	CubeColor getCol();
+	public void setRot(final CubeRotation cubeRotation) {
+		this.rot = cubeRotation;
+	}
 
-	void setCol(CubeColor cubeColor);
+	public CubeColor getCol() {
+		return col;
+	}
+
+	public void setCol(final CubeColor cubeColor) {
+		this.col = cubeColor;
+	}
 
 }

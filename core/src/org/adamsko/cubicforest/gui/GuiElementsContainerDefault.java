@@ -24,7 +24,7 @@ public abstract class GuiElementsContainerDefault extends
 	public GuiElementsContainerDefault(final String name,
 			final GuiType_e guiType, final String textureName, final int tileW,
 			final int tileH, final float posX, final float posY) {
-		super(name, textureName, tileW, tileH);
+		super(name, "", textureName, tileW, tileH);
 
 		guiElements = new ArrayList<GuiElement>();
 

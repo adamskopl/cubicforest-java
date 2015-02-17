@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world.tilePathsMaster;
 
-
 public class NullTilePath extends TilePathDefault {
 	private static NullTilePath instance = null;
 

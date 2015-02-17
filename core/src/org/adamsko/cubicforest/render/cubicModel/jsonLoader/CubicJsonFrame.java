@@ -2,18 +2,31 @@ package org.adamsko.cubicforest.render.cubicModel.jsonLoader;
 
 import java.util.List;
 
-/**
- * Interface for class describing one frame of the Blender model. Frames are
- * used to animate models, if there will by any animations.
- */
-public interface CubicJsonFrame {
+public class CubicJsonFrame {
 
-	int getNumber();
+	/**
+	 * Frame number.
+	 */
+	private int number;
+	/**
+	 * Frame's cube groups.
+	 */
+	private List<CubicJsonGroup> groups;
 
-	void setNumber(int number);
+	public int getNumber() {
+		return number;
+	}
 
-	List<CubicJsonGroup> getGroups();
+	public void setNumber(final int number) {
+		this.number = number;
+	}
 
-	void setGroups(List<CubicJsonGroup> groups);
+	public List<CubicJsonGroup> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(final List<CubicJsonGroup> groups) {
+		this.groups = groups;
+	}
 
 }

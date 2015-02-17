@@ -75,7 +75,7 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 		// first)
 		newTile.setVerticalPos(-0.01f);
 		// uncomment to add a position label to the tile
-		addTilesPosLabel(newTile);
+		// addTilesPosLabel(newTile);
 		return newTile;
 	}
 

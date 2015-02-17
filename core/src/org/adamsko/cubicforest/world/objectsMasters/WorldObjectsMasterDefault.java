@@ -29,7 +29,19 @@ public abstract class WorldObjectsMasterDefault extends
 			final TilesMaster tilesMaster, final String textureName,
 			final int tileW, final int tileH) {
 
-		super(name, textureName, tileW, tileH);
+		super(name, "", textureName, tileW, tileH);
+		this.tilesMaster = tilesMaster;
+		worldObjects = new ArrayList<WorldObject>();
+	}
+
+	/**
+	 * Constructor for masters using cubes models.
+	 */
+	public WorldObjectsMasterDefault(final String name, final String modelName,
+			final TilesMaster tilesMaster, final String textureName,
+			final int tileW, final int tileH) {
+
+		super(name, modelName, textureName, tileW, tileH);
 		this.tilesMaster = tilesMaster;
 		worldObjects = new ArrayList<WorldObject>();
 	}

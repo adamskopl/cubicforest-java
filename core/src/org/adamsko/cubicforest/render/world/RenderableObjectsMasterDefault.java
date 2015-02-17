@@ -3,6 +3,9 @@ package org.adamsko.cubicforest.render.world;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.cubicModel.CubicModelBuilder;
+import org.adamsko.cubicforest.render.cubicModel.CubicModelBuilderDefault;
+import org.adamsko.cubicforest.render.cubicModel.CubicTextureController;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
 
 import com.badlogic.gdx.Gdx;
@@ -13,6 +16,15 @@ import com.badlogic.gdx.math.Vector2;
 public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	private String name;
+	private String textureName;
+	private int tileW, tileH;
+
+	/**
+	 * name of the model represting objects in this master
+	 */
+	private String modelName;
+
+	private CubicModelBuilder cubicModelBuilder;
 
 	public String getName() {
 		return name;
@@ -74,23 +86,52 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	public RenderableObjectsMasterDefault(final int nullConstructor) {
 	}
 
+	/**
+	 * @param name
+	 * @param modelName
+	 *            name of the model represting objects in this master
+	 * @param textureName
+	 * @param tileW
+	 * @param tileH
+	 */
 	public RenderableObjectsMasterDefault(final String name,
-			final String textureName, final int tileW, final int tileH) {
+			final String modelName, final String textureName, final int tileW,
+			final int tileH) {
 		this.name = new String(name);
+		this.textureName = textureName;
+		this.modelName = new String(modelName);
+		this.tileW = tileW;
+		this.tileH = tileH;
 
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		renderableObjectsToRemove = new ArrayList<RenderableObject>();
+		initTextures();
+	}
 
-		objectsTexture = new Texture(Gdx.files.internal("data/" + textureName
-				+ ".png"));
+	@Override
+	public void initTextures() {
+		if (this.modelName.isEmpty()) {
+			// old way of generating textures
+			this.objectsTexture = new Texture(Gdx.files.internal("data/"
+					+ this.textureName + ".png"));
 
-		final int rowsNum = objectsTexture.getHeight() / tileH;
-		atlasRows = new ArrayList<TextureRegion[]>();
-		for (int i = 0; i < rowsNum; i++) {
-			atlasRows
-					.add(new TextureRegion(objectsTexture).split(tileW, tileH)[i]);
+			final int rowsNum = this.objectsTexture.getHeight() / this.tileH;
+			this.atlasRows = new ArrayList<TextureRegion[]>();
+			for (int i = 0; i < rowsNum; i++) {
+				this.atlasRows.add(new TextureRegion(this.objectsTexture)
+						.split(this.tileW, this.tileH)[i]);
+			}
 		}
+	}
+
+	@Override
+	public void initCubicModel(
+			final CubicTextureController cubicTextureController) {
+		this.cubicModelBuilder = new CubicModelBuilderDefault(
+				cubicTextureController);
+		this.cubicModelBuilder.loadModel(this.modelName);
+		this.atlasRows = cubicModelBuilder.getAtlasRows();
 	}
 
 	public void addRenderableObject(final RenderableObject newObject) {

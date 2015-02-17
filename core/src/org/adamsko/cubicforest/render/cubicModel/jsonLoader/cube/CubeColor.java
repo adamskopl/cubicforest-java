@@ -1,20 +1,32 @@
 package org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube;
 
-/**
- * Interface for class describing cube's color.
- */
-public interface CubeColor {
+public class CubeColor {
+	private float r;
+	private float g;
+	private float b;
 
-	void setR(float r);
+	public void setR(final float r) {
+		this.r = r;
+	}
 
-	float getR();
+	public float getR() {
+		return r;
+	}
 
-	void setG(float g);
+	public void setG(final float g) {
+		this.g = g;
+	}
 
-	float getG();
+	public float getG() {
+		return g;
+	}
 
-	void setB(float b);
+	public void setB(final float b) {
+		this.b = b;
+	}
 
-	float getB();
+	public float getB() {
+		return b;
+	}
 
 }

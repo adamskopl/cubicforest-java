@@ -1,20 +1,31 @@
 package org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube;
 
-/**
- * Interface for class describing cube's position.
- */
-public interface CubePosition {
+public class CubePosition {
+	private int x;
+	private int y;
+	private int z;
 
-	void setX(int x);
+	public void setX(final int x) {
+		this.x = x;
+	}
 
-	int getX();
+	public int getX() {
+		return x;
+	}
 
-	void setY(int y);
+	public void setY(final int y) {
+		this.y = y;
+	}
 
-	int getY();
+	public int getY() {
+		return y;
+	}
 
-	void setZ(int z);
+	public void setZ(final int z) {
+		this.z = z;
+	}
 
-	int getZ();
-
+	public int getZ() {
+		return z;
+	}
 }

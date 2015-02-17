@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.render.world;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.render.cubicModel.CubicTextureController;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault.ROListType_e;
 
 import com.badlogic.gdx.math.Vector2;
@@ -57,5 +58,15 @@ public interface RenderableObjectsMaster {
 	 */
 	public void changeTexture(final RenderableObject object,
 			Vector2 textureCoordinates);
+
+	/**
+	 * Initialize textures for this master.
+	 */
+	void initTextures();
+
+	/**
+	 * Initialize cubic model representing objects hold by this master.
+	 */
+	void initCubicModel(CubicTextureController cubicTextureController);
 
 }

@@ -15,7 +15,8 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 
 	public TerrainMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("TerrainObjectsMaster", tilesMaster, textureName, tileW, tileH);
+		super("TerrainObjectsMaster", "tree", tilesMaster, textureName, tileW,
+				tileH);
 
 	}
 
@@ -26,8 +27,7 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 	@Override
 	public org.adamsko.cubicforest.world.object.WorldObject factoryMethod(
 			final Vector2 tilePos) {
-		final Tree tree = new Tree(atlasRows.get(0)[atlasIndex], atlasIndex,
-				this);
+		final Tree tree = new Tree(atlasRows.get(0)[0], 0, this);
 		tree.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
 		final Vector2 pos = new Vector2(tilePos);

@@ -1,20 +1,31 @@
 package org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube;
 
-/**
- * Interface for class describing cube's rotation.
- */
-public interface CubeRotation {
+public class CubeRotation {
+	private float x;
+	private float y;
+	private float z;
 
-	void setX(float x);
+	public void setX(final float x) {
+		this.x = x;
+	}
 
-	float getX();
+	public float getX() {
+		return x;
+	}
 
-	void setY(float y);
+	public void setY(final float y) {
+		this.y = y;
+	}
 
-	float getY();
+	public float getY() {
+		return y;
+	}
 
-	void setZ(float z);
+	public void setZ(final float z) {
+		this.z = z;
+	}
 
-	float getZ();
-
+	public float getZ() {
+		return z;
+	}
 }

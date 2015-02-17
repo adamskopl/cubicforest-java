@@ -2,18 +2,25 @@ package org.adamsko.cubicforest.render.cubicModel.jsonLoader;
 
 import java.util.List;
 
-/**
- * Interface for class representing JSON format of a model exported from
- * Blender.
- */
-public interface CubicJsonModel {
+public class CubicJsonModel {
 
-	String getName();
+	private String name;
+	private List<CubicJsonFrame> frames;
 
-	void setName(String name);
+	public String getName() {
+		return name;
+	}
 
-	List<CubicJsonFrame> getFrames();
+	public void setName(final String name) {
+		this.name = name;
+	}
 
-	void setFrames(List<CubicJsonFrame> frames);
+	public List<CubicJsonFrame> getFrames() {
+		return frames;
+	}
+
+	public void setFrames(final List<CubicJsonFrame> frames) {
+		this.frames = frames;
+	}
 
 }

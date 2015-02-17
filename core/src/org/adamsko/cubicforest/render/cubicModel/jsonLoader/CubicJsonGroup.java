@@ -4,19 +4,29 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
 
-/**
- * Interface for class describing one group of cubes in the Blender model.
- * Groups are used to indicate different parts of the model, for e.g. special
- * effects purposes.
- */
-public interface CubicJsonGroup {
+public class CubicJsonGroup {
 
-	String getName();
+	/**
+	 * Group's name.
+	 */
+	private String name;
 
-	void setName(String name);
+	private List<CubicJsonCube> cubes;
 
-	List<CubicJsonCube> getCubes();
+	public String getName() {
+		return name;
+	}
 
-	void setCubes(List<CubicJsonCube> cubes);
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public List<CubicJsonCube> getCubes() {
+		return cubes;
+	}
+
+	public void setCubes(final List<CubicJsonCube> cubes) {
+		this.cubes = cubes;
+	}
 
 }
