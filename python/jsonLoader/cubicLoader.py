@@ -1,6 +1,7 @@
 import imp
 import simplejson
 import bpy
+import configparser
 import cubicModel
 
 """ 
@@ -53,13 +54,15 @@ class ModelLoader:
         """
         x
         """
+        config = configparser.ConfigParser()
+        config.read('config.ini')
         modelJson = self.model.toJson(fStart, fEnd)
         jsonData = simplejson.dumps(modelJson)
-        fd = open(self.modelName + ".json", "w")
+        fd = open(config['Paths']['writePath'] + '/' + self.modelName + ".json", "w")
         fd.write(jsonData)
         fd.close
         
-def run(modelName, fStart, fEnd):
+def run(modelName, fStart=1, fEnd=1):
     """ 
     Function for Blender Console. Invokes ModelLoader's loadModel()
     function.
