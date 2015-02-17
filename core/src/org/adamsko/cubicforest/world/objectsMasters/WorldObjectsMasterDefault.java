@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
-import org.adamsko.cubicforest.render.cubicModel.CubicModelsBuilder;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
@@ -29,18 +28,8 @@ public abstract class WorldObjectsMasterDefault extends
 	public WorldObjectsMasterDefault(final String name,
 			final TilesMaster tilesMaster, final String textureName,
 			final int tileW, final int tileH) {
-		super(name, textureName, tileW, tileH);
-		this.tilesMaster = tilesMaster;
-		worldObjects = new ArrayList<WorldObject>();
-	}
 
-	/**
-	 * Constructor for objects built from atomic cubes.
-	 */
-	public WorldObjectsMasterDefault(final String name,
-			final TilesMaster tilesMaster,
-			final CubicModelsBuilder cubicModelsBuilder) {
-		super(name, cubicModelsBuilder);
+		super(name, textureName, tileW, tileH);
 		this.tilesMaster = tilesMaster;
 		worldObjects = new ArrayList<WorldObject>();
 	}

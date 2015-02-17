@@ -38,17 +38,6 @@ public class RenderableObjectDefault implements RenderableObject {
 		renderVector = new Vector2();
 	}
 
-	/**
-	 * Constructor for object with default texture.
-	 */
-	public RenderableObjectDefault() {
-		this.textureRegion = new TextureRegion();
-		this.texNum = 0;
-		renderType = RenderableObjectType.TYPE_UNDEFINED;
-		labels = new LabelsContainer();
-		renderVector = new Vector2();
-	}
-
 	@Override
 	public RenderableObjectType getRenderType() {
 		return renderType;
@@ -133,11 +122,6 @@ public class RenderableObjectDefault implements RenderableObject {
 	@Override
 	public void clearLabels() {
 		labels.clearLables();
-	}
-
-	@Override
-	public boolean tempIsCubic() {
-		return false;
 	}
 
 }

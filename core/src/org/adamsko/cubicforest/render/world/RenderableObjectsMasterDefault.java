@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.render.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.cubicModel.CubicModelsBuilder;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
 
 import com.badlogic.gdx.Gdx;
@@ -65,12 +64,7 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	private List<RenderableObject> renderableObjectsToRemove;
 
-	private Texture objectsTexture;
-
-	/**
-	 * Will replace 'objectsTexture'
-	 */
-	private CubicModelsBuilder cubicModelsBuilder;
+	protected Texture objectsTexture;
 
 	/**
 	 * Temporary solution. Keep rows of atlas in a list.
@@ -99,26 +93,7 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		}
 	}
 
-	/**
-	 * Constructor for objects with a defeault texture.
-	 */
-	public RenderableObjectsMasterDefault(final String name,
-			final CubicModelsBuilder cubicModelsBuilder) {
-		this.name = new String(name);
-		renderableObjects = new ArrayList<RenderableObject>();
-		renderableObjectsUnserved = new ArrayList<RenderableObject>();
-		renderableObjectsToRemove = new ArrayList<RenderableObject>();
-		objectsTexture = new Texture(
-				Gdx.files.internal("data/atomic-atlas.png"));
-		atlasRows = new ArrayList<TextureRegion[]>();
-		this.cubicModelsBuilder = cubicModelsBuilder;
-	}
-
 	public void addRenderableObject(final RenderableObject newObject) {
-		if (newObject.tempIsCubic()) {
-			cubicModelsBuilder.initTexture(newObject);
-		}
-
 		// add newObject to other RenderableObject objects
 		renderableObjects.add(newObject);
 		// add newObject to RenderableObject objects, which are not in
