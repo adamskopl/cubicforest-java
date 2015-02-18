@@ -3,6 +3,7 @@ import simplejson
 import bpy
 import configparser
 import cubicModel
+import os
 
 """ 
 Load and run this script in the Blender Console
@@ -54,8 +55,9 @@ class ModelLoader:
         """
         x
         """
+        currentDir=os.path.dirname(os.path.abspath(__file__))
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read(currentDir + "/config.ini")
         modelJson = self.model.toJson(fStart, fEnd)
         jsonData = simplejson.dumps(modelJson)
         fd = open(config['Paths']['writePath'] + '/' + self.modelName + ".json", "w")
