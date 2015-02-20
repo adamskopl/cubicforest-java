@@ -22,7 +22,7 @@ class CubesGroup:
             cube = cubicCube.Cube(groupCube.name)
             cube.setPos(groupCube.location)
             cube.setRot(groupCube.rotation_euler)
-            cube.setCol(groupCube.data.materials[0].diffuse_color)
+            cube.setCol(groupCube.data.materials[0].name)
             self.cubes.append(cube)
 
     def toJson(self):
