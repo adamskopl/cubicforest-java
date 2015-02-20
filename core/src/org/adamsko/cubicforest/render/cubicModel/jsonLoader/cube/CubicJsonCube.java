@@ -5,7 +5,7 @@ public class CubicJsonCube {
 	private String name;
 	private CubePosition pos;
 	private CubeRotation rot;
-	private CubeColor col;
+	private String colName;
 
 	public String getName() {
 		return name;
@@ -31,12 +31,23 @@ public class CubicJsonCube {
 		this.rot = cubeRotation;
 	}
 
-	public CubeColor getCol() {
-		return col;
+	public String getColName() {
+		return this.colName;
 	}
 
-	public void setCol(final CubeColor cubeColor) {
-		this.col = cubeColor;
+	public void setColName(final String cubeColName) {
+		this.colName = cubeColName;
+	}
+
+	/**
+	 * Compares position of the cube with the position of the other cube.
+	 * 
+	 * @return true if positions are equal
+	 */
+	boolean equalPos(final CubicJsonCube other) {
+		final CubePosition posOther = other.getPos();
+		return (pos.getX() == posOther.getX() && pos.getY() == posOther.getY() && pos
+				.getZ() == posOther.getZ());
 	}
 
 }

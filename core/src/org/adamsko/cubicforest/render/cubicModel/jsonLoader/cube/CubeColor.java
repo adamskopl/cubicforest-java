@@ -1,11 +1,11 @@
 package org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube;
 
 public class CubeColor {
-	private float r;
-	private float g;
-	private float b;
+	private int r;
+	private int g;
+	private int b;
 
-	public void setR(final float r) {
+	public void setR(final int r) {
 		this.r = r;
 	}
 
@@ -13,7 +13,7 @@ public class CubeColor {
 		return r;
 	}
 
-	public void setG(final float g) {
+	public void setG(final int g) {
 		this.g = g;
 	}
 
@@ -21,12 +21,16 @@ public class CubeColor {
 		return g;
 	}
 
-	public void setB(final float b) {
+	public void setB(final int b) {
 		this.b = b;
 	}
 
-	public float getB() {
+	public int getB() {
 		return b;
 	}
 
+	public String toRGBString() {
+		return new String(Integer.toString(r) + "_" + Integer.toString(g) + " "
+				+ Integer.toString(b));
+	}
 }

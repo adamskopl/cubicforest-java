@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.cubicModel.CubicModelBuilder;
 import org.adamsko.cubicforest.render.cubicModel.CubicModelBuilderDefault;
-import org.adamsko.cubicforest.render.cubicModel.CubicTextureController;
+import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
 
 import com.badlogic.gdx.Gdx;

@@ -5,7 +5,9 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * Interface for class managing cubic model made from cubes.
+ * Interface for class creating cubic models: reading model files, and providing
+ * texture informations for other. Does not keep any data: builder only creates
+ * textures for other classes.
  */
 public interface CubicModelBuilder {
 

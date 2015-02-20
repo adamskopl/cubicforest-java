@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.render.world;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.cubicModel.CubicTextureController;
+import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault.ROListType_e;
 
 import com.badlogic.gdx.math.Vector2;
