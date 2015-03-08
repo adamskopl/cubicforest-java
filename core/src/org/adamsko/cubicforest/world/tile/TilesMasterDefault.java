@@ -203,7 +203,7 @@ public class TilesMasterDefault implements TilesMaster {
 
 	private void initTiles() {
 
-		tilesContainer = new TilesContainer("tiles container", this);
+		tilesContainer = new TilesContainer("TilesContainer", this);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);
