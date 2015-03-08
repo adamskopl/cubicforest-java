@@ -20,6 +20,13 @@ public class RenderableObjectDefault implements RenderableObject {
 	private TextureRegion textureRegion;
 
 	/**
+	 * Experimental texture region representing model made from cubes.
+	 */
+	private TextureRegion textureRegionCubic;
+
+	private Vector2 renderVectorCubic;
+
+	/**
 	 * Temporary solution: sequence number of the texture in an atlas row
 	 */
 	private int texNum = 0;
@@ -36,6 +43,8 @@ public class RenderableObjectDefault implements RenderableObject {
 		renderType = RenderableObjectType.TYPE_UNDEFINED;
 		labels = new LabelsContainer();
 		renderVector = new Vector2();
+		renderVectorCubic = new Vector2();
+		textureRegionCubic = null;
 	}
 
 	@Override
@@ -66,6 +75,26 @@ public class RenderableObjectDefault implements RenderableObject {
 	@Override
 	public TextureRegion getTextureRegion() {
 		return this.textureRegion;
+	}
+
+	@Override
+	public Vector2 getRenderVectorCubic() {
+		return renderVectorCubic;
+	}
+
+	@Override
+	public void setRenderVectorCubic(final Vector2 vec) {
+		this.renderVectorCubic = vec;
+	};
+
+	@Override
+	public TextureRegion getTextureRegionCubic() {
+		return textureRegionCubic;
+	}
+
+	@Override
+	public void setTextureRegionCubic(final TextureRegion textureRegionCubic) {
+		this.textureRegionCubic = textureRegionCubic;
 	}
 
 	@Override

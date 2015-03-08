@@ -71,6 +71,7 @@ public class WorldObjectsMastersContainerDefault implements
 		terrainObjectsMaster.initCubicModel(cubicTextureController);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30,
 				35);
+		heroesMaster.initCubicModel(cubicTextureController);
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",
 				30, 35);
 		gatherCubesMaster = new GatherCubesMasterDefault(tilesMaster,
@@ -253,7 +254,7 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	private void initTilesMaster() {
-		tilesMaster = new TilesMasterDefault(100);
+		tilesMaster = new TilesMasterDefault(100, cubicTextureController);
 	}
 
 	@Override

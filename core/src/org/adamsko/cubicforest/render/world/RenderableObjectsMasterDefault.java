@@ -83,6 +83,11 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	 */
 	protected List<TextureRegion[]> atlasRows;
 
+	/**
+	 * Temporary texture region for an experimental cubic texture.
+	 */
+	protected TextureRegion cubicTextureRegion;
+
 	public RenderableObjectsMasterDefault(final int nullConstructor) {
 	}
 
@@ -111,17 +116,15 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	@Override
 	public void initTextures() {
-		if (this.modelName.isEmpty()) {
-			// old way of generating textures
-			this.objectsTexture = new Texture(Gdx.files.internal("data/"
-					+ this.textureName + ".png"));
+		// old way of generating textures
+		this.objectsTexture = new Texture(Gdx.files.internal("data/"
+				+ this.textureName + ".png"));
 
-			final int rowsNum = this.objectsTexture.getHeight() / this.tileH;
-			this.atlasRows = new ArrayList<TextureRegion[]>();
-			for (int i = 0; i < rowsNum; i++) {
-				this.atlasRows.add(new TextureRegion(this.objectsTexture)
-						.split(this.tileW, this.tileH)[i]);
-			}
+		final int rowsNum = this.objectsTexture.getHeight() / this.tileH;
+		this.atlasRows = new ArrayList<TextureRegion[]>();
+		for (int i = 0; i < rowsNum; i++) {
+			this.atlasRows.add(new TextureRegion(this.objectsTexture).split(
+					this.tileW, this.tileH)[i]);
 		}
 	}
 
@@ -131,7 +134,7 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		this.cubicModelBuilder = new CubicModelBuilderDefault(
 				cubicTextureController);
 		this.cubicModelBuilder.loadModel(this.modelName);
-		this.atlasRows = cubicModelBuilder.getAtlasRows();
+		this.cubicTextureRegion = cubicModelBuilder.getAtlasRows().get(0)[0];
 	}
 
 	public void addRenderableObject(final RenderableObject newObject) {

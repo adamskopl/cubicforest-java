@@ -29,6 +29,14 @@ public interface RenderableObject extends LabelsMaster {
 
 	TextureRegion getTextureRegion();
 
+	Vector2 getRenderVectorCubic();
+
+	void setRenderVectorCubic(final Vector2 vec);
+
+	TextureRegion getTextureRegionCubic();
+
+	void setTextureRegionCubic(final TextureRegion textureRegionCubic);
+
 	void setTextureRegion(final TextureRegion tr);
 
 	/**

@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
@@ -74,12 +75,13 @@ public class TilesMasterDefault implements TilesMaster {
 	TilesMasterDefault() {
 	}
 
-	public TilesMasterDefault(final int mapSize) {
+	public TilesMasterDefault(final int mapSize,
+			final CubicTextureController cubicTextureController) {
 		this.mapSize = mapSize;
 		this.clients = new ArrayList<TilePickClient>();
 		this.tilesEventsHandler = NullTilesEventsHandler.instance();
 		TilesHelper.setMapSize(mapSize);
-		initTiles();
+		initTiles(cubicTextureController);
 		tilesSearcher = new TilesSearcherDefault(this);
 		tilesLookController = new TilesLookControllerDefault(this,
 				getTilesContainer());
@@ -201,9 +203,10 @@ public class TilesMasterDefault implements TilesMaster {
 		}
 	}
 
-	private void initTiles() {
+	private void initTiles(final CubicTextureController cubicTextureController) {
 
-		tilesContainer = new TilesContainer("tiles container", this);
+		tilesContainer = new TilesContainer("tiles container", this,
+				cubicTextureController);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);

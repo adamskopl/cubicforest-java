@@ -18,14 +18,17 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 	private final int textureSize;
 	// parameters for calculating positions of the cubes in a textures. value
 	// dependent from a single cube texture's size
-	private final int calcA, calcB, calcC;
+	private final float calcA, calcB, calcC;
+	private final int offsetX, offsetY;
 
 	public CubicModelTextureBuilderDefault(
 			final CubicTextureController cubicTextureController) {
 		this.cubicTextureController = cubicTextureController;
-		this.textureSize = 60;
+		this.textureSize = 75;
+		offsetX = textureSize / 2 - 2;
+		offsetY = textureSize * 1 / 2 + 10;
 		this.calcA = 3; // 3,
-		this.calcB = 2; // 2,
+		this.calcB = 1.5f; // 2,
 		this.calcC = 4; // 4,
 		ConditionalLog.addObject(this, "CubicModelTextureBuilderDefault");
 		ConditionalLog.setUsage(this, false);
@@ -39,10 +42,9 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 		modelPixmap.setColor(Color.RED);
 		// modelPixmap.drawRectangle(1, 1, textureSize - 2, textureSize - 2);
 
-		int x, y, z;
-		int dstX, dstY;
-		final int offsetX = textureSize / 3;
-		final int offsetY = textureSize * 2 / 3;
+		float x, y, z;
+		float dstX, dstY;
+
 		for (final CubicJsonCube cube : modelCubes) {
 			x = cube.getPos().getX();
 			y = cube.getPos().getY();
@@ -55,17 +57,11 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 
 			final Pixmap singleCubePixmap = prepareSingleCubePixmap(cube
 					.getColName());
-			modelPixmap.drawPixmap(singleCubePixmap, dstX, dstY, 0, 0,
-					cubicTextureController.getCubeTexW(),
+			singleCubePixmap.setColor(Color.RED);
+			modelPixmap.drawPixmap(singleCubePixmap, (int) dstX, (int) dstY, 0,
+					0, cubicTextureController.getCubeTexW(),
 					cubicTextureController.getCubeTexH());
 			singleCubePixmap.dispose();
-
-			ConditionalLog.debug(
-					this,
-					Integer.toString(x) + " " + Integer.toString(y) + " "
-							+ Integer.toString(z) + " -> "
-							+ Integer.toString(dstX - offsetX) + " "
-							+ Integer.toString(dstY - offsetY));
 		}
 
 		final Texture modelTexture = new Texture(modelPixmap);

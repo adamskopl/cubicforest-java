@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer20;
 import com.badlogic.gdx.math.Vector2;
@@ -193,6 +194,22 @@ public class CubicWorldRenderer implements GameRenderer {
 		updateList(renderableObjectsMastersGui, renderListMasterGui);
 		renderList(renderListMasterWorld);
 		renderList(renderListMasterGui);
+
+		// RENDER WITH TEMP CUBIC TECHNIQUE
+		for (final RenderableObject rObj : renderListMasterWorld.get()) {
+			if (rObj.getRenderType() == RenderableObjectType.TYPE_WORLD) {
+				final WorldObject wObj = (WorldObject) rObj;
+				final Vector2 objPos = wObj.getTilesPos();
+				Vector2 renderPos = coordCalcX.tilesToRender(objPos);
+				final TextureRegion cubicTextureRegion = rObj
+						.getTextureRegionCubic();
+				if (cubicTextureRegion != null) {
+					renderPos = coordCalcX.tilesToRender(objPos);
+					renderPos.add(rObj.getRenderVectorCubic());
+					batch.draw(cubicTextureRegion, renderPos.x, renderPos.y);
+				}
+			}
+		}
 	}
 
 	private void renderList(final RenderList renderListMaster) {

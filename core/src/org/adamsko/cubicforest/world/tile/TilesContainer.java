@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
+import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
@@ -18,8 +19,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsMasterDefault {
 
-	public TilesContainer(final String name, final TilesMaster tilesMaster) {
-		super(name, tilesMaster, "tiles-atlas-medium", 75, 45);
+	public TilesContainer(final String name, final TilesMaster tilesMaster,
+			final CubicTextureController cubicTextureController) {
+		super("TilesContainer", "tile", tilesMaster, "tiles-atlas-medium", 75,
+				45);
+		initCubicModel(cubicTextureController);
 	}
 
 	/**
@@ -69,10 +73,12 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
+		newTile.setTextureRegionCubic(cubicTextureRegion);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects (should be rendered
 		// first)
+		newTile.setRenderVectorCubic(new Vector2(-37.0f, -50.0f));
 		newTile.setVerticalPos(-0.01f);
 		// uncomment to add a position label to the tile
 		// addTilesPosLabel(newTile);

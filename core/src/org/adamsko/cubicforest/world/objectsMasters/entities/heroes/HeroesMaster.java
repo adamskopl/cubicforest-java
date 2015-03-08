@@ -21,7 +21,7 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 
 	public HeroesMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("HeroesMaster", tilesMaster, textureName, tileW, tileH);
+		super("HeroesMaster", "hero", tilesMaster, textureName, tileW, tileH);
 
 	}
 
@@ -48,8 +48,11 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final Hero hero = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex,
 				this);
+		hero.setTextureRegionCubic(cubicTextureRegion);
 		hero.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
+
+		hero.setRenderVectorCubic(new Vector2(-50.0f, -23.0f));
 
 		hero.setSpeed(5);
 
