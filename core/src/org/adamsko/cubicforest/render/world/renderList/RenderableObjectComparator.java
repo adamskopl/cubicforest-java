@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.render.world.renderList;
 
 import java.util.Comparator;
 
-import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 
 import com.badlogic.gdx.Gdx;

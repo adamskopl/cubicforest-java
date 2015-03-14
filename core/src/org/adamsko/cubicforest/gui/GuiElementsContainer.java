@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.gui;
 
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 
 import com.badlogic.gdx.math.Vector2;

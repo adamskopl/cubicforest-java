@@ -1,7 +1,7 @@
 package org.adamsko.cubicforest.gui;
 
-import org.adamsko.cubicforest.render.world.RenderableObjectDefault;
-import org.adamsko.cubicforest.render.world.RenderableObjectType;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectDefault;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectType;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

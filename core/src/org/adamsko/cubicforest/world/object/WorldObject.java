@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.world.object;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.render.text.ROLabel;
-import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
 import org.adamsko.cubicforest.world.object.accessor.WorldObjectAccessorClient;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;

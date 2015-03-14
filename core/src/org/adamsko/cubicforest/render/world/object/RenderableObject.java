@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.world;
+package org.adamsko.cubicforest.render.world.object;
 
 import org.adamsko.cubicforest.render.text.LabelsMaster;
 

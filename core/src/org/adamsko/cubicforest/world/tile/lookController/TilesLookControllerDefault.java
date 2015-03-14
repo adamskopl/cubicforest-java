@@ -2,8 +2,8 @@ package org.adamsko.cubicforest.world.tile.lookController;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.RenderableObject;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesContainer;

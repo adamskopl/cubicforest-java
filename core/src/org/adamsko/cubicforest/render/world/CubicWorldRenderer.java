@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.render.text.Label;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault.ROListType_e;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectType;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMasterDefault.ROListType_e;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
 import org.adamsko.cubicforest.render.world.renderList.RenderListDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;

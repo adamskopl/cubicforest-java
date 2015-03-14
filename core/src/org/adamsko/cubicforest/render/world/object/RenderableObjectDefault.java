@@ -1,9 +1,10 @@
-package org.adamsko.cubicforest.render.world;
+package org.adamsko.cubicforest.render.world.object;
 
 import java.util.List;
 
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.text.LabelsContainer;
+import org.adamsko.cubicforest.world.tile.TilesHelper.TileDirection;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,6 +34,10 @@ public class RenderableObjectDefault implements RenderableObject {
 
 	protected RenderableObjectType renderType;
 
+	RenderableObjectVisualState visualState;
+
+	TileDirection tileDirection;
+
 	/**
 	 * @param textureRegion
 	 */
@@ -45,6 +50,8 @@ public class RenderableObjectDefault implements RenderableObject {
 		renderVector = new Vector2();
 		renderVectorCubic = new Vector2();
 		textureRegionCubic = null;
+		this.visualState = RenderableObjectVisualState.NORMAL;
+		this.tileDirection = TileDirection.E;
 	}
 
 	@Override

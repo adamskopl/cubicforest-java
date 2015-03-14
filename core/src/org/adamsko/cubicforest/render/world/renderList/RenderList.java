@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.render.world.renderList;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
 
 /**
  * Manager of the {@link RenderableObject} objects. Responsible for adding,

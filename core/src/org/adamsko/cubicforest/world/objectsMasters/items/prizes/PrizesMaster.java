@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.prizes;
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.GuiMaster;
 import org.adamsko.cubicforest.gui.prizes.GuiPrizes;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
 
 public interface PrizesMaster extends Nullable, WorldObjectsMaster,

@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.render.world.objectsTextureChanger;
 
-import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

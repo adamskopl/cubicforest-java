@@ -7,7 +7,7 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMasterDefault;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;

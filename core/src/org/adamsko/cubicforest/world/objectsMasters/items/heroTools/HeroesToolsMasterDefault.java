@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
-import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
 import org.adamsko.cubicforest.world.object.NullCubicObject;

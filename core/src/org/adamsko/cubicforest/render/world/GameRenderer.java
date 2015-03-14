@@ -1,6 +1,8 @@
 package org.adamsko.cubicforest.render.world;
 
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
 
 import com.badlogic.gdx.Screen;

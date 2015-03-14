@@ -1,8 +1,8 @@
 package org.adamsko.cubicforest.world.object;
 
 import org.adamsko.cubicforest.render.text.ROLabel;
-import org.adamsko.cubicforest.render.world.RenderableObjectDefault;
-import org.adamsko.cubicforest.render.world.RenderableObjectType;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectDefault;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.NullCollisionVisitorsManagerDefault;

@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.world;
+package org.adamsko.cubicforest.render.world.object;
 
 import java.util.ArrayList;
 import java.util.List;

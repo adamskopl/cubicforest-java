@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.tile;
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
-import org.adamsko.cubicforest.render.world.RenderableObject;
+import org.adamsko.cubicforest.render.world.object.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;

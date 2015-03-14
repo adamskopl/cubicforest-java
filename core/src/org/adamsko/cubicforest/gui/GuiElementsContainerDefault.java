@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.world.RenderableObjectsMasterDefault;
+import org.adamsko.cubicforest.render.world.object.RenderableObjectsMasterDefault;
 
 import com.badlogic.gdx.math.Vector2;
 
