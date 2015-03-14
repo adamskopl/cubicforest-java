@@ -31,7 +31,7 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 			final TilePathSearchersMaster tilePathSearchersMaster,
 			final TilesLookController tilesLookController) {
 		super(worldObjectsMastersContainer.getHeroesMaster(), ordersMaster,
-				tilesLookController, "PhaseHeroes");
+				"PhaseHeroes");
 
 		this.tilePathSearchersMaster = tilePathSearchersMaster;
 

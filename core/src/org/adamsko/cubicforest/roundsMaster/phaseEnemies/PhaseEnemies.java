@@ -5,7 +5,6 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMastersContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.tile.Tile;
-import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.searcher.TilePathSearchersMaster;
 
@@ -16,10 +15,9 @@ public class PhaseEnemies extends PhaseOrderableObjectsDefault {
 	public PhaseEnemies(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
 			final OrdersMaster ordersMaster,
-			final TilePathSearchersMaster tilePathSearchersMaster,
-			final TilesLookController tilesLookController) {
+			final TilePathSearchersMaster tilePathSearchersMaster) {
 		super(worldObjectsMastersContainer.getEnemiesMaster(), ordersMaster,
-				tilesLookController, "PhaseEnemies");
+				"PhaseEnemies");
 
 		heroesHelper = new HeroesHelper(
 				worldObjectsMastersContainer.getHeroesMaster(),

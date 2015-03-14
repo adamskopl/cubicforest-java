@@ -258,7 +258,7 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 
 		final PhaseEnemies phaseEnemies = new PhaseEnemies(
 				worldObjectsMastersContainer, ordersMaster,
-				tilePathSearchersMaster, tilesLookController);
+				tilePathSearchersMaster);
 		phaseEnemies.setRoundsMaster(roundsMaster);
 
 		roundsMaster.addPhase(phaseHeroes);

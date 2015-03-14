@@ -16,7 +16,6 @@ import org.adamsko.cubicforest.world.object.WorldObjectState;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMaster;
 import org.adamsko.cubicforest.world.ordersMaster.OrdersMasterClient;
-import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
 import org.adamsko.cubicforest.world.tilePathsMaster.NullTilePath;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePath;
 
@@ -46,7 +45,6 @@ public abstract class PhaseOrderableObjectsDefault implements
 
 	protected RoundsMaster roundsMaster;
 	protected OrdersMaster ordersMaster;
-	protected TilesLookController tilesLookController;
 	protected PlayerActionsHandler playerActionsHandler;
 
 	/**
@@ -167,8 +165,7 @@ public abstract class PhaseOrderableObjectsDefault implements
 
 	protected PhaseOrderableObjectsDefault(
 			final OrderableObjectsContainer orderableObjectsContainer,
-			final OrdersMaster ordersMaster,
-			final TilesLookController tilesLookController, final String name) {
+			final OrdersMaster ordersMaster, final String name) {
 
 		if (orderableObjectsContainer.isNull()) {
 			Gdx.app.error("PhaseOrderableObjects()",
@@ -177,7 +174,6 @@ public abstract class PhaseOrderableObjectsDefault implements
 
 		this.objectsContainer = orderableObjectsContainer;
 		this.ordersMaster = ordersMaster;
-		this.tilesLookController = tilesLookController;
 		this.name = name;
 		this.phaseSkippedLastTime = false;
 		this.orderInProgress = false;
