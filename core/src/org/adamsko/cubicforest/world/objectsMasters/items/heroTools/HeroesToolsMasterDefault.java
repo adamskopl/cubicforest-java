@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
@@ -76,15 +77,18 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public void initToolsMasters(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final TilesMaster tilesMaster) {
+			final TilesMaster tilesMaster,
+			final CubicTextureController cubicTextureController) {
 		toolTrapsMaster = new ToolTrapsMaster(tilesMaster,
 				"traps-atlas-medium", 40, 45);
+		toolTrapsMaster.initCubicModel(cubicTextureController);
 		worldObjectsMastersContainer.addWorldObjectsMaster(toolTrapsMaster);
 		worldObjectsMastersContainer
 				.addRenderableObjectsMaster(toolTrapsMaster);
 
 		toolExitsMaster = new ToolExitsMaster(tilesMaster,
 				"exits-atlas-medium", 40, 45);
+		toolExitsMaster.initCubicModel(cubicTextureController);
 		worldObjectsMastersContainer.addWorldObjectsMaster(toolExitsMaster);
 		worldObjectsMastersContainer
 				.addRenderableObjectsMaster(toolExitsMaster);

@@ -21,7 +21,7 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 
 	public EnemiesMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("enemiesMaster", tilesMaster, textureName, tileW, tileH);
+		super("EnemiesMaster", "enemy", tilesMaster, textureName, tileW, tileH);
 
 	}
 
@@ -46,6 +46,8 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 				this);
 		enemy.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
+		enemy.setTextureRegionCubic(cubicTextureRegion);
+		enemy.setRenderVectorCubic(new Vector2(-40.0f, -23.0f));
 
 		enemy.setSpeed(5);
 

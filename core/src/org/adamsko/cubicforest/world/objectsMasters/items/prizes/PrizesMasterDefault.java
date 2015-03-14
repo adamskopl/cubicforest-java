@@ -30,7 +30,7 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 
 	public PrizesMasterDefault(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("PrizesMaster", tilesMaster, textureName, tileW, tileH);
+		super("PrizesMaster", "prize", tilesMaster, textureName, tileW, tileH);
 		guiPrizes = new GuiPrizesDefault("prizes-atlas-medium", 25, 35, 550,
 				-50);
 		this.prizesStartNumber = 0;
@@ -47,8 +47,10 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final Prize prize = new CubicPrize(atlasRows.get(0)[0], 0, this);
+		prize.setTextureRegionCubic(cubicTextureRegion);
 		prize.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2 - 3, -5));
+		prize.setRenderVectorCubic(new Vector2(-35.0f, -23.0f));
 		final Vector2 pos = new Vector2(tilePos);
 		pos.add(new Vector2(0.5f, 0.5f));
 		prize.setTilesPos(pos);

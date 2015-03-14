@@ -23,7 +23,8 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 
 	public GatherCubesMasterDefault(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("GatherCubesMaster", tilesMaster, textureName, tileW, tileH);
+		super("GatherCubesMaster", "gatherCube", tilesMaster, textureName,
+				tileW, tileH);
 		gatherCubesCounter = new GatherCubesCounterDefault(
 				"cubes-atlas-medium", 25, 25, 650, -50);
 		gatherCubesCounter.setStartingValue(0);
@@ -48,8 +49,10 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final GatherCube gatherCube;
 		gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
+		gatherCube.setTextureRegionCubic(cubicTextureRegion);
 		gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -2));
+		gatherCube.setRenderVectorCubic(new Vector2(-37.0f, -23.0f));
 
 		gatherCube.setSpeed(2);
 		gatherCube.setVerticalPos(0.5f);

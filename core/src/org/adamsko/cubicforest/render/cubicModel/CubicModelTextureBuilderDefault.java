@@ -34,8 +34,13 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 		ConditionalLog.setUsage(this, false);
 	}
 
+	enum One {
+		ONE, TWO, THREE, FOUR
+	}
+
 	@Override
-	public Texture createTexture(final List<CubicJsonCube> modelCubes) {
+	public Texture createTexture(final List<CubicJsonCube> modelCubes,
+			final String TEMPNAME) {
 
 		final Pixmap modelPixmap = new Pixmap(textureSize, textureSize,
 				cubicTextureController.getPixelFormat());

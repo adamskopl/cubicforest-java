@@ -44,6 +44,13 @@ public class TilesHelper {
 		NONE
 	}
 
+	public enum TileDirection {
+		N, // increasing Y coord
+		E, // increasing X coord
+		S, // decreasing Y coord
+		W // decreasing X coord
+	}
+
 	public static String toString(final TilesConnection_e conn) {
 		switch (conn) {
 		case HORIZONTAL:

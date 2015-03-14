@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.world.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
@@ -16,7 +17,8 @@ public interface HeroesToolsMaster extends WorldObjectsMaster,
 
 	void initToolsMasters(
 			WorldObjectsMastersContainer worldObjectsMastersContainer,
-			TilesMaster tilesMaster);
+			TilesMaster tilesMaster,
+			CubicTextureController cubicTextureController);
 
 	/**
 	 * Add hero tool in 'construction' state for marking purpose.

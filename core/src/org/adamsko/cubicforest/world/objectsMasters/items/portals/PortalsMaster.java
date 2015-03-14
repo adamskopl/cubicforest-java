@@ -23,7 +23,7 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 	public PortalsMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH,
 			final TilesContainer tilesContainer) {
-		super("PortalsMaster", tilesMaster, textureName, tileW, tileH);
+		super("PortalsMaster", "portal", tilesMaster, textureName, tileW, tileH);
 		portals = new ArrayList<Portal>();
 		this.tilesContainer = tilesContainer;
 	}
@@ -42,8 +42,10 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 
 		final Portal portal = new CubicPortal(atlasRows.get(0)[atlasIndex / 2],
 				atlasIndex / 2, this, parentTile);
+		portal.setTextureRegionCubic(cubicTextureRegion);
 		portal.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -11));
+		portal.setRenderVectorCubic(new Vector2(-35.0f, -23.0f));
 		final Vector2 pos = new Vector2(tilePos);
 		pos.add(new Vector2(0.5f, 0.5f));
 		portal.setTilesPos(pos);

@@ -74,17 +74,21 @@ public class WorldObjectsMastersContainerDefault implements
 		heroesMaster.initCubicModel(cubicTextureController);
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",
 				30, 35);
+		enemiesMaster.initCubicModel(cubicTextureController);
 		gatherCubesMaster = new GatherCubesMasterDefault(tilesMaster,
 				"cubes-atlas-medium", 25, 40);
+		gatherCubesMaster.initCubicModel(cubicTextureController);
 
 		heroesToolsMaster = new HeroesToolsMasterDefault(tilesMaster,
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
 
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
+		portalsMaster.initCubicModel(cubicTextureController);
 
 		prizesMaster = new PrizesMasterDefault(tilesMaster,
 				"prizes-atlas-medium", 25, 35);
+		prizesMaster.initCubicModel(cubicTextureController);
 
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles
@@ -102,7 +106,8 @@ public class WorldObjectsMastersContainerDefault implements
 
 		worldObjectsMasters.add(heroesToolsMaster);
 		gameRenderer.addROMWorld(heroesToolsMaster);
-		heroesToolsMaster.initToolsMasters(this, tilesMaster);
+		heroesToolsMaster.initToolsMasters(this, tilesMaster,
+				cubicTextureController);
 
 		worldObjectsMasters.add(portalsMaster);
 		gameRenderer.addROMWorld(portalsMaster);

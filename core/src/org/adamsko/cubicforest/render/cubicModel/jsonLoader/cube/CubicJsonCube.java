@@ -5,7 +5,15 @@ public class CubicJsonCube {
 	private String name;
 	private CubePosition pos;
 	private CubeRotation rot;
+	// color name
 	private String colName;
+
+	public CubicJsonCube(final CubicJsonCube cube) {
+		this.name = new String(cube.getName());
+		this.pos = new CubePosition(cube.getPos());
+		this.rot = new CubeRotation(cube.getRot());
+		this.colName = new String(cube.getColName());
+	}
 
 	public String getName() {
 		return name;

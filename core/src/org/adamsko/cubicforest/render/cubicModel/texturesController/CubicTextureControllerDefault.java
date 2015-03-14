@@ -82,6 +82,7 @@ public class CubicTextureControllerDefault implements CubicTextureController {
 		availableColors.add("pink");
 		availableColors.add("darkpink");
 		availableColors.add("black");
+		availableColors.add("red");
 	}
 
 	private void createColorsMap() {

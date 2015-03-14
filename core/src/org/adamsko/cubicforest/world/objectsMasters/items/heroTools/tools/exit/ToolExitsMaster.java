@@ -16,7 +16,8 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 
 	public ToolExitsMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("ToolExitsMaster", tilesMaster, textureName, tileW, tileH);
+		super("ToolExitsMaster", "toolExit", tilesMaster, textureName, tileW,
+				tileH);
 	}
 
 	@Override
@@ -40,9 +41,11 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final HeroToolExit exit;
 		exit = new HeroToolExit(atlasRows.get(0)[0], 0, this);
+		exit.setTextureRegionCubic(cubicTextureRegion);
 		exit.setState(HeroToolStates.STATE_READY);
 		exit.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2 + 2, -11));
+		exit.setRenderVectorCubic(new Vector2(-35.0f, -23.0f));
 
 		final Vector2 pos = new Vector2(tilePos);
 		pos.add(new Vector2(0.5f, 0.5f));

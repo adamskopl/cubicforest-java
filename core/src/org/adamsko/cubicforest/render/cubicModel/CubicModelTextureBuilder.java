@@ -11,7 +11,7 @@ interface CubicModelTextureBuilder {
 	/**
 	 * Create texture from given {@link CubicJsonCube} list.
 	 */
-	Texture createTexture(List<CubicJsonCube> modelCubes);
+	Texture createTexture(List<CubicJsonCube> modelCubes, String TEMPNAME);
 
 	int getTextureSize();
 

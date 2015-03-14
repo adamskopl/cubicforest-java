@@ -5,6 +5,18 @@ public class CubeRotation {
 	private float y;
 	private float z;
 
+	public CubeRotation(final CubeRotation cubeRotation) {
+		this.x = cubeRotation.getX();
+		this.y = cubeRotation.getY();
+		this.z = cubeRotation.getZ();
+	}
+
+	public CubeRotation(final float x, final float y, final float z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
 	public void setX(final float x) {
 		this.x = x;
 	}
