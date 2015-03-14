@@ -91,10 +91,4 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	void changeTexture(final RenderableObject object,
 			final Vector2 textureCoordinates);
 
-	/**
-	 * Design flaw: this should be only in {@link RenderableObjectsMaster}
-	 */
-	void changeTexture(final RenderableObject object, final int atlasRow,
-			final int atlasCol);
-
 }

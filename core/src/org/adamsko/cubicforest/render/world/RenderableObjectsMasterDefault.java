@@ -3,9 +3,9 @@ package org.adamsko.cubicforest.render.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.cubicModel.CubicModelBuilder;
-import org.adamsko.cubicforest.render.cubicModel.CubicModelBuilderDefault;
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
+import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
+import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChangerDefault;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
 
 import com.badlogic.gdx.Gdx;
@@ -23,8 +23,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	 * name of the model represting objects in this master
 	 */
 	private String modelName;
-
-	private CubicModelBuilder cubicModelBuilder;
 
 	public String getName() {
 		return name;
@@ -78,6 +76,8 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	protected Texture objectsTexture;
 
+	ObjectsTextureChanger objectsTextureChanger;
+
 	/**
 	 * Temporary solution. Keep rows of atlas in a list.
 	 */
@@ -94,7 +94,7 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	/**
 	 * @param name
 	 * @param modelName
-	 *            name of the model represting objects in this master
+	 *            name of the model representing objects in this master
 	 * @param textureName
 	 * @param tileW
 	 * @param tileH
@@ -131,10 +131,10 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	@Override
 	public void initCubicModel(
 			final CubicTextureController cubicTextureController) {
-		this.cubicModelBuilder = new CubicModelBuilderDefault(
-				cubicTextureController);
-		this.cubicModelBuilder.loadModel(this.modelName);
-		this.cubicTextureRegion = cubicModelBuilder.getAtlasRows().get(0)[0];
+		this.objectsTextureChanger = new ObjectsTextureChangerDefault(
+				this.modelName, cubicTextureController);
+		this.cubicTextureRegion = objectsTextureChanger
+				.tempGetCubicTextureRegion();
 	}
 
 	public void addRenderableObject(final RenderableObject newObject) {
@@ -191,9 +191,4 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		object.setTextureRegion(atlasRows.get((int) textureCoordinates.x)[(int) textureCoordinates.y]);
 	}
 
-	@Override
-	public void changeTexture(final RenderableObject object,
-			final int atlasRow, final int atlasCol) {
-		object.setTextureRegion(atlasRows.get(atlasRow)[atlasCol]);
-	}
 }

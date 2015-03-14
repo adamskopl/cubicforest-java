@@ -121,9 +121,9 @@ public class CubicTile extends CubicObject implements Tile {
 	@Override
 	public void refreshTexture() {
 		if (isTileHighlightedAsOccupied()) {
-			getParentContainer().changeTexture(this, 2, 1);
+			getParentContainer().changeTexture(this, new Vector2(2, 1));
 		} else {
-			getParentContainer().changeTexture(this, 0, 0);
+			getParentContainer().changeTexture(this, new Vector2(0, 0));
 		}
 	}
 

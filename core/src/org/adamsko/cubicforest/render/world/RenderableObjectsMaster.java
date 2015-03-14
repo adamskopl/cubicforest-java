@@ -43,16 +43,6 @@ public interface RenderableObjectsMaster {
 	 * 
 	 * @param object
 	 *            object for which texture will be changed
-	 */
-	public void changeTexture(final RenderableObject object,
-			final int atlasRow, final int atlasCol);
-
-	/**
-	 * Change given object's texture by using texture atlas managed by this
-	 * master.
-	 * 
-	 * @param object
-	 *            object for which texture will be changed
 	 * @param textureCoordinates
 	 *            coordinates of the texture in the atlas
 	 */
