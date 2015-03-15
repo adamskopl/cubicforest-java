@@ -5,6 +5,7 @@ import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.collision.handler.OrderOperationHandler;
 import org.adamsko.cubicforest.world.ordersMaster.OrderOperation;
 import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 import org.adamsko.cubicforest.world.tile.TilesMasterDefault.TileCollisionType;
 import org.adamsko.cubicforest.world.tile.tilesEvents.TilesEventsHandler;
 
@@ -206,6 +207,9 @@ public class TilePathGuideDefault implements TilePathGuide {
 		}
 		// recalculate helper's fields before using them in Tweener
 		helper.recalculate(guideStage);
+		if (helper.getTileDirection() != TileDirection.NULL) {
+			wanderer.tileDirection().changeDirection(helper.getTileDirection());
+		}
 		startTweener();
 	}
 

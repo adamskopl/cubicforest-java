@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
@@ -42,8 +43,8 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Enemy enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex,
-				this);
+		final Enemy enemy = new Enemy(getObjectsTextureChanger(),
+				atlasRows.get(0)[atlasIndex], atlasIndex, this);
 		enemy.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
 		enemy.setTextureRegionCubic(cubicTextureRegion);
@@ -58,6 +59,8 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 		enemy.setVerticalPos(0.3f);
 		enemy.addLabel(ROLabel.LABEL_NAME);
 		enemy.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
+		enemy.tileDirection().changeDirection(
+				TileDirection.randomTileDirection());
 		return enemy;
 	}
 

@@ -56,7 +56,8 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		for (final WorldObjectType type : types) {
 
 			final GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
-					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 70, 0);
+					type, getObjectsTextureChanger(), atlasRows.get(0)[seqNum],
+					0, this, seqNum * 70, 0);
 
 			guiElementHeroTool.addLabel(HeroesToolsMasterDefault
 					.heroTooltypeToCost(type));

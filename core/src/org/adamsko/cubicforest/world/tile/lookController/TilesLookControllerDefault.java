@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.world.object.RenderableObject;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
@@ -45,9 +46,10 @@ public class TilesLookControllerDefault implements TilesLookController {
 
 	@Override
 	public void changeTilesTexture(final List<Tile> tilesToChange,
-			final Vector2 texCoords) {
+			final RenderableObjectVisualState objectVisualState) {
 		for (final Tile tile : tilesToChange) {
-			renderableMasterTiles.changeTexture(tile, texCoords);
+			tile.visualState().changeState(objectVisualState);
+			// renderableMasterTiles.changeTexture(tile, texCoords);
 		}
 	}
 

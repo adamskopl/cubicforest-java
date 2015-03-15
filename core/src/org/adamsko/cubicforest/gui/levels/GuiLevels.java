@@ -36,7 +36,8 @@ public class GuiLevels extends GuiElementsContainerDefault {
 			}
 
 			final GuiElementLevel guiElementLevel = new GuiElementLevel(i,
-					atlasRows.get(0)[0], 0, this, posX, posY);
+					getObjectsTextureChanger(), atlasRows.get(0)[0], 0, this,
+					posX, posY);
 
 			if (activeLevel == i) {
 				higlightButton(guiElementLevel);

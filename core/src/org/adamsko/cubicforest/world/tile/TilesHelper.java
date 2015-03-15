@@ -44,13 +44,6 @@ public class TilesHelper {
 		NONE
 	}
 
-	public enum TileDirection {
-		N, // increasing Y coord
-		E, // increasing X coord
-		S, // decreasing Y coord
-		W // decreasing X coord
-	}
-
 	public static String toString(final TilesConnection_e conn) {
 		switch (conn) {
 		case HORIZONTAL:
@@ -151,26 +144,34 @@ public class TilesHelper {
 	 * 
 	 * @return Position between tiles or null;
 	 */
-	public static Vector2 getPosBetween(final Tile tileA, final Tile tileB)
-			throws Exception {
+	public static Vector2TileDirectionStruct getPosBetween(final Tile tileA,
+			final Tile tileB) throws Exception {
 		final TilesConnection_e connType = getConnectionType(tileA, tileB);
+		final Vector2TileDirectionStruct vector2TileDirectionStruct = new Vector2TileDirectionStruct();
 		switch (connType) {
 		case HORIZONTAL: {
 			if (tileA.getTilesPosX() < tileB.getTilesPosX()) {
-				return tileB.getTilesPos();
+				vector2TileDirectionStruct.vector2 = tileB.getTilesPos();
+				vector2TileDirectionStruct.tileDirection = TileDirection.E;
 			} else {
-				return tileA.getTilesPos();
+				vector2TileDirectionStruct.vector2 = tileA.getTilesPos();
+				vector2TileDirectionStruct.tileDirection = TileDirection.W;
 			}
+			break;
 		}
 		case VERTICAL: {
 			if (tileA.getTilesPosY() < tileB.getTilesPosY()) {
-				return tileB.getTilesPos();
+				vector2TileDirectionStruct.vector2 = tileB.getTilesPos();
+				vector2TileDirectionStruct.tileDirection = TileDirection.S;
 			} else {
-				return tileA.getTilesPos();
+				vector2TileDirectionStruct.vector2 = tileA.getTilesPos();
+				vector2TileDirectionStruct.tileDirection = TileDirection.N;
 			}
+			break;
 		}
 		case PORTAL: {
-			return new Vector2();
+			vector2TileDirectionStruct.vector2 = new Vector2();
+			break;
 		}
 		case NONE: {
 			throw new Exception("getPosBetween: connection: NONE");
@@ -179,6 +180,7 @@ public class TilesHelper {
 			throw new Exception("getPosBetween: connection: unsupported");
 		}
 		}
+		return vector2TileDirectionStruct;
 	}
 
 	/**

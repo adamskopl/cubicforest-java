@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.adamsko.cubicforest.render.text.Label;
 import org.adamsko.cubicforest.render.text.LabelsContainer;
-import org.adamsko.cubicforest.world.tile.TilesHelper.TileDirection;
+import org.adamsko.cubicforest.render.world.object.tileDirection.TileDirectionChanger;
+import org.adamsko.cubicforest.render.world.object.tileDirection.TileDirectionChangerDefault;
+import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChanger;
+import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChangerDefault;
+import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,16 +37,16 @@ public class RenderableObjectDefault implements RenderableObject {
 	private int texNum = 0;
 
 	protected RenderableObjectType renderType;
-
-	RenderableObjectVisualState visualState;
-
-	TileDirection tileDirection;
+	private final ObjectsTextureChanger objectsTextureChanger;
+	private final VisualStateChanger visualStateChanger;
+	private final TileDirectionChanger tileDirectionChanger;
 
 	/**
 	 * @param textureRegion
 	 */
-	public RenderableObjectDefault(final TextureRegion textureRegion,
-			final int texNum) {
+	public RenderableObjectDefault(
+			final ObjectsTextureChanger objectsTextureChanger,
+			final TextureRegion textureRegion, final int texNum) {
 		this.textureRegion = textureRegion;
 		this.texNum = texNum;
 		renderType = RenderableObjectType.TYPE_UNDEFINED;
@@ -50,18 +54,16 @@ public class RenderableObjectDefault implements RenderableObject {
 		renderVector = new Vector2();
 		renderVectorCubic = new Vector2();
 		textureRegionCubic = null;
-		this.visualState = RenderableObjectVisualState.NORMAL;
-		this.tileDirection = TileDirection.E;
+		this.objectsTextureChanger = objectsTextureChanger;
+		this.tileDirectionChanger = new TileDirectionChangerDefault(this,
+				this.objectsTextureChanger);
+		this.visualStateChanger = new VisualStateChangerDefault(this,
+				this.objectsTextureChanger);
 	}
 
 	@Override
 	public RenderableObjectType getRenderType() {
 		return renderType;
-	}
-
-	@Override
-	public void setRenderType(final RenderableObjectType renderType) {
-		this.renderType = renderType;
 	}
 
 	@Override
@@ -159,5 +161,15 @@ public class RenderableObjectDefault implements RenderableObject {
 	public void clearLabels() {
 		labels.clearLables();
 	}
+
+	@Override
+	public TileDirectionChanger tileDirection() {
+		return tileDirectionChanger;
+	}
+
+	@Override
+	public VisualStateChanger visualState() {
+		return visualStateChanger;
+	};
 
 }

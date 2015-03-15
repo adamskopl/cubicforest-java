@@ -27,7 +27,8 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 	@Override
 	public org.adamsko.cubicforest.world.object.WorldObject factoryMethod(
 			final Vector2 tilePos) {
-		final Tree tree = new Tree(atlasRows.get(0)[0], 0, this);
+		final Tree tree = new Tree(getObjectsTextureChanger(),
+				atlasRows.get(0)[0], 0, this);
 		tree.setTextureRegionCubic(cubicTextureRegion);
 		tree.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));

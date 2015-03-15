@@ -60,7 +60,8 @@ public class GuiPrizesDefault extends GuiElementsContainerDefault implements
 
 		for (int i = 0; i < prizesNumber; i++) {
 			final GuiElementPrize guiElementPrize = new GuiElementPrize(
-					atlasRows.get(0)[0], 0, this, i * 25 + 5, 0);
+					getObjectsTextureChanger(), atlasRows.get(0)[0], 0, this,
+					i * 25 + 5, 0);
 			availablePrizes.add(guiElementPrize);
 		}
 

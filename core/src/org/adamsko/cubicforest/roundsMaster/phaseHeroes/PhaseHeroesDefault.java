@@ -105,9 +105,9 @@ public class PhaseHeroesDefault extends PhaseOrderableObjectsDefault implements
 	@Override
 	public void issueOrder(final WorldObject phaseObject,
 			final TilePath tilePath) {
+		getOrdersMaster().resetHighlight();
 		ordersMaster.startOrder(getCurrentObject(), tilePath, this);
 		setTilePathActive(NullTilePath.instance());
-		getOrdersMaster().resetHighlight();
 	}
 
 	@Override

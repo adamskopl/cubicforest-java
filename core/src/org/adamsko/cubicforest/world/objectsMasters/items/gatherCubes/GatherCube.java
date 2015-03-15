@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
+import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
@@ -9,9 +10,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class GatherCube extends CubicObject {
 
-	public GatherCube(final TextureRegion tr, final int texNum,
+	public GatherCube(final ObjectsTextureChanger objectsTextureChanger,
+			final TextureRegion tr, final int texNum,
 			final WorldObjectsMasterDefault container) {
-		super(tr, texNum, container, WorldObjectType.GATHERCUBE);
+		super(objectsTextureChanger, tr, texNum, container,
+				WorldObjectType.GATHERCUBE);
 	}
 
 	@Override

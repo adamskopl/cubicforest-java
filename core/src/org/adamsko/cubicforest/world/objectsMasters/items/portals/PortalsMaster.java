@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.portals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -40,8 +41,9 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 			return NullCubicPortal.instance();
 		}
 
-		final Portal portal = new CubicPortal(atlasRows.get(0)[atlasIndex / 2],
-				atlasIndex / 2, this, parentTile);
+		final Portal portal = new CubicPortal(getObjectsTextureChanger(),
+				atlasRows.get(0)[atlasIndex / 2], atlasIndex / 2, this,
+				parentTile);
 		portal.setTextureRegionCubic(cubicTextureRegion);
 		portal.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -11));
@@ -81,11 +83,11 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 	}
 
 	public void portalHighlight(final Portal portal) {
-		portal.setTextureRegion(atlasRows.get(1)[portal.getTexNum()]);
+		portal.visualState().changeState(RenderableObjectVisualState.SELECTED);
 	}
 
 	public void portalUnHighlight(final Portal portal) {
-		portal.setTextureRegion(atlasRows.get(0)[portal.getTexNum()]);
+		portal.visualState().changeState(RenderableObjectVisualState.NORMAL);
 	}
 
 	/**

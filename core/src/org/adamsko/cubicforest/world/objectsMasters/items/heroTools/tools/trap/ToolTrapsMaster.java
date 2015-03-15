@@ -34,7 +34,8 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final HeroToolTrap trap;
-		trap = new HeroToolTrap(atlasRows.get(0)[0], 0, this);
+		trap = new HeroToolTrap(getObjectsTextureChanger(),
+				atlasRows.get(0)[0], 0, this);
 		trap.setTextureRegionCubic(cubicTextureRegion);
 		trap.setState(HeroToolStates.STATE_READY);
 		trap.setRenderVector(new Vector2(

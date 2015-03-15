@@ -1,6 +1,8 @@
 package org.adamsko.cubicforest.render.world.object;
 
 import org.adamsko.cubicforest.render.text.LabelsMaster;
+import org.adamsko.cubicforest.render.world.object.tileDirection.TileDirectionChanger;
+import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChanger;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -14,8 +16,6 @@ import com.badlogic.gdx.math.Vector2;
 public interface RenderableObject extends LabelsMaster {
 
 	RenderableObjectType getRenderType();
-
-	void setRenderType(final RenderableObjectType renderType);
 
 	/**
 	 * Returns vector for which object's image is translated by
@@ -55,5 +55,9 @@ public interface RenderableObject extends LabelsMaster {
 	 * Get object's texture height
 	 */
 	int getTexHeight();
+
+	VisualStateChanger visualState();
+
+	TileDirectionChanger tileDirection();
 
 }

@@ -72,7 +72,8 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
+		final Tile newTile = new CubicTile(tilePos, getObjectsTextureChanger(),
+				atlasRows.get(0)[0], this);
 		newTile.setTextureRegionCubic(cubicTextureRegion);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));

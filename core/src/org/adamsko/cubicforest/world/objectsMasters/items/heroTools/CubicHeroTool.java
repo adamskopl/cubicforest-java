@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 
+import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
@@ -20,10 +21,11 @@ public abstract class CubicHeroTool extends CubicObject implements HeroTool {
 		buildCost = 0;
 	}
 
-	public CubicHeroTool(final TextureRegion tr, final int texNum,
+	public CubicHeroTool(final ObjectsTextureChanger objectsTextureChanger,
+			final TextureRegion tr, final int texNum,
 			final WorldObjectsMaster container,
 			final WorldObjectType worldObjectType) {
-		super(tr, texNum, container, worldObjectType);
+		super(objectsTextureChanger, tr, texNum, container, worldObjectType);
 
 		this.buildCost = HeroesToolsMasterDefault
 				.heroTooltypeToCost(worldObjectType);

@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.render.cubicModel;
 
-import java.util.List;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -14,9 +14,15 @@ public interface CubicModelBuilder {
 	void loadModel(String modelName);
 
 	/**
-	 * Temporary method: get basic texture region for development purposes.
-	 * Model builder is generating single texture region for now.
+	 * Create {@link TextureRegion} from loaded cubes.
+	 * 
+	 * @param tileDirection
+	 *            indicates for which direction texture should be created.
+	 * @param colorName
+	 *            color name indicating texture from which cubes will be loaded.
+	 *            Empty if colors should be taken from loaded cubes.
 	 */
-	List<TextureRegion[]> getAtlasRows();
+	TextureRegion createTextureRegion(TileDirection tileDirection,
+			String colorName);
 
 }

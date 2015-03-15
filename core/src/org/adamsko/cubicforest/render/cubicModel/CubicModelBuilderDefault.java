@@ -12,7 +12,7 @@ import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubePosition;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCubeRenderComparator;
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
-import org.adamsko.cubicforest.world.tile.TilesHelper;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -27,10 +27,8 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 	// original model cubes read from a JSON file
 	private List<CubicJsonCube> modelCubes;
 	// for every direction a different collection of cubes is held
-	private final Map<TilesHelper.TileDirection, List<CubicJsonCube>> modelCubesDirections;
+	private final Map<TileDirection, List<CubicJsonCube>> modelCubesDirections;
 	private final Comparator<CubicJsonCube> cubicJsonCubeRenderComparator;
-
-	private final List<TextureRegion[]> atlasRows;
 
 	public CubicModelBuilderDefault(
 			final CubicTextureController cubicTextureController) {
@@ -38,8 +36,7 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 				cubicTextureController);
 		this.modelCubes = null;
 		this.cubicJsonCubeRenderComparator = new CubicJsonCubeRenderComparator();
-		this.atlasRows = new ArrayList<TextureRegion[]>();
-		this.modelCubesDirections = new HashMap<TilesHelper.TileDirection, List<CubicJsonCube>>();
+		this.modelCubesDirections = new HashMap<TileDirection, List<CubicJsonCube>>();
 	}
 
 	@Override
@@ -62,12 +59,16 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 		}
 		// model loaded, read cubes and sort them
 		loadCubes(this.cubicJsonModel);
-		prepareTextures(modelName);
 	}
 
 	@Override
-	public List<TextureRegion[]> getAtlasRows() {
-		return this.atlasRows;
+	public TextureRegion createTextureRegion(final TileDirection tileDirection,
+			final String colorName) {
+
+		final TextureRegion textureRegion = new TextureRegion(
+				cubicModelTextureBuilder.createTexture(
+						modelCubesDirections.get(tileDirection), colorName));
+		return textureRegion;
 	}
 
 	private void loadCubes(final CubicJsonModel cubicJsonModel) {
@@ -82,8 +83,7 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 
 	private void prepareCubesDirections() {
 		// fill directions map with copies from original model
-		for (final TilesHelper.TileDirection d : TilesHelper.TileDirection
-				.values()) {
+		for (final TileDirection d : TileDirection.values()) {
 			final List<CubicJsonCube> newCubesDir = new ArrayList<CubicJsonCube>();
 			// fill with copies of the original cubes
 			for (final CubicJsonCube cube : modelCubes) {
@@ -93,8 +93,7 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 			modelCubesDirections.put(d, newCubesDir);
 		}
 		// translate cubes depending from direction
-		for (final TilesHelper.TileDirection d : TilesHelper.TileDirection
-				.values()) {
+		for (final TileDirection d : TileDirection.values()) {
 			final List<CubicJsonCube> directionCubes = modelCubesDirections
 					.get(d);
 
@@ -126,12 +125,4 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 		}
 	}
 
-	private void prepareTextures(final String TEMPNAME) {
-		this.atlasRows.add(new TextureRegion(cubicModelTextureBuilder
-				.createTexture(
-						modelCubesDirections.get(TilesHelper.TileDirection.S),
-						TEMPNAME)).split(
-				cubicModelTextureBuilder.getTextureSize(),
-				cubicModelTextureBuilder.getTextureSize())[0]);
-	}
 }

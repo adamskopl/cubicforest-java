@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
@@ -46,8 +47,8 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Hero hero = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex,
-				this);
+		final Hero hero = new Hero(getObjectsTextureChanger(),
+				atlasRows.get(0)[atlasIndex], atlasIndex, this);
 		hero.setTextureRegionCubic(cubicTextureRegion);
 		hero.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
@@ -63,6 +64,10 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 		hero.addLabel(ROLabel.LABEL_NAME);
 		hero.altLabelLast(Color.ORANGE, 1.0f, -10.0f, 10.0f);
 		hero.setVerticalPos(0.3f);
+
+		hero.tileDirection().changeDirection(
+				TileDirection.randomTileDirection());
+
 		return hero;
 	};
 

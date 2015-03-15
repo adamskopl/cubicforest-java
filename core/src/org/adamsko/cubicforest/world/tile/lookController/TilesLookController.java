@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tile.lookController;
 import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.tile.Tile;
 
@@ -14,7 +15,8 @@ public interface TilesLookController extends Nullable {
 			List<WorldObject> otherObjects, Vector2 texCoords2,
 			Vector2 commomTexCoords);
 
-	void changeTilesTexture(List<Tile> tilesToChange, Vector2 texCoords);
+	void changeTilesTexture(List<Tile> tilesToChange,
+			RenderableObjectVisualState objectVisualState);
 
 	void changeTileTexture(Tile tile, Vector2 texCoords);
 

@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.graphics.Color;
@@ -40,7 +41,8 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final HeroToolExit exit;
-		exit = new HeroToolExit(atlasRows.get(0)[0], 0, this);
+		exit = new HeroToolExit(getObjectsTextureChanger(),
+				atlasRows.get(0)[0], 0, this);
 		exit.setTextureRegionCubic(cubicTextureRegion);
 		exit.setState(HeroToolStates.STATE_READY);
 		exit.setRenderVector(new Vector2(
@@ -55,6 +57,9 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 
 		exit.addLabel(exit.getType().toString());
 		exit.altLabelLast(Color.YELLOW, 0.8f, -40.0f, -10.0f);
+
+		exit.tileDirection().changeDirection(
+				TileDirection.randomTileDirection());
 
 		return exit;
 	}

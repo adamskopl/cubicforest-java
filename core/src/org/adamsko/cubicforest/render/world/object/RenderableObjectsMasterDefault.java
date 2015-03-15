@@ -76,7 +76,7 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	protected Texture objectsTexture;
 
-	ObjectsTextureChanger objectsTextureChanger;
+	private ObjectsTextureChanger objectsTextureChanger;
 
 	/**
 	 * Temporary solution. Keep rows of atlas in a list.
@@ -189,6 +189,11 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	public void changeTexture(final RenderableObject object,
 			final Vector2 textureCoordinates) {
 		object.setTextureRegion(atlasRows.get((int) textureCoordinates.x)[(int) textureCoordinates.y]);
+	}
+
+	@Override
+	public ObjectsTextureChanger getObjectsTextureChanger() {
+		return this.objectsTextureChanger;
 	}
 
 }

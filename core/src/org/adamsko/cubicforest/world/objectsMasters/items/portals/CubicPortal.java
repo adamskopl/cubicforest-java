@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.portals;
 
+import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
@@ -19,9 +20,11 @@ class CubicPortal extends CubicObject implements Portal {
 		parentTile = NullCubicTile.instance();
 	}
 
-	CubicPortal(final TextureRegion tr, final int texNum,
+	CubicPortal(final ObjectsTextureChanger objectsTextureChanger,
+			final TextureRegion tr, final int texNum,
 			final WorldObjectsMasterDefault container, final Tile parentTile) {
-		super(tr, texNum, container, WorldObjectType.PORTAL);
+		super(objectsTextureChanger, tr, texNum, container,
+				WorldObjectType.PORTAL);
 		this.parentTile = parentTile;
 	}
 

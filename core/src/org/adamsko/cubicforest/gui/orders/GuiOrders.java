@@ -18,14 +18,14 @@ public class GuiOrders extends GuiElementsContainerDefault {
 	private void createGui() {
 
 		GuiElementOrder elementOrder = new GuiElementOrder(
-				GuiOrdersType_e.ORDER_ACCEPT, atlasRows.get(1)[0], 0, this,
-				640, 0);
+				GuiOrdersType_e.ORDER_ACCEPT, getObjectsTextureChanger(),
+				atlasRows.get(1)[0], 0, this, 640, 0);
 		elementOrder.setRenderVector(new Vector2(0, -100));
 
 		addGuiElement(elementOrder);
 
 		elementOrder = new GuiElementOrder(GuiOrdersType_e.ORDER_CANCEL,
-				atlasRows.get(1)[1], 1, this, 0, 0);
+				getObjectsTextureChanger(), atlasRows.get(1)[1], 1, this, 0, 0);
 		elementOrder.setRenderVector(new Vector2(0, -100));
 
 		addGuiElement(elementOrder);

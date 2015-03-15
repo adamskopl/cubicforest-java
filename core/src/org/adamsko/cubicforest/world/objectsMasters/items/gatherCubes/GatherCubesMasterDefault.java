@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -48,7 +49,8 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final GatherCube gatherCube;
-		gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
+		gatherCube = new GatherCube(getObjectsTextureChanger(),
+				atlasRows.get(0)[0], 0, this);
 		gatherCube.setTextureRegionCubic(cubicTextureRegion);
 		gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -2));
@@ -91,11 +93,13 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public void cubeHighlight(final GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(1)[cube.getTexNum()]);
+		cube.visualState().changeState(RenderableObjectVisualState.SELECTED);
 	}
 
 	@Override
 	public void cubeUnHighlight(final GatherCube cube) {
 		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
+		cube.visualState().changeState(RenderableObjectVisualState.NORMAL);
 	}
 
 	@Override

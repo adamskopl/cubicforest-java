@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.adamsko.cubicforest.helpTools.ConditionalLog;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.NullCubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -149,9 +150,13 @@ class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 			return;
 		}
 		if (tileOrderValid) {
+			tilePickedOrder.visualState().changeState(
+					RenderableObjectVisualState.SELECTED);
 			tilesLookController.changeTileTexture(tilePickedOrder,
 					textureTileMovementValidChoice);
 		} else {
+			tilePickedOrder.visualState().changeState(
+					RenderableObjectVisualState.SELECTED_FAIL);
 			tilesLookController.changeTileTexture(tilePickedOrder,
 					textureTileMovementInvalidChoice);
 		}

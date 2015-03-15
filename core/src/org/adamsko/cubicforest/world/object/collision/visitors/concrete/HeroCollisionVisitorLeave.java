@@ -1,9 +1,11 @@
 package org.adamsko.cubicforest.world.object.collision.visitors.concrete;
 
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.HeroToolExit;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
@@ -31,6 +33,13 @@ public class HeroCollisionVisitorLeave extends CollisionVisitorDefault {
 	}
 
 	@Override
+	public void visitToolExit(final HeroToolExit heroToolExit) {
+		super.visitToolExit(heroToolExit);
+		heroToolExit.visualState().changeState(
+				RenderableObjectVisualState.NORMAL);
+	}
+
+	@Override
 	public void visitPortal(final Portal portal) {
 		super.visitPortal(portal);
 		portalsMaster.portalUnHighlight(portal);
@@ -40,6 +49,7 @@ public class HeroCollisionVisitorLeave extends CollisionVisitorDefault {
 	public void visitPrize(final Prize prize) {
 		super.visitPrize(prize);
 		prizesMaster.prizeUnHighlight(prize);
+		prize.visualState().changeState(RenderableObjectVisualState.NORMAL);
 	}
 
 }

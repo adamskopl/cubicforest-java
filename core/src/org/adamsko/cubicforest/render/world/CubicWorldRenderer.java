@@ -195,7 +195,7 @@ public class CubicWorldRenderer implements GameRenderer {
 	private void renderROMs() {
 		updateList(renderableObjectsMastersWorld, renderListMasterWorld);
 		updateList(renderableObjectsMastersGui, renderListMasterGui);
-		renderList(renderListMasterWorld);
+		// renderList(renderListMasterWorld);
 		renderList(renderListMasterGui);
 
 		// RENDER WITH TEMP CUBIC TECHNIQUE

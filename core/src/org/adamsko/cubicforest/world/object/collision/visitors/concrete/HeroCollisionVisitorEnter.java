@@ -1,11 +1,12 @@
 package org.adamsko.cubicforest.world.object.collision.visitors.concrete;
 
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.collision.handler.CollisionsHandler;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCube;
 import org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes.GatherCubesMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.HeroToolOrange;
-import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.trap.HeroToolTrap;
+import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools.exit.HeroToolExit;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.PortalsMaster;
 import org.adamsko.cubicforest.world.objectsMasters.items.prizes.Prize;
@@ -32,8 +33,10 @@ public class HeroCollisionVisitorEnter extends CollisionVisitorDefault {
 	}
 
 	@Override
-	public void visitToolTrap(final HeroToolTrap heroToolTrap) {
-		super.visitToolTrap(heroToolTrap);
+	public void visitToolExit(final HeroToolExit heroToolExit) {
+		super.visitToolExit(heroToolExit);
+		heroToolExit.visualState().changeState(
+				RenderableObjectVisualState.SELECTED);
 	}
 
 	@Override
@@ -52,5 +55,6 @@ public class HeroCollisionVisitorEnter extends CollisionVisitorDefault {
 	public void visitPrize(final Prize prize) {
 		super.visitPrize(prize);
 		prizesMaster.prizeHighlight(prize);
+		prize.visualState().changeState(RenderableObjectVisualState.SELECTED);
 	}
 }

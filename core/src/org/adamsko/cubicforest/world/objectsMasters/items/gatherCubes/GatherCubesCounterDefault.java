@@ -75,7 +75,8 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 	private void createGui() {
 
 		GuiElement testObject;
-		testObject = new GuiElementDefault(atlasRows.get(0)[3], 0, this, 0, 0);
+		testObject = new GuiElementDefault(getObjectsTextureChanger(),
+				atlasRows.get(0)[3], 0, this, 0, 0);
 		testObject.addLabel(counter);
 		testObject.altLabelLast(Color.WHITE, 1.0f, 30.0f, 20.0f);
 		addGuiElement(testObject);

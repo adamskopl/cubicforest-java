@@ -10,6 +10,7 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
@@ -46,7 +47,8 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Prize prize = new CubicPrize(atlasRows.get(0)[0], 0, this);
+		final Prize prize = new CubicPrize(getObjectsTextureChanger(),
+				atlasRows.get(0)[0], 0, this);
 		prize.setTextureRegionCubic(cubicTextureRegion);
 		prize.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2 - 3, -5));
@@ -57,6 +59,10 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 		prize.setVerticalPos(0.2f);
 
 		prize.setName("prize");
+
+		prize.tileDirection().changeDirection(
+				TileDirection.randomTileDirection());
+
 		return prize;
 	}
 

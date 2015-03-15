@@ -2,8 +2,10 @@ package org.adamsko.cubicforest.world.tilePathsMaster;
 
 import org.adamsko.cubicforest.world.object.accessor.WorldObjectAccessor;
 import org.adamsko.cubicforest.world.tile.Tile;
+import org.adamsko.cubicforest.world.tile.TileDirection;
 import org.adamsko.cubicforest.world.tile.TilesHelper;
 import org.adamsko.cubicforest.world.tile.TilesHelper.TilesConnection_e;
+import org.adamsko.cubicforest.world.tile.Vector2TileDirectionStruct;
 import org.adamsko.cubicforest.world.tilePathsMaster.TilePathGuideDefault.GuideStage_e;
 
 import com.badlogic.gdx.math.Vector2;
@@ -35,6 +37,11 @@ public class TilePathGuideHelper {
 	 */
 	private TilesConnection_e currentConn;
 
+	/**
+	 * Tile direction for guided object: changed during recalculations.
+	 */
+	private TileDirection tileDirection;
+
 	protected TilePathGuideHelper() {
 		tileHeadingFrom = null;
 		tileHeadingTo = null;
@@ -42,6 +49,7 @@ public class TilePathGuideHelper {
 		// tweenTarget = 0.0f;
 		tweenMoveTarget = new Vector2();
 		currentConn = TilesConnection_e.NONE;
+		this.tileDirection = TileDirection.NULL;
 	}
 
 	/**
@@ -76,17 +84,18 @@ public class TilePathGuideHelper {
 		currentConn = TilesHelper.getConnectionType(tileHeadingFrom,
 				tileHeadingTo);
 
-		final Vector2 edgePosition = TilesHelper.getPosBetween(tileHeadingFrom,
-				tileHeadingTo);
+		final Vector2TileDirectionStruct edgePosition = TilesHelper
+				.getPosBetween(tileHeadingFrom, tileHeadingTo);
+		tileDirection = edgePosition.tileDirection;
 
 		tweenType = WorldObjectAccessor.TILESPOS_XY;
 		// based on connection type between tiles, set Tween variables
 		if (currentConn == TilesConnection_e.HORIZONTAL) {
-			tweenMoveTarget.x = edgePosition.x;
-			tweenMoveTarget.y = edgePosition.y + 0.5f;
+			tweenMoveTarget.x = edgePosition.vector2.x;
+			tweenMoveTarget.y = edgePosition.vector2.y + 0.5f;
 		} else if (currentConn == TilesConnection_e.VERTICAL) {
-			tweenMoveTarget.x = edgePosition.x + 0.5f;
-			tweenMoveTarget.y = edgePosition.y;
+			tweenMoveTarget.x = edgePosition.vector2.x + 0.5f;
+			tweenMoveTarget.y = edgePosition.vector2.y;
 		} else if (currentConn == TilesConnection_e.PORTAL) {
 			// temporary: first stage of moving, is to fly up
 			tweenMoveTarget.x = tileHeadingFrom.getTilesPosX() - 2.0f;
@@ -160,6 +169,13 @@ public class TilePathGuideHelper {
 
 	protected Tile getTileHeadingTo() {
 		return tileHeadingTo;
+	}
+
+	/**
+	 * @return current tile direction changed during recalculations
+	 */
+	public TileDirection getTileDirection() {
+		return tileDirection;
 	}
 
 }

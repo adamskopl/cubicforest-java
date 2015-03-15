@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.gui;
 
 import org.adamsko.cubicforest.render.world.object.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectType;
+import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,10 +21,11 @@ public class GuiElementDefault extends RenderableObjectDefault implements
 	 */
 	private final Vector2 elementContainerPos;
 
-	public GuiElementDefault(final TextureRegion tr, final int texNum,
+	public GuiElementDefault(final ObjectsTextureChanger objectsTextureChanger,
+			final TextureRegion tr, final int texNum,
 			final GuiElementsContainer pareContainer, final float posX,
 			final float posY) {
-		super(tr, texNum);
+		super(objectsTextureChanger, tr, texNum);
 		this.renderType = RenderableObjectType.TYPE_GUI;
 
 		this.parentContainer = pareContainer;

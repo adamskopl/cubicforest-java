@@ -3,6 +3,7 @@ package org.adamsko.cubicforest.world.tile.lookController;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.Tile;
@@ -50,12 +51,13 @@ public class TilesRangeTextureChanger {
 			addTilesToGroupAndCommon(othersTilesInRange);
 		}
 
-		tilesLookController.changeTilesTexture(objectTilesInRange, texCoords1);
+		tilesLookController.changeTilesTexture(objectTilesInRange,
+				RenderableObjectVisualState.ALLOWED);
 		// uncomment to highlight enemies range
 		// tilesLookController.changeTilesTexture(groupTilesInRange,
 		// texCoords2);
 		tilesLookController.changeTilesTexture(commonTilesInRange,
-				commomTexCoords);
+				RenderableObjectVisualState.ALLOWED2);
 	}
 
 	/**

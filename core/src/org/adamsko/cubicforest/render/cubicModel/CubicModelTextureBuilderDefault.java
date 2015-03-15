@@ -35,8 +35,8 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 	}
 
 	@Override
-	public Texture createTexture(final List<CubicJsonCube> modelCubes,
-			final String TEMPNAME) {
+	public TextureRegion createTexture(final List<CubicJsonCube> modelCubes,
+			final String desiredCubesColor) {
 
 		final Pixmap modelPixmap = new Pixmap(textureSize, textureSize,
 				cubicTextureController.getPixelFormat());
@@ -56,8 +56,13 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 			dstX += (y + x) * calcA;
 			dstY += (x - y) * calcB - z * calcC;
 
-			final Pixmap singleCubePixmap = prepareSingleCubePixmap(cube
-					.getColName());
+			final String colorName;
+			if (desiredCubesColor.isEmpty()) {
+				colorName = cube.getColName();
+			} else {
+				colorName = desiredCubesColor;
+			}
+			final Pixmap singleCubePixmap = prepareSingleCubePixmap(colorName);
 			singleCubePixmap.setColor(Color.RED);
 			modelPixmap.drawPixmap(singleCubePixmap, (int) dstX, (int) dstY, 0,
 					0, cubicTextureController.getCubeTexW(),
@@ -66,7 +71,7 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 		}
 
 		final Texture modelTexture = new Texture(modelPixmap);
-		return modelTexture;
+		return new TextureRegion(modelTexture);
 	}
 
 	@Override
