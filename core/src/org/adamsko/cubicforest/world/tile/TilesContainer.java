@@ -87,6 +87,11 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 	}
 
 	public void addTile(final Vector2 tilePos) {
+		if (contains(tilePos)) {
+			Gdx.app.error(getName() + "::addTile",
+					"there is already tile on the " + tilePos.toString());
+			return;
+		}
 		final WorldObject newTile = factoryMethod(tilePos);
 		super.getWorldObjects().add(newTile);
 		super.getRenderableObjects(ROListType_e.RO_ALL).add(newTile);

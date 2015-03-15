@@ -14,6 +14,7 @@ import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class WorldObjectsMasterDefault extends
 		RenderableObjectsMasterDefault implements WorldObjectsMaster {
@@ -120,6 +121,12 @@ public abstract class WorldObjectsMasterDefault extends
 
 	@Override
 	public void addObject(final WorldObject worldObject) {
+		if (contains(worldObject.getTilesPos())) {
+			Gdx.app.error(getName() + "::addObject", "there is already "
+					+ worldObject.getName() + " on the "
+					+ worldObject.getTilesPos().toString());
+			return;
+		}
 		worldObjects.add(worldObject);
 		addRenderableObject(worldObject);
 		// associate newObject with a tile (every WorldObject is associated with
@@ -127,7 +134,18 @@ public abstract class WorldObjectsMasterDefault extends
 		tilesMaster.addWorldObject(worldObject);
 	}
 
-	public boolean containsObject(final WorldObject object) {
+	@Override
+	public boolean contains(final Vector2 objectPos) {
+		for (final WorldObject worldObject : worldObjects) {
+			if (worldObject.getTilesPos().equals(objectPos)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean contains(final WorldObject object) {
 		return worldObjects.contains(object);
 	}
 

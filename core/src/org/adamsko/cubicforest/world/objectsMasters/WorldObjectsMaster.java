@@ -34,6 +34,10 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 
 	void addObject(final WorldObject worldObject);
 
+	public boolean contains(final WorldObject object);
+
+	public boolean contains(final Vector2 objectPos);
+
 	void removeObjectFromContainer(final WorldObject objectRemove);
 
 	void removeObjectFromTile(final WorldObject objectRemove);
