@@ -24,9 +24,9 @@ import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer20;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * 
+ *
  * @author adamsko
- * 
+ *
  */
 public class CubicWorldRenderer implements GameRenderer {
 
@@ -76,6 +76,7 @@ public class CubicWorldRenderer implements GameRenderer {
 		renderROMs();
 
 		batch.end();
+		fps.log();
 
 	}
 
@@ -135,6 +136,7 @@ public class CubicWorldRenderer implements GameRenderer {
 		// managed correctly
 		// Gdx.app.debug(renderList.getName(),
 		// Integer.toString(renderList.size()));
+
 	}
 
 	private void renderObject(final RenderableObject rObj) {
