@@ -1,7 +1,9 @@
 package org.adamsko.cubicforest.helpTools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 
@@ -9,15 +11,25 @@ import com.badlogic.gdx.Gdx;
  * Conditional logging class: using {@link Gdx} logging. Allows to turn on/off
  * logging in external classes.
  */
-public class ConditionalLog {
+/**
+ *
+ */
+public class CLog {
 
 	/**
-	 * List of classes using {@link ConditionalLog} class.
+	 * List of classes using {@link CLog} class.
 	 */
 	private static List<LogObject> logObjects;
 
-	public ConditionalLog() {
+	/**
+	 * List of messages reported by given LogObject, which will not be printed
+	 * again with '*single' methods
+	 */
+	private static Map<Object, List<String>> singleLoggedMessages;
+
+	public CLog() {
 		logObjects = new ArrayList<LogObject>();
+		singleLoggedMessages = new HashMap<Object, List<String>>();
 	}
 
 	public static void addObject(final Object newObject, final String objectName) {
@@ -29,7 +41,7 @@ public class ConditionalLog {
 
 	/**
 	 * Set conditional logging for given object.
-	 * 
+	 *
 	 * @param switchedObject
 	 *            Object for witch switch is performed.
 	 * @param use
@@ -47,7 +59,7 @@ public class ConditionalLog {
 
 	/**
 	 * Check if given object is set to be used.
-	 * 
+	 *
 	 * @param switchedObject
 	 *            checked object
 	 * @return true if given object is using conditional log
@@ -71,9 +83,36 @@ public class ConditionalLog {
 	}
 
 	/**
+	 * Prints error and stop printing the next time, when message will be
+	 * reported by errorSingle again.
+	 *
+	 * WARNING: if class is using errorSingle to constantly report something,
+	 * then every 'errorSingle' is comparing String every time.
+	 *
+	 * In release version, error Single should not be used.
+	 */
+	public static void errorSingle(final Object loggedObject,
+			final String message) {
+
+		List<String> singleMList;
+
+		if (!singleLoggedMessages.containsKey(loggedObject)) {
+			singleMList = new ArrayList<String>();
+			singleLoggedMessages.put(loggedObject, singleMList);
+		} else {
+			singleMList = singleLoggedMessages.get(loggedObject);
+		}
+
+		if (!singleMList.contains(message)) {
+			singleMList.add(message);
+			error(loggedObject, message);
+		}
+	}
+
+	/**
 	 * Help method for {@link #debug(Object, String)} and
 	 * {@link #error(Object, String)}
-	 * 
+	 *
 	 * @param errorMessage
 	 *            true if printed message is an error
 	 */
@@ -111,7 +150,7 @@ public class ConditionalLog {
 
 	/**
 	 * Check if given {@link Object} is on the loggingObjects list.
-	 * 
+	 *
 	 * @param checkedObject
 	 *            checked object
 	 */
