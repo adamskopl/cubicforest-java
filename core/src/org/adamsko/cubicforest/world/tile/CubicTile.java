@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
-import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.world.object.CubicObject;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectState;
@@ -33,14 +33,16 @@ public class CubicTile extends CubicObject implements Tile {
 		portal = null;
 	}
 
-	public CubicTile(final Vector2 coords,
-			final ObjectsTextureChanger objectsTextureChanger,
-			final TextureRegion tr, final WorldObjectsMasterDefault container) {
-		super(objectsTextureChanger, tr, 0, container, WorldObjectType.DEFAULT);
+	public CubicTile(final Vector2 coords, final TextureRegion tr,
+			final WorldObjectsMasterDefault container) {
+		super(tr, 0, container, WorldObjectType.DEFAULT);
 		this.tilesPos = coords;
 
 		occupants = new ArrayList<WorldObject>();
 		portal = NullCubicPortal.instance();
+
+		CLog.addObject(this, "CubicTile " + coords.toString());
+		CLog.setUsage(this, false);
 	}
 
 	@Override
@@ -123,6 +125,7 @@ public class CubicTile extends CubicObject implements Tile {
 
 	@Override
 	public void refreshTexture() {
+		CLog.debug(this, "refreshTexture");
 		if (isTileHighlightedAsOccupied()) {
 			visualState().changeState(RenderableObjectVisualState.BLOCKED);
 			getParentContainer().changeTexture(this, new Vector2(2, 1));

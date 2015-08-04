@@ -5,6 +5,7 @@ import java.util.List;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroToolStates;
 import org.adamsko.cubicforest.world.tile.TileDirection;
@@ -43,7 +44,7 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 		final HeroToolExit exit;
 		exit = new HeroToolExit(getObjectsTextureChanger(),
 				atlasRows.get(0)[0], 0, this);
-		exit.setTextureRegionCubic(cubicTextureRegion);
+		exit.setTexturesManager(getTexturesManager(), WorldObjectType.TOOLEXIT);
 		exit.setState(HeroToolStates.STATE_READY);
 		exit.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2 + 2, -11));

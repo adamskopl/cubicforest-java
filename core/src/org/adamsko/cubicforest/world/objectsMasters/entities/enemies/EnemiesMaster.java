@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.TileDirection;
@@ -43,11 +44,11 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Enemy enemy = new Enemy(getObjectsTextureChanger(),
-				atlasRows.get(0)[atlasIndex], atlasIndex, this);
+		final Enemy enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex,
+				this);
+		enemy.setTexturesManager(getTexturesManager(), WorldObjectType.ENEMY);
 		enemy.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
-		enemy.setTextureRegionCubic(cubicTextureRegion);
 		enemy.setRenderVectorCubic(new Vector2(-40.0f, -23.0f));
 
 		enemy.setSpeed(5);

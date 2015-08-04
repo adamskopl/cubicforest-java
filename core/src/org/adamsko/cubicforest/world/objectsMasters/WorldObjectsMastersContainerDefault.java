@@ -8,10 +8,11 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoDefaul
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureControllerDefault;
+import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.NullCollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
@@ -37,6 +38,8 @@ public class WorldObjectsMastersContainerDefault implements
 	private CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
 	private CubicTextureController cubicTextureController;
 
+	private TexturesManager texturesManager;
+
 	private GameRenderer gameRenderer;
 
 	private TilesMaster tilesMaster;
@@ -52,10 +55,11 @@ public class WorldObjectsMastersContainerDefault implements
 		worldObjectsMasters = null;
 	}
 
-	public WorldObjectsMastersContainerDefault(final GameRenderer renderer) {
+	public WorldObjectsMastersContainerDefault(final GameRenderer renderer,
+			final TexturesManager texturesManager) {
 		worldObjectsMasters = new ArrayList<WorldObjectsMaster>();
 		this.gameRenderer = renderer;
-		this.cubicTextureController = new CubicTextureControllerDefault();
+		this.texturesManager = texturesManager;
 		initMasters();
 	}
 
@@ -68,27 +72,32 @@ public class WorldObjectsMastersContainerDefault implements
 
 		terrainObjectsMaster = new TerrainMaster(tilesMaster,
 				"terrain-atlas-medium", 42, 50);
-		terrainObjectsMaster.initCubicModel(cubicTextureController);
+		terrainObjectsMaster.setTexturesManager(texturesManager);
+
+		texturesManager.loadTextures(WorldObjectType.TREE);
 		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30,
 				35);
-		heroesMaster.initCubicModel(cubicTextureController);
+		heroesMaster.setTexturesManager(texturesManager);
+		texturesManager.loadTextures(WorldObjectType.HERO);
 		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",
 				30, 35);
-		enemiesMaster.initCubicModel(cubicTextureController);
+		enemiesMaster.setTexturesManager(texturesManager);
+		texturesManager.loadTextures(WorldObjectType.ENEMY);
 		gatherCubesMaster = new GatherCubesMasterDefault(tilesMaster,
 				"cubes-atlas-medium", 25, 40);
-		gatherCubesMaster.initCubicModel(cubicTextureController);
+		gatherCubesMaster.setTexturesManager(texturesManager);
+		texturesManager.loadTextures(WorldObjectType.GATHERCUBE);
 
 		heroesToolsMaster = new HeroesToolsMasterDefault(tilesMaster,
 				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
 
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
-		portalsMaster.initCubicModel(cubicTextureController);
+		portalsMaster.setTexturesManager(texturesManager);
 
 		prizesMaster = new PrizesMasterDefault(tilesMaster,
 				"prizes-atlas-medium", 25, 35);
-		prizesMaster.initCubicModel(cubicTextureController);
+		prizesMaster.setTexturesManager(texturesManager);
 
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles
@@ -259,7 +268,8 @@ public class WorldObjectsMastersContainerDefault implements
 	}
 
 	private void initTilesMaster() {
-		tilesMaster = new TilesMasterDefault(100, cubicTextureController);
+		tilesMaster = new TilesMasterDefault(100, cubicTextureController,
+				texturesManager);
 	}
 
 	@Override

@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.adamsko.cubicforest.gui.prizes.GuiPrizes;
 import org.adamsko.cubicforest.gui.prizes.GuiPrizesDefault;
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.TileDirection;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
@@ -37,8 +38,8 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 		this.prizesStartNumber = 0;
 		this.prizesCollected = 0;
 
-		ConditionalLog.addObject(this, "PrizesMasterDefault");
-		ConditionalLog.setUsage(this, true);
+		CLog.addObject(this, "PrizesMasterDefault");
+		CLog.setUsage(this, true);
 	}
 
 	@Override
@@ -47,9 +48,8 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Prize prize = new CubicPrize(getObjectsTextureChanger(),
-				atlasRows.get(0)[0], 0, this);
-		prize.setTextureRegionCubic(cubicTextureRegion);
+		final Prize prize = new CubicPrize(atlasRows.get(0)[0], 0, this);
+		prize.setTexturesManager(getTexturesManager(), WorldObjectType.PRIZE);
 		prize.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2 - 3, -5));
 		prize.setRenderVectorCubic(new Vector2(-35.0f, -23.0f));
@@ -128,7 +128,7 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 			Gdx.app.error("PrizesMasterDefault::setMemento()",
 					"prizesCollected < 0");
 		}
-		ConditionalLog.debug(
+		CLog.debug(
 				this,
 				"setMemento, collected:"
 						+ Integer.toString(this.prizesCollected));

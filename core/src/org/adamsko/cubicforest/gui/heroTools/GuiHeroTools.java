@@ -41,7 +41,7 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		}
 	}
 
-	private void createGui() {
+	public void createGui() {
 
 		availableGuiTools = new ArrayList<GuiElementHeroTool>();
 
@@ -56,8 +56,9 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		for (final WorldObjectType type : types) {
 
 			final GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
-					type, getObjectsTextureChanger(), atlasRows.get(0)[seqNum],
-					0, this, seqNum * 70, 0);
+					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 70, 0);
+			guiElementHeroTool.setTexturesManager(getTexturesManager(),
+					WorldObjectType.ENEMY);
 
 			guiElementHeroTool.addLabel(HeroesToolsMasterDefault
 					.heroTooltypeToCost(type));

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.GuiElement;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.render.text.Label;
+import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.render.world.object.RenderableObject;
-import org.adamsko.cubicforest.render.world.object.RenderableObjectType;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMasterDefault.ROListType_e;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
@@ -18,7 +19,6 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer20;
 import com.badlogic.gdx.math.Vector2;
@@ -32,7 +32,7 @@ public class CubicWorldRenderer implements GameRenderer {
 
 	OrthographicCamera cam;
 
-	private CoordCalc coordCalcX;
+	private CoordCalc coordCalc;
 
 	List<RenderableObjectsMaster> renderableObjectsMastersWorld;
 	List<RenderableObjectsMaster> renderableObjectsMastersGui;
@@ -62,6 +62,9 @@ public class CubicWorldRenderer implements GameRenderer {
 		this.cam.position.set(390, -230, 0);
 		renderableObjectsMastersWorld = new ArrayList<RenderableObjectsMaster>();
 		renderableObjectsMastersGui = new ArrayList<RenderableObjectsMaster>();
+
+		CLog.addObject(this, "CubicWorldRenderer");
+		CLog.setUsage(this, true);
 	}
 
 	@Override
@@ -76,13 +79,13 @@ public class CubicWorldRenderer implements GameRenderer {
 		renderROMs();
 
 		batch.end();
-		fps.log();
+		// fps.log();
 
 	}
 
 	@Override
 	public void setCoordCalc(final CoordCalc coordCalcX) {
-		this.coordCalcX = coordCalcX;
+		this.coordCalc = coordCalcX;
 	}
 
 	@Override
@@ -144,15 +147,41 @@ public class CubicWorldRenderer implements GameRenderer {
 		case TYPE_WORLD:
 			final WorldObject wObj = (WorldObject) rObj;
 			final Vector2 objPos = wObj.getTilesPos();
-			Vector2 renderPos = coordCalcX.tilesToRender(objPos);
+			final Vector2 renderPos = coordCalc.tilesToRender(objPos);
 			renderPos.add(rObj.getRenderVector());
 			batch.draw(rObj.getTextureRegion(), renderPos.x, renderPos.y);
+			break;
+		case TYPE_GUI:
+			// final GuiElement gObj = (GuiElement) rObj;
+			// renderPos = gObj.getScreenPos();
+			// renderPos.add(gObj.getRenderVector());
+			// batch.draw(gObj.getTextureRegion(), renderPos.x, renderPos.y);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void renderObjectCubic(final RenderableObject rObj) {
+		final CTextureRegion cubicTextureRegion = rObj.getTextureRegionCubic();
+		if (cubicTextureRegion.isNull()) {
+			CLog.errorSingle(this, "null texture>=1");
+			return;
+		}
+		switch (rObj.getRenderType()) {
+		case TYPE_WORLD:
+			final WorldObject wObj = (WorldObject) rObj;
+			final Vector2 objPos = wObj.getTilesPos();
+			Vector2 renderPos = coordCalc.tilesToRender(objPos);
+			renderPos = coordCalc.tilesToRender(objPos);
+			renderPos.add(rObj.getRenderVectorCubic());
+			batch.draw(cubicTextureRegion, renderPos.x, renderPos.y);
 			break;
 		case TYPE_GUI:
 			final GuiElement gObj = (GuiElement) rObj;
 			renderPos = gObj.getScreenPos();
 			renderPos.add(gObj.getRenderVector());
-			batch.draw(gObj.getTextureRegion(), renderPos.x, renderPos.y);
+			batch.draw(cubicTextureRegion, renderPos.x, renderPos.y);
 			break;
 		default:
 			break;
@@ -161,19 +190,18 @@ public class CubicWorldRenderer implements GameRenderer {
 
 	private void renderObjectsLabels(final RenderableObject rObj) {
 
-		Vector2 renderPos = new Vector2();
+		Vector2 renderPos = null;
 
 		switch (rObj.getRenderType()) {
 		case TYPE_WORLD:
 			final WorldObject wObj = (WorldObject) rObj;
 			final Vector2 objPos = wObj.getTilesPos();
-			renderPos = coordCalcX.tilesToRender(objPos);
+			renderPos = coordCalc.tilesToRender(objPos);
 
 			break;
 		case TYPE_GUI:
 			final GuiElement gObj = (GuiElement) rObj;
-			renderPos = new Vector2(gObj.getScreenPos().x,
-					gObj.getScreenPos().y);
+			renderPos = gObj.getScreenPos();
 			break;
 		default:
 			break;
@@ -197,29 +225,26 @@ public class CubicWorldRenderer implements GameRenderer {
 	private void renderROMs() {
 		updateList(renderableObjectsMastersWorld, renderListMasterWorld);
 		updateList(renderableObjectsMastersGui, renderListMasterGui);
-		// renderList(renderListMasterWorld);
-		renderList(renderListMasterGui);
-
-		// RENDER WITH TEMP CUBIC TECHNIQUE
-		for (final RenderableObject rObj : renderListMasterWorld.get()) {
-			if (rObj.getRenderType() == RenderableObjectType.TYPE_WORLD) {
-				final WorldObject wObj = (WorldObject) rObj;
-				final Vector2 objPos = wObj.getTilesPos();
-				Vector2 renderPos = coordCalcX.tilesToRender(objPos);
-				final TextureRegion cubicTextureRegion = rObj
-						.getTextureRegionCubic();
-				if (cubicTextureRegion != null) {
-					renderPos = coordCalcX.tilesToRender(objPos);
-					renderPos.add(rObj.getRenderVectorCubic());
-					batch.draw(cubicTextureRegion, renderPos.x, renderPos.y);
-				}
-			}
-		}
+		renderListCubic(renderListMasterWorld);
+		renderListCubic(renderListMasterGui);
 	}
 
 	private void renderList(final RenderList renderListMaster) {
 		for (final RenderableObject rObj : renderListMaster.get()) {
 			renderObject(rObj);
+		}
+		/*
+		 * Labels are rendered in the end: so they are not covered by
+		 * RenderableObject objects
+		 */
+		for (final RenderableObject rObj : renderListMaster.get()) {
+			renderObjectsLabels(rObj);
+		}
+	}
+
+	private void renderListCubic(final RenderList renderListMaster) {
+		for (final RenderableObject rObj : renderListMaster.get()) {
+			renderObjectCubic(rObj);
 		}
 		/*
 		 * Labels are rendered in the end: so they are not covered by

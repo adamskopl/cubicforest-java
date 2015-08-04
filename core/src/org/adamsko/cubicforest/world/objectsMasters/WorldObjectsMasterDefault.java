@@ -17,7 +17,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class WorldObjectsMasterDefault extends
-		RenderableObjectsMasterDefault implements WorldObjectsMaster {
+RenderableObjectsMasterDefault implements WorldObjectsMaster {
 
 	private List<WorldObject> worldObjects;
 	private TilesMaster tilesMaster;
@@ -26,22 +26,9 @@ public abstract class WorldObjectsMasterDefault extends
 		super(0);
 	}
 
-	public WorldObjectsMasterDefault(final String name,
-			final TilesMaster tilesMaster, final String textureName,
-			final int tileW, final int tileH) {
-
-		super(name, "", textureName, tileW, tileH);
-		this.tilesMaster = tilesMaster;
-		worldObjects = new ArrayList<WorldObject>();
-	}
-
-	/**
-	 * Constructor for masters using cubes models.
-	 */
 	public WorldObjectsMasterDefault(final String name, final String modelName,
 			final TilesMaster tilesMaster, final String textureName,
 			final int tileW, final int tileH) {
-
 		super(name, modelName, textureName, tileW, tileH);
 		this.tilesMaster = tilesMaster;
 		worldObjects = new ArrayList<WorldObject>();
@@ -54,7 +41,7 @@ public abstract class WorldObjectsMasterDefault extends
 
 	/**
 	 * Get {@link WorldObject} objects.
-	 * 
+	 *
 	 * @return {@link WorldObject} objects list.
 	 */
 	@Override
@@ -73,7 +60,7 @@ public abstract class WorldObjectsMasterDefault extends
 		}
 		for (final WorldObject worldObject : getWorldObjects()) {
 			worldObject
-					.initCollisionVisitorsManager(collisionVisitorsManagerFactory);
+			.initCollisionVisitorsManager(collisionVisitorsManagerFactory);
 		}
 	}
 

@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.mapsResolver.roundDecisions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.NullGameSnapshotMemento;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
@@ -92,11 +92,11 @@ public class RoundDecisions implements DecisionsComponent {
 			decisionsString = decisionsString.concat(dString + ",");
 		}
 
-		ConditionalLog.addObject(this,
+		CLog.addObject(this,
 				"RoundDecisions " + Integer.toString(getHeight()) + ","
 						+ Integer.toString(startingSnapshot.getTempId()));
-		ConditionalLog.setUsage(this, true);
-		ConditionalLog.debug(this, toString());
+		CLog.setUsage(this, true);
+		CLog.debug(this, toString());
 
 	}
 
@@ -124,7 +124,7 @@ public class RoundDecisions implements DecisionsComponent {
 		// check if memento was resolved
 		if (roundDecisionsAggregate
 				.isMementoResolved(snapshotAfterPreviousDecision)) {
-			ConditionalLog.debug(
+			CLog.debug(
 					this,
 					"solved snapshot: "
 							+ Integer.toString(snapshotAfterPreviousDecision
@@ -178,7 +178,7 @@ public class RoundDecisions implements DecisionsComponent {
 		 */
 		latestDecision = possibleDecisions.remove(0);
 
-		ConditionalLog.debug(this, "issuing " + latestDecision.toString()
+		CLog.debug(this, "issuing " + latestDecision.toString()
 				+ " remained " + Integer.toString(possibleDecisions.size()));
 
 		client.resolveDecision(latestDecision);
@@ -233,7 +233,7 @@ public class RoundDecisions implements DecisionsComponent {
 			return;
 		}
 
-		ConditionalLog.debug(
+		CLog.debug(
 				this,
 				"setSnapshotAfterDecision "
 						+ Integer.toString(snapshotAfterPreviousDecision

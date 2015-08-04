@@ -8,13 +8,14 @@ import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectV
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.TilesMaster;
 
 import com.badlogic.gdx.math.Vector2;
 
 public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
-		implements GatherCubesMaster {
+implements GatherCubesMaster {
 
 	private GatherCubesCounter gatherCubesCounter;
 
@@ -49,9 +50,9 @@ public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final GatherCube gatherCube;
-		gatherCube = new GatherCube(getObjectsTextureChanger(),
-				atlasRows.get(0)[0], 0, this);
-		gatherCube.setTextureRegionCubic(cubicTextureRegion);
+		gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
+		gatherCube.setTexturesManager(getTexturesManager(),
+				WorldObjectType.GATHERCUBE);
 		gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -2));
 		gatherCube.setRenderVectorCubic(new Vector2(-37.0f, -23.0f));

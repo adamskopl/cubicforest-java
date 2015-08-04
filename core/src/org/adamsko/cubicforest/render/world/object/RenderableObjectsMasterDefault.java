@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
+import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
+import org.adamsko.cubicforest.render.texturesManager.NullTexturesManager;
+import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChangerDefault;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
@@ -30,7 +33,7 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	/**
 	 * Types of {@link RenderableObject} objects lists in container.
-	 * 
+	 *
 	 * @author adamsko
 	 */
 	public enum ROListType_e {
@@ -38,12 +41,7 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		 * list with {@link RenderableObject} objects, that are not in
 		 * {@link RenderList} yet
 		 */
-		RO_UNSERVED,
-		/**
-		 * list with {@link RenderableObject} objects that are already in
-		 * {@link RenderList} and need to be updated (render order recalculated)
-		 */
-		RO_TO_UPDATE, RO_TO_REMOVE,
+		RO_UNSERVED, RO_TO_REMOVE,
 		/**
 		 * list with all {@link RenderableObject} objects in container
 		 */
@@ -64,19 +62,12 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	 */
 	private List<RenderableObject> renderableObjectsUnserved;
 
-	/**
-	 * List of {@link RenderableObject}. Indicates which objects from
-	 * renderableObjects objects should be updated (sorted) in
-	 * {@link RenderList}. The purpose is to separate objects needing to be
-	 * updated from those staying unchanged.
-	 */
-	private List<RenderableObject> renderableObjectsToUpdate;
-
 	private List<RenderableObject> renderableObjectsToRemove;
 
 	protected Texture objectsTexture;
 
 	private ObjectsTextureChanger objectsTextureChanger;
+	private TexturesManager texturesManager;
 
 	/**
 	 * Temporary solution. Keep rows of atlas in a list.
@@ -86,9 +77,10 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	/**
 	 * Temporary texture region for an experimental cubic texture.
 	 */
-	protected TextureRegion cubicTextureRegion;
+	protected CTextureRegion cubicTextureRegion;
 
 	public RenderableObjectsMasterDefault(final int nullConstructor) {
+		this.texturesManager = null;
 	}
 
 	/**
@@ -108,6 +100,8 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		this.tileW = tileW;
 		this.tileH = tileH;
 
+		this.texturesManager = NullTexturesManager.instance();
+
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		renderableObjectsToRemove = new ArrayList<RenderableObject>();
@@ -119,7 +113,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		// old way of generating textures
 		this.objectsTexture = new Texture(Gdx.files.internal("data/"
 				+ this.textureName + ".png"));
-
 		final int rowsNum = this.objectsTexture.getHeight() / this.tileH;
 		this.atlasRows = new ArrayList<TextureRegion[]>();
 		for (int i = 0; i < rowsNum; i++) {
@@ -133,8 +126,18 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 			final CubicTextureController cubicTextureController) {
 		this.objectsTextureChanger = new ObjectsTextureChangerDefault(
 				this.modelName, cubicTextureController);
-		this.cubicTextureRegion = objectsTextureChanger
-				.tempGetCubicTextureRegion();
+		// this.cubicTextureRegion = objectsTextureChanger
+		// .tempGetCubicTextureRegion();
+	}
+
+	@Override
+	public void setTexturesManager(final TexturesManager texturesManager) {
+		this.texturesManager = texturesManager;
+	}
+
+	@Override
+	public TexturesManager getTexturesManager() {
+		return this.texturesManager;
 	}
 
 	public void addRenderableObject(final RenderableObject newObject) {
@@ -153,10 +156,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	@Override
 	public List<RenderableObject> getRenderableObjects(final ROListType_e type) {
 		switch (type) {
-		case RO_TO_UPDATE: {
-			return renderableObjectsToUpdate;
-		}
-
 		case RO_UNSERVED: {
 			return renderableObjectsUnserved;
 		}

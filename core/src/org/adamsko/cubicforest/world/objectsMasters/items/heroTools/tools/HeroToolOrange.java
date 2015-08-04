@@ -1,6 +1,5 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.heroTools.tools;
 
-import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMaster;
@@ -10,11 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class HeroToolOrange extends CubicHeroTool {
 
-	public HeroToolOrange(final ObjectsTextureChanger objectsTextureChanger,
-			final TextureRegion tr, final int texNum,
+	public HeroToolOrange(final TextureRegion tr, final int texNum,
 			final WorldObjectsMaster container) {
-		super(objectsTextureChanger, tr, texNum, container,
-				WorldObjectType.TOOLORANGE);
+		super(tr, texNum, container, WorldObjectType.TOOLORANGE);
 
 	}
 

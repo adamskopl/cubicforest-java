@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * 
+ *
  */
 public class CubicTextureControllerDefault implements CubicTextureController {
 
@@ -31,7 +31,6 @@ public class CubicTextureControllerDefault implements CubicTextureController {
 	 * For {@link NullCubicTextureController}
 	 */
 	public CubicTextureControllerDefault(final boolean nullContructor) {
-
 	}
 
 	public CubicTextureControllerDefault() {

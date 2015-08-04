@@ -6,11 +6,11 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 
 import com.badlogic.gdx.Gdx;
@@ -19,16 +19,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TilesContainer extends WorldObjectsMasterDefault {
 
-	public TilesContainer(final String name, final TilesMaster tilesMaster,
-			final CubicTextureController cubicTextureController) {
+	public TilesContainer(final String name, final TilesMaster tilesMaster) {
 		super("TilesContainer", "tile", tilesMaster, "tiles-atlas-medium", 75,
 				45);
-		initCubicModel(cubicTextureController);
 	}
 
 	/**
 	 * Search Tiles for one containing given tilePosition.
-	 * 
+	 *
 	 * @param tilePos
 	 *            tilePosition of the searched Tile
 	 * @return Tile which contains tilePos position. null if Tile not found
@@ -45,7 +43,7 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 
 	/**
 	 * Search Tiles for one containing given tilePosition.
-	 * 
+	 *
 	 * @param tilePos
 	 *            tilePosition of the searched Tile
 	 * @return Tile which contains tilePos position. null if Tile not found
@@ -72,9 +70,8 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Tile newTile = new CubicTile(tilePos, getObjectsTextureChanger(),
-				atlasRows.get(0)[0], this);
-		newTile.setTextureRegionCubic(cubicTextureRegion);
+		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
+		newTile.setTexturesManager(getTexturesManager(), WorldObjectType.TILE);
 		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects (should be rendered

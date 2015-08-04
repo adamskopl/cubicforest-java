@@ -19,8 +19,7 @@ public class GuiDebug extends GuiElementsContainerDefault {
 	private void createGui() {
 
 		final GuiElementDebug elementDebug = new GuiElementDebug(
-				GuiDebugType.DEBUG_RELOAD, getObjectsTextureChanger(),
-				atlasRows.get(0)[0], 0, this, 0, 0);
+				GuiDebugType.DEBUG_RELOAD, atlasRows.get(0)[0], 0, this, 0, 0);
 		elementDebug.setRenderVector(new Vector2(0, 0));
 		elementDebug.addLabel("R");
 		elementDebug.altLabelLast(Color.WHITE, 1.0f, 20.0f, 32.0f);

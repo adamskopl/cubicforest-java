@@ -4,7 +4,7 @@ public class NullCubicObject extends CubicObject {
 
 	private static NullCubicObject instance = null;
 
-	public NullCubicObject() {
+	private NullCubicObject() {
 		super();
 	}
 

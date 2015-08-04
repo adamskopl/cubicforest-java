@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.world.objectsMasters.items.gatherCubes;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMementoStateDefault;
 
@@ -14,10 +14,10 @@ public class GatherCubesMementoState extends WOMMementoStateDefault {
 		super(gatherCubesMaster);
 		counter = new Vector2(gatherCubesMaster.getGatherCubesCounter()
 				.getCounter(), 0);
-		ConditionalLog.addObject(this, "GatherCubesMementoState");
-		ConditionalLog.setUsage(this, false);
+		CLog.addObject(this, "GatherCubesMementoState");
+		CLog.setUsage(this, false);
 
-		ConditionalLog.debug(this, Float.toString(counter.x));
+		CLog.debug(this, Float.toString(counter.x));
 	}
 
 	public Vector2 getCounter() {

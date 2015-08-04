@@ -1,17 +1,17 @@
 package org.adamsko.cubicforest;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.screens.GameScreen;
 
 import com.badlogic.gdx.Game;
 
 public class Cubicforest extends Game {
 
-	private ConditionalLog conditionalLog;
+	private CLog conditionalLog;
 
 	@Override
 	public void create() {
-		conditionalLog = new ConditionalLog();
+		conditionalLog = new CLog();
 		setScreen(new GameScreen(this));
 	}
 

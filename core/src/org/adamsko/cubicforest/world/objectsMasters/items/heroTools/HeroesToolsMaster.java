@@ -43,7 +43,7 @@ public interface HeroesToolsMaster extends WorldObjectsMaster,
 
 	/**
 	 * Check if given tile has a {@link HeroTool}.
-	 * 
+	 *
 	 * @param tile
 	 *            check tile
 	 * @return true, if tile contains a hero tool

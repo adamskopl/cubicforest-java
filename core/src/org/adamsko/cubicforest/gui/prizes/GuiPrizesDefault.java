@@ -10,7 +10,7 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import com.badlogic.gdx.Gdx;
 
 public class GuiPrizesDefault extends GuiElementsContainerDefault implements
-		GuiPrizes {
+GuiPrizes {
 
 	private int prizesCollected;
 	// holds all gui elements representing collected prizes. when prize is
@@ -60,8 +60,7 @@ public class GuiPrizesDefault extends GuiElementsContainerDefault implements
 
 		for (int i = 0; i < prizesNumber; i++) {
 			final GuiElementPrize guiElementPrize = new GuiElementPrize(
-					getObjectsTextureChanger(), atlasRows.get(0)[0], 0, this,
-					i * 25 + 5, 0);
+					atlasRows.get(0)[0], 0, this, i * 25 + 5, 0);
 			availablePrizes.add(guiElementPrize);
 		}
 

@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.render.cubicModel.jsonLoader;
 
 import java.util.List;
 
-public class CubicJsonModel {
+public class CubicGsonModel {
 
 	private String name;
 	private List<CubicJsonFrame> frames;

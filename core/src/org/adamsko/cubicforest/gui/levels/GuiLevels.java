@@ -19,7 +19,7 @@ public class GuiLevels extends GuiElementsContainerDefault {
 		createGui(mapsLoader);
 	}
 
-	private void createGui(final MapsLoader mapsLoader) {
+	public void createGui(final MapsLoader mapsLoader) {
 		if (mapsLoader.isNull()) {
 			Gdx.app.error("GuiLevels::createGui()", "mapsLoader.isNull()");
 			return;
@@ -36,8 +36,7 @@ public class GuiLevels extends GuiElementsContainerDefault {
 			}
 
 			final GuiElementLevel guiElementLevel = new GuiElementLevel(i,
-					getObjectsTextureChanger(), atlasRows.get(0)[0], 0, this,
-					posX, posY);
+					atlasRows.get(0)[0], 0, this, posX, posY);
 
 			if (activeLevel == i) {
 				higlightButton(guiElementLevel);

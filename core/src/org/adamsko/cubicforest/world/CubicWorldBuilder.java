@@ -11,6 +11,9 @@ import org.adamsko.cubicforest.players.PlayersControllerDefault;
 import org.adamsko.cubicforest.players.resolver.MapsResolver;
 import org.adamsko.cubicforest.players.resolver.MapsResolverDefault;
 import org.adamsko.cubicforest.players.resolver.NullMapsResolver;
+import org.adamsko.cubicforest.render.texturesManager.NullTexturesManager;
+import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
+import org.adamsko.cubicforest.render.texturesManager.TexturesManagerDefault;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalc;
 import org.adamsko.cubicforest.render.world.coordCalc.CoordCalcDefault;
@@ -47,6 +50,7 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 
 	private CoordCalc coordCalc;
 
+	private final TexturesManager texturesManager;
 	private WorldObjectsMastersContainer worldObjectsMastersContainer;
 
 	private TilePathSearchersMaster tilePathSearchersMaster;
@@ -66,9 +70,11 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 
 	// for NullCubicWorldBuilder
 	CubicWorldBuilder(final int nullConstructor) {
+		texturesManager = NullTexturesManager.instance();
 	}
 
 	public CubicWorldBuilder() {
+		texturesManager = new TexturesManagerDefault();
 		initNullables();
 	}
 
@@ -92,14 +98,14 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 	@Override
 	public void initWorldObjectsMastersContainer(final GameRenderer renderer) {
 		this.worldObjectsMastersContainer = new WorldObjectsMastersContainerDefault(
-				renderer);
+				renderer, texturesManager);
 	}
 
 	@Override
 	public void setWorldObjectsMastersContainerCVMF(
 			final CollisionVisitorsManagerFactory collisionVisitorsManagerFactory) {
 		this.worldObjectsMastersContainer
-				.setCollisionVisitorsManagerFactory(collisionVisitorsManagerFactory);
+		.setCollisionVisitorsManagerFactory(collisionVisitorsManagerFactory);
 	}
 
 	@Override
@@ -133,7 +139,7 @@ public class CubicWorldBuilder implements GameWorldBuilder {
 			return;
 		}
 
-		guiMaster.initializeContainers(mapsLoader);
+		guiMaster.initializeContainers(mapsLoader, texturesManager);
 
 		guiMaster.addGui(gatherCubesMaster.getGatherCubesCounter());
 		guiMaster.addGui(prizesMaster.getGuiPrizes());

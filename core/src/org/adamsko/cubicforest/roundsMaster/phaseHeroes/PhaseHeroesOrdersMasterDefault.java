@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.NullCubicObject;
@@ -61,8 +61,8 @@ class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 
 		initTextures();
 
-		ConditionalLog.addObject(this, "PhaseHeroesOrdersMasterDefault");
-		ConditionalLog.setUsage(this, true);
+		CLog.addObject(this, "PhaseHeroesOrdersMasterDefault");
+		CLog.setUsage(this, false);
 
 	}
 
@@ -149,6 +149,9 @@ class PhaseHeroesOrdersMasterDefault implements PhaseHeroesOrdersMaster {
 		if (tilePickedOrder.isNull()) {
 			return;
 		}
+
+		CLog.debug(this, "highlightPickedTile");
+
 		if (tileOrderValid) {
 			tilePickedOrder.visualState().changeState(
 					RenderableObjectVisualState.SELECTED);

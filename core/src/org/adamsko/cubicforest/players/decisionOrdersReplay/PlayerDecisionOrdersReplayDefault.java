@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.players.decisionOrdersReplay;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsIterator;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecision;
@@ -34,8 +34,8 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 		this.orderDecisionsIterator = NullOrderDecisionsIterator.instance();
 		this.tilesMaster = tilesMaster;
 
-		ConditionalLog.addObject(this, "PlayerDecisionOrdersReplayDefault");
-		ConditionalLog.setUsage(this, true);
+		CLog.addObject(this, "PlayerDecisionOrdersReplayDefault");
+		CLog.setUsage(this, true);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class PlayerDecisionOrdersReplayDefault extends PlayerBase implements
 
 		final OrderDecision orderDecision = this.orderDecisionsIterator
 				.currentItem();
-		if (ConditionalLog.checkUsage(this)) {
+		if (CLog.checkUsage(this)) {
 			this.aggregateReplayed.debugPrint();
 		}
 

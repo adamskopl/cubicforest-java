@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
+import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.pickmaster.PickMasterClient;
 
 /**
  * Manages {@link GuiElementsContainer} objects.
- * 
+ *
  * @author adamsko
- * 
+ *
  */
 public interface GuiMaster extends PickMasterClient, Nullable {
 
@@ -23,10 +24,11 @@ public interface GuiMaster extends PickMasterClient, Nullable {
 
 	/**
 	 * Initialize GuiMaster's {@link GuiElementsContainer} objects
-	 * 
+	 *
 	 * @param mapsLoader
 	 */
-	void initializeContainers(final MapsLoader mapsLoader);
+	void initializeContainers(final MapsLoader mapsLoader,
+			TexturesManager texturesManager);
 
 	/**
 	 * Receives new GUI elements container. From now this container is managed

@@ -9,6 +9,7 @@ import org.adamsko.cubicforest.gui.levels.GuiLevels;
 import org.adamsko.cubicforest.gui.orders.GuiOrders;
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
 import org.adamsko.cubicforest.gui.resolver.GuiResolverDefault;
+import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 
@@ -44,9 +45,11 @@ public class GuiMasterDefault implements GuiMaster {
 	}
 
 	@Override
-	public void initializeContainers(final MapsLoader mapsLoader) {
+	public void initializeContainers(final MapsLoader mapsLoader,
+			final TexturesManager texturesManager) {
 		this.guiHeroTools = new GuiHeroTools("tools-atlas-medium", 40, 42, 25,
 				-50);
+		guiHeroTools.setTexturesManager(texturesManager);
 
 		this.guiOrders = new GuiOrders("orders-atlas-medium", 100, 100, 20,
 				-340);
@@ -89,7 +92,7 @@ public class GuiMasterDefault implements GuiMaster {
 			final Vector2 inputTilesPos) {
 
 		/*
-		 * 
+		 *
 		 * 1. search for clicked GUI 2. pass clicked gui to clients
 		 */
 		for (final GuiElementsContainer guiContainer : guiList) {

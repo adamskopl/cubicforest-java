@@ -44,7 +44,7 @@ public abstract class GuiElementsContainerDefault extends
 
 	@Override
 	public Vector2 getContainerScreenPos() {
-		return new Vector2(containerScreenPos);
+		return containerScreenPos;
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public abstract class GuiElementsContainerDefault extends
 
 	/**
 	 * Check if any of the gui elements is clicked.
-	 * 
+	 *
 	 * @param screenPos
 	 * @return is any of the children clicked?
 	 */
@@ -83,7 +83,7 @@ public abstract class GuiElementsContainerDefault extends
 
 	/**
 	 * Override if container is reacting itself on an element click.
-	 * 
+	 *
 	 * @param clickedElement
 	 */
 	protected void guiElementClicked(final GuiElement clickedElement) {

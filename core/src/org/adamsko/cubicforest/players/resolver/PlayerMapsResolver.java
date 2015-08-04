@@ -2,7 +2,7 @@ package org.adamsko.cubicforest.players.resolver;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.mapsResolver.gameSnapshot.GameMemento;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionDefault;
 import org.adamsko.cubicforest.mapsResolver.roundDecisions.RoundDecisionsIterator;
@@ -30,8 +30,8 @@ public class PlayerMapsResolver extends PlayerBase implements
 		this.mapsResolver = mapsResolver;
 		this.tilesMaster = tilesMaster;
 
-		ConditionalLog.addObject(this, "PlayerMapsResolver");
-		ConditionalLog.setUsage(this, false);
+		CLog.addObject(this, "PlayerMapsResolver");
+		CLog.setUsage(this, false);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class PlayerMapsResolver extends PlayerBase implements
 
 		if (roundDecisionsIterator.isDone()) {
 			// resolver is done
-			ConditionalLog.debug(this, "iterator is done");
+			CLog.debug(this, "iterator is done");
 			getPlayersController().switchPlayerUser();
 		} else {
 			roundDecisionsIterator.next().makeNextDecision(

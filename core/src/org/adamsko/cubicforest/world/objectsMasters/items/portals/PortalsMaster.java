@@ -7,6 +7,7 @@ import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectV
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.Tile;
 import org.adamsko.cubicforest.world.tile.TilesContainer;
@@ -41,10 +42,9 @@ public class PortalsMaster extends WorldObjectsMasterDefault {
 			return NullCubicPortal.instance();
 		}
 
-		final Portal portal = new CubicPortal(getObjectsTextureChanger(),
-				atlasRows.get(0)[atlasIndex / 2], atlasIndex / 2, this,
-				parentTile);
-		portal.setTextureRegionCubic(cubicTextureRegion);
+		final Portal portal = new CubicPortal(atlasRows.get(0)[atlasIndex / 2],
+				atlasIndex / 2, this, parentTile);
+		portal.setTexturesManager(getTexturesManager(), WorldObjectType.PORTAL);
 		portal.setRenderVector(new Vector2(-atlasRows.get(0)[0]
 				.getRegionWidth() / 2, -11));
 		portal.setRenderVectorCubic(new Vector2(-35.0f, -23.0f));

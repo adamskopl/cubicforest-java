@@ -6,6 +6,7 @@ import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledObjectType;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.ordersMaster.OrderableObjectsContainer;
 import org.adamsko.cubicforest.world.tile.TileDirection;
@@ -47,9 +48,9 @@ public class HeroesMaster extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Hero hero = new Hero(getObjectsTextureChanger(),
-				atlasRows.get(0)[atlasIndex], atlasIndex, this);
-		hero.setTextureRegionCubic(cubicTextureRegion);
+		final Hero hero = new Hero(atlasRows.get(0)[atlasIndex], atlasIndex,
+				this);
+		hero.setTexturesManager(getTexturesManager(), WorldObjectType.HERO);
 		hero.setRenderVector(new Vector2(
 				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
 

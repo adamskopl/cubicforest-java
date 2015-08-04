@@ -9,16 +9,16 @@ import com.badlogic.gdx.math.Vector2;
  * Interface for class managing group of {@link GuiElement} objects. Responsible
  * for adding new elements, indicating their screen positions, handling GUI
  * inputs.
- * 
+ *
  * @author adamsko
- * 
+ *
  */
 public interface GuiElementsContainer extends RenderableObjectsMaster {
 
 	/**
 	 * Receive input coordinates and perform actions, if one of the
 	 * {@link GuiElement} objects is clicked.
-	 * 
+	 *
 	 * @param screenPos
 	 *            input screen position
 	 * @return true of one of the gui elements is clicked

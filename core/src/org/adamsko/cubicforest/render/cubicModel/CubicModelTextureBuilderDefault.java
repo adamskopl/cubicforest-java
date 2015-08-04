@@ -2,11 +2,10 @@ package org.adamsko.cubicforest.render.cubicModel;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -30,8 +29,8 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 		this.calcA = 3; // 3,
 		this.calcB = 1.5f; // 2,
 		this.calcC = 4; // 4,
-		ConditionalLog.addObject(this, "CubicModelTextureBuilderDefault");
-		ConditionalLog.setUsage(this, false);
+		CLog.addObject(this, "CubicModelTextureBuilderDefault");
+		CLog.setUsage(this, false);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 
 		final Pixmap modelPixmap = new Pixmap(textureSize, textureSize,
 				cubicTextureController.getPixelFormat());
-		modelPixmap.setColor(Color.RED);
+		// modelPixmap.setColor(Color.RED);
 		// modelPixmap.drawRectangle(1, 1, textureSize - 2, textureSize - 2);
 
 		float x, y, z;
@@ -63,7 +62,7 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 				colorName = desiredCubesColor;
 			}
 			final Pixmap singleCubePixmap = prepareSingleCubePixmap(colorName);
-			singleCubePixmap.setColor(Color.RED);
+			// singleCubePixmap.setColor(Color.RED);
 			modelPixmap.drawPixmap(singleCubePixmap, (int) dstX, (int) dstY, 0,
 					0, cubicTextureController.getCubeTexW(),
 					cubicTextureController.getCubeTexH());
@@ -71,6 +70,7 @@ class CubicModelTextureBuilderDefault implements CubicModelTextureBuilder {
 		}
 
 		final Texture modelTexture = new Texture(modelPixmap);
+		modelPixmap.dispose();
 		return new TextureRegion(modelTexture);
 	}
 

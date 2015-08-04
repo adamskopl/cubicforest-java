@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiResolverDefault extends GuiElementsContainerDefault implements
-		GuiResolver {
+GuiResolver {
 
 	private GuiElementResolver elementStart;
 	private List<GuiElementResolverSolution> solutions;
@@ -40,7 +40,7 @@ public class GuiResolverDefault extends GuiElementsContainerDefault implements
 		availableSolutions = 0;
 
 		elementStart = new GuiElementResolver(GuiResolverType.RESOLVER_START,
-				getObjectsTextureChanger(), atlasRows.get(0)[0], 0, this, 0, 0);
+				atlasRows.get(0)[0], 0, this, 0, 0);
 
 		elementStart.setRenderVector(new Vector2(0, 0));
 		elementStart.addLabel("S");
@@ -51,9 +51,8 @@ public class GuiResolverDefault extends GuiElementsContainerDefault implements
 		solutions = new ArrayList<GuiElementResolverSolution>();
 		for (int i = 0; i < maxSolutions; i++) {
 			final GuiElementResolverSolution guiElementResolverSolution = new GuiElementResolverSolution(
-					i, GuiResolverType.RESOLVER_SOLUTION,
-					getObjectsTextureChanger(), atlasRows.get(0)[0], 0, this,
-					i * 40 + 45, 0);
+					i, GuiResolverType.RESOLVER_SOLUTION, atlasRows.get(0)[0],
+					0, this, i * 40 + 45, 0);
 			guiElementResolverSolution.setRenderVector(new Vector2(0, 0));
 			guiElementResolverSolution.addLabel(i + 1);
 			guiElementResolverSolution.altLabelLast(Color.WHITE, 1.0f, 10.0f,

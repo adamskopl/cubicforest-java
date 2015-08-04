@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.world.object;
 import org.adamsko.cubicforest.render.text.ROLabel;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectType;
-import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManager;
 import org.adamsko.cubicforest.world.object.collision.visitors.CollisionVisitorsManagerDefault;
 import org.adamsko.cubicforest.world.object.collision.visitors.NullCollisionVisitorsManagerDefault;
@@ -19,12 +18,12 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * FIXME: object is too big, method implementations should be passed to special
  * classes.
- * 
+ *
  * @author adamsko
- * 
+ *
  */
 public abstract class CubicObject extends RenderableObjectDefault implements
-		WorldObject {
+WorldObject {
 
 	private final WorldObjectType type;
 	private WorldObjectState state;
@@ -64,7 +63,7 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 	 * {@link CollisionVisitorsManagerDefault} is invoked recursively.
 	 */
 	protected CubicObject() {
-		super(null, null, 0);
+		super(null, 0);
 		this.parentContainer = null;
 		this.collisionVisitorsManager = null;
 		this.type = WorldObjectType.DEFAULT;
@@ -72,10 +71,9 @@ public abstract class CubicObject extends RenderableObjectDefault implements
 		this.state = WorldObjectState.ALIVE;
 	}
 
-	public CubicObject(final ObjectsTextureChanger objectsTextureChanger,
-			final TextureRegion tr, final int texNum,
+	public CubicObject(final TextureRegion tr, final int texNum,
 			final WorldObjectsMaster container, final WorldObjectType type) {
-		super(objectsTextureChanger, tr, texNum);
+		super(tr, texNum);
 
 		this.parentContainer = container;
 

@@ -13,8 +13,7 @@ public class HeroToolExit extends CubicHeroTool {
 	public HeroToolExit(final ObjectsTextureChanger objectsTextureChanger,
 			final TextureRegion tr, final int texNum,
 			final WorldObjectsMaster container) {
-		super(objectsTextureChanger, tr, texNum, container,
-				WorldObjectType.TOOLEXIT);
+		super(tr, texNum, container, WorldObjectType.TOOLEXIT);
 	}
 
 	@Override

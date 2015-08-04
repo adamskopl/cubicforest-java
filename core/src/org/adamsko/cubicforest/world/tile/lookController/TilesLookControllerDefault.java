@@ -2,6 +2,7 @@ package org.adamsko.cubicforest.world.tile.lookController;
 
 import java.util.List;
 
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.render.world.object.RenderableObject;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
@@ -37,6 +38,9 @@ public class TilesLookControllerDefault implements TilesLookController {
 		this.tilesRangeTextureChanger = new TilesRangeTextureChanger(
 				tilesMaster, this);
 		this.tilesContainer = tilesMaster.getTilesContainer();
+
+		CLog.addObject(this, "TilesLookController");
+		CLog.setUsage(this, false);
 	}
 
 	@Override
@@ -48,6 +52,8 @@ public class TilesLookControllerDefault implements TilesLookController {
 	public void changeTilesTexture(final List<Tile> tilesToChange,
 			final RenderableObjectVisualState objectVisualState) {
 		for (final Tile tile : tilesToChange) {
+			CLog.debug(this, "changeTilesTexture"
+					+ tile.getTilesPos().toString());
 			tile.visualState().changeState(objectVisualState);
 			// renderableMasterTiles.changeTexture(tile, texCoords);
 		}

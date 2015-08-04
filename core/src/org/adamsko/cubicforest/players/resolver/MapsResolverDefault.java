@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.gui.resolver.GuiResolver;
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.NullOrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregate;
 import org.adamsko.cubicforest.mapsResolver.orderDecisions.OrderDecisionsAggregateDefault;
@@ -57,8 +57,8 @@ public class MapsResolverDefault implements MapsResolver {
 
 		resolverIsWorking = false;
 
-		ConditionalLog.addObject(this, "MapsResolverDefault");
-		ConditionalLog.setUsage(this, true);
+		CLog.addObject(this, "MapsResolverDefault");
+		CLog.setUsage(this, true);
 	}
 
 	@Override
@@ -100,9 +100,9 @@ public class MapsResolverDefault implements MapsResolver {
 					.currentItem().getLatestDecision());
 		} while (!victoriousIterator.isLast());
 
-		ConditionalLog.debug(this,
+		CLog.debug(this,
 				"victoryConditionsMet " + Boolean.toString(prizesCollected));
-		if (ConditionalLog.checkUsage(this)) {
+		if (CLog.checkUsage(this)) {
 			victoriousOrderDecisionsAggregate.debugPrint();
 		}
 

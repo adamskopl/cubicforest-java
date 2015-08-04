@@ -4,7 +4,7 @@ import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.gui.GuiElementDefault;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.objectsMasters.items.heroTools.HeroesToolsMasterDefault;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class GatherCubesCounterDefault extends GuiElementsContainerDefault
-		implements GatherCubesCounter {
+implements GatherCubesCounter {
 
 	private final Vector2 counter;
 	private int startingValue;
@@ -27,8 +27,8 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 
 		createGui();
 
-		ConditionalLog.addObject(this, "GatherCubesCounterDefault");
-		ConditionalLog.setUsage(this, false);
+		CLog.addObject(this, "GatherCubesCounterDefault");
+		CLog.setUsage(this, false);
 	}
 
 	@Override
@@ -75,8 +75,7 @@ public class GatherCubesCounterDefault extends GuiElementsContainerDefault
 	private void createGui() {
 
 		GuiElement testObject;
-		testObject = new GuiElementDefault(getObjectsTextureChanger(),
-				atlasRows.get(0)[3], 0, this, 0, 0);
+		testObject = new GuiElementDefault(atlasRows.get(0)[3], 0, this, 0, 0);
 		testObject.addLabel(counter);
 		testObject.altLabelLast(Color.WHITE, 1.0f, 30.0f, 20.0f);
 		addGuiElement(testObject);

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
+import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
@@ -28,7 +30,7 @@ import com.badlogic.gdx.math.Vector2;
  * Y 0 1 2 <br>
  * | 3 4 5 <br>
  * V 6 7 8 <br>
- * 
+ *
  * @author adamsko
  */
 // FIXME: interface needed
@@ -36,9 +38,9 @@ public class TilesMasterDefault implements TilesMaster {
 
 	/**
 	 * Event types connected with a {@link Tile}.
-	 * 
+	 *
 	 * @author adamsko
-	 * 
+	 *
 	 */
 	public enum TileCollisionType {
 		/**
@@ -76,12 +78,13 @@ public class TilesMasterDefault implements TilesMaster {
 	}
 
 	public TilesMasterDefault(final int mapSize,
-			final CubicTextureController cubicTextureController) {
+			final CubicTextureController cubicTextureController,
+			final TexturesManager texturesManager) {
 		this.mapSize = mapSize;
 		this.clients = new ArrayList<TilePickClient>();
 		this.tilesEventsHandler = NullTilesEventsHandler.instance();
 		TilesHelper.setMapSize(mapSize);
-		initTiles(cubicTextureController);
+		initTiles(texturesManager);
 		tilesSearcher = new TilesSearcherDefault(this);
 		tilesLookController = new TilesLookControllerDefault(this,
 				getTilesContainer());
@@ -203,10 +206,11 @@ public class TilesMasterDefault implements TilesMaster {
 		}
 	}
 
-	private void initTiles(final CubicTextureController cubicTextureController) {
+	private void initTiles(final TexturesManager texturesManager) {
 
-		tilesContainer = new TilesContainer("tiles container", this,
-				cubicTextureController);
+		tilesContainer = new TilesContainer("tiles container", this);
+		tilesContainer.setTexturesManager(texturesManager);
+		texturesManager.loadTextures(WorldObjectType.TILE);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);

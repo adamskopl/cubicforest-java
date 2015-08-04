@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.adamsko.cubicforest.render.cubicModel.jsonLoader.CubicJsonModel;
+import org.adamsko.cubicforest.render.cubicModel.jsonLoader.CubicGsonModel;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubePosition;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCubeRenderComparator;
@@ -23,9 +23,6 @@ import com.google.gson.JsonSyntaxException;
 public class CubicModelBuilderDefault implements CubicModelBuilder {
 
 	private final CubicModelTextureBuilder cubicModelTextureBuilder;
-	private CubicJsonModel cubicJsonModel;
-	// original model cubes read from a JSON file
-	private List<CubicJsonCube> modelCubes;
 	// for every direction a different collection of cubes is held
 	private final Map<TileDirection, List<CubicJsonCube>> modelCubesDirections;
 	private final Comparator<CubicJsonCube> cubicJsonCubeRenderComparator;
@@ -34,7 +31,6 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 			final CubicTextureController cubicTextureController) {
 		this.cubicModelTextureBuilder = new CubicModelTextureBuilderDefault(
 				cubicTextureController);
-		this.modelCubes = null;
 		this.cubicJsonCubeRenderComparator = new CubicJsonCubeRenderComparator();
 		this.modelCubesDirections = new HashMap<TileDirection, List<CubicJsonCube>>();
 	}
@@ -50,15 +46,22 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 		}
 		final String fileString = fileHandle.readString();
 		try {
-			this.cubicJsonModel = new Gson().fromJson(fileString,
-					CubicJsonModel.class);
+			CubicGsonModel cubicGsonModel = new Gson().fromJson(fileString,
+					CubicGsonModel.class);
+
+			List<CubicJsonCube> modelCubes = cubicGsonModel.getFrames().get(0)
+					.getGroups().get(0).getCubes();
+
+			prepareCubesDirections(modelCubes);
+
+			cubicGsonModel = null;
+			modelCubes = null;
+
 		} catch (final JsonSyntaxException ex) {
 			Gdx.app.error("CubicModelBuilderDefault::loadModel()",
 					ex.toString());
 			return;
 		}
-		// model loaded, read cubes and sort them
-		loadCubes(this.cubicJsonModel);
 	}
 
 	@Override
@@ -71,17 +74,7 @@ public class CubicModelBuilderDefault implements CubicModelBuilder {
 		return textureRegion;
 	}
 
-	private void loadCubes(final CubicJsonModel cubicJsonModel) {
-		modelCubes = cubicJsonModel.getFrames().get(0).getGroups().get(0)
-				.getCubes();
-
-		prepareCubesDirections();
-
-		// sort cubes: sorted list indicates the render order
-		Collections.sort(modelCubes, cubicJsonCubeRenderComparator);
-	}
-
-	private void prepareCubesDirections() {
+	private void prepareCubesDirections(final List<CubicJsonCube> modelCubes) {
 		// fill directions map with copies from original model
 		for (final TileDirection d : TileDirection.values()) {
 			final List<CubicJsonCube> newCubesDir = new ArrayList<CubicJsonCube>();

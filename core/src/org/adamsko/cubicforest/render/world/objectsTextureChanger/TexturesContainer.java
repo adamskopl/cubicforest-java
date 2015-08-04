@@ -13,7 +13,7 @@ interface TexturesContainer {
 
 	/**
 	 * Add texture to the container.
-	 * 
+	 *
 	 * @param objectVisualState
 	 *            visual state of an object for which added texture will be
 	 *            used. Every state a have number of textures equal to tile
@@ -31,7 +31,7 @@ interface TexturesContainer {
 			TileDirection tileDirection);
 
 	/**
-	 * Check if container contains textures for given vistual state.
+	 * Check if container contains textures for given visual state.
 	 */
 	boolean containsTextures(RenderableObjectVisualState objectVisualState);
 

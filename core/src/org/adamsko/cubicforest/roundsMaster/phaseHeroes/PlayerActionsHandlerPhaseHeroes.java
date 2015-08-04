@@ -1,6 +1,6 @@
 package org.adamsko.cubicforest.roundsMaster.phaseHeroes;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.roundsMaster.PlayerActionsHandlerPhase;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.NullCubicTile;
@@ -13,8 +13,8 @@ class PlayerActionsHandlerPhaseHeroes extends PlayerActionsHandlerPhase {
 
 	PlayerActionsHandlerPhaseHeroes(final PhaseHeroes phaseHeroes) {
 		this.phaseHeroes = phaseHeroes;
-		ConditionalLog.addObject(this, "PlayerActionsHandlerPhaseHeroes");
-		ConditionalLog.setUsage(this, true);
+		CLog.addObject(this, "PlayerActionsHandlerPhaseHeroes");
+		CLog.setUsage(this, true);
 	}
 
 	@Override

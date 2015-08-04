@@ -3,7 +3,7 @@ package org.adamsko.cubicforest.world.objectsMasters.items.heroTools;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.helpTools.ConditionalLog;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
@@ -28,12 +28,12 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Manages tools built by heroes.
- * 
+ *
  * @author adamsko
- * 
+ *
  */
 public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
-		implements HeroesToolsMaster {
+implements HeroesToolsMaster {
 
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker
@@ -60,7 +60,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 			final GatherCubesMaster gatherCubesMaster,
 			final HeroesMaster heroesMaster, final String textureName,
 			final int tileW, final int tileH) {
-		super("HeroesToolsMaster", TM, textureName, tileW, tileH);
+		super("HeroesToolsMaster", "", TM, textureName, tileW, tileH);
 
 		this.gatherCubesMaster = gatherCubesMaster;
 		heroToolMarker = NullHeroTool.instance();
@@ -70,8 +70,8 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		setToolTypes();
 		mapAvailableTools = new ArrayList<WorldObjectType>();
 
-		ConditionalLog.addObject(this, "HeroesToolsMasterDefault");
-		ConditionalLog.setUsage(this, true);
+		CLog.addObject(this, "HeroesToolsMasterDefault");
+		CLog.setUsage(this, true);
 	}
 
 	@Override
@@ -81,17 +81,17 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 			final CubicTextureController cubicTextureController) {
 		toolTrapsMaster = new ToolTrapsMaster(tilesMaster,
 				"traps-atlas-medium", 40, 45);
-		toolTrapsMaster.initCubicModel(cubicTextureController);
+		toolTrapsMaster.setTexturesManager(getTexturesManager());
 		worldObjectsMastersContainer.addWorldObjectsMaster(toolTrapsMaster);
 		worldObjectsMastersContainer
-				.addRenderableObjectsMaster(toolTrapsMaster);
+		.addRenderableObjectsMaster(toolTrapsMaster);
 
 		toolExitsMaster = new ToolExitsMaster(tilesMaster,
 				"exits-atlas-medium", 40, 45);
-		toolExitsMaster.initCubicModel(cubicTextureController);
+		toolExitsMaster.setTexturesManager(getTexturesManager());
 		worldObjectsMastersContainer.addWorldObjectsMaster(toolExitsMaster);
 		worldObjectsMastersContainer
-				.addRenderableObjectsMaster(toolExitsMaster);
+		.addRenderableObjectsMaster(toolExitsMaster);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 				.factoryMethod(heroToolTilePos);
 		heroToolMarker.setState(HeroToolStates.STATE_CONSTRUCTION);
 		((RenderableObjectsMaster) getToolMaster(heroToolMarkerType))
-				.changeTexture(heroToolMarker, new Vector2(1, 0));
+		.changeTexture(heroToolMarker, new Vector2(1, 0));
 
 		getToolMaster(heroToolMarker.getType()).addObject(heroToolMarker);
 	}
@@ -199,7 +199,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 	/**
 	 * Get {@link WorldObjectsMaster} for specific {@link HeroTool}.
-	 * 
+	 *
 	 * @return
 	 */
 	private WorldObjectsMaster getToolMaster(
