@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
-import org.adamsko.cubicforest.render.world.object.RenderableObject;
-import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
@@ -19,9 +17,9 @@ import com.badlogic.gdx.math.Vector2;
  * Interface for classes managing {@link WorldObjectType} type objects. If there
  * is a new type of world objects, their container should implement this
  * interface.
- * 
+ *
  * @author adamsko
- * 
+ *
  */
 public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	public void update(float deltaTime);
@@ -48,7 +46,7 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	 * Based on {@link CFMap} object informations, load objects. Usually: adding
 	 * objects to {@link TilesMaster} and to the {@link WorldObjectsMaster}
 	 * list.
-	 * 
+	 *
 	 * @param cfMap
 	 *            {@link CFMap} object containing data about {@link WorldObject}
 	 *            objects to be loaded
@@ -56,12 +54,12 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	 */
 	void loadMapObjects(CFMap cfMap) throws Exception;
 
-/**
+	/**
 	 * Based on tiles positions, load objects. <br>
 	 * Created for {@link #setMemento(WOMMemento)}. The assumption is, that
 	 * effect of loading should be the same as with
 	 * {@link #loadMapObjects(CFMap)!
-	 * 
+	 *
 	 * @param tilePositions tile positions of loaded object
 	 */
 	void loadMapObjects(List<Vector2> tilePositions);
@@ -69,7 +67,7 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	/**
 	 * Remove {@link WorldObject} objects to be prepared to
 	 * {@link #loadMapObjects(CFMap)}.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	void unloadMapObjects();
@@ -77,7 +75,7 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	/**
 	 * Initialize {@link CollisionVisitorsManager} for every {@link WorldObject}
 	 * object contained by this master.
-	 * 
+	 *
 	 * @param collisionVisitorsManagerFactory
 	 *            factory object initializing {@link CollisionVisitorsManager}
 	 *            by given {@link WorldObjectType}
@@ -88,11 +86,5 @@ public interface WorldObjectsMaster extends WorldObjectsCreator, Nullable {
 	void setMemento(WOMMemento memento);
 
 	WOMMemento createMemento();
-
-	/**
-	 * Design flaw: this should be only in {@link RenderableObjectsMaster}
-	 */
-	void changeTexture(final RenderableObject object,
-			final Vector2 textureCoordinates);
 
 }

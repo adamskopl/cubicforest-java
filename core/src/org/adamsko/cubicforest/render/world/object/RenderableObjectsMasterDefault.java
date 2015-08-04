@@ -10,19 +10,10 @@ import org.adamsko.cubicforest.render.world.renderList.RenderList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 
 public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	private String name;
-	private String textureName;
-	private int tileW, tileH;
-
-	/**
-	 * name of the model represting objects in this master
-	 */
-	private String modelName;
 
 	public String getName() {
 		return name;
@@ -66,17 +57,12 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	private TexturesManager texturesManager;
 
 	/**
-	 * Temporary solution. Keep rows of atlas in a list.
-	 */
-	protected List<TextureRegion[]> atlasRows;
-
-	/**
 	 * Temporary texture region for an experimental cubic texture.
 	 */
 	protected CTextureRegion cubicTextureRegion;
 
 	public RenderableObjectsMasterDefault(final int nullConstructor) {
-		this.texturesManager = null;
+		this.texturesManager = NullTexturesManager.instance();
 	}
 
 	/**
@@ -88,33 +74,14 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	 * @param tileH
 	 */
 	public RenderableObjectsMasterDefault(final String name,
-			final String modelName, final String textureName, final int tileW,
-			final int tileH) {
+			final String modelName) {
 		this.name = new String(name);
-		this.textureName = textureName;
-		this.modelName = new String(modelName);
-		this.tileW = tileW;
-		this.tileH = tileH;
 
 		this.texturesManager = NullTexturesManager.instance();
 
 		renderableObjects = new ArrayList<RenderableObject>();
 		renderableObjectsUnserved = new ArrayList<RenderableObject>();
 		renderableObjectsToRemove = new ArrayList<RenderableObject>();
-		initTextures();
-	}
-
-	@Override
-	public void initTextures() {
-		// old way of generating textures
-		this.objectsTexture = new Texture(Gdx.files.internal("data/"
-				+ this.textureName + ".png"));
-		final int rowsNum = this.objectsTexture.getHeight() / this.tileH;
-		this.atlasRows = new ArrayList<TextureRegion[]>();
-		for (int i = 0; i < rowsNum; i++) {
-			this.atlasRows.add(new TextureRegion(this.objectsTexture).split(
-					this.tileW, this.tileH)[i]);
-		}
 	}
 
 	@Override
@@ -169,12 +136,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 		listOriginal.clear();
 
 		return listCopy;
-	}
-
-	@Override
-	public void changeTexture(final RenderableObject object,
-			final Vector2 textureCoordinates) {
-		object.setTextureRegion(atlasRows.get((int) textureCoordinates.x)[(int) textureCoordinates.y]);
 	}
 
 }

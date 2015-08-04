@@ -17,7 +17,6 @@ import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndi
 import org.adamsko.cubicforest.world.tile.tilesSearcher.searchParameter.TilesSearchParameter;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class CubicTile extends CubicObject implements Tile {
@@ -33,9 +32,9 @@ public class CubicTile extends CubicObject implements Tile {
 		portal = null;
 	}
 
-	public CubicTile(final Vector2 coords, final TextureRegion tr,
+	public CubicTile(final Vector2 coords,
 			final WorldObjectsMasterDefault container) {
-		super(tr, 0, container, WorldObjectType.DEFAULT);
+		super(container, WorldObjectType.DEFAULT);
 		this.tilesPos = coords;
 
 		occupants = new ArrayList<WorldObject>();
@@ -128,10 +127,10 @@ public class CubicTile extends CubicObject implements Tile {
 		CLog.debug(this, "refreshTexture");
 		if (isTileHighlightedAsOccupied()) {
 			visualState().changeState(RenderableObjectVisualState.BLOCKED);
-			getParentContainer().changeTexture(this, new Vector2(2, 1));
+			// getParentContainer().changeTexture(this, new Vector2(2, 1));
 		} else {
 			visualState().changeState(RenderableObjectVisualState.NORMAL);
-			getParentContainer().changeTexture(this, new Vector2(0, 0));
+			// getParentContainer().changeTexture(this, new Vector2(0, 0));
 		}
 	}
 

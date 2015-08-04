@@ -21,10 +21,8 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 	private int nameIndex;
 	private int atlasIndex;
 
-	public EnemiesMaster(final TilesMaster tilesMaster,
-			final String textureName, final int tileW, final int tileH) {
-		super("EnemiesMaster", "enemy", tilesMaster, textureName, tileW, tileH);
-
+	public EnemiesMaster(final TilesMaster tilesMaster) {
+		super("EnemiesMaster", "enemy", tilesMaster);
 	}
 
 	@Override
@@ -44,12 +42,9 @@ public class EnemiesMaster extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Enemy enemy = new Enemy(atlasRows.get(0)[atlasIndex], atlasIndex,
-				this);
+		final Enemy enemy = new Enemy(this);
 		enemy.setTexturesManager(getTexturesManager(), WorldObjectType.ENEMY);
-		enemy.setRenderVector(new Vector2(
-				-atlasRows.get(0)[0].getRegionWidth() / 2, -7));
-		enemy.setRenderVectorCubic(new Vector2(-40.0f, -23.0f));
+		enemy.setRenderVector(new Vector2(-40.0f, -23.0f));
 
 		enemy.setSpeed(5);
 

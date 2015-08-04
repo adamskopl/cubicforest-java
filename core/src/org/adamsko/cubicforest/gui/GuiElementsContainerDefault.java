@@ -8,7 +8,7 @@ import org.adamsko.cubicforest.render.world.object.RenderableObjectsMasterDefaul
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class GuiElementsContainerDefault extends
-		RenderableObjectsMasterDefault implements GuiElementsContainer {
+RenderableObjectsMasterDefault implements GuiElementsContainer {
 
 	/**
 	 * Absolute screen position of the container. Its elements positions are
@@ -22,9 +22,8 @@ public abstract class GuiElementsContainerDefault extends
 	private GuiElement clickedElement = null;
 
 	public GuiElementsContainerDefault(final String name,
-			final GuiType_e guiType, final String textureName, final int tileW,
-			final int tileH, final float posX, final float posY) {
-		super(name, "", textureName, tileW, tileH);
+			final GuiType_e guiType, final float posX, final float posY) {
+		super(name, "");
 
 		guiElements = new ArrayList<GuiElement>();
 

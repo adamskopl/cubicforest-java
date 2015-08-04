@@ -57,9 +57,8 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 
 	public HeroesToolsMasterDefault(final TilesMaster TM,
 			final GatherCubesMaster gatherCubesMaster,
-			final HeroesMaster heroesMaster, final String textureName,
-			final int tileW, final int tileH) {
-		super("HeroesToolsMaster", "", TM, textureName, tileW, tileH);
+			final HeroesMaster heroesMaster) {
+		super("HeroesToolsMaster", "", TM);
 
 		this.gatherCubesMaster = gatherCubesMaster;
 		heroToolMarker = NullHeroTool.instance();
@@ -110,8 +109,8 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 		heroToolMarker = (HeroTool) getToolMaster(heroToolMarkerType)
 				.factoryMethod(heroToolTilePos);
 		heroToolMarker.setState(HeroToolStates.STATE_CONSTRUCTION);
-		((RenderableObjectsMaster) getToolMaster(heroToolMarkerType))
-				.changeTexture(heroToolMarker, new Vector2(1, 0));
+		// ((RenderableObjectsMaster) getToolMaster(heroToolMarkerType))
+		// .changeTexture(heroToolMarker, new Vector2(1, 0));
 
 		getToolMaster(heroToolMarker.getType()).addObject(heroToolMarker);
 	}
@@ -137,7 +136,7 @@ public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
 	public void setToolTexture(final HeroTool tool, final int index) {
 		final RenderableObjectsMaster master = (RenderableObjectsMaster) getToolMaster(tool
 				.getType());
-		master.changeTexture(tool, new Vector2(0, 0));
+		// master.changeTexture(tool, new Vector2(0, 0));
 	}
 
 	@Override

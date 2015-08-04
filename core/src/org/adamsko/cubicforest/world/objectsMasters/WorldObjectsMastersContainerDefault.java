@@ -68,17 +68,14 @@ public class WorldObjectsMastersContainerDefault implements
 		this.collisionVisitorsManagerFactory = NullCollisionVisitorsManagerFactory
 				.instance();
 
-		terrainObjectsMaster = new TerrainMaster(tilesMaster,
-				"terrain-atlas-medium", 42, 50);
+		terrainObjectsMaster = new TerrainMaster(tilesMaster);
 		terrainObjectsMaster.setTexturesManager(texturesManager);
 
 		texturesManager.loadTextures(WorldObjectType.TREE);
-		heroesMaster = new HeroesMaster(tilesMaster, "heroes-atlas-medium", 30,
-				35);
+		heroesMaster = new HeroesMaster(tilesMaster);
 		heroesMaster.setTexturesManager(texturesManager);
 		texturesManager.loadTextures(WorldObjectType.HERO);
-		enemiesMaster = new EnemiesMaster(tilesMaster, "enemies-atlas-medium",
-				30, 35);
+		enemiesMaster = new EnemiesMaster(tilesMaster);
 		enemiesMaster.setTexturesManager(texturesManager);
 		texturesManager.loadTextures(WorldObjectType.ENEMY);
 		gatherCubesMaster = new GatherCubesMasterDefault(tilesMaster,
@@ -87,15 +84,14 @@ public class WorldObjectsMastersContainerDefault implements
 		texturesManager.loadTextures(WorldObjectType.GATHERCUBE);
 
 		heroesToolsMaster = new HeroesToolsMasterDefault(tilesMaster,
-				gatherCubesMaster, heroesMaster, "tools-atlas-medium", 40, 45);
+				gatherCubesMaster, heroesMaster);
 
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
 		portalsMaster.setTexturesManager(texturesManager);
 		texturesManager.loadTextures(WorldObjectType.PORTAL);
 
-		prizesMaster = new PrizesMasterDefault(tilesMaster,
-				"prizes-atlas-medium", 25, 35);
+		prizesMaster = new PrizesMasterDefault(tilesMaster);
 		prizesMaster.setTexturesManager(texturesManager);
 		texturesManager.loadTextures(WorldObjectType.PRIZE);
 

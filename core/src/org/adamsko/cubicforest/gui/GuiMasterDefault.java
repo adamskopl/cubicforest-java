@@ -47,27 +47,24 @@ public class GuiMasterDefault implements GuiMaster {
 	@Override
 	public void initializeContainers(final MapsLoader mapsLoader,
 			final TexturesManager texturesManager) {
-		this.guiHeroTools = new GuiHeroTools("tools-atlas-medium", 40, 42, 25,
-				-50);
+		this.guiHeroTools = new GuiHeroTools(25, -50);
 		guiHeroTools.setTexturesManager(texturesManager);
 		guiHeroTools.createGui();
 
-		this.guiOrders = new GuiOrders("orders-atlas-medium", 100, 100, 20,
-				-340);
+		this.guiOrders = new GuiOrders(20, -340);
 		guiOrders.setTexturesManager(texturesManager);
 		guiOrders.createGui();
 
-		this.guiDebug = new GuiDebug("orders-atlas-medium", 50, 50, 680, -120);
+		this.guiDebug = new GuiDebug(680, -120);
 		guiDebug.setTexturesManager(texturesManager);
 		guiDebug.createGui();
 
-		this.guiLevels = new GuiLevels("levels-atlas-medium", 30, 30, 600, -100);
+		this.guiLevels = new GuiLevels(600, -100);
 		guiLevels.setMapsLoader(mapsLoader);
 		guiLevels.setTexturesManager(texturesManager);
 		guiLevels.createGui();
 
-		this.guiResolver = new GuiResolverDefault("orders-atlas-medium", 30,
-				30, 150, -440);
+		this.guiResolver = new GuiResolverDefault(150, -440);
 		guiResolver.setTexturesManager(texturesManager);
 		guiResolver.createGui();
 

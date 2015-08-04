@@ -143,27 +143,7 @@ public class CubicWorldRenderer implements GameRenderer {
 	}
 
 	private void renderObject(final RenderableObject rObj) {
-		switch (rObj.getRenderType()) {
-		case TYPE_WORLD:
-			final WorldObject wObj = (WorldObject) rObj;
-			final Vector2 objPos = wObj.getTilesPos();
-			final Vector2 renderPos = coordCalc.tilesToRender(objPos);
-			renderPos.add(rObj.getRenderVector());
-			batch.draw(rObj.getTextureRegion(), renderPos.x, renderPos.y);
-			break;
-		case TYPE_GUI:
-			// final GuiElement gObj = (GuiElement) rObj;
-			// renderPos = gObj.getScreenPos();
-			// renderPos.add(gObj.getRenderVector());
-			// batch.draw(gObj.getTextureRegion(), renderPos.x, renderPos.y);
-			break;
-		default:
-			break;
-		}
-	}
-
-	private void renderObjectCubic(final RenderableObject rObj) {
-		final CTextureRegion cubicTextureRegion = rObj.getTextureRegionCubic();
+		final CTextureRegion cubicTextureRegion = rObj.getTextureRegion();
 		if (cubicTextureRegion.isNull()) {
 			CLog.errorSingle(this, "null texture " + rObj.toString());
 			return;
@@ -180,7 +160,7 @@ public class CubicWorldRenderer implements GameRenderer {
 		case TYPE_GUI:
 			final GuiElement gObj = (GuiElement) rObj;
 			renderPos = gObj.getScreenPos();
-			renderPos.add(gObj.getRenderVector());
+			renderPos.add(gObj.getRenderVectorCubic());
 			batch.draw(cubicTextureRegion, renderPos.x, renderPos.y);
 			break;
 		default:
@@ -225,26 +205,13 @@ public class CubicWorldRenderer implements GameRenderer {
 	private void renderROMs() {
 		updateList(renderableObjectsMastersWorld, renderListMasterWorld);
 		updateList(renderableObjectsMastersGui, renderListMasterGui);
-		renderListCubic(renderListMasterWorld);
-		renderListCubic(renderListMasterGui);
+		renderList(renderListMasterWorld);
+		renderList(renderListMasterGui);
 	}
 
 	private void renderList(final RenderList renderListMaster) {
 		for (final RenderableObject rObj : renderListMaster.get()) {
 			renderObject(rObj);
-		}
-		/*
-		 * Labels are rendered in the end: so they are not covered by
-		 * RenderableObject objects
-		 */
-		for (final RenderableObject rObj : renderListMaster.get()) {
-			renderObjectsLabels(rObj);
-		}
-	}
-
-	private void renderListCubic(final RenderList renderListMaster) {
-		for (final RenderableObject rObj : renderListMaster.get()) {
-			renderObjectCubic(rObj);
 		}
 		/*
 		 * Labels are rendered in the end: so they are not covered by

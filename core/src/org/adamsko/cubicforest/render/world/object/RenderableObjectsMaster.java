@@ -5,8 +5,6 @@ import java.util.List;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMasterDefault.ROListType_e;
 
-import com.badlogic.gdx.math.Vector2;
-
 /**
  * Manages {@link RenderableObject} objects.
  *
@@ -36,23 +34,6 @@ public interface RenderableObjectsMaster {
 	 *         {@link ROListType_e} type.
 	 */
 	public List<RenderableObject> popRenderableObjects(ROListType_e type);
-
-	/**
-	 * Change given object's texture by using texture atlas managed by this
-	 * master.
-	 *
-	 * @param object
-	 *            object for which texture will be changed
-	 * @param textureCoordinates
-	 *            coordinates of the texture in the atlas
-	 */
-	public void changeTexture(final RenderableObject object,
-			Vector2 textureCoordinates);
-
-	/**
-	 * Initialize textures for this master.
-	 */
-	void initTextures();
 
 	void setTexturesManager(TexturesManager texturesManager);
 

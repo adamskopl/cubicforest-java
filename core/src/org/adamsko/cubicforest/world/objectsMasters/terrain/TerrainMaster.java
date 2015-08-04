@@ -15,10 +15,8 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 
 	private int atlasIndex;
 
-	public TerrainMaster(final TilesMaster tilesMaster,
-			final String textureName, final int tileW, final int tileH) {
-		super("TerrainObjectsMaster", "tree", tilesMaster, textureName, tileW,
-				tileH);
+	public TerrainMaster(final TilesMaster tilesMaster) {
+		super("TerrainObjectsMaster", "tree", tilesMaster);
 
 		CLog.addObject(this, "TerrainMaster");
 		CLog.setUsage(this, false);
@@ -33,11 +31,9 @@ public class TerrainMaster extends WorldObjectsMasterDefault {
 			final Vector2 tilePos) {
 		CLog.debug(this, "factoryMethod");
 
-		final Tree tree = new Tree(atlasRows.get(0)[0], 0, this);
+		final Tree tree = new Tree(this);
 		tree.setTexturesManager(getTexturesManager(), WorldObjectType.TREE);
-		tree.setRenderVector(new Vector2(
-				-atlasRows.get(0)[0].getRegionWidth() / 2, -5));
-		tree.setRenderVectorCubic(new Vector2(-35.0f, -20.0f));
+		tree.setRenderVector(new Vector2(-35.0f, -20.0f));
 		final Vector2 pos = new Vector2(tilePos);
 		pos.add(new Vector2(0.5f, 0.5f));
 		tree.setTilesPos(pos);

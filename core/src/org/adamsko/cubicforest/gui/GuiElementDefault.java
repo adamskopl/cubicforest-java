@@ -4,7 +4,6 @@ import org.adamsko.cubicforest.render.world.object.RenderableObjectDefault;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectType;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiElementDefault extends RenderableObjectDefault implements
@@ -24,10 +23,9 @@ GuiElement {
 	 */
 	private final Vector2 elementScreenPos;
 
-	public GuiElementDefault(final TextureRegion tr, final int texNum,
-			final GuiElementsContainer pareContainer, final float posX,
-			final float posY) {
-		super(tr, texNum);
+	public GuiElementDefault(final GuiElementsContainer pareContainer,
+			final float posX, final float posY) {
+		super();
 		this.renderType = RenderableObjectType.TYPE_GUI;
 
 		this.parentContainer = pareContainer;
@@ -60,15 +58,16 @@ GuiElement {
 	@Override
 	public boolean isClicked(final Vector2 clickedScreenPos) {
 		final Vector2 screenPos = getScreenPos();
-		screenPos.add(getRenderVector());
+		screenPos.add(getRenderVectorCubic());
 
 		// FIXME get "real" y coordinates...
 		screenPos.y = -screenPos.y;
 
 		if (clickedScreenPos.x > screenPos.x
-				&& clickedScreenPos.x < screenPos.x + getTexWidth()
+				&& clickedScreenPos.x < screenPos.x // + getTexWidth()
 				&& clickedScreenPos.y < screenPos.y
-				&& clickedScreenPos.y > screenPos.y - getTexHeight()) {
+				&& clickedScreenPos.y > screenPos.y // - getTexHeight()
+		) {
 
 			return true;
 		}

@@ -36,7 +36,7 @@ public class VisualStateChangerDefault implements VisualStateChanger {
 				.getTextureRegion(worldObjectType, objectVisualState,
 						renderableObject.tileDirection().getDirection());
 
-		renderableObject.setTextureRegionCubic(newTextureRegion);
+		renderableObject.setTextureRegion(newTextureRegion);
 		CLog.debug(this, "changeState " + worldObjectType.toString());
 	}
 

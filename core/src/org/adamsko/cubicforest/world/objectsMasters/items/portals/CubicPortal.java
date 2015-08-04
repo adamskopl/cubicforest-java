@@ -7,8 +7,6 @@ import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 import org.adamsko.cubicforest.world.tile.NullCubicTile;
 import org.adamsko.cubicforest.world.tile.Tile;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 class CubicPortal extends CubicObject implements Portal {
 
 	private Portal twinPortal;
@@ -19,9 +17,8 @@ class CubicPortal extends CubicObject implements Portal {
 		parentTile = NullCubicTile.instance();
 	}
 
-	CubicPortal(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container, final Tile parentTile) {
-		super(tr, texNum, container, WorldObjectType.PORTAL);
+	CubicPortal(final WorldObjectsMasterDefault container, final Tile parentTile) {
+		super(container, WorldObjectType.PORTAL);
 		this.parentTile = parentTile;
 	}
 

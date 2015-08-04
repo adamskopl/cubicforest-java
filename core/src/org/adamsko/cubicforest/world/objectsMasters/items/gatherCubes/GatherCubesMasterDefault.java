@@ -15,7 +15,7 @@ import org.adamsko.cubicforest.world.tile.TilesMaster;
 import com.badlogic.gdx.math.Vector2;
 
 public class GatherCubesMasterDefault extends WorldObjectsMasterDefault
-implements GatherCubesMaster {
+		implements GatherCubesMaster {
 
 	private GatherCubesCounter gatherCubesCounter;
 
@@ -25,8 +25,7 @@ implements GatherCubesMaster {
 
 	public GatherCubesMasterDefault(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("GatherCubesMaster", "gatherCube", tilesMaster, textureName,
-				tileW, tileH);
+		super("GatherCubesMaster", "gatherCube", tilesMaster);
 		gatherCubesCounter = new GatherCubesCounterDefault(
 				"cubes-atlas-medium", 25, 25, 650, -50);
 		gatherCubesCounter.setStartingValue(0);
@@ -50,12 +49,10 @@ implements GatherCubesMaster {
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final GatherCube gatherCube;
-		gatherCube = new GatherCube(atlasRows.get(0)[0], 0, this);
+		gatherCube = new GatherCube(this);
 		gatherCube.setTexturesManager(getTexturesManager(),
 				WorldObjectType.GATHERCUBE);
-		gatherCube.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-				.getRegionWidth() / 2, -2));
-		gatherCube.setRenderVectorCubic(new Vector2(-37.0f, -23.0f));
+		gatherCube.setRenderVector(new Vector2(-37.0f, -23.0f));
 
 		gatherCube.setSpeed(2);
 		gatherCube.setVerticalPos(0.5f);
@@ -93,13 +90,11 @@ implements GatherCubesMaster {
 
 	@Override
 	public void cubeHighlight(final GatherCube cube) {
-		cube.setTextureRegion(atlasRows.get(1)[cube.getTexNum()]);
 		cube.visualState().changeState(RenderableObjectVisualState.SELECTED);
 	}
 
 	@Override
 	public void cubeUnHighlight(final GatherCube cube) {
-		cube.setTextureRegion(atlasRows.get(0)[cube.getTexNum()]);
 		cube.visualState().changeState(RenderableObjectVisualState.NORMAL);
 	}
 

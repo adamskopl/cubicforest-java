@@ -20,8 +20,7 @@ implements GatherCubesCounter {
 
 	public GatherCubesCounterDefault(final String textureName, final int tileW,
 			final int tileH, final int posX, final int posY) {
-		super("gatherCubesCounter", GuiType_e.GUI_CUBES_COUNTER, textureName,
-				tileW, tileH, posX, posY);
+		super("gatherCubesCounter", GuiType_e.GUI_CUBES_COUNTER, posX, posY);
 
 		counter = new Vector2(0, 0);
 
@@ -74,7 +73,7 @@ implements GatherCubesCounter {
 	public void createGui() {
 
 		GuiElement testObject;
-		testObject = new GuiElementDefault(atlasRows.get(0)[3], 0, this, 0, 0);
+		testObject = new GuiElementDefault(this, 0, 0);
 		testObject.addLabel(counter);
 		testObject.altLabelLast(Color.WHITE, 1.0f, 30.0f, 20.0f);
 		addGuiElement(testObject);

@@ -5,17 +5,14 @@ import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 public class GuiElementHeroTool extends GuiElementDefault {
 
 	private final WorldObjectType type;
 
 	GuiElementHeroTool(final WorldObjectType heroToolType,
-			final TextureRegion tr, final int texNum,
 			final GuiElementsContainerDefault pareContainer, final float posX,
 			final float posY) {
-		super(tr, texNum, pareContainer, posX, posY);
+		super(pareContainer, posX, posY);
 
 		this.type = heroToolType;
 

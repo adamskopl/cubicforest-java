@@ -6,13 +6,10 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 public class GatherCube extends CubicObject {
 
-	public GatherCube(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container) {
-		super(tr, texNum, container, WorldObjectType.GATHERCUBE);
+	public GatherCube(final WorldObjectsMasterDefault container) {
+		super(container, WorldObjectType.GATHERCUBE);
 		CLog.addObject(this, "GatherCube");
 		CLog.setUsage(this, true);
 	}

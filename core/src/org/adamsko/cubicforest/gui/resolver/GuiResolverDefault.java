@@ -10,7 +10,6 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 
 public class GuiResolverDefault extends GuiElementsContainerDefault implements
 		GuiResolver {
@@ -20,10 +19,8 @@ public class GuiResolverDefault extends GuiElementsContainerDefault implements
 	private int availableSolutions;
 	private final int maxSolutions;
 
-	public GuiResolverDefault(final String textureName, final int tileW,
-			final int tileH, final float posX, final float posY) {
-		super("GuiResolverDefault", GuiType_e.GUI_RESOLVER, textureName, tileW,
-				tileH, posX, posY);
+	public GuiResolverDefault(final float posX, final float posY) {
+		super("GuiResolverDefault", GuiType_e.GUI_RESOLVER, posX, posY);
 		maxSolutions = 10;
 	}
 
@@ -39,11 +36,10 @@ public class GuiResolverDefault extends GuiElementsContainerDefault implements
 		availableSolutions = 0;
 
 		elementStart = new GuiElementResolver(GuiResolverType.RESOLVER_START,
-				atlasRows.get(0)[0], 0, this, 0, 0);
+				this, 0, 0);
 		elementStart.setTexturesManager(getTexturesManager(),
 				WorldObjectType.TILE);
 
-		elementStart.setRenderVector(new Vector2(0, 0));
 		elementStart.addLabel("S");
 		elementStart.altLabelLast(Color.WHITE, 1.0f, 10.0f, 22.0f);
 
@@ -52,9 +48,7 @@ public class GuiResolverDefault extends GuiElementsContainerDefault implements
 		solutions = new ArrayList<GuiElementResolverSolution>();
 		for (int i = 0; i < maxSolutions; i++) {
 			final GuiElementResolverSolution guiElementResolverSolution = new GuiElementResolverSolution(
-					i, GuiResolverType.RESOLVER_SOLUTION, atlasRows.get(0)[0],
-					0, this, i * 40 + 45, 0);
-			guiElementResolverSolution.setRenderVector(new Vector2(0, 0));
+					i, GuiResolverType.RESOLVER_SOLUTION, this, i * 40 + 45, 0);
 			guiElementResolverSolution.addLabel(i + 1);
 			guiElementResolverSolution.altLabelLast(Color.WHITE, 1.0f, 10.0f,
 					22.0f);

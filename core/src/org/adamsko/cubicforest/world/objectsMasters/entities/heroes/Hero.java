@@ -5,13 +5,10 @@ import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectVisitor;
 import org.adamsko.cubicforest.world.objectsMasters.WorldObjectsMasterDefault;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 public class Hero extends CubicObject {
 
-	public Hero(final TextureRegion tr, final int texNum,
-			final WorldObjectsMasterDefault container) {
-		super(tr, texNum, container, WorldObjectType.HERO);
+	public Hero(final WorldObjectsMasterDefault container) {
+		super(container, WorldObjectType.HERO);
 	}
 
 	@Override

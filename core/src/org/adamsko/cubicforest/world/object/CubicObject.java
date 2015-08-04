@@ -12,7 +12,6 @@ import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndi
 import org.adamsko.cubicforest.world.tile.propertiesIndicator.TilePropertiesIndicatorDefault;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -63,7 +62,7 @@ WorldObject {
 	 * {@link CollisionVisitorsManagerDefault} is invoked recursively.
 	 */
 	protected CubicObject() {
-		super(null, 0);
+		super();
 		this.parentContainer = null;
 		this.collisionVisitorsManager = null;
 		this.type = WorldObjectType.DEFAULT;
@@ -71,9 +70,9 @@ WorldObject {
 		this.state = WorldObjectState.ALIVE;
 	}
 
-	public CubicObject(final TextureRegion tr, final int texNum,
-			final WorldObjectsMaster container, final WorldObjectType type) {
-		super(tr, texNum);
+	public CubicObject(final WorldObjectsMaster container,
+			final WorldObjectType type) {
+		super();
 
 		this.parentContainer = container;
 

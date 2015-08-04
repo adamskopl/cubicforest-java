@@ -19,10 +19,8 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 	 */
 	private List<GuiElementHeroTool> availableGuiTools;
 
-	public GuiHeroTools(final String textureName, final int tileW,
-			final int tileH, final float posX, final float posY) {
-		super("guiHeroTools", GuiType_e.GUI_HERO_TOOLS, textureName, tileW,
-				tileH, posX, posY);
+	public GuiHeroTools(final float posX, final float posY) {
+		super("guiHeroTools", GuiType_e.GUI_HERO_TOOLS, posX, posY);
 	}
 
 	@Override
@@ -56,7 +54,7 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		for (final WorldObjectType type : types) {
 
 			final GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
-					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 70, 0);
+					type, this, seqNum * 70, 0);
 			guiElementHeroTool.setTexturesManager(getTexturesManager(),
 					WorldObjectType.TILE);
 

@@ -16,18 +16,11 @@ import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChange
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class RenderableObjectDefault implements RenderableObject {
 
 	protected LabelsContainer labels;
-	/**
-	 * vector for which object's image is translated by
-	 */
-	private Vector2 renderVector;
-
-	private TextureRegion textureRegion;
 
 	/**
 	 * Experimental texture region representing model made from cubes.
@@ -36,11 +29,6 @@ public class RenderableObjectDefault implements RenderableObject {
 
 	private Vector2 renderVectorCubic;
 
-	/**
-	 * Temporary solution: sequence number of the texture in an atlas row
-	 */
-	private int texNum = 0;
-
 	protected RenderableObjectType renderType;
 	private VisualStateChanger visualStateChanger;
 	private TileDirectionChanger tileDirectionChanger;
@@ -48,13 +36,9 @@ public class RenderableObjectDefault implements RenderableObject {
 	/**
 	 * @param textureRegion
 	 */
-	public RenderableObjectDefault(final TextureRegion textureRegion,
-			final int texNum) {
-		this.textureRegion = NullCTextureRegion.instance();
-		this.texNum = texNum;
+	public RenderableObjectDefault() {
 		renderType = RenderableObjectType.TYPE_UNDEFINED;
 		labels = new LabelsContainer();
-		renderVector = new Vector2();
 		renderVectorCubic = new Vector2();
 		textureRegionCubic = NullCTextureRegion.instance();
 
@@ -84,61 +68,26 @@ public class RenderableObjectDefault implements RenderableObject {
 	}
 
 	@Override
-	public void setRenderVector(final Vector2 vec) {
-		this.renderVector = vec;
-	}
-
-	@Override
-	public Vector2 getRenderVector() {
-		return renderVector;
-	}
-
-	@Override
-	public void setTextureRegion(final TextureRegion tr) {
-		this.textureRegion = tr;
-	}
-
-	@Override
-	public TextureRegion getTextureRegion() {
-		return this.textureRegion;
-	}
-
-	@Override
 	public Vector2 getRenderVectorCubic() {
 		return renderVectorCubic;
 	}
 
 	@Override
-	public void setRenderVectorCubic(final Vector2 vec) {
+	public void setRenderVector(final Vector2 vec) {
 		this.renderVectorCubic = vec;
-	};
+	}
 
 	@Override
-	public CTextureRegion getTextureRegionCubic() {
+	public CTextureRegion getTextureRegion() {
 		return textureRegionCubic;
 	}
 
 	@Override
-	public void setTextureRegionCubic(final CTextureRegion textureRegionCubic) {
+	public void setTextureRegion(final CTextureRegion textureRegionCubic) {
 		if (textureRegionCubic.isNull()) {
 			CLog.error(this, "setTextureRegionCubic null " + toString());
 		}
 		this.textureRegionCubic = textureRegionCubic;
-	}
-
-	@Override
-	public int getTexNum() {
-		return texNum;
-	}
-
-	@Override
-	public int getTexWidth() {
-		return textureRegion.getRegionWidth();
-	}
-
-	@Override
-	public int getTexHeight() {
-		return textureRegion.getRegionHeight();
 	}
 
 	@Override

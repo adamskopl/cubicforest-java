@@ -10,16 +10,13 @@ import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoader;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 
 public class GuiLevels extends GuiElementsContainerDefault {
 
 	private MapsLoader mapsLoader;
 
-	public GuiLevels(final String textureName, final int tileW,
-			final int tileH, final float posX, final float posY) {
-		super("guiLevels", GuiType_e.GUI_LEVELS, textureName, tileW, tileH,
-				posX, posY);
+	public GuiLevels(final float posX, final float posY) {
+		super("guiLevels", GuiType_e.GUI_LEVELS, posX, posY);
 		mapsLoader = NullMapsLoader.instance();
 
 		CLog.addObject(this, "GuiLevels");
@@ -48,7 +45,7 @@ public class GuiLevels extends GuiElementsContainerDefault {
 			}
 
 			final GuiElementLevel guiElementLevel = new GuiElementLevel(i,
-					atlasRows.get(0)[0], 0, this, posX, posY);
+					this, posX, posY);
 			guiElementLevel.setTexturesManager(getTexturesManager(),
 					WorldObjectType.TILE);
 
@@ -56,7 +53,6 @@ public class GuiLevels extends GuiElementsContainerDefault {
 				higlightButton(guiElementLevel);
 			}
 
-			guiElementLevel.setRenderVector(new Vector2(0, 0));
 			guiElementLevel.addLabel(i + 1);
 			guiElementLevel.altLabelLast(Color.WHITE, 1.0f, 12.0f, 22.0f);
 			addGuiElement(guiElementLevel);
@@ -74,17 +70,17 @@ public class GuiLevels extends GuiElementsContainerDefault {
 
 	public void levelClicked(final int levelIndex) {
 		final GuiElement e = guiElements.get(levelIndex);
-		e.setTextureRegion(atlasRows.get(1)[0]);
+		// e.setTextureRegion(atlasRows.get(1)[0]);
 	}
 
 	private void unhilightButtons() {
 		for (final GuiElement e : guiElements) {
-			e.setTextureRegion(atlasRows.get(0)[0]);
+			// e.setTextureRegion(atlasRows.get(0)[0]);
 		}
 	}
 
 	private void higlightButton(final GuiElement element) {
-		element.setTextureRegion(atlasRows.get(1)[0]);
+		// element.setTextureRegion(atlasRows.get(1)[0]);
 	}
 
 	@Override

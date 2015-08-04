@@ -17,8 +17,7 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 
 	public ToolTrapsMaster(final TilesMaster tilesMaster,
 			final String textureName, final int tileW, final int tileH) {
-		super("ToolTrapsMaster", "toolTrap", tilesMaster, textureName, tileW,
-				tileH);
+		super("ToolTrapsMaster", "toolTrap", tilesMaster);
 
 		// heroToolsFactory = new HeroToolsFactory(atlasRows, heroesMaster);
 	}
@@ -35,12 +34,10 @@ public class ToolTrapsMaster extends WorldObjectsMasterDefault {
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final HeroToolTrap trap;
-		trap = new HeroToolTrap(atlasRows.get(0)[0], 0, this);
+		trap = new HeroToolTrap(this);
 		trap.setTexturesManager(getTexturesManager(), WorldObjectType.TOOLTRAP);
 		trap.setState(HeroToolStates.STATE_READY);
-		trap.setRenderVector(new Vector2(
-				-atlasRows.get(0)[0].getRegionWidth() / 2 + 2, -11));
-		trap.setRenderVectorCubic(new Vector2(-35.0f, -23.0f));
+		trap.setRenderVector(new Vector2(-35.0f, -23.0f));
 
 		final Vector2 pos = new Vector2(tilePos);
 		pos.add(new Vector2(0.5f, 0.5f));

@@ -20,8 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 public class TilesContainer extends WorldObjectsMasterDefault {
 
 	public TilesContainer(final String name, final TilesMaster tilesMaster) {
-		super("TilesContainer", "tile", tilesMaster, "tiles-atlas-medium", 75,
-				45);
+		super("TilesContainer", "tile", tilesMaster);
 	}
 
 	/**
@@ -70,13 +69,11 @@ public class TilesContainer extends WorldObjectsMasterDefault {
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Tile newTile = new CubicTile(tilePos, atlasRows.get(0)[0], this);
+		final Tile newTile = new CubicTile(tilePos, this);
 		newTile.setTexturesManager(getTexturesManager(), WorldObjectType.TILE);
-		newTile.setRenderVector(new Vector2(-atlasRows.get(0)[0]
-				.getRegionWidth() / 2, -atlasRows.get(0)[0].getRegionHeight()));
 		// tiles are slightly lower than other objects (should be rendered
 		// first)
-		newTile.setRenderVectorCubic(new Vector2(-37.0f, -50.0f));
+		newTile.setRenderVector(new Vector2(-37.0f, -50.0f));
 		newTile.setVerticalPos(-0.01f);
 		// uncomment to add a position label to the tile
 		// addTilesPosLabel(newTile);

@@ -40,7 +40,7 @@ public class TileDirectionChangerDefault implements TileDirectionChanger {
 		final CTextureRegion newTextureRegion = texturesManager
 				.getTextureRegion(worldObjectType, renderableObject
 						.visualState().getState(), tileDirection);
-		renderableObject.setTextureRegionCubic(newTextureRegion);
+		renderableObject.setTextureRegion(newTextureRegion);
 
 		CLog.debug(this, "changeDirection " + worldObjectType.toString());
 	}

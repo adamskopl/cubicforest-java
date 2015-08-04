@@ -71,7 +71,7 @@ public class TilesLookControllerDefault implements TilesLookController {
 
 	@Override
 	public void changeTileTexture(final Tile tile, final Vector2 texCoords) {
-		renderableMasterTiles.changeTexture(tile, texCoords);
+		// renderableMasterTiles.changeTexture(tile, texCoords);
 	}
 
 	@Override

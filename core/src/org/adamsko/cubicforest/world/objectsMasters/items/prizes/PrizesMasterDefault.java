@@ -30,11 +30,9 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 	 */
 	private int prizesCollected;
 
-	public PrizesMasterDefault(final TilesMaster tilesMaster,
-			final String textureName, final int tileW, final int tileH) {
-		super("PrizesMaster", "prize", tilesMaster, textureName, tileW, tileH);
-		guiPrizes = new GuiPrizesDefault("prizes-atlas-medium", 25, 35, 550,
-				-50);
+	public PrizesMasterDefault(final TilesMaster tilesMaster) {
+		super("PrizesMaster", "prize", tilesMaster);
+		guiPrizes = new GuiPrizesDefault(550, -50);
 		this.prizesStartNumber = 0;
 		this.prizesCollected = 0;
 
@@ -48,11 +46,9 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
-		final Prize prize = new CubicPrize(atlasRows.get(0)[0], 0, this);
+		final Prize prize = new CubicPrize(this);
 		prize.setTexturesManager(getTexturesManager(), WorldObjectType.PRIZE);
-		prize.setRenderVector(new Vector2(
-				-atlasRows.get(0)[0].getRegionWidth() / 2 - 3, -5));
-		prize.setRenderVectorCubic(new Vector2(-35.0f, -23.0f));
+		prize.setRenderVector(new Vector2(-35.0f, -23.0f));
 		final Vector2 pos = new Vector2(tilePos);
 		pos.add(new Vector2(0.5f, 0.5f));
 		prize.setTilesPos(pos);
@@ -90,12 +86,12 @@ public class PrizesMasterDefault extends WorldObjectsMasterDefault implements
 
 	@Override
 	public void prizeHighlight(final Prize prize) {
-		prize.setTextureRegion(atlasRows.get(1)[prize.getTexNum()]);
+		// prize.setTextureRegion(atlasRows.get(1)[prize.getTexNum()]);
 	}
 
 	@Override
 	public void prizeUnHighlight(final Prize prize) {
-		prize.setTextureRegion(atlasRows.get(0)[prize.getTexNum()]);
+		// prize.setTextureRegion(atlasRows.get(0)[prize.getTexNum()]);
 	}
 
 	@Override

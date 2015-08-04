@@ -6,24 +6,20 @@ import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 
 public class GuiDebug extends GuiElementsContainerDefault {
 
-	public GuiDebug(final String textureName, final int tileW, final int tileH,
-			final float posX, final float posY) {
-		super("guiDebug", GuiType_e.GUI_DEBUG, textureName, tileW, tileH, posX,
-				posY);
+	public GuiDebug(final float posX, final float posY) {
+		super("guiDebug", GuiType_e.GUI_DEBUG, posX, posY);
 	}
 
 	@Override
 	public void createGui() {
 
 		final GuiElementDebug elementDebug = new GuiElementDebug(
-				GuiDebugType.DEBUG_RELOAD, atlasRows.get(0)[0], 0, this, 0, 0);
+				GuiDebugType.DEBUG_RELOAD, this, 0, 0);
 		elementDebug.setTexturesManager(getTexturesManager(),
 				WorldObjectType.TILE);
-		elementDebug.setRenderVector(new Vector2(0, 0));
 		elementDebug.addLabel("R");
 		elementDebug.altLabelLast(Color.WHITE, 1.0f, 20.0f, 32.0f);
 

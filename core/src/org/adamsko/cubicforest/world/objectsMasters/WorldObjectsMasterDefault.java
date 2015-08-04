@@ -27,9 +27,8 @@ RenderableObjectsMasterDefault implements WorldObjectsMaster {
 	}
 
 	public WorldObjectsMasterDefault(final String name, final String modelName,
-			final TilesMaster tilesMaster, final String textureName,
-			final int tileW, final int tileH) {
-		super(name, modelName, textureName, tileW, tileH);
+			final TilesMaster tilesMaster) {
+		super(name, modelName);
 		this.tilesMaster = tilesMaster;
 		worldObjects = new ArrayList<WorldObject>();
 	}
