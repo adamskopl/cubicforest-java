@@ -6,13 +6,14 @@ import java.util.List;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiResolverDefault extends GuiElementsContainerDefault implements
-GuiResolver {
+		GuiResolver {
 
 	private GuiElementResolver elementStart;
 	private List<GuiElementResolverSolution> solutions;
@@ -23,10 +24,7 @@ GuiResolver {
 			final int tileH, final float posX, final float posY) {
 		super("GuiResolverDefault", GuiType_e.GUI_RESOLVER, textureName, tileW,
 				tileH, posX, posY);
-
 		maxSolutions = 10;
-
-		createGui();
 	}
 
 	@Override
@@ -35,12 +33,15 @@ GuiResolver {
 		// reloaded during resolving process)
 	}
 
-	private void createGui() {
+	@Override
+	public void createGui() {
 
 		availableSolutions = 0;
 
 		elementStart = new GuiElementResolver(GuiResolverType.RESOLVER_START,
 				atlasRows.get(0)[0], 0, this, 0, 0);
+		elementStart.setTexturesManager(getTexturesManager(),
+				WorldObjectType.TILE);
 
 		elementStart.setRenderVector(new Vector2(0, 0));
 		elementStart.addLabel("S");

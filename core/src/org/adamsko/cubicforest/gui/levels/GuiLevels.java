@@ -3,25 +3,37 @@ package org.adamsko.cubicforest.gui.levels;
 import org.adamsko.cubicforest.gui.GuiElement;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
+import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
+import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoader;
+import org.adamsko.cubicforest.world.object.WorldObjectType;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class GuiLevels extends GuiElementsContainerDefault {
 
-	public GuiLevels(final MapsLoader mapsLoader, final String textureName,
-			final int tileW, final int tileH, final float posX, final float posY) {
+	private MapsLoader mapsLoader;
+
+	public GuiLevels(final String textureName, final int tileW,
+			final int tileH, final float posX, final float posY) {
 		super("guiLevels", GuiType_e.GUI_LEVELS, textureName, tileW, tileH,
 				posX, posY);
-		createGui(mapsLoader);
+		mapsLoader = NullMapsLoader.instance();
+
+		CLog.addObject(this, "GuiLevels");
+		CLog.setUsage(this, true);
 	}
 
-	public void createGui(final MapsLoader mapsLoader) {
+	public void setMapsLoader(final MapsLoader mapsLoader) {
+		this.mapsLoader = mapsLoader;
+	}
+
+	@Override
+	public void createGui() {
 		if (mapsLoader.isNull()) {
-			Gdx.app.error("GuiLevels::createGui()", "mapsLoader.isNull()");
+			CLog.error(this, "createGui mapsLoader null");
 			return;
 		}
 		final int levelsNumber = mapsLoader.size();
@@ -37,6 +49,8 @@ public class GuiLevels extends GuiElementsContainerDefault {
 
 			final GuiElementLevel guiElementLevel = new GuiElementLevel(i,
 					atlasRows.get(0)[0], 0, this, posX, posY);
+			guiElementLevel.setTexturesManager(getTexturesManager(),
+					WorldObjectType.TILE);
 
 			if (activeLevel == i) {
 				higlightButton(guiElementLevel);

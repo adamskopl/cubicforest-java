@@ -23,7 +23,6 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 			final int tileH, final float posX, final float posY) {
 		super("guiHeroTools", GuiType_e.GUI_HERO_TOOLS, textureName, tileW,
 				tileH, posX, posY);
-		createGui();
 	}
 
 	@Override
@@ -41,6 +40,7 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 		}
 	}
 
+	@Override
 	public void createGui() {
 
 		availableGuiTools = new ArrayList<GuiElementHeroTool>();
@@ -58,7 +58,7 @@ public class GuiHeroTools extends GuiElementsContainerDefault {
 			final GuiElementHeroTool guiElementHeroTool = new GuiElementHeroTool(
 					type, atlasRows.get(0)[seqNum], 0, this, seqNum * 70, 0);
 			guiElementHeroTool.setTexturesManager(getTexturesManager(),
-					WorldObjectType.ENEMY);
+					WorldObjectType.TILE);
 
 			guiElementHeroTool.addLabel(HeroesToolsMasterDefault
 					.heroTooltypeToCost(type));

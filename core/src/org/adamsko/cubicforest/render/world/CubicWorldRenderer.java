@@ -165,7 +165,7 @@ public class CubicWorldRenderer implements GameRenderer {
 	private void renderObjectCubic(final RenderableObject rObj) {
 		final CTextureRegion cubicTextureRegion = rObj.getTextureRegionCubic();
 		if (cubicTextureRegion.isNull()) {
-			CLog.errorSingle(this, "null texture>=1");
+			CLog.errorSingle(this, "null texture " + rObj.toString());
 			return;
 		}
 		switch (rObj.getRenderType()) {

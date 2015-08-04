@@ -21,7 +21,6 @@ GuiPrizes {
 			final int tileH, final float posX, final float posY) {
 		super("guiHeroTools", GuiType_e.GUI_HERO_TOOLS, textureName, tileW,
 				tileH, posX, posY);
-		createGui();
 		prizesCollected = 0;
 	}
 
@@ -53,7 +52,8 @@ GuiPrizes {
 		}
 	};
 
-	private void createGui() {
+	@Override
+	public void createGui() {
 
 		availablePrizes = new ArrayList<GuiElementPrize>();
 		final int prizesNumber = 3;

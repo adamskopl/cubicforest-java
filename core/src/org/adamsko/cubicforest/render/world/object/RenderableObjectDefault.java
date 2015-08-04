@@ -66,7 +66,7 @@ public class RenderableObjectDefault implements RenderableObject {
 	public void setTexturesManager(final TexturesManager texturesManager,
 			final WorldObjectType worldObjectType) {
 		if (texturesManager.isNull()) {
-			CLog.error(this, "setTexturesManager null" + toString());
+			CLog.error(this, "setTexturesManager null " + toString());
 		}
 
 		this.tileDirectionChanger = new TileDirectionChangerDefault(this,

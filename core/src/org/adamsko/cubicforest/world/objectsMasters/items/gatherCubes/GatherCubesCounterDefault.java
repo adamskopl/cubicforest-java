@@ -25,8 +25,6 @@ implements GatherCubesCounter {
 
 		counter = new Vector2(0, 0);
 
-		createGui();
-
 		CLog.addObject(this, "GatherCubesCounterDefault");
 		CLog.setUsage(this, false);
 	}
@@ -72,7 +70,8 @@ implements GatherCubesCounter {
 		return false;
 	}
 
-	private void createGui() {
+	@Override
+	public void createGui() {
 
 		GuiElement testObject;
 		testObject = new GuiElementDefault(atlasRows.get(0)[3], 0, this, 0, 0);

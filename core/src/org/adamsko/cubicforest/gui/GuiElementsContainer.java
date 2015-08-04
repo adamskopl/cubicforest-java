@@ -59,4 +59,6 @@ public interface GuiElementsContainer extends RenderableObjectsMaster {
 	 */
 	void reload(CFMap cfMap);
 
+	void createGui();
+
 }

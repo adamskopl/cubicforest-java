@@ -31,7 +31,7 @@ import org.adamsko.cubicforest.world.tile.TilesMasterDefault;
 import com.badlogic.gdx.Gdx;
 
 public class WorldObjectsMastersContainerDefault implements
-		WorldObjectsMastersContainer {
+WorldObjectsMastersContainer {
 
 	private final List<WorldObjectsMaster> worldObjectsMasters;
 
@@ -94,10 +94,12 @@ public class WorldObjectsMastersContainerDefault implements
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
 		portalsMaster.setTexturesManager(texturesManager);
+		texturesManager.loadTextures(WorldObjectType.PORTAL);
 
 		prizesMaster = new PrizesMasterDefault(tilesMaster,
 				"prizes-atlas-medium", 25, 35);
 		prizesMaster.setTexturesManager(texturesManager);
+		texturesManager.loadTextures(WorldObjectType.PRIZE);
 
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles
@@ -159,7 +161,7 @@ public class WorldObjectsMastersContainerDefault implements
 	public void initCollisionVisitorsManagers() {
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster
-					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 		}
 	}
 
@@ -210,7 +212,7 @@ public class WorldObjectsMastersContainerDefault implements
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster.setMemento(mementos.get(mementoIndex));
 			worldObjectsMaster
-					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 			mementoIndex++;
 		}
 	}
