@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.adamsko.cubicforest.render.cubicModel.jsonLoader.CubicGsonModel;
+import org.adamsko.cubicforest.render.cubicModel.CubicGsonModel;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubePosition;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
 import org.adamsko.cubicforest.world.tile.TileDirection;

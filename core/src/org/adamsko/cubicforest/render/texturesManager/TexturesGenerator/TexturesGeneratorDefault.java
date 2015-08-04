@@ -3,9 +3,9 @@ package org.adamsko.cubicforest.render.texturesManager.TexturesGenerator;
 import java.util.List;
 
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureControllerDefault;
 import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
+import org.adamsko.cubicforest.render.texturesManager.CubicTextureController.CubicTextureController;
+import org.adamsko.cubicforest.render.texturesManager.CubicTextureController.CubicTextureControllerDefault;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 
 import com.badlogic.gdx.graphics.Pixmap;

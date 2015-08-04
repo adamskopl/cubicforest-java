@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.cubicModel.texturesController;
+package org.adamsko.cubicforest.render.texturesManager.CubicTextureController;
 
 import java.util.ArrayList;
 import java.util.HashMap;

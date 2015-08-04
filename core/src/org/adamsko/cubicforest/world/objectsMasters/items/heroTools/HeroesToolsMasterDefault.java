@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adamsko.cubicforest.helpTools.CLog;
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.TiledMapProperties;
@@ -33,7 +32,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class HeroesToolsMasterDefault extends WorldObjectsMasterDefault
-implements HeroesToolsMaster {
+		implements HeroesToolsMaster {
 
 	private HeroTool heroToolMarker;
 	// indicates a type of the heroToolMarker
@@ -77,21 +76,20 @@ implements HeroesToolsMaster {
 	@Override
 	public void initToolsMasters(
 			final WorldObjectsMastersContainer worldObjectsMastersContainer,
-			final TilesMaster tilesMaster,
-			final CubicTextureController cubicTextureController) {
+			final TilesMaster tilesMaster) {
 		toolTrapsMaster = new ToolTrapsMaster(tilesMaster,
 				"traps-atlas-medium", 40, 45);
 		toolTrapsMaster.setTexturesManager(getTexturesManager());
 		worldObjectsMastersContainer.addWorldObjectsMaster(toolTrapsMaster);
 		worldObjectsMastersContainer
-		.addRenderableObjectsMaster(toolTrapsMaster);
+				.addRenderableObjectsMaster(toolTrapsMaster);
 
 		toolExitsMaster = new ToolExitsMaster(tilesMaster,
 				"exits-atlas-medium", 40, 45);
 		toolExitsMaster.setTexturesManager(getTexturesManager());
 		worldObjectsMastersContainer.addWorldObjectsMaster(toolExitsMaster);
 		worldObjectsMastersContainer
-		.addRenderableObjectsMaster(toolExitsMaster);
+				.addRenderableObjectsMaster(toolExitsMaster);
 	}
 
 	@Override
@@ -113,7 +111,7 @@ implements HeroesToolsMaster {
 				.factoryMethod(heroToolTilePos);
 		heroToolMarker.setState(HeroToolStates.STATE_CONSTRUCTION);
 		((RenderableObjectsMaster) getToolMaster(heroToolMarkerType))
-		.changeTexture(heroToolMarker, new Vector2(1, 0));
+				.changeTexture(heroToolMarker, new Vector2(1, 0));
 
 		getToolMaster(heroToolMarker.getType()).addObject(heroToolMarker);
 	}

@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.cubicModel.jsonLoader;
+package org.adamsko.cubicforest.render.cubicModel;
 
 import java.util.List;
 

@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMemento;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoDefault;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WMContainerMementoState;
 import org.adamsko.cubicforest.mapsResolver.wmcontainer.WOMMemento;
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
@@ -31,12 +30,11 @@ import org.adamsko.cubicforest.world.tile.TilesMasterDefault;
 import com.badlogic.gdx.Gdx;
 
 public class WorldObjectsMastersContainerDefault implements
-WorldObjectsMastersContainer {
+		WorldObjectsMastersContainer {
 
 	private final List<WorldObjectsMaster> worldObjectsMasters;
 
 	private CollisionVisitorsManagerFactory collisionVisitorsManagerFactory;
-	private CubicTextureController cubicTextureController;
 
 	private TexturesManager texturesManager;
 
@@ -117,8 +115,7 @@ WorldObjectsMastersContainer {
 
 		worldObjectsMasters.add(heroesToolsMaster);
 		gameRenderer.addROMWorld(heroesToolsMaster);
-		heroesToolsMaster.initToolsMasters(this, tilesMaster,
-				cubicTextureController);
+		heroesToolsMaster.initToolsMasters(this, tilesMaster);
 
 		worldObjectsMasters.add(portalsMaster);
 		gameRenderer.addROMWorld(portalsMaster);
@@ -161,7 +158,7 @@ WorldObjectsMastersContainer {
 	public void initCollisionVisitorsManagers() {
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster
-			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 		}
 	}
 
@@ -212,7 +209,7 @@ WorldObjectsMastersContainer {
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster.setMemento(mementos.get(mementoIndex));
 			worldObjectsMaster
-			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 			mementoIndex++;
 		}
 	}
@@ -270,8 +267,7 @@ WorldObjectsMastersContainer {
 	}
 
 	private void initTilesMaster() {
-		tilesMaster = new TilesMasterDefault(100, cubicTextureController,
-				texturesManager);
+		tilesMaster = new TilesMasterDefault(100, texturesManager);
 	}
 
 	@Override

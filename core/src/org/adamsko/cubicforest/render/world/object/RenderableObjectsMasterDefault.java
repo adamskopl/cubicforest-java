@@ -3,12 +3,9 @@ package org.adamsko.cubicforest.render.world.object;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
 import org.adamsko.cubicforest.render.texturesManager.NullTexturesManager;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
-import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
-import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChangerDefault;
 import org.adamsko.cubicforest.render.world.renderList.RenderList;
 
 import com.badlogic.gdx.Gdx;
@@ -66,7 +63,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 
 	protected Texture objectsTexture;
 
-	private ObjectsTextureChanger objectsTextureChanger;
 	private TexturesManager texturesManager;
 
 	/**
@@ -119,15 +115,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 			this.atlasRows.add(new TextureRegion(this.objectsTexture).split(
 					this.tileW, this.tileH)[i]);
 		}
-	}
-
-	@Override
-	public void initCubicModel(
-			final CubicTextureController cubicTextureController) {
-		this.objectsTextureChanger = new ObjectsTextureChangerDefault(
-				this.modelName, cubicTextureController);
-		// this.cubicTextureRegion = objectsTextureChanger
-		// .tempGetCubicTextureRegion();
 	}
 
 	@Override
@@ -188,11 +175,6 @@ public class RenderableObjectsMasterDefault implements RenderableObjectsMaster {
 	public void changeTexture(final RenderableObject object,
 			final Vector2 textureCoordinates) {
 		object.setTextureRegion(atlasRows.get((int) textureCoordinates.x)[(int) textureCoordinates.y]);
-	}
-
-	@Override
-	public ObjectsTextureChanger getObjectsTextureChanger() {
-		return this.objectsTextureChanger;
 	}
 
 }

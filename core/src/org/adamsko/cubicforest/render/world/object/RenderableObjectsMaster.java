@@ -2,10 +2,8 @@ package org.adamsko.cubicforest.render.world.object;
 
 import java.util.List;
 
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMasterDefault.ROListType_e;
-import org.adamsko.cubicforest.render.world.objectsTextureChanger.ObjectsTextureChanger;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -56,19 +54,8 @@ public interface RenderableObjectsMaster {
 	 */
 	void initTextures();
 
-	/**
-	 * Initialize cubic model representing objects hold by this master.
-	 */
-	void initCubicModel(CubicTextureController cubicTextureController);
-
 	void setTexturesManager(TexturesManager texturesManager);
 
 	TexturesManager getTexturesManager();
-
-	/**
-	 * @return {@link ObjectsTextureChanger} holding textures for objects from
-	 *         this container.
-	 */
-	ObjectsTextureChanger getObjectsTextureChanger();
 
 }

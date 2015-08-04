@@ -42,8 +42,7 @@ public class ToolExitsMaster extends WorldObjectsMasterDefault {
 	@Override
 	public WorldObject factoryMethod(final Vector2 tilePos) {
 		final HeroToolExit exit;
-		exit = new HeroToolExit(getObjectsTextureChanger(),
-				atlasRows.get(0)[0], 0, this);
+		exit = new HeroToolExit(atlasRows.get(0)[0], 0, this);
 		exit.setTexturesManager(getTexturesManager(), WorldObjectType.TOOLEXIT);
 		exit.setState(HeroToolStates.STATE_READY);
 		exit.setRenderVector(new Vector2(

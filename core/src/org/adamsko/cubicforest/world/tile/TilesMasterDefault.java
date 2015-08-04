@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.world.tile;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adamsko.cubicforest.render.cubicModel.texturesController.CubicTextureController;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
@@ -78,7 +77,6 @@ public class TilesMasterDefault implements TilesMaster {
 	}
 
 	public TilesMasterDefault(final int mapSize,
-			final CubicTextureController cubicTextureController,
 			final TexturesManager texturesManager) {
 		this.mapSize = mapSize;
 		this.clients = new ArrayList<TilePickClient>();
