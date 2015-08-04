@@ -26,4 +26,4 @@ Additional notes:
            should be unzipped to 'libs' (tween-engine-api.jar)
 -   setting 'ANDROID_HOME' system variable may be required (it should be set to Android SDK location)
 
-![nil](http://adamsko.org/wp-content/uploads/2014/01/screen04-13.png)
+![nil](http://skobo.pl/screenshots/cubicforest.png)
