@@ -36,7 +36,8 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 
 	@Override
 	public CTextureRegion generate(final List<CubicJsonCube> modelCubes,
-			final RenderableObjectVisualState renderableObjectVisualState) {
+			final RenderableObjectVisualState renderableObjectVisualState,
+			final boolean isometric) {
 		final Pixmap modelPixmap = new Pixmap(textureSize, textureSize,
 				cubicTextureController.getPixelFormat());
 
@@ -48,10 +49,17 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 			y = cube.getPos().getY();
 			z = cube.getPos().getZ();
 
-			dstX = offsetX;
-			dstY = offsetY;
-			dstX += (y + x) * calcA;
-			dstY += (x - y) * calcB - z * calcC;
+			if (isometric) {
+				dstX = offsetX;
+				dstY = offsetY;
+				dstX += (y + x) * calcA;
+				dstY += (x - y) * calcB - z * calcC;
+			} else {
+				dstX = offsetX;
+				dstY = offsetY;
+				dstX += x * 3;
+				dstY += z * 3;
+			}
 
 			final String colorName;
 			if (renderableObjectVisualState == RenderableObjectVisualState.NORMAL) {
@@ -76,13 +84,31 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 	 * disposed right after using!
 	 */
 	private Pixmap prepareSingleCubePixmap(final String color) {
-		final TextureRegion[] cubesRow = cubicTextureController
-				.getAtlasRowsColor(color).get(0);
-		final Texture singleCube = cubesRow[0].getTexture();
-		singleCube.getTextureData().prepare();
-		final Pixmap singleCubePixmap = singleCube.getTextureData()
-				.consumePixmap();
-		return singleCubePixmap;
+
+		final TextureRegion cubeTexR = cubicTextureController.getTextureRegion(color,
+				0);
+		final Texture cubeTex = cubeTexR.getTexture();
+
+		if (!cubeTex.getTextureData().isPrepared()) {
+			cubeTex.getTextureData().prepare();
+		}
+
+		final Pixmap texPixmap = cubeTex.getTextureData().consumePixmap();
+
+		final Pixmap newPixmap = new Pixmap(cubeTexR.getRegionWidth(),
+				cubeTexR.getRegionHeight(), cubicTextureController.getPixelFormat());
+
+		for (int x = 0; x < cubeTexR.getRegionWidth(); x++) {
+			for (int y = 0; y < cubeTexR.getRegionHeight(); y++) {
+				final int colorInt = texPixmap.getPixel(cubeTexR.getRegionX() + x,
+						cubeTexR.getRegionY() + y);
+				newPixmap.drawPixel(x, y, colorInt);
+			}
+		}
+		texPixmap.dispose();
+		cubeTex.getTextureData().disposePixmap();
+
+		return newPixmap;
 	}
 
 	/**

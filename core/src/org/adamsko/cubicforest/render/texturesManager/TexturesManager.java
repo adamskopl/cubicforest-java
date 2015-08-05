@@ -10,11 +10,6 @@ import org.adamsko.cubicforest.world.tile.TileDirection;
  */
 public interface TexturesManager extends Nullable {
 
-	/**
-	 * Load textures for objects of given type.
-	 */
-	// public void loadTextures(WorldObjectType objectType);
-
 	public CTextureRegion getTextureRegion(WorldObjectType worldObjectType,
 			RenderableObjectVisualState objectVisualState,
 			TileDirection tileDirection);

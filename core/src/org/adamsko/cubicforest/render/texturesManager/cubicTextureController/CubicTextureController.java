@@ -1,7 +1,5 @@
 package org.adamsko.cubicforest.render.texturesManager.cubicTextureController;
 
-import java.util.List;
-
 import org.adamsko.cubicforest.Nullable;
 
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -14,13 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public interface CubicTextureController extends Nullable {
 
-	/**
-	 * Return atlas rows of cubes for given color.
-	 * 
-	 * @param color
-	 *            a name of a desired color
-	 */
-	List<TextureRegion[]> getAtlasRowsColor(String color);
+	TextureRegion getTextureRegion(String color, int rowIndex);
 
 	Format getPixelFormat();
 

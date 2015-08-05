@@ -34,8 +34,8 @@ public class CubicTextureControllerDefault implements CubicTextureController {
 	}
 
 	public CubicTextureControllerDefault() {
-		this.cubeTexW = 6;
-		this.cubeTexH = 7;
+		this.cubeTexW = 6; // 6
+		this.cubeTexH = 7; // 7
 		atlasColorsMap = new HashMap<String, List<TextureRegion[]>>();
 		availableColors = new ArrayList<String>();
 
@@ -49,13 +49,13 @@ public class CubicTextureControllerDefault implements CubicTextureController {
 	}
 
 	@Override
-	public List<TextureRegion[]> getAtlasRowsColor(final String color) {
+	public TextureRegion getTextureRegion(final String color, final int rowIndex) {
 		if (!atlasColorsMap.containsKey(color)) {
 			Gdx.app.error("CubicTextureControllerDefault::getAtlasRowsColor()",
 					"no " + color.toString() + " in a map");
-			return atlasColorsMap.get(atlasColorsMap.get(0));
+			return atlasColorsMap.get(atlasColorsMap.get(0)).get(0)[0];
 		}
-		return atlasColorsMap.get(color);
+		return atlasColorsMap.get(color).get(0)[rowIndex];
 	}
 
 	@Override
@@ -92,6 +92,7 @@ public class CubicTextureControllerDefault implements CubicTextureController {
 		String fileName = new String();
 		for (final String color : availableColors) {
 			fileName = "data/cubes-small2/cubes-atlas-" + color + ".png";
+
 			final FileHandle textureFileHandle = Gdx.files.internal(fileName);
 			if (!textureFileHandle.exists()) {
 				Gdx.app.error(
@@ -99,12 +100,14 @@ public class CubicTextureControllerDefault implements CubicTextureController {
 						fileName + " not found");
 				return;
 			}
+
 			final Texture cubesTexture = new Texture(textureFileHandle);
 			final List<TextureRegion[]> atlasRows = new ArrayList<TextureRegion[]>();
 			atlasRows.add(new TextureRegion(cubesTexture).split(this.cubeTexW,
 					this.cubeTexH)[0]);
+
 			this.atlasColorsMap.put(color, atlasRows);
+
 		}
 	}
-
 }

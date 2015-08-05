@@ -43,11 +43,6 @@ public class TexturesManagerDefault implements TexturesManager {
 		return false;
 	}
 
-	// @Override
-	// public void loadTextures(final WorldObjectType objectType) {
-	// modelsManager.loadModel(objectType);
-	// }
-
 	@Override
 	public CTextureRegion getTextureRegion(
 			final WorldObjectType worldObjectType,
@@ -65,7 +60,7 @@ public class TexturesManagerDefault implements TexturesManager {
 				return null;
 			}
 			textureRegion = texturesGenerator.generate(directionCubes,
-					renderableObjectVisualState);
+					renderableObjectVisualState, true);
 			modelsTexturesContainer.put(worldObjectType,
 					renderableObjectVisualState, tileDirection, textureRegion);
 		}
@@ -86,7 +81,7 @@ public class TexturesManagerDefault implements TexturesManager {
 				return null;
 			}
 			textureRegion = texturesGenerator.generate(directionCubes,
-					renderableObjectVisualState);
+					renderableObjectVisualState, false);
 			modelsTexturesContainer.put(width, height,
 					renderableObjectVisualState, textureRegion);
 		}

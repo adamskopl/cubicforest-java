@@ -12,6 +12,7 @@ import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectV
 public interface TexturesGenerator {
 
 	CTextureRegion generate(final List<CubicJsonCube> modelCubes,
-			RenderableObjectVisualState renderableObjectVisualState);
+			RenderableObjectVisualState renderableObjectVisualState,
+			boolean isometric);
 
 }
