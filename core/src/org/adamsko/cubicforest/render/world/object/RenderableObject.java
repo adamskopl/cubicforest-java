@@ -32,6 +32,9 @@ public interface RenderableObject extends LabelsMaster {
 	void setTexturesManager(TexturesManager texturesManager,
 			WorldObjectType worldObjectType);
 
+	void setTexturesManager(TexturesManager texturesManager, int width,
+			int height);
+
 	void setTextureRegion(final CTextureRegion textureRegionCubic);
 
 	VisualStateChanger visualState();

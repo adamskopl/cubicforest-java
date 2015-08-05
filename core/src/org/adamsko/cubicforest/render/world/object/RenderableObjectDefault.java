@@ -8,11 +8,13 @@ import org.adamsko.cubicforest.render.text.LabelsContainer;
 import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
 import org.adamsko.cubicforest.render.texturesManager.NullCTextureRegion;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
+import org.adamsko.cubicforest.render.world.object.tileDirection.NullTileDirectionChanger;
 import org.adamsko.cubicforest.render.world.object.tileDirection.TileDirectionChanger;
 import org.adamsko.cubicforest.render.world.object.tileDirection.TileDirectionChangerDefault;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChanger;
-import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChangerDefault;
+import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChangerGeneric;
+import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChangerWorldObjectType;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.graphics.Color;
@@ -55,11 +57,24 @@ public class RenderableObjectDefault implements RenderableObject {
 
 		this.tileDirectionChanger = new TileDirectionChangerDefault(this,
 				worldObjectType, texturesManager);
-		this.visualStateChanger = new VisualStateChangerDefault(this,
-				worldObjectType, texturesManager);
+		this.visualStateChanger = new VisualStateChangerWorldObjectType(this,
+				texturesManager, worldObjectType);
 
 		this.visualStateChanger.changeState(RenderableObjectVisualState.NORMAL);
 
+	}
+
+	@Override
+	public void setTexturesManager(final TexturesManager texturesManager,
+			final int width, final int height) {
+		if (texturesManager.isNull()) {
+			CLog.error(this, "setTexturesManager null " + toString());
+		}
+
+		this.tileDirectionChanger = NullTileDirectionChanger.instance();
+		this.visualStateChanger = new VisualStateChangerGeneric(this,
+				texturesManager, width, height);
+		this.visualStateChanger.changeState(RenderableObjectVisualState.NORMAL);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.texturesManager.ModelsTexturesContainer;
+package org.adamsko.cubicforest.render.texturesManager.modelsTexturesContainer;
 
 import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
@@ -14,7 +14,14 @@ public interface ModelsTexturesContainer {
 			RenderableObjectVisualState renderableObjectVisualState,
 			TileDirection tileDirection);
 
+	CTextureRegion get(int width, int height,
+			RenderableObjectVisualState renderableObjectVisualState);
+
 	void put(WorldObjectType worldObjectType,
 			RenderableObjectVisualState renderableObjectVisualState,
 			TileDirection tileDirection, CTextureRegion textureRegion);
+
+	void put(int width, int height,
+			RenderableObjectVisualState renderableObjectVisualState,
+			CTextureRegion textureRegion);
 }

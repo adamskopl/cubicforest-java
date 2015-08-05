@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.gui.debug;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -18,8 +17,7 @@ public class GuiDebug extends GuiElementsContainerDefault {
 
 		final GuiElementDebug elementDebug = new GuiElementDebug(
 				GuiDebugType.DEBUG_RELOAD, this, 0, 0);
-		elementDebug.setTexturesManager(getTexturesManager(),
-				WorldObjectType.TILE);
+		elementDebug.setTexturesManager(getTexturesManager(), 5, 5);
 		elementDebug.addLabel("R");
 		elementDebug.altLabelLast(Color.WHITE, 1.0f, 20.0f, 32.0f);
 

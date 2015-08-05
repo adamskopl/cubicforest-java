@@ -8,6 +8,10 @@ public class CubicJsonCube {
 	// color name
 	private String colName;
 
+	public CubicJsonCube() {
+
+	}
+
 	public CubicJsonCube(final CubicJsonCube cube) {
 		this.name = new String(cube.getName());
 		this.pos = new CubePosition(cube.getPos());
@@ -49,10 +53,10 @@ public class CubicJsonCube {
 
 	/**
 	 * Compares position of the cube with the position of the other cube.
-	 * 
+	 *
 	 * @return true if positions are equal
 	 */
-	boolean equalPos(final CubicJsonCube other) {
+	public boolean equalPos(final CubicJsonCube other) {
 		final CubePosition posOther = other.getPos();
 		return (pos.getX() == posOther.getX() && pos.getY() == posOther.getY() && pos
 				.getZ() == posOther.getZ());

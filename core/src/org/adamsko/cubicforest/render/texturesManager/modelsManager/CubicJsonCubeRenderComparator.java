@@ -1,13 +1,16 @@
-package org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube;
+package org.adamsko.cubicforest.render.texturesManager.modelsManager;
 
 import java.util.Comparator;
+
+import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubePosition;
+import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
 
 /**
  * Comparator for {@link CubicJsonCube}. Used to indicate the render order of
  * the cubes in a model: 0: cubes have the same position, -1: render first cube
  * first, 1: render second cube first.
  */
-public class CubicJsonCubeRenderComparator implements Comparator<CubicJsonCube> {
+class CubicJsonCubeRenderComparator implements Comparator<CubicJsonCube> {
 
 	@Override
 	public int compare(final CubicJsonCube o1, final CubicJsonCube o2) {

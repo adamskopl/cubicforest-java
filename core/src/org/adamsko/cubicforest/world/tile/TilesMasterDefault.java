@@ -6,7 +6,6 @@ import java.util.List;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.roundsMaster.RoundsMaster;
 import org.adamsko.cubicforest.world.object.WorldObject;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.items.portals.Portal;
 import org.adamsko.cubicforest.world.tile.lookController.TilesLookController;
@@ -208,7 +207,7 @@ public class TilesMasterDefault implements TilesMaster {
 
 		tilesContainer = new TilesContainer("tiles container", this);
 		tilesContainer.setTexturesManager(texturesManager);
-		texturesManager.loadTextures(WorldObjectType.TILE);
+		// texturesManager.loadTextures(WorldObjectType.TILE);
 
 		for (int fIndex = 0; fIndex < mapSize; fIndex++) {
 			final Vector2 fCoords = TilesHelper.calcCoords(fIndex);

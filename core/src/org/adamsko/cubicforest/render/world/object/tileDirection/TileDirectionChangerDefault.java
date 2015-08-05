@@ -1,5 +1,6 @@
 package org.adamsko.cubicforest.render.world.object.tileDirection;
 
+import org.adamsko.cubicforest.Nullable;
 import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
@@ -7,7 +8,8 @@ import org.adamsko.cubicforest.render.world.object.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.TileDirection;
 
-public class TileDirectionChangerDefault implements TileDirectionChanger {
+public class TileDirectionChangerDefault implements TileDirectionChanger,
+		Nullable {
 
 	/**
 	 * handled object
@@ -32,6 +34,11 @@ public class TileDirectionChangerDefault implements TileDirectionChanger {
 
 		CLog.addObject(this, "TileDirectionChanger");
 		CLog.setUsage(this, false);
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 	@Override

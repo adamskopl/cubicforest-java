@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.texturesManager.TexturesGenerator;
+package org.adamsko.cubicforest.render.texturesManager.texturesGenerator;
 
 import java.util.List;
 

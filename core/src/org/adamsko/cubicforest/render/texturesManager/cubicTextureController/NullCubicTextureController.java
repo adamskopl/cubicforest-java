@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.texturesManager.CubicTextureController;
+package org.adamsko.cubicforest.render.texturesManager.cubicTextureController;
 
 public class NullCubicTextureController extends CubicTextureControllerDefault {
 	private static NullCubicTextureController instance = null;

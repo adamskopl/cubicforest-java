@@ -38,8 +38,8 @@ public class NullTexturesManager extends TexturesManagerDefault {
 		return nullTexureRegion;
 	}
 
-	@Override
-	public void loadTextures(final WorldObjectType objectType) {
-		CLog.error(this, "loadTextures " + objectType.toString());
-	}
+	// @Override
+	// public void loadTextures(final WorldObjectType objectType) {
+	// CLog.error(this, "loadTextures " + objectType.toString());
+	// }
 }

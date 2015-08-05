@@ -30,7 +30,7 @@ import org.adamsko.cubicforest.world.tile.TilesMasterDefault;
 import com.badlogic.gdx.Gdx;
 
 public class WorldObjectsMastersContainerDefault implements
-		WorldObjectsMastersContainer {
+WorldObjectsMastersContainer {
 
 	private final List<WorldObjectsMaster> worldObjectsMasters;
 
@@ -71,17 +71,17 @@ public class WorldObjectsMastersContainerDefault implements
 		terrainObjectsMaster = new TerrainMaster(tilesMaster);
 		terrainObjectsMaster.setTexturesManager(texturesManager);
 
-		texturesManager.loadTextures(WorldObjectType.TREE);
+		// texturesManager.loadTextures(WorldObjectType.TREE);
 		heroesMaster = new HeroesMaster(tilesMaster);
 		heroesMaster.setTexturesManager(texturesManager);
-		texturesManager.loadTextures(WorldObjectType.HERO);
+		// texturesManager.loadTextures(WorldObjectType.HERO);
 		enemiesMaster = new EnemiesMaster(tilesMaster);
 		enemiesMaster.setTexturesManager(texturesManager);
-		texturesManager.loadTextures(WorldObjectType.ENEMY);
+		// texturesManager.loadTextures(WorldObjectType.ENEMY);
 		gatherCubesMaster = new GatherCubesMasterDefault(tilesMaster,
 				"cubes-atlas-medium", 25, 40);
 		gatherCubesMaster.setTexturesManager(texturesManager);
-		texturesManager.loadTextures(WorldObjectType.GATHERCUBE);
+		// texturesManager.loadTextures(WorldObjectType.GATHERCUBE);
 
 		heroesToolsMaster = new HeroesToolsMasterDefault(tilesMaster,
 				gatherCubesMaster, heroesMaster);
@@ -89,11 +89,11 @@ public class WorldObjectsMastersContainerDefault implements
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
 		portalsMaster.setTexturesManager(texturesManager);
-		texturesManager.loadTextures(WorldObjectType.PORTAL);
+		// texturesManager.loadTextures(WorldObjectType.PORTAL);
 
 		prizesMaster = new PrizesMasterDefault(tilesMaster);
 		prizesMaster.setTexturesManager(texturesManager);
-		texturesManager.loadTextures(WorldObjectType.PRIZE);
+		// texturesManager.loadTextures(WorldObjectType.PRIZE);
 
 		// tiles container has to be added first, because objects are
 		// removed/added to tiles
@@ -154,7 +154,7 @@ public class WorldObjectsMastersContainerDefault implements
 	public void initCollisionVisitorsManagers() {
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster
-					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 		}
 	}
 
@@ -205,7 +205,7 @@ public class WorldObjectsMastersContainerDefault implements
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster.setMemento(mementos.get(mementoIndex));
 			worldObjectsMaster
-					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 			mementoIndex++;
 		}
 	}

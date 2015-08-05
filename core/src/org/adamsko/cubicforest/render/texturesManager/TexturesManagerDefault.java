@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.render.cubicModel.jsonLoader.cube.CubicJsonCube;
-import org.adamsko.cubicforest.render.texturesManager.ModelsTexturesContainer.ModelsTexturesContainer;
-import org.adamsko.cubicforest.render.texturesManager.ModelsTexturesContainer.ModelsTexturesContainerDefault;
-import org.adamsko.cubicforest.render.texturesManager.TexturesGenerator.TexturesGenerator;
-import org.adamsko.cubicforest.render.texturesManager.TexturesGenerator.TexturesGeneratorDefault;
+import org.adamsko.cubicforest.render.texturesManager.modelsManager.ModelsManager;
+import org.adamsko.cubicforest.render.texturesManager.modelsManager.ModelsManagerDefault;
+import org.adamsko.cubicforest.render.texturesManager.modelsTexturesContainer.ModelsTexturesContainer;
+import org.adamsko.cubicforest.render.texturesManager.modelsTexturesContainer.ModelsTexturesContainerDefault;
+import org.adamsko.cubicforest.render.texturesManager.texturesGenerator.TexturesGenerator;
+import org.adamsko.cubicforest.render.texturesManager.texturesGenerator.TexturesGeneratorDefault;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.tile.TileDirection;
@@ -41,10 +43,10 @@ public class TexturesManagerDefault implements TexturesManager {
 		return false;
 	}
 
-	@Override
-	public void loadTextures(final WorldObjectType objectType) {
-		modelsManager.loadModel(objectType);
-	}
+	// @Override
+	// public void loadTextures(final WorldObjectType objectType) {
+	// modelsManager.loadModel(objectType);
+	// }
 
 	@Override
 	public CTextureRegion getTextureRegion(
@@ -56,6 +58,7 @@ public class TexturesManagerDefault implements TexturesManager {
 				renderableObjectVisualState, tileDirection);
 		if (textureRegion == null) {
 			// first request for texture, generate it
+			modelsManager.loadModel(worldObjectType);
 			final List<CubicJsonCube> directionCubes = modelsManager
 					.getModelCubes(worldObjectType, tileDirection);
 			if (directionCubes == null) {
@@ -65,6 +68,27 @@ public class TexturesManagerDefault implements TexturesManager {
 					renderableObjectVisualState);
 			modelsTexturesContainer.put(worldObjectType,
 					renderableObjectVisualState, tileDirection, textureRegion);
+		}
+		return textureRegion;
+	}
+
+	@Override
+	public CTextureRegion getTextureRegion(final int width, final int height,
+			final RenderableObjectVisualState renderableObjectVisualState) {
+		textureRegion = modelsTexturesContainer.get(width, height,
+				renderableObjectVisualState);
+		if (textureRegion == null) {
+			// first request for texture, generate it
+			modelsManager.loadModel(width, height);
+			final List<CubicJsonCube> directionCubes = modelsManager
+					.getModelCubes(width, height);
+			if (directionCubes == null) {
+				return null;
+			}
+			textureRegion = texturesGenerator.generate(directionCubes,
+					renderableObjectVisualState);
+			modelsTexturesContainer.put(width, height,
+					renderableObjectVisualState, textureRegion);
 		}
 
 		return textureRegion;

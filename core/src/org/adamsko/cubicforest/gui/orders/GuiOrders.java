@@ -3,7 +3,6 @@ package org.adamsko.cubicforest.gui.orders;
 import org.adamsko.cubicforest.gui.GuiElementsContainerDefault;
 import org.adamsko.cubicforest.gui.GuiType_e;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 public class GuiOrders extends GuiElementsContainerDefault {
 
@@ -16,15 +15,13 @@ public class GuiOrders extends GuiElementsContainerDefault {
 
 		GuiElementOrder elementOrder = new GuiElementOrder(
 				GuiOrdersType_e.ORDER_ACCEPT, this, 640, 0);
-		elementOrder.setTexturesManager(getTexturesManager(),
-				WorldObjectType.TILE);
+		elementOrder.setTexturesManager(getTexturesManager(), 10, 10);
 
 		addGuiElement(elementOrder);
 
 		elementOrder = new GuiElementOrder(GuiOrdersType_e.ORDER_CANCEL, this,
 				0, 0);
-		elementOrder.setTexturesManager(getTexturesManager(),
-				WorldObjectType.TILE);
+		elementOrder.setTexturesManager(getTexturesManager(), 10, 10);
 
 		addGuiElement(elementOrder);
 

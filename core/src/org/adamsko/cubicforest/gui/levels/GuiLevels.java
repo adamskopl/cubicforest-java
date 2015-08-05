@@ -7,7 +7,6 @@ import org.adamsko.cubicforest.helpTools.CLog;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
 import org.adamsko.cubicforest.world.mapsLoader.MapsLoader;
 import org.adamsko.cubicforest.world.mapsLoader.tiled.NullMapsLoader;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -46,8 +45,7 @@ public class GuiLevels extends GuiElementsContainerDefault {
 
 			final GuiElementLevel guiElementLevel = new GuiElementLevel(i,
 					this, posX, posY);
-			guiElementLevel.setTexturesManager(getTexturesManager(),
-					WorldObjectType.TILE);
+			guiElementLevel.setTexturesManager(getTexturesManager(), 5, 5);
 
 			if (activeLevel == i) {
 				higlightButton(guiElementLevel);

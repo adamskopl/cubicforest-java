@@ -6,7 +6,7 @@ import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.object.RenderableObject;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
-public class VisualStateChangerDefault implements VisualStateChanger {
+public class VisualStateChangerWorldObjectType implements VisualStateChanger {
 
 	/**
 	 * handled object
@@ -16,9 +16,13 @@ public class VisualStateChangerDefault implements VisualStateChanger {
 	RenderableObjectVisualState visualState;
 	private final TexturesManager texturesManager;
 
-	public VisualStateChangerDefault(final RenderableObject renderableObject,
-			final WorldObjectType worldObjectType,
-			final TexturesManager texturesManager) {
+	// help variables
+	CTextureRegion newTextureRegion;
+
+	public VisualStateChangerWorldObjectType(
+			final RenderableObject renderableObject,
+			final TexturesManager texturesManager,
+			final WorldObjectType worldObjectType) {
 		this.renderableObject = renderableObject;
 		this.worldObjectType = worldObjectType;
 		this.visualState = RenderableObjectVisualState.NORMAL;
@@ -32,9 +36,9 @@ public class VisualStateChangerDefault implements VisualStateChanger {
 	public void changeState(final RenderableObjectVisualState objectVisualState) {
 		this.visualState = objectVisualState;
 
-		final CTextureRegion newTextureRegion = texturesManager
-				.getTextureRegion(worldObjectType, objectVisualState,
-						renderableObject.tileDirection().getDirection());
+		newTextureRegion = texturesManager.getTextureRegion(worldObjectType,
+				objectVisualState, renderableObject.tileDirection()
+						.getDirection());
 
 		renderableObject.setTextureRegion(newTextureRegion);
 		CLog.debug(this, "changeState " + worldObjectType.toString());

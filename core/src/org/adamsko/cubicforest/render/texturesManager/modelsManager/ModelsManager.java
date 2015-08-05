@@ -1,4 +1,4 @@
-package org.adamsko.cubicforest.render.texturesManager;
+package org.adamsko.cubicforest.render.texturesManager.modelsManager;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ public interface ModelsManager {
 	 */
 	void loadModel(WorldObjectType modelType);
 
+	void loadModel(int width, int height);
+
 	List<CubicJsonCube> getModelCubes(WorldObjectType modelType,
 			TileDirection tileDirection);
+
+	List<CubicJsonCube> getModelCubes(int width, int height);
 }
