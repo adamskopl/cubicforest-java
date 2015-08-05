@@ -66,7 +66,8 @@ public class RenderableObjectDefault implements RenderableObject {
 
 	@Override
 	public void setTexturesManager(final TexturesManager texturesManager,
-			final int width, final int height) {
+			final int width, final int height,
+			final RenderableObjectVisualState renderableObjectVisualState) {
 		if (texturesManager.isNull()) {
 			CLog.error(this, "setTexturesManager null " + toString());
 		}
@@ -74,7 +75,7 @@ public class RenderableObjectDefault implements RenderableObject {
 		this.tileDirectionChanger = NullTileDirectionChanger.instance();
 		this.visualStateChanger = new VisualStateChangerGeneric(this,
 				texturesManager, width, height);
-		this.visualStateChanger.changeState(RenderableObjectVisualState.NORMAL);
+		this.visualStateChanger.changeState(renderableObjectVisualState);
 	}
 
 	@Override

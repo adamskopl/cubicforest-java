@@ -8,6 +8,7 @@ import org.adamsko.cubicforest.render.texturesManager.cubicTextureController.Cub
 import org.adamsko.cubicforest.render.texturesManager.cubicTextureController.CubicTextureControllerDefault;
 import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,7 +17,7 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 
 	private final CubicTextureController cubicTextureController;
 
-	private final int textureSize;
+	private int textureSize;
 	// parameters for calculating positions of the cubes in a textures. value
 	// dependent from a single cube texture's size
 	private final float calcA, calcB, calcC;
@@ -25,10 +26,9 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 	public TexturesGeneratorDefault() {
 		// 'atomic cube' are now available
 		this.cubicTextureController = new CubicTextureControllerDefault();
-
-		this.textureSize = 75;
-		offsetX = textureSize / 2 - 2;
-		offsetY = textureSize * 1 / 2 + 10;
+		this.textureSize = 90;
+		this.offsetX = textureSize / 2 - 2;
+		this.offsetY = textureSize * 1 / 2 + 10;
 		this.calcA = 3; // 3,
 		this.calcB = 1.5f; // 2,
 		this.calcC = 4; // 4,
@@ -38,11 +38,19 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 	public CTextureRegion generate(final List<CubicJsonCube> modelCubes,
 			final RenderableObjectVisualState renderableObjectVisualState,
 			final boolean isometric) {
+
+		if (isometric) {
+			textureSize = 90;
+		} else {
+			textureSize = (int) Math.sqrt(modelCubes.size()) * 4 + 8;
+		}
+
 		final Pixmap modelPixmap = new Pixmap(textureSize, textureSize,
 				cubicTextureController.getPixelFormat());
 
 		float x, y, z;
 		float dstX, dstY;
+		int rowIndex;
 
 		for (final CubicJsonCube cube : modelCubes) {
 			x = cube.getPos().getX();
@@ -50,15 +58,18 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 			z = cube.getPos().getZ();
 
 			if (isometric) {
+				rowIndex = 0;
 				dstX = offsetX;
 				dstY = offsetY;
 				dstX += (y + x) * calcA;
 				dstY += (x - y) * calcB - z * calcC;
 			} else {
-				dstX = offsetX;
-				dstY = offsetY;
-				dstX += x * 3;
-				dstY += z * 3;
+				rowIndex = 5;
+				dstX = textureSize / 2 - cubicTextureController.getCubeTexW()
+						/ 2;
+				dstY = 2;
+				dstX += x * 4;
+				dstY += z * 4;
 			}
 
 			final String colorName;
@@ -67,10 +78,16 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 			} else {
 				colorName = visualStateToTextureColor(renderableObjectVisualState);
 			}
-			final Pixmap singleCubePixmap = prepareSingleCubePixmap(colorName);
+			final Pixmap singleCubePixmap = prepareSingleCubePixmap(colorName,
+					rowIndex);
 			modelPixmap.drawPixmap(singleCubePixmap, (int) dstX, (int) dstY, 0,
 					0, cubicTextureController.getCubeTexW(),
 					cubicTextureController.getCubeTexH());
+
+			modelPixmap.setColor(Color.RED);
+			// uncomment to draw texture's border
+			// modelPixmap.drawRectangle(0, 0, textureSize, textureSize);
+
 			singleCubePixmap.dispose();
 		}
 
@@ -83,10 +100,11 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 	 * Get pixel map of a single cube with desired color. Pixel map should be
 	 * disposed right after using!
 	 */
-	private Pixmap prepareSingleCubePixmap(final String color) {
+	private Pixmap prepareSingleCubePixmap(final String color,
+			final int rowIndex) {
 
-		final TextureRegion cubeTexR = cubicTextureController.getTextureRegion(color,
-				0);
+		final TextureRegion cubeTexR = cubicTextureController.getTextureRegion(
+				color, rowIndex);
 		final Texture cubeTex = cubeTexR.getTexture();
 
 		if (!cubeTex.getTextureData().isPrepared()) {
@@ -96,12 +114,13 @@ public class TexturesGeneratorDefault implements TexturesGenerator {
 		final Pixmap texPixmap = cubeTex.getTextureData().consumePixmap();
 
 		final Pixmap newPixmap = new Pixmap(cubeTexR.getRegionWidth(),
-				cubeTexR.getRegionHeight(), cubicTextureController.getPixelFormat());
+				cubeTexR.getRegionHeight(),
+				cubicTextureController.getPixelFormat());
 
 		for (int x = 0; x < cubeTexR.getRegionWidth(); x++) {
 			for (int y = 0; y < cubeTexR.getRegionHeight(); y++) {
-				final int colorInt = texPixmap.getPixel(cubeTexR.getRegionX() + x,
-						cubeTexR.getRegionY() + y);
+				final int colorInt = texPixmap.getPixel(cubeTexR.getRegionX()
+						+ x, cubeTexR.getRegionY() + y);
 				newPixmap.drawPixel(x, y, colorInt);
 			}
 		}

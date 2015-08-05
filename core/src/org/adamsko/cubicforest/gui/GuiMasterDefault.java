@@ -51,7 +51,7 @@ public class GuiMasterDefault implements GuiMaster {
 		guiHeroTools.setTexturesManager(texturesManager);
 		guiHeroTools.createGui();
 
-		this.guiOrders = new GuiOrders(20, -340);
+		this.guiOrders = new GuiOrders(20, -450);
 		guiOrders.setTexturesManager(texturesManager);
 		guiOrders.createGui();
 

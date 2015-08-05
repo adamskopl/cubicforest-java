@@ -4,6 +4,7 @@ import org.adamsko.cubicforest.render.text.LabelsMaster;
 import org.adamsko.cubicforest.render.texturesManager.CTextureRegion;
 import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.object.tileDirection.TileDirectionChanger;
+import org.adamsko.cubicforest.render.world.object.visualState.RenderableObjectVisualState;
 import org.adamsko.cubicforest.render.world.object.visualState.VisualStateChanger;
 import org.adamsko.cubicforest.world.object.WorldObjectType;
 
@@ -33,7 +34,7 @@ public interface RenderableObject extends LabelsMaster {
 			WorldObjectType worldObjectType);
 
 	void setTexturesManager(TexturesManager texturesManager, int width,
-			int height);
+			int height, RenderableObjectVisualState renderableObjectVisualState);
 
 	void setTextureRegion(final CTextureRegion textureRegionCubic);
 

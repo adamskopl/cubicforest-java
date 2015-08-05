@@ -34,8 +34,8 @@ public class CubicTextureControllerDefault implements CubicTextureController {
 	}
 
 	public CubicTextureControllerDefault() {
-		this.cubeTexW = 6; // 6
-		this.cubeTexH = 7; // 7
+		this.cubeTexW = 8;
+		this.cubeTexH = 8;
 		atlasColorsMap = new HashMap<String, List<TextureRegion[]>>();
 		availableColors = new ArrayList<String>();
 

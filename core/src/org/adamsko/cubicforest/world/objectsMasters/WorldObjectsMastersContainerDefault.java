@@ -11,7 +11,6 @@ import org.adamsko.cubicforest.render.texturesManager.TexturesManager;
 import org.adamsko.cubicforest.render.world.GameRenderer;
 import org.adamsko.cubicforest.render.world.object.RenderableObjectsMaster;
 import org.adamsko.cubicforest.world.mapsLoader.CFMap;
-import org.adamsko.cubicforest.world.object.WorldObjectType;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.CollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.object.collision.visitors.manager.NullCollisionVisitorsManagerFactory;
 import org.adamsko.cubicforest.world.objectsMasters.entities.enemies.EnemiesMaster;
@@ -30,7 +29,7 @@ import org.adamsko.cubicforest.world.tile.TilesMasterDefault;
 import com.badlogic.gdx.Gdx;
 
 public class WorldObjectsMastersContainerDefault implements
-WorldObjectsMastersContainer {
+		WorldObjectsMastersContainer {
 
 	private final List<WorldObjectsMaster> worldObjectsMasters;
 
@@ -85,6 +84,7 @@ WorldObjectsMastersContainer {
 
 		heroesToolsMaster = new HeroesToolsMasterDefault(tilesMaster,
 				gatherCubesMaster, heroesMaster);
+		heroesToolsMaster.setTexturesManager(texturesManager);
 
 		portalsMaster = new PortalsMaster(tilesMaster, "portals-atlas-medium",
 				45, 25, tilesMaster.getTilesContainer());
@@ -154,7 +154,7 @@ WorldObjectsMastersContainer {
 	public void initCollisionVisitorsManagers() {
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster
-			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 		}
 	}
 
@@ -205,7 +205,7 @@ WorldObjectsMastersContainer {
 		for (final WorldObjectsMaster worldObjectsMaster : worldObjectsMasters) {
 			worldObjectsMaster.setMemento(mementos.get(mementoIndex));
 			worldObjectsMaster
-			.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
+					.initCollisionVisitorsManagers(collisionVisitorsManagerFactory);
 			mementoIndex++;
 		}
 	}

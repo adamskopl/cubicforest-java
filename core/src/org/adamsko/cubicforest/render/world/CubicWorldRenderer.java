@@ -205,20 +205,23 @@ public class CubicWorldRenderer implements GameRenderer {
 	private void renderROMs() {
 		updateList(renderableObjectsMastersWorld, renderListMasterWorld);
 		updateList(renderableObjectsMastersGui, renderListMasterGui);
-		renderList(renderListMasterWorld);
-		renderList(renderListMasterGui);
+		renderList(renderListMasterWorld, false);
+		renderList(renderListMasterGui, true);
 	}
 
-	private void renderList(final RenderList renderListMaster) {
+	private void renderList(final RenderList renderListMaster,
+			final boolean renderLabels) {
 		for (final RenderableObject rObj : renderListMaster.get()) {
 			renderObject(rObj);
 		}
-		/*
-		 * Labels are rendered in the end: so they are not covered by
-		 * RenderableObject objects
-		 */
-		for (final RenderableObject rObj : renderListMaster.get()) {
-			renderObjectsLabels(rObj);
+		if (renderLabels) {
+			/*
+			 * Labels are rendered in the end: so they are not covered by
+			 * RenderableObject objects
+			 */
+			for (final RenderableObject rObj : renderListMaster.get()) {
+				renderObjectsLabels(rObj);
+			}
 		}
 	}
 
